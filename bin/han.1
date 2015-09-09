@@ -1,0 +1,18 @@
+.TH HAN 1 "May 2015" "Manual page for han"
+.SH NAME
+.B han
+\- try running builtin help, then man(1)
+.SH SYNOPSIS
+.B han
+.I (HELPTOPIC | MANARGS...)
+.SH DESCRIPTION
+If called with a single argument, try running the help builtin for the given
+keyword, writing its output to a file. If it succeeds, show that. If not, pass
+the call to man(1).
+.P
+This was written so it could be used as a 'keywordprg' in Vim for Bash files;
+you can then use the K normal-mode binding over both shell builtins (e.g. read,
+set, export) and external programs (e.g. cat(1), grep(1), ed(1)).
+.SH AUTHOR
+Tom Ryder <tom@sanctum.geek.nz>
+

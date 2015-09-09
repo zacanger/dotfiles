@@ -1,0 +1,15 @@
+#!/usr/bin/perl
+
+s%[P-T1]%\$$&%g,@_=split/:/for's^#^ ^:'x2       .'s/..       /##/x:
+::s<# .*>@#@for@a:s[  |##S+|(P)P .*];1.Q.       Q." "x       --R;ge
+for$a[!0]:s,PP,PQP$&,,s;(Q#)|(  )?Q*;1||$       {-4+6}       ;gefor
+$a[0]:0:        s|  #*$(#        )?|P#S#|       ,R++&&       s/[##]
+{3}[  ]          {4}/" "          .+" P#"       /ex&&s       &S#$&T
+.q@ ##@          &efor@a          :s~([#]       *?)[ ]       {3}~1.
+1~exfor          @a'.':'          x11 .'S       =" "x3       ;T =qq
+$###$;P          ="#T";Q          ="S ";$       _=Q.Q.       Q;@a=(
+"P$_ST"          ,"T$_".          S."P")'       ;eval(       pop(@_
+)),$D++          and$D&1          &&chop,       $|= @!       =split
+(//,$_.          $a[++$a          &1] .qq       :\n:),       ,map{;
+;print;          select$          F,$F,$F         ,.05}@!while@_;
+##2007#          Stephen          #Dolan#          #(a.k.a. mu)#

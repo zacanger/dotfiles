@@ -1,0 +1,59 @@
+## get one line moar!
+set morespace
+
+set tabsize 4
+set boldtext
+
+## walk don't run
+set smooth
+
+## what is a comment?
+syntax "comments" ".*"
+## what color shall it be?
+color cyan "^#.*"
+## Use punctuation as part of the word when skipping.
+set wordbounds
+## indent cleverly?
+set autoindent
+## backup file creation (off)
+# set backup
+## actually useless: clear the statusbar after single keystroke
+set quickblank
+## wrap long lines softly with this song
+set softwrap
+## pressing home key jumps to line beginning 
+set smarthome
+## Mouse support in X or with GDM
+set mouse
+## Don't want to follow Symlinks
+set nofollow
+## Line numbers
+set const
+## Convert typed tabs to spaces.
+set tabstospaces
+## Allow nano to be suspended.
+set suspend
+## Save automatically on exit, don't prompt.
+# set tempfile
+
+## inlcudes from the default
+include "/usr/share/nano/nanorc.nanorc"
+include "/usr/share/nano/c.nanorc"
+include "/usr/share/nano/html.nanorc"
+# include "/usr/share/nano/tex.nanorc"
+# include "/usr/share/nano/mutt.nanorc"
+# include "/usr/share/nano/patch.nanorc"
+include "/usr/share/nano/man.nanorc"
+# include "/usr/share/nano/groff.nanorc"
+include "/usr/share/nano/perl.nanorc"
+include "/usr/share/nano/python.nanorc"
+# include "/usr/share/nano/ruby.nanorc"
+# include "/usr/share/nano/java.nanorc"
+# include "/usr/share/nano/asm.nanorc"
+include "/usr/share/nano/sh.nanorc"
+# include "/usr/share/nano/pov.nanorc"
+include "/usr/share/nano/css.nanorc"
+include "/usr/share/nano/awk.nanorc"
+include "/usr/share/nano/xml.nanorc"
+include "/usr/share/nano/php.nanorc"
+include "/usr/share/nano/debian.nanorc"

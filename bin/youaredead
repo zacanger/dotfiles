@@ -1,0 +1,110 @@
+#!/usr/bin/env bash
+# YOU ARE DEAD. by rupa 2013. WTFPL.
+
+[ "$YOU_ARE_DEAD_KEYS" ] || YOU_ARE_DEAD_KEYS="wasd"
+
+usage() {
+cat<<!
+$(basename $0) [options]
+
+KEYS: $YOU_ARE_DEAD_KEYS. YOU ARE DEAD.
+
+-[0-9] SHORT GAME.
+    -e ENDLESS MODE.
+
+DVORAK MODE:
+    YOU_ARE_DEAD_KEYS=",aoe" ./$(basename $0)
+
+PROTIP TO PREVENT HORRIBLE ACCIDENTS:
+    # you must beat a level before you can execute scary_function
+    while :; do ./$(basename $0) -1 && break; done
+    scary_function
+!
+}
+
+LEVEL=1
+MAX_LEVEL=10
+SCORE=0
+TIME="$(date +%s)"
+
+for x; do case $x in
+    -[1-9]) MAX_LEVEL=${x:1};;
+    -e) unset MAX_LEVEL;;
+    -h|--help) usage; exit;;
+esac; shift; done
+
+trap 'tput cnorm -- normal' EXIT
+tput civis -- invisible
+
+X=x
+R='.'
+P='~'
+S='<'
+
+YOU=x
+CHOICES="$R$P$S      "
+
+[ "$SEED" ] && RANDOM=$SEED
+
+duration() {
+    h=$((SECONDS/3600))
+    m=$(((SECONDS%3600)/60))
+    s=$((SECONDS%60))
+    printf "%02d:%02d:%02d" $h $m $s
+}
+
+you_win() {
+    printf "$DUNGEON\nLEVEL $LEVEL, SCORE $SCORE $(duration). YOU WIN. YOU ARE DEAD.\n"
+    exit
+}
+
+game_over() {
+    printf "\nLEVEL $LEVEL, SCORE $SCORE $(duration). YOU ARE DEAD.\n"
+    exit 1
+}
+
+build_dungeon() {
+    DUNGEON=" "
+    local COUNTER=2
+    while [ $COUNTER -le $(tput cols) ]; do
+        DUNGEON="$DUNGEON${CHOICES:$((RANDOM % ${#CHOICES})):1}"
+        COUNTER=$((COUNTER + 1));
+    done
+}
+
+build_dungeon
+
+while :; do
+
+    COLS=$(tput cols)
+    OLDYOU=$YOU
+
+    printf "$DUNGEON\r%*s$YOU\r" $((SCORE % $COLS))
+
+    read -s -n 1
+
+    case "$REPLY" in
+        ${YOU_ARE_DEAD_KEYS:0:1}) YOU="$R";;
+        ${YOU_ARE_DEAD_KEYS:1:1}) YOU="$P";;
+        ${YOU_ARE_DEAD_KEYS:2:1}) YOU="$S";;
+        ${YOU_ARE_DEAD_KEYS:3:1}) YOU="$X"; SCORE=$((SCORE + 1));;
+        *) continue;;
+    esac
+
+    [ "$YOU" = "$X" ] || continue
+
+    THING=${DUNGEON:$((SCORE % $COLS)):1}
+
+    case $THING$OLDYOU in
+        $R$S|$P$R|$S$P|$R$X|$P$X|$S$X) game_over;;
+        $R$R|$S$S|$P$P) SCORE=$((SCORE - 1)); continue;;
+    esac
+
+    [ $((SCORE % $COLS)) = 0 ] && {
+        [ "$MAX_LEVEL" -a "$LEVEL" -ge "$MAX_LEVEL" ] && you_win
+        LEVEL=$((LEVEL + 1))
+        printf "$DUNGEON\nLEVEL $LEVEL ($(duration))\n"
+        build_dungeon
+    }
+
+done

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+arpfile="/home/arp-scan_$(date +%s).log"
+arp-scan -l -I wlan0 > $arpfile
+cat $arpfile
+
+range="$(ifconfig|grep wlan0 -A1|tail -n1|cut -d\: -f2|cut -d\. -f1,2,3).1-255"
+nmap -T4 -v $range --open -oG /home/nmap_$(date +%s).log

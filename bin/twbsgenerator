@@ -1,0 +1,52 @@
+#!/bin/bash
+
+if [ "$1" = "" ]
+then
+  echo "What do you want to call your project?"
+  read dir
+else
+  dir="$1"
+fi
+
+echo "Creating Directories for $dir"
+mkdir -p "$dir/js"
+mkdir -p "$dir/css"
+
+echo "Getting some JavaScript Libraries..."
+wget "http://code.jquery.com/jquery-1.11.2.min.js" -O "$dir/js/jquery.js"
+wget "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" -O "$dir/js/bootstrap.js"
+wget "http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js" -O "$dir/js/jquery.mobile.js"
+
+echo "Getting Some CSS Files..."
+wget "http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" -O "$dir/css/jquery.mobile.css"
+wget "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" -O "$dir/css/bootstrap.min.css"
+wget "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css" -O "$dir/css/bootstrap-theme.min.css"
+
+clear
+echo "Creating basic HTML file..."
+cat << EOF >> "$dir/index.html"
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Include meta tag to ensure proper rendering and touch zooming -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Include stylesheets 
+  <link rel="stylesheet" href="css/jquery.mobile.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+  -->
+  <!-- Include JavaScript libraries -->
+  <script src="js/jquery.js"></script>
+  <!--<script src="js/bootstrap.js"></script>-->
+  <!--<script src="js/jquery.mobile.js"></script>-->
+
+  <script>
+  \$(document).ready(function(){
+  });
+  </script>
+</head>
+<body>
+
+</body>
+</html>
+EOF

@@ -1,0 +1,1076 @@
+$ArchLinux: wikipedia computer abbrevs 2011-12-22
+
+/.	Slashdot
+100B-FX	100BASE-FX
+100B-T	100BASE-T
+100B-TX	100BASE-TX
+100BVG	100BASE-VG
+10B-F	10BASE-F
+10B-FB	10BASE-FB
+10B-FL	10BASE-FL
+10B-T	10BASE-T
+10B2	10BASE-2
+10B5	10BASE-5
+1GL	First-Generation Programming Language
+1NF	First Normal Form
+286	Intel 80286 processor
+2B1Q	2 Binary 1 Quaternary
+2GL	Second-Generation Programming Language
+2NF	Second Normal Form
+386	Intel 80386 processor
+3GL	Third-Generation Programming Language
+3NF	Third Normal Form
+486	Intel 80486 processor
+4B5BLF	4 Byte 5 Byte Local Fiber
+4GL	Fourth-Generation Programming Language
+4NF	Fourth Normal Form
+5GL	Fifth-Generation Programming Language
+5NF	Fifth Normal Form
+6NF	Sixth Normal Form
+8B10BLF	8 Byte 10 Byte Local Fiber
+AA	Anti-Aliasing
+AAA	Authentication Authorization, Accounting
+AABB	Axis Aligned Bounding Box
+AAC	Advanced Audio Coding
+AAL	ATM Adaptation Layer
+AALC	ATM Adaptation Layer Connection
+AARP	AppleTalk Address Resolution Protocol
+AAT	Average Access Time
+ABCL	Actor-Based Concurrent Language
+ABM	Asynchronous Balanced Mode
+ABR	Area Border Router
+ABR	Auto Baud-Rate detection
+ABR	Available Bitrate
+ABR	Average Bitrate
+AC	Acoustic Coupler
+AC	Alternating Current
+ACD	Automatic Call Distributor
+ACE	Advanced Computing Environment
+ACID	Atomicity Consistency Isolation Durability
+ACK	ACKnowledgement
+ACK	Amsterdam Compiler Kit
+ACL	Active Current Loop
+ACM	Association for Computing Machinery
+ACME	Automated Classification of Medical Entities
+ACP	Airline Control Program
+ACR	Allowed Cell Rate
+ACR	Attenuation to Crosstalk Ratio
+AD	Active Directory
+AD	Administrative Domain
+ADA	ADA US Government Programming Language
+ADB	Apple Desktop Bus
+ADC	Analog-to-Digital Converter
+ADC	Apple Display Connector
+ADCCP	Advanced Data Communications Control Procedures
+ADO	ActiveX Data Objects
+ADT	Abstract Data Type
+AE	Adaptive Equalizer
+AES	Advanced Encryption Standard
+AF	Anisotropic Filtering
+AFP	Apple Filing Protocol
+AH	Active Hub
+AI	Artificial Intelligence
+AIX	Advanced Interactive eXecutive
+AL	Active Link
+AL	Access List
+ALAC	Apple Lossless Audio Codec
+ALGOL	Algorithmic Language
+ALSA	Advanced Linux Sound Architecture
+ALU	Arithmetic and Logical Unit
+AM	Active Matrix
+AM	Access Method
+AM	Active Monitor
+AM	Allied Mastercomputer
+AMD	Advanced Micro Devices
+AMQP	Advanced Message Queuing Protocol
+AMR	Audio Modem Riser
+ANN	Artificial Neural Network
+ANT	Another Neat Tool
+AOP	Aspect-Oriented Programming
+APCI	Application-Layer Protocol Control Information
+APIPA	Automatic Private IP Addressing
+APL	A Programming Language
+APR	Apache Portable Runtime
+ARC	Adaptive Replacement Cache
+ARC	Advanced RISC Computing
+ARIN	American Registry for Internet Numbers
+ARM	Advanced RISC Machines
+AROS	AROS Research Operating System
+ARPA	Address and Routing Parameter Area
+ARPA	Advanced Research Projects Agency
+ARPANET	Advanced Research Projects Agency Network
+AS	Access Server
+ASG	Abstract Semantic Graph
+ASIC	Application-Specific Integrated Circuit
+ASM	Algorithmic State Machine
+ASMP	Asymmetric Multiprocessing
+ASN.1	Abstract Syntax Notation 1
+ASP	Active Server Pages
+ASP	Application Service Provider
+ASR	Asynchronous Signal Routine
+ASSP	Application-Specific Standard Product
+AST	Abstract Syntax Tree
+AT	Access Time
+AT	Active Terminator
+ATAG	Authoring Tool Accessibility Guidelines
+AVC	Advanced Video Coding
+AVI	Audio Video Interleaved
+AWK	Aho Weinberger Kernighan
+AWT	Abstract Window Toolkit
+AJAX	Asynchronous JavaScript and XML
+AOE	ATA over Ethernet
+B2B	Business-to-Business
+B2C	Business-to-Consumer
+BAL	Basic Assembly Language
+BASIC	Beginner's All-Purpose Symbolic Instruction Code
+BBP	Baseband Processor
+BBS	Bulletin Board System
+BCD	Binary Coded Decimal
+BCNF	Boyce–Codd normal form
+BEEP	Blocks Extensible Exchange Protocol
+BFD	Binary File Descriptor
+BFS	Breadth-First Search
+BINAC	Binary Automatic Computer
+BIND	Berkeley Internet Name Domain
+BIOS	Basic Input Output System
+BJT	Bipolar Junction Transistor
+BMP	Basic Multilingual Plane
+BNC	Bayonet Neill-Concelman
+BOINC	Berkeley Open Infrastructure for Network Computing
+BOM	Byte Order Mark
+BOOTP	Bootstrap Protocol
+BPDU	Bridge Protocol Data Unit
+BPEL	Business Process Execution Language
+BPL	Broadband over Power Lines
+BRR	Business Readiness Rating
+BSA	Business Software Alliance
+BSB	Backside Bus
+BSS	Block Started by Symbol
+BSOD	Blue Screen of Death
+BT	BitTorrent
+BT	Bluetooth
+BTAM	Basic Telecommunications Access Method
+BW	Bandwidth
+BASH	Bourne-again shell
+BIDI	Bi-Directional
+BLOG	Web Log
+CA	Certificate Authority
+CAE	Computer-Aided Engineering
+CAI	Computer-Aided Instruction
+CAID	Computer-Aided Industrial Design
+CAM	Computer-Aided Manufacturing
+CAPTCHA	Completely Automated Public Turing Test to tell Computers and Humans Apart
+CAQ	Computer-Aided Quality Assurance
+CASE	Computer-Aided Software Engineering
+CD-R	CD-Recordable
+CD-ROM	CD Read-Only Memory
+CD-RW	CD-Rewritable
+CDE	Common Desktop Environment
+CDMA	Code Division Multiple Access
+CDN	Content Delivery Network
+CDP	Continuous Data Protection
+CDSA	Common Data Security Architecture
+CERT	Computer Emergency Response Team
+CES	Consumer Electronics Show
+CF	Compact Flash
+CFD	Computational Fluid Dynamics
+CFG	Context-Free Grammar
+CFG	Control Flow Graph
+CG	Computer Graphics
+CGA	Color Graphics Array
+CGI	Computer-Generated Imagery
+CGT	Computational Graph Theory
+CHAP	Challenge-Handshake Authentication Protocol
+CHS	Cylinder-Head-Sector
+CIFS	Common Internet Filesystem
+CIM	Common Information Model
+CISC	Complex Instruction Set Computer
+CJK	Chinese, Japanese, and Korean
+CJKV	Chinese, Japanese, Korean, and Vietnamese
+CLR	Common Language Runtime
+CM	Configuration Management
+CM	Content Management
+CMMI	Capability Maturity Model Integration
+CMOS	Complementary Metal-Oxide Semiconductor
+CMS	Content Management System
+CN	Canonical Name
+CN	Common Name
+CNC	Computer Numerical Control
+CNR	Communications and Networking Riser
+COBOL	Common Business-Oriented Language
+COM	Component Object Model
+CORBA	Common Object Request Broker Architecture
+CP/M	Control Program/Monitor
+CPA	Cell Processor Architecture
+CPA	Converged Packet Access
+CPAN	Comprehensive Perl Archive Network
+CPRI	Common Public Radio Interface
+CPS	characters per second
+CR	Carriage Return
+CRAN	Comprehensive R Archive Network
+CRC	Cyclic Redundancy Check
+CRM	Customer Relationship Management
+CRS	Computer Reservations System
+CRUD	Create, Read, Update and Delete
+CS	Cable Select
+CS	Computer Science
+CSE	Computer Science and Engineering
+CSI	Common System Interface
+CSP	Communicating Sequential Processes
+CSRF	Cross-Site Request Forgery
+CSS	Content-Scrambling System
+CSS	Closed Source Software
+CSS	Cross-Site Scripting
+CSV	Comma-Separated Values
+CT	Computerized Tomography
+CTAN	Comprehensive TeX Archive Network
+CTCP	Client-To-Client Protocol
+CTI	Computer Telephony Integration
+CTL	Computational Tree Logic
+CTM	Close To Metal
+CTSS	Compatible Time-Sharing System
+CUA	Common User Access
+CVS	Concurrent Versioning System
+DAC	Digital-To-Analog Converter
+DAC	Discretionary Access Control
+DAO	Data Access Objects
+DAO	Disk-At-Once
+DAP	Directory Access Protocol
+DARPA	Defense Advanced Research Projects Agency
+DAT	Digital Audio Tape
+DB	Database
+DBA	Database Administrator
+DBCS	Double Byte Character Set
+DBMS	Database Management System
+DCC	Direct Client-to-Client
+DCCA	Debian Common Core Alliance
+DCCP	Datagram Congestion Control Protocol
+DCL	Data Control Language
+DCMI	Dublin Core Metadata Initiative
+DCOM	Distributed Component Object Model
+DD	Double Density
+DDE	Dynamic Data Exchange
+DDL	Data Definition Language
+DDOS	Distributed Denial of Service
+DEC	Digital Equipment Corporation
+DES	Data Encryption Standard
+DFA	Deterministic Finite Automaton
+DFD	Data Flow Diagram
+DFS	Depth-First Search
+DFS	Distributed File System
+DGD	Dworkin's Game Driver
+DHTML	Dynamic Hypertext Markup Language
+DIF	Data Integrity Field
+DIMM	Dual Inline Memory Module
+DIN	Deutsches Institut für Normung
+DIP	Dual In-line Package
+DIVX	Digital Video Express
+DKIM	Domain Keys Identified Mail
+DL	Download
+DLL	Dynamic Link Library
+DLNA	Digital Living Network Alliance
+DLP	Digital Light Processing
+DMCA	Digital Millennium Copyright Act
+DMI	Direct Media Interface
+DML	Data Manipulation Language
+DML	Definitive Media Library
+DMR	Dennis M. Ritchie
+DN	Distinguished Name
+DND	Drag-and-Drop
+DOCSIS	Data Over Cable Service Interface Specification
+DOM	Document Object Model
+DOS	Disk Operating System
+DP	Dot Pitch
+DPC	Deferred Procedure Call
+DPI	Deep Packet Inspection
+DPMI	DOS Protected Mode Interface
+DPMS	Display Power Management Signaling
+DR-DOS	Digital Research - Disk Operating System
+DRI	Direct Rendering Infrastructure
+DRM	Digital Rights Management
+DRM	Direct Rendering Manager
+DSDL	Document Schema Definition Languages
+DSDM	Dynamic Systems Development Method
+DSL	Domain-Specific Language
+DSLAM	Digital Subscriber Line Access Multiplexer
+DSN	Database Source Name
+DSN	Data Set Name
+DSP	Digital Signal Processor
+DSSSL	Document Style Semantics and Specification Language
+DTP	Desktop Publishing
+DTR	Data Terminal Ready
+DVD	Digital Video Disc
+DVD-R	DVD-Recordable
+DVD-ROM	DVD-Read Only Memory
+DVD-RW	DVD-Rewritable
+DVR	Digital Video Recorder
+EAI	Enterprise Application Integration
+EBCDIC	Extended Binary Coded Decimal Interchange Code
+EBML	Extensible Binary Meta Language
+ECC	Elliptic Curve Cryptography
+ECMA	European Computer Manufacturers Association
+ECN	Explicit Congestion Notification
+ECOS	Embedded Configurable Operating System
+ECRS	Expense and Cost Recovery System
+EDA	Electronic Design Automation
+EDI	Electronic Data Interchange
+EDSAC	Electronic Delay Storage Automatic Calculator
+EDVAC	Electronic Discrete Variable Automatic Computer
+EEPROM	Electronically Erasable Programmable Read-Only Memory
+EFF	Electronic Frontier Foundation
+EFM	Eight-to-Fourteen Modulation
+EGA	Enhanced Graphics Array
+EIDE	Enhanced IDE
+EIGRP	Enhanced Interior Gateway Routing Protocol
+ELF	Extremely Low Frequency
+ELF	Executable and Linkable Format
+ELM	ELectronic Mail
+EMACS	Editor MACroS
+EMS	Expanded Memory Specification
+ENIAC	Electronic Numerical Integrator And Computer
+EOL	End of Line
+EOM	End Of Message
+EPIC	Explicitly Parallel Instruction Computing
+EPROM	Erasable Programmable Read-Only Memory
+ERP	Enterprise Resource Planning
+ESCON	Enterprise Systems Connection
+ESD	Electrostatic Discharge
+ESR	Eric Steven Raymond
+ETL	Extract, Transform, Load
+EUC	Extended Unix Code
+EULA	End User License Agreement
+EXT	EXTended file system
+FAP	FORTRAN Assembly Program
+FAQ	Frequently Asked Questions
+FASM	Flat ASseMbler
+FBDIMM	Fully Buffered Dual Inline Memory Module
+FC-AL	Fibre Channel Arbitrated Loop
+FCB	File Control Block
+FDC	Floppy Disk Controller
+FDD	Floppy Disk Drive
+FDMA	Frequency-Division Multiple Access
+FDS	Fedora Directory Server
+FEC	Forward Error Correction
+FEMB	Front-End Motherboard
+FET	Field Effect Transistor
+FHS	Filesystem Hierarchy Standard
+FICON	FIber CONnectivity
+FIFO	First In First Out
+FIPS	Federal Information Processing Standards
+FL	Function Level
+FLAC	Free Lossless Audio Codec
+FLOPS	FLoating-Point Operations Per Second
+FLOSS	Free/Libre/Open Source Software
+FOLDOC	Free On-line Dictionary of Computing
+FOSDEM	Free and Open source Software Developers' European Meeting
+FOSI	Formatted Output Specification Instance
+FOSS	Free and Open Source Software
+FP	Function Programming
+FPGA	Field Programmable Gate Array
+FPS	Floating Point Systems
+FPU	Floating Point Unit
+FRU	Field Replaceable Unit
+FS	File System
+FSB	Front Side Bus
+FSF	Free Software Foundation
+FSM	Finite State Machine
+FTTC	Fiber To The Curb
+FTTH	Fiber To The Home
+FTTP	Fiber To The Premises
+FUD	Fear Uncertainty Doubt
+FWS	Folding White Space
+FXP	File eXchange Protocol
+G11N	Globalization
+GB	Gigabyte
+GCC	GNU Compiler Collection
+GCJ	GNU Compiler for Java
+GCR	Group Code Recording
+GDB	GNU Debugger
+GDI	Graphics Device Interface
+GFDL	GNU Free Documentation License
+GIMP	GNU Image Manipulation Program
+GIMPS	Great Internet Mersenne Prime Search
+GIS	Geographic Information System
+GLUT	OpenGL Utility Toolkit
+GML	Geography Markup Language
+GNOME	GNU Network Object Model Environment
+GOMS	Goals, Operators, Methods, and Selection rules
+GPASM	GNU PIC ASseMbler
+GPG	GNU Privacy Guard
+GPGPU	General-Purpose Computing on Graphics Processing Units
+GPIB	General-Purpose Instrumentation Bus
+GPL	General Public License
+GPL	General-Purpose Language
+GPRS	General Packet Radio Service
+GPT	GUID Partition Table
+GRUB	Grand Unified Boot-Loader
+GSM	Global System for Mobile Communications
+GTK+	GIMP Toolkit
+GUI	Graphical User Interface
+GUID	Globally Unique IDentifier
+GWT	Google Web Toolkit
+GAS	GNU Assembler
+GB	Gigabit
+HAL	Hardware Abstraction Layer
+HBA	Host Bus Adapter
+HCI	Human Computer Interaction
+HCL	Hardware Compatibility List
+HD	High Density
+HD DVD	High Definition DVD
+HDD	Hard Disk Drive
+HDL	Hardware Description Language
+HDMI	High-Definition Multimedia Interface
+HF	High Frequency
+HHD	Hybrid Hard Drive
+HID	Human Interface Device
+HIG	Human Interface Guidelines
+HIRD	Hurd of Interfaces Representing Depth
+HLASM	High Level ASseMbler
+HMA	High Memory Area
+HP	Hewlett-Packard
+HPC	High-Performance Computing
+HPFS	High Performance File System
+HSM	Hierarchical Storage Management
+HT	Hyper Threading
+HTC	High-Throughput Computing
+HTM	Hierarchical Temporal Memory
+HTML	Hypertext Markup Language
+HTTP	Hypertext Transfer Protocol
+HTTPD	Hypertext Transport Protocol Daemon
+HTX	HyperTransport eXpansion
+HURD	Hird of Unix-Replacing Daemons
+HVD	Holographic Versatile Disc
+HZ	Hertz
+I/O	Input/Output
+I18N	Internationalization
+I2C	Inter-Integrated Circuit
+IANA	Internet Assigned Numbers Authority
+IBM	International Business Machines
+ICANN	Internet Corporation for Assigned Names and Numbers
+ICE	In-Circuit Emulator
+ICE	Intrusion Countermeasure Electronics
+ICP	Internet Cache Protocol
+ICT	Information and Communication Technology
+IDE	Integrated Development Environment
+IDF	Intermediate Distribution Frame
+IDL	Interface Definition Language
+IDS	Intrusion Detection System
+IE	Internet Explorer
+IEEE	Institute of Electrical and Electronics Engineers
+IFL	Integrated Facility for Linux
+IGMP	Internet Group Management Protocol
+IGRP	Interior Gateway Routing Protocol
+IHV	Independent Hardware Vendor
+IIOP	Internet Inter-Orb Protocol
+IIS	Internet Information Services
+IL	Intermediate Language
+IM	Instant Messaging
+IMAP	Internet Message Access Protocol
+IME	Input Method Editor
+INFOSEC	Information Systems Security
+IP	Intellectual Property
+IPC	Inter-Process Communication
+IPL	Initial Program Load
+IPO	Inter Procedural Optimization
+IPP	Internet Printing Protocol
+IPS	Intrusion Prevention System
+IPTV	Internet Protocol Television
+IPX	Internetwork Packet Exchange
+IRP	I/O Request Packet
+IS	Information Systems
+ISA	Instruction Set Architecture
+ISAM	Indexed Sequential Access Method
+ISC	Internet Storm Center
+ISO	International Organization for Standardization
+ISPF	Interactive System Productivity Facility
+ISR	Interrupt Service Routine
+ISV	Independent Software Vendor
+IT	Information Technology
+ITL	Interval Temporal Logic
+ITU	International Telecommunication Union
+IRDA	Infrared Data Association
+J2EE	Java 2 Enterprise Edition
+J2ME	Java 2 Micro Edition
+J2SE	Java 2 Standard Edition
+JAX-RPC	Java XML for Remote Procedure Calls
+JAXB	Java Architecture for XML Binding
+JAXP	Java API for XML Processing
+JBOD	Just a Bunch of Disks
+JCL	Job Control Language
+JCP	Java Community Process
+JDBC	Java Database Connectivity
+JDK	Java Development Kit
+JDS	Java Desktop System
+JES	Job Entry Subsystem
+JFC	Java Foundation Classes
+JFET	Junction Field-Effect Transistor
+JFS	IBM Journaling File System
+JINI	Jini Is Not Initials
+JIT	Just-In-Time
+JMS	Java Message Service
+JMX	Java Management Extensions
+JNDI	Java Naming and Directory Interface
+JNI	Java Native Interface
+JNZ	Jump non-zero
+JRE	Java Runtime Environment
+JS	JavaScript
+JSON	JavaScript Object Notation
+JSP	Jackson Structured Programming
+JSP	JavaServer Pages
+JTAG	Joint Test Action Group
+JUG	Java Users Group
+JVM	Java Virtual Machine
+K&AMP;R	Kernighan and Ritchie
+KB	Keyboard
+KB	Kilobyte
+KB	Knowledge Base
+KDE	K Desktop Environment
+KM	Knowledge Machine
+KRL	Knowledge Representation Language
+KVM	Keyboard, Video, Mouse
+KB	Kilobit
+L10N	Localization
+L2TP	Layer two Tunneling Protocol
+LAMP	Linux Apache MySQL Perl
+LAMP	Linux Apache MySQL PHP
+LAMP	Linux Apache MySQL Python
+LCOS	Liquid Crystal On Silicon
+LE	Logical Extents
+LED	Light-Emitting Diode
+LF	Line Feed
+LF	Low Frequency
+LFS	Linux From Scratch
+LGPL	Lesser General Public License
+LIB	LIBrary
+LIF	Low Insertion Force
+LIFO	Last In First Out
+LILO	Linux Loader
+LISP	LISt Processing
+LKML	Linux Kernel Mailing List
+LM	Lan Manager
+LOC	Lines of Code
+LPC	Lars Pensjö C
+LPI	Linux Professional Institute
+LSB	Least Significant Bit
+LSB	Linux Standard Base
+LSI	Large-Scale Integration
+LTL	Linear Temporal Logic
+LTR	Left-to-Right
+LUG	Linux User Group
+LV	Logical Volume
+LVD	Low Voltage Differential
+LVM	Logical Volume Management
+LZW	Lempel-Ziv-Welch
+MAC	Mandatory Access Control
+MAC	Media Access Control
+MAN	Metropolitan Area Network
+MANET	Mobile Ad-Hoc Network
+MAPI	Messaging Application Programming Interface
+MB	Megabyte
+MBCS	Multi Byte Character Set
+MCA	Micro Channel Architecture
+MCA	Microsoft Certified Architect
+MCAD	Microsoft Certified Application Developer
+MCAS	Microsoft Certified Application Specialist
+MCDBA	Microsoft Certified DataBase Administrator
+MCDST	Microsoft Certified Desktop Support Technician
+MCITP	Microsoft Certified Information Technology Professional
+MCM	Microsoft Certified Master
+MCP	Microsoft Certified Professional
+MCPD	Microsoft Certified Professional Developer
+MCSA	Microsoft Certified Systems Administrator
+MCSD	Microsoft Certified Solution Developer
+MCSE	Microsoft Certified Systems Engineer
+MCT	Microsoft Certified Trainer
+MCTS	Microsoft Certified Technology Specialist
+MDA	Mail Delivery Agent
+MDA	Model-Driven Architecture
+MDA	Monochrome Display Adapter
+MDF	Main Distribution Frame
+MDI	Multiple Document Interface
+ME	[Windows] Millennium Edition
+MF	Medium Frequency
+MFC	Microsoft Foundation Classes
+MGCP	Media Gateway Control Protocol
+MHZ	Megahertz
+MIB	Management Information Base
+MICR	Magnetic Ink Character Recognition
+MIMD	Multiple Instruction, Multiple Data
+MIMO	Multiple-Input Multiple-Output
+MINIX	MIni-uNIX
+MIPS	Microprocessor without Interlocked Pipeline Stages
+MIS	Management Information Systems
+MISD	Multiple Instruction, Single Data
+MIT	Massachusetts Institute of Technology
+MMDS	Mortality Medical Data System
+MMI	Man Machine Interface.
+MMIO	Memory-Mapped I/O
+MMORPG	Massively Multiplayer Online Role-Playing Game
+MMX	Multi-Media Extensions
+MNG	Multiple-image Network Graphics
+MOM	Message-Oriented Middleware
+MOO	MUD Object Oriented
+MOS	Microsoft Office Specialist
+MOSFET	Metal-Oxide Semiconductor Field Effect Transistor
+MOUS	Microsoft Office User Specialist
+MPAA	Motion Picture Association of America
+MPEG	Motion Pictures Experts Group
+MPL	Mozilla Public License
+MPU	Microprocessor Unit
+MS	Memory Stick
+MS	Microsoft
+MS-DOS	Microsoft DOS
+MSA	Mail Submission Agent
+MSB	Most Significant Bit
+MSDN	Microsoft Developer Network
+MSI	Medium-Scale Integration
+MSI	Message Signaled Interrupt
+MSI	Microsoft Installer
+MT	Machine Translation
+MTA	Microsoft Technology Associate
+MTBF	Mean Time Between Failures
+MUD	Multi-User Dungeon
+MVC	Model-View-Controller
+MVP	Most Valuable Professional
+MVS	Multiple Virtual Storage
+MX	Mail exchange
+MXF	Material Exchange Format
+MB	Megabit
+MOBO	Motherboard
+NACK	Negative ACKnowledgement
+NAK	Negative AcKnowledge Character
+NAS	Network-Attached Storage
+NASM	Netwide ASseMbler
+NCP	NetWare Core Protocol
+NCSA	National Center for Supercomputing Applications
+NDPS	Novell Distributed Print Services
+NDS	Novell Directory Services
+NEP	Network Equipment Provider
+NEXT	Near-End CrossTalk
+NFA	Nondeterministic Finite Automaton
+NGL	aNGeL
+NGSCB	Next-Generation Secure Computing Base
+NI	National Instruments
+NIC	Network Interface Controller
+NIM	No Internal Message
+NIO	New I/O
+NIST	National Institute of Standards and Technology
+NLP	Natural Language Processing
+NLS	Native Language Support
+NMI	Non-Maskable Interrupt
+NNTP	Network News Transfer Protocol
+NOC	Network Operations Center
+NOP	No OPeration
+NOS	Network Operating System
+NP	Nondeterministic Polynomial time
+NPL	Netscape Public License
+NPTL	Native POSIX Thread Library
+NPU	Network Processing Unit
+NS	Netscape
+NSA	National Security Agency
+NSPR	Netscape Portable Runtime
+NSS	Novell Storage Service
+NSS	Network Security Services
+NSS	Name Service Switch
+NT	New Technology
+NTFS	NT Filesystem
+NTLM	NT Lan Manager
+NTP	Network Time Protocol
+NUMA	Non-Uniform Memory Access
+NURBS	Non-Uniform Rational B-Spline
+NVR	Network Video Recorder
+NVRAM	Non-Volatile Random Access Memory
+NAN	Not a Number
+NETBIOS	Network Basic Input/Output System
+OASIS	Organization for the Advancement of Structured Information Standards
+OAT	Operational Acceptance Testing
+OBSAI	Open Base Station Architecture Initiative
+ODBC	Open DataBase Connectivity
+OES	Open Enterprise Server
+OFTC	Open and Free Technology Community
+OLAP	Online Analytical Processing
+OLE	Object Linking and Embedding
+OLED	Organic Light Emitting Diode
+OLPC	One Laptop per Child
+OLTP	Online Transaction Processing
+OMF	Object Module Format
+OMG	Object Management Group
+OO	Object-Oriented
+OO	OpenOffice
+OOE	Out-of-Order Execution
+OOM	Out Of Memory
+OOP	Object-Oriented Programming
+OOTB	Out of the box
+OOO	OpenOffice.org
+OPML	Outline Processor Markup Language
+ORB	Object Request Broker
+ORM	Oject-Relational Mapping
+OS	Open Source
+OS	Operating System
+OSCON	O'Reilly Open Source CONvention
+OSDN	Open Source Developer Network
+OSI	Open Source Initiative
+OSS	Open Sound System
+OSS	Open-Source Software
+OSS	Operations Support System
+OSTG	Open Source Technology Group
+OUI	Organizationally Unique Identifier
+OOOE	Out-of-Order Execution
+P2P	Peer-To-Peer
+PAC	Programmable Automation Controller
+PAN	Personal Area Network
+PAP	Password Authentication Protocol
+PARC	Palo Alto Research Center
+PATA	Parallel ATA
+PC DOS	Personal Computer Disk Operating System
+PCB	Printed Circuit Board
+PCB	Process Control Block
+PCIE	PCI Express
+PCL	Printer Command Language
+PCM	Pulse-Code Modulation
+PCRE	Perl Compatible Regular Expressions
+PD	Public Domain
+PDA	Personal Digital Assistant
+PDF	Portable Document Format
+PDP	Programmed Data Processor
+PE	Physical Extents
+PERL	Practical Extraction and Reporting Language
+PGA	Pin Grid Array
+PGO	Profile-Guided Optimization
+PHP	PHP: Hypertext Preprocessor
+PIC	Peripheral Interface Controller
+PID	Proportional-Integral-Derivative
+PIM	Personal Information Manager
+PINE	Program for Internet News and Email
+PKCS	Public Key Cryptography Standards
+PKI	Public Key Infrastructure
+PL/I	Programming Language One
+PL/M	Programming Language for Microcomputers
+PL/P	Programming Language for Prime
+PLC	Power Line Communication
+PLC	Programmable Logic Controller
+PLD	Programmable Logic Device
+PLT	Power Line Telecoms
+PMM	POST Memory Manager
+POID	Persistent Object Identifier
+POP	Point of Presence
+POP3	Post Office Protocol v3
+POSIX	Portable Operating System Interface
+POST	Power-On Self Test
+PPC	PowerPC
+PPI	Pixels Per Inch
+PPPOA	PPP over ATM
+PPPOE	PPP over Ethernet
+PPTP	Point-to-Point Tunneling Protocol
+PS	PostScript
+PS/2	Personal System/2
+PSA	Professional Services Automation
+PSU	Power Supply Unit
+PSVI	Post-Schema-Validation Infoset
+PTS-DOS	PhysTechSoft - Disk Operating System
+PV	Physical Volume
+PVG	Physical Volume Group
+PVR	Personal Video Recorder
+PXE	Preboot Execution Environment
+PXI	PCI eXtensions for Instrumentation
+PNP	Plug-and-Play
+POE	Power over Ethernet
+QA	Quality Assurance
+QDR	Quad Data Rate
+QFP	Quad Flat Package
+QOTD	Quote of the Day
+QTAM	Queued Teleprocessing Access Method
+QT	Quasar Toolkit
+RACF	Resource Access Control Facility
+RAD	Rapid Application Development
+RADIUS	Remote Authentication Dial In User Service
+RAID	Redundant Array of Independent Disks
+RAIT	Redundant Array of Inexpensive Tapes
+RARP	Reverse Address Resolution Protocol
+RAS	Reliability, Availability and Serviceability
+RAS	Remote Access Service
+RC	Region Code
+RC	Release Candidate
+RC	Run Commands
+RDBMS	Relational DataBase Management System
+RDF	Resource Description Framework
+RDM	Relational Data Model
+RDOS	Real-time Disk Operating System
+RDS	Remote Data Services
+REFAL	REcursive Functions Algorithmic Language
+REST	Representational State Transfer
+RF	Radio Frequency
+RFI	Radio Frequency Interference
+RFID	Radio Frequency Identification
+RGB	Red, Green, Blue
+RHEL	Red Hat Enterprise Linux
+RHL	Red Hat Linux
+RIA	Rich Internet Application
+RIAA	Recording Industry Association of America
+RIP	Raster Image Processor
+RISC	Reduced Instruction Set Computer
+RISC OS	Reduced Instruction Set Computer Operating System
+RJE	Remote Job Entry
+RLE	Run-Length Encoding
+RLL	Run-Length Limited
+RMI	Remote Method Invocation
+RMS	Richard Matthew Stallman
+ROM-DOS	Read Only Memory - Disk Operating System
+ROMB	Read-Out Motherboard
+RPC	Remote Procedure Call
+RPG	Report Program Generator
+RPM	RPM Package Manager
+RSA	Rivest Shamir Adleman
+RSI	Repetitive Strain Injury
+RSS	Radio Service Software
+RSS	Rich Site Summary, RDF Site Summary, or Really Simple Syndication
+RTAI	Real-Time Application Interface
+RTC	Real-Time Clock
+RTE	Real-Time Enterprise
+RTEMS	Real-Time Executive for Multiprocessor Systems
+RTL	Right-to-Left
+RTOS	Real-Time Operating System
+RTP	Real-time Transport Protocol
+RTS	Ready To Send
+RTSP	Real Time Streaming Protocol
+S/MIME	Secure/Multipurpose Internet Mail Extensions
+SAN	Storage Area Network
+SATA	Serial ATA
+SAX	Simple API for XML
+SBOD	Spinning Beachball of Death
+SBP-2	Serial Bus Protocol 2
+SBU	Standard Build Unit
+SCADA	Supervisory Control And Data Acquisition
+SCID	Source Code in Database
+SCP	Secure Copy
+SCPI	Standard Commands for Programmable Instrumentation
+SCTP	Stream Control Transmission Protocol
+SD	Secure Digital
+SDDL	Security Descriptor Definition Language
+SDI	Single Document Interface
+SDIO	Secure Digital Input Output
+SDK	Software Development Kit
+SDL	Simple DirectMedia Layer
+SDN	Service Delivery Network
+SDP	Session Description Protocol
+SDR	Software-Defined Radio
+SDSL	Symmetric DSL
+SE	Single Ended
+SEI	Software Engineering Institute
+SEO	Search Engine Optimization
+SFTP	Secure FTP
+SFTP	Simple File Transfer Protocol
+SFTP	SSH File Transfer Protocol
+SGI	Silicon Graphics, Incorporated
+SGML	Standard Generalized Markup Language
+SHA	Secure Hash Algorithm
+SHDSL	Single-pair High-speed Digital Subscriber Line
+SIGCAT	Special Interest Group on CD-ROM Applications and Technology
+SIGGRAPH	Special Interest Group on Graphics
+SIMD	Single Instruction, Multiple Data
+SIMM	Single Inline Memory Module
+SIP	Supplementary Ideographic Plane
+SISD	Single Instruction, Single Data
+SLED	SUSE Linux Enterprise Desktop
+SLES	SUSE Linux Enterprise Server
+SLI	Scalable Link Interface
+SLIP	Serial Line Internet Protocol
+SLM	Service Level Management
+SLOC	Source Lines of Code
+SMA	SubMiniature version A
+SMB	Server Message Block
+SMBIOS	System Management BIOS
+SMIL	Synchronized Multimedia Integration Language
+SMP	Supplementary Multilingual Plane
+SMP	Symmetric Multi-Processing
+SMS	Short Message Service
+SMS	System Management Server
+SMT	Simultaneous Multithreading
+SNA	Systems Network Architecture
+SNTP	Simple Network Time Protocol
+SO-DIMM	Small Outline DIMM
+SOA	Service-Oriented Architecture
+SOAP	Simple Object Access Protocol
+SOE	Standard Operating Environment
+SOHO	Small Office/Home Office
+SOI	Silicon On Insulator
+SP	Service Pack
+SPARC	Scalable Processor Architecture
+SPF	Sender Policy Framework
+SPI	Serial Peripheral Interface
+SPI	Stateful Packet Inspection
+SPMD	Single Program, Multiple Data
+SQL	Structured Query Language
+SSD	Software Specification Document
+SSD	Solid-State Drive
+SSE	Streaming SIMD Extensions
+SSI	Server Side Includes
+SSI	Single-System Image
+SSI	Small-Scale Integration
+SSID	Service Set Identifier
+SSL	Secure Socket Layer
+SSP	Supplementary Special-purpose Plane
+SSSE	Supplementary Streaming SIMD Extensions
+SUS	Single UNIX Specification
+SUSE	Software und System-Entwicklung
+SVC	Scalable Video Coding
+SVD	Structured VLSI Design
+SVG	Scalable Vector Graphics
+SVGA	Super Video Graphics Array
+SWF	Shock Wave Flash
+SWT	Standard Widget Toolkit
+SAAS	Software as a Service
+SOC	System-on-a-Chip
+SYSOP	System operator
+TAO	Track-At-Once
+TASM	Turbo ASseMbler
+TB	TeraByte
+TCP/IP	Transmission Control Protocol/Internet Protocol
+TCU	Telecommunication Control Unit
+TDMA	Time Division Multiple Access
+TI	Texas Instruments
+TLA	Three-Letter Acronym
+TLD	Top-Level Domain
+TLS	Thread-Local Storage
+TNC	Terminal Node Controller
+TNC	Threaded Neill-Concelman connector
+TPF	Transaction Processing Facility
+TROFF	Trace Off
+TRON	Trace On
+TRON	The Real-time Operating system Nucleus
+TRS-DOS	Tandy Radio Shack - Disk Operating System
+TSO	Time Sharing Option
+TSP	Traveling Salesman Problem
+TSR	Terminate and Stay Resident
+TTA	True Tap Audio
+TTF	TrueType Font
+TTL	Transistor-Transistor Logic
+TTS	Text-to-Speech
+TUCOWS	The Ultimate Collection of Winsock Software
+TWAIN	Technology Without An Interesting Name
+UAAG	User Agent Accessibility Guidelines
+UAC	User Account Control
+UAT	User Acceptance Testing
+UCS	Universal Character Set
+UDDI	Universal Description, Discovery, and Integration
+UDMA	Ultra DMA
+UEFI	Unified Extensible Firmware Interface
+UHF	Ultra High Frequency
+UI	User Interface
+UL	Upload
+ULA	Uncommitted Logic Array
+UMA	Upper Memory Area
+UMB	Upper Memory Block
+UML	User-Mode Linux
+UMPC	Ultra-Mobile Personal Computer
+UNC	Universal Naming Convention
+URN	Uniform Resource Name
+USR	U.S. Robotics
+UTC	Coordinated Universal Time
+UTF	Unicode Transformation Format
+UUCP	Unix to Unix Copy
+UUID	Universally Unique Identifier
+UUN	Universal User Name
+UVC	Universal Virtual Computer
+UX	User Experience
+VB	Visual Basic
+VBA	Visual Basic for Applications
+VBS	Visual Basic Script
+VCPI	Virtual Control Program Interface
+VDSL	Very High Bitrate Digital Subscriber Line
+VFAT	Virtual FAT
+VFS	Virtual File System
+VG	Volume Group
+VGA	Video Graphics Array
+VHF	Very High Frequency
+VLB	Vesa Local Bus
+VLF	Very Low Frequency
+VLIW	Very Long Instruction Word
+VLSI	Very-Large-Scale Integration
+VM	Virtual Machine
+VM	Virtual Memory
+VNC	Virtual Network Computing
+VOD	Video On Demand
+VPU	Visual Processing Unit
+VR	Virtual Reality
+VRML	Virtual Reality Modeling Language
+VSAM	Virtual Storage Access Method
+VSAT	Very Small Aperture Terminal
+VT	Video Terminal?
+VTAM	Virtual Telecommunications Access Method
+VOIP	Voice over Internet Protocol
+W3C	World Wide Web Consortium
+WAFS	Wide Area File Services
+WAI	Web Accessibility Initiative
+WAIS	Wide Area Information Server
+WAP	Wireless Access Point
+WASM	Watcom ASseMbler
+WBEM	Web-Based Enterprise Management
+WCAG	Web Content Accessibility Guidelines
+WCF	Windows Communication Foundation
+WDM	Wavelength-Division Multiplexing
+WFI	Wait For Interrupt
+WINS	Windows Internet Name Service
+WMA	Windows Media Audio
+WMV	Windows Media Video
+WOL	Wake-on-LAN
+WOM	Wake-on-Modem
+WOR	Wake-on-Ring
+WPAN	Wireless Personal Area Network
+WPF	Windows Presentation Foundation
+WSDL	Web Services Description Language
+WSFL	Web Services Flow Language
+WUSB	Wireless Universal Serial Bus
+WWAN	Wireless Wide Area Network
+WWID	World Wide Identifier
+WWN	World Wide Name
+WZC	Wireless Zero Configuration
+WEBDAV	WWW Distributed Authoring and Versioning
+WI-FI	Wireless Fidelity
+WIMAX	Worldwide Interoperability for Microwave Access
+WINFS	Windows Future Storage
+XAG	XML Accessibility Guidelines
+XAML	eXtensible Application Markup Language
+XCBL	XML Common Business Library
+XDM	X Window Display Manager
+XDMCP	X Display Manager Control Protocol
+XHTML	eXtensible Hypertext Markup Language
+XILP	X Interactive ListProc
+XMMS	X Multimedia System
+XMPP	eXtensible Messaging and Presence Protocol
+XMS	Extended Memory Specification
+XNS	Xerox Network Systems
+XP	Cross-Platform
+XP	Extreme Programming
+XPCOM	Cross Platform Component Object Model
+XPI	XPInstall
+XPIDL	Cross-Platform IDL
+XSD	XML Schema Definition
+XSL-FO	eXtensible Stylesheet Language Formatting Objects
+XSLT	eXtensible Stylesheet Language Transformations
+XSS	Cross-Site Scripting
+XTF	eXtensible Tag Framework
+XTF	eXtended Triton Format
+XUL	XML User Interface Language
+Y2K	Year Two Thousand
+YAAF	Yet Another Application Framework
+YACC	Yet Another Compiler Compiler
+YAML	YAML Ain't Markup Language
+YAST	Yet another Setup Tool
+BIN	binary
+BIT	binary digit
+CC	C Compiler
+DEV	development
+EID	electronic ID card
+IBCS	Intel Binary Compatibility Standard
+ISCSI	Internet Small Computer System Interface
+ISNS	Internet Storage Name Service
+JWZ	Jamie Zawinski
+KHZ	Kilohertz
+REGEX	Regular Expression
+REGEXP	Regular Expression
+SBIN	superuser binary
+SU	superuser
+TMP	temporary
+USR	user
+VAR	variable

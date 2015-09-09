@@ -1,0 +1,30 @@
+.TH EDDA 1 "June 2015" "Manual page for edda"
+.SH NAME
+.B edda
+\- run ed(1) over multiple files
+.SH SYNOPSIS
+.B edda [OPTS] [--] FILE1 [FILE2...]
+.SH DESCRIPTION
+Duplicate any data on stdin into a temporary file, and run ed(1) with any given
+options over each of the files given as the remaining arguments. Example:
+.P
+   $ edda -s /etc/app.d/*.conf <<EOF
+   ,s/foo/bar/g
+   w
+   EOF
+.SH WISDOM
+"Each man who is wise and would wise be called,
+.br
+ Must ask and answer aright.
+.br
+ Let one know thy secret, but never a second;
+.br
+ If three, a thousand shall know."
+.P
+   -- Poetic Edda, Hávamál, 63
+.br
+.SH SEE ALSO
+ed(1)
+.SH AUTHOR
+Tom Ryder <tom@sanctum.geek.nz>
+
