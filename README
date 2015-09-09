@@ -1,0 +1,10 @@
+the.list-/etc/apt/sources.list.d/the.list
+unused.list-...unused...
+---
+dpkg.list-things installed on fresh debian
+npm.list-saaaame
+pip.list-um, idk what this could be
+pip3.list-HMMMMM
+---
+bin is a mess, and also has random cheatcheets and things. be careful.
+licenses: see individual files, since i yoinked just about everything from someone else.
