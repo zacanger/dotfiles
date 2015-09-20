@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/" >
+        <file>icons/bookmark-new.png</file>
+        <file>icons/go-home.png</file>
+        <file>icons/go-next.png</file>
+        <file>icons/go-previous.png</file>
+        <file>icons/gtk-cancel.png</file>
+        <file>icons/gtk-refresh.png</file>
+        <file>icons/show_all_bookmark.png</file>                
+        <file>icons/stock_zoom-1.png</file>
+        <file>icons/stock_zoom-in.png</file>
+        <file>icons/stock_zoom-out.png</file>
+        <file>icons/image0.xpm</file>
+    </qresource>
+</RCC>

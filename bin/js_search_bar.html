@@ -1,0 +1,252 @@
+<script>
+/*
+ *  Whenever you do a search in a browser, the search gets redirected here, and
+ *  this Javascript code makes some decisions about where to send your search
+ *  to.
+ *
+ *  This is a file that gets stored locally on all of my machines.
+ *  Because it's stored locally, it can be loaded very quickly.
+ *
+ *
+ *  For instructions on installing this as the default search engine in your
+ *  particular browser, load this file by itself in a browser.
+ *     (eg.  file:///home/username/browser/js_search_bar.html  )
+ *
+ *  Or, if you have installed it already, typing "help help" will show the full
+ *  help text as well.
+ *
+ */
+
+
+        // TODO:
+        //  - Chrome has a facility like this built-in, and it allows AUTOCOMPLETE!
+        //    Explore if this is a possibility for integrating this.
+        //          https://developer.chrome.com/extensions/omnibox
+        //          http://www.hongkiat.com/blog/omnibox-chrome-extensions/
+
+
+// Browser Keymarks.
+//
+// If you append "+" to a command that's a Google query, it upgrades it to "I'm feeling lucky"
+//              (eg. "git+" is the feeling-lucky version of "git")
+//
+// Some commands are prefixed with a comma.  This is because I do a lot of
+// normal searches using these words, and I don't want to confuse regular searches
+// with these special commands.
+var commands = {
+    google   : google(""),
+    g        : google(""),
+    ter      : google("site:terraria.gamepedia.com"),
+
+    // wikipedia
+    wiki     : google("site:en.wikipedia.org"),
+    wikit    : google("site:en.wikipedia.org/wiki/template"),       // search the "Template:" namespace
+    wikiw    : google("site:en.wikipedia.org/wiki/wikipedia"),      // search the "Wikipedia:" namespace
+    wikic    : google("site:en.wikipedia.org/wiki/category"),       // search the "Category:" namespace
+    w        : function(args) { return "https://en.wikipedia.org/wiki/" + args.replace(/ /g, "_") },
+                    // Jump directly to a page.  For example,
+                    //          w Georgia (country)
+                    // would take you to
+                    //          https://en.wikipedia.org/wiki/Georgia_(country)
+
+    // development
+    ',perl'  : "http://perldoc.perl.org/search.html?q=%s",
+    perlfunc : "http://perldoc.perl.org/functions/%s.html",
+    cpan     : "https://metacpan.org/search?q=%s",
+    js       : google("site:developer.mozilla.org"),
+    ',git'   : google("site:schacon.github.com/git/"),
+    ',vim'   : "http://vimdoc.sourceforge.net/search.php?search=%s&docs=help",
+    ahk      : google("site:autohotkey.com"),
+
+    // sysadmin
+    man      : "http://man.cx/%s",
+    deb      : google("site:packages.debian.org"),
+    ',git'   : "http://man.cx/git-%s",
+
+    // ubuntu
+    ',ubuntu': google("site:ubuntu.com"),
+    u        : google("site:ubuntu.com"),
+    upkg     : google("site:packages.ubuntu.com"),
+    uhelp    : google("site:help.ubuntu.com"),
+    uman     : google("site:manpages.ubuntu.com"),
+    uforum   : google("site:ubuntuforums.org"),
+
+    testing  : function() {     // an example of how (typeof(cmd) == "function") works
+        return "http://reddit.com";
+    },
+    // typing "help help" from anywhere returns the help text for this page
+    help : function() { return window.location.href.replace(/\?.*/, "") },
+};
+
+
+function main() {
+    if (window.location.search.match(/^\??$/)) {
+        // if the page is loaded directly, display the help text in <script language="ignore"> below
+        show_help_text();
+    } else {
+        parse_search();
+    }
+}
+
+
+function show_help_text() {
+    document.write( document.getElementById("really_html").innerHTML );
+}
+
+
+function parse_search() {
+    var search = decodeURIComponent(
+                    window.location.search
+                        .replace(/^\?/, "")
+                        .replace(/\+/g, "%20"));
+    var cmd = search.match(/^(\S+)/)[0];
+    search = search.replace(/^\S+\s*/, "");
+    do_search(cmd, search);
+}
+
+
+function do_search(cmd, args) {
+    //alert(cmd + "\n" + args);
+    var lucky_upgrade = false;
+
+    if (!commands[cmd]) {           // the comma-prefix is optional for some commands, and required for others;  if it's optional on this command, remove it
+        cmd = cmd.replace(/^,+/, "");
+    }
+
+    if (!commands[cmd]) {
+        // check if this is a Feeling Lucky upgrade
+        var cmd_unlucky;
+        if ((cmd_unlucky = cmd.replace(/\+$/, "")) != cmd && commands[cmd_unlucky]) {
+            // the plus-sign can be placed at the end of the command name
+            lucky_upgrade = true;
+            cmd = cmd_unlucky;
+        } else {
+            //alert("unknown command: " + cmd);
+            //show_help_text();
+            //return;
+
+            // fallback to just googling the whole thing
+            args = cmd + " " + args;
+            cmd = "google";
+        }
+    }
+    if (args.length > 0 && args[args.length-1].match(/\+$/)) {
+        // the plus-sign can also be placed at the very end of the search terms
+        args[args.length-1] = args[args.length-1].replace(/\+$/, "");
+        lucky_upgrade = true;
+    }
+    var redirectto = commands[cmd];
+    if (typeof(redirectto) == "string") {
+        redirectto = redirectto.replace(/%s/, encodeURIComponent(args));
+            // reasons why this should be "encodeURIComponent":
+            //      - so the plus-symbol in  [g 2+3=] gets sent to Google
+            // reasons why this should be "encodeURI":
+            //      - ...
+    } else if (typeof(redirectto) == "function") {
+        redirectto = redirectto(args);
+    } else {
+        alert("oops");
+        return;
+    }
+    if (lucky_upgrade && redirectto.match(/^https?:\/\/([^\/]*\.)google\.com\//)) {
+        // Google disabled the "feeling lucky" from any other site than its own:
+        //      http://superuser.com/questions/695109/consistent-im-feeling-lucky-macro-for-google
+        //      http://cowsthatgomoo.blogspot.com/2013/05/googles-selfish-move-to-keep-im-feeling.html
+        //      http://forums.mozillazine.org/viewtopic.php?p=7946025&sid=bd71231f6ed794424a276d2c3bc3db7c#p7946025
+        // But there's a workaround!
+        //      http://webapps.stackexchange.com/a/59216
+        redirectto = redirectto.replace(/^https?:\/\/([^\/]*\.)?google\.com\/search\?/, "https://www.google.com/webhp?#") + "&btnI=1";
+    }
+    //alert("redirecting to\n" + redirectto); // return;
+    window.location = redirectto;
+}
+
+
+function feeling_lucky(args) {
+    return google(args) + "&btnI=1";
+}
+
+function google(args) {
+    return "https://www.google.com/search?q=" + encodeURI(args) + "+%s&ie=utf-8&oe=utf-8";
+}
+
+
+</script>
+
+
+
+
+<!-- If we're doing a search, we don't want to spend any time trying to parse or render HTML.
+   - So instead make this a here-document that we can load if/when we want to.
+  -->
+<script id="really_html" language="ignore">
+
+<style>
+    /* --==##  links aren't underlined unless you :hover  ##==-- */
+    a:hover {text-decoration:underline}
+    a {text-decoration:none}
+    @media print { a {text-decoration:underline} }
+
+    /* --==##  make h1/h2/h3 stand out with bars  ##==-- */
+    h1, h2, h3 {padding:0.3em; border-top:2px solid #000; border-bottom:2px solid #000;
+    background-color:#ccc; margin-top:2em}
+    body>h1:first-child, body>h2:first-child, body>h3:first-child {margin-top:0}
+
+    /* --==##  table cells have a nice border  ##==-- */
+    table.wikitable {border-collapse:collapse}
+    table.wikitable td, table.wikitable th {border:1px solid #aaa; padding:0.3em}
+    table.wikitable th {background-color:#000; color:#fff}
+    table.wikitable th a {color:#aaf}
+    table.wikitable th a:visited {color:#faf}
+    table.wikitable tr.header td, table.wikitable thead td {border:#fff}
+
+    /* --==##  kbd has gray background  ##==-- */
+    kbd {background-color:#bbb}
+
+    /* --==##  selectively make ul/ol spaced (non-cascading)  ##==-- */
+    ul.spaced > li, ol.spaced > li {margin-bottom:1em}
+    .spaced > li > .spaced {margin-top:1em}
+
+    /* --==##  CSS reset  ##==-- */
+    a img {border:0}
+</style>
+
+
+<p>This tool lets you do various preconfigured searches of the form "&lt;keyword&gt; &lt;searchterms&gt;".
+
+<p>For example, <kbd>man tmux</kbd> would show the man page for tmux.
+
+<p>To see the list of keywords available, "view source".
+
+
+<h3>Setup instructions</h3>
+<ul class=spaced>
+<li><b>Firefox</b>
+    <ul>
+    <li>install the <a href="https://addons.mozilla.org/en-US/firefox/addon/add-to-search-bar/">Add To Search Bar</a> extension
+    <li>right-click in the search box above, and choose "Add to search bar"
+    </ul>
+<li><b>Firefox</b>
+    <ul>
+    <li><tt>about:config</tt> &gt; point <A href="http://kb.mozillazine.org/Keyword.URL">keyword.URL</a> to this URL with <kbd>?</kbd> appended
+    <li>Keyword.URL stopped working in Firefox 23.  You can <a href="https://addons.mozilla.org/en-US/firefox/addon/keywordurl-hack/">install this extension</a> to restore the older functionality.
+    </ul>
+<li><b>Chrome</b>
+    <ul>
+    <li>right click in the URL bar, select "Edit Search Engines"
+    <li>add a new entry with the name 'jsbar', point it to this URL, with <kbd>?%s</kbd> appended
+    <li>find the new entry (in the middle of the list, in alphabetical order), and click on the 'Make Default' button
+    </ul>
+</ul>
+
+</script>
+
+
+
+
+
+
+
+<script>
+main();
+</script>

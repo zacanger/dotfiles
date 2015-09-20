@@ -1,0 +1,31 @@
+REQUIREMENTS
+============
+
+ * Qt >= 4.4.3
+ * sip >= 4.7.7
+ * Python >= 2.5
+ * Python-pyqt >= 4.4.3
+
+
+BUILDING AND INSTALLING
+=======================
+
+This package uses setuptools, so execute:
+
+Build::
+
+        python setup.py build
+
+Install::
+
+        python setup.py install --prefix=/usr
+        python setup.py install_data --install-dir=/usr/share
+
+Run ::
+		python webbrowser.py
+		
+You can choose where to install by using command options, see output
+of "python setup.py <command> --help", example:
+
+        python setup.py install --help
+

@@ -1,0 +1,11 @@
+REQUIREMENTS
+============
+
+ * Qt >= 4.4.3
+ * sip >= 4.7.7
+ * Python >= 2.5
+ * Python-pyqt >= 4.4.3
+
+
+Run ::
+		python webbrowser.py
