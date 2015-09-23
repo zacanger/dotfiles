@@ -773,3 +773,6 @@ mysqldump -u username -p --opt databasename \> dumpfile.sql
 
 mysql -u username -p --database=databasename < dumpfile.sql
 
+
+[0]: file:///home/zacanger/Desktop/cheats.html
+[1]: http://example.com/folder/file

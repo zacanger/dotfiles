@@ -25,8 +25,11 @@ shopt -s checkwinsize
 # match all files and zero or more directories and subdirectories.
 shopt -s globstar
 
+# include .file in expansions
+shopt -s dotglob
+
 # see lesspipe(1)
-#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
@@ -95,8 +98,11 @@ if ! shopt -oq posix; then
 fi
 
 
-# autocorrect cd
+# autocorrect spelling on some things
 shopt -s cdspell
+shopt -s dirspell
+
+#include
 
 . /usr/share/autojump/autojump.sh
 
@@ -106,8 +112,8 @@ echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
 export PATH=$PATH:/usr/local/share/npm/bin:~/bin:/opt
 
 ### MOTD ###
-      # Display MotD
-      # if [[ -e $HOME/.motd ]]; then cat $HOME/.motd; fi
+# Display MotD
+# if [[ -e $HOME/.motd ]]; then cat $HOME/.motd; fi
 
 export PS1="[$(t | wc -l | sed -e's/ *//')] $PS1"
 export EDITOR="nano"
@@ -119,7 +125,7 @@ if [ -d ~/.bash_functions ]; then
     done
 fi
 
-if [ -e /home/zacanger/.nix-profile/etc/profile.d/nix.sh ]; then . /home/zacanger/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+# if [ -e /home/zacanger/.nix-profile/etc/profile.d/nix.sh ]; then . /home/zacanger/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 
 ## shline
