@@ -1,4 +1,8 @@
-I HAVE NO IDEA
+A lot of this is a mess. I'm working on cleaning it up a bit, though. Moved all docs/manpages to man/. I'm not too fond of extensions... almost all of the bash scripts don't have them, because typing `whatever.sh | thingy.sh' and 'blah.sh' and `.sh .sh .shshshshshsh` can get old right quick. Some Python bits are probably also missing extensions. Same story.  
+
+Virtually everything in here was stolen from someone, probably. Anywhere there were credits, I believe I've left them intact. Some things might not have them--most likely I those would be bits pulled from comments on blog posts, anonymous paste services, or whatever. If it's your code and it doesn't mention you, please do let me know.  
+
+At some point I'll actually get a blog/site generator (probably in Bash) figured out, which'll be in here... as well as a script to keep all this (and ../) updated automatically (from my Dropbox, where this git repo lives), and also to just link to these instead of duplicating on every box....
 
 
-A good bit of this stuff is actually just a total mess. Bits and pieces from different distros I've used at some point or another... possibly things labeled .md that are actually shell scripts... I really just don't know. Maybe I'll organize, one day. Anything I've grabbed from online somewhere, credits will be in there. The exceptions, if any, are snippets found without much info; comments on blog posts, paste services, etc.
+
