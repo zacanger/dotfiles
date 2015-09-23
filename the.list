@@ -10,57 +10,15 @@
 ## wget -qO- https://URL.TLD/PATH/TO/THE.gpg.key | apt-key add -
 ##
 
-# bbqtools-basic & bbq-tools
-# It's also worth checking various configs; try bbqgit,
-# but also on Github: dkeg, pidsley, debianjoe,
-# wuxmedia, ivanovnegro, and (of course) machinebacon
+# bbqtools-basic & bbq-tools; also check github
 deb http://linuxbbq.org/repos/apt/debian sid main
 
-deb http://security.debian.org/ testing/updates main contrib non-free
-# deb-src http://security.debian.org/ testing/updates main contrib non-free
-deb http://ftp.debian.org/debian/ sid main contrib non-free
-# deb-src http://ftp.debian.org/debian/ sid main contrib non-free
-
-# Debian Multimedia
-# Note that even the 'experimental' stuff is usually old
-# Also experimental ONLY contains staging, so we need sid too
-# Mirrors tend to be down often, I think? Hence the extras.
-# Experimental only ever has 'main.'
+# Debian Multimedia... switch with one of the others if it goes down
 deb http://mirrors.dotsrc.org/debian-multimedia/ sid main non-free
-# deb-src http://mirrors.dotsrc.org/debian-multimedia/ sid main non-free
-# http://deb-multimedia.org/debian-m-unstable mirrors list
-deb http://mirror.optus.net/debian-multimedia/ experimental main
-# deb ftp://ftp.metu.edu.tr/debian-multimedia/ experimental main
-
-# Devuan
-deb http://packages.devuan.org/devuan ceres main contrib non-free
-deb-src http://packages.devuan.org/devuan ceres main contrib non-free
 
 # @paultags
 deb https://pault.ag/debian wicked main
 deb-src https://pault.ag/debian wicked main
-
-# This section is a mess. But KX is the only place to get a lot of this stuff
-# as Debian binaries automatically.
-# deb-src http://ppa.launchpad.net/kxstudio-debian/libs/ubuntu devel main
-deb http://ppa.launchpad.net/kxstudio-debian/music/ubuntu devel main
-# deb-src http://ppa.launchpad.net/kxstudio-debian/music/ubuntu devel main
-deb http://ppa.launchpad.net/kxstudio-debian/plugins/ubuntu devel main
-# deb-src http://ppa.launchpad.net/kxstudio-debian/plugins/devel lucid main
-deb http://ppa.launchpad.net/kxstudio-debian/apps/ubuntu devel main
-# deb-src http://ppa.launchpad.net/kxstudio-debian/apps/ubuntu devel main
-deb http://ppa.launchpad.net/kxstudio-debian/kxstudio/ubuntu devel main
-# deb-src http://ppa.launchpad.net/kxstudio-debian/kxstudio/ubuntu devel main
-deb http://kxstudio.sourceforge.net/repo/ stable free non-free
-
-# Google Web Designer, only useful for Google Ads
-deb http://dl.google.com/linux/webdesigner/deb/ stable main
-
-# Obviously one should use nvm/n to keep this updated; this is for initial installation
-deb https://deb.nodesource.com/iojs_3.x sid main
-deb-src https://deb.nodesource.com/iojs_3.x sid main
-
-
 
 deb http://ppa.launchpad.net/numix/ppa/ubuntu devel main
 # deb-src http://ppa.launchpad.net/numix/ppa/ubuntu devel main
@@ -70,7 +28,7 @@ deb http://ppa.launchpad.net/yannubuntu/boot-repair/ubuntu precise main
 # deb-src http://ppa.launchpad.net/yannubuntu/boot-repair/ubuntu precise main
 
 # siduction
-deb http://packages.siduction.org/base unstable main contrib non-free
+# deb http://packages.siduction.org/base unstable main contrib non-free
 # deb-src http://packages.siduction.org/base unstable main contrib non-free
 deb http://packages.siduction.org/extra unstable main contrib non-free
 # deb-src http://packages.siduction.org/extra unstable main contrib non-free
@@ -79,25 +37,13 @@ deb http://packages.siduction.org/fixes unstable main contrib non-free
 deb http://packages.siduction.org/user unstable main contrib non-free
 # deb-src http://packages.siduction.org/user unstable main contrib non-free
 
-# Only Kali packages from Kali repos
-deb http://http.kali.org/dists/kali-rolling-only/ main contrib non-free
-# deb-src http://http.kali.org/dists/kali-rolling-only/ main contrib non-free
-
-# Misc
-deb http://download.virtualbox.org/virtualbox/debian jessie contrib
-deb http://eu.repository.frozenbox.org/mirrors/parrot testing main contrib non-free
-deb http://debian.tu-bs.de/project/aptosid/debian/ sid main fix.main
-deb http://deb.playonlinux.com/ wheezy main
-deb http://www.phoronix-test-suite.com/releases/repo/ pts.debian/
-
 # pgl
 deb http://moblock-deb.sourceforge.net/debian/ sid main
 # deb-src http://moblock-deb.sourceforge.net/debian/ sid main
 
-# ceni, artwork, some other stuff here
-deb ftp://cathbard.com/ ./
-# deb-src ftp://cathbard.com/ ./
-
 # php stuff. jessie is the newest dist
 deb http://packages.dotdeb.org/ jessie all
 # deb-src http://packages.dotdeb.org/ jessie all
+
+deb [arch=i386,amd64] http://linux.dropbox.com/debian sid main
+
