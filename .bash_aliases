@@ -1,3 +1,15 @@
+# managing .bashrc & .bash_aliases
+alias edrc='nano ~/.bashrc'
+alias edal='nano ~/.bash_aliases'
+alias reload='source ~/.bashrc'
+
+# package managers
+alias apmupd='apm update --no-confirm'
+alias npmupd='npm update -g'
+alias bupd='bower update'
+alias pipupd='pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
+
+# apt/dpkg stuff
 alias upd='sudo apt-get update'
 alias upg='sudo apt-get update && sudo apt-get upgrade'
 alias purge='sudo apt-get purge'
@@ -6,15 +18,18 @@ alias search='apt-cache search'
 alias policy='apt-cache policy'
 alias depends='apt-cache depends'
 alias ins='sudo apt-get install'
+alias insd='dpkg -l | grep ii | most'
+alias isit='dpkg -l | grep ii | grep '
+alias rdepends='apt-cache rdepends '
+alias show='apt-cache show '
 
-## Space on drive
+# disk usage
 alias disk='du -S | sort -n -r | most'
 
 # search
 alias where="which"
 alias what="apropos"
 alias apr="apropos"
-alias ff="find . -type f -name"
 
 # navigation
 alias ..="cd .."
@@ -22,56 +37,61 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../../"
 alias ......="cd ../../../../.."
+alias ,,='..'
+alias ,,,='...'
+alias ,,,,='....'
+alias ,,,,,='.....'
+alias ,,,,,,='......'
 alias fonts="cd /usr/share/fonts"
 
-#### SAFETY ####
+# safety
 # alias rm='rm -Iv --preserve-root'
+# gh:sindresorhus/trash,empty-trash
+alias rm='trash'
+alias erm='empty-trash'
 alias mv='mv -iv'
 alias cp='cp -iv'
 alias ln='ln -i'
-
 alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
+# alias shred='shred -n 100 -z -v -u'
+alias shred='echo NOPE, WE LIKE '
 
-alias shred='shred -n 100 -z -v -u'
-
-#### REBOOT/SHUTDOWN ####
+# omg just go away
 alias reboot='sudo /sbin/reboot'
 alias poweroff='sudo /sbin/poweroff'
 alias halt='sudo /sbin/halt'
 alias shutdown='sudo /sbin/shutdown'
+alias bye='sudo /sbin/poweroff'
 
+# ls -ALL THE THINGS
 alias ls='ls -F --color=auto --group-directories-first'
 alias la='ls -A'
 alias ll='ls -l'
 alias l='ls -CF'
+alias lo='ls -lghtr'
+alias lS='ls -lhS'
+alias lt='ls -rtH'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias md='mkdir -p -v'
-alias manb='man -H'
+# https://bitbucket.org/sjl/t
+alias t='python ~/bin/t.py --task-dir ~/Dropbox/tpytasks --list tasks'
+alias tl='t | wc -l'
 
-alias fclist='fc-list | cut -d : -f 2 | sort -u | uniq'
+# browsers suck
+alias kk='kill-tabs'
+alias kch='pkill -15 chromium'
+alias kice='pkill -15 iceweasel'
+alias kff='pkill -15 firefox'
+alias ksm='pkill -15 seamonkey'
+alias kqu='pkill -15 qutebrowser'
 
-### zacanger's additions
-
-alias edrc='nano ~/.bashrc'
-alias edal='nano ~/.bash_aliases'
-alias reload='source ~/.bashrc'
-alias insd='dpkg -l | grep ii | most'
-alias isit='dpkg -l | grep ii | grep '
-alias rdepends='apt-cache rdepends '
-alias show='apt-cache show '
-alias cheatsheet='most ~/bin/cheatsheet.md'
-alias h='history'
-alias c='clear'
-alias q='exit'
-alias gcl='git clone '
-alias hcl='hub clone '
+# dropbox; basically may as well be ~/ at this point
 alias dbup='dropbox start'
 alias dbdn='dropbox stop'
 alias dbstat='dropbox status'
@@ -81,42 +101,29 @@ alias tweet='twidge update '
 alias feed='twidge lsrecent'
 alias mytw='twidge lsarchive'
 
-# package managers
-alias apmupd='apm update --no-confirm'
-alias npmupd='npm update -g'
-alias bupd='bower update'
-alias pipupd='pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
-
 # https://github.com/nvbn/thefuck
 alias fuck='eval $(thefuck $(fc -ln -1))'
 alias please='fuck'
 
 # misc shortcuts
 alias fls='ranger'
-alias web='iceweasel'
+alias web='firefox'
 alias browser='chromium'
-alias mu='mocp -T green_theme'
+alias mu='mocp -y -T my_theme'
 alias sfm='spacefm'
-alias kk='kill-tabs'
-alias t='python ~/bin/t.py --task-dir ~/Dropbox/tpytasks --list tasks'
-alias tl='t | wc -l'
-alias ,,='..'
-alias ,,,='...'
-alias ,,,,='....'
-alias lt='ls -rtH'
-alias bye='poweroff'
+alias dt='dvtm -m ^'
 alias les='most'
 alias k9='pkill -9'
 alias gui='startxfce4'
-alias rm='trash'
-alias erm='empty-trash'
 alias blank='xflock4'
-alias kch='pkill -15 chromium'
-alias kice='pkill -15 iceweasel'
-alias kff='pkill -15 firefox'
-alias ksm='pkill -15 seamonkey'
-alias kqu='pkill -15 qutebrowser'
-alias dt='dvtm -m ^'
-alias lo='ls -lghtr'
-alias lS='ls -lhS'
-sizesum='du | sort -nr | less'
+alias gcl='git clone '
+alias hcl='hub clone '
+alias cheatsheet='most ~/bin/man/cheatsheet.md'
+alias halp='lo -R ~/bin/man/'
+alias md='mkdir -p -v'
+alias manb='man -H'
+alias fontlist='fc-list | cut -d : -f 2 | sort -u | uniq'
+alias h='history'
+alias c='clear'
+alias q='exit'
+
