@@ -136,3 +136,5 @@ fi
 #    }
 #
 #    export PROMPT_COMMAND="_update_ps1"
+
+# export PS1="$PS1\$(git-check)" # gh:oss6/git-check
