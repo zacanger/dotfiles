@@ -41,7 +41,6 @@ case "$TERM" in
     xterm-color) color_prompt=yes;;
 esac
 
-# uncomment for a colored prompt
 force_color_prompt=yes
 
 # record history immediately, rather than on exit
@@ -65,13 +64,13 @@ fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
+# case "$TERM" in
+# xterm*|rxvt*)
+#     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+#     ;;
+# *)
+#     ;;
+# esac
 
 # color ls
 if [ -x /usr/bin/dircolors ]; then
@@ -138,3 +137,4 @@ fi
 #    export PROMPT_COMMAND="_update_ps1"
 
 # export PS1="$PS1\$(git-check)" # gh:oss6/git-check
+
