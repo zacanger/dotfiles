@@ -1,0 +1,2 @@
+here() { pwd > ~/.going/${1-_back} ; 
+                   echo "go ${1} will go to `pwd`" ;  } 

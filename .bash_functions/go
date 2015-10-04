@@ -1,0 +1,1 @@
+go() { cd `cat ~/.going/${1-_back} || echo .` ; }
