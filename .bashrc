@@ -110,6 +110,7 @@ echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
 
 export PATH=$PATH:/usr/local/share/npm/bin:~/bin:/opt
 
+
 ### MOTD ###
 # Display MotD
 # if [[ -e $HOME/.motd ]]; then cat $HOME/.motd; fi
@@ -137,4 +138,11 @@ fi
 #    export PROMPT_COMMAND="_update_ps1"
 
 # export PS1="$PS1\$(git-check)" # gh:oss6/git-check
+
+# only show dirs on cd
+complete -d cd rmdir
+
+# ask if more than x options
+bind 'set completion-query-items 200'
+
 

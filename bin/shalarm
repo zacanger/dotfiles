@@ -14,3 +14,4 @@ while [ $trig = 0 ]; do
 	fi
 done
 exit
+

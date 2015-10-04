@@ -43,6 +43,7 @@ alias ,,,,='....'
 alias ,,,,,='.....'
 alias ,,,,,,='......'
 alias fonts="cd /usr/share/fonts"
+alias cb='cd $OLDPWD'
 
 # safety
 # alias rm='rm -Iv --preserve-root'
@@ -73,6 +74,9 @@ alias l='ls -CF'
 alias lo='ls -lghtr'
 alias lS='ls -lhS'
 alias lt='ls -rtH'
+alias ld='ls -d */'
+
+# ag all the things! um, i mean...
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 alias grep='grep --color=auto'
@@ -83,18 +87,20 @@ alias egrep='egrep --color=auto'
 alias t='python ~/bin/t.py --task-dir ~/Dropbox/tpytasks --list tasks'
 alias tl='t | wc -l'
 
-# browsers suck
+# browsers suck. destroy them.
 alias kk='kill-tabs'
 alias kch='pkill -15 chromium'
 alias kice='pkill -15 iceweasel'
 alias kff='pkill -15 firefox'
 alias ksm='pkill -15 seamonkey'
 alias kqu='pkill -15 qutebrowser'
+alias klt='pkill -15 luakit'
 
 # dropbox; basically may as well be ~/ at this point
 alias dbup='dropbox start'
 alias dbdn='dropbox stop'
 alias dbstat='dropbox status'
+alias dbfls='dropbox filestatus ~/Dropbox/*'
 
 # twatter
 alias tweet='twidge update '
@@ -115,7 +121,7 @@ alias dt='dvtm -m ^'
 alias les='most'
 alias k9='pkill -9'
 alias gui='startxfce4'
-alias blank='xflock4'
+alias shhh='xflock4'
 alias gcl='git clone '
 alias hcl='hub clone '
 alias cheatsheet='most ~/bin/man/cheatsheet.md'
@@ -127,8 +133,10 @@ alias h='history'
 alias c='clear'
 alias q='exit'
 alias bbp='bb.sh post'
+alias hkurlist='wget -O - hackurls.com/ascii | less'
+alias hackurls='w3m hackurls.com'
 
-## Temporary
+## temporary; larnin' sum thangs
 alias js='javascripting'
 alias jsr='javascripting run '
 alias jsv='javascripting verify '
@@ -139,4 +147,3 @@ alias ra='regex-adventure'
 alias mmh='makemehapi'
 alias gi='git-it'
 alias fjw='functional-javascript-workshop'
-
