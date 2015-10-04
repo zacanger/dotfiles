@@ -40,7 +40,7 @@ global_variables() {
     # embedding code, put it on global_analytics
     # If you have custom analytics code (i.e. non-google) or want to use the Universal
     # code, leave global_analytics empty and specify a global_analytics_file
-    global_analytics="UA-37160536-1"
+    global_analytics="UA-xxxxxxxxxxxx-1"
     global_analytics_file=""
 
     # Leave this empty (i.e. "") if you don't want to use feedburner, 
