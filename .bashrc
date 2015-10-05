@@ -145,4 +145,3 @@ complete -d cd rmdir
 # ask if more than x options
 bind 'set completion-query-items 200'
 
-

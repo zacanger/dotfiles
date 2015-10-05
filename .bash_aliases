@@ -137,9 +137,6 @@ alias hkurlist='wget -O - hackurls.com/ascii | less'
 alias hackurls='w3m hackurls.com'
 
 ## temporary; larnin' sum thangs
-alias js='javascripting'
-alias jsr='javascripting run '
-alias jsv='javascripting verify '
 alias htn='how-to-npm'
 alias lyn='learnyounode'
 alias sa='stream-adventure'
@@ -147,3 +144,6 @@ alias ra='regex-adventure'
 alias mmh='makemehapi'
 alias gi='git-it'
 alias fjw='functional-javascript-workshop'
+
+
+alias guitartune='for n in E2 A2 D3 G3 B3 E4;do play -n synth 4 pluck $n repeat 2;done'
