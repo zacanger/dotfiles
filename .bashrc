@@ -118,7 +118,6 @@ export PATH=$PATH:/usr/local/share/npm/bin:~/bin:/opt
 export PS1="[$(t | wc -l | sed -e's/ *//')] $PS1"
 export EDITOR="nano"
 
-
 if [ -d ~/.bash_functions ]; then
     for file in ~/.bash_functions/*; do
         . "$file"
