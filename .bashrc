@@ -108,7 +108,7 @@ shopt -s dirspell
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
 echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
 
-export PATH=$PATH:/usr/local/share/npm/bin:~/bin:/opt
+export PATH=$PATH:/usr/local/share/npm/bin:~/bin:/opt:~/Downloads/textadept:~/Downloads/firefox
 
 
 ### MOTD ###
@@ -140,6 +140,30 @@ fi
 
 # only show dirs on cd
 complete -d cd rmdir
+# bash builtins
+complete -A builtin builtin
+# bash options
+complete -A setopt set
+# commands
+complete -A command command complete coproc exec hash type
+# dirs
+complete -A directory cd pushd mkdir rmdir
+# funcs
+complete -A function function
+# halp
+complete -A helptopic help
+# jobspecs
+complete -A job disown fg jobs
+complete -A stopped bg
+# readline
+complete -A binding bind
+# sh... opt....
+complete -A shopt shopt
+# signals
+complete -A signal trap
+# variables
+complete -A variable declare export readonly typeset
+complete -A function -A variable unset
 
 # ask if more than x options
 bind 'set completion-query-items 200'

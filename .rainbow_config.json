@@ -1,0 +1,67 @@
+{
+    // After 120 minutes, the stream will automatically hangup
+    "HEARTBEAT_TIMEOUT" : 120,
+    // Image on term
+    "IMAGE_ON_TERM" : true,
+    // Resize image to fit on terminal view
+    "IMAGE_RESIZE_TO_FIT" : true,
+    // Themes
+    "THEME" : "tomorrow_night",
+    // Ascii Art
+    "ASCII_ART" : true,
+    // Hide promt when receive a tweet
+    "HIDE_PROMPT" : false,
+    // Prefix
+    "PREFIX" : "#owner#place#me#keyword",
+    // 'search': search type ('mixed','recent','popular')
+    "SEARCH_TYPE" : "mixed",
+    // 'search': search max result, number over 100 will fallback to 100
+    "SEARCH_MAX_RECORD" : 20,
+    // 'home': default number of home's tweets
+    "HOME_TWEET_NUM" : 20,
+    // 'allrt': default number of retweets
+    "RETWEETS_SHOW_NUM" : 20,
+    // 'conversation': max tweet in a thread
+    "CONVERSATION_MAX" : 20,
+    // 'quote' format
+    "QUOTE_FORMAT" : "#comment RT #owner: #tweet",
+    // 'thread' meta format
+    "THREAD_META_LEFT" : "(#id) #clock",
+    "THREAD_META_RIGHT" : "#clock (#id)",
+    // 'thread' frame's minimum width
+    "THREAD_MIN_WIDTH" : 20,
+    // 'Notification' format
+    "NOTIFY_FORMAT" : "  #source_user #notify #clock",
+    // 'inbox','sent': default number of direct message
+    "MESSAGES_DISPLAY" : 10,
+    // 'trend': max trending topics
+    "TREND_MAX" : 20,
+    // List home timeline max
+    "LIST_MAX" : 10,
+    // 'switch': Filter and Ignore list ex: ['@fat','@mdo']
+    "ONLY_LIST" : [],
+    "IGNORE_LIST" : [],
+    // Autocomplete history file name
+    "HISTORY_FILENAME" : "completer.hist",
+    // Image margin
+    "IMAGE_SHIFT" : 2,
+    // Image max height
+    "IMAGE_MAX_HEIGHT" : 90,
+    // Seconds to wait before displaying another tweet, will drop all tweets while waiting.
+    "STREAM_DELAY" : 0,
+    // Stream config
+    "USER_DOMAIN" : "userstream.twitter.com",
+    "PUBLIC_DOMAIN" : "stream.twitter.com",
+    "SITE_DOMAIN" : "sitestream.twitter.com",
+    // Format
+    "FORMAT": {
+        "TWEET": {
+            "CLOCK_FORMAT" : "%Y/%m/%d %H:%M:%S",
+            "DISPLAY" : "\n  #name #nick #clock \n  \u20AA:#rt_count \u2665:#fa_count id:#id via #client #fav\n  #tweet"
+        },
+        "MESSAGE": {
+            "CLOCK_FORMAT" : "%Y/%m/%d %H:%M:%S",
+            "DISPLAY" : "\n  #sender_name #sender_nick #to #recipient_name #recipient_nick :\n  #clock message_id:#id\n  #message"
+        }
+    }
+}

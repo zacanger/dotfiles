@@ -73,7 +73,7 @@ alias ll='ls -l'
 alias l='ls -CF'
 alias lo='ls -lghtr'
 alias lS='ls -lhS'
-alias lt='ls -rtH'
+alias lT='ls -rtH'
 alias ld='ls -d */'
 
 # ag all the things! um, i mean...
@@ -99,8 +99,8 @@ alias klt='pkill -15 luakit'
 # dropbox; basically may as well be ~/ at this point
 alias dbup='dropbox start'
 alias dbdn='dropbox stop'
-alias dbstat='dropbox status'
-alias dbfls='dropbox filestatus ~/Dropbox/*'
+alias dbst='dropbox status'
+alias dbls='dropbox filestatus ~/Dropbox/*'
 
 # twatter
 alias tweet='twidge update '
@@ -135,15 +135,16 @@ alias q='exit'
 alias bbp='bb.sh post'
 alias hkurlist='wget -O - hackurls.com/ascii | less'
 alias hackurls='w3m hackurls.com'
+alias rbs='rainbowstream'
+alias cn='connectivity'
+
+alias tuner='for n in D2 A2 D3 G3 A3 D4;do play -n synth 4 pluck $n repeat 2;done'
+
 
 ## temporary; larnin' sum thangs
-alias htn='how-to-npm'
-alias lyn='learnyounode'
 alias sa='stream-adventure'
 alias ra='regex-adventure'
 alias mmh='makemehapi'
 alias gi='git-it'
 alias fjw='functional-javascript-workshop'
 
-
-alias guitartune='for n in E2 A2 D3 G3 B3 E4;do play -n synth 4 pluck $n repeat 2;done'

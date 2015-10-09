@@ -68,7 +68,7 @@ html, body, body>div {
 
 	body a:hover, body a:active,
 	body a:hover *:not(img), body a:active *:not(img)
-	{
+  body	{
 		background-color: rgba(60,60,60,0) !important;
 		color: #C9B3A9 !important;
 	}

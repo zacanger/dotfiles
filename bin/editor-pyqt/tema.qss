@@ -1,0 +1,27 @@
+QToolBar {
+    background: gray;
+}
+
+QMenuBar {
+    background: gray;
+}
+
+QMenuBar::item {
+   background: gray;
+   color: white;
+}
+
+QMenuBar::item:selected {
+    background: #444;
+    border-radius: 3px;
+}
+
+QMenu {
+    background: gray;
+    color: white;
+}
+
+QMenu::item:selected {
+    background: #999;
+    border: 1px solid blue;
+}

@@ -1,2 +1,0 @@
-This is a simple text editor. Type the path of the file you want to load/save in
-the small input box on the lower left of this window.
