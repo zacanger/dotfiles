@@ -40,7 +40,7 @@ global_variables() {
     # embedding code, put it on global_analytics
     # If you have custom analytics code (i.e. non-google) or want to use the Universal
     # code, leave global_analytics empty and specify a global_analytics_file
-    global_analytics="UA-xxxxxxxxxxxx-1"
+    global_analytics="UA-XXXXXXXXXXXXXXXXX-1"
     global_analytics_file=""
 
     # Leave this empty (i.e. "") if you don't want to use feedburner, 
@@ -99,9 +99,9 @@ global_variables() {
 
     # Localization and i18n
     # "Comments?" (used in twitter link after every post)
-    template_comments="your thoughts?"
+    template_comments="so,"
     # "Read more..." (link under cut article on index page)
-    template_read_more="..."
+    template_read_more="read more..."
     # "View more posts" (used on bottom of index page as link to archive)
     template_archive="posts"
     # "All posts" (title of archive page)
@@ -121,8 +121,8 @@ global_variables() {
     # "Subscribe to this page..." (used as text for browser feed button that is embedded to html)
     template_subscribe_browser_button="subscribe"
     # "Tweet" (used as twitter text button for posting to twitter)
-    template_twitter_button="tell the world about it"
-    template_twitter_comment="&lt;Type your comment here but please leave the URL so that other people can follow the comments&gt;"
+    template_twitter_button="wanna tweet about it?"
+    template_twitter_comment="&lt;say nice things about me&gt;"
     
     # The locale to use for the dates displayed on screen (not for the timestamps)
     date_format="%B %d, %Y"
@@ -892,8 +892,8 @@ create_includes() {
     else 
         protected_mail="$(echo "$global_email" | sed 's/@/\&#64;/g' | sed 's/\./\&#46;/g')"
         echo '<div id="footer">'$global_license '<a href="'$global_author_url'">'$global_author'</a> &mdash; <a href="mailto:'$protected_mail'">'$protected_mail'</a><br/>' >> ".footer.html"
-        echo 'totally using a modified <a href="https://github.com/cfenollosa/bashblog">bashblog</a> and a stripped out <a href="https://github.com/dhg/Skeleton">skeleton</a> here</div>' >> ".footer.html"
-        echo '<a href="http://zacanger.com/me">here's that 'about me' page you're looking for</a>' >> ".footer.html"
+        echo 'generated with a modified <a href="https://github.com/cfenollosa/bashblog">bashblog</a></div>' >> ".footer.html"
+        echo '<a href="http://zacanger.com/me">who is zac anger?</a>' >> ".footer.html"
     fi
 }
 
