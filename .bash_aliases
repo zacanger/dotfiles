@@ -22,7 +22,7 @@ alias insd='dpkg -l | grep ii | most'
 alias isit='dpkg -l | grep ii | grep '
 alias rdepends='apt-cache rdepends '
 alias show='apt-cache show '
-
+alias dupg='sudo apt-get update && sudo apt-get dist-upgrade'
 # disk usage
 alias disk='du -S | sort -n -r | most'
 
@@ -147,4 +147,5 @@ alias ra='regex-adventure'
 alias mmh='makemehapi'
 alias gi='git-it'
 alias fjw='functional-javascript-workshop'
+
 
