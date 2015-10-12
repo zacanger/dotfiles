@@ -1,0 +1,147 @@
+#!/bin/bash
+# command line task manager
+
+REMINDERS=~/.reminders
+TODO_LIST=~/.todo
+
+APP_PATH=$0
+APP=$(basename $APP_PATH)
+VERSION="0.1"
+WIDTH=$(($(tput cols)-4))
+
+function calendar() {
+	regex="^[0-9]+$"
+	[[ $1 =~ $regex ]] && n=$1 || n=7
+	day=""
+	for i in $(seq 1 $n); do
+		if [[ $i -eq 1 ]]; then
+			dayname="Today"
+		elif [[ $i -eq 2 ]]; then
+			dayname="Tomorrow"
+		else
+			dayname="$(date -d "$day" +%A)"
+		fi
+		pad=$((($WIDTH-${#dayname})/2))
+		printf "\033[40;30;1m%2s \033[36;1m%*s%*s\033[0m\n\n"	\
+				"$(date -d "$day" +%d)"								\
+				$(($WIDTH - $pad))									\
+				$dayname													\
+				$pad														\
+					" "
+		remind -g -q '-kecho %s' $REMINDERS "$(date -d "$day" +%Y/%m/%d)" | 
+			awk '
+			/at [0-9]*:[0-9][0-9][ap]m$/ {
+				printf "  \033[37;1m%s\033[0m ", $NF;
+				gsub(/at [0-9]*:[0-9][0-9][ap]m$/,"");
+				gsub(/::/,"\033[34m::");
+				print $0;
+				next;
+			}
+			/No reminders./ {
+				next;
+			}
+			// {
+				gsub(/::/,"\033[34m::");
+				printf "  \033[33;1m*\033[0m %s\n", $0;
+			}'
+		echo
+		day="tomorrow $day"
+	done
+}
+
+function list() {
+	pad=$((($WIDTH-5)/2))
+	printf "\033[40;30;1m   \033[36;1m%*s%*s\033[0m\n\n"	\
+			$(($WIDTH - $pad))									\
+			"To Do"													\
+			$pad														\
+					" "
+	awk '
+		BEGIN {
+			urg[0] = "0;1"; urg[1] = "1;32"; urg[2] = "1;33";
+			urg[3] = "1;31";
+			imp[0] = "0;37"; imp[1] = "0;36"; imp[2] = "0";
+			imp[3] = "1;36"; imp[4] = "1;35";
+		}
+		/^[0-6][\t ]*[0-6][\t ]/ {
+			i=$1;
+			u=$2;
+			$1=""; $2="";
+			printf " \033[%sm*\033[%sm%s\033[0m\n", urg[u], imp[i], $0;
+		}
+	' $TODO_LIST
+	echo
+}
+
+case $1 in
+	cal)
+		shift
+		case $1 in
+			add)
+				shift;
+				regex="at [0-9]{1,2}:[0-9]{2}"
+				if [[ "$@" =~ $regex ]]; then
+					echo "rem $@ %2" >> $REMINDERS
+				else
+					echo "rem $@" >> $REMINDERS
+				fi
+				;;
+			edit) $EDITOR $REMINDERS ;;
+			*) calendar $@ ;;
+		esac
+		;;
+	list)
+		shift
+		case $1 in
+			add) shift; echo "$@" >> $TODO_LIST ;;
+			edit) $EDITOR $TODO_LIST ;;
+			*) list $@ ;;
+		esac
+		;;
+	month)
+		(list && calendar 30) | less
+		;;
+	add)
+		shift
+		regex="^[0-6][\t ]+[0-4][\t ]*"
+		if [[ "$@" =~ $regex ]]; then
+			$APP_PATH list add $@
+		else 
+			$APP_PATH cal add $@
+		fi
+		;;
+	edit)
+		shift
+		case $1 in
+			cal) $EDITOR $REMINDERS ;;
+			*) $EDITOR $TODO_LIST ;;
+		esac
+		;;
+	version|-v|--version) echo "$APP $VERSION" ;;
+	help|-h|--help)
+		echo "${APP^^} - command line task scheduler"
+		echo "  By Jesse McClure (c) 2013"
+		echo "  License: CC-BY-SA http://creativecommons.org/licenses/by-sa/3.0/"
+		echo ""
+		echo "USAGE: $APP [[ cal | list ] [ add <line> | edit ]] [ <N> ]"
+		echo "   cal     show calendar only"
+		echo "   list    show the todo list only"
+		echo "   add     add <line> to calendar or todo list"
+		echo "   edit    edit the reminders or todo list file"
+		echo "   <N>     show calendar for next <N> days (default=7)"
+		echo ""
+		echo "FORMAT FOR ADD:"
+		echo "   cal     <date string> [at HH:MM [duration HH:MM]] <message>"
+		echo "   list    <importance(0-6)> <urgency(0-3)> <description>"
+		echo ""
+		echo "ADD SHORTHAND:"
+		echo "   $APP add <entry>"
+		echo "      <entry> format will be checked and added either"
+		echo "      to the calendar or todo list as appropriate."
+		;;
+	*)
+		list $@
+		calendar $@
+		;;
+esac
+
