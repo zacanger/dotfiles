@@ -137,15 +137,6 @@ alias hkurlist='wget -O - hackurls.com/ascii | less'
 alias hackurls='w3m hackurls.com'
 alias rbs='rainbowstream'
 alias cn='connectivity'
-
+alias cuip='curl ifconfig\.me/ip'
 alias tuner='for n in D2 A2 D3 G3 A3 D4;do play -n synth 4 pluck $n repeat 2;done'
-
-
-## temporary; larnin' sum thangs
-alias sa='stream-adventure'
-alias ra='regex-adventure'
-alias mmh='makemehapi'
-alias gi='git-it'
-alias fjw='functional-javascript-workshop'
-
 

@@ -116,6 +116,7 @@ export PATH=$PATH:/usr/local/share/npm/bin:~/bin:/opt:~/Downloads/textadept:~/Do
 # if [[ -e $HOME/.motd ]]; then cat $HOME/.motd; fi
 
 export PS1="[$(t | wc -l | sed -e's/ *//')] $PS1"
+# export PS="\[\e[1;33m\]\w\[\e[;0;1m\] ($( dirsize -Hb )) \$\[\e[;0m\]" # add this bit on to keep dirsize in prompt (see ~/bin/dirsize)
 export EDITOR="nano"
 
 if [ -d ~/.bash_functions ]; then
