@@ -1,0 +1,94 @@
+
+Debian Notes
+default
+
+dpkg --get-selections
+Show installed packages	
+
+dpkg --get-selections | grep mouse
+dpkg -S xserver-xorg-input-kbd
+Show installed packages with mouse in name
+
+dpkg -L xserver-xorg-input-mouse
+Show locations of files within a package
+
+sudo dpkg-reconfigure slim
+Reconfigure a package
+
+apt-cache search xserver-xorg-input-kbd
+aptitude search xserver-xorg-input-kbd
+Search repository for package by name and description 
+
+apt-cache search --names-only xorg
+Search packages querying in the name only
+
+apt-cache show xserver-xorg-input-mouse
+apt-cache showpkg xserver-xorg-input-mouse
+Show detailed information about a package
+
+apt-get install dwb 
+Install a package
+
+
+adduser hippiechick sudo
+Add a user to the sudo group
+User must logout and login to take effect
+
+
+lspci -v | grep VGA
+Show type of video card system has
+
+vim /usr/share/gdm/dconf/10-desktop-base-settings
+picture-uri='file:///blahbla.jpg'
+File to set background image if using gdm
+
+vim /usr/share/gdm/dconf/10-desktop-base-settings
+[org/gnome/desktop/background]
+picture-options='none'
+primary-color='#000000'
+Remove background picture
+
+vim /etc/gdm3/greeter.gsettings
+File to change the login screen for gdm3
+
+dpkg-reconfigure gdm3
+Reload gdm3 configuration on logout/reboot
+
+/etc/alternatives
+Location of alternatives. Don't cat these they
+are binaries. Just use them to see what options
+you can throw at update alternatives.
+
+update-alternatives --display x-window-manager
+Shows the symlinks for the default and alternative
+window managers
+
+update-alternatives --config x-window-manager
+Shows alternatives and give choice of which to use
+
+update-alternatives --config x-www-browser
+Set which browser to use as default
+
+update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/dwb 100
+Add dwb to x-www-browser list and set it's priority to 100
+
+
+Slim notes to keep in mind
+--------------------------
+/etc/X11/default-display-manager
+This file determines the default display manager
+/usr/sbin/gdm3
+Would be for gdm3
+/usr/bin/slim
+Sets slim as the default display manager
+qingy - is another choice
+
+/etc/init.d/gdm3
+Contain the settings for gdm3
+HEED_DEFAULT_DISPLAY_MANAGER=true
+This line will instructs whether gdm3 should
+respect the default, if set to false, it
+can run at same time as another.
+
+End-slim-default-display-manager
+-------------------------------
