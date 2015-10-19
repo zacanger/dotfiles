@@ -1,6 +1,6 @@
 # managing .bashrc & .bash_aliases
-alias edrc='nano ~/.bashrc'
-alias edal='nano ~/.bash_aliases'
+alias edrc='nvim ~/.bashrc'
+alias edal='nvim ~/.bash_aliases'
 alias reload='source ~/.bashrc'
 
 # package managers
@@ -84,7 +84,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 # https://bitbucket.org/sjl/t
-alias t='python ~/bin/t.py --task-dir ~/Dropbox/tpytasks --list tasks'
+alias t='python2.7 ~/bin/t.py --task-dir ~/Dropbox/tpytasks --list tasks'
 alias tl='t | wc -l'
 
 # browsers suck. destroy them.
@@ -143,4 +143,8 @@ alias localbin='zerobin && lt -p 8000'
 alias vi='nvim'
 alias vim='nvim'
 alias locate='locate -i'
+alias sf='semistandard-format'
+alias python='python3.5'
+alias pip='pip3.5'
+
 
