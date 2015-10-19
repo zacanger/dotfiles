@@ -142,4 +142,5 @@ alias tuner='for n in D2 A2 D3 G3 A3 D4;do play -n synth 4 pluck $n repeat 2;don
 alias localbin='zerobin && lt -p 8000'
 alias vi='nvim'
 alias vim='nvim'
+alias locate='locate -i'
 

@@ -1,0 +1,66 @@
+*font:             -*-fantasque-sans-mono-*-*-*-10-*-*-*-*-*-*-*
+*boldFont:         -*-fantasque-sans-mono-*-*-*-10-*-*-*-*-*-*-*
+
+*background:       #121212
+*foreground:       #EDEDED
+*scrollBar:        false
+*secondaryscroll:  true
+*matcher.button:   1
+*colorBD:          #268bd2
+*colorUL:          #859900
+*cursorBlink:      false
+
+*cursorColor:  #FEFEFE
+
+*transparent:      true
+*shading: 20
+!*geometry: 81x55
+
+*allow_bold:      	true
+
+*copyCommand:      xsel -ib
+*pasteCommand:     xsel -ob
+
+Xft*dpi:                96
+Xft*antialias:          true
+Xft*hinting:            none
+Xft.autohint:           0
+Xft.antialias:          1
+Xft.hinting:            true
+Xft.hintstyle:          hintfull
+Xft.dpi:                96
+Xft.rgba:               rgb
+Xft.lcdfilter:          lcddefault
+
+*dynamicColors:    on
+*depth:            24
+
+*mapAlert:         true
+*visualBell:       true
+*urgentOnBell:     true
+
+!black
+*color0:    #000000
+*color8:    #888888
+!red
+*color1:    #CC5555
+*color9:    #FF8888
+!green
+*color2:    #66BB88
+*color10:   #99EEBB
+!yellow
+*color3:    #CC8855
+*color11:   #FFBB88
+!blue
+*color4:    #6688BB
+*color12:   #99BBEE
+!magenta
+*color5:    #CC5588
+*color13:   #FF88BB
+!cyan
+*color6:    #66BBBB
+*color14:   #99EEEE
+!white
+*color7:    #BBBBBB
+*color15:   #EEEEEE
+
