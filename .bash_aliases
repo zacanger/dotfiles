@@ -112,7 +112,7 @@ alias fuck='eval $(thefuck $(fc -ln -1))'
 alias please='fuck'
 
 # misc shortcuts
-alias fls='ranger'
+alias fs='ranger'
 alias web='firefox'
 alias browser='chromium'
 alias mu='mocp -y -T moc_theme'
