@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=lighttable
+Comment=
+Exec=/home/z/bin/LightTable/ltbin
+Icon=qxmledit
+Path=
+Terminal=false
+StartupNotify=true

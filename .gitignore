@@ -18,3 +18,8 @@ __pycache__/
 /.build/
 _build/
 *.zedstate
+*/cligh/*
+*/gh/*
+*.gitconfig
+*.gist
+*/hub

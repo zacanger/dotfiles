@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="xfce4-mixer" version="1.0">
+  <property name="sound-card" type="string" value="HDAIntelPCHAlsamixer"/>
+  <property name="volume-step-size" type="uint" value="5"/>
+  <property name="sound-cards" type="empty">
+    <property name="HDAIntelPCHAlsamixer" type="array">
+      <value type="string" value="Master"/>
+      <value type="string" value="Headphone"/>
+      <value type="string" value="Speaker+LO"/>
+      <value type="string" value="PCM"/>
+      <value type="string" value="Line-in"/>
+      <value type="string" value="Line Boost"/>
+      <value type="string" value="Microphone"/>
+      <value type="string" value="Mic Boost"/>
+      <value type="string" value="Beep"/>
+      <value type="string" value="Capture"/>
+      <value type="string" value="Auto-Mute Mode"/>
+      <value type="string" value="Digital"/>
+      <value type="string" value="Internal Mic Boost"/>
+      <value type="string" value="Loopback Mixing"/>
+    </property>
+    <property name="BlueSnowflakeAlsamixer" type="array">
+      <value type="string" value="Microphone"/>
+    </property>
+    <property name="HDAATIHDMIAlsamixer" type="array">
+      <value type="string" value="IEC958"/>
+    </property>
+  </property>
+  <property name="window-height" type="int" value="854"/>
+  <property name="window-width" type="int" value="1600"/>
+</channel>

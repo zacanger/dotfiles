@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=ff
+Comment=ff
+Exec=/home/z/Downloads/firefox/firefox
+Icon=firefox-aurora
+Path=
+Terminal=false
+StartupNotify=true

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=luakit
+Comment=
+Exec=luakit
+Icon=web-browser
+Path=
+Terminal=false
+StartupNotify=true

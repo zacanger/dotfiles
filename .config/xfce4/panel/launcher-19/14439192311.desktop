@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=seamonkey
+Comment=
+Exec=/home/z/Downloads/seamonkey/seamonkey
+Icon=web-browser-symbolic
+Path=
+Terminal=false
+StartupNotify=true

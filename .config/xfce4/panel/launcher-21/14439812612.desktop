@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=textadept
+Comment=
+Exec=/home/z/Downloads/textadept/textadept
+Icon=
+Path=
+Terminal=false
+StartupNotify=true

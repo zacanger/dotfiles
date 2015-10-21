@@ -10,7 +10,7 @@
 	name = zacanger
 [hub]
 	username = zacanger
-	oauthtoken = 
+	oauthtoken = 00cd0863f530fdb9070ca53b1588425e712c1982
 [cola]
 	fontdiff = Fantasque Sans Mono,10,-1,5,50,0,0,0,0,0
 [push]
