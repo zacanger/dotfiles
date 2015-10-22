@@ -20,5 +20,5 @@ _build/
 *.zedstate
 p0rn-*
 porn-*
-*/bin/x
-*/bin/x/*
+/bin/x
+/bin/x/**
