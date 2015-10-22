@@ -36,17 +36,9 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-
-if [ -e /usr/share/terminfo/x/xterm-256color ] && [ "$COLORTERM" == "xfce4-terminal" ]; then
-    export TERM=xterm-256color
-fi
-
-
-
-
-
-
-
+# if [ -e /usr/share/terminfo/x/xterm-256color ] && [ "$COLORTERM" == "xfce4-terminal" ]; then
+#     export TERM=xterm-256color
+# fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
@@ -120,16 +112,14 @@ shopt -s dirspell
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
 echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
 
-export PATH=$PATH:/usr/local/share/npm/bin:~/bin:/opt:~/Downloads/textadept:~/Downloads/firefox
-
-
+export PATH=$PATH:/usr/local/share/npm/bin:~/bin:/opt:~/Downloads/textadept:~/Downloads/firefox:$(find $HOME/bin -type d | paste -s -d:)
 ### MOTD ###
 # Display MotD
 # if [[ -e $HOME/.motd ]]; then cat $HOME/.motd; fi
 
 export PS1="[$(t | wc -l | sed -e's/ *//')] $PS1"
 # export PS="\[\e[1;33m\]\w\[\e[;0;1m\] ($( dirsize -Hb )) \$\[\e[;0m\]" # add this bit on to keep dirsize in prompt (see ~/bin/dirsize)
-export EDITOR="nano"
+export EDITOR="nvim"
 
 if [ -d ~/.bash_functions ]; then
     for file in ~/.bash_functions/*; do

@@ -1,0 +1,180 @@
+# Tucan Manager.
+# Copyright (C) 2008-2009 The Tucan Project.
+# Christian Widell <christian_widell(at)hotmail(dot)com>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.3.7\n"
+"POT-Creation-Date: 2009-01-11 22:54+CET\n"
+"PO-Revision-Date: 2009-05-03 09:50+0100\n"
+"Last-Translator: Christian Widell <christian_widell(at)hotmail(dot)com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: UTF-8\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: ./advanced_packages.py:37
+msgid "Advanced Packages"
+msgstr "Avancerade paket"
+
+#: ./advanced_packages.py:96
+msgid "Choose new path for selected Package."
+msgstr "Välj ny sökväg för valt paket."
+
+#: ./file_chooser.py:33
+msgid "Select a Folder"
+msgstr "Välj en mapp"
+
+#: ./file_chooser.py:40
+msgid "Show hidden files."
+msgstr "Visa dolda filer."
+
+#: ./gui.py:84
+msgid "Load Session"
+msgstr "Ladda session"
+
+#: ./gui.py:85
+msgid "Save Session"
+msgstr "Spara session"
+
+#: ./gui.py:90
+msgid "Show Uploads"
+msgstr "Visa uppladdningar"
+
+#: ./gui.py:93
+msgid "File"
+msgstr "Arkiv"
+
+#: ./gui.py:94
+msgid "View"
+msgstr "Visa"
+
+#: ./gui.py:95
+msgid "Help"
+msgstr "Hjälp"
+
+#: ./gui.py:99
+msgid "Add Downloads"
+msgstr "Lägg till nedladdningar"
+
+#: ./gui.py:100
+msgid "Add Uploads"
+msgstr "Lägg till uppladdningar"
+
+#: ./gui.py:101
+msgid "Clear Complete"
+msgstr "Rensa slutförda"
+
+#: ./gui.py:102
+msgid "Move Up"
+msgstr "Flytta upp"
+
+#: ./gui.py:103
+msgid "Move Down"
+msgstr "Flytta ner"
+
+#: ./gui.py:104
+msgid "Start Selected"
+msgstr "Starta valda"
+
+#: ./gui.py:105
+msgid "Stop Selected"
+msgstr "Stoppa valda"
+
+#: ./input_links.py:54
+msgid "Input Links"
+msgstr "Ange länkar"
+
+#: ./input_links.py:69
+msgid "Paste links here:"
+msgstr "Klistra in länkar här:"
+
+#: ./input_links.py:88
+msgid "Check Links"
+msgstr "Kontrollera länkar"
+
+#: ./input_links.py:131
+msgid "Show advanced Package configuration."
+msgstr "Visa avancerade paket inställningar."
+
+#: ./input_links.py:207
+msgid "Checking links, please wait."
+msgstr "Kontrollerar länkar, vänligen vänta."
+
+#: ./input_links.py:260
+msgid "Check Canceled!"
+msgstr "Kryssa i avbrutna!"
+
+#: ./preferences.py:54
+msgid "General Configuration"
+msgstr "Allmänt"
+
+#: ./preferences.py:55
+msgid "Service Configuration"
+msgstr "Tjänster"
+
+#: ./preferences.py:56
+msgid "Advanced Configuration"
+msgstr "Avancerat"
+
+#: ./preferences.py:120
+msgid "Choose language: "
+msgstr "Välj språk: "
+
+#: ./preferences.py:138
+msgid "Max simultaneous downloads: "
+msgstr "Max antal parallela nedladdningar: "
+
+#: ./preferences.py:173
+msgid "Downloads Folder: "
+msgstr "Nedladdningsmapp: "
+
+#: ./preferences.py:260
+msgid "Restart Tucan to apply service changes."
+msgstr "Starta om Tucan för att verkställa ändringar."
+
+#: ./preferences.py:279
+msgid "The choosed directory isn't a service, or it's not configured."
+msgstr "Den valda katalogen är inte en tjänst, eller så är den inte konfigurerad."
+
+#: ./preferences.py:307
+msgid "Before using this service, you must accept it's terms of service at "
+msgstr "Innan du accepterar den här tjänsten måste du acceptera deras användningsvillkor på "
+
+#: ./preferences.py:308
+msgid "Terms of service"
+msgstr "Användningsvillkor"
+
+#: ./preferences.py:331
+msgid "Close to tray."
+msgstr "Stäng till notifieringsyta."
+
+#: ./preferences.py:335
+msgid "Save session on close."
+msgstr "Spara session vid avslut."
+
+#: ./preferences.py:339
+msgid "Default advanced packages."
+msgstr "Visa alltid avancerade paket inställningar."
+
+#: ./preferences.py:343
+msgid "Show uploads."
+msgstr "Visa uppladdningar."
+
+#: ./service_preferences.py:47
+msgid "Author"
+msgstr "Upphovsman"
+
+#: ./service_preferences.py:55
+msgid "Version"
+msgstr "Version"
+
+#: ./service_preferences.py:64
+msgid "Slots"
+msgstr "Slots"
+
+#: ./service_preferences.py:71
+msgid "Captcha"
+msgstr "Förhandsvisning"

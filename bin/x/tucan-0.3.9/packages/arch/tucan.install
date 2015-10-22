@@ -1,0 +1,13 @@
+ post_install() {
+   ln -s /usr/share/tucan/media/tucan.svg /usr/share/pixmaps/tucan.svg
+   ln -s /usr/share/tucan/tucan.desktop /usr/share/applications
+   ln -s /usr/share/tucan/tucan.py /usr/bin/tucan
+   echo "Tucan have the feature to autoupdate plugins by itself. Click Search on \"Service Configuration\"."
+   }
+
+post_remove() {
+	rm /usr/share/pixmaps/tucan.svg
+	rm /usr/share/applications/tucan.desktop
+	rm /usr/bin/tucan
+}
+

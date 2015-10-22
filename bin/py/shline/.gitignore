@@ -1,0 +1,4 @@
+powerline-shell.py
+shline.py
+*.py[co]
+config.py

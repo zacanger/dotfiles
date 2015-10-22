@@ -1,0 +1,180 @@
+# Tucan Manager.
+# Copyright (C) 2008-2009 The Tucan Project.
+# kir, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.3\n"
+"POT-Creation-Date: 2009-01-10 04:03+CET\n"
+"PO-Revision-Date: 2009-01-10 04:32+CET\n"
+"Last-Translator: kir & cionci\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: UTF-8\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: ./advanced_packages.py:37
+msgid "Advanced Packages"
+msgstr "Pacchetti Avanzati"
+
+#: ./advanced_packages.py:96
+msgid "Choose new path for selected Package."
+msgstr "Scegli il nuovo percorso per il pacchetto selezionatoo."
+
+#: ./advanced_packages.py:119 ./preferences.py:187
+msgid "Select a Folder"
+msgstr "Scegli una Cartella"
+
+#: ./gui.py:70
+msgid "Load Session"
+msgstr "Carica Sessione"
+
+#: ./gui.py:71
+msgid "Save Session"
+msgstr "Salva Sessione"
+
+#: ./gui.py:76
+msgid "Show Uploads"
+msgstr "Mostra Upload"
+
+#: ./gui.py:79
+msgid "File"
+msgstr "File"
+
+#: ./gui.py:80
+msgid "View"
+msgstr "Visualizza"
+
+#: ./gui.py:81
+msgid "Help"
+msgstr "Aiuto"
+
+#: ./gui.py:85
+msgid "Add Downloads"
+msgstr "Aggiungi Download"
+
+#: ./gui.py:86
+msgid "Add Uploads"
+msgstr "Aggiungi Upload"
+
+#: ./gui.py:87
+msgid "Clear Complete"
+msgstr "Svuota Completati"
+
+#: ./gui.py:88
+msgid "Move Up"
+msgstr "Muovi su"
+
+#: ./gui.py:89
+msgid "Move Down"
+msgstr "Muovi giù"
+
+#: ./gui.py:90
+msgid "Start Selected"
+msgstr "Avvia Selezionati"
+
+#: ./gui.py:91
+msgid "Stop Selected"
+msgstr "Ferma Selezionati"
+
+#: ./input_links.py:54
+msgid "Input Links"
+msgstr "Inserimento Link"
+
+#: ./input_links.py:69
+msgid "Paste links here:"
+msgstr "Incolla qui i link:"
+
+#: ./input_links.py:88
+msgid "Check Links"
+msgstr "Controlla link"
+
+#: ./input_links.py:131
+msgid "Show advanced Package configuration."
+msgstr "Mostra impostazioni dei Pacchetti avanzati."
+
+#: ./input_links.py:207
+msgid "Checking links, please wait."
+msgstr "Controllo dei link, attendere per favore."
+
+#: ./input_links.py:260
+msgid "Check Canceled!"
+msgstr "Controllo Annullato!"
+
+#: ./preferences.py:51
+msgid "General Configuration"
+msgstr "Configurazione Generale"
+
+#: ./preferences.py:52
+msgid "Service Configuration"
+msgstr "Configurazione Servizi"
+
+#: ./preferences.py:53
+msgid "Advanced Configuration"
+msgstr "Configurazione Avanzata"
+
+#: ./preferences.py:117
+msgid "Choose language: "
+msgstr "Scegli lingua: "
+
+#: ./preferences.py:135
+msgid "Max simultaneous downloads: "
+msgstr "Download simultanei: "
+
+#: ./preferences.py:170
+msgid "Downloads Folder: "
+msgstr "Cartella dei Download: "
+
+#: ./preferences.py:191
+msgid "Show hidden files."
+msgstr "Mostra file nascosti."
+
+#: ./preferences.py:281
+msgid "Restart Tucan to apply service changes."
+msgstr "Riavvia Tucan per applicare le modifiche ai servizi."
+
+#: ./preferences.py:300
+msgid "The choosed directory isn't a service, or it's not configured."
+msgstr "La directory scielta non è un servizio compatibile o non è configurato."
+
+#: ./preferences.py:328
+msgid "Before using this service, you must accept it's terms of service at "
+msgstr "Prima di usare il servizio, devi accettare i termini d'uso su "
+
+#: ./preferences.py:329
+msgid "Terms of service"
+msgstr "Termini d'uso"
+
+#: ./preferences.py:352
+msgid "Close to tray."
+msgstr "Minimizza nella tray."
+
+#: ./preferences.py:356
+msgid "Save session on close."
+msgstr "Salva sessione all'uscita."
+
+#: ./preferences.py:360
+msgid "Default advanced packages."
+msgstr "Opzioni predefinite per i pacchetti avanzati."
+
+#: ./preferences.py:364
+msgid "Show uploads."
+msgstr "Mostra upload."
+
+#: ./service_preferences.py:47
+msgid "Author"
+msgstr "Autore"
+
+#: ./service_preferences.py:55
+msgid "Version"
+msgstr "Versione"
+
+#: ./service_preferences.py:64
+msgid "Slots"
+msgstr "Slot"
+
+#: ./service_preferences.py:71
+msgid "Captcha"
+msgstr "Captcha"

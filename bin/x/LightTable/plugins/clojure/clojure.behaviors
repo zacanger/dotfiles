@@ -1,0 +1,127 @@
+{:+
+ {:app [(:lt.objs.plugins/load-js ["codemirror/clojure-mode.js" "clojure_compiled.js"])]
+
+  :files [(:lt.objs.files/file-types [{:name "Clojure" :exts [:clj] :mime "text/x-clojure" :tags [:editor.clj :editor.clojure]}
+                                      {:name "ClojureScript" :exts [:cljs] :mime "text/x-clojurescript" :tags [:editor.cljs :editor.clojurescript]}])]
+
+  :clojure.lang [:lt.plugins.clojure/connect-local
+                 :lt.plugins.clojure/eval!
+                 :lt.plugins.clojure/build!]
+
+  :clients [:lt.plugins.clojure/handle-cancellation]
+
+  :plugin.file [:lt.plugins.clojure/build-cljs-plugin
+                :lt.plugins.clojure/plugin-compile-results]
+
+  :sidebar.docs.search [:lt.plugins.clojure/clj-doc-search
+                        :lt.plugins.clojure/cljs-doc-search]
+
+  :nrepl.client.common [:lt.plugins.clojure.nrepl/nrepl-message
+                        :lt.plugins.clojure.nrepl/nrepl-connect
+                        :lt.plugins.clojure.nrepl/nrepl-send!
+                        :lt.plugins.clojure.nrepl/connect!
+                        :lt.plugins.clojure.nrepl/try-connect!
+                        :lt.plugins.clojure.nrepl/close
+                        :lt.plugins.clojure/eval-print-err
+                        :lt.plugins.clojure/eval-print
+                        :lt.plugins.clojure/clj-result
+                        :lt.plugins.clojure/clj-exception]
+
+  :nrepl.client [:lt.plugins.clojure.nrepl/client.settings
+                 :lt.plugins.clojure.nrepl/init-session
+                 (:lt.object/add-tag :nrepl.client.common)]
+
+  :nrepl.client.remote [:lt.plugins.clojure.nrepl/client.settings.remote
+                        :lt.plugins.clojure.nrepl/init-remote-session
+                        (:lt.object/add-tag :nrepl.client.common)]
+
+ :editor.clj.jump-to-definition [:lt.plugins.clojure/jump-to-definition-at-cursor
+                                 :lt.plugins.clojure/start-jump-to-definition
+                                 :lt.plugins.clojure/finish-jump-to-definition]
+
+ :editor.clj.hints [:lt.plugins.clojure/clj-result ;; to get hints
+                    :lt.plugins.clojure/trigger-update-hints
+                    :lt.plugins.clojure/finish-update-hints
+                    :lt.plugins.clojure/use-local-hints
+                    ]
+
+  :editor.clj.common [:lt.plugins.clojure/on-result-set-ns
+                      :lt.plugins.clojure/no-op
+                      [:lt.object/add-tag :watchable]
+                      [:lt.object/add-tag :docable]
+                      (:lt.object/add-tag :editor.clj.hints)
+                      (:lt.object/add-tag :editor.clj.jump-to-definition)
+                      :lt.plugins.clojure/on-eval.custom]
+
+  :editor.clj.eval [:lt.plugins.clojure/on-eval.one
+                    :lt.plugins.clojure/on-eval.clj
+                    :lt.plugins.clojure/eval-location]
+
+  :editor.cljs.eval [:lt.plugins.clojure/on-eval.one
+                     :lt.plugins.clojure/on-eval.cljs
+                     :lt.plugins.clojure/eval-location]
+
+  :editor.clj [(:lt.object/add-tag :editor.clj.common)
+               (:lt.object/add-tag :editor.clj.eval)
+               :lt.plugins.clojure/eval-print
+               :lt.plugins.clojure/eval-print-err
+               :lt.plugins.clojure/clj-result
+               :lt.plugins.clojure/clj-result.inline
+               :lt.plugins.clojure/clj-result.statusbar
+               :lt.plugins.clojure/clj-result.replace
+               :lt.plugins.clojure/clj-result.inline-at-cursor
+               :lt.plugins.clojure/clj-result.return
+               :lt.plugins.clojure/clj-exception
+               :lt.plugins.clojure/clj-watch-result
+               :lt.plugins.clojure/clj-watch-src
+               :lt.plugins.clojure/clj-watch-custom-src
+               :lt.plugins.clojure/clj-doc
+               :lt.plugins.clojure/print-clj-doc]
+
+  :editor.cljs [(:lt.object/add-tag :editor.clj.common)
+                (:lt.object/add-tag :editor.cljs.eval)
+                :lt.plugins.clojure/eval-print
+                :lt.plugins.clojure/eval-print-err
+                :lt.plugins.clojure/exec.cljs!
+                :lt.plugins.clojure/on-code
+                :lt.plugins.clojure/cljs-result
+                :lt.plugins.clojure/cljs-result.inline
+                :lt.plugins.clojure/cljs-result.statusbar
+                :lt.plugins.clojure/cljs-result.replace
+                :lt.plugins.clojure/cljs-result.inline-at-cursor
+                :lt.plugins.clojure/cljs-result.return
+                :lt.plugins.clojure/cljs-exception
+                :lt.plugins.clojure/cljs-watch-result
+                :lt.plugins.clojure/cljs-watch-src
+                :lt.plugins.clojure/cljs-watch-custom-src
+                :lt.plugins.clojure/cljs-doc
+                :lt.plugins.clojure/print-cljs-doc
+                :lt.objs.plugins/check-for-plugin-file]
+
+  :editor.clj.instarepl [(:lt.object/add-tag :editor.clj.common)
+                         :lt.plugins.clojure.instarepl/on-eval-one
+                         :lt.plugins.clojure.instarepl/set-parent-title
+                         :lt.plugins.clojure.instarepl/on-eval-sonar
+                         :lt.plugins.clojure.instarepl/dirty-parent
+                         :lt.plugins.clojure.instarepl/eval-on-change
+                         :lt.plugins.clojure.instarepl/close-parent
+                         :lt.plugins.clojure/clj-result.inline
+                         :lt.plugins.clojure/clj-result.statusbar
+                         :lt.plugins.clojure/clj-result.replace
+                         :lt.plugins.clojure/clj-watch-result
+                         :lt.plugins.clojure/clj-watch-src
+                         :lt.plugins.clojure/clj-watch-custom-src
+                         :lt.plugins.clojure/clj-doc
+                         :lt.plugins.clojure/print-clj-doc]
+
+  :instarepl [:lt.plugins.clojure.instarepl/sonar-result
+              :lt.plugins.clojure.instarepl/clj-exception
+              :lt.plugins.clojure.instarepl/on-show-refresh-eds
+              :lt.plugins.clojure.instarepl/destroy-on-close
+              :lt.plugins.clojure.instarepl/reroute-watches
+              :lt.plugins.clojure.instarepl/live-toggle
+              :lt.plugins.clojure.instarepl/on-focus-focus-ed
+              :lt.plugins.clojure.instarepl/no-op
+              :lt.plugins.clojure.instarepl/cleanup-on-destroy
+              :lt.plugins.clojure/eval-print-err
+              :lt.plugins.clojure/eval-print]}}

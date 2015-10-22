@@ -1,0 +1,181 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2009-01-11 22:54+CET\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: ./advanced_packages.py:37
+msgid "Advanced Packages"
+msgstr ""
+
+#: ./advanced_packages.py:96
+msgid "Choose new path for selected Package."
+msgstr ""
+
+#: ./file_chooser.py:33
+msgid "Select a Folder"
+msgstr ""
+
+#: ./file_chooser.py:40
+msgid "Show hidden files."
+msgstr ""
+
+#: ./gui.py:84
+msgid "Load Session"
+msgstr ""
+
+#: ./gui.py:85
+msgid "Save Session"
+msgstr ""
+
+#: ./gui.py:90
+msgid "Show Uploads"
+msgstr ""
+
+#: ./gui.py:93
+msgid "File"
+msgstr ""
+
+#: ./gui.py:94
+msgid "View"
+msgstr ""
+
+#: ./gui.py:95
+msgid "Help"
+msgstr ""
+
+#: ./gui.py:99
+msgid "Add Downloads"
+msgstr ""
+
+#: ./gui.py:100
+msgid "Add Uploads"
+msgstr ""
+
+#: ./gui.py:101
+msgid "Clear Complete"
+msgstr ""
+
+#: ./gui.py:102
+msgid "Move Up"
+msgstr ""
+
+#: ./gui.py:103
+msgid "Move Down"
+msgstr ""
+
+#: ./gui.py:104
+msgid "Start Selected"
+msgstr ""
+
+#: ./gui.py:105
+msgid "Stop Selected"
+msgstr ""
+
+#: ./input_links.py:54
+msgid "Input Links"
+msgstr ""
+
+#: ./input_links.py:69
+msgid "Paste links here:"
+msgstr ""
+
+#: ./input_links.py:88
+msgid "Check Links"
+msgstr ""
+
+#: ./input_links.py:131
+msgid "Show advanced Package configuration."
+msgstr ""
+
+#: ./input_links.py:207
+msgid "Checking links, please wait."
+msgstr ""
+
+#: ./input_links.py:260
+msgid "Check Canceled!"
+msgstr ""
+
+#: ./preferences.py:54
+msgid "General Configuration"
+msgstr ""
+
+#: ./preferences.py:55
+msgid "Service Configuration"
+msgstr ""
+
+#: ./preferences.py:56
+msgid "Advanced Configuration"
+msgstr ""
+
+#: ./preferences.py:120
+msgid "Choose language: "
+msgstr ""
+
+#: ./preferences.py:138
+msgid "Max simultaneous downloads: "
+msgstr ""
+
+#: ./preferences.py:173
+msgid "Downloads Folder: "
+msgstr ""
+
+#: ./preferences.py:260
+msgid "Restart Tucan to apply service changes."
+msgstr ""
+
+#: ./preferences.py:279
+msgid "The choosed directory isn't a service, or it's not configured."
+msgstr ""
+
+#: ./preferences.py:307
+msgid "Before using this service, you must accept it's terms of service at "
+msgstr ""
+
+#: ./preferences.py:308
+msgid "Terms of service"
+msgstr ""
+
+#: ./preferences.py:331
+msgid "Close to tray."
+msgstr ""
+
+#: ./preferences.py:335
+msgid "Save session on close."
+msgstr ""
+
+#: ./preferences.py:339
+msgid "Default advanced packages."
+msgstr ""
+
+#: ./preferences.py:343
+msgid "Show uploads."
+msgstr ""
+
+#: ./service_preferences.py:47
+msgid "Author"
+msgstr ""
+
+#: ./service_preferences.py:55
+msgid "Version"
+msgstr ""
+
+#: ./service_preferences.py:64
+msgid "Slots"
+msgstr ""
+
+#: ./service_preferences.py:71
+msgid "Captcha"
+msgstr ""
+

@@ -1,0 +1,49 @@
+<?xml version="1.0"?> <!--*- mode: xml -*-->
+<app-bundle>
+
+  <meta>
+    <prefix>/Users/Crak/gtk/inst</prefix>
+    <destination overwrite="yes">${env:HOME}/Desktop</destination>
+    <run-install-name-tool/>
+
+  </meta>
+  <plist>${project}/Info.plist</plist>
+
+  <!-- Whatever, remember to copy manually the script TucanManager and tucan-->
+  <main-binary>${prefix}/bin/pygtk-demo</main-binary>
+  <!--launcher-script>${project}/launcher.sh</launcher-script-->
+  
+  <!-- Tucan's source -->
+  <data dest="${bundle}/Contents/Resources/src">
+    ${project}/src
+  </data>
+  
+  <!-- tesseract dependency -->  
+  <data dest="${bundle}/Contents/Resources/src/tesseract">
+    ${project}/tesseract
+  </data>
+
+  <data dest="${bundle}/Contents/Resources">
+    ${project}/tucan.icns
+  </data>
+  
+  <data dest="${bundle}/Contents/Resources/etc/gtk-2.0/gtkrc">
+    ${project}/gtkrc
+  </data>
+  
+  <!-- necessary for ige-mac-integration -->
+  <data dest="${bundle}/Contents/Resources/">
+    ${project}/environment.sh
+  </data>
+    
+  <!-- Modules for GTK+ (image loaders, etc) -->
+  <binary>
+    ${prefix}/lib/gtk-2.0
+  </binary>
+
+  <!-- Modules for ige-mac-integration, something happens to .dylib-->
+  <binary>
+    ${prefix}/lib/python2.5
+  </binary>
+
+</app-bundle>

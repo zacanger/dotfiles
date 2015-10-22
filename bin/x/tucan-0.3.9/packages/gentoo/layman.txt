@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<layman>
+	<overlays>
+		<overlay
+			name = "tucan-overlay"
+			contact = "http://forums.tucaneando.com/"
+			status = "unofficial"
+			type = "svn"
+			src  = "https://forja.rediris.es/svn/cusl3-tucan/trunk/packages/gentoo/overlay">
+
+		<link>
+			http://tucaneando.com/
+		</link>
+
+		<description>
+			Tucan unofficial overlay
+		</description>
+		</overlay>
+	</overlays>
+</layman>

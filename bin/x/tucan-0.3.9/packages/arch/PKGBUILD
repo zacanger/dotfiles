@@ -1,0 +1,36 @@
+# Contributor: Raul Pons Lopez <raulponslopez+aur {at} gmail {dot} com>
+
+# Note: The pakage's host puts a random number in tarball's link. New var added for this "pkgrediris".
+
+pkgname=tucan
+pkgver=0.3.8
+pkgrel=1
+pkgrediris=1400
+pkgdesc="Download and upload manager for hosting sites."
+arch=('i686' 'x86_64')
+url="http://tucaneando.com/"
+license=('GPLv3')
+groups=()
+depends=('python' 'pygtk' 'pil' 'tesseract' 'librsvg')
+makedepends=()
+optdepends=()
+conflicts=()
+backup=()
+install=${pkgname}.install
+source=(http://forja.rediris.es/frs/download.php/$pkgrediris/$pkgname-$pkgver.tar.gz)
+md5sums=('3e27a9b17f67d8523950522366b18b77')
+
+ 
+build() {
+  cd $srcdir/$pkgname-$pkgver
+  mkdir -p $pkgdir/usr/share/tucan 
+  cp -r $srcdir/$pkgname-$pkgver/* $pkgdir/usr/share/tucan
+  
+  mkdir -p $pkgdir/usr/share/pixmaps
+
+  mkdir $pkgdir/usr/share/applications
+
+  chmod 755 $pkgdir/usr/share/tucan/tucan.py
+  mkdir -p $pkgdir/usr/bin
+}
+

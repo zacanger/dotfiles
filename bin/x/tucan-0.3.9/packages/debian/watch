@@ -1,0 +1,6 @@
+# watch control file for uscan
+version=3
+# Full-site-with-pattern  [Version  [Action]]
+     http://forja.rediris.es/frs/?group_id=408&release_id=668 \
+     /frs/download.php/(.*)/tucan-(.*)\.tar\.gz \
+     debian   uupdate

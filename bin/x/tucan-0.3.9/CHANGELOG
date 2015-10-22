@@ -1,0 +1,165 @@
+Tucan 0.3.9 Alpha 2009-10-07.
+------------------------------
+- Command Line interface.
+- Shutdown Addon.
+- Clipboard monitor.
+- New Update Manager.
+- Single Package Mode.
+- Download .part files.
+- Report bugs from LogView.
+- Statusbar limit cancel.
+- Solved many GUI bugs.
+- New anonymous Depositfiles plugin.
+- New anonymous Hotfile plugin.
+- Russian Localization.
+- Greek Localization.
+- Czech Localization.
+- OSX support.
+- Makefile updated.
+- manpage updated.
+
+Tucan 0.3.8 Alpha 2009-07-15.
+------------------------------
+- Download speed limiter.
+- Clean exit.
+- Enable/Disable Update Manager.
+- Win32 unicode bug solved.
+- Solved many GUI bugs.
+- Corrupt session notification.
+- Link loss notification.
+- Plugin system update.
+- New anonymous Zshare plugin.
+- New anonymous Filefactory plugin.
+- New anonymous Easy-share plugin.
+- New anonymous Badongo plugin.
+- French Localization.
+- Swedish Localization.
+- Updated to GPLv3.
+
+Tucan 0.3.7 Alpha 2009-04-18.
+------------------------------
+- Proxy support.
+- Solved Megaupload Captcha.
+- Solved many bugs.
+- New anonymous Sendspace plugin.
+- Makefile updated.
+- Debian package.
+- Ubuntu package.
+- German Localization.
+- Polish Localization.
+- Slovak Localization.
+- Portuguese Localization.
+
+Tucan 0.3.6 Alpha 2009-03-19.
+------------------------------
+- New logging system.
+- Update Manager checks Tucan version.
+- Better session support.
+- Solved Megaupload DB bug.
+- Solved interchangeable links bug.
+- Solved Limits bug.
+- New Anonymous 4Shared plugin.
+
+Tucan 0.3.5 Alpha 2009-03-03.
+------------------------------
+- Uploads Window.
+- Update Manager.
+- New Anonymous Mediafire plugin.
+- New Anonymous Megupload plugin.
+- FAQ.es
+- service-HOWTO.es
+- Italian localization update.
+
+Tucan 0.3.4 Alpha 2009-02-19.
+------------------------------
+- Version shows as 3 digits now.
+- Automatic plugin update with new versions.
+- Megaupload Anonymous plugin updated.
+- Megaupload Premium plugin updated.
+
+Tucan 0.3.3 Alpha 2009-02-11.
+------------------------------
+- Limit notification Menu.
+- Megaupload premium plugin updated.
+- Better link validation.
+- Account passwords hidden.
+- Microsoft Windows CRC problem solved.
+- New Makefile.
+- Gentoo ebuild.
+- Archlinux PKGBUILD.
+- tucan.desktop.
+
+Tucan 0.3.2 Alpha 2009-01-26.
+------------------------------
+- Slots bug solved.
+- Closing bug solved.
+- Timeout bug solved.
+- Megaupload Premium Download.
+- Rapidshare Premium Download.
+- Italian Localization.
+- Microsoft Windows support.
+- Makefile.
+- manpage.
+
+Tucan 0.3.1 Alpha 2009-01-12.
+------------------------------
+- FileChooser dialog.
+- Preferences shown if not configured.
+- Improved Captcha recognition.
+- Internationalization support.
+- Spanish Localization.
+- English Localization.
+
+Tucan 0.3 Alpha 2009-01-03.
+------------------------------
+- GUI support for Preferences.
+- New plugin system.
+- New Anonymous Rapidshare plugin.
+- New Anonymous Megupload plugin.
+- Anonymous Gigasize plugin.
+- Sessions package path problem solved.
+- CHANGELOG.
+
+Tucan 0.2.2 Alpha 2008-12-26.
+------------------------------
+- Download's contextual menu.
+- Preferences Window.
+- Service Preferences Window.
+- Main configuration.
+- Service configuration.
+- Accounts configuration.
+- Copy download links.
+- Sessions.
+- Path problem solved.
+
+Tucan 0.2.1 Alpha 2008-12-14.
+------------------------------
+- About Window.
+- Clear Completed Toolbar button.
+- Almost all Toolbar's buttons implemented.
+- InputLinks selectable links.
+- Delete downloads.
+- Statusbar and TrayIcon show downloads status.
+- Megaupload ellipsize problem solved.
+- Rapidshare ellipsize problem solved.
+- Incorrect links problem solved.
+- TODO.
+
+Tucan 0.2 Alpha 2008-12-08.
+----------------------------
+- New Main Window.
+- AdvancedPackages Window.
+- Package manager.
+- Limit Exceeded exceptions.
+- README.
+
+Tucan 0.1 pre-Alpha Not released.
+------------------------------
+- Main Window.
+- InputLinks Window.
+- TrayIcon.
+- Download scheduler.
+- Basic plugin system.
+- Anonymous Rapidshare plugin.
+- Anonymous Megupload plugin.
+- LICENSE.

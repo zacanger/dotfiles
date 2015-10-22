@@ -1,0 +1,74 @@
+\documentclass{latex2man}
+
+\begin{Name}{1}{iocane}{Jesse McClure}{simulate mouse events}{Iocane - The colorless, oderless, tasteless poison that will eliminate your system's rodent infestation}
+\Prog{Iocane}
+ - The colorless, oderless, tasteless poison that will eliminate your system's rodent infestation
+\end{Name}
+
+\section{Synopsis}
+\Prog{iocane}
+	\oOpt{-h}
+	\oOpt{-i}
+	\oOpt{-s}
+	\oOptArg{-c}{\ command-string}
+	\oArg{filename}
+
+\section{Description}
+\Prog{iocane} simulates mouse events from the keyboard, or from commands in a script file.
+
+\section{Options}
+\begin{description}
+\item[\Opt{-h}]
+	Print help and exit
+\item[\Opt{-i}]
+	Run in interactive mode
+\item[\Opt{-s}]
+	Run in stdin mode (default)
+\item[\OptArg{-c}{\ command-string}]
+	Execute command-string.  Multiple commands can be placed on the command line with multiple \Opt{-c} flags.  If \Arg{command-string} contains spaces they must be escaped or quoted.  If any \Opt{-c} commands are specified, \Prog{iocane} will not default to stdin mode and will instead exit after all \Arg{command-string}s are executed.  This can be overridden by explicitly specifying interactive or stdin mode on the command line.
+\item[\Arg{filename}]
+	Specify an optional \Prog{iocane} script file from which to read commands.
+\end{description}
+
+\section{Configuration}
+In interactive mode, runtime configuration is read from the following files, in order, stopping at the first file found:
+\File{\$XDG_CONFIG_HOME/iocane/config},
+\File{\$HOME/.iocanerc},
+\File{/usr/share/iocane/iocanerc}.
+
+Each non-empty, non-comment line in a configuration file specifies a \Arg{key} and a \Arg{command-string}.  Any X11 keysym can be used for \Arg{key}.
+
+\section{Commands}
+
+The following \Arg{command-string}s can be entered in the configuration file to be bound to a key, specified as an option to a \Opt{-c} flag on the command line, sent to \Prog{iocane's} stdin, or entered one per line in a script with a #!/bin/iocane shebang.  Any command can also be specified by first letter.
+
+\begin{description}
+\item[\Opt{powder}]
+	Move the cursor off screen
+\item[\Opt{move} \Arg{x} \Arg{y}]
+	Move the cursor by (\Arg{x},\Arg{y}) pixels
+\item[\Arg{x} \Arg{y}]
+	Place the cursor at coordinates (\Arg{x},\Arg{y})
+\item[\Opt{button} \Arg{n}]
+	Simulate a press of mouse button \Arg{n}
+\item[\Opt{cursor} \Arg{n}]
+	Sets the cursor to the \Arg{n}th item in X Font Cursors
+\item[\Opt{sleep} \Arg{s} \Arg{ms}]
+	Sleep for \Arg{s} seconds and \Arg{ms} milliseconds
+\item[\Opt{quit} | \Opt{exit}]
+	Exit from interactive mode or end a script
+\end{description}
+
+\section{Author}
+Copyright \copyright 2013 Jesse McClure \\
+License GPLv3: GNU GPL version 3 \URL{http://gnu.org/licenses/gpl.html} \\
+This is free software: you are free to change and redistribute it. \\
+There is NO WARRANTY, to the extent permitted by law.
+
+Submit bug reports via github: \\
+\URL{http://github/com/TrilbyWhite/Iocance.git}
+
+I would like your feedback.  If you enjoy \Prog{Iocane} see the bottom of the site below for detauls on submitting comments: \\
+\URL{http://mccluresk9.com/software.html}
+
+\LatexManEnd

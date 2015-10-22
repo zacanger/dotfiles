@@ -1,0 +1,194 @@
+===================
+ Description
+=========
+
+ - Tucan is a free and open source application designed for automatic
+   management of downloads and uploads at hosting sites like:
+
+   - http://rapidshare.com/
+   - http://megaupload.com/
+   - http://gigasize.com/
+   - http://mediafire.com/
+   - http://4shared.com/
+   - http://sendspace.com/
+   - http://zshare.net/
+   - http://filefactory.com/
+   - http://easy-share.com/
+   - http://badongo.com/
+   - http://depositfiles.com/
+   - http://hotfile.com/
+   - (...)
+
+
+===================
+ Characteristics
+=========
+
+ - Written entirely in Python.
+ - Graphical User Interface written in PyGTK (GTK+ toolkit).
+ - Multiplatform (GNU/Linux, FreeBSD, Microsoft Windows...).
+ - Easy to expand with plugins.
+ - Lightweight and fast.
+ - Management of waits between downloads (anonymous access).
+ - Captcha recognition where needed (like anonymous access to
+   megaupload or gigasize).
+ - Management of interchangeable links.
+ - Proxy support.
+
+
+===================
+ Plugins
+=========
+
+ +===================+========================+=============================+
+ |   Hosting site    |        Downloads       |           Uploads           |
+ +===================+========================+=============================+
+ | rapidshare.com    | anonymous and premium  |                             |
+ +-------------------+------------------------+-----------------------------+
+ | megaupload.com    | anonymous and premium  |                             |
+ +-------------------+------------------------+-----------------------------+
+ | gigasize.com      | anonymous              |                             |
+ +-------------------+------------------------+-----------------------------+
+ | mediafire.com     | anonymous              |                             |
+ +-------------------+------------------------+-----------------------------+
+ | 4shared.com       | anonymous              |                             |
+ +-------------------+------------------------+-----------------------------+
+ | sendspace.com     | anonymous              |                             |
+ +-------------------+------------------------+-----------------------------+
+ | zshare.net        | anonymous              |                             |
+ +-------------------+------------------------+-----------------------------+
+ | filefactory.com   | anonymous              |                             |
+ +-------------------+------------------------+-----------------------------+
+ | easy-share.com    | anonymous              |                             |
+ +-------------------+------------------------+-----------------------------+
+ | badongo.com       | anonymous              |                             |
+ +-------------------+------------------------+-----------------------------+
+ | depositfiles.com  | anonymous              |                             |
+ +-------------------+------------------------+-----------------------------+
+ | hotfile.com       | anonymous              |                             |
+ +-------------------+------------------------+-----------------------------+
+
+
+===================
+ Dependencies
+=========
+
+ - Python >= 2.5
+ - PyGTK
+ - Python Imaging Library
+ - Tesseract OCR (with the english language pack)
+ - SVG Rendering Library
+
+ +=========================+===================+====================+
+ | Package \ Distribution  |  Debian / Ubuntu  |       Gentoo       |
+ +=========================+===================+====================+
+ | Python >= 2.5           | python            | dev-lang/python    |
+ +-------------------------+-------------------+--------------------+
+ | PyGTK                   | python-gtk2       | dev-python/pygtk   |
+ +-------------------------+-------------------+--------------------+
+ | Python Imaging Library  | python-imaging    | dev-python/imaging |
+ +-------------------------+-------------------+--------------------+
+ | Tesseract OCR           | tesseract-ocr     | app-text/tesseract |
+ | (english language pack) | tesseract-ocr-eng |    (linguas_en)    |
+ +-------------------------+-------------------+--------------------+
+ | SVG Rendering Library   | librsvg2-common   | gnome-base/librsvg |
+ +-------------------------+-------------------+--------------------+
+
+ +===========+====================+================+================+
+ |   Arch    |       Fedora       |    OpenSuSE    |    Mandriva    |
+ +===========+====================+================+================+
+ | python    | python             | python         | python         |
+ +-----------+--------------------+----------------+----------------+
+ | pygtk     | pygtk2             | python-gtk     | pygtk2.0       |
+ +-----------+--------------------+----------------+----------------+
+ | pil       | python-imaging     | python-imaging | python-imaging |
+ +-----------+--------------------+----------------+----------------+
+ | tesseract | tesseract          | tesseract      | tesseract      |
+ |           | tesseract-langpack |                |                |
+ +-----------+--------------------+----------------+----------------+
+ | librsvg   | librsvg2           | librsvg        | librsvg        |
+ +-----------+--------------------+----------------+----------------+
+
+
+===================
+ Download
+=========
+
+ - Stable version:
+
+   https://forja.rediris.es/projects/cusl3-tucan/ -> Files
+
+
+ - Development version (needs subversion):
+
+   $ svn co https://forja.rediris.es/svn/cusl3-tucan/trunk tucan
+
+
+===================
+ Installation & Usage
+=========
+
+ - Unpack the tarball:
+
+   $ tar zxvf tucan-<version>.tar.gz
+   $ cd tucan-<version>/
+
+ - Install Tucan typing (needs root privileges):
+
+   # make install
+
+ - Run Tucan typing in a terminal:
+
+   $ tucan
+
+   ----------
+
+ - Uninstall Tucan typing (needs root privileges):
+
+   # make uninstall
+
+
+===================
+ Update Manager
+=========
+
+ - Tucan brings some services that sometimes need to be updated and other times
+   there are new services available.
+ - In order to update (or install new) services Tucan has a system update:
+
+   - Automatic usage:
+     - For enable/disable it, the user must go to the Preferences window >
+       Advanced > "Automatic check for updates." (enabled by default).
+
+   - Manual usage:
+     - For enable it, the user must go to the Preferences window > Services >
+       Find.
+
+ - After an update of services Tucan needs to be restarted.
+
+
+===================
+ Tips & Tricks
+=========
+
+ - Before running a new version, it's recommended to remove the directory
+   /home/<user>/.tucan/ or C:\Documents and Settings\<user>\.tucan\ if exists.
+ - The first time you run Tucan (without directory ~/.tucan/), the Preferences
+   window appears.
+ - Before running a service, it must be enabled in "Service Configuration" in
+   the Preferences window.
+
+ - Anonymous access to http://gigasize.com/:
+   - gigasize.com disallows checking links if an active link is already
+     downloading from this service.
+
+
+===================
+ Links
+=========
+
+ - http://tucaneando.com/
+ - http://doc.tucaneando.com/
+ - http://blog.tucaneando.com/
+ - http://forums.tucaneando.com/
+ - https://forja.rediris.es/projects/cusl3-tucan/

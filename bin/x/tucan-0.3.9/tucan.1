@@ -1,0 +1,168 @@
+.TH "TUCAN" "1" "November 10, 2008" "GPL" "Tucan Manager"
+.SH "NAME"
+tucan \- download and upload manager for hosting sites
+
+.SH "SYNOPSIS"
+.B tucan
+[OPTIONS]
+
+.SH "DESCRIPTION"
+.B Tucan
+is a free and open source application designed for automatic management of downloads and uploads at hosting sites like:
+.LP
+.RS 3
+rapidshare.com, megaupload.com, gigasize.com, mediafire.com, 
+4shared.com, sendspace.com, zshare.net, filefactory.com, 
+easy\-share.com, badongo.com, depositfiles.com, hotfile.com, ...
+.RE
+
+.SH "OPTIONS"
+Tucan can be used through a Graphical User Interface (GUI) or through a Command Line Interface (CLI). 
+Running Tucan without options makes it starts its GUI but with an option makes it starts its CLI.
+.LP
+The following options are to use Tucan through its CLI.
+
+.LP
+.B Generic Program Information
+.RS 3
+.B \-h, \-\-help
+.RS 6
+Print a usage message briefly summarizing these command-line options and then exit.
+.RE
+.LP
+.B \-V, \-\-version
+.RS 6
+Print the version number of tucan to the standard output. This version number should be included in all bug reports.
+.RE
+.RE
+
+.LP
+.B Configuration Options
+.RS 3
+.B \-w TYPE, \-\-wizard=TYPE
+.RS 6
+Configure some Tucan options. Available TYPEs:
+.RS 6
+\- accounts   configure premium accounts.
+.br
+\- services   enable/disable services.
+.br
+\- updates    launch the Update Manager.
+.RE
+.RE
+.RE
+
+.LP
+.B Common Options
+.RS 3
+.B \-c, \-\-cli
+.RS 6
+command line interface.
+.RE
+.LP
+.B \-d, \-\-daemon
+.RS 6
+no interaction interface.
+.RE
+.LP
+.B \-v, \-\-verbose
+.RS 6
+print all log to stdout.
+.RE
+.RE
+
+.LP
+.B Download Options
+.RS 3
+.B \-i FILE, \-\-input\-links=FILE
+.RS 6
+import links from FILE.
+.LP
+The FILE format is pretty simple:
+.RS 6
+\- Plain text.
+.br
+\- A link per line.
+.br
+\- Lines beginning with # are ignored (are treated as comments).
+.RE
+.RE
+.RE
+
+.SH "FILES"
+$HOME/.tucan/tucan.conf
+.RS 6
+Tucan settings.
+.RE
+.LP
+$HOME/.tucan/tucan.log
+.RS 6
+Tucan log.
+.RE
+
+.SH "EXAMPLES"
+.B Update services:
+.br
+tucan \-\-wizard updates
+.RS 3
+or
+.RE
+tucan \-w updates
+
+.LP
+.B Enable (or Disable) services:
+.br
+tucan \-\-wizard services
+.RS 3
+or
+.RE
+tucan \-w services
+.LP
+.RS 3
+and follow the instructions on screen.
+.RE
+
+.LP
+.B Configure premium accounts:
+.br
+tucan \-\-wizard accounts
+.RS 3
+or
+.RE
+tucan \-w accounts
+.LP
+.RS 3
+and follow the instructions on screen.
+.RE
+
+.LP
+.B Simple download with CLI (see above for FILE format):
+.br
+tucan \-\-cli \-\-input\-links file.txt
+.RS 3
+or
+.RE
+tucan \-c \-i file.txt
+
+.LP
+.B Simple download without interaction interface (see above for FILE format):
+.br
+tucan \-\-daemon \-\-input\-links file.txt
+.RS 3
+or
+.RE
+tucan \-d \-i file.txt
+
+.SH "SEE ALSO"
+<http://tucaneando.com/>
+.br
+<http://doc.tucaneando.com/>
+.br
+<http://blog.tucaneando.com/>
+.br
+<http://forums.tucaneando.com/>
+.br
+<https://forja.rediris.es/projects/cusl3\-tucan/>
+
+.SH "COPYRIGHT"
+(C) 2008\-2009 The Tucan Project.

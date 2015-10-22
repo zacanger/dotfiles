@@ -1,0 +1,7 @@
+battery: battery.c common.h
+clock: clock.c common.h
+essid: essid.c
+exist: exist.c
+narg: narg.c
+uq: uq.c
+volume: volume.c

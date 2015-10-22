@@ -1,0 +1,22 @@
+tucan (0.3.8-1) unstable; urgency=low
+
+  * New upstream release
+  * debian-policy updated to 3.8.2
+  * License upgraded to GPLv3
+  * New upstream/maintainer mail
+  * Solved data loss (Closes: #531392)
+
+ -- Fran Lupion (Crak) <crak@tucaneando.com>  Wed, 15 Jul 2009 22:54:52 +0200
+
+tucan (0.3.7-1) unstable; urgency=low
+
+  * New upstream release
+  * Uploaded to debian (Closes: #520470)
+
+ -- Fran Lupion (Crak) <crak@tucaneando.com>  Sun, 19 Apr 2009 19:39:32 +0200
+
+tucan (0.3.6-1) unstable; urgency=low
+
+  * Initial release
+
+ -- Fran Lupion (Crak) <crak@tucaneando.com>  Tue, 07 Apr 2009 19:23:20 +0200

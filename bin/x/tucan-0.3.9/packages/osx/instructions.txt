@@ -1,0 +1,41 @@
+Build Tucan OSX
+-------------------------
+#prepare source
++ sh release_tucan.sh <version>, rename as "src"
++ delete packages/
+
+#create the .app
++ export PATH=$PATH:/Users/Crak/bin
++ ige-mac-bundler tucan.bundle
++ copy TucanManager to Contents/MacOS/
+!!! copy /lib/libigemacintegration.0.dylib to Contents/Resources/lib/
+
+#clean up (save size!)
++ remove Contents/Resources/lib/gtk-2.0/2.10.0/print-backends
++ remove Contents/Resources/lib/gtk-2.0/2.10.0/engines/* (leave clearlooks)
+
+#compile binary
+gcc `python-config --libs` `python-config --includes` -u _PyMac_Error -framework CoreFoundation -Wall tucan.c -o tucan
+
+#debug
+IGE_DEBUG_LAUNCHER=yes TucanManager.app/Contents/MacOS/TucanManager
+
+#create .dmg
+hdiutil create -size 80m -volname Tucan\ Manager -srcfolder build tucan-0.3.8.dmg
+
+#ERRORS
+1.
+[2009-08-08 15:39:41,999] easy-share.parsers ERROR: http://www.easy-share.com/1699551079.html :decoder jpeg not available
+Traceback (most recent call last):
+  File "/Users/Crak/.tucan/plugins/easy-share/parsers.py", line 60, in __init__
+    tes = Tesseract(opener.open(self.captcha_url).read(), self.filter_image)
+  File "/Users/Crak/Desktop/TucanManager.app/Contents/Resources/src/tesseract.py", line 57, in __init__
+    p.feed(data)
+  File "/Library/Python/2.5/site-packages/PIL/ImageFile.py", line 411, in feed
+    im.mode, d, a, im.decoderconfig
+  File "/Library/Python/2.5/site-packages/PIL/Image.py", line 375, in _getdecoder
+    raise IOError("decoder %s not available" % decoder_name)
+IOError: decoder jpeg not available
+
+2.
+08/08/09 13:48:26 [0x0-0x1bf1bf].org.tucan[4796] glib.GError: Unable to load image-loading module: @executable_path/Resources/lib/gtk-2.0/2.10.0/loaders/libpixbufloader-ico.so: dlopen(@executable_path/Resources/lib/gtk-2.0/2.10.0/loaders/libpixbufloader-ico.so, 1): image not found 
