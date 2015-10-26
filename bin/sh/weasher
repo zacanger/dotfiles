@@ -1,2 +1,0 @@
-#!/bin/bash
-w3m http://weather.weatherbug.com/PA/Brogue-weather.html -dump\ | grep -i '^hi:\|^lo:\|^rain:\|^humidity:\|^dew point:'

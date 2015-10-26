@@ -6,7 +6,7 @@
 # [1] http://openweathermap.org/
 # [2] http://erikflowers.github.io/weather-icons/
 
-API="http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric&mode=xml"
+API="http://api.openweathermap.org/data/2.5/forecast?q=%s&units=imperial&mode=xml&appid=be22f778633d53500a0fe39dc09ba5d5"
 
 today() {
     curl -s --connect-timeout 5 $(printf $API $@)
@@ -103,7 +103,7 @@ main() {
             ;;
     esac
 
-    printf "%0.1f °C\n" $(echo $xml | temperature)
+    printf "%0.1f °F\n" $(echo $xml | temperature)
 }
 
 main $@

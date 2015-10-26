@@ -321,7 +321,7 @@
 # CDH3 Installation - https://ccp.cloudera.com/display/CDHDOC/CDH3+InstallationCDH3Installation-AddingaDebianRepository
 # Aegir hosting system  - http://community.aegirproject.org/
 # Automatic install on Debian  http://community.aegirproject.org/installing/debian
-# Secure APT: 
+# Secure APT:
 # Nginx - http://wiki.nginx.org/Main
 # Install - http://wiki.nginx.org/InstallOfficial_Debian.2FUbuntu_packages
 # Varnish Community - https://www.varnish-cache.org/
@@ -431,15 +431,19 @@
 # deb http://www.duinsoft.nl/pkg/ debs all
 # deb http://apt.ludomatic.fr/ lenny non-free
 # deb-src http://apt.ludomatic.fr/ lenny non-free
+#
 # Ajenti
 # deb http://repo.ajenti.org/debian main main
+#
 # Google Chrome
 # deb http://dl.google.com/linux/deb/ stable non-free main
+#
 # nginx
 # http://nginx.org/packages/debian/ squeeze nginx
-#  deb     http://deb.grml.org/ grml-stable main
-#  deb-src http://deb.grml.org/ grml-stable main
+# deb http://deb.grml.org/ grml-stable main
+# deb-src http://deb.grml.org/ grml-stable main
 # deb http://archive.finnix.org/finnix unstable main neale
+#
 # OLD NODE
 # deb https://deb.nodesource.com/node_0.12 sid main
 # deb-src https://deb.nodesource.com/node_0.12 sid main
@@ -452,7 +456,6 @@
 # like finnix, most of this is better off left untouched unless actually needed
 # deb http://deb.grml.org/ grml-testing main
 # deb-src http://deb.grml.org/ grml-testing main
-#
 #
 # OLD KALI STUFF, can probably be deleted?
 # deb http://http.kali.org/ /kali main contrib non-free
@@ -467,10 +470,10 @@
 # deb-src http://security.kali.org/kali-security kali/updates main contrib non-free
 # deb http://repo.kali.org/kali kali-bleeding-edge main
 #
-#
 # deb http://sourceforge.net/projects/whonixdevelopermetafiles/files/internal/ testers main
 # deb http://packages.psycast.de/devuan/ sid main
 # deb http://packages.devuan.org/devuan/ sid main contrib non-free
+#
 # Semplice Linux; pretty but nothing handy here yet
 # deb http://archive.semplice-linux.org/semplice/archive unstable main non-free
 # deb-src http://archive.semplice-linux.org/semplice/archive unstable main contrib non-free
@@ -482,9 +485,20 @@
 # deb http://repo.aptly.info/ nightly main
 #
 # From other Debian rolls; sometimes useful
-# deb http://community.solydxk.com/production/ solydxk main
-# deb http://repository.solydxk.com/ solydxk main upstream import
 # deb http://mozilla.debian.net/ experimental iceweasel-aurora
 # deb http://debs.slavino.sk/ testing main non-free
 # deb-src http://debs.slavino.sk/ testing main non-free
 # deb http://sparkylinux.org/repo testing main
+#
+# I really like Siduction, but at this point the only package I've actually been getting
+# from them is Ceni, and seeing as I build most stuff from source these days anyway...
+# deb http://packages.siduction.org/base unstable main contrib non-free
+# deb-src http://packages.siduction.org/base unstable main contrib non-free
+# deb http://packages.siduction.org/extra unstable main contrib non-free
+# deb-src http://packages.siduction.org/extra unstable main contrib non-free
+# deb http://packages.siduction.org/fixes unstable main contrib non-free
+# deb-src http://packages.siduction.org/fixes unstable main contrib non-free
+# deb http://packages.siduction.org/user unstable main contrib non-free
+# deb-src http://packages.siduction.org/user unstable main contrib non-free
+
+

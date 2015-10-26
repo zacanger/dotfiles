@@ -171,3 +171,5 @@ complete -A function -A variable unset
 # ask if more than x options
 bind 'set completion-query-items 200'
 
+
+
