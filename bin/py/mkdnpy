@@ -4,13 +4,13 @@
 (requires pywebkitgtk)
 
 ## cli:
-    mkdn.py <file>
+    mkdnpy <file>
 
 ## in vim:
-    :!mkdn.py % &
+    :!mkdnpy % &
 
 ## wrap it in a shell script:
-    mkdn.py "$*" &
+    mkdnpy "$*" &
     ${EDITOR:-vim} "$*"
     kill %1
 

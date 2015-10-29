@@ -1,0 +1,174 @@
+2003-05-30 19:35  ed
+
+	* pip.in: Fixed error message.
+
+2003-05-30 19:32  ed
+
+	* README: Documented changes in this release.
+
+2003-05-30 19:28  ed
+
+	* Makefile.PL, README, pip_latex2html, pip_tex: Version 1.2.
+
+2003-02-23 21:14  ed
+
+	* TODO: Added URL for Rubber.
+
+2003-01-01 22:29  ed
+
+	* TODO: Todo list.
+
+2003-01-01 22:25  ed
+
+	* pip_tex: Documented the bug where you can't produce a DVI file
+	with zero pages.
+
+2002-10-22 22:51  ed
+
+	* README: Added a warning about 'make test' failure on Windows.
+
+2002-10-22 22:48  ed
+
+	* pip.in, test.pl: New -I (buffer stdin) and -O (buffer stdout)
+	flags.
+
+2002-10-22 22:48  ed
+
+	* pip_tex: Remove the .idx and .toc files created by a LaTeX run. 
+	Actually, we ought to keep these and use them to run latex for a
+	second pass, but multiple passes are yet to be implemented.
+
+2002-10-18 23:18  ed
+
+	* mkdist: Remove the ChangeLog.bak file sometimes created by
+	cvs2cl.
+
+2002-10-18 23:16  ed
+
+	* mkdist: Fixes seemingly needed for perl 5.005.
+
+2002-10-18 22:48  ed
+
+	* pip.in: New $CLEANUP variable controls whether to unlink
+	temporary files and directories on exit.
+
+2002-10-18 15:15  ed
+
+	* pip.in: Make the temporary directory under /tmp/ (or other
+	appropriate place).  I think that before it was being made relative
+	to the current directory, or something.
+
+2002-10-18 14:56  ed
+
+	* MANIFEST, Makefile.PL, README, mkdist, pip.PL, pip.in,
+	pip_latex2html, pip_tex: Version 1.1: added pip_latex2html and some
+	more information on BUGS in pip_tex.  Rewrote the mkdist script in
+	Perl so it can check version numbers across several files.  Updated
+	the README.
+
+2002-10-18 13:11  ed
+
+	* Makefile.PL, pip.in, pip_tex: Replaced some of the home-grown
+	temporary file routines with File::Temp::tempdir().  Perhaps more
+	still to do.
+
+2002-09-17 20:48  ed
+
+	* pip_tex: Documenting the bug found by regis@grison.org - loading
+	files from the current directory doesn't work.
+
+2002-09-17 20:23  ed
+
+	* pip.in: Chris Coyle <chrisco@sprint.ca> pointed out the existence
+	of process substitution and said I should mention it in the manual
+	page.
+
+2002-09-17 20:16  ed
+
+	* pip_tex: Fix suggested by Hans Fredrik Nordhaug
+	<hansfn@mi.uib.no>: check return value of getopts().
+
+2002-09-05 16:02  ed
+
+	* pip.in: Added a 'DESCRIPTION' section to keep pod2man happy.
+
+2002-09-05 16:01  ed
+
+	* mkdist, pip.in, pip_tex: Fixed Changes generation; altered the
+	documentation to stop pod2man complaints.
+
+2002-09-05 15:49  ed
+
+	* COPYING, MANIFEST, MANIFEST.SKIP, Makefile.PL, README, mkdist,
+	pip, pip.PL, pip.in, pip_latex, pip_tex, test.pl: Packaged up for
+	version 1.0.  There's now a Makefile.PL and a test suite in
+	test.pl.  Manual pages for pip and pip_tex are generated from their
+	pod documentation.  (And pip_tex is now the official name;
+	pip_latex is a symlink created by the mkdist script, though both
+	are installed separately by the Makefile.)  Changed copying
+	conditions to GPL.  Made nice --help and --version options.
+	
+	Fixed a security hole with use of /tmp; there is still the chance
+	of a DoS attack but nothing more serious I hope.
+	
+	Added a new -b switch to pip which specifies a placeholder should
+	be used for both input and output.  For example, this CVS log
+	message I'm typing now could be implemented using 'pip -b xemacs
+	-'.
+	
+	I just hope it still works on Windows.
+
+2002-08-31 22:52  ed
+
+	* ChangeLog.before-RCS, README, pip, pip_latex: Changed email
+	address and website.
+
+2001-01-22 14:59  ed
+
+	* mkdist: Initial revision
+
+2001-01-22 14:53  ed
+
+	* pip_latex: Update version number
+
+2001-01-22 14:53  ed
+
+	* pip: Version 0.2.2
+
+2001-01-22 14:02  ed
+
+	* README: Version 0.2.2; warning about /tmp insecurity
+
+2001-01-22 13:57  ed
+
+	* pip_latex: Add prototypes to keep perl5.6 happy
+
+2001-01-22 13:56  ed
+
+	* pip_latex: Add warning about tmpdir()
+
+2001-01-22 13:55  ed
+
+	* pip: Add prototype to keep perl5.6 happy
+
+2001-01-22 13:54  ed
+
+	* pip: Add warning about tmpnam()
+
+2001-01-22 13:20  ed
+
+	* ChangeLog.before-RCS, README, pip, pip_latex: Initial revision
+
+2000-07-17  Edward Avis  <ed@membled.com>
+
+	* Added pip_latex
+	* Version 0.2.1
+
+2000-05-11  Edward Avis  <ed@membled.com>
+
+	* pip: removed 'use diagnostics' for speed
+	(tmpnam()): use our own tmpnam() instead of POSIX - 8 char limit
+	* pip: try to detect when a program has added an extension to
+		the output filename, and recover (but give a warning).
+	* pip: version 0.2
+	

@@ -1,0 +1,78 @@
+Pip version 1.2
+
+INTRODUCTION
+
+Some programs (often those from a non-Unix background) don't read
+input from stdin, nor write to stdout.  Instead, they make you specify
+an 'input file' and an 'output file' on the command line.  At least most
+Unix programs that do this let you use the special filename '-' to
+mean stdin or stdout, but there are some programs that don't recognize 
+this convention.
+
+Sometimes this is for technical reasons, because the input needs to be
+seekable.  Sometimes it is because the author didn't think it would be
+useful and is probably a Pascal sympathizer :-).  But in any case, it
+is annoying not to be able to use such programs in pipelines.
+
+Pip fixes this problem.  It wraps such programs and lets you give
+filenames of '-' as you would with any other.  However pip doesn't
+know whether '-' should mean stdin or stdout, so you must tell it with
+the -i or -o flags.
+
+For example, to convert the program 'stupid', which takes an input
+filename and an output filename, to be a filter:
+
+pip -io stupid - -
+
+Also pip's -I and -O flags can help with programs that do use stdin
+and stdout but require them to be seekable and so cannot be used in
+the middle of pipelines.  More advanced uses and examples are
+documented in the manual page.
+
+TeX and LaTeX
+
+pip is fairly general and works for 90% of the annoying DOSish
+programs out there, but it won't handle more complex programs like TeX
+that generate multiple output files.  The separate programs pip_(la)tex
+wrap (La)TeX, turning it into a filter that reads source from
+stdin and writes a DVI file to stdout.  For example,
+
+pip_latex <filename.tex | pip -i xdvi -
+
+to quickly format and view a LaTeX source file.  See the documentation
+at the start of 'pip_tex' for how it handles TeX's error messages
+and logs.
+
+There's also pip_latex2html which is a wrapper for the latex2html
+program.
+
+CHANGES IN THIS RELEASE
+
+Added -I and -O options, for commands which can use stdin and stdout
+but require them to be seekable.  Added a more polite check for the
+File::Temp module on perls which don't have it as standard (5.005 and
+earlier).
+
+INSTALLING
+
+As for Perl modules:
+
+% perl Makefile.PL PREFIX=/usr/local    # or whatever
+% make
+% make test
+% make install
+
+(The 'make test' stage may fail on Windows because there is no 'cat'
+program installed.)
+
+AUTHOR AND COPYING
+
+Copyright 2003 Ed Avis.  See the file COPYING for copying conditions.
+There is no warranty.
+
+Please contact me with any suggestions or bug reports.
+
+Ed Avis <ed@membled.com>
+
+These programs have a web page at
+<http://membled.com/work/apps/pip>.

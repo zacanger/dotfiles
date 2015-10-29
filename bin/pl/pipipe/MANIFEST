@@ -1,0 +1,11 @@
+COPYING
+Changes
+Makefile.PL
+MANIFEST
+README
+test.pl
+pip.PL
+pip.in
+pip_tex
+pip_latex
+pip_latex2html

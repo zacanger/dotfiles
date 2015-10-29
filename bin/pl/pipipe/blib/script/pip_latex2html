@@ -1,0 +1,109 @@
+#!/usr/bin/perl -w
+# Copyright 2002 Ed Avis, see the file COPYING.
+# Included with the package 'pip'.
+#
+
+=head1 NAME
+
+pip_latex2html - wrapper for latex2html to use it as a filter
+
+=head1 SYNOPSIS
+
+C<pip_latex2html>
+
+=head1 DESCRIPTION
+
+pip_latex2html reads LaTeX source on standard input and writes an HTML
+document to standard output.  It does this by running the latex2html
+command.
+
+=head1 BUGS
+
+latex2htmlE<39>s output is normally a collection of files: as well as the
+HTML page itself you have images, a CSS stylesheet and maybe other
+things.  But this wrapper just outputs the HTML.  In particular this
+means that images and equations cannot be included in the output.
+
+Then there are the shortcomings of latex2html itself, which cannot
+perfectly handle every type of LaTeX document.  This is unavoidable
+since LaTeX markup is a complete (and very complex) programming
+language.
+
+=head1 AUTHOR
+
+Ed Avis, ed@membled.com.
+
+=cut
+
+use strict;
+use File::Temp qw(tempdir);
+
+my $VERSION = '1.2';
+
+sub usage() {
+    print STDERR <<END
+usage: $0
+
+Report bugs to <ed\@membled.com>.
+END
+  ;
+}
+
+foreach (@ARGV) {
+    if (index('--help', $_) == 0) {
+	usage();
+	exit(0);
+    }
+    elsif (index('--version', $_) == 0) {
+	print STDERR <<END
+pip_latex2html, part of pip version $VERSION
+Written by Ed Avis.
+
+Copyright (C) 2002 Ed Avis.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+END
+  ;
+	exit(0);
+    }
+    else {
+	print STDERR "unknown argument $_\n";
+	usage();
+	exit(1);
+    }
+}
+
+my $dir = tempdir();
+chdir $dir or die "cannot chdir to $dir: $!";
+
+# latex2html stupidly puts its error messages on stdout instead of
+# stderr.
+#
+local *OLDOUT;
+open(OLDOUT, '>&STDOUT') or die "cannot dup stdout: $!";
+open(STDOUT, '>&STDERR') or die "cannot dup stderr: $!";
+system(qw(pip -i latex2html -split 0 -noascii_mode -nonavigation
+	  -notop_navigation -noaddress -noinfo -noimages -dir),
+       $dir, '-.tex')
+  && die "error running latex2html: $!";
+open(STDOUT, '>&OLDOUT') or die "cannot dup stdout back again: $!";
+my @made = grep { $_ ne 'index.html' } <*.html>;
+if (@made == 0) {
+    die "latex2html failed to create an HTML output file\n";
+}
+elsif (@made == 1) {
+     my $f = $made[0];
+     open(FH, $f) or die "cannot open $f: $!";
+     # Remove stylesheet references.  Should actually parse the HTML,
+     # but can't be bothered.
+     #
+     while (<FH>) {
+ 	print unless
+	  /^\s*<\s*link\b[^>]*\brel\s*=\s*["']stylesheet['"][^>]*>\s*$/i;
+     }
+     close FH or die "cannot close $f: $!";
+}
+elsif (@made >= 1) {
+    die "latex2html created more than one HTML output file\n";
+}
+else { die }

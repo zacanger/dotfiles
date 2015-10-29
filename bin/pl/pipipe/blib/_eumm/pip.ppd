@@ -1,0 +1,10 @@
+<SOFTPKG NAME="pip" VERSION="1.2">
+    <ABSTRACT></ABSTRACT>
+    <AUTHOR>Ed Avis &lt;ed@membled.com&gt;</AUTHOR>
+    <IMPLEMENTATION>
+        <REQUIRE NAME="File::Temp" />
+        <ARCHITECTURE NAME="x86_64-linux-gnu-thread-multi-5.20" />
+        <CODEBASE HREF="" />
+    </IMPLEMENTATION>
+</SOFTPKG>
+
