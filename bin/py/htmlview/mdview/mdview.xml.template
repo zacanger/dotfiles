@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type='text/xsl' href='interface.xsl'?>
+<interface xmlns="http://zero-install.sourceforge.net/2004/injector/interface">
+	<name>mdview</name>
+	<summary>markdown viewer</summary>
+	<description>
+A couple of useful tools for viewing HTML and markdown
+	</description>
+	<feed-for interface="http://gfxmonk.net/dist/0install/mdview.xml"/>
+	<group main="mdview">
+		<requires interface="http://gfxmonk.net/dist/0install/markdown.xml"/>
+		<requires interface="http://gfxmonk.net/dist/0install/htmlview.xml"/>
+		<implementation version="{version}">
+			<manifest-digest/>
+			<archive href="{archive}"/>
+		</implementation>
+	</group>
+</interface>
