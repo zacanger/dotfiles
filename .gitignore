@@ -18,8 +18,6 @@ __pycache__/
 /.build/
 _build/
 *.zedstate
-p0rn-*
-porn-*
 /bin/x
 /bin/x/**
 /private/**
