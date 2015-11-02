@@ -75,6 +75,7 @@ alias lo='ls -lghtr'
 alias lS='ls -lhS'
 alias lT='ls -rtH'
 alias ld='ls -d */'
+alias k='ls -htr'
 
 # ag all the things! um, i mean...
 alias dir='dir --color=auto'
@@ -147,4 +148,5 @@ alias sf='semistandard-format'
 alias python='python3.5'
 alias pip='pip3.5'
 alias sw='time cat'
+alias ds='dirsize'
 

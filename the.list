@@ -1,0 +1,55 @@
+## I know it's good practice to split all these into individual files in
+## `/etc/apt/sources.list.d/`, but I also know I never will. Some scripts
+## will go ahead and create their own file there... those get tacked on
+## to this file, and any cron jobs or what have you related to those
+## gets deleted.
+## There's also `unused.list`, which isn't *completely* unused...
+## it's just all the extra repos that I access once in a very rare
+## while, but don't need to actually check when I update packages.
+## Actual debian repos (sid and experimental, main non-free contrib)
+## are in `/etc/apt/sources.list`
+
+# bbqtools-basic & bbq-tools; also check github
+deb http://linuxbbq.org/repos/apt/debian sid main
+
+# Debian Multimedia... switch with one of the others if it goes down
+deb http://mirrors.dotsrc.org/debian-multimedia/ sid main non-free
+
+# apt-build threw a bitch-fit so i put this here.
+deb [trusted=yes] file:/var/cache/apt-build/repository apt-build main
+
+# @paultags, has some useful stuff
+deb https://pault.ag/debian wicked main
+deb-src https://pault.ag/debian wicked main
+
+deb http://ppa.launchpad.net/numix/ppa/ubuntu devel main
+# deb-src http://ppa.launchpad.net/numix/ppa/ubuntu devel main
+
+# Useful stuff for fixing boot (note to self: keep this here for
+# the roommate).
+deb http://ppa.launchpad.net/yannubuntu/boot-repair/ubuntu precise main
+# deb-src http://ppa.launchpad.net/yannubuntu/boot-repair/ubuntu precise main
+
+# pgl
+deb http://moblock-deb.sourceforge.net/debian/ sid main
+# deb-src http://moblock-deb.sourceforge.net/debian/ sid main
+
+# php stuff. jessie is the newest dist
+deb http://packages.dotdeb.org/ jessie all
+# deb-src http://packages.dotdeb.org/ jessie all
+
+# might as well be ~/ at this point
+deb [arch=i386,amd64] http://linux.dropbox.com/debian sid main
+
+# slack, google hangouts plugin, google chrome... for school/work
+deb https://packagecloud.io/slacktechnologies/slack/debian buster main
+deb http://dl.google.com/linux/talkplugin/deb/ stable main
+deb http://dl.google.com/linux/chrome/deb/ stable main
+
+# solydxk, mostly for their sweet xfce config tools
+deb http://community.solydxk.com/production solydxk main
+deb http://repository.solydxk.com solydxk main upstream import
+
+# sil tools and unicode typefaces
+deb http://packages.sil.org/ubuntu xenial main
+

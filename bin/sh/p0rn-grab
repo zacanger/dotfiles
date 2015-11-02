@@ -1,0 +1,42 @@
+#!/bin/sh
+# $Id: p0rn-grab,v 1.3 2004/05/14 20:53:04 mitch Exp $
+#
+# download all images/videos from a given URL
+#
+# 2004 (C) by Christian Garbs <mitch@cgarbs.de>
+# Licensed under GNU GPL.  See COPYING for details.
+
+if [ -z $1 ]; then
+    echo "No file given!"
+    exit 1
+fi
+
+USERAGENT="Mozilla/4.0 (compatible; MSIE 5.0; Linux) Opera 5.0  [en]"
+SAVEPATH=out
+SAVETMP=out.tmp.$$
+
+URL=$1
+DOMAIN=`echo $URL|sed -e 's,^[^/]*//,,' -e 's,/.*$,,'`
+
+mkdir -p $SAVETMP
+cd $SAVETMP
+
+NR=0
+
+lynx --dump $URL \
+| egrep -i '^ *[0-9]+\. http://.*(jpg|jpeg|mpg|mpeg|avi|png|wmv)$' \
+| sed 's/^.*http:/http:/' \
+| tac \
+| while read FILE; do
+    NR=$(($NR + 1))
+    wget -nv --user-agent="${USERAGENT}" --referer=$URL "$FILE"
+    FILE=`basename "$FILE"`
+    mv "$FILE" "$DOMAIN"-`printf %03d $NR`-"$FILE"
+done
+
+mmv "*-*" "#1-"`date +%Y%m%d`-"$$-#2"
+mv * ../$SAVEPATH
+
+cd ..
+
+rm -rf $SAVETMP

@@ -9,7 +9,7 @@ esac
 
 # lines w space & dups, ignores: bash(1) for more
 HISTCONTROL=ignoreboth
-HISTIGNORE='ls:history:la:ranger:mocp'
+HISTIGNORE='ls:history:la:ranger:mocp:h:c:clear:'
 
 # history append, length, timestamp
 shopt -s histappend
@@ -99,6 +99,15 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+
+# XTERM_TITLE='\[\033]0;\h\007\]'
+# [ "$IS_VIRTUAL_CONSOLE" ] && XTERM_TITLE=''
+# PS1=$XTERM_TITLE'\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+
+# vi mode
+# set -o vi
+# bind -m vi-insert \\C-l:clear-screen        # make Ctrl-L work the same as it does in emacs mode
 
 
 # autocorrect spelling on some things
