@@ -1,0 +1,95 @@
+/*
+:Author: Fred L. Drake, Jr.
+:date: $Date: 2004/03/31 22:31:05 $
+:version: $Revision: 1.7 $
+
+This stylesheet combines some ideas from the two stylesheets
+distributed with docutils and enhances them for Zope 3 documentation.
+*/
+
+@import url(http://rst2a.com/static/styles/html/default.css);
+
+body {
+  margin: 0px 1em 1em 4em;
+  padding: 0px; }
+
+h1.title {
+  background-image: url("zope3logo.gif");
+  background-position: -6px -4px;
+  background-repeat: no-repeat;
+  font-size: 150%;
+  min-height: 42px; }
+
+div.section {
+  margin: 0px 0px 1.5em 0px; }
+
+div.section h1 {
+  background-color: rgb(230,230,230);
+  margin-left: -2em;
+  padding: 0.2em;
+  padding-left: 0.35em;
+  padding-top: 0.35em;
+  /* This grey underline make this more visually distinctive on LCD
+     monitors, which often don't have enough contrast. */
+  border-right: thin solid rgb(180,180,180);
+  border-bottom: thin solid rgb(180,180,180); }
+
+div.section div.section div.section h3 {
+  margin-left: -1.9em;
+  margin-bottom: -0.5em; }
+
+h1 {
+  font-family: sans-serif;
+  font-size: 135%; }
+
+h2 {
+  font-family: sans-serif;
+  font-size: 120%; }
+
+h3 {
+  font-family: sans-serif;
+  font-size: 105%; }
+
+h4 {
+  font-family: sans-serif;
+  font-size: 100%; }
+
+h5 {
+  font-family: sans-serif;
+  font-size: 100%; }
+
+h6 {
+  font-family: sans-serif;
+  font-style: italic;
+  font-size: 100%; }
+
+hr {
+  width: 75%; }
+
+.literal .pre {
+  background-color: white;
+  font-family: lucidatypewriter, "lucida typewriter", sans-serif; }
+
+.literal-block {
+  border: thin solid rgb(180,180,180);
+  font-family: lucidatypewriter, "lucida typewriter", monospace;
+  font-size: 80%;
+  padding: 0.5em; }
+
+table.table {
+  margin-left: 2em;
+  margin-right: 2em; }
+
+table.table thead {
+  background-color: rgb(230,230,230); }
+
+dt {
+  font-weight: bold; }
+
+/* docutils uses the "option" class with both "col" and "span"
+   elements, so we have to be explicit here */
+.option-list span.option {
+  font-weight: bold; }
+
+.option-list kbd {
+  font-family: inherit; }

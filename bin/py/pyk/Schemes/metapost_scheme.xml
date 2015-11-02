@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE HLScheme>
+<!-- Remember these escape chars in XML
+&lt; 	< 	less than
+&gt; 	> 	greater than
+&amp; 	& 	ampersand 
+&apos; 	' 	apostrophe
+&quot; 	" 	quotation mark
+&lt;b&gt;
+ -->
+<SyntaxScheme>
+<!-- Scheme part-->
+
+<scheme name="Metapost" extensions="mp">
+
+    <context id="text/formula" format="text/formula" >
+        <start>$</start>
+        <stop>$</stop>
+        <escape>\\</escape>
+    </context>
+
+    <words id="keyword" format="keyword1">ahangle ahlength background bbox bboxmargin beginfig beveled black blue buildcycle butt center cutafter cutbefore cuttings dashpattern defaultfont defaultpen defaultscale dotlabel dotlabels drawarrow drawdblarrow drawoptions endfig evenly extra_beginfig extra_endfig green label labeloffset mitered red rounded squared upto downto exitunless relax gobble gobbled interact loggingall tracingall tracingnone eps epsilon infinity right left up down origin
+quartercircle halfcircle fullcircle unitsquare identity blankpicture withdots ditto EOF pensquare penrazor
+penspeck whatever abs round ceiling byte dir unitvector inverse counterclockwise tensepath mod div dotprod
+takepower direction directionpoint intersectionpoint softjoin incr decr reflectedabout rotatedaround
+rotatedabout min max flex superellipse interpath magstep currentpen currentpen_path currentpicture
+fill draw filldraw drawdot unfill undraw unfilldraw undrawdot erase cutdraw image pickup numeric_pickup
+pen_lft pen_rt pen_top pen_bot savepen clearpen clear_pen_memory lft rt top bot ulft urt llft lrt
+penpos penstroke arrowhead makelabel labels penlabel range numtok thru clearxy clearit clearpen pickup
+shipit bye hide stop solve</words>
+
+    
+    <words id="keyword2" format="keyword2" >cm pt</words>
+    <words id="keyword3" format="keyword3" >pair path picture</words>
+    
+    <word id="numbers" format="numbers">\b\d+\b</word>
+    <word id="deco2" format="deco2">=|;|\:|\+|-|\*|/|\.</word>
+    <word id="deco1" format="deco1">\\</word>
+    <word id="comment" format="comment" comment="true" not_in="@">%</word>
+    <word id="keyword0" format="keyword0">\\\w+</word>
+    <word id="numbers" format="numbers">\d+</word>
+ 
+</scheme>
+
+<!-- Snippets part-->
+<snip>
+
+    <entry>
+        <trigger>pcom</trigger>
+        <description>python comments1</description>
+        <snippet># ${1:comment name}
+        </snippet>
+    </entry>
+
+</snip>
+
+</SyntaxScheme>

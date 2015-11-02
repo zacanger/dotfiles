@@ -1,0 +1,150 @@
+/* --- Ad-Remover --- */
+
+.yamplus-unit-container {
+  display: none!important;
+}
+.stretchy_kids {
+  display: none!important;
+}
+.remnant-unit-container,
+.remnant_ad,
+li.recommended-unit-container {
+  display: none!important;
+}
+/* --- Clean Reblogs --- */
+
+.reblog-list-item .reblog-content p {
+  margin-top: 10px!important;
+  margin-bottom: 10px!important;
+}
+.reblog-list-item .reblog-content p:last-child {
+  margin-bottom: 0px!important;
+}
+.reblog-list {
+  padding-bottom: 15px;
+}
+.reblog-list-item {
+  border-bottom: 1px solid #e7e7e7!important;
+}
+a.reblog-avatar,
+.reblog-list-item .reblog-avatar {
+  display: none!important;
+}
+a.reblog-tumblelog-name::after {
+  content: ':';
+}
+.reblog-list-item .reblog-header {
+  margin-bottom: -5px!important;
+  padding-left: 0px!important
+}
+.reblog-title {
+  margin-top: 10px!important;
+}
+.reblog-list-item.contributed-content {
+  padding-bottom: 15px!important;
+}
+.posts .reblog-list+.contributed-content {
+  margin-top: -1px!important;
+}
+/* --- Color Fix --- */
+
+.tab_notice {
+  background: #fff!important;
+}
+.compose-button {
+  fill: #9aa2ad!important;
+}
+/* --- Disable Rainbow Animations --- */
+
+.logo:hover .inner {
+  opacity: 0!important;
+  -moz-animation: none!important;
+  -o-animation: none!important;
+  -webkit-animation: none!important;
+  animation: none!important;
+}
+.loader-container {
+  display: none!important;
+}
+/* --- Hide Radar --- */
+
+.identity .controls_section.controls_section_radar,
+#tumblr_radar {
+  display: none!important;
+}
+/* --- Hide Recommended Blogs --- */
+
+.identity .controls_section.follow_list.recommended_tumblelogs {
+  display: none!important;
+}
+.identity .controls_section.controls_section_radar {
+  margin: -3px 0 0!important;
+}
+/* --- Move the Source --- */
+
+.post .post-source-footer {
+  position: absolute!important;
+  top: -2px!important;
+  right: 10px!important;
+  height: 20px!important;
+  overflow: hidden!important;
+  text-align: right!important;
+  word-break: break-all;
+  padding: 0px!important;
+  font-weight: 700;
+  background-color: transparent!important;
+  float: none!important;
+}
+.post_tags {
+  padding-left: 20px!important;
+}
+/* --- No Recommended Likes --- */
+
+.rapid-recs-container {
+  display: none!important;
+}
+/* --- Remove 'Explore All of Tumblr' Buttons --- */
+
+.sidebar_link.avatar_align,
+.tracked_tags .explore_topics {
+  display: none!important;
+}
+/* --- Remove Inline Recommended Blogs --- */
+
+.recommended-unit-container.blog-card-compact {
+  display: none!important;
+}
+/* --- Static Icons --- */
+
+.post .post_avatar .avatar-wrapper,
+.post .post_avatar,
+.post .avatar-wrapper {
+  position: absolute!important;
+  top: 0px!important;
+}
+.post .post_avatar {
+  left: -85px!important;
+}
+.post .xkit-classic-menu-opener {
+  position: absolute!important;
+  top: 40px !important;
+}
+.post_body .xkit-classic-menu-opener {
+  position: relative!important;
+  top: -20px!important;
+}
+.post-avatar--sticky .post_avatar_wrapper {
+  position: absolute!important;
+  top: 0px!important;
+}
+/* --- Wrap Tags --- */
+
+.post_full .post_tags {
+  white-space: normal!important;
+}
+.post_full .post_tags .post_tag {
+  display: inline!important;
+}
+.post_full .post_tags:after {
+  width: 0px!important;
+}

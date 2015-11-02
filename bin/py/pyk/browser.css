@@ -1,0 +1,385 @@
+/*
+reSTinPeace's browser CSS
+*/
+
+body {
+    margin: 20px 0 0 0;
+    padding: 0;
+    background: #E6E6E6 ;
+    font-family: "DejaVu Sans Mono", sans-serif;
+    font-size: 13px;
+    color: #000;
+}
+
+
+div h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-weight: normal;
+    color: #000000;
+}
+
+
+div h1 {
+    font-size: medium;
+    color: #AF1515;
+    text-align : center;
+}
+
+div h1.title {
+    font-size: 150%;
+    color: #AF1515;
+    text-align: center; /* Does not work */
+    /* margin-left: 50px;  Obliged to this ? */
+}
+
+div h2 {
+    font-size: 140%;
+    color: #076F15;
+}
+
+div h3 {
+    font-size: 110%;
+    color: #1A2F8F;
+}
+
+
+div p, ol, ul {
+    line-height: 180%;
+}
+
+div p {
+    font-family: "DejaVu Sans Mono", sans-serif;
+    font-size: 13px;
+    color: #000;
+}
+
+div ol {
+    margin-left: 0;
+    list-style-position: inside;
+}
+
+div ul {
+    margin-left: 0;
+    list-style: none;
+}
+
+div ul li {
+    padding-left: 15px;
+}
+
+div blockquote {
+    margin: 0;
+    font-style: italic;
+}
+
+div blockquote * {
+    line-height: normal;
+}
+
+div a {
+    color: #569400;
+}
+
+div a:hover {
+    text-decoration: none;
+}
+
+div img {
+    border: none;
+}
+
+div img.left {
+    float: left;
+    margin: 5px 15px 0 0;
+}
+
+div img.right {
+    float: right;
+    margin: 0 0 0 15px;
+}
+
+div hr {
+    display: none;
+}
+
+/* Menu */
+
+#menu {
+    width: 740px;
+    height: 60px;
+    margin: 0 auto;
+}
+
+#menu ul {
+    margin: 0;
+    list-style: none;
+}
+
+#menu li {
+    display: inline;
+}
+
+#menu a {
+    display: block;
+    float: left;
+    text-decoration: none;
+    font-size: 136%;
+    color: #FFFFFF;
+}
+
+#menu a:hover {
+    text-decoration: underline;
+}
+
+/* Logo */
+
+#logo {
+    width: 740px;
+    height: 301px;
+    margin: 0 auto;
+}
+
+#logo h1, #logo h2 {
+    margin-right: 440px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+#logo h1 {
+    font-size: 250%;
+}
+
+#logo h2 {
+    font-size: 85%;
+}
+
+#logo a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+/* Page */
+
+#page {
+    width: 740px;
+    margin: 0 auto;
+}
+
+/* Content */
+
+#content {
+    float: right;
+    width: 377px;
+    border: 1px solid #E6E6E6;
+}
+
+.twocols {
+}
+
+.twocols .col1, .twocols .col2 {
+    width: 168px;
+    padding: 10px;
+}
+
+.twocols .col1 {
+    float: left;
+}
+
+.twocols .col2 {
+    float: right;
+}
+
+/* Sidebar */
+
+#sidebar {
+    float: left;
+    width: 297px;
+    border: 1px solid #E6E6E6;
+}
+
+.boxed {
+}
+
+.boxed .title {
+    height: 29px;
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 122%;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+.boxed .content {
+}
+
+.boxed h3 {
+    margin: 0;
+}
+
+.boxed p, .boxed ul, .boxed ol {
+    margin: 0;
+    list-style: none;
+    line-height: normal;
+}
+
+.boxed ul {
+}
+
+.boxed ul li {
+    background-position: 0 13px;
+    border-top: 1px solid #CFCFCF;
+}
+
+.boxed ul li.first {
+    border: none;
+}
+
+/* Search */
+
+#search {
+}
+
+#search form {
+    margin: 0;
+}
+
+#search fieldset {
+    margin: 0;
+    border: none;
+}
+
+#search p {
+    margin: 0;
+    font-size: 85%;
+}
+
+#searchinput {
+    width: 180px;
+}
+
+#searchsubmit {
+}
+
+/* Footer */
+
+#footer {
+    width: 740px;
+    margin: 0 auto;
+    height: 100px;
+}
+
+#footer p {
+    margin: 0;
+    line-height: normal;
+    font-size: 85%;
+}
+
+#footer a {
+    color: #666666;
+}
+
+#legal {
+    float: left;
+}
+
+#links {
+    float: right;
+}
+
+
+/* Pygments related */
+
+div pre.literal-block{
+font-family: "DejaVu Sans Mono",sans-serif;
+font-size: 12px;
+margin : 3px;
+display: block;
+color: #000;
+background: #EFA4A4;
+overflow: auto;
+border-top-style: dashed;
+border-right-style: dashed;
+border-bottom-style: dashed;
+border-left-style: dashed;
+border-top-color: #3c78b5;
+border-right-color: #3c78b5;
+border-bottom-color: #3c78b5;
+border-left-color: #3c78b5;
+}
+
+div .highlight pre{
+font: 9px "DejaVu Sans Mono",sans-serif;
+display: block;
+color: #fff;
+overflow: auto;
+border-top-style: dashed;
+border-right-style: dashed;
+border-bottom-style: dashed;
+border-left-style: dashed;
+border-top-color: #3c78b5;
+border-right-color: #3c78b5;
+border-bottom-color: #3c78b5;
+border-left-color: #3c78b5;
+background: #141414;
+}
+
+.highlight .n  { color: #FFF; }
+.highlight .c  { color:#5F5A60; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .o  { color: #666666 } /* Operator */
+.highlight .cm { color: #00FF00; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #00FF00 }       /* Comment.Preproc */
+.highlight .c1 { color: #00FF00}        /* Comment.Single */
+.highlight .cs { color: #00FF00}        /* Comment.Special */
+.highlight .gd { color: #A00000 }       /* Generic.Deleted */
+.highlight .ge { font-style: italic }   /* Generic.Emph */
+.highlight .gr { color: #FF0000 }       /* Generic.Error */
+.highlight .gh { color: #000080 }       /* Generic.Heading */
+.highlight .gi { color: #00A000 }       /* Generic.Inserted */
+.highlight .go { color: #808080 }       /* Generic.Output */
+.highlight .gp { color: #000080 }       /* Generic.Prompt */
+.highlight .gs { color: #000080 }       /* Generic.Strong */
+.highlight .gu { color: #800080 }       /* Generic.Subheading */
+.highlight .gt { color: #0040D0 }       /* Generic.Traceback */
+.highlight .k  { color: #F9EE98 }        /* Keyword */
+.highlight .kc { color: #C0C0FF }       /* Keyword.Constant */
+.highlight .kd { color: #C0C0FF }       /* Keyword.Declaration */
+.highlight .kp { color: #C0C0FF }       /* Keyword.Pseudo */
+.highlight .kr { color: #C0C0FF }       /* Keyword.Reserved */
+.highlight .kt { color: #C0C0FF }       /* Keyword.Type */
+.highlight .m  { color: #CF6A4C }        /* Literal.Number */
+.highlight .s  { color: #BB4444 }        /* Literal.String */
+.highlight .na { color: #BB4444 }       /* Name.Attribute */
+.highlight .nb { color: #AA22FF }       /* Name.Builtin */
+.highlight .nc { color: #7587A6 }       /* Name.Class */
+.highlight .no { color: #880000 }       /* Name.Constant */
+.highlight .nd { color: #AA22FF }       /* Name.Decorator */
+.highlight .ni { color: #999999 }       /* Name.Entity */
+.highlight .ne { color: #D2413A }       /* Name.Exception */
+.highlight .nf { color: #8F9D6A }       /* Name.Function */
+.highlight .nl { color: #A0A000 }       /* Name.Label */
+.highlight .nn { color: #C0C0FF ; font-style: normal}       /* Name.Namespace */
+.highlight .nt { color: #008000 }       /* Name.Tag */
+.highlight .nv { color: #B8860B }       /* Name.Variable */
+.highlight .ow { color: #AA22FF }       /* Operator.Word */
+.highlight .mf { color: #666666 }       /* Literal.Number.Float */
+.highlight .mh { color: #666666 }       /* Literal.Number.Hex */
+.highlight .mi { color: #CF6A4C }       /* Literal.Number.Integer */
+.highlight .mo { color: #CF6A4C }       /* Literal.Number.Oct */
+.highlight .sb { color: #BB4444 }       /* Literal.String.Backtick */
+.highlight .sc { color: #BB4444 }       /* Literal.String.Char */
+.highlight .sd { color: #BB4444 }       /* Literal.String.Doc */
+.highlight .s2 { color: #BB4444 }       /* Literal.String.Double */
+.highlight .se { color: #BB6622 }       /* Literal.String.Escape */
+.highlight .sh { color: #BB4444 }       /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688 }       /* Literal.String.Interpol */
+.highlight .sx { color: #008000 }       /* Literal.String.Other */
+.highlight .sr { color: #BB6688 }       /* Literal.String.Regex */
+.highlight .s1 { color: #BB4444 }       /* Literal.String.Single */
+.highlight .ss { color: #B8860B }       /* Literal.String.Symbol */
+.highlight .bp { color: #AA22FF }       /* Name.Builtin.Pseudo */
+.highlight .vc { color: #B8860B }       /* Name.Variable.Class */
+.highlight .vg { color: #B8860B }       /* Name.Variable.Global */
+.highlight .vi { color: #B8860B }       /* Name.Variable.Instance */
+.highlight .il { color: #666666 }       /* Literal.Number.Integer.Long */

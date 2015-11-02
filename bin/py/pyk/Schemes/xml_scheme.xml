@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE HLScheme>
+<SyntaxScheme>
+<!-- LaTeX Scheme -->
+<scheme name="XML" extensions="xml;html;xhtml;ui">
+
+    <context id="text/formula" format="text/formula" >
+        <start>&lt;!--</start>
+        <stop>--&gt;</stop>
+        <escape></escape>
+    </context>
+
+    <word id="deco1" format="deco1" minimal="true">".*"</word>
+    <word id="deco2" format="deco2" minimal="true">\w+\=</word>
+    
+    <!--<word id="keyword5" format="keyword5" minimal="true"><![CDATA[([A-Za-z_:]|[^\\x00-\\x7F])([A-Za-z0-9_:.-]|[^\\x00-\\x7F])*]]></word>
+    <word id="keyword4" format="keyword4" minimal="true"><![CDATA[\"[^<\"]*\"|'[^<']*']]></word>-->
+    <word id="keyword1" format="keyword1" minimal="true"><![CDATA[<[/]?\w+>]]></word>
+    <word id="keyword3" format="keyword3" minimal="true"><![CDATA[>[\w|\s]+<]]></word>
+
+</scheme>
+
+<!-- Snippets -->
+<snip>
+
+    <entry>
+        <trigger>tag</trigger>
+        <description>tag</description>
+        <snippet><![CDATA[<${1:tagname}>${2:value}</$1>]]></snippet>
+    </entry>
+
+    <!-- Special snippets for PyK grammars -->
+    <entry>
+        <trigger>ctx</trigger>
+        <description>PyK context tag</description>
+        <snippet><![CDATA[<context id="${1:tagname}" format="${2:format}">
+    <start>${3:start}</start>
+    <stop>${4:stop}</stop>
+    <escape>${5:esc}</escape>
+</context>]]></snippet>
+    </entry>
+
+</snip>
+
+</SyntaxScheme>

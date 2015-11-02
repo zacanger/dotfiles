@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE HLScheme>
+<!-- Remember these escape chars in XML
+&lt;    <   less than
+&gt;    >   greater than
+&amp;   &   ampersand
+&apos;  '   apostrophe
+&quot;  "   quotation mark
+&lt;b&gt;
+ -->
+<SyntaxScheme>
+<!-- Scheme part-->
+
+<scheme name="Default" extensions=".;">
+
+</scheme>
+
+<!-- Snippets part-->
+<snip>
+
+    <entry>
+        <trigger>nom</trigger>
+        <description>my name</description>
+        <snippet>${1:Christophe Kibleur}</snippet>
+    </entry>
+    <!-- BBCode added on 02.12.2007 for forum writtings -->
+    <entry>
+        <trigger>bold</trigger>
+        <description>my name</description>
+        <snippet>[b]${1:bolded}[/b]</snippet>
+    </entry>
+    <entry>
+        <trigger>ita</trigger>
+        <description>my name</description>
+        <snippet>[i]${1:italic}[/i]</snippet>
+    </entry>
+    <entry>
+        <trigger>und</trigger>
+        <description>underline</description>
+        <snippet>[u]${1:underlined}[/u]</snippet>
+    </entry>
+    <entry>
+        <trigger>quote</trigger>
+        <description>Quote</description>
+        <snippet>[quote]${1:Quote}[/quote]</snippet>
+    </entry>
+    <entry>
+        <trigger>list</trigger>
+        <description>list</description>
+        <snippet>[list]${1:list}[/list]</snippet>
+    </entry>
+    <entry>
+        <trigger>list=</trigger>
+        <description>list</description>
+        <snippet>[list=]${1:list}[/list]</snippet>
+    </entry>
+    <entry>
+        <trigger>img</trigger>
+        <description>image</description>
+        <snippet>[img]${1:adress}[/img]</snippet>
+    </entry>
+    <entry>
+        <trigger>url</trigger>
+        <description>url</description>
+        <snippet>[url]${1:adress}[/url]</snippet>
+    </entry>
+    <entry>
+        <trigger>center</trigger>
+        <description>centered text</description>
+        <snippet>[center]${1:adress}[/center]</snippet>
+    </entry>
+    <entry>
+        <trigger>strike</trigger>
+        <description>stroked text</description>
+        <snippet>[strike]${1:stroked text}[/strike]</snippet>
+    </entry>
+    <entry>
+        <trigger>tex</trigger>
+        <description>LaTeX code</description>
+        <snippet>[tex]${1:LaTeX text}[/tex]</snippet>
+    </entry>
+    <!-- End BBCode -->
+
+</snip>
+
+</SyntaxScheme>

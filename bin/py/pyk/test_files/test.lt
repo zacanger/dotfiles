@@ -1,0 +1,7 @@
+@SysInclude { doc }
+@Doc @Text @Begin
+@Display @Heading { PyEdit: é little editor }
+With @I @B PyEdit app is just crazy ?I just never seen this before!?
+@PP
+No, PyEdit ain't just a little editor.
+@End @Text

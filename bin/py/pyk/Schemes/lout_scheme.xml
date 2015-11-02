@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE HLScheme>
+<SyntaxScheme>
+<!-- Scheme -->
+
+<scheme name="Lout" extensions="lout;lt">
+
+    <context id="string/triplesimple" format="string" >
+        <start>/*</start>
+        <stop>*/</stop>
+        <escape>\\</escape>
+    </context>
+
+    <words id="keyword" format="keyword1">def macro named left right</words>
+    <word id="comment" format="comment" comment="true" not_in="'">#</word>
+    <word id="keyword1" format="keyword0">@\w+</word>
+    <word id="keyword2" format="keyword2">@@\w+</word>
+    <word id="numbers" format="numbers">\b\d+\b</word>
+    <word id="string/simple" format="string/simple" mini="true">(?:"[^"]*")</word>
+    <word id="decoration" format="deco1">[\(|\)|\[|\]|\{|\}]</word>
+    <word id="decoration" format="deco2">[=|;|\:|\+|-|\*|/|\.]</word>
+</scheme>
+
+            <!-- Snippets -->
+<snip>
+
+
+    <entry>
+        <trigger>m</trigger>
+        <description>maths</description>
+        <snippet>@Math {${1:formula}}</snippet>
+    </entry>
+
+    <entry>
+        <trigger>col</trigger>
+        <description>color</description>
+        <snippet>@Colour {${1:color}}</snippet>
+    </entry>
+
+</snip>
+
+</SyntaxScheme>

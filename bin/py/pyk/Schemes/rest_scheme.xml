@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE HLScheme>
+<SyntaxScheme>
+
+<!-- Scheme -->
+<scheme name="reSt" extensions="rst;txt">
+
+    <word id="rst/lists" format="rstList">^\s*[-+]\s</word>
+    <word id="rst/admonition" format="rstAdmo">\.\.\s\w+::</word>
+    <!--<word id="rst/2points" format="rst10" minimal="true">:[^\d]*:</word> -->
+    <word id="rst/hyperlink" format="rst1">\.\. [\w+ _]*: </word>
+    <word id="rst/hyperlink_target" format="rst2">\b\w+_\b</word>
+    <word id="rst/titles" format="rst3">(\*|\-|=|#|~)+</word>
+    <word id="rst/italic" format="rst5" minimal="true">\*.*\*</word>
+    <word id="rst/bold" format="rst4" minimal="true">\*\*.*\*\*</word>
+    <word id="rst/tables" format="rst6">(\|.*\|)|((\+(\-|\+|\=)+)\+)</word>
+    <word id="rst/deco" format="rst7">^(\*|\-|=|#|~)+$</word>
+    <word id="rst/litteral" format="rst8" minimal="true">`.*`</word>
+    <word id="rst/litteral" format="rst8" minimal="True">``.*``</word>
+    <word id="rst/links" format="rst9" minimal="true">`.*`_</word>
+
+</scheme>
+
+<!-- Snippets -->
+<snip>
+
+<entry>
+<trigger id="rest">link</trigger>
+<description>Add a link without reference</description>
+<snippet>`${1:Name} &lt;${2:Adress}&gt;`_ $0</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">bold</trigger>
+<description>Bolded text</description>
+<snippet>**${1:Bolded}** $0</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">ita</trigger>
+<description>Italic Text</description>
+<snippet>*${1:Italic}* $0</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">inter</trigger>
+<description>Interpreted</description>
+<snippet>`${1:Iterpreted}` $0</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">trans</trigger>
+<description>Transition marker (horizontal line)</description>
+<snippet>-----
+
+</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">lit</trigger>
+<description>Litteral</description>
+<snippet>``${1:Litteral}`` $0</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">ref</trigger>
+<description>Reference</description>
+<snippet>${1:Reference}_ $0</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">pref</trigger>
+<description>Phrase Reference</description>
+<snippet>`${1:PhraseReference}`_ $0</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">ano</trigger>
+<description>Anonymous</description>
+<snippet>${1:Anonymous}__ $0</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">iit</trigger>
+<description>Inline Internal Target</description>
+<snippet>_`${1:InlineInternalTarget}` $0</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">sr</trigger>
+<description>Substitution Reference</description>
+<snippet>|${1:SubstitutionReference}| $0</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">sc</trigger>
+<description>Source Code with Pygments</description>
+<snippet>.. sourcecode:: ${1:python}
+
+    $0</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">rest</trigger>
+<description>reStructuredText</description>
+<snippet>reStructuredText </snippet>
+</entry>
+
+<entry>
+<trigger id="rest">im</trigger>
+<description>Image</description>
+<snippet>.. image:: ${1:adresse}
+    :scale: ${2:100}
+    :alt: ${3:nom}
+    :align: ${4:center}
+    :target: ${5:lien}
+
+</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">tit</trigger>
+<description>Title</description>
+<snippet>${1/.*/len(EXP)*'='}
+${1:Title}
+${1/.*/len(EXP)*'='}
+
+$0</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">t1</trigger>
+<description>Header 1</description>
+<snippet>${1:Header level 1}
+${1/.*/len(EXP)*'='}
+
+$0</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">t2</trigger>
+<description>Header 2</description>
+<snippet>${1:Header level 2}
+${1/.*/len(EXP)*'-'}
+
+$0</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">t3</trigger>
+<description>Header 3</description>
+<snippet>${1:Header level 3}
+${1/.*/len(EXP)*'#'}
+
+$0</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">t4</trigger>
+<description>Header 4</description>
+<snippet>${1:Header level 4}
+${1/.*/len(EXP)*'~'}
+
+$0</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">toc</trigger>
+<description>Table of contents</description>
+<snippet>.. contents::
+
+</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">hl</trigger>
+<description>HyperLink like Python_</description>
+<snippet>${1:Hyperlink}_</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">hlt</trigger>
+<description>HyperLink target like '.. _Python: htpp://python.org'</description>
+<snippet>.. _${1:Hyperlink Target}: ${2:Adress}</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">ihlt</trigger>
+<description>Implicit HyperLink Target ie `Titles are
+targets, too`_</description>
+<snippet>`${1:Section Name}`_</snippet>
+</entry>
+
+
+<entry>
+<trigger id="rest">subdef</trigger>
+<description>Substitution Definition ie |biohazard|</description>
+<snippet>|${1:Substitution Definition}|</snippet>
+</entry>
+
+<entry>
+<trigger id="rest">subdef</trigger>
+<description>Substitution Definition ie |biohazard|</description>
+<snippet>|${1:Substitution Definition}|</snippet>
+</entry>
+
+</snip>
+</SyntaxScheme>

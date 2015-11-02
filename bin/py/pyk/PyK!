@@ -1,0 +1,11 @@
+#!/bin/bash
+echo ---- Bonjour $USER -----
+cd /home/kib/Public/TabEditor/pyk
+if  [ $# -ne 1 ]; then
+    echo "launch without a file"
+    python main.py
+elif [ -f "$1" ]; then
+    echo "launch from a file"
+    python main.py $1
+   fi
+

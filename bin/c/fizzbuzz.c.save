@@ -1,0 +1,21 @@
+//My attempt at a fizzbuzz program. Wish me luck ;_;
+#include <stdio.h>
+int main(){
+	int hundred;
+	for (hundred = 1; hundred <= 100; hundred++){
+		printf("%d", hundred);
+		if (hundred % 3 == 0){
+			printf("Fizz");
+		}
+		else{
+			printf("\
+		}
+		if (hundred % 5 == 0){
+			printf("Buzz\n");
+		}
+		else{
+			printf("\n");
+		}
+	}
+	return 0;
+}
