@@ -149,4 +149,5 @@ alias python='python3.5'
 alias pip='pip3.5'
 alias sw='time cat'
 alias ds='dirsize'
+alias ds.='dirsize .'
 
