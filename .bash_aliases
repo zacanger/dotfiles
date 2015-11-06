@@ -152,4 +152,6 @@ alias ds='dirsize'
 alias ds.='dirsize .'
 alias dfm='dmenu-fm'
 alias lh='laenza.sh'
+alias co='xclip -selection clipboard'
+alias pa='xclip -o'
 

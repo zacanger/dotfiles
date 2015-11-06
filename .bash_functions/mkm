@@ -1,4 +1,4 @@
-mkmv () {
+mkm () {
   dirname=$1
   if [ -z "${dirname}" ]; then
     echo "Need a dirname" >&2

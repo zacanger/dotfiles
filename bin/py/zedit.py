@@ -10,7 +10,7 @@ class Window():
            button.pack()
         
 class Editor:
-    file_name = "" # etc Users/Luke/programming/info.txt
+    file_name = "" 
     def __init__(self, master):
         self.file_opt = options = {}
 
