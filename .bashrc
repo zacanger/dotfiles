@@ -181,4 +181,11 @@ complete -A function -A variable unset
 bind 'set completion-query-items 200'
 
 
+case $TERM in
+xterm*)
+    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+    ;;
+*)
+    ;;
+esac
 
