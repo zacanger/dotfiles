@@ -118,9 +118,6 @@ shopt -s dirspell
 
 . /usr/share/autojump/autojump.sh
 
-# Only load Liquid Prompt in interactive shells, not from a script or from scp
-echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
-
 export PATH=$PATH:/usr/local/share/npm/bin:~/bin:/opt:~/Downloads/textadept:~/Downloads/firefox:$(find $HOME/bin -type d | paste -s -d:)
 ### MOTD ###
 # Display MotD
@@ -180,7 +177,7 @@ complete -A function -A variable unset
 # ask if more than x options
 bind 'set completion-query-items 200'
 
-
+# dynamic tytle
 case $TERM in
 xterm*)
     PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
@@ -188,4 +185,8 @@ xterm*)
 *)
     ;;
 esac
+
+# Only load Liquid Prompt in interactive shells, not from a script or from scp
+echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
+
 
