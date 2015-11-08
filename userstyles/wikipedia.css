@@ -1,18 +1,6 @@
-/*********************************************************************
-This is free and unencumbered software released into the public domain.
-
-Anyone is free to copy, modify, publish, use, compile, sell, or
-distribute this software, either in source code form or as a compiled
-binary, for any purpose, commercial or non-commercial, and by any
-means.
-
-For more information, please refer to <http://unlicense.org/>
-*********************************************************************/
 /*
-WiTeX
-https://github.com/AndrewBelt/WiTeX
+Based on https://github.com/AndrewBelt/WiTeX
 */
-/* Latin Modern (LaTeX default) font */
 
 @font-face {
   font-family: 'Latin Modern Roman';
@@ -56,7 +44,7 @@ body {
   background: none;
   font-size: 14pt;
   font-family: 'Latin Modern Roman', serif;
-  color: black;
+  color: #222;
 }
 h1,
 h2,
@@ -73,7 +61,7 @@ a:visited {
 }
 a.new,
 a.new:visited {
-  color: black;
+  color: #222;
 }
 ul {
   list-style: disc;
@@ -83,7 +71,7 @@ ul {
 #mw-head-base,
 #footer {
   /* nuke everything but the content */
-  
+
   display: none;
 }
 /* Content Box */
@@ -95,7 +83,7 @@ ul {
 #content,
 div#content {
   border: none;
-  color: black;
+  color: #222;
 }
 #firstHeading,
 #siteSub {
@@ -157,27 +145,19 @@ div#content h2 {
   text-indent: 2em;
 }
 .mw-editsection {
-  /* hide more non-content */
-  
   display: none;
 }
 table.ambox {
   margin-bottom: 1em;
 }
 dl dd {
-  /* center definitions (most useful for display equations) */
-  
   text-align: center;
 }
 span.texhtml {
-  /* revert inline math to default font */
-  
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
 }
-/* Table of Contents */
-
 #toc,
 .toc {
   border: none;
@@ -185,7 +165,6 @@ span.texhtml {
   background: none;
   font-size: inherit;
   /* span 100% of the width */
-  
   display: block;
 }
 .mw-body #toc h2,
@@ -206,22 +185,18 @@ span.texhtml {
 .toctoggle {
   display: none;
 }
-/* Figures */
-
 div.tright {
   margin: 0.5em 0 0.5em 1.5em;
 }
 div.tleft {
   margin: 0.5em 1.5em 0.5em 0;
 }
-/* Code */
-
 .mw-code {
   margin: 1em 0;
 }
 pre,
 code {
-  font-family: "Latin Modern Mono", monospace !important;
+  font-family: "Fantasque Sans Mono", "Latin Modern Mono", monospace !important;
 }
 sup {
   text-indent: 0;
