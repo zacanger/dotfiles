@@ -60,12 +60,12 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
+# if [ "$color_prompt" = yes ]; then
+#     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+# else
+#     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+# fi
+# unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 # case "$TERM" in
@@ -123,7 +123,7 @@ export PATH=$PATH:/usr/local/share/npm/bin:~/bin:/opt:~/Downloads/textadept:~/Do
 # Display MotD
 # if [[ -e $HOME/.motd ]]; then cat $HOME/.motd; fi
 
-export PS1="[$(t | wc -l | sed -e's/ *//')] $PS1"
+# export PS1="[$(t | wc -l | sed -e's/ *//')] $PS1"
 # export PS="\[\e[1;33m\]\w\[\e[;0;1m\] ($( dirsize -Hb )) \$\[\e[;0m\]" # add this bit on to keep dirsize in prompt (see ~/bin/dirsize)
 export EDITOR="nvim"
 

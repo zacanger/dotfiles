@@ -43,7 +43,7 @@ alias ,,,,='....'
 alias ,,,,,='.....'
 alias ,,,,,,='......'
 alias fonts="cd /usr/share/fonts"
-alias cb='cd $OLDPWD'
+alias cs='cd $OLDPWD'
 
 # safety
 # alias rm='rm -Iv --preserve-root'
@@ -122,7 +122,7 @@ alias dt='dvtm -m ^'
 alias les='most'
 alias k9='pkill -9'
 alias gui='startxfce4'
-alias shhh='xfce4-terminal --fullscreen & xtrlock'
+alias shhh='xtrlock'
 alias gcl='git clone '
 alias hcl='hub clone '
 alias cheatsheet='most ~/bin/doc/cheatsheet.md'
@@ -155,4 +155,5 @@ alias lh='laenza.sh'
 alias co='xclip -selection clipboard'
 alias pa='xclip -o'
 alias v='nvim'
+alias mc='msee'
 
