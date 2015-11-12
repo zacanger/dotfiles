@@ -155,4 +155,7 @@ alias co='xclip -selection clipboard'
 alias pa='xclip -o'
 alias v='nvim'
 alias ms='msee'
-
+alias cx='chmod +x'
+alias vn='viewnior'
+alias gv='gpicview'
+alias cl='clone'

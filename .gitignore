@@ -20,4 +20,7 @@ _build/
 *.zedstate
 /bin/x
 /bin/x/**
+node_modules
+bower_components
+*.bak
 
