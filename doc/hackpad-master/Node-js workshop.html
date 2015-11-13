@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="2132"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$KKyn3DpwfBN</title>
+</head>
+<body><h1><a href='http://www.nodejs.org'/>Node.js</a> workshop</h1><p><b>By <a href='/ep/profile/DSJ4bUjGZcw'/>Jonas Jongejan</a> !</b></p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_KKyn3DpwfBN_p.252083_1413917211609_undefined'/></p><p></p><p><b>Overview</b></p><p>Node is Chrome&rsquo;s implementation of Javascript, taken off the browser and used in the world as a full, general purpose language.&nbsp;</p><p>It&rsquo;s easy for communication and other more general network, web functions and it has a very good system to handle different types of logic.</p><p>In its simplest form, it can be used in terminal just like you would on the console:</p><ul class="code"><li>console.log(&quot;Hola&quot;)</li>
+<li>&gt; Hola</li>
+<li><br/></li></ul>
+<p>To make an application in Node.js we&rsquo;ll create a new file, such as app.js within a folder:</p><ul class="code"><li>appfolder</li>
+<li>-&gt; app.js</li>
+<li><br/></li></ul>
+<p>To run the application, simply do:</p><ul class="code"><li>node app.js</li></ul>
+
+<p><b>Modules</b></p><p>What makes Node.js interesting is the vast quantity of modules for it, that we&rsquo;ll manage using <i>npm,</i> or Node Package Manager. npm comes with the common node setup, and it&rsquo;s a tool to easy install modules (of which there are &gt; 100k now).&nbsp;</p><p>To install a module, we&rsquo;ll simply do:</p><ul class="code"><li>npm install moment.js</li></ul>
+<p>For Node applications, the standard is to install modules locally within the application folder, so that it&rsquo;s easy to share and transport and minimize dependency issues.</p><p>To include a module that we&rsquo;ve installed to the application, we&rsquo;ll use &rsquo;require&rsquo;.</p><ul style="list-style: none;"><li>* ones with &rsquo;npm&rsquo; will be specific to node</li></ul>
+<ul class="code"><li>var moment = require(&rsquo;moment&rsquo;);&nbsp; // this includes your modules</li>
+<li>console.log(moment())</li></ul>
+
+<p><b>package.json:</b></p><p>Package.json is a file that describes the structure of the current application and its dependencies. It describes the modules its uses and it will inform the requirements when the application is run in an environment that is different from the original one.&nbsp;</p><p>Using:</p><ul class="code"><li>npm install moments.js --save</li></ul>
+<p>This will write the dependency moment.js (and whatever else it already has) in <i>package.json</i>, so that it&rsquo;s included in its dependencies descriptions. Need to type &quot;--save&quot; in terminal in order to include new modules that extend node.</p><ul class="code"><li>{</li>
+<li>&nbsp;&nbsp;&nbsp; &quot;dependencies&quot; : {</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;moment&quot;: &quot;^2.8.3&quot;,</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;superb&quot;: &quot;^1.0.4&quot;</li>
+<li>&nbsp;&nbsp;&nbsp; }</li>
+<li>}</li></ul>
+<p>This is so, so that when you deliver, share, deploy or whatever you do with a node app, you don&rsquo;t include the dependencies but there is a structured documentation of the environment in which it runs.</p><p>package.json will often include all sorts of information, such as license, author, etc.</p><p></p><p><b>Uses</b></p><p>Node is very often used to create web services, for server programming and other stuff.</p><p></p><undefined><li><b>Web applications: Express.js as example</b></li></undefined>
+<p><a href='http://expressjs.com/'/>Express.js</a> is a web framework for Node. It has a variety of uses, such as server utilities. It is thought to provide basic serving roots, &rsquo;<i>when you receive this kind of request, return this shit&rsquo;-</i> type of behavior</p><p>For example (from Express.js site):</p><ul class="code"><li>// When app gets a GET with no additional info,</li>
+<li>&nbsp;&nbsp;&nbsp; send back: &quot;Hello World&quot;</li>
+<li>app.get(&rsquo;/&rsquo;, function (req, res) {</li>
+<li>&nbsp; res.send(&rsquo;Holaquetal!&rsquo;)</li>
+<li>});</li>
+<li>&nbsp;&nbsp;</li>
+<li>// We create the server, and make it listen to port 3000</li>
+<li>var server = app.listen(3000, function () {</li>
+<li>&nbsp; var host = server.address().address</li>
+<li>&nbsp; var port = server.address().port</li>
+<li>&nbsp; console.log(&rsquo;Example app listening at <a href="http://%s:%s"></a>http://%s:%s&rsquo;, host, port)</li>
+<li>});</li></ul>
+
+<p>As a server programming tool, it can take URI parameters, manipulate them in the server and return them to the client.</p><p></p><undefined><li><b>Other interesting modules</b></li></undefined>
+<p><a href='https://github.com/xoxco/node-slack'/>node-slack</a>: communicate with Slack&rsquo;s api, make bots and other fun stuff</p><p></p><p><b>Host a Node.js app in a public serving server -&gt; HEROKU!</b></p><p><a href="https://www.heroku.com/"></a>https://www.heroku.com/</p><p>It&rsquo;s a very simple hosting service, hosting servers where to upload applications in Node (and Python, RoR, whateva) and have it run. In its free version, it&rsquo;s created for simply proof-of-concept applications and testing, but projects can be scaled to production in premium versions of it.</p><p></p><p>Heroku requieres a config file called Procfile with a specific form to inform the server on how to run, and some port configuration and so on. In its most basic form:</p><ul class="code"><li>web: node app.js</li></ul>
+<p>Yeah.</p><p></p><p>-&gt; DO THIS: So to make this work, we&rsquo;ll first install <a href='https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up'/>Heroku command line tools</a> (there&rsquo;s a set of tool from Heroku you can install).&nbsp;</p><p>Then to push it to the Heroku git server, we&rsquo;ll first create a git repo in Heroku in our folder.</p><ul class="code"><li>heroku create</li></ul>
+<p>And finally commit and push changes to the server:</p><ul class="code"><li>git push keroku master</li></ul>
+
+<p>So it really is very simple to get something running on a server in Node that allows communication between machines and a server and so on (look at examples with <a href="http://socket.io/)"></a>http://socket.io/).</p><p></p><p>Can connect / interact with twitter too:</p><p><a href="https://www.npmjs.org/package/node-twitter"></a>https://www.npmjs.org/package/node-twitter</p><p>Extra reference for Twitter and Node, bots!&nbsp; -&gt; <a href="http://www.apcoder.com/2013/10/03/twitter-bot-20-minutes-node-js/"></a><a href='http://www.apcoder.com/2013/10/03/twitter-bot-20-minutes-node-js/'/>http://www.apcoder.com/2013/10/03/twitter-bot-20-minutes-node-js/</a></p><p></p><p>Node is a way to work with different APIs</p><p></p><p><b>Database utilities</b></p><p>Node has very good support for database systems such as PostgreSQL (Redshift) or NoSQL (MongoDB), but it can work with anything.&nbsp;</p><p></p><p><b>More modules</b></p><p>Awesome curated list of packages -&gt; <a href="https://github.com/sindresorhus/awesome-nodejs"></a>https://github.com/sindresorhus/awesome-nodejs</p><p></p><p><b>References</b></p><p><a href="http://www.nodejs.org"></a>http://www.nodejs.org</p><p><a href="http://nodeschool.io/"></a><a href='http://nodeschool.io/'/>http://nodeschool.io/</a></p><p><a href="https://devcenter.heroku.com/articles/node-best-practices"></a><a href='https://devcenter.heroku.com/articles/node-best-practices'/>https://devcenter.heroku.com/articles/node-best-practices</a></p><p></p></body>
+</html>

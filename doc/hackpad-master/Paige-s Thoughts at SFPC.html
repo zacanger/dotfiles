@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="2405"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$iwo24nJ6eTv</title>
+</head>
+<body><h1>Paige&rsquo;s Thoughts at SFPC</h1><p><b>GOALS CHECKLIST:</b></p><ul class="taskdone"><li>blog consistently (goal is every day a week)</li></ul>
+<ul class="task"><li>get more familiar with web development: ex) customize github blog</li><ul class="taskdone"><li>move blog to github using jekyll and github pages<ul class="taskdone"><li><a href="http://paigederaedt.github.io/blog"></a>http://paigederaedt.github.io/blog</li></ul>
+</ul>
+<ul class="task"><li>create new portfolio site hosted on github</li>
+<li>get comfortable with javascript</li></ul class="task">
+</li>
+<li>learn more processing - chapter a week with other students</li>
+<li>get comfortable with d3</li></ul>
+<ul class="taskdone"><li>get comfortable with open frameworks</li>
+<li>make lots of little things</li></ul>
+<ul class="task"><li>make one big thing</li></ul>
+<ul class="taskdone"><li>teach something to someone</li></ul>
+<ul class="task"><li>figure how I can keep making things after SFPC</li></ul>
+
+<p><b>PROJECT IDEAS:</b></p><p><b>Language + code:</b></p><p>There&rsquo;s been a huge focus in this class on education - I like this. There&rsquo;s a culturally imposed divide of skills that people can have: If you&rsquo;re good at reading/writing then you&rsquo;re probably not good at math; if you&rsquo;re good at math then you&rsquo;re probably not good at reading/writing. Most of the focus is centered on improving the way we teach people math/programming and making technology more accessible to them as its use becomes more prevalent in the world. I was lucky that math always clicked for me in school and I enjoyed it enough to study it at university. However, knowing that I liked math imposed an inherent lack of ability to write - I was terrified of english and lit classes. It was weird though, because I loved to read. I didn&rsquo;t really understand this disconnect fully until I came to SFPC. I made my circle visualization that I presented at the welcome party before coming or even knowing about SFPC based on pure curiosity. I didn&rsquo;t really have a clear intention of why I was doing it at the time. But after thinking more about it during my time here, I realized it was my attempt to make writing more math-y. This was the only way I could be comfortable with it. Thinking back, it also explains why I was so interested in my previous work experience at a startup whose products were built with natural language processing and linguistics concepts. IT&rsquo;S ALL STARTING TO MAKE SENSE! So one project idea that I have is trying to make language more math-y, to help people like me and also other engineers for whom writing a paper was freaking huge deal in university. I guess this is my perspective on a &rsquo;new audience&rsquo;.</p><p></p><p>I spoke with Sara Hendren about this and she suggested thinking about my &rsquo;new audience&rsquo; as a younger group and to make pieces that can be a &rsquo;pretty&rsquo; data viz at one level, but a teaching tool at another level: all focusing on this idea of making language more math-y.</p><p></p><p>Here&rsquo;s a few idea snippets I&rsquo;ve had:</p><ul><li>make circle viz interactive in d3, processing, or open frameworks<ul><li>have text read to you/move across screen while the circle viz is drawn out live, line by line<ul><li>have certain lines different colors based on sentiment or define drawing motion based on sentiment<ul><li>maybe viz morphs through time based on cumulative sentiment?</li></ul>
+</li>
+<li>show live stats while animation is happening or show based on chapter, etc.</li>
+<li>is one letter more likely to correspond to works of a certain sentiment?<ul><li>for a certain letter, are the words that use it more pos/neg or sub/obj?</li></ul>
+</li></ul>
+</li></ul>
+</li>
+<li>more static circle viz where you can hover over chord and see words that contributed to that chord<ul><li>be able to choose a sequence of n letters and iterate around the circle</li>
+<li>have array of letter tuple frequencies - each word will have it&rsquo;s own letter tuple frequency array associated to it. Then for each word, check if the selected tuple has a nonzero entry in its frequency array--&gt;but need a way to add more letters, so not to limit to tuples...??</li>
+<li>when displaying words, show how close each word is to next word in sequence (just look for first instance)</li>
+<li>search for a word and highlight sequence in image process for showing words when segments are moused over: we know what segment we have, segment i, so check count matrix for for diagonal i? to get paths?</li></ul>
+</li>
+<li>have text read/move across screen where words disappear into a different type of viz based on some rules: sentiment, other natural language processing stats<ul><li>maybe they all join a different shape and shape can change size, color, when each word is added</li>
+<li>add sound when this happens?</li></ul>
+</li>
+<li>interested in these viz with not only books/poems/other literature, but also personal data<ul><li>facebook statuses</li>
+<li>facebook, gchat messaging</li>
+<li>facebook posts</li>
+<li>twitter</li></ul>
+</li>
+<li>getting even more meta:<ul><li>analyzing actual code text in the same way</li>
+<li>feed different code snippets into viz in the same way you&rsquo;d feed a book</li>
+<li>need to account for more special characters</li></ul>
+</li>
+<li>dragging letters into a line but gets harder or easier to spell something out based on some rules<ul><li>programming forces you to write in a certain way - what happens?</li></ul>
+</ul>
+
+<p><b>Crochet + code:</b></p><p>I really like crocheting...</p><ul><li>crochet pattern maker<ul><li>people have already made knitting machines, but that takes away the act of using your hands which I really like</li>
+<li>users can insert an image and some analysis could be done to abstract the image based on some parameters the user chooses: detail, number of colors, etc. - these parameters would dictate how hard the piece would be to make</li>
+<li>once everything is chosen, a pattern and list of instructions could be generated to instruct them on how to hand crochet this image<ul><li>I don&rsquo;t like the current rectangle shape limitation...can only make an image right now, what if user wants to make something more 3D?</li></ul>
+</ul>
+</ul>
+
+<p><b>Crochet + language + code:</b></p><p>Crochet poems: creating a pattern based on text. Maybe you can use a set of rules that are created based on sequences of characters in text to crochet a piece?</p><ul><li>certain character sequences determine single/double/triple crochet</li>
+<li>sentiment corresponds to color&nbsp;</li>
+<li>how can I use conductive yarn?</li></ul>
+
+<p></p></body>
+</html>

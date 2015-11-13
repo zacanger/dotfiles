@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="812"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$JSv3iMuEi3A</title>
+</head>
+<body><h1>Learning to learn</h1><p>editing</p><p><i>[ Note this is going to have a course description and a bunch of notes.&nbsp; just testing how hackpad works and adding some notes from my class here...&nbsp; ]</i></p><p></p><p></p><p><i>There are only 10 different kinds of people in the world:</i></p><p><i>those who know binary and those who don&rsquo;t.</i></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&nbsp; Anonymous&nbsp;</p><p></p><p><i>Our computer successfully creates the illusion that it</i></p><p><i>contains photographs, letters, songs, and movies. All it</i></p><p><i>really contains is bits, lots of them, patterned in ways</i></p><p><i>you can&rsquo;t see.&nbsp; Your computer was designed to store just</i></p><p><i>bits - all the files and folders and different kinds of</i></p><p><i>data are illusions created by computer programmers.</i></p><ul style="list-style: none;"><li><br/><ul style="list-style: none;"><li>- (Hal Abelson, Ken Ledeen, Harry Lewis, in &quot;Blown to Bits&quot;)</li></ul>
+</ul>
+
+<p><b>Asking Questions</b></p><p></p><p>We spent time in class coming up with a list of questions.&nbsp;&nbsp;</p><p></p><ul><li>what are simple ways of teaching people how to code?</li>
+<li>how do analog computers work?</li>
+<li>how do software patents work?&nbsp;&nbsp;</li>
+<li>what alternative models of computation are there?&nbsp; quantam computing etc.&nbsp;</li>
+<li>how does cryptography, esp as it relates to random number generation and breaking crypto work?</li>
+<li>what does a monad mean?</li>
+<li>what is a lambda expression</li>
+<li>how do you translate a mathmatical paper into code?</li>
+<li>what are people&rsquo;s first programming language and how does it color their opinions of what&rsquo;s possible?</li>
+<li>todays computers are electrical, what are the alternatives?</li>
+<li>what is the origin of different toolkits like processing and arduino?</li>
+<li>what tools do we need now?</li>
+<li>who is the first programmer?</li>
+<li>how does opencl / distributed programming work?</li>
+<li>what is node.js, why would I use it?</li>
+<li>what is the hardest, most esoteric, computer language?</li>
+<li>what are templates in c++, and how do we use them effectively?&nbsp; why would you use them?</li></ul>
+
+<p><i>Homework 1:&nbsp; Write code in a language you have no experience with.&nbsp;</i></p><p></p><p><b>Binary Numbers</b></p><p></p><ul><li>bits<ul><li>every icon</li>
+<li>open up a file</li>
+<li>morse code</li>
+<li>image as computer program</li>
+<li>1 if by land, 2 if by sea</li>
+<li>binary arithmatic</li>
+<li>homework<ul><li>hard<ul><li>bit levels</li>
+<li>make every icon. figure out how fast it&rsquo;s running, tell me years when cool things happen</li>
+<li>bit flags</li></ul>
+</li></ul>
+</li>
+<li>binary logic</li></ul>
+</ul>
+
+<p><i>Homework 2:&nbsp; Build a tool to show someone the concept of binary numbers</i></p><p></p><p><b>Variables</b></p><ul style="list-style: none;"><li><br/></li></ul>
+<ul><li>name<ul><li>(sometimes start with something, perl = $)</li>
+<li>python no puctuation</li>
+<li>typically can&rsquo;t start with digit</li>
+<li>single letter names for small things, like &quot;i&quot; for iterator</li></ul>
+</li>
+<li>data types<ul><li>primary types<ul><li>integer</li>
+<li>byte (char) 0,1,255</li>
+<li>floating point</li>
+<li>strings</li></ul>
+</li></ul>
+</li>
+<li>value</li>
+<li>arrays</li>
+<li>strict vs unstrict typing<ul><li>&quot;125&quot; + 3 = ?</li></ul>
+</ul>
+
+<p><i>Homework 3:&nbsp; Create sketches with interesting variable names?&nbsp; Can you tell a story, or a joke, or a poem through code?&nbsp;&nbsp; See Ishac&rsquo;s code poem book for inspiration.&nbsp; What is the scariest variable name you can make?&nbsp; What is the most important variable personally you can make?&nbsp; etc.&nbsp; think about the Name, Type and Value of the variable.&nbsp;</i></p><ul style="list-style: none;"><li><br/></li></ul>
+<p><b>Control Structures</b></p><p></p><p><b>Functions&nbsp;</b></p><p></p><ul><li>function<ul><li>input -&gt; relationship -&gt; output</li>
+<li>f(x), ie x^2, x*2+1, etc</li>
+<li>x^2, put in 4, get out 16</li>
+<li>sin, cos, etc. like a calculator</li>
+<li>math rules<ul><li>A function relates each element of a set with exactly one element of another set (possibly the same set)</li>
+<li>exactly one output (no f(2) = 7 or 9)</li>
+<li>ie, this is ok<ul><li><a href="http://www.mathsisfun.com/sets/images/function-sets-x2.gif"></a><a href='http://www.mathsisfun.com/sets/images/function-sets-x2.gif'/>http://www.mathsisfun.com/sets/images/function-sets-x2.gif</a></li></ul>
+</li>
+<li>but not this<ul><li><a href="http://www.mathsisfun.com/sets/images/relation-not-function.gif"></a><a href='http://www.mathsisfun.com/sets/images/relation-not-function.gif'/>http://www.mathsisfun.com/sets/images/relation-not-function.gif</a></li></ul>
+</li></ul>
+</li>
+<li>in code<ul><li>procedure, routine, method</li>
+<li>library of routines</li>
+<li>in c, c++<ul><li>order doesn&rsquo;t matter</li>
+<li>function prototype is an important concept</li>
+<li>RETURN_TYPE name_of_function ( PARAMETER_TYPE name_of_param,PARAMETER_TYPE name_of_param, etc);</li>
+<li>special function<ul><li>int main() { }</li></ul>
+</li>
+<li>simple example<ul><li>max</li></ul>
+</li>
+<li>return type, can be void (don&rsquo;t return anything) or any other variable type</li>
+<li>pass by value, pass by reference</li>
+<li>const</li></ul>
+</li></ul>
+</li>
+<li>proper functional programming:<ul><li><a href="http://en.wikipedia.org/wiki/Functional_programming"></a><a href='http://en.wikipedia.org/wiki/Functional_programming'/>http://en.wikipedia.org/wiki/Functional_programming</a></li>
+<li>no &quot;state&quot;</li>
+<li>calling a function f twice with the same value for an argument x will produce the same result f(x) both times.</li>
+<li>Eliminating side effects</li>
+<li>purely functional programs have no side effects and are thus trivially parallelizable</li>
+<li>(take 25 (squares-of (integers)))<ul><li>(1 4 9 16 25 36 49 64 ... 576 625)</li>
+<li>Referential Transparency simply means that, in any given sentence, you can replace the words in that sentence with their definitions, and not change the meaning of the sentence. Or, more importantly for our purposes, it means that you can replace any function call with the value it returns. Let’s see this in action.</li>
+<li>(integers) = (1 2 3 4 5 6)</li>
+<li>(squares-of (1 2 3 4 5 6 …)) = (1,4,9,16,25)</li>
+<li>(take 25 (1 4 9 16 25 36 49 64 …)) = take the first 25</li>
+<li>(take 25 (squares-of (integers))) -&gt; no variables! no state!</li></ul>
+</ul>
+</ul>
+</ul>
+
+<p><b>Objects</b></p><p></p><p><i>Object-oriented programming is an exceptionally bad idea which could only have originated in California. - dijkstra</i></p><p></p><p><i>A programming language serves two related purposes: it provides a vehicle for the programmer to specify actions to be executed and a set of concepts for the programmer to use when thinking about what can be done. The first aspect ideally requires a language that is &quot;close to the machine&quot;, so that all important aspects of a machine are handled simply and efficiently in a way that is reasonably obvious to the programmer. The C language was primarily designed with this in mind. The second aspect ideally requires a language that is &quot;close to the problem to be solved&quot; so that the concepts of a solution can be expressed directly and concisely. The facilities added to C to create C++ were primarily designed with this in mind.&nbsp; -- Bjarne Stroustrup</i></p><p></p><ul><li>data structures<ul><li>data structure is a group of data elements grouped together under one name</li>
+<li>data elements, <i>members</i>, can have different types and different lengths</li>
+<li>dot (.) between object name and member name<ul><li>apple.weight</li>
+<li>apple.price</li>
+<li>banana.weight</li>
+<li>banana.price</li>
+<li>melon.weight</li>
+<li>melon.price</li></ul>
+</li>
+<li>feels a bit like relational databases (spreadsheet)<ul><li><a href="http://computer.howstuffworks.com/question599.htm"></a><a href='http://computer.howstuffworks.com/question599.htm'/>http://computer.howstuffworks.com/question599.htm</a></li></ul>
+</li>
+<li>typedef</li>
+<li>all &quot;public&quot;</li>
+<li><a href="http://www.tldp.org/LDP/tlk/ds/ds.html"></a><a href='http://www.tldp.org/LDP/tlk/ds/ds.html'/>http://www.tldp.org/LDP/tlk/ds/ds.html</a></li></ul>
+</li>
+<li>classes<ul><li>object is the composition of nouns (like data such as numbers, strings, or variables) and verbs (like actions, such as functions).</li>
+<li>objects are an instance of some class (definition)</li>
+<li>OOP is about collections of objects</li>
+<li>Each object independent</li>
+<li>objects allow you to place data where it is not accessible to rest of the program</li>
+<li>1950s 60s at MIT (AI / LISP)<ul><li><a href='http://en.wikipedia.org/wiki/Ivan_Sutherland'/>ivan sutherland</a> <a href='http://en.wikipedia.org/wiki/Sketchpad'/>sketchpad</a><ul><li>&quot;object&quot; and &quot;instance&quot; (with the class concept covered by &quot;master&quot; or &quot;definition&quot;),</li></ul>
+</li>
+<li>70s smalltalk</li>
+<li>1990s = widely available (c++, etc)</li>
+<li>GUI --&gt; OOP</li></ul>
+</li>
+<li>dynamic dispatch, abstraction, subtype polymorphism, and inheritance<ul><li>TBA</li></ul>
+</ul>
+</ul>
+
+<p>lots of pro / cons:&nbsp;</p><ul><li><a href="http://c2.com/cgi/wiki?ArgumentsAgainstOop"></a>http://c2.com/cgi/wiki?ArgumentsAgainstOop</li>
+<li><a href="http://c2.com/cgi/wiki?BenefitsOfOo"></a>http://c2.com/cgi/wiki?BenefitsOfOo</li>
+<li><a href="http://harmful.cat-v.org/software/OO_programming/"></a>http://harmful.cat-v.org/software/OO_programming/</li>
+<li>cons<ul><li>space / time costs</li>
+<li>inheritance patterns can get very complex:&nbsp;<ul><li><a href="http://ect.bell-labs.com/who/yjchang/api/d0/da7/classjava_1_1lang_1_1ScopeAdapter.html"></a>http://ect.bel<a href='http://ect.bellabs.com/who/yjchang/api/d0/da7/classjava_1_1lang_1_1ScopeAdapter.html'/>l</a>-labs.com/who/yjchang/api/d0/da7/classjava_1_1lang_1_1ScopeAdapter.html</li></ul>
+</ul>
+</ul>
+
+<p>useful:&nbsp;</p><ul><li><a href="http://processing.org/tutorials/objects/"></a>http://processing.org/tutorials/objects/</li></ul>
+
+<p><i>Homework 4: Think about metaphors and specifically, how you can describe programming concepts for non programmers.&nbsp; How can whimsy and play be effective teaching tools?&nbsp; What alternative ways of viewing these concpets can help explain them?&nbsp; Build a tool to help explain one or more of the concepts we&rsquo;ve been reviewing: variables, control structures, and objects.</i></p><p></p><p></p></body>
+</html>

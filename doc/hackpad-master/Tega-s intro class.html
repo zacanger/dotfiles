@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="1324"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$jzddaaHSLit</title>
+</head>
+<body><h1>Tega&rsquo;s intro class</h1><p></p><p>Let&rsquo;s use Processing! <a href="https://www.processing.org/download/?processing"></a>https://www.processing.org/download/?processing</p><p>Helpful guides:</p><ul><li>API, can also right click on term in interface to see examples here - <a href="http://www.processing.org/reference/"></a>http://www.processing.org/reference/</li>
+<li>Search for and ask questions here: <a href="http://forum.processing.org/two/"></a>http://forum.processing.org/two/</li>
+<li>extend processing with libraries <a href="http://processing.org/reference/libraries/"></a>http://processing.org/reference/libraries/</li>
+<li>online video tutorials - <a href="http://icm.shiffman.net/"></a>http://icm.shiffman.net/</li>
+<li>processing for browser - p5js.org</li></ul>
+<p>Intro Books on the SFPC Shelf:</p><ul><li>Learning Processing (Dan Shiffman Intro) <a href="http://www.learningprocessing.com/"></a>http://www.learningprocessing.com/</li>
+<li>The nature of code - <a href="http://natureofcode.com/"></a>http://natureofcode.com/</li>
+<li>Processing Handbook (Reas and Fry)</li>
+<li>Visualizing Data (Fry)</li>
+<li>Interactivity (Processing, OF and Arduino)</li>
+<li>Think Like a programmer (intro to python)</li></ul>
+<p>Huge amount of Processing code available here:</p><ul><li><a href="http://www.openprocessing.org/sketch/159778"></a>http://www.openprocessing.org/sketch/159778</li></ul>
+
+<p>When you need more then Processing for processing heavy work - <a href="http://www.openframeworks.cc/"></a>http://www.openframeworks.cc/</p><p></p><p></p><p><b><u>Day 2: Oct. 9th</u></b></p><p>Fun with variables! There are two types</p><ul><li>Global - these are available everywhere in the program</li>
+<li>Local - these are only available in the bracket it&rsquo;s mentioned in</li></ul>
+
+<p>For loops, what do they do? Lets say you want a program to draw 10 horizontal lines ;-) You could write 10 lines of code with explicit positioning to declare the x and y values on the access e.g.:</p><ul class="code"><li>line(x,y,x1,y1);</li>
+<li>line (10,10,10,100);</li>
+<li>line (20, 10,20,100);</li>
+<li>line(30,10,30,100);</li>
+<li>line(40,10,40,100);</li></ul>
+
+<p>but if the lines increment by 10 each time you can also write it like this:</p><ul class="code"><li>//here i is a local variable</li>
+<li>//for (variable type starting value; exit condition;</li>
+<li>for(int 1=10; i&lt;width; i=1+30){</li>
+<li>&nbsp; line(i,10,1,100);</li></ul>
+
+<p>For loops also execute the commands so if you have an animation you want to see display on the screen if you put it in a for loop it will show the last frame of the full animation (the result). You then have to draw it out line by line.</p><ul class="code"><li>&nbsp;if (i&lt;width){</li>
+<li>&nbsp;line(i,10,i,100);</li>
+<li>&nbsp;i=i+10;</li></ul>
+
+<p>Now we want to draw horizontal lines in addition to the vertical lines.</p><ul class="code"><li>//here i is a local variable</li>
+<li>//for (variable type starting value; exit condition;</li>
+<li>for(int 1=10; i&lt;width; i=1+30){</li>
+<li>for(int j=10; j&lt;height; j=j+10){</li>
+<li>&nbsp; line(i,10,1,100);</li>
+<li>&nbsp; line(10,j,200,j);</li></ul>
+
+<p>While loops are also cool, they execute while a certain condition is met like if x&lt;1000.</p><p></p><p>Different ways to attack a new program</p><p>1) look up someone else&rsquo;s code that does something similar and just hack it</p><p>2) write out the steps in comments then fill in the code under the comments like</p><ul class="code"><li>//draw a thing</li>
+<li>//move a thing this way</li>
+<li>//when i hit a corner turn...</li>
+<li>&nbsp;&nbsp;&nbsp; (oh shit i don&rsquo;t know how to do this, well... i guess it should)</li>
+<li>&nbsp;&nbsp;&nbsp; a) know where the corners are</li>
+<li>&nbsp;&nbsp;&nbsp; b) figure out which way to turn</li>
+<li>//go a new direction</li></ul>
+
+<p></p><p></p></body>
+</html>

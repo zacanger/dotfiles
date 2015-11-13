@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="1851"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$9VKm5dxYZJ1</title>
+</head>
+<body><h1>Python Session</h1><p>very <b>friendly</b> language for non-programmer</p><p>community is great</p><p></p><p><b>scripting language</b></p><p>code you write is only interpreted when it&rsquo;s necessary&nbsp;</p><p>for writing small utilities</p><p>(for Zach) tends to be project to use for small things</p><p></p><p><b>interpreted language</b></p><p>simultaneous translation &gt; reading line by line and turn that into instruction, not compile or think about the whole thing before start doing something.&nbsp;</p><p>like live translation, will have a snag as soon as it hits an error</p><p></p><p>command line interface</p><p></p><p>C - variable tied to datatype</p><p>Python - <b>loose type</b> &gt;&gt; List of variable with different types</p><p></p><p></p><ul><li><b>loose variable types</b></li>
+<li><b>white space is ultra important</b><ul><li>in python you HAVE to tab</li>
+<li>when using code copies from the internet, make sure it uses tabs and not spaces</li></ul>
+</ul>
+
+<p></p><p><b>High level</b></p><p>doing a lot of processing is not so great</p><p>big games, image processing, photoshop</p><p>not something you&rsquo;ll write in python</p><p></p><p></p><p>Python have many <b>versions</b></p><p>v3 came out a few years ago&nbsp;</p><p>v2 still supported and Zach still use 2</p><p></p><p>v3 won&rsquo;t run on v2 compiler</p><p></p><p></p><p>mac shipped with python</p><p>you can use brew to install multiple version of <b>python</b></p><p>and switch between versions</p><p></p><p><b>Package Manager</b></p><p>equivalent of npm in node</p><ul><li><b>pip</b></li>
+<li><b>easy_install</b></li></ul>
+
+<p>(BeautifulSoup)</p><p>HTML parsing library</p><p></p><p><b>inspecting python</b></p><p>Has something called <a href='http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop'/>REPL</a> – allows you to inspect what the code is doing.&nbsp;</p><p>run&nbsp;</p><ul class="code"><li>$ python</li></ul>
+<p>in command line</p><p></p><p>you&rsquo;ll get&nbsp;</p><ul class="code"><li>&gt;&gt;&gt;&nbsp;</li></ul>
+<p>curser where you can test your code</p><p></p><ul class="comment"><li>add notes about using exit to debug</li></ul>
+
+<p></p><p>for example&nbsp;</p><ul class="code"><li>&gt;&gt;&gt; print &rsquo;Hello World&rsquo;</li>
+<li>Hello world</li></ul>
+
+<p>you can use repl to test the language out, for example&nbsp;</p><p></p><ul class="code"><li>&gt;&gt;&gt; x = &quot;hello&quot;</li>
+<li>&gt;&gt;&gt; y = &quot;ll&quot;</li>
+<li>&gt;&gt;&gt; x in y&nbsp;</li>
+<li>False</li>
+<li>&gt;&gt;&gt; y in x</li>
+<li>True</li>
+<li><br/></li></ul>
+
+<p>ctrl + C to quit back to bash&nbsp; (or better, type quit() )</p><p></p><p><b>environment</b></p><p>Zach use SublimeText for editor for python</p><p>command line tools works too, like vi, pico, emac</p><ul style="list-style: none;"><li>these stuffs is not very friendly though, pico is the most friendly</li></ul>
+
+<p><b>Q: What is Regular expression? Regular expression python?</b></p><p>is a grammar, for example, if you want to find an IP address in text&nbsp;</p><p>1 2 3 dot</p><p></p><p></p><p><b>save to a file</b></p><p>anything that print out the the console can be printed in the file through piping</p><p>for example</p><ul class="code"><li>python hello.py &gt; oscar.txt</li></ul>
+
+<p>file I/O&nbsp;</p><p><a href="https://docs.python.org/2/tutorial/inputoutput.html"></a>https://docs.python.org/2/tutorial/inputoutput.html</p><p></p><p><b>Variable can be anything</b></p><p>counter = 100</p><p>miles = 1000.0</p><p>name = &rsquo;John&rsquo;</p><p></p><p><b>Key value pairs</b></p><p>(in pseudo code)</p><p>capitals[&quot;NY&quot;] = &quot;Albany&quot;</p><p>capitals[&quot;IL&quot;] = &quot;Springfield&quot;</p><p></p><p>List [ ]&nbsp; &lt;- just values</p><p>Dictionary {} &lt;- has key vlaue pairings</p><p></p><ul class="code"><li>tinydict = {&rsquo;name&rsquo;: &rsquo;john&rsquo;,&rsquo;code&rsquo;:6734, &rsquo;dept&rsquo;: &rsquo;sales&rsquo;}</li>
+<li>print tinydict&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # Prints complete dictionary</li>
+<li>print tinydict.keys()&nbsp;&nbsp; # Prints all the keys</li>
+<li>print tinydict.values() # Prints all the values</li>
+<li>print tinydict[&rsquo;name&rsquo;]</li></ul>
+
+<p><b>Dictionary</b></p><p><a href='http://pythonarticles.com/python_dictionaries.html'/>Dictionary is a mapping from one thing to another</a> .&nbsp;</p><p>There is no order, unsorted. Can access things in the dictionary by a word (or the key), not a position number.&nbsp; (In c++ we use &quot;map&quot; part of the STL)</p><p></p><p><b>Big data sets</b></p><p>Once you have something in <a href='https://en.wikipedia.org/wiki/Tab-separated_values'/>tab separated values</a> , python can work with it. might need some data cleanup. There are tools, not necessarily Python code, the help clean up data. Results may vary.</p><p></p><p>CSV - library for working with tab separated value files.&nbsp;</p><p>each row is a dictionary. not uncommon to have a list with dictionaries, or a dictionary with lists.&nbsp;</p><p></p><p><b>Resources</b> (python libraries to include in web scraping)</p><p><a href='http://www.crummy.com/software/BeautifulSoup/'/>beautifulsoup</a> - library for prasing xml and html data</p><p><a href='https://docs.python.org/2/library/urllib.html'/>urllib</a>&nbsp; - loads a webpage</p><p><a href='https://docs.python.org/2/library/re.html'/>re</a>&nbsp; - regular expressions operations</p><p><a href='http://dev.opml.org/'/>opml</a>&nbsp; - &quot;an XML-based format that allows exchange of outline-structured&nbsp; information between applications running on different operating systems&nbsp; and environments.&quot;</p><p></p><p></p><p>sleep - <a href="https://docs.python.org/2/library/time.html#time.sleep"></a>https://docs.python.org/2/library/time.html#time.sleep</p><p>if you&rsquo;re scraping a site, you might need to do some rate limiting, dictate the speed at which class are made.&nbsp;</p><p></p><p></p><p></p><p>there are also techniques for distributing request from different ip addresses</p><p></p><p></p><p><b>Example - Bible Alphabetical:</b></p><p></p><ul class="code"><li><br/></li>
+<li>tr &rsquo; &rsquo; &rsquo;&#92;n&rsquo; &lt; a.txt &gt;&gt; b.txt</li>
+<li>sort b.txt &gt;&gt; c.txt</li>
+<li>tr &rsquo;&#92;n&rsquo; &rsquo; &rsquo; &lt; c.txt &gt;&gt; d.txt</li>
+<li><br/></li></ul>
+
+<p>(sort b.txt into a new file c.txt)</p><p>(change newlines to space in c.txt into a new file d.txt)</p><p>I think this doesn&rsquo;t deal with spaces and weird stuff (like words with punctuation)</p><p>but it&rsquo;s a start</p><p></p><p>--</p><p></p><p>use uniq to sort works by frequency - <a href="https://en.wikipedia.org/wiki/Uniq"></a><a href='https://en.wikipedia.org/wiki/Uniq'/>https://en.wikipedia.org/wiki/Uniq</a></p><p></p></body>
+</html>

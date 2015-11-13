@@ -1,0 +1,4174 @@
+<!-- [Introducing Gitlet][0] -->
+
+# [Mary Rose Cook][1]
+
+[About][2]
+[Archive][3]
+[RSS][4]
+
+## Introducing Gitlet
+
+For the last few months, I have been writing [Gitlet][5], an implementation of Git in JavaScript. This post is about the code and what it was like to write it.
+
+I had two goals with Gitlet.
+
+First, I wanted to learn the innards of Git really well.
+
+Second, I wanted to use that knowledge to produce an essay, [Git from the inside out][6], that gives a clear, deep explanation of Git and the ideas underlying it.
+
+My implementation of Git is not intended to be fast or feature-complete. It is intended to support commands that are commonly used and that demonstrate the core ideas in Git: `init`, `add`, `rm`, `commit`, `branch`, `checkout`, `diff`, `remote`, `fetch`, `merge`, `push`, `pull`, `status` and `clone`. For example, I implemented `remote`, but only supported `git remote add` because `git remote remove` and the rest are just conveniences and their implementation says nothing about the essence of Git.
+
+For another example, I implemented `merge` and supported fast forwards, un-conflicting merges and conflicted merges. But, for conflicted files, the whole file is written as conflicting, rather than just the incompatible sections. The difference between fast forwards and merge commits gets to the heart of Git. Figuring out which sections of a file have changed does not.
+
+I wrote the code to be short and very easy to understand. I eagerly welcome pull requests that make the code shorter or easier to understand. And, of course, bug fixes are much appreciated.
+
+It's hard to say how much you need to know about Git to understand the code. If you don't know much about the inner logic of Git, it is probably worth it to first read my essay, [Git in six hundred words][7]. But, if you already know what blobs and trees and fast forwards are, the code should be interesting. Though the entire project is 1000 lines, the implementation of the main API commands is only 350 lines.
+
+Finally, I want to talk about what it was like to write the code.
+
+First, it was hard to figure out how Git works. I went to the actual source to answer a few questions. But doing that was time-consuming because I don't know C well. [A Hacker's Guide to Git][8] was a killer introduction to the internals of Git. It gave me a grounding in most of the commands I implemented. Stack Overflow was helpful on some obscure questions. I read a lot of Git documentation. I referred again and again to [this elegant, detailed Quora answer][9] on how merging works. I didn't implement recursive merges in the end, but this great [Codice Software post][10] helped me understand them. But, mostly, I could only answer my questions by creating repositories and running commands and diving into the `.git` directory to see what had happened.
+
+Second, I had a strange feeling of discovery. This feeling is hard to talk about. Some behaviours were inexplicably difficult to implement. I'd write ten lines that felt like they should be two. But, slowly, patterns began to emerge. I found that particular shapes of data occurred again and again. I could represent directory hierarchies with nested objects. I could represent indices by mapping file paths to hashes. I could represent diffs by mapping paths to a change status and the hashes of the old, new and base versions. Once I had code to create and translate these data structures, the Git API became much easier to implement.
+
+And I found that fundamental operations on the `.git` directory could be composed to implement Git API commands. For example: implementing checkout. Read the current `HEAD`, get the commit hash it points at, read the commit object, read the commit tree content and convert the content to an index. Repeat for the branch to be checked out. Diff the two indices. Write that diff to the working copy. Write the name of the branch being checked out to `HEAD`. Convert the commit being checked out to an index. Write that index to the `index` file.
+
+These basic data types and operations seemed to express something of the fundamental nature of Git. I've had this feeling before when working on novel projects. But it was funny to feel the sensation of discovery when working on something that already existed.
+  
+
+
+
+[0]: http://maryrosecook.com/blog/post/introducing-gitlet
+[1]: http://maryrosecook.com/blog/
+[2]: http://maryrosecook.com/
+[3]: http://maryrosecook.com/blog/archive
+[4]: http://maryrosecook.com/blog/feed
+[5]: http://gitlet.maryrosecook.com
+[6]: http://maryrosecook.com/blog/post/git-from-the-inside-out
+[7]: http://maryrosecook.com/blog/post/git-in-six-hundred-words
+[8]: https://wildlyinaccurate.com/a-hackers-guide-to-git
+[9]: https://www.quora.com/How-does-Git-merge-work/answer/Anders-Kaseorg?srid=I5Y&share=1
+[10]: http://codicesoftware.blogspot.com/2011/09/merge-recursive-strategy.html
+
+
+<!-- [Git in six hundred words][0] -->
+
+# [Mary Rose Cook][1]
+
+[About][2]
+[Archive][3]
+[RSS][4]
+
+## Git in six hundred words
+
+(This essay is a companion piece to [Gitlet][5], my implementation of Git in JavaScript.)
+
+Imagine you have a directory called `alpha`. It contains a file called `number.txt` that contains the text `first`.
+
+You run `git init` to set up `alpha` as a Git repository.
+
+You run `git add number.txt` to add `number.txt` to the index. The index is a list of all the files that Git is keeping track of. It maps filenames to the content of the files. It now has the mapping `number.txt -> first`. Running the add command has also added a blob object containing `first` to the Git object database.
+
+You run `git commit -m first`. This does three things. First, it creates a tree object in the objects database. This object represents the list of items in the top level of the alpha directory. This object has a pointer to the `first` blob object that was created when you ran `git add`. Second, it creates a commit object that represents the version of the repository that you have just committed. This includes a pointer to the tree object. Third, it points the master branch at the new commit object.
+
+You run `git clone . ../beta`. This creates a new directory called `beta`. It initializes it as a Git repository. It copies the objects in the alpha objects database to the beta objects database. It points the master branch on beta at the commit object that the master branch points at on the alpha repository. It sets the index on beta to mirror the content of the first commit. It updates your files - `number.txt` - to mirror the index.
+
+You move to the beta repository. You change the content of `number.txt` to `second`. You run `git add number.txt` and `git commit -m second`. The commit object that is created has a pointer to its parent, the first commit. The commit command points the master branch at the second commit.
+
+You move back to the alpha repository. You run `git remote add beta ../beta`. This sets the beta repository as a remote repository.
+
+You run `git pull beta master`.
+
+Under the covers, this runs `git fetch beta master`. This finds the objects for the second commit and copies them from the beta repository to the alpha repository. It points alpha's record of beta's master at the second commit object. It updates `FETCH_HEAD` to show that the master branch was fetched from the beta repository.
+
+Under the covers, the pull command runs `git merge FETCH_HEAD`. This reads `FETCH_HEAD`, which shows that the master branch on the beta repository was the most recently fetched branch. It gets the commit object that alpha's record of beta's master is pointing at. This is the second commit. The master branch on alpha is pointing at the first commit, which is the ancestor of the second commit. This means that, to complete the merge, the merge command can just point the master branch at the second commit. The merge command updates the index to mirror the contents of the second commit. It updates the working copy to mirror the index.
+
+You run `git branch red`. This creates a branch called `red` that points at the second commit object.
+
+You run `git checkout red`. Before the checkout, `HEAD` pointed at the master branch. It now points at the red branch. This makes the red branch the current branch.
+
+You set the content of `number.txt` to `third`, run `git add numbers.txt` and run `git commit -m third`.
+
+You run `git push beta red`. This finds the objects for the third commit and copies them from the alpha repository to the beta repository. It points the red branch on the beta repository at the third commit object, and that's it.
+
+(If you would like to learn about the internals of Git in detail, you can read my essay, [Git from the inside out][6].)
+  
+
+
+
+[0]: http://maryrosecook.com/blog/post/git-in-six-hundred-words
+[1]: http://maryrosecook.com/blog/
+[2]: http://maryrosecook.com/
+[3]: http://maryrosecook.com/blog/archive
+[4]: http://maryrosecook.com/blog/feed
+[5]: http://gitlet.maryrosecook.com
+[6]: http://maryrosecook.com/blog/post/git-from-the-inside-out
+
+
+
+
+<!-- [Git from the inside out][0] -->
+
+# [Mary Rose Cook][1]
+
+[About][2]
+[Archive][3]
+[RSS][4]
+
+## Git from the inside out
+
+This essay explains how Git works. It assumes you understand Git well enough to use it to version control your projects.
+
+The essay focuses on the graph structure that underpins Git and the way the properties of this graph dictate Git's behavior. Looking at fundamentals, you build your mental model on the truth rather than on hypotheses constructed from evidence gathered while experimenting with the API. This truer model gives you a better understanding of what Git has done, what it is doing, and what it will do.
+
+The text is structured as a series of Git commands run on a single project. At intervals, there are observations about the graph data structure that Git is built on. These observations illustrate a property of the graph and the behavior that this property produces.
+
+After reading, if you wish to go even deeper into Git, you can look at the [heavily annotated source code][5] of my implementation of Git in JavaScript.
+
+### Create the project
+
+    ~ $ mkdir alpha
+    ~ $ cd alpha
+    
+
+The user creates `alpha`, a directory for their project.
+
+    ~/alpha $ mkdir data
+    ~/alpha $ printf 'a' > data/letter.txt
+    
+
+They move into the `alpha` directory and create a directory called `data`. Inside, they create a file called `letter.txt` that contains `a`. The alpha directory looks like this:
+
+    alpha
+    └── data
+        └── letter.txt
+    
+
+### Initialize the repository
+
+    ~/alpha $ git init
+              Initialized empty Git repository
+    
+
+`git init` makes the current directory into a Git repository. To do this, it creates a `.git` directory and writes some files to it. These files define everything about the Git configuration and the history of the project. They are just ordinary files. No magic in them. The user can read and edit them with a text editor or shell. Which is to say: the user can read and edit the history of their project as easily as their project files.
+
+The `alpha` directory now looks like this:
+
+    alpha
+    ├── data
+    |   └── letter.txt
+    └── .git
+        ├── objects
+        etc...
+    
+
+The `.git` directory and its contents are Git's. All the other files are collectively known as the working copy. They are the user's.
+
+### Add some files
+
+    ~/alpha $ git add data/letter.txt
+    
+
+The user runs `git add` on `data/letter.txt`. This has two effects.
+
+First, it creates a new blob file in the `.git/objects/` directory.
+
+This blob file contains the compressed content of `data/letter.txt`. Its name is derived by hashing its content. Hashing a piece of text means running a program on it that turns it into a smaller[1][6] piece of text that uniquely[2][7] identifies the original. For example, Git hashes `a` to `2e65efe2a145dda7ee51d1741299f848e5bf752e`. The first two characters are used as the name of a directory inside the objects database: `.git/objects/2e/`. The rest of the hash is used as the name of the blob file that holds the content of the added file: `.git/objects/2e/65efe2a145dda7ee51d1741299f848e5bf752e`.
+
+Notice how just adding a file to Git saves its content to the `objects` directory. Its content will still be safe inside Git if the user deletes `data/letter.txt` from the working copy.
+
+Second, `git add` adds the file to the index. The index is a list that contains every file that Git has been told to keep track of. It is stored as a file at `.git/index`. Each line of the file maps a tracked file to the hash of its content at the moment it was added. This is the index after the `git add` command is run:
+
+    data/letter.txt 2e65efe2a145dda7ee51d1741299f848e5bf752e
+    
+
+The user makes a file called `data/number.txt` that contains `1234`.
+
+    ~/alpha $ printf '1234' > data/number.txt
+    
+
+The working copy looks like this:
+
+    alpha
+    └── data
+        └── letter.txt
+        └── number.txt
+    
+
+The user adds the file to Git.
+
+    ~/alpha $ git add data
+    
+
+The `git add` command creates a blob object that contains the content of `data/number.txt`. It adds an index entry for `data/number.txt` that points at the blob. This is the index after the `git add` command is run a second time:
+
+    data/letter.txt 2e65efe2a145dda7ee51d1741299f848e5bf752e
+    data/number.txt 274c0052dd5408f8ae2bc8440029ff67d79bc5c3
+    
+
+Notice that only the files in the `data` directory are listed in the index, though the user ran `git add data`. The `data` directory is not listed separately.
+
+    ~/alpha $ printf '1' > data/number.txt
+    ~/alpha $ git add data
+    
+
+When the user originally created `data/number.txt`, they meant to type `1`, not `1234`. They make the correction and add the file to the index again. This command creates a new blob with the new content. And it updates the index entry for `data/number.txt` to point at the new blob.
+
+### Make a commit
+
+    ~/alpha $ git commit -m 'a1'
+              [master (root-commit) 774b54a] a1
+    
+
+The user makes the `a1` commit. Git prints some data about the commit. These data will make sense shortly.
+
+The commit command has three steps. It creates a tree graph to represent the content of the version of the project being committed. It creates a commit object. It points the current branch at the new commit object.
+
+#### Create a tree graph
+
+Git records the current state of the project by creating a tree graph from the index. This tree graph records the location and content of every file in the project.
+
+The graph is composed of two types of object: blobs and trees.
+
+Blobs are stored by `git add`. They represent the content of files.
+
+Trees are stored when a commit is made. A tree represents a directory in the working copy.
+
+Below is the tree object that records the contents of the `data` directory for the new commit:
+
+    100664 blob 2e65efe2a145dda7ee51d1741299f848e5bf752e letter.txt
+    100664 blob 56a6051ca2b02b04ef92d5150c9ef600403cb1de number.txt
+    
+
+The first line records everything required to reproduce `data/letter.txt`. The first part states the file's permissions. The second part states that the content of this entry is represented by a blob, rather than a tree. The third part states the hash of the blob. The fourth part states the file's name.
+
+The second line records the same for `data/number.txt`.
+
+Below is the tree object for `alpha`, which is the root directory of the project:
+
+    040000 tree 0eed1217a2947f4930583229987d90fe5e8e0b74 data
+    
+
+The sole line in this tree points at the `data` tree.
+
+![Tree graph for the `a1` commit](http://maryrosecook.com/images/git-from-the-inside-out/1-a1-tree-graph.png)
+
+Tree graph for the `a1` commit
+
+In the graph above, the `root` tree points at the `data` tree. The `data` tree points at the blobs for `data/letter.txt` and `data/number.txt`.
+
+#### Create a commit object
+
+`git commit` creates a commit object after creating the tree graph. The commit object is just another text file in `.git/objects/`:
+
+    tree ffe298c3ce8bb07326f888907996eaa48d266db4
+    author Mary Rose Cook  1424798436 -0500
+    committer Mary Rose Cook  1424798436 -0500
+    
+    a1
+    
+
+The first line points at the tree graph. The hash is for the tree object that represents the root of the working copy. That is: the `alpha` directory. The last line is the commit message.
+
+![`a1` commit object pointing at its tree graph](http://maryrosecook.com/images/git-from-the-inside-out/2-a1-commit.png)
+
+`a1` commit object pointing at its tree graph
+
+#### Point the current branch at the new commit
+
+Finally, the commit command points the current branch at the new commit object.
+
+Which is the current branch? Git goes to the `HEAD` file at `.git/HEAD` and finds:
+
+    ref: refs/heads/master
+    
+
+This says that `HEAD` is pointing at `master`. `master` is the current branch.
+
+`HEAD` and `master` are both refs. A ref is a label used by Git or the user to identify a specific commit.
+
+The file that represents the `master` ref does not exist, because this is the first commit to the repository. Git creates the file at `.git/refs/heads/master` and sets its content to the hash of the commit object:
+
+    74ac3ad9cde0b265d2b4f1c778b283a6e2ffbafd
+    
+
+(If you are typing in these Git commands as you read, the hash of your `a1` commit will be different from the hash of mine. Content objects like blobs and trees always hash to the same value. Commits do not, because they include dates and the names of their creators.)
+
+Let's add `HEAD` and `master` to the Git graph:
+
+![`master` pointing at the `a1` commit](http://maryrosecook.com/images/git-from-the-inside-out/3-a1-refs.png)
+
+`HEAD` pointing at `master` and `master` pointing at the `a1` commit
+
+`HEAD` points at `master`, as it did before the commit. But `master` now exists and points at the new commit object.
+
+### Make a commit that is not the first commit
+
+Below is the Git graph after the `a1` commit. The working copy and index are included.
+
+![`a1` commit shown with the working copy and index](http://maryrosecook.com/images/git-from-the-inside-out/4-a1-wc-and-index.png)
+
+`a1` commit shown with the working copy and index
+
+Notice that the working copy, index, and `a1` commit all have the same content for `data/letter.txt` and `data/number.txt`. The index and `HEAD` commit both use hashes to refer to blob objects, but the working copy content is stored as text in a different place.
+
+    ~/alpha $ printf '2' > data/number.txt
+    
+
+The user sets the content of `data/number.txt` to `2`. This updates the working copy, but leaves the index and `HEAD` commit as they are.
+
+![`data/number.txt` set to `2` in the working copy](http://maryrosecook.com/images/git-from-the-inside-out/5-a1-wc-number-set-to-2.png)
+
+`data/number.txt` set to `2` in the working copy
+
+    ~/alpha $ git add data/number.txt
+    
+
+The user adds the file to Git. This adds a blob containing `2` to the `objects` directory. It points the index entry for `data/number.txt` at the new blob.
+
+![`data/number.txt` set to `2` in the working copy and index](http://maryrosecook.com/images/git-from-the-inside-out/6-a1-wc-and-index-number-set-to-2.png)
+
+`data/number.txt` set to `2` in the working copy and index
+
+    ~/alpha $ git commit -m 'a2'
+              [master f0af7e6] a2
+    
+
+The user commits. The steps for the commit are the same as before.
+
+First, a new tree graph is created to represent the content of the index.
+
+The index entry for `data/number.txt` has changed. The old `data` tree no longer reflects the indexed state of the `data` directory. A new `data` tree object must be created:
+
+    100664 blob 2e65efe2a145dda7ee51d1741299f848e5bf752e letter.txt
+    100664 blob d8263ee9860594d2806b0dfd1bfd17528b0ba2a4 number.txt
+    
+
+The new `data` tree hashes to a different value from the old `data` tree. A new `root` tree must be created to record this hash:
+
+    040000 tree 40b0318811470aaacc577485777d7a6780e51f0b data
+    
+
+Second, a new commit object is created.
+
+    tree ce72afb5ff229a39f6cce47b00d1b0ed60fe3556
+    parent 774b54a193d6cfdd081e581a007d2e11f784b9fe
+    author Mary Rose Cook  1424813101 -0500
+    committer Mary Rose Cook  1424813101 -0500
+    
+    a2
+    
+
+The first line of the commit object points at the new `root` tree object. The second line points at `a1`: the commit's parent. To find the parent commit, Git went to `HEAD`, followed it to `master` and found the commit hash of `a1`.
+
+Third, the content of the `master` branch file is set to the hash of the new commit.
+
+![`a2` commit](http://maryrosecook.com/images/git-from-the-inside-out/7-a2.png)
+
+`a2` commit
+
+![Git graph without the working copy and index](http://maryrosecook.com/images/git-from-the-inside-out/8-a2-just-objects-commits-and-refs.png)
+
+Git graph without the working copy and index
+
+**Graph property**: content is stored as a tree of objects. This means that only diffs are stored in the objects database. Look at the graph above. The `a2` commit reuses the `a` blob that was made before the `a1` commit. Similarly, if a whole directory doesn't change from commit to commit, its tree and all the blobs and trees below it can be reused. Generally, there are few content changes from commit to commit. This means that Git can store large commit histories in a small amount of space.
+
+**Graph property**: each commit has a parent. This means that a repository can store the history of a project.
+
+**Graph property**: refs are entry points to one part of the commit history or another. This means that commits can be given meaningful names. The user organizes their work into lineages that are meaningful to their project with concrete refs like `fix-for-bug-376`. Git uses symbolic refs like `HEAD`, `MERGE_HEAD` and `FETCH_HEAD` to support commands that manipulate the commit history.
+
+**Graph property**: the nodes in the `objects/` directory are immutable. This means that content is edited, not deleted. Every piece of content ever added and every commit ever made is somewhere in the `objects` directory[3][8].
+
+**Graph property**: refs are mutable. Therefore, the meaning of a ref can change. The commit that `master` points at might be the best version of a project at the moment, but, soon enough, it will be superseded by a newer and better commit.
+
+**Graph property**: the working copy and the commits pointed at by refs are readily available, but other commits are not. This means that recent history is easier to recall, but that it also changes more often. Or: Git has a fading memory that must be jogged with increasingly vicious prods.
+
+The working copy is the easiest point in history to recall because it is in the root of the repository. Recalling it doesn't even require a Git command. It is also the least permanent point in history. The user can make a dozen versions of a file but Git won't record any of them unless they are added.
+
+The commit that `HEAD` points at is very easy to recall. It is at the tip of the branch that is checked out. To see its content, the user can just stash[4][9] and then examine the working copy. At the same time, `HEAD` is the most frequently changing ref.
+
+The commit that a concrete ref points at is easy to recall. The user can simply check out that branch. The tip of a branch changes less often than `HEAD`, but often enough for the meaning of a branch name to be changeable.
+
+It is difficult to recall a commit that is not pointed at by any ref. The further the user goes from a ref, the harder it will be for them to construct the meaning of a commit. But the further back they go, the less likely it is that someone will have changed history since they last looked[5][10].
+
+### Check out a commit
+
+    ~/alpha $ git checkout 37888c2
+              You are in 'detached HEAD' state...
+    
+
+The user checks out the `a2` commit using its hash. (If you are running these Git commands, this one won't work. Use `git log` to find the hash of your `a2` commit.)
+
+Checking out has four steps.
+
+First, Git gets the `a2` commit and gets the tree graph it points at.
+
+Second, it writes the file entries in the tree graph to the working copy. This results in no changes. The working copy already has the content of the tree graph being written to it because `HEAD` was already pointing via `master` at the `a2` commit.
+
+Third, Git writes the file entries in the tree graph to the index. This, too, results in no changes. The index already has the content of the `a2` commit.
+
+Fourth, the content of `HEAD` is set to the hash of the `a2` commit:
+
+    f0af7e62679e144bb28c627ee3e8f7bdb235eee9
+    
+
+Setting the content of `HEAD` to a hash puts the repository in the detached `HEAD` state. Notice in the graph below that `HEAD` points directly at the `a2` commit, rather than pointing at `master`.
+
+![Detached `HEAD` on `a2` commit](http://maryrosecook.com/images/git-from-the-inside-out/9-a2-detached-head.png)
+
+Detached `HEAD` on `a2` commit
+
+    ~/alpha $ printf '3' > data/number.txt
+    ~/alpha $ git add data/number.txt
+    ~/alpha $ git commit -m 'a3'
+              [detached HEAD 3645a0e] a3
+    
+
+The user sets the content of `data/number.txt` to `3` and commits the change. Git goes to `HEAD` to get the parent of the `a3` commit. Instead of finding and following a branch ref, it finds and returns the hash of the `a2` commit.
+
+Git updates `HEAD` to point directly at the hash of the new `a3` commit. The repository is still in the detached `HEAD` state. It is not on a branch because no commit points at either `a3` or one of its descendants. This means it is easy to lose.
+
+From now on, trees and blobs will mostly be omitted from the graph diagrams.
+
+![`a3` commit that is not on a branch](http://maryrosecook.com/images/git-from-the-inside-out/10-a3-detached-head.png)
+
+`a3` commit that is not on a branch
+
+### Create a branch
+
+    ~/alpha $ git branch deputy
+    
+
+The user creates a new branch called `deputy`. This just creates a new file at `.git/refs/heads/deputy` that contains the hash that `HEAD` is pointing at: the hash of the `a3` commit.
+
+**Graph property**: branches are just refs and refs are just files. This means that Git branches are lightweight.
+
+The creation of the `deputy` branch puts the new `a3` commit safely on a branch. `HEAD` is still detached because it still points directly at a commit.
+
+![`a3` commit now on the `deputy` branch](http://maryrosecook.com/images/git-from-the-inside-out/11-a3-on-deputy.png)
+
+`a3` commit now on the `deputy` branch
+
+### Check out a branch
+
+    ~/alpha $ git checkout master
+              Switched to branch 'master'
+    
+
+The user checks out the `master` branch.
+
+First, Git gets the `a2` commit that `master` points at and gets the tree graph the commit points at.
+
+Second, Git writes the file entries in the tree graph to the files of the working copy. This sets the content of `data/number.txt` to `2`.
+
+Third, Git writes the file entries in the tree graph to the index. This updates the entry for `data/number.txt` to the hash of the `2` blob.
+
+Fourth, Git points `HEAD` at `master` by changing its content from a hash to:
+
+    ref: refs/heads/master
+    
+
+![`master` checked out and pointing at the `a2` commit](http://maryrosecook.com/images/git-from-the-inside-out/12-a3-on-master-on-a2.png)
+
+`master` checked out and pointing at the `a2` commit
+
+### Check out a branch that is incompatible with the working copy
+
+    ~/alpha $ printf '789' > data/number.txt
+    ~/alpha $ git checkout deputy
+              Your changes to these files would be overwritten
+              by checkout:
+                data/number.txt
+              Commit your changes or stash them before you
+              switch branches.
+    
+
+The user accidentally sets the content of `data/number.txt` to `789`. They try to check out `deputy`. Git prevents the check out.
+
+`HEAD` points at `master` which points at `a2` where `data/number.txt` reads `2`. `deputy` points at `a3` where `data/number.txt` reads `3`. The working copy version of `data/number.txt` reads `789`. All these versions are different and the differences must be resolved.
+
+Git could replace the working copy version of `data/number.txt` with the version in the commit being checked out. But it avoids data loss at all costs.
+
+Git could merge the working copy version with the version being checked out. But this is complicated.
+
+So, Git aborts the check out.
+
+    ~/alpha $ printf '2' > data/number.txt
+    ~/alpha $ git checkout deputy
+              Switched to branch 'deputy'
+    
+
+The user notices that they accidentally edited `data/number.txt` and sets the content back to `2`. They check out `deputy` successfully.
+
+![`deputy` checked out](http://maryrosecook.com/images/git-from-the-inside-out/13-a3ondeputy.png)
+
+`deputy` checked out
+
+### Merge an ancestor
+
+    ~/alpha $ git merge master
+              Already up-to-date.
+    
+
+The user merges `master` into `deputy`. Merging two branches means merging two commits. The first commit is the one that `deputy` points at: the receiver. The second commit is the one that `master` points at: the giver. For this merge, Git does nothing. It reports it is `Already up-to-date.`.
+
+**Graph property**: the series of commits in the graph are interpreted as a series of changes made to the content of the repository. This means that, in a merge, if the giver commit is an ancestor of the receiver commit, Git will do nothing. Those changes have already been incorporated.
+
+### Merge a descendent
+
+    ~/alpha $ git checkout master
+              Switched to branch 'master'
+    
+
+The user checks out `master`.
+
+![`master` checked out and pointing at the `a2` commit](http://maryrosecook.com/images/git-from-the-inside-out/14-a3-on-master-on-a2.png)
+
+`master` checked out and pointing at the `a2` commit
+
+    ~/alpha $ git merge deputy
+              Fast-forward
+    
+
+They merge `deputy` into `master`. Git discovers that the receiver commit, `a2`, is an ancestor of the giver commit, `a3`. It can do a fast-forward merge.
+
+It gets the giver commit and gets the tree graph that it points at. It writes the file entries in the tree graph to the working copy and the index. It "fast-forwards" `master` to point at `a3`.
+
+![`a3` commit from `deputy` fast-forward merged into `master`](http://maryrosecook.com/images/git-from-the-inside-out/15-a3-on-master.png)
+
+`a3` commit from `deputy` fast-forward merged into `master`
+
+**Graph property**: the series of commits in the graph are interpreted as a series of changes made to the content of the repository. This means that, in a merge, if the giver is a descendent of the receiver, history is not changed. There is already a sequence of commits that describe the change to make: the sequence of commits between the receiver and the giver. But, though the Git history doesn't change, the Git graph does change. The concrete ref that `HEAD` points at is updated to point at the giver commit.
+
+### Merge two commits from different lineages
+
+    ~/alpha $ printf '4' > data/number.txt
+    ~/alpha $ git add data/number.txt
+    ~/alpha $ git commit -m 'a4'
+              [master 7b7bd9a] a4
+    
+
+The user sets the content of `number.txt` to `4` and commits the change to `master`.
+
+    ~/alpha $ git checkout deputy
+              Switched to branch 'deputy'
+    ~/alpha $ printf 'b' > data/letter.txt
+    ~/alpha $ git add data/letter.txt
+    ~/alpha $ git commit -m 'b3'
+              [deputy 982dffb] b3
+    
+
+The user checks out `deputy`. They set the content of `data/letter.txt` to `b` and commit the change to `deputy`.
+
+![`a4` committed to `master`, `b3` committed to `deputy` and `deputy` checked out](http://maryrosecook.com/images/git-from-the-inside-out/16-a4-b3-on-deputy.png)
+
+`a4` committed to `master`, `b3` committed to `deputy` and `deputy` checked out
+
+**Graph property**: commits can share parents. This means that new lineages can be created in the commit history.
+
+**Graph property**: commits can have multiple parents. This means that separate lineages can be joined by a commit with two parents: a merge commit.
+
+    ~/alpha $ git merge master -m 'b4'
+              Merge made by the 'recursive' strategy.
+    
+
+The user merges `master` into `deputy`.
+
+Git discovers that the receiver, `b3`, and the giver, `a4`, are in different lineages. It makes a merge commit. This process has eight steps.
+
+First, Git writes the hash of the giver commit to a file at `alpha/.git/MERGE_HEAD`. The presence of this file tells Git it is in the middle of merging.
+
+Second, Git finds the base commit: the most recent ancestor that the receiver and giver commits have in common.
+
+![`a3`, the base commit of `a4` and `b3`](http://maryrosecook.com/images/git-from-the-inside-out/17-a4-b3-on-deputy.png)
+
+`a3`, the base commit of `a4` and `b3`
+
+**Graph property**: commits have parents. This means that it is possible to find the point at which two lineages diverged. Git traces backwards from `b3` to find all its ancestors and backwards from `a4` to find all its ancestors. It finds the most recent ancestor shared by both lineages, `a3`. This is the base commit.
+
+Third, Git generates the indices for the base, receiver and giver commits from their tree graphs.
+
+Fourth, Git generates a diff that combines the changes made to the base by the receiver commit and the giver commit. This diff is a list of file paths that point to a change: add, remove, modify or conflict.
+
+Git gets the list of all the files that appear in the base, receiver or giver indices. For each one, it compares the index entries to decide the change to make to the file. It writes a corresponding entry to the diff. In this case, the diff has two entries.
+
+The first entry is for `data/letter.txt`. The content of this file is `a` in the base, `b` in the receiver and `a` in the giver. The content is different in the base and receiver. But it is the same in the base and giver. Git sees that the content was modified by the receiver, but not the giver. The diff entry for `data/letter.txt` is a modification, not a conflict.
+
+The second entry in the diff is for `data/number.txt`. In this case, the content is the same in the base and receiver, and different in the giver. The diff entry for `data/letter.txt` is also a modification.
+
+**Graph property**: it is possible to find the base commit of a merge. This means that, if a file has changed from the base in just the receiver or giver, Git can automatically resolve the merge of that file. This reduces the work the user must do.
+
+Fifth, the changes indicated by the entries in the diff are applied to the working copy. The content of `data/letter.txt` is set to `b` and the content of `data/number.txt` is set to `4`.
+
+Sixth, the changes indicated by the entries in the diff are applied to the index. The entry for `data/letter.txt` is pointed at the `b` blob and the entry for `data/number.txt` is pointed at the `4` blob.
+
+Seventh, the updated index is committed:
+
+    tree 20294508aea3fb6f05fcc49adaecc2e6d60f7e7d
+    parent 982dffb20f8d6a25a8554cc8d765fb9f3ff1333b
+    parent 7b7bd9a5253f47360d5787095afc5ba56591bfe7
+    author Mary Rose Cook  1425596551 -0500
+    committer Mary Rose Cook  1425596551 -0500
+    
+    b4
+    
+
+Notice that the commit has two parents.
+
+Eighth, Git points the current branch, `deputy`, at the new commit.
+
+![`b4`, the merge commit resulting from the recursive merge of `a4` into `b3`](http://maryrosecook.com/images/git-from-the-inside-out/18-b4-on-deputy.png)
+
+`b4`, the merge commit resulting from the recursive merge of `a4` into `b3`
+
+### Merge two commits from different lineages that both modify the same file
+
+    ~/alpha $ git checkout master
+              Switched to branch 'master'
+    ~/alpha $ git merge deputy
+              Fast-forward
+    
+
+The user checks out `master`. They merge `deputy` into `master`. This fast-forwards `master` to the `b4` commit. `master` and `deputy` now point at the same commit.
+
+![`deputy` merged into `master` to bring `master` up to the latest commit, `b4`](http://maryrosecook.com/images/git-from-the-inside-out/19-b4-master-deputy-on-b4.png)
+
+`deputy` merged into `master` to bring `master` up to the latest commit, `b4`
+
+    ~/alpha $ git checkout deputy
+              Switched to branch 'deputy'
+    ~/alpha $ printf '5' > data/number.txt
+    ~/alpha $ git add data/number.txt
+    ~/alpha $ git commit -m 'b5'
+              [deputy bd797c2] b5
+    
+
+The user checks out `deputy`. They set the content of `data/number.txt` to `5` and commit the change to `deputy`.
+
+    ~/alpha $ git checkout master
+              Switched to branch 'master'
+    ~/alpha $ printf '6' > data/number.txt
+    ~/alpha $ git add data/number.txt
+    ~/alpha $ git commit -m 'b6'
+              [master 4c3ce18] b6
+    
+
+The user checks out `master`. They set the content of `data/number.txt` to `6` and commit the change to `master`.
+
+![`b5` commit on `deputy` and `b6` commit on `master`](http://maryrosecook.com/images/git-from-the-inside-out/20-b5-on-deputy-b6-on-master.png)
+
+`b5` commit on `deputy` and `b6` commit on `master`
+
+    ~/alpha $ git merge deputy
+              CONFLICT in data/number.txt
+              Automatic merge failed; fix conflicts and
+              commit the result.
+    
+
+The user merges `deputy` into `master`. There is a conflict and the merge is paused. The process for a conflicted merge follows the same first six steps as the process for an unconflicted merge: set `.git/MERGE_HEAD`, find the base commit, generate the indices of the base, receiver and giver commits, create a diff, update the working copy and update the index. Because of the conflict, the seventh commit step and eighth ref update step are never taken. Let's go through the steps again and see what happens.
+
+First, Git writes the hash of the giver commit to a file at `.git/MERGE_HEAD`.
+
+![`MERGE_HEAD` written during merge of `b5` into `b6`](http://maryrosecook.com/images/git-from-the-inside-out/21-b6-on-master-with-merge-head.png)
+
+`MERGE_HEAD` written during merge of `b5` into `b6`
+
+Second, Git finds the base commit, `b4`.
+
+Third, Git generates the indices for the base, receiver and giver commits.
+
+Fourth, Git generates a diff that combines the changes made to the base by the receiver commit and the giver commit. This diff is a list of file paths that point to a change: add, remove, modify or conflict.
+
+In this case, the diff contains only one entry: `data/number.txt`. The entry is marked as a conflict because the content for `data/number.txt` is different in the receiver, giver and base.
+
+Fifth, the changes indicated by the entries in the diff are applied to the working copy. For a conflicted area, Git writes both versions to the file in the working copy. The content of `data/number.txt` is set to:
+
+    <<<<<<< HEAD
+    6
+    =======
+    5
+    >>>>>>> deputy
+    
+
+Sixth, the changes indicated by the entries in the diff are applied to the index. Entries in the index are uniquely identified by a combination of their file path and stage. The entry for an unconflicted file has a stage of `0`. Before this merge, the index looked like this, where the `0`s are stage values:
+
+    0 data/letter.txt 63d8dbd40c23542e740659a7168a0ce3138ea748
+    0 data/number.txt 62f9457511f879886bb7728c986fe10b0ece6bcb
+    
+
+After the merge diff is written to the index, the index looks like this:
+
+    0 data/letter.txt 63d8dbd40c23542e740659a7168a0ce3138ea748
+    1 data/number.txt bf0d87ab1b2b0ec1a11a3973d2845b42413d9767
+    2 data/number.txt 62f9457511f879886bb7728c986fe10b0ece6bcb
+    3 data/number.txt 7813681f5b41c028345ca62a2be376bae70b7f61
+    
+
+The entry for `data/letter.txt` at stage `0` is the same as it was before the merge. The entry for `data/number.txt` at stage `0` is gone. There are three new entries in its place. The entry for stage `1` has the hash of the base `data/number.txt` content. The entry for stage `2` has the hash of the receiver `data/number.txt` content. The entry for stage `3` has the hash of the giver `data/number.txt` content. The presence of these three entries tells Git that `data/number.txt` is in conflict.
+
+The merge pauses.
+
+    ~/alpha $ printf '11' > data/number.txt
+    ~/alpha $ git add data/number.txt
+    
+
+The user integrates the content of the two conflicting versions by setting the content of `data/number.txt` to `11`. They add the file to the index. Git adds a blob containing `11`. Adding a conflicted file tells Git that the conflict is resolved. Git removes the `data/number.txt` entries for stages `1`, `2` and `3` from the index. It adds an entry for `data/number.txt` at stage `0` with the hash of the new blob. The index now reads:
+
+    0 data/letter.txt 63d8dbd40c23542e740659a7168a0ce3138ea748
+    0 data/number.txt 9d607966b721abde8931ddd052181fae905db503
+    
+
+    ~/alpha $ git commit -m 'b11'
+              [master 251a513] b11
+    
+
+Seventh, the user commits. Git sees `.git/MERGE_HEAD` in the repository, which tells it that a merge is in progress. It checks the index and finds there are no conflicts. It creates a new commit, `b11`, to record the content of the resolved merge. It deletes the file at `.git/MERGE_HEAD`. This completes the merge.
+
+Eighth, Git points the current branch, `master`, at the new commit.
+
+![`b11`, the merge commit resulting from the conflicted, recursive merge of `b5` into `b6`](http://maryrosecook.com/images/git-from-the-inside-out/22-b11-on-master.png)
+
+`b11`, the merge commit resulting from the conflicted, recursive merge of `b5` into `b6`
+
+### Remove a file
+
+This diagram of the Git graph includes the commit history, the trees and blobs for the latest commit, and the working copy and index:
+
+![The working copy, index, `b11` commit and its tree graph](http://maryrosecook.com/images/git-from-the-inside-out/23-b11-with-objects-wc-and-index.png)
+
+The working copy, index, `b11` commit and its tree graph
+
+    ~/alpha $ git rm data/letter.txt
+              rm 'data/letter.txt'
+    
+
+The user tells Git to remove `data/letter.txt`. The file is deleted from the working copy. The entry is deleted from the index.
+
+![After `data/letter.txt` `rm`ed from working copy and index](http://maryrosecook.com/images/git-from-the-inside-out/24-b11-letter-removed-from-wc-and-index.png)
+
+After `data/letter.txt` `rm`ed from working copy and index
+
+    ~/alpha $ git commit -m '11'
+              [master d14c7d2] 11
+    
+
+The user commits. As part of the commit, as always, Git builds a tree graph that represents the content of the index. `data/letter.txt` is not included in the tree graph because it is not in the index.
+
+![`11` commit made after `data/letter.txt` `rm`ed](http://maryrosecook.com/images/git-from-the-inside-out/25-11.png)
+
+`11` commit made after `data/letter.txt` `rm`ed
+
+### Copy a repository
+
+    ~/alpha $ cd ..
+          ~ $ cp -R alpha bravo
+    
+
+The user copies the contents of the `alpha/` repository to the `bravo/` directory. This produces the following directory structure:
+
+    ~
+    ├── alpha
+    |   └── data
+    |       └── number.txt
+    └── bravo
+        └── data
+            └── number.txt
+    
+
+There is now another Git graph in the `bravo` directory:
+
+![New graph created when `alpha` `cp`ed to `bravo`](http://maryrosecook.com/images/git-from-the-inside-out/26-11-cp-alpha-to-bravo.png)
+
+New graph created when `alpha` `cp`ed to `bravo`
+
+### Link a repository to another repository
+
+          ~ $ cd alpha
+    ~/alpha $ git remote add bravo ../bravo
+    
+
+The user moves back into the `alpha` repository. They set up `bravo` as a remote repository on `alpha`. This adds some lines to the file at `alpha/.git/config`:
+
+    [remote "bravo"]
+        url = ../bravo/
+    
+
+These lines specify that there is a remote repository called `bravo` in the directory at `../bravo`.
+
+### Fetch a branch from a remote
+
+    ~/alpha $ cd ../bravo
+    ~/bravo $ printf '12' > data/number.txt
+    ~/bravo $ git add data/number.txt
+    ~/bravo $ git commit -m '12'
+              [master 94cd04d] 12
+    
+
+The user goes into the `bravo` repository. They set the content of `data/number.txt` to `12` and commit the change to `master` on `bravo`.
+
+![`12` commit on `bravo` repository](http://maryrosecook.com/images/git-from-the-inside-out/27-12-bravo.png)
+
+`12` commit on `bravo` repository
+
+    ~/bravo $ cd ../alpha
+    ~/alpha $ git fetch bravo master
+              Unpacking objects: 100%
+              From ../bravo
+                * branch master -> FETCH_HEAD
+    
+
+The user goes into the `alpha` repository. They fetch `master` from `bravo` into `alpha`. This process has four steps.
+
+First, Git gets the hash of the commit that master is pointing at on `bravo`. This is the hash of the `12` commit.
+
+Second, Git makes a list of all the objects that the `12` commit depends on: the commit object itself, the objects in its tree graph, the ancestor commits of the `12` commit and the objects in their tree graphs. It removes from this list any objects that the `alpha` object database already has. It copies the rest to `alpha/.git/objects/`.
+
+Third, the content of the concrete ref file at `alpha/.git/refs/remotes/bravo/master` is set to the hash of the `12` commit.
+
+Fourth, the content of `alpha/.git/FETCH_HEAD` is set to:
+
+    94cd04d93ae88a1f53a4646532b1e8cdfbc0977f branch 'master' of ../bravo
+    
+
+This indicates that the most recent fetch command fetched the `12` commit of `master` from `bravo`.
+
+![`alpha` after `bravo/master` fetched](http://maryrosecook.com/images/git-from-the-inside-out/28-12-fetched-to-alpha.png)
+
+`alpha` after `bravo/master` fetched
+
+**Graph property**: objects can be copied. This means that history can be shared between repositories.
+
+**Graph property**: a repository can store remote branch refs like `alpha/.git/refs/remotes/bravo/master`. This means that a repository can record locally the state of a branch on a remote repository. It is correct at the time it is fetched but will go out of date if the remote branch changes.
+
+### Merge FETCH\_HEAD
+
+    ~/alpha $ git merge FETCH_HEAD
+              Updating d14c7d2..94cd04d
+              Fast-forward
+    
+
+The user merges `FETCH_HEAD`. `FETCH_HEAD` is just another ref. It resolves to the `12` commit, the giver. `HEAD` points at the `11` commit, the receiver. Git does a fast-forward merge and points `master` at the `12` commit.
+
+![`alpha` after `FETCH_HEAD` merged](http://maryrosecook.com/images/git-from-the-inside-out/29-12-merged-to-alpha.png)
+
+`alpha` after `FETCH_HEAD` merged
+
+### Pull a branch from a remote
+
+    ~/alpha $ git pull bravo master
+              Already up-to-date.
+    
+
+The user pulls `master` from `bravo` into `alpha`. Pull is shorthand for "fetch and merge `FETCH_HEAD`". Git does these two commands and reports that `master` is `Already up-to-date`.
+
+### Clone a repository
+
+    ~/alpha $ cd ..
+          ~ $ git clone alpha charlie
+              Cloning into 'charlie'
+    
+
+The user moves into the directory above. They clone `alpha` to `charlie`. Cloning to `charlie` has similar results to the `cp` the user did to produce the `bravo` repository. Git creates a new directory called `charlie`. It inits `charlie` as a Git repo, adds `alpha` as a remote called `origin`, fetches `origin` and merges `FETCH_HEAD`.
+
+### Push a branch to a checked-out branch on a remote
+
+          ~ $ cd alpha
+    ~/alpha $ printf '13' > data/number.txt
+    ~/alpha $ git add data/number.txt
+    ~/alpha $ git commit -m '13'
+              [master 3238468] 13
+    
+
+The user goes back into the `alpha` repository. They set the content of `data/number.txt` to `13` and commit the change to `master` on `alpha`.
+
+    ~/alpha $ git remote add charlie ../charlie
+    
+
+They set up `charlie` as a remote repository on `alpha`.
+
+    ~/alpha $ git push charlie master
+              Writing objects: 100%
+              remote error: refusing to update checked out
+              branch: refs/heads/master because it will make
+              the index and work tree inconsistent
+    
+
+They push `master` to `charlie`.
+
+All the objects required for the `13` commit are copied to `charlie`.
+
+At this point, the push process stops. Git, as ever, tells the user what went wrong. It refuses to push to a branch that is checked out on the remote. This makes sense. A push would update the remote index and `HEAD`. This would cause confusion if someone were editing the working copy on the remote.
+
+At this point, the user could make a new branch, merge the `13` commit into it and push that branch to `charlie`. But, really, they want a repository that they can push to whenever they want. They want a central repository that they can push to and pull from, but that no one commits to directly. They want something like a GitHub remote. They want a bare repository.
+
+### Clone a bare repository
+
+    ~/alpha $ cd ..
+          ~ $ git clone alpha delta --bare
+              Cloning into bare repository 'delta'
+    
+
+The user moves into the directory above. They clone `delta` as a bare repository. This is an ordinary clone with two differences. The `config` file indicates that the repository is bare. And the files that are normally stored in the `.git` directory are stored in the root of the repository:
+
+    delta
+    ├── HEAD
+    ├── config
+    ├── objects
+    └── refs
+    
+
+![`alpha` and `delta` graphs after `alpha` cloned to `delta`](http://maryrosecook.com/images/git-from-the-inside-out/30-13-alpha-cloned-to-delta-bare.png)
+
+`alpha` and `delta` graphs after `alpha` cloned to `delta`
+
+### Push a branch to a bare repository
+
+          ~ $ cd alpha
+    ~/alpha $ git remote add delta ../delta
+    
+
+The user goes back into the `alpha` repository. They set up `delta` as a remote repository on `alpha`.
+
+    ~/alpha $ printf '14' > data/number.txt
+    ~/alpha $ git add data/number.txt
+    ~/alpha $ git commit -m '14'
+              [master cb51da8] 14
+    
+
+They set the content of `data/number.txt` to `14` and commit the change to `master` on `alpha`.
+
+![`14` commit on `alpha`](http://maryrosecook.com/images/git-from-the-inside-out/31-14-alpha.png)
+
+`14` commit on `alpha`
+
+    ~/alpha $ git push delta master
+              Writing objects: 100%
+              To ../delta
+                3238468..cb51da8 master -> master
+    
+
+They push `master` to `delta`. Pushing has three steps.
+
+First, all the objects required for the `14` commit on the `master` branch are copied from `alpha/.git/objects/` to `delta/objects/`.
+
+Second, `delta/refs/heads/master` is updated to point at the `14` commit.
+
+Third, `alpha/.git/refs/remotes/delta/master` is set to point at the `14` commit. `alpha` has an up-to-date record of the state of `delta`.
+
+![`14` commit pushed from `alpha` to `delta`](http://maryrosecook.com/images/git-from-the-inside-out/32-14-pushed-to-delta.png)
+
+`14` commit pushed from `alpha` to `delta`
+
+### Summary
+
+Git is built on a graph. Almost every Git command manipulates this graph. To understand Git deeply, focus on the properties of this graph, not workflows or commands.
+
+To learn more about Git, investigate the `.git` directory. It's not scary. Look inside. Change the content of files and see what happens. Create a commit by hand. Try and see how badly you can mess up a repo. Then repair it.
+
+--------------------------------
+
+1.  In this case, the hash is longer than the original content. But, all pieces of content longer than the number of characters in a hash will be expressed more concisely than the original. [↩][11]
+1.  
+    There is a chance that two different pieces of content will hash to the same value. But this chance [is low][12]. [↩][13]
+1.  
+    `git prune` deletes all objects that cannot be reached from a ref. If the user runs this command, they may lose content. [↩][14]
+1.  
+    `git stash` stores all the differences between the working copy and the `HEAD` commit in a safe place. They can be retrieved later. [↩][15]
+1.  
+    The `rebase` command can be used to add, edit and delete commits in the history. [↩][16]
+    
+
+  
+
+
+[0]: http://maryrosecook.com/blog/post/git-from-the-inside-out
+[1]: http://maryrosecook.com/blog/
+[2]: http://maryrosecook.com/
+[3]: http://maryrosecook.com/blog/archive
+[4]: http://maryrosecook.com/blog/feed
+[5]: http://gitlet.maryrosecook.com/docs/gitlet.html
+[6]: http://maryrosecook.com/blog/post/git-from-the-inside-out#fn1
+[7]: http://maryrosecook.com/blog/post/git-from-the-inside-out#fn2
+[8]: http://maryrosecook.com/blog/post/git-from-the-inside-out#fn3
+[9]: http://maryrosecook.com/blog/post/git-from-the-inside-out#fn4
+[10]: http://maryrosecook.com/blog/post/git-from-the-inside-out#fn5
+[11]: http://maryrosecook.com/blog/post/git-from-the-inside-out#fnref1
+[12]: http://crypto.stackexchange.com/a/2584
+[13]: http://maryrosecook.com/blog/post/git-from-the-inside-out#fnref2
+[14]: http://maryrosecook.com/blog/post/git-from-the-inside-out#fnref3
+[15]: http://maryrosecook.com/blog/post/git-from-the-inside-out#fnref4
+[16]: http://maryrosecook.com/blog/post/git-from-the-inside-out#fnref5
+
+
+
+
+GITLET ANNOTATED
+
+<!-- [gitlet.js][0] -->
+
+*   # gitlet.js
+*   
+    [¶][1]
+    
+        #!/usr/bin/env node
+    
+*   [¶][2]
+    
+    [Home][3] | [GitHub][4]
+*   
+    [¶][5]
+    
+    ## Preparation
+*   
+    [¶][6]
+*   
+    [¶][7]
+    
+    I wrote Gitlet to show how Git works under the covers. I wrote
+    it to be readable. I commented the code heavily.
+*   
+    [¶][8]
+    
+    If you are not familiar with the basic Git commands, you can read
+    Git in six hundred words (below).
+*   
+    [¶][9]
+    
+    For a six thousand word deep dive into the innards of Git, you can
+    read [Git from the inside
+    out][10].
+*   
+    [¶][11]
+    
+    ## Git in six hundred words
+*   
+    [¶][12]
+*   
+    [¶][13]
+    
+    Imagine you have a directory called `alpha`. It contains a file
+    called `number.txt` that contains the text `first`.
+*   
+    [¶][14]
+    
+    You run `git init` to set up `alpha` as a Git repository.
+*   
+    [¶][15]
+    
+    You run `git add number.txt` to add `number.txt` to the index. The
+    index is a list of all the files that Git is keeping track of. It
+    maps filenames to the content of the files. It now has the mapping
+    `number.txt -> first`. Running the add command has also added a
+    blob object containing `first` to the Git object database.
+*   
+    [¶][16]
+    
+    You run `git commit -m first`. This does three things. First, it
+    creates a tree object in the objects database. This object
+    represents the list of items in the top level of the alpha
+    directory. This object has a pointer to the `first` blob object
+    that was created when you ran `git add`. Second, it creates a
+    commit object that represents the version of the repository that
+    you have just committed. This includes a pointer to the tree
+    object. Third, it points the master branch at the new commit
+    object.
+*   
+    [¶][17]
+    
+    You run `git clone . ../beta`. This creates a new directory called
+    `beta`. It initializes it as a Git repository. It copies the
+    objects in the alpha objects database to the beta objects
+    database. It points the master branch on beta at the commit object
+    that the master branch points at on the alpha repository. It sets
+    the index on beta to mirror the content of the first commit. It
+    updates your files - `number.txt` - to mirror the index.
+*   
+    [¶][18]
+    
+    You move to the beta repository. You change the content of
+    `number.txt` to `second`. You run `git add number.txt` and `git
+    commit -m second`. The commit object that is created has a pointer
+    to its parent, the first commit. The commit command points the
+    master branch at the second commit.
+*   
+    [¶][19]
+    
+    You move back to the alpha repository. You run `git remote add beta
+    ../beta`. This sets the beta repository as a remote repository.
+*   
+    [¶][20]
+    
+    You run `git pull beta master`.
+*   
+    [¶][21]
+    
+    Under the covers, this runs `git fetch beta master`. This finds the
+    objects for the second commit and copies them from the beta
+    repository to the alpha repository. It points alpha's record of
+    beta's master at the second commit object. It updates `FETCH_HEAD`
+    to show that the master branch was fetched from the beta
+    repository.
+*   
+    [¶][22]
+    
+    Under the covers, the pull command runs `git merge
+    FETCH_HEAD`. This reads `FETCH_HEAD`, which shows that the master
+    branch on the beta repository was the most recently fetched
+    branch. It gets the commit object that alpha's record of beta's
+    master is pointing at. This is the second commit. The master branch
+    on alpha is pointing at the first commit, which is the ancestor of
+    the second commit. This means that, to complete the merge, the
+    merge command can just point the master branch at the second
+    commit. The merge command updates the index to mirror the contents
+    of the second commit. It updates the working copy to mirror the
+    index.
+*   
+    [¶][23]
+    
+    You run `git branch red`. This creates a branch called `red` that
+    points at the second commit object.
+*   
+    [¶][24]
+    
+    You run `git checkout red`. Before the checkout, `HEAD` pointed at
+    the master branch. It now points at the red branch. This makes the
+    red branch the current branch.
+*   
+    [¶][25]
+    
+    You set the content of `number.txt` to `third`, run `git add
+    numbers.txt` and run `git commit -m third`.
+*   
+    [¶][26]
+    
+    You run `git push beta red`. This finds the objects for the third
+    commit and copies them from the alpha repository to the beta
+    repository. It points the red branch on the beta repository at the
+    third commit object, and that's it.
+*   
+    [¶][27]
+    
+    ## Imports
+*   
+    [¶][28]
+    
+        var fs = require("fs");
+        var nodePath = require("path");
+    
+*   [¶][29]
+    
+    ## Main Git API functions
+*   
+    [¶][30]
+    
+        var gitlet = module.exports = {
+    
+*   [¶][31]
+    
+    **init()** initializes the current directory as a new repository.
+    
+          init: function(opts) {
+    
+*   [¶][32]
+    
+    Abort if already a repository.
+    
+            if (files.inRepo()) { return; }
+        
+            opts = opts || {};
+    
+*   [¶][33]
+    
+    Create a JS object that mirrors the Git basic directory
+    structure.
+    
+            var gitletStructure = {
+              HEAD: "ref: refs/heads/master\n",
+    
+*   [¶][34]
+    
+    If `--bare` was passed, write to the Git config indicating
+    that the repository is bare. If `--bare` was not passed,
+    write to the Git config saying the repository is not bare.
+    
+              config: config.objToStr({ core: { "": { bare: opts.bare === true }}}),
+        
+              objects: {},
+              refs: {
+                heads: {},
+              }
+            };
+    
+*   [¶][35]
+    
+    Write the standard Git directory structure using the
+    `gitletStructure` JS object. If the repository is not bare,
+    put the directories inside the `.gitlet` directory. If the
+    repository is bare, put them in the top level of the
+    repository.
+    
+            files.writeFilesFromTree(opts.bare ? gitletStructure : { ".gitlet": gitletStructure },
+                                     process.cwd());
+          },
+    
+*   [¶][36]
+    
+    **add()** adds files that match `path` to the index.
+    
+          add: function(path, _) {
+            files.assertInRepo();
+            config.assertNotBare();
+    
+*   [¶][37]
+    
+    Get the paths of all the files matching `path`.
+    
+            var addedFiles = files.lsRecursive(path);
+    
+*   [¶][38]
+    
+    Abort if no files matched `path`.
+    
+            if (addedFiles.length === 0) {
+              throw new Error(files.pathFromRepoRoot(path) + " did not match any files");
+    
+*   [¶][39]
+    
+    Otherwise, use the `update_index()` Git command to actually add
+    the files.
+    
+            } else {
+              addedFiles.forEach(function(p) { gitlet.update_index(p, { add: true }); });
+            }
+          },
+    
+*   [¶][40]
+    
+    **rm()** removes files that match `path` from the index.
+    
+          rm: function(path, opts) {
+            files.assertInRepo();
+            config.assertNotBare();
+            opts = opts || {};
+    
+*   [¶][41]
+    
+    Get the paths of all files in the index that match `path`.
+    
+            var filesToRm = index.matchingFiles(path);
+    
+*   [¶][42]
+    
+    Abort if `-f` was passed. The removal of files with changes is
+    not supported.
+    
+            if (opts.f) {
+              throw new Error("unsupported");
+    
+*   [¶][43]
+    
+    Abort if no files matched `path`.
+    
+            } else if (filesToRm.length === 0) {
+              throw new Error(files.pathFromRepoRoot(path) + " did not match any files");
+    
+*   [¶][44]
+    
+    Abort if `path` is a directory and `-r` was not passed.
+    
+            } else if (fs.existsSync(path) && fs.statSync(path).isDirectory() && !opts.r) {
+              throw new Error("not removing " + path + " recursively without -r");
+        
+            } else {
+    
+*   [¶][45]
+    
+    Get a list of all files that are to be removed and have also
+    been changed on disk. If this list is not empty then abort.
+    
+              var changesToRm = util.intersection(diff.addedOrModifiedFiles(), filesToRm);
+              if (changesToRm.length > 0) {
+                throw new Error("these files have changes:\n" + changesToRm.join("\n") + "\n");
+    
+*   [¶][46]
+    
+    Otherwise, remove the files that match `path`. Delete them
+    from disk and remove from the index.
+    
+              } else {
+                filesToRm.map(files.workingCopyPath).filter(fs.existsSync).forEach(fs.unlinkSync);
+                filesToRm.forEach(function(p) { gitlet.update_index(p, { remove: true }); });
+              }
+            }
+          },
+    
+*   [¶][47]
+    
+    **commit()** creates a commit object that represents the current
+    state of the index, writes the commit to the `objects` directory
+    and points `HEAD` at the commit.
+    
+          commit: function(opts) {
+            files.assertInRepo();
+            config.assertNotBare();
+    
+*   [¶][48]
+    
+    Write a tree set of tree objects that represent the current
+    state of the index.
+    
+            var treeHash = gitlet.write_tree();
+        
+            var headDesc = refs.isHeadDetached() ? "detached HEAD" : refs.headBranchName();
+    
+*   [¶][49]
+    
+    Compare the hash of the tree object at the top of the tree that
+    was just written with the hash of the tree object that the
+    `HEAD` commit points at. If they are the same, abort because
+    there is nothing new to commit.
+    
+            if (refs.hash("HEAD") !== undefined &&
+                treeHash === objects.treeHash(objects.read(refs.hash("HEAD")))) {
+              throw new Error("# On " + headDesc + "\nnothing to commit, working directory clean");
+        
+            } else {
+    
+*   [¶][50]
+    
+    Abort if the repository is in the merge state and there are
+    unresolved merge conflicts.
+    
+              var conflictedPaths = index.conflictedPaths();
+              if (merge.isMergeInProgress() && conflictedPaths.length > 0) {
+                throw new Error(conflictedPaths.map(function(p) { return "U " + p; }).join("\n") +
+                                "\ncannot commit because you have unmerged files\n");
+    
+*   [¶][51]
+    
+    Otherwise, do the commit.
+    
+              } else {
+    
+*   [¶][52]
+    
+    If the repository is in the merge state, use a pre-written
+    merge commit message. If the repository is not in the
+    merge state, use the message passed with `-m`.
+    
+                var m = merge.isMergeInProgress() ? files.read(files.gitletPath("MERGE_MSG")) : opts.m;
+    
+*   [¶][53]
+    
+    Write the new commit to the `objects` directory.
+    
+                var commitHash = objects.writeCommit(treeHash, m, refs.commitParentHashes());
+    
+*   [¶][54]
+    
+    Point `HEAD` at new commit.
+    
+                gitlet.update_ref("HEAD", commitHash);
+    
+*   [¶][55]
+    
+    If `MERGE_HEAD` exists, the repository was in the merge
+    state. Remove `MERGE_HEAD` and `MERGE_MSG`to exit the merge
+    state. Report that the merge is complete.
+    
+                if (merge.isMergeInProgress()) {
+                  fs.unlinkSync(files.gitletPath("MERGE_MSG"));
+                  refs.rm("MERGE_HEAD");
+                  return "Merge made by the three-way strategy";
+    
+*   [¶][56]
+    
+    Repository was not in the merge state, so just report that
+    the commit is complete.
+    
+                } else {
+                  return "[" + headDesc + " " + commitHash + "] " + m;
+                }
+              }
+            }
+          },
+    
+*   [¶][57]
+    
+    **branch()** creates a new branch that points at the commit that
+    `HEAD` points at.
+    
+          branch: function(name, opts) {
+            files.assertInRepo();
+            opts = opts || {};
+    
+*   [¶][58]
+    
+    If no branch `name` was passed, list the local branches.
+    
+            if (name === undefined) {
+              return Object.keys(refs.localHeads()).map(function(branch) {
+                return (branch === refs.headBranchName() ? "* " : "  ") + branch;
+              }).join("\n") + "\n";
+    
+*   [¶][59]
+    
+    `HEAD` is not pointing at a commit, so there is no commit for
+    the new branch to point at. Abort. This is most likely to
+    happen if the repository has no commits.
+    
+            } else if (refs.hash("HEAD") === undefined) {
+              throw new Error(refs.headBranchName() + " not a valid object name");
+    
+*   [¶][60]
+    
+    Abort because a branch called `name` already exists.
+    
+            } else if (refs.exists(refs.toLocalRef(name))) {
+              throw new Error("A branch named " + name + " already exists");
+    
+*   [¶][61]
+    
+    Otherwise, create a new branch by creating a new file called
+    `name` that contains the hash of the commit that `HEAD` points
+    at.
+    
+            } else {
+              gitlet.update_ref(refs.toLocalRef(name), refs.hash("HEAD"));
+            }
+          },
+    
+*   [¶][62]
+    
+    **checkout()** changes the index, working copy and `HEAD` to
+    reflect the content of `ref`. `ref` might be a branch name or a
+    commit hash.
+    
+          checkout: function(ref, _) {
+            files.assertInRepo();
+            config.assertNotBare();
+    
+*   [¶][63]
+    
+    Get the hash of the commit to check out.
+    
+            var toHash = refs.hash(ref);
+    
+*   [¶][64]
+    
+    Abort if `ref` cannot be found.
+    
+            if (!objects.exists(toHash)) {
+              throw new Error(ref + " did not match any file(s) known to Gitlet");
+    
+*   [¶][65]
+    
+    Abort if the hash to check out points to an object that is a
+    not a commit.
+    
+            } else if (objects.type(objects.read(toHash)) !== "commit") {
+              throw new Error("reference is not a tree: " + ref);
+    
+*   [¶][66]
+    
+    Abort if `ref` is the name of the branch currently checked out.
+    Abort if head is detached, `ref` is a commit hash and `HEAD` is
+    pointing at that hash.
+    
+            } else if (ref === refs.headBranchName() ||
+                       ref === files.read(files.gitletPath("HEAD"))) {
+              return "Already on " + ref;
+            } else {
+    
+*   [¶][67]
+    
+    Get a list of files changed in the working copy. Get a list
+    of the files that are different in the head commit and the
+    commit to check out. If any files appear in both lists then
+    abort.
+    
+              var paths = diff.changedFilesCommitWouldOverwrite(toHash);
+              if (paths.length > 0) {
+                throw new Error("local changes would be lost\n" + paths.join("\n") + "\n");
+    
+*   [¶][68]
+    
+    Otherwise, perform the checkout.
+    
+              } else {
+                process.chdir(files.workingCopyPath());
+    
+*   [¶][69]
+    
+    If the ref is in the `objects` directory, it must be a hash
+    and so this checkout is detaching the head.
+    
+                var isDetachingHead = objects.exists(ref);
+    
+*   [¶][70]
+    
+    Get the list of differences between the current commit and
+    the commit to check out. Write them to the working copy.
+    
+                workingCopy.write(diff.diff(refs.hash("HEAD"), toHash));
+    
+*   [¶][71]
+    
+    Write the commit being checked out to `HEAD`. If the head
+    is being detached, the commit hash is written directly to
+    the `HEAD` file. If the head is not being detached, the
+    branch being checked out is written to `HEAD`.
+    
+                refs.write("HEAD", isDetachingHead ? toHash : "ref: " + refs.toLocalRef(ref));
+    
+*   [¶][72]
+    
+    Set the index to the contents of the commit being checked
+    out.
+    
+                index.write(index.tocToIndex(objects.commitToc(toHash)));
+    
+*   [¶][73]
+    
+    Report the result of the checkout.
+    
+                return isDetachingHead ?
+                  "Note: checking out " + toHash + "\nYou are in detached HEAD state." :
+                  "Switched to branch " + ref;
+              }
+            }
+          },
+    
+*   [¶][74]
+    
+    **diff()** shows the changes required to go from the `ref1`
+    commit to the `ref2` commit.
+    
+          diff: function(ref1, ref2, opts) {
+            files.assertInRepo();
+            config.assertNotBare();
+    
+*   [¶][75]
+    
+    Abort if `ref1` was supplied, but it does not resolve to a
+    hash.
+    
+            if (ref1 !== undefined && refs.hash(ref1) === undefined) {
+              throw new Error("ambiguous argument " + ref1 + ": unknown revision");
+    
+*   [¶][76]
+    
+    Abort if `ref2` was supplied, but it does not resolve to a
+    hash.
+    
+            } else if (ref2 !== undefined && refs.hash(ref2) === undefined) {
+              throw new Error("ambiguous argument " + ref2 + ": unknown revision");
+    
+*   [¶][77]
+    
+    Otherwise, perform diff.
+    
+            } else {
+    
+*   [¶][78]
+    
+    Gitlet only shows the name of each changed file and whether
+    it was added, modified or deleted. For simplicity, the
+    changed content is not shown.
+*   
+    [¶][79]
+    
+    The diff happens between two versions of the repository. The
+    first version is either the hash that `ref1` resolves to, or
+    the index. The second version is either the hash that `ref2`
+    resolves to, or the working copy.
+    
+              var nameToStatus = diff.nameStatus(diff.diff(refs.hash(ref1), refs.hash(ref2)));
+    
+*   [¶][80]
+    
+    Show the path of each changed file.
+    
+              return Object.keys(nameToStatus)
+                .map(function(path) { return nameToStatus[path] + " " + path; })
+                .join("\n") + "\n";
+            }
+          },
+    
+*   [¶][81]
+    
+    **remote()** records the locations of remote versions of this
+    repository.
+    
+          remote: function(command, name, path, _) {
+            files.assertInRepo();
+    
+*   [¶][82]
+    
+    Abort if `command` is not "add". Only "add" is supported.
+    
+            if (command !== "add") {
+              throw new Error("unsupported");
+    
+*   [¶][83]
+    
+    Abort if repository already has a record for a remote called
+    `name`.
+    
+            } else if (name in config.read()["remote"]) {
+              throw new Error("remote " + name + " already exists");
+    
+*   [¶][84]
+    
+    Otherwise, add remote record.
+    
+            } else {
+    
+*   [¶][85]
+    
+    Write to the config file a record of the `name` and `path` of
+    the remote.
+    
+              config.write(util.setIn(config.read(), ["remote", name, "url", path]));
+              return "\n";
+            }
+          },
+    
+*   [¶][86]
+    
+    **fetch()** records the commit that `branch` is at on `remote`.
+    It does not change the local branch.
+    
+          fetch: function(remote, branch, _) {
+            files.assertInRepo();
+    
+*   [¶][87]
+    
+    Abort if a `remote` or `branch` not passed.
+    
+            if (remote === undefined || branch === undefined) {
+              throw new Error("unsupported");
+    
+*   [¶][88]
+    
+    Abort if `remote` not recorded in config file.
+    
+            } else if (!(remote in config.read().remote)) {
+              throw new Error(remote + " does not appear to be a git repository");
+        
+            } else {
+    
+*   [¶][89]
+    
+    Get the location of the remote.
+    
+              var remoteUrl = config.read().remote[remote].url;
+    
+*   [¶][90]
+    
+    Turn the unqualified branch name into a qualified remote ref
+    eg `[branch] -> refs/remotes/[remote]/[branch]`
+    
+              var remoteRef =  refs.toRemoteRef(remote, branch);
+    
+*   [¶][91]
+    
+    Go to the remote repository and get the hash of the commit
+    that `branch` is on.
+    
+              var newHash = util.onRemote(remoteUrl)(refs.hash, branch);
+    
+*   [¶][92]
+    
+    Abort if `branch` did not exist on the remote.
+    
+              if (newHash === undefined) {
+                throw new Error("couldn't find remote ref " + branch);
+    
+*   [¶][93]
+    
+    Otherwise, perform the fetch.
+    
+              } else {
+    
+*   [¶][94]
+    
+    Note down the hash of the commit this repository currently
+    thinks the remote branch is on.
+    
+                var oldHash = refs.hash(remoteRef);
+    
+*   [¶][95]
+    
+    Get all the objects in the remote `objects` directory and
+    write them. to the local `objects` directory. (This is an
+    inefficient way of getting all the objects required to
+    recreate locally the commit the remote branch is on.)
+    
+                var remoteObjects = util.onRemote(remoteUrl)(objects.allObjects);
+                remoteObjects.forEach(objects.write);
+    
+*   [¶][96]
+    
+    Set the contents of the file at
+    `.gitlet/refs/remotes/[remote]/[branch]` to `newHash`, the
+    hash of the commit that the remote branch is on.
+    
+                gitlet.update_ref(remoteRef, newHash);
+    
+*   [¶][97]
+    
+    Record the hash of the commit that the remote branch is on
+    in `FETCH_HEAD`. (The user can call `gitlet merge
+    FETCH_HEAD` to merge the remote version of the branch into
+    their local branch. For more details, see
+    [gitlet.merge()][96].)
+    
+                refs.write("FETCH_HEAD", newHash + " branch " + branch + " of " + remoteUrl);
+    
+*   [¶][98]
+    
+    Report the result of the fetch.
+    
+                return ["From " + remoteUrl,
+                        "Count " + remoteObjects.length,
+                        branch + " -> " + remote + "/" + branch +
+                        (merge.isAForceFetch(oldHash, newHash) ? " (forced)" : "")].join("\n") + "\n";
+              }
+            }
+          },
+    
+*   [¶][99]
+    
+    **merge()** finds the set of differences between the commit that
+    the currently checked out branch is on and the commit that `ref`
+    points to. It finds or creates a commit that applies these
+    differences to the checked out branch.
+    
+          merge: function(ref, _) {
+            files.assertInRepo();
+            config.assertNotBare();
+    
+*   [¶][100]
+    
+    Get the `receiverHash`, the hash of the commit that the
+    current branch is on.
+    
+            var receiverHash = refs.hash("HEAD");
+    
+*   [¶][101]
+    
+    Get the `giverHash`, the hash for the commit to merge into the
+    receiver commit.
+    
+            var giverHash = refs.hash(ref);
+    
+*   [¶][102]
+    
+    Abort if head is detached. Merging into a detached head is not
+    supported.
+    
+            if (refs.isHeadDetached()) {
+              throw new Error("unsupported");
+    
+*   [¶][103]
+    
+    Abort if `ref` did not resolve to a hash, or if that hash is
+    not for a commit object.
+    
+            } else if (giverHash === undefined || objects.type(objects.read(giverHash)) !== "commit") {
+              throw new Error(ref + ": expected commit type");
+    
+*   [¶][104]
+    
+    Do not merge if the current branch - the receiver - already has
+    the giver's changes. This is the case if the receiver and
+    giver are the same commit, or if the giver is an ancestor of
+    the receiver.
+    
+            } else if (objects.isUpToDate(receiverHash, giverHash)) {
+              return "Already up-to-date";
+        
+            } else {
+    
+*   [¶][105]
+    
+    Get a list of files changed in the working copy. Get a list
+    of the files that are different in the receiver and giver. If
+    any files appear in both lists then abort.
+    
+              var paths = diff.changedFilesCommitWouldOverwrite(giverHash);
+              if (paths.length > 0) {
+                throw new Error("local changes would be lost\n" + paths.join("\n") + "\n");
+    
+*   [¶][106]
+    
+    If the receiver is an ancestor of the giver, a fast forward
+    is performed. This is possible because there is already a
+    commit that incorporates all of the giver's changes into the
+    receiver.
+    
+              } else if (merge.canFastForward(receiverHash, giverHash)) {
+    
+*   [¶][107]
+    
+    Fast forwarding means making the current branch reflect the
+    commit that `giverHash` points at. The branch is pointed
+    at `giverHash`. The index is set to match the contents of
+    the commit that `giverHash` points at. The working copy is
+    set to match the contents of that commit.
+    
+                merge.writeFastForwardMerge(receiverHash, giverHash);
+                return "Fast-forward";
+    
+*   [¶][108]
+    
+    If the receiver is not an ancestor of the giver, a merge
+    commit must be created.
+    
+              } else {
+    
+*   [¶][109]
+    
+    The repository is put into the merge state. The
+    `MERGE_HEAD` file is written and its contents set to
+    `giverHash`. The `MERGE_MSG` file is written and its
+    contents set to a boilerplate merge commit message. A
+    merge diff is created that will turn the contents of
+    receiver into the contents of giver. This contains the
+    path of every file that is different and whether it was
+    added, removed or modified, or is in conflict. Added files
+    are added to the index and working copy. Removed files are
+    removed from the index and working copy. Modified files
+    are modified in the index and working copy. Files that are
+    in conflict are written to the working copy to include the
+    receiver and giver versions. Both the receiver and giver
+    versions are written to the index.
+    
+                merge.writeNonFastForwardMerge(receiverHash, giverHash, ref);
+    
+*   [¶][110]
+    
+    If there are any conflicted files, a message is shown to
+    say that the user must sort them out before the merge can
+    be completed.
+    
+                if (merge.hasConflicts(receiverHash, giverHash)) {
+                  return "Automatic merge failed. Fix conflicts and commit the result.";
+    
+*   [¶][111]
+    
+    If there are no conflicted files, a commit is created from
+    the merged changes and the merge is over.
+    
+                } else {
+                  return gitlet.commit();
+                }
+              }
+            }
+          },
+    
+*   [¶][112]
+    
+    **pull()** fetches the commit that `branch` is on at `remote`.
+    It merges that commit into the current branch.
+    
+          pull: function(remote, branch, _) {
+            files.assertInRepo();
+            config.assertNotBare();
+            gitlet.fetch(remote, branch);
+            return gitlet.merge("FETCH_HEAD");
+          },
+    
+*   [¶][113]
+    
+    **push()** gets the commit that `branch` is on in the local repo
+    and points `branch` on `remote` at the same commit.
+    
+          push: function(remote, branch, opts) {
+            files.assertInRepo();
+            opts = opts || {};
+    
+*   [¶][114]
+    
+    Abort if a `remote` or `branch` not passed.
+    
+            if (remote === undefined || branch === undefined) {
+              throw new Error("unsupported");
+    
+*   [¶][115]
+    
+    Abort if `remote` not recorded in config file.
+    
+            } else if (!(remote in config.read().remote)) {
+              throw new Error(remote + " does not appear to be a git repository");
+        
+            } else {
+              var remotePath = config.read().remote[remote].url;
+              var remoteCall = util.onRemote(remotePath);
+    
+*   [¶][116]
+    
+    Abort if remote repository is not bare and `branch` is
+    checked out.
+    
+              if (remoteCall(refs.isCheckedOut, branch)) {
+                throw new Error("refusing to update checked out branch " + branch);
+        
+              } else {
+    
+*   [¶][117]
+    
+    Get `receiverHash`, the hash of the commit that `branch` is
+    on at `remote`.
+    
+                var receiverHash = remoteCall(refs.hash, branch);
+    
+*   [¶][118]
+    
+    Get `giverHash`, the hash of the commit that `branch` is on
+    at the local repository.
+    
+                var giverHash = refs.hash(branch);
+    
+*   [¶][119]
+    
+    Do nothing if the remote branch - the receiver - has
+    already incorporated the commit that `giverHash` points
+    to. This is the case if the receiver commit and giver
+    commit are the same, or if the giver commit is an ancestor
+    of the receiver commit.
+    
+                if (objects.isUpToDate(receiverHash, giverHash)) {
+                  return "Already up-to-date";
+    
+*   [¶][120]
+    
+    Abort if `branch` on `remote` cannot be fast forwarded to
+    the commit that `giverHash` points to. A fast forward can
+    only be done if the receiver commit is an ancestor of the
+    giver commit.
+    
+                } else if (!opts.f && !merge.canFastForward(receiverHash, giverHash)) {
+                  throw new Error("failed to push some refs to " + remotePath);
+    
+*   [¶][121]
+    
+    Otherwise, do the push.
+    
+                } else {
+    
+*   [¶][122]
+    
+    Put all the objects in the local `objects` directory into
+    the remote `objects` directory.
+    
+                  objects.allObjects().forEach(function(o) { remoteCall(objects.write, o); });
+    
+*   [¶][123]
+    
+    Point `branch` on `remote` at `giverHash`.
+    
+                  remoteCall(gitlet.update_ref, refs.toLocalRef(branch), giverHash);
+    
+*   [¶][124]
+    
+    Set the local repo's record of what commit `branch` is on
+    at `remote` to `giverHash` (since that is what it is now
+    is).
+    
+                  gitlet.update_ref(refs.toRemoteRef(remote, branch), giverHash);
+    
+*   [¶][125]
+    
+    Report the result of the push.
+    
+                  return ["To " + remotePath,
+                          "Count " + objects.allObjects().length,
+                          branch + " -> " + branch].join("\n") + "\n";
+                }
+              }
+            }
+          },
+    
+*   [¶][126]
+    
+    **status()** reports the state of the repo: the current branch,
+    untracked files, conflicted files, files that are staged to be
+    committed and files that are not staged to be committed.
+    
+          status: function(_) {
+            files.assertInRepo();
+            config.assertNotBare();
+            return status.toString();
+          },
+    
+*   [¶][127]
+    
+    **clone()** copies the repository at `remotePath` to
+    \*\*`targetPath`.
+    
+          clone: function(remotePath, targetPath, opts) {
+            opts = opts || {};
+    
+*   [¶][128]
+    
+    Abort if a `remotePath` or `targetPath` not passed.
+    
+            if (remotePath === undefined || targetPath === undefined) {
+              throw new Error("you must specify remote path and target path");
+    
+*   [¶][129]
+    
+    Abort if `remotePath` does not exist, or is not a Gitlet
+    repository.
+    
+            } else if (!fs.existsSync(remotePath) || !util.onRemote(remotePath)(files.inRepo)) {
+              throw new Error("repository " + remotePath + " does not exist");
+    
+*   [¶][130]
+    
+    Abort if `targetPath` exists and is not empty.
+    
+            } else if (fs.existsSync(targetPath) && fs.readdirSync(targetPath).length > 0) {
+              throw new Error(targetPath + " already exists and is not empty");
+    
+*   [¶][131]
+    
+    Otherwise, do the clone.
+    
+            } else {
+        
+              remotePath = nodePath.resolve(process.cwd(), remotePath);
+    
+*   [¶][132]
+    
+    If `targetPath` doesn't exist, create it.
+    
+              if (!fs.existsSync(targetPath)) {
+                fs.mkdirSync(targetPath);
+              }
+    
+*   [¶][133]
+    
+    In the directory for the new remote repository...
+    
+              util.onRemote(targetPath)(function() {
+    
+*   [¶][134]
+    
+    Initialize the directory as a Gitlet repository.
+    
+                gitlet.init(opts);
+    
+*   [¶][135]
+    
+    Set up `remotePath` as a remote called "origin".
+    
+                gitlet.remote("add", "origin", nodePath.relative(process.cwd(), remotePath));
+    
+*   [¶][136]
+    
+    Get the hash of the commit that master is pointing at on
+    the remote repository.
+    
+                var remoteHeadHash = util.onRemote(remotePath)(refs.hash, "master");
+    
+*   [¶][137]
+    
+    If the remote repo has any commits, that hash will exist.
+    The new repository records the commit that the passed
+    `branch` is at on the remote. It then sets master on the
+    new repository to point at that commit.
+    
+                if (remoteHeadHash !== undefined) {
+                  gitlet.fetch("origin", "master");
+                  merge.writeFastForwardMerge(undefined, remoteHeadHash);
+                }
+              });
+    
+*   [¶][138]
+    
+    Report the result of the clone.
+    
+              return "Cloning into " + targetPath;
+            }
+          },
+    
+*   [¶][139]
+    
+    **update\_index()** adds the contents of the file at `path` to the
+    index, or removes the file from the index.
+    
+          update_index: function(path, opts) {
+            files.assertInRepo();
+            config.assertNotBare();
+            opts = opts || {};
+        
+            var pathFromRoot = files.pathFromRepoRoot(path);
+            var isOnDisk = fs.existsSync(path);
+            var isInIndex = index.hasFile(path, 0);
+    
+*   [¶][140]
+    
+    Abort if `path` is a directory. `update_index()` only handles
+    single files.
+    
+            if (isOnDisk && fs.statSync(path).isDirectory()) {
+              throw new Error(pathFromRoot + " is a directory - add files inside\n");
+        
+            } else if (opts.remove && !isOnDisk && isInIndex) {
+    
+*   [¶][141]
+    
+    Abort if file is being removed and is in conflict. Gitlet
+    doesn't support this.
+    
+              if (index.isFileInConflict(path)) {
+                throw new Error("unsupported");
+    
+*   [¶][142]
+    
+    If files is being removed, is not on disk and is in the
+    index, remove it from the index.
+    
+              } else {
+                index.writeRm(path);
+                return "\n";
+              }
+    
+*   [¶][143]
+    
+    If file is being removed, is not on disk and not in the index,
+    there is no work to do.
+    
+            } else if (opts.remove && !isOnDisk && !isInIndex) {
+              return "\n";
+    
+*   [¶][144]
+    
+    Abort if the file is on disk and not in the index and the
+    `--add` was not passed.
+    
+            } else if (!opts.add && isOnDisk && !isInIndex) {
+              throw new Error("cannot add " + pathFromRoot + " to index - use --add option\n");
+    
+*   [¶][145]
+    
+    If file is on disk and either `-add` was passed or the file is
+    in the index, add the file's current content to the index.
+    
+            } else if (isOnDisk && (opts.add || isInIndex)) {
+              index.writeNonConflict(path, files.read(files.workingCopyPath(path)));
+              return "\n";
+    
+*   [¶][146]
+    
+    Abort if the file is not on disk and `--remove` not passed.
+    
+            } else if (!opts.remove && !isOnDisk) {
+              throw new Error(pathFromRoot + " does not exist and --remove not passed\n");
+            }
+          },
+    
+*   [¶][147]
+    
+    **write\_tree()** takes the content of the index and stores a tree
+    object that represents that content to the `objects` directory.
+    
+          write_tree: function(_) {
+            files.assertInRepo();
+            return objects.writeTree(files.nestFlatTree(index.toc()));
+          },
+    
+*   [¶][148]
+    
+    **update\_ref()** gets the hash of the commit that `refToUpdateTo`
+    points at and sets `refToUpdate` to point at the same hash.
+    
+          update_ref: function(refToUpdate, refToUpdateTo, _) {
+            files.assertInRepo();
+    
+*   [¶][149]
+    
+    Get the hash that `refToUpdateTo` points at.
+    
+            var hash = refs.hash(refToUpdateTo);
+    
+*   [¶][150]
+    
+    Abort if `refToUpdateTo` does not point at a hash.
+    
+            if (!objects.exists(hash)) {
+              throw new Error(refToUpdateTo + " not a valid SHA1");
+    
+*   [¶][151]
+    
+    Abort if `refToUpdate` does not match the syntax of a ref.
+    
+            } else if (!refs.isRef(refToUpdate)) {
+              throw new Error("cannot lock the ref " + refToUpdate);
+    
+*   [¶][152]
+    
+    Abort if `hash` points to an object in the `objects` directory
+    that is not a commit.
+    
+            } else if (objects.type(objects.read(hash)) !== "commit") {
+              var branch = refs.terminalRef(refToUpdate);
+              throw new Error(branch + " cannot refer to non-commit object " + hash + "\n");
+    
+*   [¶][153]
+    
+    Otherwise, set the contents of the file that the ref represents
+    to `hash`.
+    
+            } else {
+              refs.write(refs.terminalRef(refToUpdate), hash);
+            }
+          }
+        };
+    
+*   [¶][154]
+    
+    ## Refs module
+*   
+    [¶][155]
+*   
+    [¶][156]
+    
+    Refs are names for commit hashes. The ref is the name of a file.
+    Some refs represent local branches, like `refs/heads/master` or
+    `refs/heads/feature`. Some represent remote branches, like
+    `refs/remotes/origin/master`. Some represent important states of
+    the repository, like `HEAD`, `MERGE_HEAD` and `FETCH_HEAD`. Ref
+    files contain either a hash or another ref.
+    
+        var refs = {
+    
+*   [¶][157]
+    
+    **isRef()** returns true if `ref` matches valid qualified ref
+    syntax.
+    
+          isRef: function(ref) {
+            return ref !== undefined &&
+              (ref.match("^refs/heads/[A-Za-z-]+$") ||
+               ref.match("^refs/remotes/[A-Za-z-]+/[A-Za-z-]+$") ||
+               ["HEAD", "FETCH_HEAD", "MERGE_HEAD"].indexOf(ref) !== -1);
+          },
+    
+*   [¶][158]
+    
+    **terminalRef()** resolves `ref` to the most specific ref
+    possible.
+    
+          terminalRef: function(ref) {
+    
+*   [¶][159]
+    
+    If `ref` is "HEAD" and head is pointing at a branch, return the
+    branch.
+    
+            if (ref === "HEAD" && !refs.isHeadDetached()) {
+              return files.read(files.gitletPath("HEAD")).match("ref: (refs/heads/.+)")[1];
+    
+*   [¶][160]
+    
+    If ref is qualified, return it.
+    
+            } else if (refs.isRef(ref)) {
+              return ref;
+    
+*   [¶][161]
+    
+    Otherwise, assume ref is an unqualified local ref (like
+    `master`) and turn it into a qualified ref (like
+    `refs/heads/master`)
+    
+            } else {
+              return refs.toLocalRef(ref);
+            }
+          },
+    
+*   [¶][162]
+    
+    **hash()** returns the hash that `refOrHash` points to.
+    
+          hash: function(refOrHash) {
+            if (objects.exists(refOrHash)) {
+              return refOrHash;
+            } else {
+              var terminalRef = refs.terminalRef(refOrHash);
+              if (terminalRef === "FETCH_HEAD") {
+                return refs.fetchHeadBranchToMerge(refs.headBranchName());
+              } else if (refs.exists(terminalRef)) {
+                return files.read(files.gitletPath(terminalRef));
+              }
+            }
+          },
+    
+*   [¶][163]
+    
+    **isHeadDetached()** returns true if `HEAD` contains a commit
+    hash, rather than the ref of a branch.
+    
+          isHeadDetached: function() {
+            return files.read(files.gitletPath("HEAD")).match("refs") === null;
+          },
+    
+*   [¶][164]
+    
+    **isCheckedOut()** returns true if the repository is not bare and
+    `HEAD` is pointing at the branch called `branch`
+    
+          isCheckedOut: function(branch) {
+            return !config.isBare() && refs.headBranchName() === branch;
+          },
+    
+*   [¶][165]
+    
+    **toLocalRef()** converts the branch name `name` into a qualified
+    local branch ref.
+    
+          toLocalRef: function(name) {
+            return "refs/heads/" + name;
+          },
+    
+*   [¶][166]
+    
+    **toRemoteRef()** converts `remote` and branch name `name` into a
+    qualified remote branch ref.
+    
+          toRemoteRef: function(remote, name) {
+            return "refs/remotes/" + remote + "/" + name;
+          },
+    
+*   [¶][167]
+    
+    **write()** sets the content of the file for the qualified ref
+    `ref` to `content`.
+    
+          write: function(ref, content) {
+            if (refs.isRef(ref)) {
+              files.write(files.gitletPath(nodePath.normalize(ref)), content);
+            }
+          },
+    
+*   [¶][168]
+    
+    **rm()** removes the file for the qualified ref `ref`.
+    
+          rm: function(ref) {
+            if (refs.isRef(ref)) {
+              fs.unlinkSync(files.gitletPath(ref));
+            }
+          },
+    
+*   [¶][169]
+    
+    **fetchHeadBranchToMerge()** reads the `FETCH_HEAD` file and gets
+    the hash that the remote `branchName` is pointing at. For more
+    information about `FETCH_HEAD` see [gitlet.fetch()][83].
+    
+          fetchHeadBranchToMerge: function(branchName) {
+            return util.lines(files.read(files.gitletPath("FETCH_HEAD")))
+              .filter(function(l) { return l.match("^.+ branch " + branchName + " of"); })
+              .map(function(l) { return l.match("^([^ ]+) ")[1]; })[0];
+          },
+    
+*   [¶][170]
+    
+    **localHeads()** returns a JS object that maps local branch names
+    to the hash of the commit they point to.
+    
+          localHeads: function() {
+            return fs.readdirSync(nodePath.join(files.gitletPath(), "refs", "heads"))
+              .reduce(function(o, n) { return util.setIn(o, [n, refs.hash(n)]); }, {});
+          },
+    
+*   [¶][171]
+    
+    **exists()** returns true if the qualified ref `ref` exists.
+    
+          exists: function(ref) {
+            return refs.isRef(ref) && fs.existsSync(files.gitletPath(ref));
+          },
+    
+*   [¶][172]
+    
+    **headBranchName()** returns the name of the branch that `HEAD`
+    is pointing at.
+    
+          headBranchName: function() {
+            if (!refs.isHeadDetached()) {
+              return files.read(files.gitletPath("HEAD")).match("refs/heads/(.+)")[1];
+            }
+          },
+    
+*   [¶][173]
+    
+    **commitParentHashes()** returns the array of commits that would
+    be the parents of the next commit.
+    
+          commitParentHashes: function() {
+            var headHash = refs.hash("HEAD");
+    
+*   [¶][174]
+    
+    If the repository is in the middle of a merge, return the
+    hashes of the two commits being merged.
+    
+            if (merge.isMergeInProgress()) {
+              return [headHash, refs.hash("MERGE_HEAD")];
+    
+*   [¶][175]
+    
+    If this repository has no commits, return an empty array.
+    
+            } else if (headHash === undefined) {
+              return [];
+    
+*   [¶][176]
+    
+    Otherwise, return the hash of the commit that `HEAD` is
+    currently pointing at.
+    
+            } else {
+              return [headHash];
+            }
+          }
+        };
+    
+*   [¶][177]
+    
+    ## Objects module
+*   
+    [¶][178]
+*   
+    [¶][179]
+    
+    Objects are files in the `.gitlet/objects/` directory.
+    
+    *   A blob object stores the content of a file. For example, if a
+        file called `numbers.txt` that contains `first` is added to the
+        index, a blob called `hash(first)` will be created containing
+        `"first"`.
+    *   A tree object stores a list of files and directories in a
+        directory in the repository. Entries in the list for files point
+        to blob objects. Entries in the list for directories point at
+        other tree objects.
+    *   A commit object stores a pointer to a tree object and a message.
+        It represents the state of the repository after a commit.
+        
+    
+        var objects = {
+    
+*   [¶][180]
+    
+    **writeTree()** stores a graph of tree objects that represent the
+    content currently in the index.
+    
+          writeTree: function(tree) {
+            var treeObject = Object.keys(tree).map(function(key) {
+              if (util.isString(tree[key])) {
+                return "blob " + tree[key] + " " + key;
+              } else {
+                return "tree " + objects.writeTree(tree[key]) + " " + key;
+              }
+            }).join("\n") + "\n";
+        
+            return objects.write(treeObject);
+          },
+    
+*   [¶][181]
+    
+    **fileTree()** takes a tree hash and finds the corresponding tree
+    object. It reads the connected graph of tree objects into a
+    nested JS object, like:  
+    `{ file1: "hash(1)", src: { file2:  "hash(2)" }`
+    
+          fileTree: function(treeHash, tree) {
+            if (tree === undefined) { return objects.fileTree(treeHash, {}); }
+        
+            util.lines(objects.read(treeHash)).forEach(function(line) {
+              var lineTokens = line.split(/ /);
+              tree[lineTokens[2]] = lineTokens[0] === "tree" ?
+                objects.fileTree(lineTokens[1], {}) :
+                lineTokens[1];
+            });
+        
+            return tree;
+          },
+    
+*   [¶][182]
+    
+    **writeCommit()** creates a commit object and writes it to the
+    objects database.
+    
+          writeCommit: function(treeHash, message, parentHashes) {
+            return objects.write("commit " + treeHash + "\n" +
+                                 parentHashes
+                                   .map(function(h) { return "parent " + h + "\n"; }).join("") +
+                                 "Date:  " + new Date().toString() + "\n" +
+                                 "\n" +
+                                 "    " + message + "\n");
+          },
+    
+*   [¶][183]
+    
+    **write()** writes `str` to the objects database.
+    
+          write: function(str) {
+            files.write(nodePath.join(files.gitletPath(), "objects", util.hash(str)), str);
+            return util.hash(str);
+          },
+    
+*   [¶][184]
+    
+    **isUpToDate()** returns true if the giver commit has already
+    been incorporated into the receiver commit. That is, it returns
+    true if the giver commit is an ancestor of the receiver, or they
+    are the same commit.
+    
+          isUpToDate: function(receiverHash, giverHash) {
+            return receiverHash !== undefined &&
+              (receiverHash === giverHash || objects.isAncestor(receiverHash, giverHash));
+          },
+    
+*   [¶][185]
+    
+    **exists()** returns true if there is an object in the database
+    called `objectHash`
+    
+          exists: function(objectHash) {
+            return objectHash !== undefined &&
+              fs.existsSync(nodePath.join(files.gitletPath(), "objects", objectHash));
+          },
+    
+*   [¶][186]
+    
+    **read()** returns the content of the object called `objectHash`.
+    
+          read: function(objectHash) {
+            if (objectHash !== undefined) {
+              var objectPath = nodePath.join(files.gitletPath(), "objects", objectHash);
+              if (fs.existsSync(objectPath)) {
+                return files.read(objectPath);
+              }
+            }
+          },
+    
+*   [¶][187]
+    
+    **allObjects()** returns an array of the string content of all
+    the objects in the database
+    
+          allObjects: function() {
+            return fs.readdirSync(files.gitletPath("objects")).map(objects.read);
+          },
+    
+*   [¶][188]
+    
+    **type()** parses `str` as an object and returns its type:
+    commit, tree or blob.
+    
+          type: function(str) {
+            return { commit: "commit", tree: "tree", blob: "tree" }[str.split(" ")[0]] || "blob";
+          },
+    
+*   [¶][189]
+    
+    **isAncestor()** returns true if `descendentHash` is a descendent
+    of `ancestorHash`.
+    
+          isAncestor: function(descendentHash, ancestorHash) {
+            return objects.ancestors(descendentHash).indexOf(ancestorHash) !== -1;
+          },
+    
+*   [¶][190]
+    
+    **ancestors()** returns an array of the hashes of all the
+    ancestor commits of `commitHash`.
+    
+          ancestors: function(commitHash) {
+            var parents = objects.parentHashes(objects.read(commitHash));
+            return util.flatten(parents.concat(parents.map(objects.ancestors)));
+          },
+    
+*   [¶][191]
+    
+    **parentHashes()** parses `str` as a commit and returns the
+    hashes of its parents.
+    
+          parentHashes: function(str) {
+            if (objects.type(str) === "commit") {
+              return str.split("\n")
+                .filter(function(line) { return line.match(/^parent/); })
+                .map(function(line) { return line.split(" ")[1]; });
+            }
+          },
+    
+*   [¶][192]
+    
+    **parentHashes()** parses `str` as a commit and returns the tree
+    it points at.
+    
+          treeHash: function(str) {
+            if (objects.type(str) === "commit") {
+              return str.split(/\s/)[1];
+            }
+          },
+    
+*   [¶][193]
+    
+    **commitToc()** takes the hash of a commit and reads the content
+    stored in the tree on the commit. It turns that tree into a
+    table of content that maps filenames to hashes of the files'
+    content, like: `{ "file1": hash(1), "a/file2": "hash(2)" }`
+    
+          commitToc: function(hash) {
+            return files.flattenNestedTree(objects.fileTree(objects.treeHash(objects.read(hash))));
+          }
+        };
+    
+*   [¶][194]
+    
+    ## Index module
+*   
+    [¶][195]
+*   
+    [¶][196]
+    
+    The index maps files to hashes of their content. When a commit is
+    created, a tree is built that mirrors the content of the index.
+*   
+    [¶][197]
+    
+    Index entry keys are actually a `path,stage` combination. Stage is
+    always `0`, unless the entry is about a file that is in conflict.
+    See `index.writeConflict()` for more details.
+    
+        var index = {
+    
+*   [¶][198]
+    
+    **hasFile()** returns true if there is an entry for `path` in the
+    index `stage`.
+    
+          hasFile: function(path, stage) {
+            return index.read()[index.key(path, stage)] !== undefined;
+          },
+    
+*   [¶][199]
+    
+    **read()** returns the index as a JS object.
+    
+          read: function() {
+            var indexFilePath = files.gitletPath("index");
+            return util.lines(fs.existsSync(indexFilePath) ? files.read(indexFilePath) : "\n")
+              .reduce(function(idx, blobStr) {
+                var blobData = blobStr.split(/ /);
+                idx[index.key(blobData[0], blobData[1])] = blobData[2];
+                return idx;
+              }, {});
+          },
+    
+*   [¶][200]
+    
+    **key()** returns an index key made from `path` and `stage`.
+    
+          key: function(path, stage) {
+            return path + "," + stage;
+          },
+    
+*   [¶][201]
+    
+    **keyPieces()** returns a JS object that contains the path and
+    stage of 'key\`.
+    
+          keyPieces: function(key) {
+            var pieces = key.split(/,/);
+            return { path: pieces[0], stage: parseInt(pieces[1]) };
+          },
+    
+*   [¶][202]
+    
+    **toc()** returns an object that maps file paths to hashes of
+    their content. This function is like `read()`, except the JS
+    object it returns only uses the file path as a key.
+    
+          toc: function() {
+            var idx = index.read();
+            return Object.keys(idx)
+              .reduce(function(obj, k) { return util.setIn(obj, [k.split(",")[0], idx[k]]); }, {});
+          },
+    
+*   [¶][203]
+    
+    **isFileInConflict()** returns true if the file for `path` is in
+    conflict.
+    
+          isFileInConflict: function(path) {
+            return index.hasFile(path, 2);
+          },
+    
+*   [¶][204]
+    
+    **conflictedPaths()** returns an array of all the paths of files
+    that are in conflict.
+    
+          conflictedPaths: function() {
+            var idx = index.read();
+            return Object.keys(idx)
+              .filter(function(k) { return index.keyPieces(k).stage === 2; })
+              .map(function(k) { return index.keyPieces(k).path; });
+          },
+    
+*   [¶][205]
+    
+    **writeNonConflict()** sets a non-conflicting index entry for the
+    file at `path` to the hash of `content`. (If the file was in
+    conflict, it is set to be no longer in conflict.)
+    
+          writeNonConflict: function(path, content) {
+    
+*   [¶][206]
+    
+    Remove all keys for the file from the index.
+    
+            index.writeRm(path);
+    
+*   [¶][207]
+    
+    Write a key for `path` at stage `0` to indicate that the
+    file is not in conflict.
+    
+            index._writeStageEntry(path, 0, content);
+          },
+    
+*   [¶][208]
+    
+    **writeConflict()** sets an index entry for the file
+    at `path` that indicates the file is in conflict after a merge.
+    `receiverContent` is the version of the file that is being merged
+    into. `giverContent` is the version being merged in.
+    `baseContent` is the version that the receiver and
+    giver both descended from.
+    
+          writeConflict: function(path, receiverContent, giverContent, baseContent) {
+            if (baseContent !== undefined) {
+    
+*   [¶][209]
+    
+    Write a key for `path` at stage `1` for `baseContent`.
+    (There is no `baseContent` if the same file was added for the
+    first time by both versions being merged.)
+    
+              index._writeStageEntry(path, 1, baseContent);
+            }
+    
+*   [¶][210]
+    
+    Write a key for `path` at stage `2` for `receiverContent`.
+    
+            index._writeStageEntry(path, 2, receiverContent);
+    
+*   [¶][211]
+    
+    Write a key for `path` at stage `3` for `giverContent`.
+    
+            index._writeStageEntry(path, 3, giverContent);
+          },
+    
+*   [¶][212]
+    
+    **writeRm()** removes the index entry for the file at `path`.
+    The file will be removed from the index even if it is in
+    conflict. (See `index.writeConflict()` for more information on
+    conflicts.)
+    
+          writeRm: function(path) {
+            var idx = index.read();
+            [0, 1, 2, 3].forEach(function(stage) { delete idx[index.key(path, stage)]; });
+            index.write(idx);
+          },
+    
+*   [¶][213]
+    
+    **\_writeStageEntry()** adds the hashed `content` to the index at
+    key `path,stage`.
+    
+          _writeStageEntry: function(path, stage, content) {
+            var idx = index.read();
+            idx[index.key(path, stage)] = objects.write(content);
+            index.write(idx);
+          },
+    
+*   [¶][214]
+    
+    **write()** takes a JS object that represents an index and writes
+    it to `.gitlet/index`.
+    
+          write: function(index) {
+            var indexStr = Object.keys(index)
+                .map(function(k) { return k.split(",")[0] + " " + k.split(",")[1] + " " + index[k] })
+                .join("\n") + "\n";
+            files.write(files.gitletPath("index"), indexStr);
+          },
+    
+*   [¶][215]
+    
+    **workingCopyToc()** returns an object that maps the file paths
+    in the working copy to hashes of those files' content.
+    
+          workingCopyToc: function() {
+            return Object.keys(index.read())
+              .map(function(k) { return k.split(",")[0]; })
+              .filter(function(p) { return fs.existsSync(files.workingCopyPath(p)); })
+              .reduce(function(idx, p) {
+                idx[p] = util.hash(files.read(files.workingCopyPath(p)))
+                return idx;
+              }, {});
+          },
+    
+*   [¶][216]
+    
+    **tocToIndex()** takes an object that maps file paths to hashes
+    of the files' content. It returns an object that is identical,
+    except the keys of the object are composed of the file paths and
+    stage `0`. eg: \`{ "file1,0": hash(1), "src/file2,0": hash(2) }'
+    
+          tocToIndex: function(toc) {
+            return Object.keys(toc)
+              .reduce(function(idx, p) { return util.setIn(idx, [index.key(p, 0), toc[p]]); }, {});
+          },
+    
+*   [¶][217]
+    
+    **matchingFiles()** returns all the paths in the index that match
+    `pathSpec`. It matches relative to `currentDir`.
+    
+          matchingFiles: function(pathSpec) {
+            var searchPath = files.pathFromRepoRoot(pathSpec);
+            return Object.keys(index.toc())
+              .filter(function(p) { return p.match("^" + searchPath.replace(/\\/g, "\\\\")); });
+          }
+        };
+    
+*   [¶][218]
+    
+    ## Diff module
+*   
+    [¶][219]
+*   
+    [¶][220]
+    
+    Produces diffs between versions of the repository content. Diffs
+    are represented as JS objects that map file paths to objects that
+    indicate the change required to get from the first version of the
+    file (the receiver) to the second (the giver). eg:
+    
+        {
+          file1: {
+            status: "A",
+            receiver: undefined,
+            base: undefined,
+            giver: hash(1)
+          },
+          file2: {
+            status: "C",
+            receiver: hash(b),
+            base: hash(a),
+            giver: hash(c)
+          }
+        }
+    
+        var diff = {
+          FILE_STATUS: { ADD: "A", MODIFY: "M", DELETE: "D", SAME: "SAME", CONFLICT: "CONFLICT" },
+    
+*   [¶][221]
+    
+    **diff()** returns a diff object (see above for the format of a
+    diff object). If `hash1` is passed, it is used as the first
+    version in the diff. If it is not passed, the index is used. If
+    `hash2` is passed, it is used as the second version in the diff.
+    If it is not passed, the working copy is used.
+    
+          diff: function(hash1, hash2) {
+            var a = hash1 === undefined ? index.toc() : objects.commitToc(hash1);
+            var b = hash2 === undefined ? index.workingCopyToc() : objects.commitToc(hash2);
+            return diff.tocDiff(a, b);
+          },
+    
+*   [¶][222]
+    
+    **nameStatus()** takes a diff and returns a JS object that maps
+    from file paths to file statuses.
+    
+          nameStatus: function(dif) {
+            return Object.keys(dif)
+              .filter(function(p) { return dif[p].status !== diff.FILE_STATUS.SAME; })
+              .reduce(function(ns, p) { return util.setIn(ns, [p, dif[p].status]); }, {});
+          },
+    
+*   [¶][223]
+    
+    **tocDiff()** takes three JS objects that map file paths to
+    hashes of file content. It returns a diff between `receiver` and
+    `giver` (see the module description for the format). `base` is
+    the version that is the most recent commen ancestor of the
+    `receiver` and `giver`. If `base` is not passed, `receiver` is
+    used as the base. The base is only passed when getting the diff
+    for a merge. This is the only time the conflict status might be
+    used.
+    
+          tocDiff: function(receiver, giver, base) {
+    
+*   [¶][224]
+    
+    fileStatus() takes three strings that represent different
+    versions of the content of a file. It returns the change that
+    needs to be made to get from the `receiver` to the `giver`.
+    
+            function fileStatus(receiver, giver, base) {
+              var receiverPresent = receiver !== undefined;
+              var basePresent = base !== undefined;
+              var giverPresent = giver !== undefined;
+              if (receiverPresent && giverPresent && receiver !== giver) {
+                if (receiver !== base && giver !== base) {
+                  return diff.FILE_STATUS.CONFLICT;
+                } else {
+                  return diff.FILE_STATUS.MODIFY;
+                }
+              } else if (receiver === giver) {
+                return diff.FILE_STATUS.SAME;
+              } else if ((!receiverPresent && !basePresent && giverPresent) ||
+                         (receiverPresent && !basePresent && !giverPresent)) {
+                return diff.FILE_STATUS.ADD;
+              } else if ((receiverPresent && basePresent && !giverPresent) ||
+                         (!receiverPresent && basePresent && giverPresent)) {
+                return diff.FILE_STATUS.DELETE;
+              }
+            };
+    
+*   [¶][225]
+    
+    If `base` was not passed, use `receiver` as the base.
+    
+            base = base || receiver;
+    
+*   [¶][226]
+    
+    Get an array of all the paths in all the versions.
+    
+            var paths = Object.keys(receiver).concat(Object.keys(base)).concat(Object.keys(giver));
+    
+*   [¶][227]
+    
+    Create and return diff.
+    
+            return util.unique(paths).reduce(function(idx, p) {
+              return util.setIn(idx, [p, {
+                status: fileStatus(receiver[p], giver[p], base[p]),
+                receiver: receiver[p],
+                base: base[p],
+                giver: giver[p]
+              }]);
+            }, {});
+          },
+    
+*   [¶][228]
+    
+    **changedFilesCommitWouldOverwrite()** gets a list of files
+    changed in the working copy. It gets a list of the files that
+    are different in the head commit and the commit for the passed
+    hash. It returns a list of paths that appear in both lists.
+    
+          changedFilesCommitWouldOverwrite: function(hash) {
+            var headHash = refs.hash("HEAD");
+            return util.intersection(Object.keys(diff.nameStatus(diff.diff(headHash))),
+                                     Object.keys(diff.nameStatus(diff.diff(headHash, hash))));
+          },
+    
+*   [¶][229]
+    
+    **addedOrModifiedFiles()** returns a list of files that have been
+    added to or modified in the working copy since the last commit.
+    
+          addedOrModifiedFiles: function() {
+            var headToc = refs.hash("HEAD") ? objects.commitToc(refs.hash("HEAD")) : {};
+            var wc = diff.nameStatus(diff.tocDiff(headToc, index.workingCopyToc()));
+            return Object.keys(wc).filter(function(p) { return wc[p] !== diff.FILE_STATUS.DELETE; });
+          }
+        };
+    
+*   [¶][230]
+    
+    ## Merge module
+*   
+    [¶][231]
+    
+        var merge = {
+    
+*   [¶][232]
+    
+    **commonAncestor()** returns the hash of the commit that is the
+    most recent common ancestor of `aHash` and `bHash`.
+    
+          commonAncestor: function(aHash, bHash) {
+            var sorted = [aHash, bHash].sort();
+            aHash = sorted[0];
+            bHash = sorted[1];
+            var aAncestors = [aHash].concat(objects.ancestors(aHash));
+            var bAncestors = [bHash].concat(objects.ancestors(bHash));
+            return util.intersection(aAncestors, bAncestors)[0];
+          },
+    
+*   [¶][233]
+    
+    **isMergeInProgress()** returns true if the repository is in the
+    middle of a merge.
+    
+          isMergeInProgress: function() {
+            return refs.hash("MERGE_HEAD");
+          },
+    
+*   [¶][234]
+    
+    **canFastForward()** A fast forward is possible if the changes
+    made to get to the `giverHash` commit already incorporate the
+    changes made to get to the `receiverHash` commit. So,
+    `canFastForward()` returns true if the `receiverHash` commit is
+    an ancestor of the `giverHash` commit. It also returns true if
+    there is no `receiverHash` commit because this indicates the
+    repository has no commits, yet.
+    
+          canFastForward: function(receiverHash, giverHash) {
+            return receiverHash === undefined || objects.isAncestor(giverHash, receiverHash);
+          },
+    
+*   [¶][235]
+    
+    **isAForceFetch()** returns true if hash for local commit
+    (`receiverHash`) is not ancestor of hash for fetched commit
+    (`giverHash`).
+    
+          isAForceFetch: function(receiverHash, giverHash) {
+            return receiverHash !== undefined && !objects.isAncestor(giverHash, receiverHash);
+          },
+    
+*   [¶][236]
+    
+    **hasConflicts()** returns true if merging the commit for
+    `giverHash` into the commit for `receiverHash` would produce
+    conflicts.
+    
+          hasConflicts: function(receiverHash, giverHash) {
+            var mergeDiff = merge.mergeDiff(receiverHash, giverHash);
+            return Object.keys(mergeDiff)
+              .filter(function(p){return mergeDiff[p].status===diff.FILE_STATUS.CONFLICT }).length > 0
+          },
+    
+*   [¶][237]
+    
+    **mergeDiff()** returns a diff that represents the changes to get
+    from the `receiverHash` commit to the `giverHash` commit.
+    Because this is a merge diff, the function uses the common
+    ancestor of the `receiverHash` commit and `giverHash` commit to
+    avoid trivial conflicts.
+    
+          mergeDiff: function(receiverHash, giverHash) {
+            return diff.tocDiff(objects.commitToc(receiverHash),
+                                objects.commitToc(giverHash),
+                                objects.commitToc(merge.commonAncestor(receiverHash, giverHash)));
+          },
+    
+*   [¶][238]
+    
+    **writeMergeMsg()** creates a message for the merge commit that
+    will potentially be created when the `giverHash` commit is merged
+    into the `receiverHash` commit. It writes this message to
+    `.gitlet/MERGE_MSG`.
+    
+          writeMergeMsg: function(receiverHash, giverHash, ref) {
+            var msg = "Merge " + ref + " into " + refs.headBranchName();
+        
+            var mergeDiff = merge.mergeDiff(receiverHash, giverHash);
+            var conflicts = Object.keys(mergeDiff)
+                .filter(function(p) { return mergeDiff[p].status === diff.FILE_STATUS.CONFLICT });
+            if (conflicts.length > 0) {
+              msg += "\nConflicts:\n" + conflicts.join("\n");
+            }
+        
+            files.write(files.gitletPath("MERGE_MSG"), msg);
+          },
+    
+*   [¶][239]
+    
+    **writeIndex()** merges the `giverHash` commit into the
+    `receiverHash` commit and writes the merged content to the index.
+    
+          writeIndex: function(receiverHash, giverHash) {
+            var mergeDiff = merge.mergeDiff(receiverHash, giverHash);
+            index.write({});
+            Object.keys(mergeDiff).forEach(function(p) {
+              if (mergeDiff[p].status === diff.FILE_STATUS.CONFLICT) {
+                index.writeConflict(p,
+                                    objects.read(mergeDiff[p].receiver),
+                                    objects.read(mergeDiff[p].giver),
+                                    objects.read(mergeDiff[p].base));
+              } else if (mergeDiff[p].status === diff.FILE_STATUS.MODIFY) {
+                index.writeNonConflict(p, objects.read(mergeDiff[p].giver));
+              } else if (mergeDiff[p].status === diff.FILE_STATUS.ADD ||
+                         mergeDiff[p].status === diff.FILE_STATUS.SAME) {
+                var content = objects.read(mergeDiff[p].receiver || mergeDiff[p].giver);
+                index.writeNonConflict(p, content);
+              }
+            });
+          },
+    
+*   [¶][240]
+    
+    **writeFastForwardMerge()** Fast forwarding means making the
+    current branch reflect the commit that `giverHash` points at. No
+    new commit is created.
+    
+          writeFastForwardMerge: function(receiverHash, giverHash) {
+    
+*   [¶][241]
+    
+    Point head at `giverHash`.
+    
+            refs.write(refs.toLocalRef(refs.headBranchName()), giverHash);
+    
+*   [¶][242]
+    
+    Make the index mirror the content of `giverHash`.
+    
+            index.write(index.tocToIndex(objects.commitToc(giverHash)));
+    
+*   [¶][243]
+    
+    If the repo is bare, it has no working copy, so there is no
+    more work to do. If the repo is not bare...
+    
+            if (!config.isBare()) {
+    
+*   [¶][244]
+    
+    ...Get an object that maps from file paths in the
+    `receiverHash` commit to hashes of the files' content. If
+    `recevierHash` is undefined, the repository has no commits,
+    yet, and the mapping object is empty.
+    
+              var receiverToc = receiverHash === undefined ? {} : objects.commitToc(receiverHash);
+    
+*   [¶][245]
+    
+    ...and write the content of the files to the working copy.
+    
+              workingCopy.write(diff.tocDiff(receiverToc, objects.commitToc(giverHash)));
+            }
+          },
+    
+*   [¶][246]
+    
+    **writeNonFastForwardMerge()** A non fast forward merge creates a
+    merge commit to integrate the content of the `receiverHash`
+    commit with the content of the `giverHash` commit. This
+    integration requires a merge commit because, unlike a fast
+    forward merge, no commit yet exists that embodies the combination
+    of these two commits. `writeNonFastForwardMerge()` does not
+    actually create the merge commit. It just sets the wheels in
+    motion.
+    
+          writeNonFastForwardMerge: function(receiverHash, giverHash, giverRef) {
+    
+*   [¶][247]
+    
+    Write `giverHash` to `.gitlet/MERGE_HEAD`. This file acts as a
+    record of `giverHash` and as the signal that the repository is
+    in the merging state.
+    
+            refs.write("MERGE_HEAD", giverHash);
+    
+*   [¶][248]
+    
+    Write a standard merge commit message that will be used when
+    the merge commit is created.
+    
+            merge.writeMergeMsg(receiverHash, giverHash, giverRef);
+    
+*   [¶][249]
+    
+    Merge the `receiverHash` commit with the `giverHash` commit and
+    write the content to the index.
+    
+            merge.writeIndex(receiverHash, giverHash);
+    
+*   [¶][250]
+    
+    If the repo is bare, it has no working copy, so there is no
+    more work to do. If the repo is not bare...
+    
+            if (!config.isBare()) {
+    
+*   [¶][251]
+    
+    ...merge the `receiverHash` commit with the `giverHash`
+    commit and write the content to the working copy.
+    
+              workingCopy.write(merge.mergeDiff(receiverHash, giverHash));
+            }
+          }
+        };
+    
+*   [¶][252]
+    
+    ## Working copy module
+*   
+    [¶][253]
+*   
+    [¶][254]
+    
+    The working copy is the set of files that are inside the
+    repository, excluding the `.gitlet` directory.
+    
+        var workingCopy = {
+    
+*   [¶][255]
+    
+    **write()** takes a diff object (see the diff module for a
+    description of the format) and applies the changes in it to the
+    working copy.
+    
+          write: function(dif) {
+    
+*   [¶][256]
+    
+    `composeConflict()` takes the hashes of two versions of the
+    same file and returns a string that represents the two versions
+    as a conflicted file:
+    
+        <<<<<
+        version1
+        ======
+        version2>>>>>
+    
+    Note that Gitlet, unlike real Git, does not do a line by line
+    diff and mark only the conflicted parts of the file. If a file
+    is in conflict, the whole body of the file is marked as one big
+    conflict.
+    
+            function composeConflict(receiverFileHash, giverFileHash) {
+              return "<<<<<<\n" + objects.read(receiverFileHash) +
+                "\n======\n" + objects.read(giverFileHash) +
+                "\n>>>>>>\n";
+            };
+    
+*   [¶][257]
+    
+    Go through all the files that have changed, updating the
+    working copy for each.
+    
+            Object.keys(dif).forEach(function(p) {
+              if (dif[p].status === diff.FILE_STATUS.ADD) {
+                files.write(files.workingCopyPath(p), objects.read(dif[p].receiver || dif[p].giver));
+              } else if (dif[p].status === diff.FILE_STATUS.CONFLICT) {
+                files.write(files.workingCopyPath(p), composeConflict(dif[p].receiver, dif[p].giver));
+              } else if (dif[p].status === diff.FILE_STATUS.MODIFY) {
+                files.write(files.workingCopyPath(p), objects.read(dif[p].giver));
+              } else if (dif[p].status === diff.FILE_STATUS.DELETE) {
+                fs.unlinkSync(files.workingCopyPath(p));
+              }
+            });
+    
+*   [¶][258]
+    
+    Remove any directories that have been left empty after the
+    deletion of all the files in them.
+    
+            fs.readdirSync(files.workingCopyPath())
+              .filter(function(n) { return n !== ".gitlet"; })
+              .forEach(files.rmEmptyDirs);
+          }
+        };
+    
+*   [¶][259]
+    
+    ## Config module
+*   
+    [¶][260]
+*   
+    [¶][261]
+    
+    This code allows the config file at `.gitlet/config` to be read and
+    written.
+    
+        var config = {
+    
+*   [¶][262]
+    
+    **isBare()** returns true if the repository is bare.
+    
+          isBare: function() {
+            return config.read().core[""].bare === "true";
+          },
+    
+*   [¶][263]
+    
+    **assertNotBare()** throws if the repository is bare.
+    
+          assertNotBare: function() {
+            if (config.isBare()) {
+              throw new Error("this operation must be run in a work tree");
+            }
+          },
+    
+*   [¶][264]
+    
+    **read()** returns the contents of the config file as a nested JS
+    object.
+    
+          read: function() {
+            return config.strToObj(files.read(files.gitletPath("config")));
+          },
+    
+*   [¶][265]
+    
+    **write()** stringifies the nested JS object `configObj` and
+    overwrites the config file with it.
+    
+          write: function(configObj) {
+            files.write(files.gitletPath("config"), config.objToStr(configObj));
+          },
+    
+*   [¶][266]
+    
+    **strToObj()** parses the config string `str` and returns its
+    contents as a nested JS object.
+    
+          strToObj: function(str) {
+            return str.split("[")
+              .map(function(item) { return item.trim(); })
+              .filter(function(item) { return item !== ""; })
+              .reduce(function(c, item) {
+                var lines = item.split("\n");
+                var entry = [];
+    
+*   [¶][267]
+    
+    section eg "core"
+    
+                entry.push(lines[0].match(/([^ \]]+)( |\])/)[1]);
+    
+*   [¶][268]
+    
+    eg "master"
+    
+                var subsectionMatch = lines[0].match(/\"(.+)\"/);
+                var subsection = subsectionMatch === null ? "" : subsectionMatch[1];
+                entry.push(subsection);
+    
+*   [¶][269]
+    
+    options and their values
+    
+                entry.push(lines.slice(1).reduce(function(s, l) {
+                  s[l.split("=")[0].trim()] = l.split("=")[1].trim();
+                  return s;
+                }, {}));
+        
+                return util.setIn(c, entry);
+              }, { "remote": {} });
+          },
+    
+*   [¶][270]
+    
+    **objToStr()** `configObj` is a JS object that holds the config
+    for the repository. `objToStr()` stringifies the object and
+    returns the string.
+    
+          objToStr: function(configObj) {
+            return Object.keys(configObj)
+              .reduce(function(arr, section) {
+                return arr.concat(
+                  Object.keys(configObj[section])
+                    .map(function(subsection) { return { section: section, subsection: subsection }})
+                );
+              }, [])
+              .map(function(entry) {
+                var subsection = entry.subsection === "" ? "" : " \"" + entry.subsection +"\"";
+                var settings = configObj[entry.section][entry.subsection];
+                return "[" + entry.section + subsection + "]\n" +
+                  Object.keys(settings)
+                  .map(function(k) { return "  " + k + " = " + settings[k]; })
+                  .join("\n") + "\n";
+              })
+              .join("");
+          }
+        };
+    
+*   [¶][271]
+    
+    ## Util module
+*   
+    [¶][272]
+*   
+    [¶][273]
+    
+    A set of handy functions.
+    
+        var util = {
+    
+*   [¶][274]
+    
+    **isString()** returns true if `thing` is a string.
+    
+          isString: function(thing) {
+            return typeof thing === "string";
+          },
+    
+*   [¶][275]
+    
+    **hash()** returns a hash of `string`.
+    
+          hash: function(string) {
+            var hashInt = 0;
+            for (var i = 0; i < string.length; i++) {
+              hashInt = hashInt * 31 + string.charCodeAt(i);
+              hashInt = hashInt | 0;
+            }
+        
+            return Math.abs(hashInt).toString(16);
+          },
+    
+*   [¶][276]
+    
+    **setIn()** takes an array that contains 1 or more keys and has
+    one value at the end. It drills down into `obj` using the keys
+    and sets the value as the value of the last key. eg  
+    `setIn({}, ["a", "b", "me"]); // => { a: { b: "me" } }`
+    
+          setIn: function(obj, arr) {
+            if (arr.length === 2) {
+              obj[arr[0]] = arr[1];
+            } else if (arr.length > 2) {
+              obj[arr[0]] = obj[arr[0]] || {};
+              util.setIn(obj[arr[0]], arr.slice(1));
+            }
+        
+            return obj;
+          },
+    
+*   [¶][277]
+    
+    **lines()** takes a string, splits on newlines and returns an
+    array of the lines that are not empty.
+    
+          lines: function(str) {
+            return str.split("\n").filter(function(l) { return l !== ""; });
+          },
+    
+*   [¶][278]
+    
+    **flatten()** returns a flattened version of `arr`.
+    
+          flatten: function(arr) {
+            return arr.reduce(function(a, e) {
+              return a.concat(e instanceof Array ? util.flatten(e) : e);
+            }, []);
+          },
+    
+*   [¶][279]
+    
+    **unique()** returns the unique elements in `arr`.
+    
+          unique: function(arr) {
+            return arr.reduce(function(a, p) { return a.indexOf(p) === -1 ? a.concat(p) : a; }, []);
+          },
+    
+*   [¶][280]
+    
+    **intersection()** takes two arrays `a` and `b`. It returns an
+    array of the items that appear in both.
+    
+          intersection: function(a, b) {
+            return a.filter(function(e) { return b.indexOf(e) !== -1; });
+          },
+    
+*   [¶][281]
+    
+    **onRemote()** allows execution of a command on a remote
+    repository. It returns an anonymous function that takes another
+    function `fn`. When the anonymous function is run, it switches
+    to `remotePath`, executes `fn`, then switches back to the
+    original directory.
+    
+          onRemote: function(remotePath) {
+            return function(fn) {
+              var originalDir = process.cwd();
+              process.chdir(remotePath);
+              var result = fn.apply(null, Array.prototype.slice.call(arguments, 1));
+              process.chdir(originalDir);
+              return result;
+            };
+          }
+        };
+    
+*   [¶][282]
+    
+    ## Files module
+*   
+    [¶][283]
+    
+        var files = {
+    
+*   [¶][284]
+    
+    **inRepo()** returns true if the current working directory is
+    inside a repository.
+    
+          inRepo: function() {
+            return files.gitletPath() !== undefined;
+          },
+    
+*   [¶][285]
+    
+    **assertInRepo()** throws if the current working directory is not
+    inside a repository.
+    
+          assertInRepo: function() {
+            if (!files.inRepo()) {
+              throw new Error("not a Gitlet repository");
+            }
+          },
+    
+*   [¶][286]
+    
+    **pathFromRepoRoot()** returns `path` relative to the repo root
+    
+          pathFromRepoRoot: function(path) {
+            return nodePath.relative(files.workingCopyPath(), nodePath.join(process.cwd(), path));
+          },
+    
+*   [¶][287]
+    
+    **write()** writes `content` to file at `path`, overwriting
+    anything that is already there.
+    
+          write: function(path, content) {
+            var prefix = require("os").platform() == "win32" ? "." : "/";
+            files.writeFilesFromTree(util.setIn({}, path.split(nodePath.sep).concat(content)), prefix);
+          },
+    
+*   [¶][288]
+    
+    **writeFilesFromTree()** takes `tree` of files as a nested JS obj
+    and writes all those files to disk taking `prefix` as the root of
+    the tree. `tree` format is: `{ a: { b: { c: "filecontent" }}}`
+    
+          writeFilesFromTree: function(tree, prefix) {
+            Object.keys(tree).forEach(function(name) {
+              var path = nodePath.join(prefix, name);
+              if (util.isString(tree[name])) {
+                fs.writeFileSync(path, tree[name]);
+              } else {
+                if (!fs.existsSync(path)) {
+                  fs.mkdirSync(path, "777");
+                }
+        
+                files.writeFilesFromTree(tree[name], path);
+              }
+            });
+          },
+    
+*   [¶][289]
+    
+    **rmEmptyDirs()** recursively removes all the empty directories
+    inside `path`.
+    
+          rmEmptyDirs: function(path) {
+            if (fs.statSync(path).isDirectory()) {
+              fs.readdirSync(path).forEach(function(c) { files.rmEmptyDirs(nodePath.join(path, c)); });
+              if (fs.readdirSync(path).length === 0) {
+                fs.rmdirSync(path);
+              }
+            }
+          },
+    
+*   [¶][290]
+    
+    **read()** returns the contents of the file at `path` as a
+    string. It returns `undefined` if the file doesn't exist.
+    
+          read: function(path) {
+            if (fs.existsSync(path)) {
+              return fs.readFileSync(path, "utf8");
+            }
+          },
+    
+*   [¶][291]
+    
+    **gitletPath()** returns a string made by concatenating `path` to
+    the absolute path of the `.gitlet` directory of the repository.
+    
+          gitletPath: function(path) {
+            function gitletDir(dir) {
+              if (fs.existsSync(dir)) {
+                var potentialConfigFile = nodePath.join(dir, "config");
+                var potentialGitletPath = nodePath.join(dir, ".gitlet");
+                if (fs.existsSync(potentialConfigFile) &&
+                    fs.statSync(potentialConfigFile).isFile() &&
+                    files.read(potentialConfigFile).match(/\[core\]/)) {
+                  return dir;
+                } else if (fs.existsSync(potentialGitletPath)) {
+                  return potentialGitletPath;
+                } else if (dir !== "/") {
+                  return gitletDir(nodePath.join(dir, ".."));
+                }
+              }
+            };
+        
+            var gDir = gitletDir(process.cwd());
+            if (gDir !== undefined) {
+              return nodePath.join(gDir, path || "");
+            }
+          },
+    
+*   [¶][292]
+    
+    **workingCopyPath()** returns a string made by concatenating `path` to
+    the absolute path of the root of the repository.
+    
+          workingCopyPath: function(path) {
+            return nodePath.join(nodePath.join(files.gitletPath(), ".."), path || "");
+          },
+    
+*   [¶][293]
+    
+    **lsRecursive()** returns an array of all the files found in a
+    recursive search of `path`.
+    
+          lsRecursive: function(path) {
+            if (!fs.existsSync(path)) {
+              return [];
+            } else if (fs.statSync(path).isFile()) {
+              return [path];
+            } else if (fs.statSync(path).isDirectory()) {
+              return fs.readdirSync(path).reduce(function(fileList, dirChild) {
+                return fileList.concat(files.lsRecursive(nodePath.join(path, dirChild)));
+              }, []);
+            }
+          },
+    
+*   [¶][294]
+    
+    **nestFlatTree()** takes `obj`, a mapping of file path strings to
+    content, and returns a nested JS obj where each key represents a
+    sub directory. This is the opposite of
+    `flattenNestedTree()`  
+    eg `nestFlatTree({ "a/b": "me" }); // => { a: { b: "me" }}`
+    
+          nestFlatTree: function(obj) {
+            return Object.keys(obj).reduce(function(tree, wholePath) {
+              return util.setIn(tree, wholePath.split(nodePath.sep).concat(obj[wholePath]));
+            }, {});
+          },
+    
+*   [¶][295]
+    
+    **flattenNestedTree()** takes `tree`, a nested JS object where
+    each key represents a sub directory and returns a JS object
+    mapping file path strings to content. This is the opposite of
+    `nestFlatTree()`  
+    eg `flattenNestedTree({ a: { b: "me" }}); // => { "a/b": "me"}`
+    
+          flattenNestedTree: function(tree, obj, prefix) {
+            if (obj === undefined) { return files.flattenNestedTree(tree, {}, ""); }
+        
+            Object.keys(tree).forEach(function(dir) {
+              var path = nodePath.join(prefix, dir);
+              if (util.isString(tree[dir])) {
+                obj[path] = tree[dir];
+              } else {
+                files.flattenNestedTree(tree[dir], obj, path);
+              }
+            });
+        
+            return obj;
+          }
+        };
+    
+*   [¶][296]
+    
+    ## Status module
+*   
+    [¶][297]
+*   
+    [¶][298]
+    
+    Outputs the repository status as a human-readable string.
+    
+        var status = {
+    
+*   [¶][299]
+    
+    **toString()** returns the repository status as a human-readable
+    string.
+    
+          toString: function() {
+    
+*   [¶][300]
+    
+    **untracked()** returns an array of lines listing the files not
+    being tracked by Gitlet.
+    
+            function untracked() {
+              return fs.readdirSync(files.workingCopyPath())
+                  .filter(function(p) { return index.toc()[p] === undefined && p !== ".gitlet"; });
+            };
+    
+*   [¶][301]
+    
+    **toBeCommitted()** returns an array of lines listing the files
+    that have changes that will be included in the next commit.
+    
+            function toBeCommitted() {
+              var headHash = refs.hash("HEAD");
+              var headToc = headHash === undefined ? {} : objects.commitToc(headHash);
+              var ns = diff.nameStatus(diff.tocDiff(headToc, index.toc()));
+              return Object.keys(ns).map(function(p) { return ns[p] + " " + p; });
+            };
+    
+*   [¶][302]
+    
+    **notStagedForCommit()** returns an array of lines listing the
+    files that have changes that will not be included in the next
+    commit.
+    
+            function notStagedForCommit() {
+              var ns = diff.nameStatus(diff.diff());
+              return Object.keys(ns).map(function(p) { return ns[p] + " " + p; });
+            };
+    
+*   [¶][303]
+    
+    **listing()** keeps `lines` (prefixed by `heading`) only if it's nonempty.
+    
+            function listing(heading, lines) {
+              return lines.length > 0 ? [heading, lines] : [];
+            }
+    
+*   [¶][304]
+    
+    Gather all the sections, keeping only nonempty ones, and flatten them
+    together into a string.
+    
+            return util.flatten(["On branch " + refs.headBranchName(),
+                                 listing("Untracked files:", untracked()),
+                                 listing("Unmerged paths:", index.conflictedPaths()),
+                                 listing("Changes to be committed:", toBeCommitted()),
+                                 listing("Changes not staged for commit:", notStagedForCommit())])
+                .join("\n");
+          }
+        };
+    
+*   [¶][305]
+    
+    ## Running gitlet.js as a script
+*   
+    [¶][306]
+*   
+    [¶][307]
+    
+    Gitlet can be used from the command line. For example, executing
+    `node gitlet.js commit -m woo` would commit to the current repo
+    with the message "woo".
+*   
+    [¶][308]
+    
+    **parseOptions()** takes the `process.argv` object passed when
+    gitlet.js is run as a script. It returns an object that contains
+    the parsed parameters to be formed into a Gitlet command.
+    
+        var parseOptions = function(argv) {
+          var name;
+          return argv.reduce(function(opts, arg) {
+            if (arg.match(/^-/)) {
+              name = arg.replace(/^-+/, "");
+              opts[name] = true;
+            } else if (name !== undefined) {
+              opts[name] = arg;
+              name = undefined;
+            } else {
+              opts._.push(arg);
+            }
+        
+            return opts;
+          }, { _: [] });
+        };
+    
+*   [¶][309]
+    
+    **runCli()** takes the `process.argv` object passed when gitlet.js
+    is run as a script. It parses the command line arguments, runs the
+    corresponding Gitlet command and returns the string returned by the
+    command.
+    
+        var runCli = module.exports.runCli = function(argv) {
+          var opts = parseOptions(argv);
+          var commandName = opts._[2];
+        
+          if (commandName === undefined) {
+            throw new Error("you must specify a Gitlet command to run");
+          } else {
+            var commandFnName = commandName.replace(/-/g, "_");
+            var fn = gitlet[commandFnName];
+        
+            if (fn === undefined) {
+              throw new Error("'" + commandFnName + "' is not a Gitlet command");
+            } else {
+              var commandArgs = opts._.slice(3);
+              while (commandArgs.length < fn.length - 1) {
+                commandArgs.push(undefined);
+              }
+        
+              return fn.apply(gitlet, commandArgs.concat(opts));
+            }
+          }
+        };
+    
+*   [¶][310]
+    
+    If `gitlet.js` is run as a script, pass the `process.argv` array of
+    script arguments to `runCli()` so they can be used to run a Gitlet
+    command. Print the return value of the Gitlet command. If the
+    Gitlet command throws, print the error message.
+    
+        if (require.main === module) {
+          try {
+            var result = runCli(process.argv);
+            if (result !== undefined) {
+              console.log(result);
+            }
+          } catch (e) {
+            console.error(e.toString());
+          }
+        }
+    
+    
+
+
+
+[0]: http://gitlet.maryrosecook.com/docs/gitlet.html
+[1]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-1
+[2]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-2
+[3]: http://gitlet.maryrosecook.com/
+[4]: https://github.com/maryrosecook/gitlet
+[5]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-3
+[6]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-4
+[7]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-5
+[8]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-6
+[9]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-7
+[10]: http://maryrosecook.com/blog/post/git-from-the-inside-out
+[11]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-8
+[12]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-9
+[13]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-10
+[14]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-11
+[15]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-12
+[16]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-13
+[17]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-14
+[18]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-15
+[19]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-16
+[20]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-17
+[21]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-18
+[22]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-19
+[23]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-20
+[24]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-21
+[25]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-22
+[26]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-23
+[27]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-24
+[28]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-25
+[29]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-26
+[30]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-27
+[31]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-28
+[32]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-29
+[33]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-30
+[34]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-31
+[35]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-32
+[36]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-33
+[37]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-34
+[38]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-35
+[39]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-36
+[40]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-37
+[41]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-38
+[42]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-39
+[43]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-40
+[44]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-41
+[45]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-42
+[46]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-43
+[47]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-44
+[48]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-45
+[49]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-46
+[50]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-47
+[51]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-48
+[52]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-49
+[53]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-50
+[54]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-51
+[55]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-52
+[56]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-53
+[57]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-54
+[58]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-55
+[59]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-56
+[60]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-57
+[61]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-58
+[62]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-59
+[63]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-60
+[64]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-61
+[65]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-62
+[66]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-63
+[67]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-64
+[68]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-65
+[69]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-66
+[70]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-67
+[71]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-68
+[72]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-69
+[73]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-70
+[74]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-71
+[75]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-72
+[76]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-73
+[77]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-74
+[78]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-75
+[79]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-76
+[80]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-77
+[81]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-78
+[82]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-79
+[83]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-80
+[84]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-81
+[85]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-82
+[86]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-83
+[87]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-84
+[88]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-85
+[89]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-86
+[90]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-87
+[91]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-88
+[92]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-89
+[93]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-90
+[94]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-91
+[95]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-92
+[96]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-93
+[97]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-94
+[98]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-95
+[99]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-96
+[100]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-97
+[101]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-98
+[102]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-99
+[103]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-100
+[104]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-101
+[105]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-102
+[106]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-103
+[107]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-104
+[108]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-105
+[109]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-106
+[110]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-107
+[111]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-108
+[112]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-109
+[113]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-110
+[114]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-111
+[115]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-112
+[116]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-113
+[117]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-114
+[118]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-115
+[119]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-116
+[120]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-117
+[121]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-118
+[122]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-119
+[123]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-120
+[124]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-121
+[125]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-122
+[126]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-123
+[127]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-124
+[128]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-125
+[129]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-126
+[130]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-127
+[131]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-128
+[132]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-129
+[133]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-130
+[134]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-131
+[135]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-132
+[136]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-133
+[137]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-134
+[138]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-135
+[139]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-136
+[140]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-137
+[141]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-138
+[142]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-139
+[143]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-140
+[144]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-141
+[145]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-142
+[146]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-143
+[147]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-144
+[148]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-145
+[149]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-146
+[150]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-147
+[151]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-148
+[152]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-149
+[153]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-150
+[154]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-151
+[155]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-152
+[156]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-153
+[157]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-154
+[158]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-155
+[159]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-156
+[160]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-157
+[161]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-158
+[162]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-159
+[163]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-160
+[164]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-161
+[165]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-162
+[166]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-163
+[167]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-164
+[168]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-165
+[169]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-166
+[170]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-167
+[171]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-168
+[172]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-169
+[173]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-170
+[174]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-171
+[175]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-172
+[176]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-173
+[177]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-174
+[178]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-175
+[179]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-176
+[180]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-177
+[181]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-178
+[182]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-179
+[183]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-180
+[184]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-181
+[185]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-182
+[186]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-183
+[187]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-184
+[188]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-185
+[189]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-186
+[190]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-187
+[191]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-188
+[192]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-189
+[193]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-190
+[194]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-191
+[195]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-192
+[196]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-193
+[197]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-194
+[198]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-195
+[199]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-196
+[200]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-197
+[201]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-198
+[202]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-199
+[203]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-200
+[204]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-201
+[205]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-202
+[206]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-203
+[207]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-204
+[208]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-205
+[209]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-206
+[210]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-207
+[211]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-208
+[212]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-209
+[213]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-210
+[214]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-211
+[215]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-212
+[216]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-213
+[217]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-214
+[218]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-215
+[219]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-216
+[220]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-217
+[221]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-218
+[222]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-219
+[223]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-220
+[224]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-221
+[225]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-222
+[226]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-223
+[227]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-224
+[228]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-225
+[229]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-226
+[230]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-227
+[231]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-228
+[232]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-229
+[233]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-230
+[234]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-231
+[235]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-232
+[236]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-233
+[237]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-234
+[238]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-235
+[239]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-236
+[240]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-237
+[241]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-238
+[242]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-239
+[243]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-240
+[244]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-241
+[245]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-242
+[246]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-243
+[247]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-244
+[248]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-245
+[249]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-246
+[250]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-247
+[251]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-248
+[252]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-249
+[253]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-250
+[254]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-251
+[255]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-252
+[256]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-253
+[257]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-254
+[258]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-255
+[259]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-256
+[260]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-257
+[261]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-258
+[262]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-259
+[263]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-260
+[264]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-261
+[265]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-262
+[266]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-263
+[267]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-264
+[268]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-265
+[269]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-266
+[270]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-267
+[271]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-268
+[272]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-269
+[273]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-270
+[274]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-271
+[275]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-272
+[276]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-273
+[277]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-274
+[278]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-275
+[279]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-276
+[280]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-277
+[281]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-278
+[282]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-279
+[283]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-280
+[284]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-281
+[285]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-282
+[286]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-283
+[287]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-284
+[288]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-285
+[289]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-286
+[290]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-287
+[291]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-288
+[292]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-289
+[293]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-290
+[294]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-291
+[295]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-292
+[296]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-293
+[297]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-294
+[298]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-295
+[299]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-296
+[300]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-297
+[301]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-298
+[302]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-299
+[303]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-300
+[304]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-301
+[305]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-302
+[306]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-303
+[307]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-304
+[308]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-305
+[309]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-306
+[310]: http://gitlet.maryrosecook.com/docs/gitlet.html#section-307

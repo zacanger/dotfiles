@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="2350"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$h4bODX9BDUa</title>
+</head>
+<body><h1>Input/Output 04-22 Notes</h1><p></p><p></p><p>Before this we all worked on our programming languages.&nbsp;</p><p></p><p>---</p><p></p><p>Discussion about Processing versus openFrameworks. Processing is like having a learners permit as a teenager. openFrameworks is like being an adult with a full lisence. margin for error is greater, but you can go farther. Also, datatypes is weird in Java.</p><p></p><p><a href='/ep/profile/AUZb6pnTdHj'/>Zach Lieberman</a> is pro code on a page, not on a screen. Code is typography. Super important to remember this. The easiest code to understand is no code. The best way to learn is to not look at code, but rather to organize it. Think of it as a hypertext way of writing, not a linear way of writing. you don&rsquo;t have to think about what&rsquo;s in the link. you can drill down to look at what&rsquo;s there in the link, but you don&rsquo;t have to. There is the option of abstraction that is very powerful.&nbsp;</p><p></p><p>He sees people get really tripped up with organizing the code. It&rsquo;s easy to get lost in code in terms of context so organization is really important.</p><p></p><p>Horror story time:</p><p>[Zach and Golan Levin] were working together to track people on stage and track their voices [messa di voce <a href="http://www.flong.com/projects/messa/"></a>http://www.flong.com/projects/messa/]. some live performance thing. had a student come to meet them to help with the project. the student flew out, drank red bull non stop, wrote a totally unintelligible codebase. it seemed to work, but didn&rsquo;t actually work when they got to the theater. there was a function called &rsquo;process&rsquo; that was 7 pages long. it was crazy, so much in there, poorly stuctured. it was a nightmare. Zach went to the press office and printed it out to be able to sort out what was going on. Zach could find the bugs when it was on paper.&nbsp;</p><p></p><p>Moral: We get lost on the computer screen. We need new ways of thinking through our code.&nbsp;</p><ul class="comment"><li>Now I understand why we&rsquo;re given all these recommendations of print books to read.</li></ul>
+
+<p>Muscle memory for typing code.</p><p>Writing on paper as a means of learning.</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_h4bODX9BDUa_p.77541_1398182793204_20140422_120036.jpg'/></p><p></p><p>We&rsquo;ll be defining the words that are circled. Those are the terms people didn&rsquo;t feel super comfortable with.</p><p></p><p>--</p><p><b>Story</b></p><ul><li>What happens when you write code.</li>
+<li>Your program begins as texts</li>
+<li>IDE (Integrated Development Environment)<ul><li>We will be writing text files.</li>
+<li>A journey that your text files goes on. (A series of steps.)</li></ul>
+<ul style="list-style: none;"><li>1. Text</li>
+<li>2. Preprocess</li>
+<li>3. Compile</li>
+<li>4. Link</li><ul><li>Understand the process by which it goes from text to the thing that you are seeing.</li>
+<li>The more you understand about the process the easier it is to understand what is going on.</li>
+<li>The second phase is <b><a href='http://en.wikipedia.org/wiki/Preprocessor'/>preprocess</a>.</b><ul><li>A stage that alters the text file itself. Goes through the text file (Find and replace)</li>
+<li>Macro in a text editor.</li>
+<li>Idea of including or importing, a file somewhere else that you are including.</li>
+<li>cpp. taking text and turning it into instructions for the CPU.</li>
+<li>Could you take a textfile and use it on a different CPU?<ul><li>Might work on the same family of CPUs.</li>
+<li>You can target certain chips using flags.</li></ul>
+</li>
+<li>Library is a set of code someone else has written that you write your code againsnt.</li>
+<li>At the end you have a thing that runs.</li>
+<li>Different language will have different phases.<ul><li>Compiled language in Java goes into Byte code.</li></ul>
+</li>
+<li>A language that can compile itself.<ul><li>That compiler is an executable.</li></ul>
+</li>
+<li>Package Manager<ul><li>Literally see how it has an automated process.</li>
+<li>&quot;Brew Install some tool&quot;<ul><li>Link thing, turn files into objects.</li>
+<li>Nerd term for that is toolchain.<ul><li>Toolbelt for creating something.</li></ul>
+</li>
+<li>For Arduino there is a toolchain that is compiling it linking and turning it to code that the Arduino can understand.</li></ul>
+</li>
+<li>Hard for our mind to image the limits.</li></ul>
+</ul>
+</ul>
+</ul>
+</ul>
+<p>--</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_h4bODX9BDUa_p.77541_1398189241426_20140422_134839.jpg'/></p><p></p><p><b><u>Variety of Datatypes&nbsp;</u></b></p><ul><li>Datatypes is a way to define the limits.<ul><li>You are using 0 and 1 to represent something.</li></ul>
+</li>
+<li>C and C++ you call these primitive datatypes</li></ul>
+<p><u>Ints</u> - 32</p><p><u>Long long</u> - 64 (Ginormous)</p><p><u>Floating</u> - Can do about seven decimals places.</p><ul><li>3.0000000</li>
+<li>When using animation code typically you can use a float.</li>
+<li>As you get further away from 0 the less values that this number can represent.</li></ul>
+<p><u>Double</u> - more precise than a float use mostly by scientist where those differences matter.</p><p><u>Boolean</u> - represent true and false.</p><p><u>String</u> - letters</p><p></p><p><b>Differences in Languages</b></p><ul><li>Stringly typed<ul><li>Java<ul><li>var x = 5</li>
+<li>x = &quot;hello&quot;</li></ul>
+</li>
+<li>C++<ul><li>float x = 100.05;</li>
+<li>Cant change the type because your asking the cpu to give you space in memory specifically for a float.</li>
+<li>You can&rsquo;t put a string in there.</li></ul>
+</li></ul>
+</li>
+<li>Weakly typed<ul><li>You can play with languages in different ways</li>
+<li>A strings&nbsp; + an int</li>
+<li>Weakly typed languages have all of these typed of existential questions.</li></ul>
+</li>
+<li>One of the joys of programming is take data and put the numbers together.<ul><li>That is a process of abastraction, to create a new thing and simplify your value.</li></ul>
+</ul>
+
+<p><b>C and C++</b></p><ul><li><b>Variables</b><ul><li>This name a reserved for a place in memory.<ul><li>Placeholders for <b>memory.</b></li>
+<li>Memory - the idea that we can store information. Which lets us do things overtime.</li>
+<li>Memory that you have used is called <a href='http://en.wikipedia.org/wiki/Stack_(abstract_data_type)'/>the stack.</a></li>
+<li>C++ doesn&rsquo;t care where you are looking in memory.<ul><li>An address position that you can look around in.</li>
+<li>Going from a student permit to your parents are not in the car.</li></ul>
+</li>
+<li>You can&rsquo;t initialize variables twice.<ul><li><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_h4bODX9BDUa_p.77541_1398191012497_boy-driver-1-600x450.png'/></li></ul>
+</li></ul>
+</li>
+<li>Stages of a variables life.<ul><li>Define the varibale</li>
+<li>put a value in</li>
+<li>get value out</li>
+<li>goodbye!</li></ul>
+</li></ul>
+</li>
+<li>Words in code that you can&rsquo;t use to create variables (reserved).</li>
+<li>Turns a color saying that these word is important.</li>
+<li>If you compile in 32 bits you can only use that amount of memory.&nbsp; (32 bits can address 4 billion positions in memory, ie 4 gb)</li>
+<li>A limitation compared to 64 bits.</li>
+<li>Drawing Memory</li>
+<li>Old Mac Computers -- non protected memory<ul><li>Get a bomb</li>
+<li>Unhappy Face<ul><li><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_h4bODX9BDUa_p.77541_1398191709981_SadMac.gif'/></li></ul>
+</li>
+<li>Looks very similar to analog feedback and CRT.</li></ul>
+</li>
+<li>Sometimes there is protected space.</li>
+<li>Memory Glitch that happened to me in THREE.js</li></ul>
+<p>*</p><p><a href="http://www.youtube.com/watch?v=Cv2lJhCrM7I"></a>http://www.youtube.com/watch?v=Cv2lJhCrM7I</p><p></p><p><b>Objects</b></p><ul><li>The moment that you can start defining an object is the moment you can start creating your own code.</li></ul>
+
+<p></p></body>
+</html>

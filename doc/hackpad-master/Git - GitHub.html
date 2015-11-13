@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="986"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$W9GmyQIqTZo</title>
+</head>
+<body><h1>Git / GitHub</h1><p></p><p>nice git client for Mac OS (free)</p><p><a href="http://www.sourcetreeapp.com/"></a>http://www.sourcetreeapp.com/</p><p></p><p>Optionally show hidden files, to make editing the .gitignore file:</p><p>/*</p><p>$ defaults write com.apple.finder AppleShowAllFiles -boolean true</p><p>$ killall Finder</p><p>*/</p><p></p><p>source tree:</p><ol><li>(edit some files)</li>
+<li>[add]</li>
+<li>[commit]</li>
+<li>[push]</li></ol>
+
+<p>commands</p><p><a href="http://git-scm.com/docs"></a>http://git-scm.com/docs</p><p></p><p>A successful Git branching model:</p><p><a href="http://nvie.com/posts/a-successful-git-branching-model/"></a>http://nvie.com/posts/a-successful-git-branching-model/</p><p></p><p>.gitignore example</p><ul><li><a href="https://gist.github.com/motoishmz/5236307/raw/be863c52bc5c3ad8c88d94952118c3578919ead9/.gitignore"></a>https://gist.github.com/motoishmz/5236307/raw/be863c52bc5c3ad8c88d94952118c3578919ead9/.gitignore</li>
+<li><a href="https://gist.github.com/ofZach/3707086"></a>https://gist.github.com/ofZach/3707086&nbsp;&nbsp; (this is useful for OF developement)</li></ul>
+
+<p></p><p><b>Process for making a change to a file in SourceTree:</b></p><ul><li>Make a change to a file</li>
+<li>&quot;Add&quot; the file to the queue</li>
+<li>&quot;Commit&quot; all of the files you added, and write some comments</li>
+<li>&quot;Push&quot; all of the commits to Github</li></ul>
+
+<p></p><p></p><p></p><p><b>useful resources</b></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_W9GmyQIqTZo_p.77282_1380754442277_git.png'/></p><ul><li><a href="http://golancourses.net/2013/resources/tools/git-and-github/"></a>http://golancourses.net/2013/resources/tools/git-and-github/</li>
+<li>my cheat sheet for command line: <a href="http://piratepad.net/gitCheatSheet)"></a>http://piratepad.net/gitCheatSheet)</li></ul>
+
+<p><b>Git terminal commands (common workflow)</b></p><p></p><p>Cloning a repository from github:</p><ul style="list-style: none;"><li>git clone <i>url_from_github</i></li></ul>
+
+<p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_W9GmyQIqTZo_p.77434_1380758257986_undefined'/></p><p></p><p><i>(take care about always cloning from the https url, I have found things can get funky if you don&rsquo;t use https as the source URL w/ github repos, especially if you go to push changes back.&nbsp; luckily it&rsquo;s the default now... they used ssh before.&nbsp; Mini and I fixed a problem she had where she had not used the https url so authentication to push changes back was hard.&nbsp; After switching the source to https it was fine.)</i></p><p></p><p>Get some useful info about what you&rsquo;ve changed.</p><ul style="list-style: none;"><li>git status</li></ul>
+
+<p>Add files you&rsquo;ve changed to staging</p><ul style="list-style: none;"><li>git add <i>files</i></li><ul><li><i>note: you can use a wild card on this line, like <u>git add src/*.cpp</u></i></li></ul>
+</ul>
+
+<p>Commit files in staging (add a useful message!)</p><ul style="list-style: none;"><li>git commit -m &rsquo;<i>commit message</i>&rsquo;</li></ul>
+
+<p>Alternatively, &quot;git add&quot; all modified files and commit them in one go</p><ul style="list-style: none;"><li>git commit -am &rsquo;<i>commit message</i>&rsquo;</li></ul>
+
+<p>See history of commits to this repository, with time, author, commit messages</p><ul style="list-style: none;"><li>git log</li></ul>
+
+<p>See uncommitted file changes&nbsp;</p><ul style="list-style: none;"><li>git diff</li></ul>
+
+<p>Send your changes to Github</p><ul style="list-style: none;"><li>git push</li></ul>
+
+<p>Download changes from Github (and merge them)</p><ul style="list-style: none;"><li>git pull</li></ul>
+
+<p>Create a new branch</p><ul style="list-style: none;"><li>git checkout -b <i>YourNewBranchName</i></li></ul>
+
+<p>Pushing git to the new branch</p><ul style="list-style: none;"><li>git push origin <i>YourNewBranchName</i></li></ul>
+
+<p>Switching back to master</p><ul style="list-style: none;"><li>git checkout master</li></ul>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="3693"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$lrzPpxSUTLN</title>
+</head>
+<body><h1>Questions: Programming for Graphics</h1><p></p><p>started piling up questions concerning Programming for Graphics + general topics around it, since 2013-10-30.</p><p></p><p>To find unsolved questions: search: (waiting for answer...)</p><p></p><ul class="comment"><li>2013-11-13 (Wed)</li></ul>
+<p><b>9. Optical flow example?</b></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_lrzPpxSUTLN_p.77282_1384994436048_IMG_0182.JPG'/></p><p></p><p>I took a picture of every page of a flip book. I want to use the features in this picture as an emitter of my particle system. Do you have some optical flow examples except ofxCv example?</p><p></p><undefined><li><b>Answer</b></li></undefined>
+
+<ul><li>Julapy&rsquo;s example (couldn&rsquo;t find on forum, but received it from Zach)</li></ul>
+
+<p></p><ul class="comment"><li>2013-11-12 (Tue)</li></ul>
+<p><b>8. SVG path order / path planning for our plotter</b></p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_lrzPpxSUTLN_p.77282_1384988669382_スクリーンショット 2013-11-20 午後6.03.33.png'/></p><p></p><p>I typed &quot;SFPC&quot; in illustrator, and then I exported it as a svg file. I want to draw the font outline with a single stroke but the path order is scattered because the order depends on the font data.&nbsp;&nbsp;</p><p></p><p>I want to draw SFPC using our plotter. How can I define the stroke?</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_lrzPpxSUTLN_p.77282_1384992583365_photo.JPG'/></p><p></p><p></p><undefined><li><b>Answer</b></li></undefined>
+<ul><li><a href='http://en.wikipedia.org/wiki/A*_search_algorithm'/>A* search algorithm</a> (answer from Kyle)</li></ul>
+
+<p></p><p></p><ul class="comment"><li>2013-11-9 (Sat)</li></ul>
+
+<p><b>7. What is ofDisableArbTex() ?</b></p><p></p><p>ofTexture.h</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_lrzPpxSUTLN_p.77282_1384041520450_Screen Shot 2013-11-09 at 6.56.33 PM.png'/></p><p></p><p></p><p>After searching ofGetUsingArbTex() in Xcode project, I understood bUsingArbTex is used for whether using GL_TEXTURE_RECTANGLE_ARB or GL_TEXTURE_2D.&nbsp;</p><p></p><p>In short, ofDisableArbTex() means &quot;we don&rsquo;t want to use the part of texture, but want to use whole of texture image&quot;.... is it correct?&nbsp;</p><p></p><undefined><li><b>Answer</b></li></undefined>
+<p>GL_TEXTURE_2D = pow2 texture.&nbsp; 16x16, 256x64, 128x8, etc.&nbsp; width and height must be power of 2.&nbsp; For non power of 2 image (640x480) this is problematic since we are using a sub texture (portion) and not the whole image.&nbsp; in GL_TEXTURE_2D, gl texture coordinates are in %s, ie (0-1).&nbsp;</p><p></p><p>GL_TEXTURE_RECTANGLE_ARB = rectangular texture, width height can be any size.&nbsp; texture coordinate are in pixels</p><p></p><p>GL_TEXTURE_2D allows repeating textures and other things, GL_TEXTURE_RECTANGLE_ARB is more space efficient.&nbsp;</p><p></p><p>in OF we use GL_TEXTURE_RECTANGLE_ARB when we can, since it&rsquo;s more easier to manage.&nbsp;&nbsp; ofDisableArbTex() forces OF to use GL_TEXTURE_2D instead of trying to use GL_TEXTURE_RECTANGLE_ARB.&nbsp; This is useful if you need features unique to GL_TEXTURE_2D or specific shaders (in glsl the code varies if you are using GL_TEXTURE_2D or GL_TEXTURE_RECTANGLE_ARB).</p><p></p><p></p><p></p><ul class="comment"><li>2013-11-8 (Fri)</li></ul>
+
+<p><b>6. Texture Example</b></p><p>Today&rsquo;s result: texture + dof + discarding some pixels using fragment shader</p><p>*</p><p><a href="http://code-check-eins-zwei.tumblr.com/post/66401894895/dof-circle-discard-texture"></a>http://code-check-eins-zwei.tumblr.com/<a href='http://code-check-eins-zwei.tumblr.com/'/>post/66401894895/dof-circle-discard-texture</a></p><p></p><p>I still don&rsquo;t understand what kind of texture Zach was using when Zach show me the dof example. Would you show me it? or, please tell me what kind of texture is looks interesting for point sprite+alpha blending.</p><p></p><undefined><li><b>Answer</b></li></undefined>
+<p>it&rsquo;s just a distance formula generated texture, I think I used powf to make it curve slightly differently:&nbsp;&nbsp; <a href="http://pastebin.com/FbWAicBa"></a>http://pastebin.com/FbWAicBa</p><p></p><p>from there, be sure to enable point sprite:&nbsp;</p><ul style="list-style: none;"><li>&nbsp;&nbsp; glDisable(GL_DEPTH_TEST);</li></ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; glEnable(GL_BLEND);</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; glBlendFunc(GL_SRC_ALPHA, GL_ONE);</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; glEnable(GL_ALPHA_TEST);</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; glAlphaFunc(GL_GREATER, 0);</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tex.bind();</p><p></p><p>and make sure your fragment shader can handle it:&nbsp;</p><p></p><p>uniform sampler2D texture;</p><p></p><p>void main() {</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gl_FragColor = texture2D(texture, gl_PointCoord) *gl_Color;</p><p>}</p><p></p><p></p><p></p><p></p><ul class="comment"><li>2013-11-4 (Mon)</li></ul>
+<p><b>5. Vertex Shader Ideas?</b></p><p>Recently I make my particle system + OSC interface + UI (MaxMSP). The goal is that drawing something using only white dot.</p><p></p><p>Today I added vertex shader to change the point size to realize the distance from camera to each point.</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_lrzPpxSUTLN_p.77282_1383629733037_スクリーンショット 2013-11-05 午前0.28.55.png'/></p><p></p><p>Let me know if you know some common/interesting technics or expression using vertex shader (not the other kind of shaders!)</p><p></p><undefined><li><b>Answer:</b></li></undefined>
+<ul><li>vertex shader can use camera info to control size / color / opacity (ie, DOF)<ul><li>for DOF see here: <a href="http://pastebin.com/KJaaWCeH"></a>http://pastebin.com/KJaaWCeH</li>
+<li>uses a simple formula to adjust size based on distance from focal plane: float size = abs(gl_Position.z - focusDistance) * aperture + 1.;)</li></ul>
+</li>
+<li>vertex shader can animate points using noise functions (as offsets / displacement from the vertice)</li>
+<li>vertex shader can alter normals (for adjusting lighting, etc or passing data to frag shader)</li>
+<li>vertex shader can move points around based on some properties</li></ul>
+
+<p></p><p></p><p><b>4. How to implement sin( ofGetElapsedTimef() ) in Max?</b></p><p>except using MSP...</p><p></p><undefined><li><b>Answer:</b></li></undefined>
+<p>(waiting for answer...)</p><p></p><p></p><ul class="comment"><li>2013-10-31 (Thu)</li></ul>
+<p><b>3. Smart way to send values from Max to ofVec3f via OSC?</b></p><p></p><undefined><li><b>Answer:</b></li></undefined>
+<p>Max: using &rsquo;pack&rsquo; or &rsquo;pac&rsquo; object</p><p>OF: using ofxKeyValueOSC <a href="https://github.com/satoruhiga/ofxKeyValueOSC"></a>https://github.com/satoruhiga/ofxKeyValueOSC</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_lrzPpxSUTLN_p.77282_1383585191150_スクリーンショット 2013-11-04 午後0.12.57.png'/></p><p></p><p></p><ul class="comment"><li>2013-10-30 (Wed)</li></ul>
+
+<p><b>2. MaxMSP bpatcher doesn&rsquo;t load subpatch when I open the main patch</b></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_lrzPpxSUTLN_p.77282_1383186664087_10.09.38.png'/></p><p></p><p></p><undefined><li><b>Answer:</b></li></undefined>
+
+<p>adding file search path from Window &gt;&gt; File Preference</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_lrzPpxSUTLN_p.77282_1383188483850_11.00.32.png'/></p><p></p><p></p><p><b>1. linecap in OpenGL?</b></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_lrzPpxSUTLN_p.77282_1383186230570_7.55.29.png'/></p><p></p><p>By default, OF draws the line looks like rectangle when I call ofLine. I want to draw lines using linecap. I couldn&rsquo;t found any options in OpenGL about linecap. How can I do this? Should I make outline path of capped line?</p><p></p><undefined><li><b>Answer:</b></li></undefined>
+<p>This is a hack but what if you draw an ofCircle(lineEnd.x, lineEnd.y, lineWidth / 2); ?</p><p>↑ Yes I think it might work, but it might be not handy.</p><p>I found ofxFatLines by Roy <a href="https://github.com/roymacdonald/ofxFatLines"></a>https://github.com/roymacdonald/ofxFatLines. should I do this kind of approach...?</p><p></p><ul><li>thick lines opengl is always a HUGE issue</li>
+<li><a href="https://github.com/roymacdonald/ofxFatLines"></a>https://github.com/roymacdonald/ofxFatLines (but this has some bugs at different sizes.&nbsp; I am not 100% convinced -- for example <a href="http://i.imgur.com/ApggE.png)"></a>http://i.imgur.com/ApggE.png)...&nbsp; vase render has updates, maybe it&rsquo;s improved since this addon?&nbsp;&nbsp; I still feel unconvinced it can handle edge cases well.&nbsp;</li>
+<li>fake smooth lines <a href="https://github.com/apitaru/ofxSmoothLines"></a>https://github.com/apitaru/ofxSmoothLines</li>
+<li>graphics libraries, like CAIRO do great 2d lines, but they are not 3d oriented.</li>
+<li>I like this one: <a href="https://github.com/bgstaal/ofxShivaVG"></a>https://github.com/bgstaal/ofxShivaVG ( &lt;&lt; cool!!)<ul><li>uses stencil buffer, pay attention to main.cpp</li></ul>
+</li>
+<li>for NON variable thickness lines, I can show you how to calculate end caps yourself...&nbsp; it&rsquo;s not hard...&nbsp; use the circle formula.&nbsp;&nbsp;</li></ul>
+
+<p></p></body>
+</html>

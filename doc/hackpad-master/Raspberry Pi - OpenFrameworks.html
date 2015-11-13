@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="2552"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$HGi1I8lv4s9</title>
+</head>
+<body><h1>Raspberry Pi + OpenFrameworks</h1><p></p><p><b>Fairly Detailed Setup Instructions:</b></p><p><a href='/D9EgUtoGFWQ'/>OF RPi Setup Manual</a></p><p></p><p><b>Workshop Resources</b></p><p><a href='https://github.com/jmwohl/OFPiWorkshop'/>Example Code</a></p><p></p><p><b>OF + Pi SD Card Image:</b></p><p><a href="http://ofpi.jonwohl.com/ofpi_workshop_20140510.img"></a><a href='http://ofpi.jonwohl.com/ofpi_workshop_20140510.img'/>http://ofpi.jonwohl.com/ofpi_workshop_20140510.img</a></p><p></p><p>// Note: I&rsquo;ll work on a non-expanded (i.e. not 8GB) image and repost that with instructions when I can.</p><ul class="comment"><li>awesome thanks! downloading it now,,, I strumbled upon this link, guess it might be helpful <a href="http://raspberrypi.stackexchange.com/questions/8305/how-to-make-an-image-img-from-whats-in-the-sdcard-but-as-compact-as-the-ori"></a>http://raspberrypi.stackexchange.com/questions/8305/how-to-make-an-image-img-from-whats-in-the-sdcard-but-as-compact-as-the-ori</li>
+<li>&nbsp;Nice, this looks promising... I had come across some documentation using parted, but this looks simpler. I&rsquo;ll give it a go.</li></ul>
+
+<p></p><h2>Installation</h2><p></p><p><b>Transfer image to the SD card</b></p><p>in terminal, use the application `dd` (if = input file, of = output file)</p><ul class="code"><li>$ sudo dd bs=1m if=/dev/rdisk2 of-backup-image.dmg</li></ul>
+<p>These can be any file or memory on your computer, be very careful as ****<b>wrong drive names can damage your files</b>****</p><p></p><p><b>Terminal &amp; how to find the right disk names</b></p><p>in terminal, <i>everything</i> is a file</p><p></p><ul class="code"><li>$ ls</li></ul>
+<p>list file in directory</p><p></p><p>Capital names usually refer to user files</p><p>small caps are file that computer use,,, linux stuffs</p><p></p><ul class="code"><li>$ /dev&nbsp;</li></ul>
+<p>to access folder with all the drivers</p><ul class="code"><li>ls -al *disk*</li></ul>
+<p>(list all the disk)</p><p></p><p>You&rsquo;ll see a list of disk in your computer</p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_HGi1I8lv4s9_p.78223_1399747027328_Screen Shot 2014-05-10 at 2.36.34 PM.png'/></p><p></p><p>different colors represent different permission to each drive</p><p></p><p></p><p></p><p>Recommended SD CARD: Lexar 400x Professional: <a href="http://www.amazon.com/Lexar-Professional-UHS-I-Memory-LSD32GCTBNA400/dp/B007ADFV2M"></a>http://www.amazon.com/Lexar-Professional-UHS-I-Memory-LSD32GCTBNA400/dp/B007ADFV2M</p><p></p><p>Terminal Software:&nbsp; iTerm <a href="http://www.iterm2.com/"></a>http://www.iterm2.com/</p><p></p><p>Yorgo Alexopoulos has <a href='https://yorgo.org'/>yorgo.org</a></p><p></p><p>after copy image file you might have to manually expand the partition of the disk,, depends on original SD card size vs your SD card size</p><p></p><p><b>OSC</b></p><p>kinda of protocol (actually sit on top of another protocol (UDP-based))</p><p>a way to send message over the network</p><p></p><p></p><p><b>LINK TO SD CARD SETUP MANUAL</b></p><p><a href='/D9EgUtoGFWQ'/>OF RPi Setup Manual</a></p><p></p><h2>Breakdown</h2><ul><li>image was expanded to 8gb, you might need to expand again if you have bigger card</li>
+<li>wifi dongle &gt;&gt; easily setup go to Raspbian&rsquo;s GUI</li>
+<li>use package manager to update/upgrade software (Update linux packages section)</li>
+<li>(add samba support section)</li></ul>
+
+<p><b><i>tips</i></b></p><ul><li>Desolder the LAN port out of the model B to make it draw much less power!</li>
+<li>long wire soldered to GPIO can make it AM antenna! it&rsquo;s fast enough!</li></ul>
+
+<p><b>Pi story</b></p><ul><li>70s everything was exposed // study computer had no barrier<ul><li><a href="http://en.wikipedia.org/wiki/Commodore_64"></a>http://en.wikipedia.org/wiki/Commodore_64</li></ul>
+</li>
+<li>it take a lot of work just to get to the same level of exposure on the modern computer</li>
+<li>for the sake of next gen good engineers PI has born!<ul><li><a href="http://en.wikipedia.org/wiki/Raspberry_Pi"></a>http://en.wikipedia.org/wiki/Raspberry_Pi</li></ul>
+</ul>
+
+<ul class="code"><li>sudo arp-scan --interface=bridge100 --localnet</li></ul>
+
+<p>list computer on this networks</p><p></p><ul class="code"><li>ssh pi@192.168.2.4</li></ul>
+
+<p>to gain control remotely through SSH</p><ul class="code"><li>cat /dev/urandom &gt; /dev/fb0</li></ul>
+<p>write random number to the screen noiseeeeee!</p><p></p><ul class="code"><li>cat /dev/zero &gt; /dev/fb0</li></ul>
+<p>clear the screen with zero</p><ul class="code"><li>cat /dev/input/mice &gt; /dev/fb0</li></ul>
+<p>drag mouse and it draws into the screen by pixels</p><p></p><p>other interesting folders you want to access</p><ul class="code"><li>/proc</li>
+<li>/sys</li></ul>
+
+<p>if you want to access gpio1</p><ul class="code"><li>/sys/class/gpio/gpio1</li></ul>
+
+<p></p><p></p><p></p><p><b>Samba server</b></p><p>Finder &gt; Go &gt; connect to server</p><ul class="code"><li><a href="smb://192.168.2.2/OF"></a>smb://192.168.2.2/OF</li></ul>
+<p>connecting through Samba protocol</p><p>this will mount the drive to your computer...</p><p></p><ul><li>what is user/pass</li>
+<li>config to where to open up to&nbsp;</li>
+<li>more about how to put Samba on the pi&nbsp; <a href="http://www.openframeworks.cc/setup/raspberrypi/Raspberry-Pi-SMB.html"></a>http://www.openframeworks.cc/setup/raspberrypi/Raspberry-Pi-SMB.html</li></ul>
+
+<p></p><p></p><p></p><undefined><li>GDB another solution for debugging</li></undefined>
+<p><a href="http://en.wikipedia.org/wiki/Gdbserver"></a>http://en.wikipedia.org/wiki/Gdbserver</p><p></p><p></p><h2>Remote Access</h2><p>If you are using internet connection sharing, ssh is the way to go</p><p>And if you want X, then you can use tightvncserver</p><p>But if you want framebuffer, there is only <a href='https://github.com/hanzelpeter/dispmanx_vnc/'/>dispmanx_vnc</a>, which has a bug where you can&rsquo;t use the mouse :(</p><p>I am looking at modifying the source to make sure uinput is being set correctly</p><p>But maybe it should be evdev and not uinput? I don&rsquo;t know</p><p></p></body>
+</html>

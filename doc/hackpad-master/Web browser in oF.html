@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="291"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$vC4RnifaNQ3</title>
+</head>
+<body><h1>Web browser in oF</h1><p>There are several ways to communicate with web from openFrameworks. One of the most radical way is having a browser itself inside oF application. It means you can make communications between C++ and Javascript inside openFrameworks.</p><p></p><p>It doesn&rsquo;t so make sense if you simply create an application with Javascript instead of C++ but it can be useful when you want to combine oF with a web-based application which already exists for some specific purposes such as:</p><ul><li>to control Arduino from nodejs on heroku server via openFrameworks ( but if you want to directly communicate with nodejs, maybe <a href='https://github.com/satoruhiga/ofxNodejs'/>this</a> is simpler)</li>
+<li>to access web-API with Javascript libraries while using an hardware interface which cannot be handled by a browser</li></ul>
+
+<p>----</p><p></p><p><b>Set up</b></p><p></p><p><b>1. Get Awesomium</b></p><p><a href='http://www.awesomium.com/'/>Awesomium</a> is a <a href='http://www.chromium.org/'/>Chromium-powered</a> HTML UI engine which can be used when you want to make a browser application in C++ or .NET application.</p><p>To use in openFrameworks, you need at first <a href='http://www.awesomium.com/download/'/>download Awesomium</a> and install it. You can use it for free unless you get more than $100k revenue.</p><p></p><p></p><p><b>2. Get ofxAwesomium addon</b></p><p>There are several ofxAddons for Awesomium but I used <a href='https://github.com/mpcdigital/ofxAwesomium'/>ofxAwesomium</a> You need to do a little setup as described in README.md on the github.</p><p>When I manually import the addon, your addons directory in XCode looks like this:</p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_ZlJOopgPHXi_p.257357_1416886638731_%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202014-10-28%203.50.46.png'/></p><p></p><p>You need to get and place Awesomium.framework from /Library/Frameworks/Awesomium.framework .</p><p></p><p>----</p><p></p><p><b>How to use</b></p><p>You can check examples in addons at first. And here are things I needed to figure out from outside of the examples.</p><p></p><p></p><p><b>Sample code</b>:</p><p><a href="https://github.com/yukiy/browser-in-OF-basic"></a><a href='https://github.com/yukiy/browser-in-OF-basic'/>https://github.com/yukiy/browser-in-OF-basic</a></p><p></p><p></p><p><b>a.Read html/js/css files</b></p><p></p><ul><li>Open a webpage.</li></ul>
+<ul class="code"><li>void testApp::setup(){</li>
+<li>&nbsp;&nbsp;&nbsp; browser.setup(ofGetWidth(), ofGetHeight());</li>
+<li>&nbsp;&nbsp;&nbsp; browser.loadURL(&quot;<a href="http://www.google.com"></a><a href='http://www.google.com/'/>http://www.google.com</a>&quot;);</li>
+<li>}</li></ul>
+
+<p></p><ul><li>Load local html files.</li></ul>
+<ul class="code"><li>void testApp::setup(){</li>
+<li>&nbsp;&nbsp;&nbsp; browser.setup(ofGetWidth(), ofGetHeight());&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp; browser.loadURL(&quot;<a href="file:///Workspaces/openFrameworks/of_v0.8.4_osx_release/apps/SFPC/browser/bin/data/www/test.html"></a><a href='file:///Workspaces/openFrameworks/of_v0.8.4_osx_release/apps/SFPC/browser/bin/data/www/test.html'/>file:///Workspaces/openFrameworks/of_v0.8.4_osx_release/apps/SFPC/browser/bin/data/www/test.html</a>&quot;);&nbsp;&nbsp;</li>
+<li>}</li></ul>
+
+<p></p><ul><li>or you can directly write HTML here.</li></ul>
+<ul class="code"><li>void testApp::setup(){</li>
+<li>&nbsp;&nbsp;&nbsp; browser.setup(ofGetWidth(), ofGetHeight());</li>
+<li>&nbsp;&nbsp;&nbsp; browser.loadURL(&quot;data:text/html,&lt;h1&gt;Hello World&lt;/h1&gt;&quot;);</li>
+<li>}</li></ul>
+
+<p>---</p><p></p><p><b>b. Excute Javascript from openFrameworks</b></p><p></p><ul><li>When I press a key, change bgColor of HTML.</li></ul>
+<ul class="code"><li>void testApp::keyPressed(int key){</li>
+<li>&nbsp;&nbsp;&nbsp; browser.keyPressed(key);</li>
+<li>&nbsp;&nbsp;&nbsp; browser.doJavaScript(&quot;document.body.bgColor = &rsquo;<a href='https://hackpad.com/ep/search/?q=%23FF0000&amp;via=ZlJOopgPHXi'/>#FF0000</a>&rsquo;;&quot;);</li>
+<li>}</li></ul>
+
+<ul><li>And also you can load JS file with ofBuffer.</li></ul>
+<ul class="code"><li>void testApp::keyPressed(int key){&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp; browser.keyPressed(key);&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp; ofBuffer buffer = ofBufferFromFile(&quot;www/test.js&quot;);&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp; browser.doJavaScript(buffer);&nbsp;&nbsp;</li>
+<li>}&nbsp;&nbsp;</li></ul>
+
+<p>---</p><p></p><p><b>c. Access variables in Javascript from openFrameworks</b></p><p></p><ul><li>If I want to get a global variable called “g_data” in javascript.</li></ul>
+<ul class="code"><li>void testApp::mousePressed(int x, int y, int button){</li>
+<li>&nbsp;&nbsp;&nbsp; browser.mousePressed(x, y, button);</li>
+<li>&nbsp;&nbsp;&nbsp; JSValue data = browser.doJavaScript(&quot;g_data&quot;);</li>
+<li>&nbsp;&nbsp;&nbsp; cout &lt;&lt; data.ToString() &lt;&lt; endl;</li>
+<li>}</li></ul>
+
+<p>For more methods:</p><p><a href="http://wiki.awesomium.com/general-use/introduction-to-javascript-integration.html"></a><a href='http://wiki.awesomium.com/general-use/introduction-to-javascript-integration.html'/>http://wiki.awesomium.com/general-use/introduction-to-javascript-integration.html</a></p><p>↑this is for native C++, so good to see &quot;src/ofxAwesomium.cpp&quot; too.</p><p></p><p></p><ul class="comment"><li>Also, there&rsquo;s CEF (another chrome project) and webkit -- for webkit, see <a href="https://github.com/admsyn/FITC-2014-slides/blob/master/src/ofxPresent/src/ofxPresentApp%2BCocoa.mm"></a>https://github.com/admsyn/FITC-2014-slides/blob/master/src/ofxPresent/src/ofxPresentApp%2BCocoa.mm for osx code to put html content on the screen. (it&rsquo;s literally on the screen, not in a texture).&nbsp; I don&rsquo;t have good luck with CEF to texture, but the CEF window system works well.&nbsp; Finally, you can use the CEF syphon client to put a web page into OF via syphon.</li>
+<li>Also -- see things like this <a href="https://code.google.com/p/oflivecoding/"></a>https://code.google.com/p/oflivecoding/ that use javascript interpreter but not a browser to open up live coding to OF -- it&rsquo;s javascript based</li></ul>
+
+<p></p><p></p><p></p><p></p><p></p></body>
+</html>

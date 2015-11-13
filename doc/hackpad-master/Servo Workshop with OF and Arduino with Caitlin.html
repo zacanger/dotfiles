@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="770"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$ZKQSofmkm1V</title>
+</head>
+<body><h1>Servo Workshop with OF and Arduino with Caitlin&nbsp;</h1><p></p><p>Use firmata to communicate between arduino and openframeworks</p><p><a href="http://firmata.org/wiki/V2.3ProtocolDetails"></a>http://firmata.org/wiki/V2.3ProtocolDetails</p><p></p><p>The baud rate for firmata and OF is 57600</p><ul><li>setup arduino is called as an argument of the setup arduino function</li></ul>
+
+<p>Check that you are addressing the right port on your computer and update frameworks.</p><p>GO TO TERMINAL AND TYPE IN ls /dev/tty.*</p><p>&nbsp;&nbsp;&nbsp; //FIND THE USB NUMBER AND UPDATE THE FUNCTION SO THAT YOU ARE ADDRESSING THE RIGHT PORT</p><p></p><p>Any time we address a pin in OF, we use a slightly different syntaxt than in processing</p><ul><li>We must refer to the ardunio object</li>
+<li>eg. having&nbsp;</li>
+<li>&nbsp;ard.sendDigitalPinMode(2,ARD_INPUT);</li></ul>
+
+<p>Predefined constants to address pins are</p><p>sendDigitalPinMode(2, ARD_INPUT);</p><p>sendAnalogPinRepoting(0,ARD_ANALOG);</p><p>also ARD_OUTPUT and ARD_PWM - we need to define the pin mode for firmata</p><p></p><p>SERVOS</p><ul><li>to attach servos we call ard.sendServoAttach(9);</li>
+<li>We can only use pins D3, D5, D6, etc.</li></ul>
+
+<p>Firmata is more robust than the serial communication. It handles data better. This is an advantage of using OF rather than using Processing which relies wholly on serial communications.&nbsp; (actually, processing does have a fimata library -- see <a href="http://firmata.org/wiki/Download)"></a>http://firmata.org/wiki/Download)</p><p></p><p>Firmata is better then serial for complex messages, since it&rsquo;s sometimes really painful to send multi-byte or variable length messages from one platform to another.&nbsp; they operate at different speeds and serial is very low level.&nbsp; With firmata, you can quickly change your host code without changing your arduino code = faster dev times.&nbsp;&nbsp; it&rsquo;s like OSC vs networking code.&nbsp;&nbsp;</p><p></p><p></p><p></p><p>Check voltage on Servos when buying</p><p></p><p>Pin 9 common for Servos</p><p>90% have 180 degree rotation</p><p>(DC motors have 360, continuously rotating but less easy to tell where to move)</p><p></p></body>
+</html>

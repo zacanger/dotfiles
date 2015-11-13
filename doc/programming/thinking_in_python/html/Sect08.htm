@@ -1,0 +1,466 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPython.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:12/31/2001
+Translation Time:08:24:13
+Translation Platform:Win32
+Number of Output files:18
+This File:Sect08.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>5: Factories: encapsulating object creation</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    <!-- [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.htm">Revision History</a> ] -->
+    [ <a href="http://www.mindview.net/Books/TIPython/">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  Thinking in Python<br>
+  <small>Revision 0.1.2 (12/31/01) -- Incomplete and Unfinished</small></FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Bruce Eckel &copy;2002 MindView, Inc.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect07.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect09.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc534420107"></A><A NAME="Heading58"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+5: Factories: encapsulating object creation</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">When you discover that you need to add
+new types to a system, the most sensible first step is to use polymorphism to
+create a common interface to those new types. This separates the rest of the
+code in your system from the knowledge of the specific types that you are
+adding. New types may be added without disturbing existing code ... or so it
+seems. At first it would appear that the only place you need to change the code
+in such a design is the place where you inherit a new type, but this is not
+quite true. You must still create an object of your new type, and at the point
+of creation you must specify the exact constructor to use. Thus, if the code
+that creates objects is distributed throughout your application, you have the
+same problem when adding new types&#151;you must still chase down all the
+points of your code where type matters. It happens to be the <I>creation</I> of
+the type that matters in this case rather than the <I>use</I> of the type (which
+is taken care of by polymorphism), but the effect is the same: adding a new type
+can cause problems.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_240">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The solution is to force the creation of
+objects to occur through a common <I>factory</I> rather than to allow the
+creational code to be spread throughout your system. If all the code in your
+program must go through this factory whenever it needs to create one of your
+objects, then all you must do when you add a new object is to modify the
+factory.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_241">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Since every object-oriented program
+creates objects, and since it&#146;s very likely you will extend your program
+by adding new types, I suspect that factories may be the most universally useful
+kinds of design patterns.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_242">Add Comment</A></FONT><A NAME="_Toc534420108"></A><BR></P></DIV>
+<A NAME="Heading59"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Simple Factory method</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">As an example, let&#146;s revisit the
+<B>Shape</B> system.  </FONT><FONT FACE="Georgia">One approach is to make the
+factory a <B>static</B> method of the base class:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_243">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c05:shapefact1:ShapeFactory1.py
+# A simple static factory method.
+<font color=#0000ff>from</font> __future__ <font color=#0000ff>import</font> generators
+<font color=#0000ff>import</font> random
+
+<font color=#0000ff>class</font> Shape(object):
+  # Create based on <font color=#0000ff>class</font> name:
+  <font color=#0000ff>def</font> factory(type):
+    #<font color=#0000ff>return</font> eval(type + <font color=#004488>"()"</font>)
+    <font color=#0000ff>if</font> type == <font color=#004488>"Circle"</font>: <font color=#0000ff>return</font> Circle()
+    <font color=#0000ff>if</font> type == <font color=#004488>"Square"</font>: <font color=#0000ff>return</font> Square()
+    <font color=#0000ff>assert</font> 1, <font color=#004488>"Bad shape creation: "</font> + type
+  factory = staticmethod(factory)
+
+<font color=#0000ff>class</font> Circle(Shape):
+  <font color=#0000ff>def</font> draw(self): <font color=#0000ff>print</font> <font color=#004488>"Circle.draw"</font> 
+  <font color=#0000ff>def</font> erase(self): <font color=#0000ff>print</font> <font color=#004488>"Circle.erase"</font> 
+
+<font color=#0000ff>class</font> Square(Shape):
+  <font color=#0000ff>def</font> draw(self): <font color=#0000ff>print</font> <font color=#004488>"Square.draw"</font> 
+  <font color=#0000ff>def</font> erase(self): <font color=#0000ff>print</font> <font color=#004488>"Square.erase"</font> 
+
+# Generate shape name strings:
+<font color=#0000ff>def</font> shapeNameGen(n):
+  types = Shape.__subclasses__()
+  <font color=#0000ff>for</font> i <font color=#0000ff>in</font> range(n):
+    <font color=#0000ff>yield</font> random.choice(types).__name__
+
+shapes = \
+  [ Shape.factory(i) <font color=#0000ff>for</font> i <font color=#0000ff>in</font> shapeNameGen(7)]
+
+<font color=#0000ff>for</font> shape <font color=#0000ff>in</font> shapes:
+  shape.draw()
+  shape.erase()
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <B>factory(&#160;)</B> takes
+an argument that allows it to determine what type of  <B>Shape</B> to create; it
+happens to be a <B>String</B> in this case but it could be any set of data. The
+<B>factory(&#160;)</B> is now the only other code in the system that needs to be
+changed when a new type of <B>Shape </B>is added (the initialization data for
+the objects will presumably come from somewhere outside the system, and not be a
+hard-coded array as in the above
+example).</FONT><FONT FACE="Georgia"><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_244">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Note that this example also shows the new
+Python 2.2 <B>staticmethod(&#160;)</B> technique for creating static methods in
+a class.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_245">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">I have also used a tool which is new in
+Python 2.2 called a <I>generator</I>. A generator is a special case of a
+factory: it&#146;s a factory that takes no arguments in order to create a new
+object. Normally you hand some information to a factory in order to tell it what
+kind of object to create and how to create it, but a generator has some kind of
+internal algorithm that tells it what and how to build. It &#147;generates out
+of thin air&#148; rather than being told what to create.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_246">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Now, this may not look consistent with
+the code you see above:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_247">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>for</font> i <font color=#0000ff>in</font> shapeNameGen(7)</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">looks
+like there&#146;s an initialization taking place. This is where a generator is
+a bit strange &#150; when you call a function that contains a <B>yield</B>
+statement (<B>yield</B> is a new keyword that determines that a function is a
+generator), that function actually returns a generator object that has an
+iterator. This iterator is implicitly used in the <B>for</B> statement above, so
+it appears that you are iterating through the generator function, not what it
+returns. This was done for convenience of use.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_248">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Thus, the code that you write is actually
+a kind of factory, that creates the generator objects that do the actual
+generation. You can use the generator explicitly if you want, for example:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_249">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>gen = shapeNameGen(7)
+<font color=#0000ff>print</font> gen.next()</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">So <B>next( )</B>
+is the iterator method that&#146;s actually called to generate the next object,
+and it takes no arguments. <B>shapeNameGen( )</B> is the factory, and <B>gen</B>
+is the generator.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_250">Add Comment</A></FONT><A NAME="AAA"></A><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Inside the generator-factory, you can see
+the call to <B>__subclasses__( )</B>, which produces a list of references to
+each of the subclasses of <B>Shape</B> (which must be inherited from
+<B>object</B> for this to work). You should be aware, however, that this only
+works for the first level of inheritance from <B>Item</B>, so if you were to
+inherit a new class from <B>Circle</B>, it wouldn&#146;t show up in the list
+generated by <B>__subclasses__( )</B>. If you need to create a deeper hierarchy
+this way, you must recurse the <B>__subclasses__( )</B> list.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_251">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Also note that in <B>shapeNameGen( )</B>
+the statement
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_252">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>types = Shape.__subclasses__()</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Is
+only executed when the generator object is produced; each time the <B>next(
+)</B> method of this generator object is called (which, as noted above, may
+happen implicitly), only the code in the <B>for</B> loop will be executed, so
+you don&#146;t have wasteful execution (as you would if this were an ordinary
+function).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_253">Add Comment</A></FONT><A NAME="_Toc455024532"></A><A NAME="_Toc476705903"></A><A NAME="_Toc534420109"></A><BR></P></DIV>
+<A NAME="Heading60"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Polymorphic factories</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The static<B> factory(&#160;)</B> method
+in the previous example forces all the creation operations to be focused in one
+spot, so that&#146;s the only place you need to change the code. This is
+certainly a reasonable solution, as it throws a box around the process of
+creating objects. However, the <I>Design Patterns</I> book emphasizes that the
+reason for the <I>Factory Method</I> pattern is so that different types of
+factories can be subclassed from the basic factory (the above design is
+mentioned as a special case). However, the book does not provide an example, but
+instead just repeats the example used for the <I>Abstract Factory</I>
+(you&#146;ll see an example of this in the next section). Here is
+<B>ShapeFactory1.py</B> modified so the factory methods are in a separate class
+as virtual functions. Notice also that the specific <B>Shape </B>classes are
+dynamically loaded on demand:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_254">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c05:shapefact2:ShapeFactory2.py
+# Polymorphic factory methods.
+<font color=#0000ff>from</font> __future__ <font color=#0000ff>import</font> generators
+<font color=#0000ff>import</font> random
+
+<font color=#0000ff>class</font> ShapeFactory:
+  factories = {}
+  <font color=#0000ff>def</font> addFactory(id, shapeFactory):
+    ShapeFactory.factories.put[id] = shapeFactory
+  addFactory = staticmethod(addFactory)
+  # A Template Method:
+  <font color=#0000ff>def</font> createShape(id):
+    <font color=#0000ff>if</font> <font color=#0000ff>not</font> ShapeFactory.factories.has_key(id):
+      ShapeFactory.factories[id] = \
+        eval(id + '.Factory()')
+    <font color=#0000ff>return</font> ShapeFactory.factories[id].create()
+  createShape = staticmethod(createShape)
+
+<font color=#0000ff>class</font> Shape(object): <font color=#0000ff>pass</font>
+
+<font color=#0000ff>class</font> Circle(Shape):
+  <font color=#0000ff>def</font> draw(self): <font color=#0000ff>print</font> <font color=#004488>"Circle.draw"</font> 
+  <font color=#0000ff>def</font> erase(self): <font color=#0000ff>print</font> <font color=#004488>"Circle.erase"</font>
+  <font color=#0000ff>class</font> Factory:
+    <font color=#0000ff>def</font> create(self): <font color=#0000ff>return</font> Circle() 
+
+<font color=#0000ff>class</font> Square(Shape):
+  <font color=#0000ff>def</font> draw(self): 
+    <font color=#0000ff>print</font> <font color=#004488>"Square.draw"</font> 
+  <font color=#0000ff>def</font> erase(self): 
+    <font color=#0000ff>print</font> <font color=#004488>"Square.erase"</font> 
+  <font color=#0000ff>class</font> Factory:
+    <font color=#0000ff>def</font> create(self): <font color=#0000ff>return</font> Square() 
+
+<font color=#0000ff>def</font> shapeNameGen(n):
+  types = Shape.__subclasses__()
+  <font color=#0000ff>for</font> i <font color=#0000ff>in</font> range(n):
+    <font color=#0000ff>yield</font> random.choice(types).__name__
+
+shapes = [ ShapeFactory.createShape(i) 
+           <font color=#0000ff>for</font> i <font color=#0000ff>in</font> shapeNameGen(7)]
+
+<font color=#0000ff>for</font> shape <font color=#0000ff>in</font> shapes:
+  shape.draw()
+  shape.erase()
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Now the factory method appears
+in its own class, <B>ShapeFactory</B>, as the <B>create(&#160;)</B> method. The
+different types of shapes must each create their own factory with a
+<B>create(&#160;)</B> method to create an object of their own type. The actual
+creation of shapes is performed by calling
+<B>ShapeFactory.createShape(&#160;)</B>, which is a static method that uses the
+dictionary in <B>ShapeFactory</B> to find the appropriate factory object based
+on an identifier that you pass it. The factory is immediately used to create the
+shape object, but you could imagine a more complex problem where the appropriate
+factory object is returned and then used by the caller to create an object in a
+more sophisticated way. However, it seems that much of the time you don&#146;t
+need the intricacies of the polymorphic factory method, and a single static
+method in the base class (as shown in <B>ShapeFactory1.py</B>) will work fine.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_255">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Notice that the <B>ShapeFactory</B> must
+be initialized by loading its dictionary with factory objects, which takes place
+in the static initialization clause of each of the shape implementations.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_256">Add Comment</A></FONT><A NAME="_Toc455024533"></A><A NAME="_Toc476705904"></A><A NAME="_Toc534420110"></A><BR></P></DIV>
+<A NAME="Heading61"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Abstract factories</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <I>Abstract Factory</I> pattern looks
+like the factory objects we&#146;ve seen previously, with not one but several
+factory methods. Each of the factory methods creates a different kind of object.
+The idea is that at the point of creation of the factory object, you decide how
+all the objects created by that factory will be used. The example given in
+<I>Design Patterns</I> implements portability across various graphical user
+interfaces (GUIs): you create a factory object appropriate to the GUI that
+you&#146;re working with, and from then on when you ask it for a menu, button,
+slider, etc. it will automatically create the appropriate version of that item
+for the GUI. Thus you&#146;re able to isolate, in one place, the effect of
+changing from one GUI to another.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_257">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">As another example suppose you are
+creating a general-purpose gaming environment and you want to be able to support
+different types of games. Here&#146;s how it might look using an abstract
+factory:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_258">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c05:Games.py
+# An example of the Abstract Factory pattern.
+
+<font color=#0000ff>class</font> Obstacle:
+  <font color=#0000ff>def</font> action(self): <font color=#0000ff>pass</font>
+
+<font color=#0000ff>class</font> Player:
+  <font color=#0000ff>def</font> interactWith(self, obstacle): <font color=#0000ff>pass</font>
+
+<font color=#0000ff>class</font> Kitty(Player):
+  <font color=#0000ff>def</font> interactWith(self, obstacle):
+    <font color=#0000ff>print</font> <font color=#004488>"Kitty has encountered a"</font>,
+    obstacle.action()
+
+<font color=#0000ff>class</font> KungFuGuy(Player):
+  <font color=#0000ff>def</font> interactWith(self, obstacle):
+    <font color=#0000ff>print</font> <font color=#004488>"KungFuGuy now battles a"</font>,
+    obstacle.action()
+
+<font color=#0000ff>class</font> Puzzle(Obstacle):
+  <font color=#0000ff>def</font> action(self): 
+    <font color=#0000ff>print</font> <font color=#004488>"Puzzle"</font> 
+
+<font color=#0000ff>class</font> NastyWeapon(Obstacle):
+  <font color=#0000ff>def</font> action(self): 
+    <font color=#0000ff>print</font> <font color=#004488>"NastyWeapon"</font> 
+
+# The Abstract Factory:
+<font color=#0000ff>class</font> GameElementFactory:
+  <font color=#0000ff>def</font> makePlayer(self): <font color=#0000ff>pass</font>
+  <font color=#0000ff>def</font> makeObstacle(self): <font color=#0000ff>pass</font>
+
+# Concrete factories:
+<font color=#0000ff>class</font> KittiesAndPuzzles(GameElementFactory):
+  <font color=#0000ff>def</font> makePlayer(self): <font color=#0000ff>return</font> Kitty()
+  <font color=#0000ff>def</font> makeObstacle(self): <font color=#0000ff>return</font> Puzzle()
+
+<font color=#0000ff>class</font> KillAndDismember(GameElementFactory):
+  <font color=#0000ff>def</font> makePlayer(self): <font color=#0000ff>return</font> KungFuGuy()
+  <font color=#0000ff>def</font> makeObstacle(self): <font color=#0000ff>return</font> NastyWeapon()
+
+<font color=#0000ff>class</font> GameEnvironment:
+  <font color=#0000ff>def</font> __init__(self, factory):
+    self.factory = factory
+    self.p = factory.makePlayer() 
+    self.ob = factory.makeObstacle()
+  <font color=#0000ff>def</font> play(self): 
+    self.p.interactWith(self.ob) 
+
+g1 = GameEnvironment(KittiesAndPuzzles())
+g2 = GameEnvironment(KillAndDismember())
+g1.play() 
+g2.play() 
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In this environment,
+<B>Player</B> objects interact with <B>Obstacle</B> objects, but there are
+different types of players and obstacles depending on what kind of game
+you&#146;re playing. You determine the kind of game by choosing a particular
+<B>GameElementFactory</B>, and then the <B>GameEnvironment</B> controls the
+setup and play of the game. In this example, the setup and play is very simple,
+but those activities (the <I>initial conditions</I> and the <I>state change</I>)
+can determine much of the game&#146;s outcome. Here, <B>GameEnvironment</B> is
+not designed to be inherited, although it could very possibly make sense to do
+that.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_259">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This also contains examples of <I>Double
+Dispatching</I> and the <I>Factory Method</I>, both of which will be explained
+later.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_260">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Of course, the above scaffolding of
+<B>Obstacle</B>, <B>Player</B> and <B>GameElementFactory</B> (which was
+translated from the Java version of this example) is unnecessary &#150;
+it&#146;s only required for languages that have static type checking. As long
+as the concrete Python classes follow the form of the required classes, we
+don&#146;t need any base classes:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_261">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c05:Games2.py
+# Simplified Abstract Factory.
+
+<font color=#0000ff>class</font> Kitty:
+  <font color=#0000ff>def</font> interactWith(self, obstacle):
+    <font color=#0000ff>print</font> <font color=#004488>"Kitty has encountered a"</font>,
+    obstacle.action()
+
+<font color=#0000ff>class</font> KungFuGuy:
+  <font color=#0000ff>def</font> interactWith(self, obstacle):
+    <font color=#0000ff>print</font> <font color=#004488>"KungFuGuy now battles a"</font>,
+    obstacle.action()
+
+<font color=#0000ff>class</font> Puzzle:
+  <font color=#0000ff>def</font> action(self): <font color=#0000ff>print</font> <font color=#004488>"Puzzle"</font> 
+
+<font color=#0000ff>class</font> NastyWeapon:
+  <font color=#0000ff>def</font> action(self): <font color=#0000ff>print</font> <font color=#004488>"NastyWeapon"</font> 
+
+# Concrete factories:
+<font color=#0000ff>class</font> KittiesAndPuzzles:
+  <font color=#0000ff>def</font> makePlayer(self): <font color=#0000ff>return</font> Kitty()
+  <font color=#0000ff>def</font> makeObstacle(self): <font color=#0000ff>return</font> Puzzle()
+
+<font color=#0000ff>class</font> KillAndDismember:
+  <font color=#0000ff>def</font> makePlayer(self): <font color=#0000ff>return</font> KungFuGuy()
+  <font color=#0000ff>def</font> makeObstacle(self): <font color=#0000ff>return</font> NastyWeapon()
+
+<font color=#0000ff>class</font> GameEnvironment:
+  <font color=#0000ff>def</font> __init__(self, factory):
+    self.factory = factory
+    self.p = factory.makePlayer() 
+    self.ob = factory.makeObstacle()
+  <font color=#0000ff>def</font> play(self): 
+    self.p.interactWith(self.ob) 
+
+g1 = GameEnvironment(KittiesAndPuzzles())
+g2 = GameEnvironment(KillAndDismember())
+g1.play() 
+g2.play() 
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Another way to put this is that
+all inheritance in Python is implementation inheritance; since Python does its
+type-checking at runtime, there&#146;s no need to use interface inheritance so
+that you can upcast to the base type.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_262">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You might want to study the two examples
+for comparison, however. Does the first one add enough useful information about
+the pattern that it&#146;s worth keeping some aspect of it? Perhaps all you
+need is &#147;tagging classes&#148; like this:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_263">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>class</font> Obstacle: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> Player: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> GameElementFactory: <font color=#0000ff>pass</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Then
+the inheritance serves only to indicate the type of the derived classes.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_264">Add Comment</A></FONT><A NAME="_Toc534420111"></A><BR></P></DIV>
+<A NAME="Heading62"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Exercises</H2></FONT>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Add a class
+<B>Triangle</B> to <B>ShapeFactory1.py</B>
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_265">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Add
+a class <B>Triangle</B> to <B>ShapeFactory2.py</B>
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_266">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Add
+a new type of <B>GameEnvironment</B> called <B>GnomesAndFairies</B> to
+<B>GameEnvironment.py</B>
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_267">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+<B>ShapeFactory2.py</B> so that it uses an <I>Abstract Factory</I> to create
+different sets of shapes (for example, one particular type of factory object
+creates &#147;thick shapes,&#148; another creates &#147;thin shapes,&#148;
+but each factory object can create all the shapes: circles, squares, triangles
+etc.).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_268">Add Comment</A></FONT></OL>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect07.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect09.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:12/31/2001</P></DIV>
+
+</BODY>
+
+</HTML>

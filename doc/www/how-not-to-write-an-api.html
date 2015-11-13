@@ -1,0 +1,102 @@
+<!doctype html5>
+<html><head>
+<title>How not to write an API</title>
+<link rel=stylesheet href=blog_bare.css>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+<style>
+#content li{font-size:0.95em;padding-left:0.35em}
+.note:before {
+  content: '*';
+  font-weight:bold;
+  color: crimson;
+}
+p{width: 95%}
+h2{margin-top:2em}
+h3{font-size:1.15em;font-weight:bold;margin-top:2.5em;margin-bottom:-.25em;color:rgba(0,0, 20, 0.9)}
+h4{font-size:1.05em;margin-bottom:-0.5em;margin-top:2.75em}
+pre{font-size:14px;background:#f4f4f4;padding:0.5em;width:90%}
+blockquote{display:inline;color:rgba(4,8,18,0.9);margin:0;padding:0;letter-spacing:-0.02em;font-size:1em;font-family:'Droid Serif',serif;font-style:italic}
+blockquote > a {margin-bottom:0.5em;display:inline-block}
+blockquote p{border-left: 2px solid #ddF;padding:0.5em 1em;margin:0 0 0 0.5em}
+img{border:2px solid #ddd;display:inline-block;padding:0.5em;margin: 0 1em}
+@media only screen and (max-device-width: 767px) {
+  img{margin:0}
+}
+</style>
+<meta name=description content="How not to write an API">
+</head>
+<body>
+<div id=content>
+<h1 id="how-to-not-write-an-api">How Not To Write an API</h1>
+<h2 id="sub">avoiding Unnecessary rabbit-holes</h2>
+<h2 id="a-saga-about-typeahead.js">Introduction</h2>
+<p><a href="https://github.com/twitter/typeahead.js">typeahead.js</a> renders a list of suggested options below an input box as a user enters text:</p>
+<img src="http://i.imgur.com/swhWDDr.jpg">
+<p>You just need data and a DOM node to bind it to. This sounds easy, but the talented maintainers have unwittingly created a very frustrating experience.</p>
+<h4>Remote Data</h4>
+<p>If your data is on a server, you can specify <code>url: /remote/%QUERY.json</code> where <code>%QUERY</code> is replaced by the value of the input. That is, if you are running <code>0.10.x</code>. In <code>0.11.x</code> you need to manually specify a <code>wildcard: "%QUERY"</code> because although this option has the same syntax as the previous version, the default wildcard is now null.</p>
+<p>Once you pull the data down as an array of objects you can specify the key with the handy <code>displayKey: objectKey</code> option. In versions prior to <code>0.11.0</code> this content is inserted as HTML, whereas now it's in plaintext.</p>
+<p>If you want to continue to do HTML insertion you may be thinking you can use <code>display: function(){ &hellip; }</code> instead of the <code>displayKey</code>.  This would make sense&hellip;</p>
+<p>Instead, you ignore the <code>display</code> and <code>displayKey</code> options and write something like <pre>{
+  templates: {
+    suggestion: function(row) { 
+      // Return a JQuery node, because
+      // that's all it will accept.
+      return $("&lt;p&gt;")
+        .html(row.html); 
+    }
+  }
+}</pre><p>This gives you similar functionality to <code>displayKey</code> in <code>0.10.5</code>.</p>
+<p>You'll probably want to do this since the inner DOM nodes in <code>0.11.x</code> have changed from <code>&lt;p&gt;</code> tags to <code>&lt;div&gt;</code> tags. Oh, that brings us to style.</p>
+<h4>Stylizing</h4>
+<p>You'd think that being explicitly referenced in the Bootstrap documentation as a supported library (in <a href="http://getbootstrap.com/2.3.2/javascript.html#typeahead">2.3.2</a> but not 3.x<sup>1</sup>), <code>typeahead.js</code> would structure their HTML as a Bootstrap-friendly style drop-down&hellip;</p>
+<blockquote>Note from 2015-06-16: This history isn't correct. <a href=https://github.com/kristopolous/articles/issues/1>Chris Rebert explains</a>: 
+  <p>To dispel a key misconception here: The similarity of the names is indeed unfortunate & confusing, but Twitter's Typeahead.js is completely separate from and has never shared any code with Bootstrap v2's typeahead widget. I imagine that the fact that old versions of Twitter's Typeahead.js offered optional Bootstrap integration also contributed to this confusion.
+  </p>
+  <p>In Bootstrap v3, Bootstrap's own typeahead widget from v2 was removed due to its complexity and its suffering from some significant bugs. The Bootstrap Core Team recommended that users migrate to Twitter's Typeahead.js since it was a superior alternative (see http://getbootstrap.com/migration/#notes), and since there was hope that Twitter's Typeahead.js would continue to offer an optional Bootstrap integration (which sadly didn't pan out).</p>
+  <p>With the release of version 3, Bootstrap ceased to be affiliated with Twitter (see twbs/bootstrap#9899), which makes Typeahead.js's lack of integration/compatibility with Bootstrap more understandable.</p>
+</blockquote>
+
+<p>In Bootstrap 3, the <a href="https://github.com/twbs/bootstrap/blob/efe2023014ec90f35c0f722af6f3ec7a8eab720e/dist/css/bootstrap.css#L3605">selectors for the dropdown</a> are <code>.dropdown-menu &gt; li &gt; a</code>. However, in <code>0.10.x</code> the dropdowns are <code>span &gt; div &gt; p</code> and in <code>0.11.x</code>, it's <code>div &gt; div &gt; div</code>.</p>
+<p>If you think typeahead.js will still work with Bootstrap through the <a href="https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md#class-names"><code>classNames</code> interface</a> &mdash; it doesn't and the object keys and class names have changed <a href="https://github.com/twitter/typeahead.js/blob/v0.10.5/doc/jquery_typeahead.md#look-and-feel">between the versions</a>.</p>
+<p>To make things display nicely, <a href="https://github.com/bassjobsen/typeahead.js-bootstrap-css">you need a separate stylesheet</a> that inherits from Bootstrap's <code>less</code> source for <code>0.10.x</code> <i>and</i> <code>0.11.x</code>.</p>
+
+<h4>Local data</h4>
+<p>If you have local data ... since typeahead has a <code>prefetch</code> and a <code>local</code> option, you'd think you can just do a local search without specifying the remote.</p>
+<p>What actually happens is that an internal <code>this.query</code> parameter <a href="https://github.com/twitter/typeahead.js/blob/v0.10.5/src/typeahead/dataset.js#L28">doesn't get set</a>, which determines the value of the input box on blur. Once you navigate away from it, the value is cleared.<sup>3</sup></p>
+<p>There's an <a href="https://github.com/twitter/typeahead.js/blob/v0.11.1/src/typeahead/input.js#L213">undocumented <code>setQuery</code></a> you can use if you provide it with a correctly wrapped object.<sup>2</sup></p>
+<p>But wait, you say, looking at the website, there's a simple example <a href="http://twitter.github.io/typeahead.js/examples/">provided here</a> with local data. <a href="https://gist.github.com/jharding/9458744/revisions">Look at the gist</a> and see there's small differences between the two.  These seem to be irrelevant and stylistic. If you try the new code on the old version, you'll see that these changes matter.</p>
+
+<p>If you use the Bloodhound engine to provide an instance as a source, you can in <code>0.9.x</code> and <code>0.11.x</code>. In <code>0.10.x</code> you use <a href="https://gist.github.com/jharding/9458749/revisions"><code>instance.ttAdapter()</code></a>. You can see that in the example where they shadow a local variable they didn't define.</p>
+
+<h4>Events</h4>
+<p>In <code>0.10.x</code> you can bind the node to a <a href="https://github.com/twitter/typeahead.js/blob/v0.10.5/doc/jquery_typeahead.md#custom-events"><code>typehead:selected</code> event</a> (which <a href="https://github.com/twitter/typeahead.js/blob/v0.11.0/doc/jquery_typeahead.md#custom-events">has been renamed</a> to <code>typeahead:select</code> in <code>0.11.0</code>). Now if you choose to do a <code>setQuery</code> inside the listener, you'll get a <code>JQuery</code> error that is <a href="https://github.com/twitter/typeahead.js/blob/8d3e6de304486826ac47069cd2a2103c2f67897c/src/typeahead/dataset.js#L30">thrown</a> by <code>typeahead</code>. You can avoid this by wrapping that in a <code>setTimeout</code> in the renamed listener.</p>
+<h4>Compatibility</h4>
+<p>I'm glad this all makes sense. Especially since the <a href="https://github.com/twitter/typeahead.js#versioning">main readme</a> assures us: <em>New additions <u>without</u> breaking backwards compatibility bumps the minor</em> They've taken the time to provide a <code>0.9.x</code> &#8594; <code>0.10.x</code> <a href="https://github.com/twitter/typeahead.js/blob/master/doc/migration/0.10.0.md">migration guide</a> (there's compatibility issues within the z versions of 0.10.x itself).</p>
+<p>They should really just drop the first zero because that's what they actually mean.</p>
+<hr>
+<small>
+  <ol>
+    <li>Where it changed from Bootstrap-typeahead to typeahead.js.</li>
+    <li>This was noted in <a href="https://github.com/twitter/typeahead.js/issues/577">#577</a> and <a href="https://github.com/twitter/typeahead.js/issues/247">#247</a> but never made its way to the documentation.</li>
+    <li>At least for me.</li>
+  </ol>
+</small>
+<h2 id="this-isnt-how-you-make-an-api.">This isn't how you make an API</h2>
+<h4>A release means you are ready to go</h4>
+<p>Everyone has bugs. If you are going to tag a version and make it a release, you are telling the world that it's ready to go.  The only person with the hand on the release-trigger is the maintainer.  If it's not ready, don't do it.</p>
+<h4 id="the-developer-is-the-end-user.-you-are-providing-the-user-interface">The developer is the end user. You are providing the user interface</h4>
+<p>When writing an API, you should refer to the programmers using it as &quot;your users&quot; and the thing you provide as &quot;your interface&quot;. All of the rules of designing an intuitive consistent end product still apply when providing a documented interface for fellow programmers.</p>
+<h4 id="dont-do-things-pre-emptively-or-frivolously">Don't do things pre-emptively or frivolously</h4>
+<p>When designing something that people will use, you can either put things in liberally and then have no qualms about breaking things a few weeks later, put things in liberally and then feel the terrible burden of support, or create a wall between supported (conservative) things and unsupported (liberal) things.</p>
+<p>The last option is the only sensible one if you anticipate on supporting a large number of users.</p>
+<h4 id="you-are-providing-a-tool">You are providing a tool</h4>
+<p>Developers are utilizing your tool to solve a problem, not deal with a bunch of new ones presented by the presumptions or constraints of the technology. There is no merit to providing a solution that takes just as long to implement due to obtuse design then it would to do directly. You are effectively burning your user base every time you do this.</p>
+<p>The worst thing you can do is make your users think they've made a mistake after sinking significant time and effort and then either holding their nose as they try to just "make it work", or worse, abandon their efforts entirely and think terrible thoughts about you.</p>
+<h2>Conclusion</h2>
+<p>Nobody builds things to make enemies.  We're in this to help people. We write APIs for people to make better software &mdash; not waste their time unraveling our implementation to finish theirs. The whole point is to remove a problem, not create new ones.  Exhausting time, effort, and mind-share due to poor release management is a terrible shame.</p>
+<p>Their are real people behind every project and we must never forget that.  It's easy to remove the human from the experience and think evil malevolent thoughts as you sip that third cup of coffee trying to get that thing done that <i>should have been 15 seconds</i>.</p>
+<p>We must do better.</p>
+</body>
+</html>

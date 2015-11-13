@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="1450"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$9U8LZjRNj7v</title>
+</head>
+<body><h1>Introduction to Nodejs</h1><p></p><p><b>examples of using Node.js?</b></p><ul><li>www.abug.in/school_for_poetic_computation</li></ul>
+<p>&nbsp;&nbsp;&nbsp; anything with abug.in/xxx translate into sound..?</p><ul><li>use to mockup api&rsquo;s</li>
+<li>Dumbrella - proxy service that checks web to see if it&rsquo;s going to rain, communicates this to arduino in an umbrella handle, and lights up the handle if it&rsquo;s going to rain</li>
+<li>write simple chat bots, twitter bots easily</li></ul>
+
+<p><b>What is Node.js and why use it?</b></p><p>Python is a&nbsp; language and interpreter. It&rsquo;s a glue between hardware and software or an interface between networking and a website. It&rsquo;s a platform for building fast networking scalable applications. In Nodejs you are writing javascript code and nodejs runs and interpretes it. It can do many things at once (asynchronys thinking) as apposed to doing things in order A, B, C, etc.</p><p></p><p><b>Install node</b></p><p>in terminal, type&nbsp;</p><ul class="code"><li>brew install nodejs</li>
+<li><br/></li></ul>
+<p><b>Example 1</b></p><ul class="comment"><li>what do each of these examples do?</li></ul>
+<ul class="code"><li>&nbsp;&nbsp;&nbsp; var http = require(&rsquo;http&rsquo;);</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp; var send_hello_world = function (req, res) {</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; res.send(&rsquo;hell world&#92;n&rsquo;);</li>
+<li>&nbsp;&nbsp;&nbsp; }</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp; http.createServer(send_hello_world).listen(1337, &rsquo;127.0.0.1);</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp; console.log(&rsquo;Server running at <a href="http://127.0.01:1337/"></a>http://127.0.01:1337/&rsquo;);</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;</li></ul>
+<p><b>Example 2</b>&nbsp;&nbsp;</p><ul class="code"><li>&nbsp;&nbsp;&nbsp; my_cool_message_manager.on(&rsquo;message&rsquo;, function(message){</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.log(message);</li>
+<li>&nbsp;&nbsp;&nbsp; })</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp; my_cool_message_manager.on(&rsquo;leave&rsquo;, function(person){</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.log(&rsquo;goodbye, &rsquo;, person);</li>
+<li>&nbsp;&nbsp;&nbsp; }</li></ul>
+
+<p><b>Example 3 description</b></p><p>-a stream listens for things and pipes them.</p><p>-whenever we get a tweet from this twitter stream, print it to the console</p><p></p><p><b>Example 3</b></p><p></p><p>server.listen (process.env.PORT or 5200), -&gt;</p><p>&nbsp;&nbsp;&nbsp; stream = t.stream &rsquo;statuses/filter&rsquo;, { track: keywords }</p><p>&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp; stream.on &rsquo;tweet&rsquo;, (tweet) -&gt;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for socket in connectSockets</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; socket.emit &rsquo;tweet&rsquo;, tweet</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp; console.info &quot;[%s] #{server.name} listening at #{server.url}&quot;, process.pid</p><p>&nbsp;&nbsp;&nbsp;&nbsp;</p><p><b>Resources:</b></p><p>&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp; Nipster - <a href="https://eirikb.github.io/nipster/"></a>https://eirikb.github.io/nipster/</p><p></p><p>&nbsp;&nbsp;&nbsp; Request - <a href="https://github.com/mikeal/request"></a>https://github.com/mikeal/request</p><p>&nbsp;&nbsp;&nbsp;&nbsp; ( nice node built-in &rsquo;http&rsquo; alternative )&nbsp;</p><ul class="comment"><li>&nbsp;&nbsp;&nbsp;&nbsp; had trouble installing nps and request.</li></ul>
+
+<p>*</p><p><a href="https://gist.github.com/jedahan/11351894"></a>https://gist.github.com/jedahan/11351894</p><ul class="comment"><li>&nbsp;make sure to do `npm install request` before running this</li>
+<li>but how do i install npm?</li></ul>
+
+<p><b>Node.js on the raspberry pi</b></p><p>Node on the raspbian (the default raspberry pi linux distribution), is really, really out of date. To get an up-to-date version, install from these sources (thanks <a href='http://revryl.com/2014/01/04/nodejs-raspberry-pi/'/>revryl</a> ):</p><p></p><ul class="code"><li>wget <a href="http://node-arm.herokuapp.com/node_latest_armhf.deb"></a><a href='http://node-arm.herokuapp.com/node_latest_armhf.deb'/>http://node-arm.herokuapp.com/node_latest_armhf.deb</a></li>
+<li>sudo dpkg -i node_latest_armhf.deb</li></ul>
+
+<p></p><p></p><p><a href="http://casperjs.org/"></a>http://casperjs.org/<a href='http://casperjs.org/'/> -&nbsp;</a></p><p></p></body>
+</html>

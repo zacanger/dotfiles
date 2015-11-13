@@ -1,0 +1,644 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPython.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:12/31/2001
+Translation Time:08:24:11
+Translation Platform:Win32
+Number of Output files:18
+This File:Sect02.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>The pattern concept</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    <!-- [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.htm">Revision History</a> ] -->
+    [ <a href="http://www.mindview.net/Books/TIPython/">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  Thinking in Python<br>
+  <small>Revision 0.1.2 (12/31/01) -- Incomplete and Unfinished</small></FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Bruce Eckel &copy;2002 MindView, Inc.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect01.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect03.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc534420062"></A><A NAME="Heading12"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+The pattern concept</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia" SIZE=4>&#147;Design patterns help you
+learn from others' successes instead of your own
+failures</FONT><A NAME="fnB3" HREF="#fn3">[3]</A><FONT FACE="Georgia" SIZE=4>.&#148;
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_16">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Probably the most important step forward
+in object-oriented design is the &#147;design patterns&#148; movement,
+chronicled in <A NAME="Index1"></A><A NAME="Index2"></A><I>Design Patterns
+(ibid)</I></FONT><A NAME="fnB4" HREF="#fn4">[4]</A><FONT FACE="Georgia">. That
+book shows 23 different solutions to particular classes of problems. In this
+book, the basic concepts of design patterns will be introduced along with
+examples. This should whet your appetite to read <I>Design Patterns</I> by
+Gamma, et. al., a source of what has now become an essential, almost mandatory,
+vocabulary for OOP programmers.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_17">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The latter part of this book contains an
+example of the design evolution process, starting with an initial solution and
+moving through the logic and process of evolving the solution to more
+appropriate designs. The program shown (a trash sorting simulation) has evolved
+over time, and you can look at that evolution as a prototype for the way your
+own design can start as an adequate solution to a particular problem and evolve
+into a flexible approach to a class of problems.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_18">Add Comment</A></FONT><A NAME="_Toc534420063"></A><BR></P></DIV>
+<A NAME="Heading13"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+What is a pattern?</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Initially, you can think of a pattern as
+an especially clever and insightful way of solving a particular class of
+problems. That is, it looks like a lot of people have worked out all the angles
+of a problem and have come up with the most general, flexible solution for it.
+The problem could be one you have seen and solved before, but your solution
+probably didn&#146;t have the kind of completeness you&#146;ll see embodied in
+a pattern.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_19">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Although they&#146;re called
+&#147;design patterns,&#148; they really aren&#146;t tied to the realm of
+design. A pattern seems to stand apart from the traditional way of thinking
+about analysis, design, and implementation. Instead, a pattern embodies a
+complete idea within a program, and thus it can sometimes appear at the analysis
+phase or high-level design phase. This is interesting because a pattern has a
+direct implementation in code and so you might not expect it to show up before
+low-level design or implementation (and in fact you might not realize that you
+need a particular pattern until you get to those phases).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_20">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The basic concept of a pattern can also
+be seen as the basic concept of program design: adding a layer of
+<A NAME="Index3"></A><A NAME="Index4"></A>abstraction. Whenever you abstract
+something you&#146;re isolating particular details, and one of the most
+compelling motivations behind this is to <I>separate things that change from
+things that stay the same</I>. Another way to put this is that once you find
+some part of your program that&#146;s likely to change for one reason or
+another, you&#146;ll want to keep those changes from propagating other changes
+throughout your code. Not only does this make the code much cheaper to maintain,
+but it also turns out that it is usually simpler to understand (which results in
+lowered costs).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_21">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Often, the most difficult part of
+developing an elegant and cheap-to-maintain design is in discovering what I call
+&#147;the <A NAME="Index5"></A><A NAME="Index6"></A><A NAME="Index7"></A>vector
+of change.&#148; (Here, &#147;vector&#148; refers to the maximum gradient and
+not a container class.) This means finding the most important thing that changes
+in your system, or put another way, discovering where your greatest cost is.
+Once you discover the vector of change, you have the focal point around which to
+structure your design.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_22">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">So the goal of design patterns is to
+isolate changes in your code. If you look at it this way, you&#146;ve been
+seeing some design patterns already in this book. For example,
+<A NAME="Index8"></A>inheritance can be thought of as a design pattern (albeit
+one implemented by the compiler). It allows you to express differences in
+behavior (that&#146;s the thing that changes) in objects that all have the same
+interface (that&#146;s what stays the same). <A NAME="Index9"></A>Composition
+can also be considered a pattern, since it allows you to
+change&#151;dynamically or statically&#151;the objects that implement your
+class, and thus the way that class works.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_23">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Another pattern that appears in <I>Design
+Patterns</I> is the <A NAME="Index10"></A><I>iterator</I>, which has been
+implicitly available in <B>for</B> loops from the beginning of the language, and
+was introduced as an explicit feature in Python 2.2. An iterator allows you to
+hide the particular implementation of the container as you&#146;re stepping
+through and selecting the elements one by one. Thus, you can write generic code
+that performs an operation on all of the elements in a sequence without regard
+to the way that sequence is built. Thus your generic code can be used with any
+object that can produce an iterator.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_24">Add Comment</A></FONT><A NAME="_Toc534420064"></A><BR></P></DIV>
+<A NAME="Heading14"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Pattern taxonomy</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">One of the events that&#146;s occurred
+with the rise of design patterns is what could be thought of as the
+&#147;pollution&#148; of the term &#150; people have begun to use the term to
+mean just about anything synonymous with &#147;good.&#148; After some
+pondering, I&#146;ve come up with a sort of hierarchy describing a succession
+of different types of categories:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_25">Add Comment</A></FONT><BR></P></DIV>
+<OL>
+<LI><FONT FACE="Georgia"><B></B>how we write code in a particular language to do
+this particular type of thing. This could be something as common as the way that
+you code the process of stepping through an array in C (and not running off the
+end).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_26">Add Comment</A></FONT><LI><FONT FACE="Georgia"><B>Design</B>:
+the solution that we came up with to solve this particular problem. This might
+be a clever design, but it makes no attempt to be general.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_27">Add Comment</A></FONT><LI><FONT FACE="Georgia"><B>Design</B>:
+a way to solve this <I>kind</I> of problem. A design that has become more
+general, typically through reuse.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_28">Add Comment</A></FONT><LI><FONT FACE="Georgia"><B>Pattern</B>:
+how to solve an entire class of similar problem. This usually only appears after
+applying a standard design a number of times, and then seeing a common pattern
+throughout these applications.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_29">Add Comment</A></FONT></OL><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">I
+feel this helps put things in perspective, and to show where something might
+fit. However, it doesn&#146;t say that one is better than another. It
+doesn&#146;t make sense to try to take every problem solution and generalize it
+to a design pattern &#150; it&#146;s not a good use of your time, and you
+can&#146;t force the discovery of patterns that way; they tend to be subtle and
+appear over time.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_30">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">One could also argue for the inclusion of
+<I>Analysis Pattern</I> and <I>Architectural Pattern</I> in this taxonomy.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_31">Add Comment</A></FONT><A NAME="_Toc476705894"></A><A NAME="_Toc534420065"></A><BR></P></DIV>
+<A NAME="Heading15"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Design Structures</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">One of the struggles that I&#146;ve had
+with design patterns is their classification &#150; I&#146;ve often found the
+GoF approach to be too obscure, and not always very helpful. Certainly, the
+<I>Creational</I> patterns are fairly straightforward: how are you going to
+create your objects? This is a question you normally need to ask, and the name
+brings you right to that group of patterns. But I find <I>Structural</I> and
+<I>Behavioral</I> to be far less useful distinctions. I have not been able to
+look at a problem and say &#147;clearly, you need a structural pattern
+here,&#148; so that classification doesn&#146;t lead me to a solution
+(I&#146;ll readily admit that I may be missing something here).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_32">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">I&#146;ve labored for awhile with this
+problem, first noting that the underlying structure of some of the GoF patterns
+are similar to each other, and trying to develop relationships based on that
+similarity. While this was an interesting experiment, I don&#146;t think it
+produced much of use in the end because the point is to solve problems, so a
+helpful approach will look at the problem to solve and try to find relationships
+between the problem and potential solutions.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_33">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To that end, I&#146;ve begun to try to
+collect basic design structures, and to try to see if there&#146;s a way to
+relate those structures to the various design patterns that appear in well
+thought-out systems. Currently, I&#146;m just trying to make a list, but
+eventually I hope to make steps towards connecting these structures with
+patterns (or I may come up with a different approach altogether &#150; this is
+still in its formative stages).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_34">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here</FONT><A NAME="fnB5" HREF="#fn5">[5]</A><FONT FACE="Georgia">
+is the present list of candidates, only some of which will make it to the final
+list. Feel free to suggest others, or possibly relationships with patterns.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_35">Add Comment</A></FONT><BR></P></DIV>
+<UL>
+<LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Encapsulation</B>: self
+containment and embodying a model of
+usage</FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Gathering
+</B><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_36">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Localization
+</B><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_37">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Separation
+</B><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_38">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Hiding
+</B><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_39">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Guarding
+</B><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_40">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Connector
+</B><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_41">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Barrier/fence
+</B><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_42">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Variation
+in behavior
+</B><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_43">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Notification
+</B><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_44">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Transaction
+</B><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_45">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Mirror</B>:
+&#147;the ability to keep a parallel universe(s) in step with the golden
+world&#148;
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_46">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Shadow</B>
+&#147;follows your movement and does something different in a different
+medium&#148; (May be a variation on Proxy).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_47">Add Comment</A></FONT><A NAME="_Toc534420066"></A></UL><A NAME="Heading16"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Design principles</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">When I put out a call for ideas in my
+newsletter</FONT><A NAME="fnB6" HREF="#fn6">[6]</A><FONT FACE="Georgia">, a
+number of suggestions came back which turned out to be very useful, but
+different than the above classification, and I realized that a list of design
+principles is at least as important as design structures, but for a different
+reason: these allow you to ask questions about your proposed design, to apply
+tests for quality.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_48">Add Comment</A></FONT><BR></P></DIV>
+<UL>
+<LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Principle of least
+astonishment</B> (don&#146;t be astonishing).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_49">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Make
+common things easy, and rare things possible
+</B><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_50">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Consistency</B>.
+One thing has become very clear to me, especially because of Python: the more
+random rules you pile onto the programmer, rules that have nothing to do with
+solving the problem at hand, the slower the programmer can produce. And this
+does not appear to be a linear factor, but an exponential one.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_51">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Law
+of Demeter</B>: a.k.a. &#147;Don&#146;t talk to strangers.&#148; An object
+should only reference itself, its attributes, and the arguments of its methods.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_52">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Subtraction</B>:
+a design is finished when you cannot take anything else
+away</FONT><A NAME="fnB7" HREF="#fn7">[7]</A><FONT FACE="Georgia">.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_53">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Simplicity
+before
+generality</B></FONT><A NAME="fnB8" HREF="#fn8">[8]</A><FONT FACE="Georgia">. (A
+variation of <I>Occam&#146;s Razor</I>, which says &#147;the simplest solution
+is the best&#148;). A common problem we find in frameworks is that they are
+designed to be general purpose without reference to actual systems. This leads
+to a dizzying array of options that are often unused, misused or just not
+useful. However, most developers work on specific systems, and the quest for
+generality does not always serve them well. The best route to generality is
+through understanding well-defined specific examples. So, this principle acts as
+the tie breaker between otherwise equally viable design alternatives. Of course,
+it is entirely possible that the simpler solution is the more general one.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_54">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Reflexivity</B>
+(my suggested term). One abstraction per class, one class per abstraction. Might
+also be called <B>Isomorphism</B>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_55">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Independence</B>
+or <B>Orthogonality</B>. Express independent ideas independently. This
+complements Separation, Encapsulation and Variation, and is part of the
+Low-Coupling-High-Cohesion message.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_56">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Once
+and once only</B>: Avoid duplication of logic and structure where the
+duplication is not accidental, ie where both pieces of code express the same
+intent for the same reason.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_57">Add Comment</A></FONT></UL><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In
+the process of brainstorming this idea, I hope to come up with a small handful
+of fundamental ideas that can be held in your head while you analyze a problem.
+However, other ideas that come from this list may end up being useful as a
+checklist while walking through and analyzing your design.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_58">Add Comment</A></FONT><A NAME="_Toc534420067"></A><BR></P></DIV>
+<A NAME="Heading17"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+The Singleton</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Possibly the simplest design pattern is
+the <A NAME="Index11"></A><I>singleton</I>, which is a way to provide one and
+only one object of a particular type. To accomplish this, you must take control
+of object creation out of the hands of the programmer. One convenient way to do
+this is to delegate to a single instance of a private nested inner class:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_59">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c01:SingletonPattern.py
+
+<font color=#0000ff>class</font> OnlyOne:
+  <font color=#0000ff>class</font> __OnlyOne:
+    <font color=#0000ff>def</font> __init__(self, arg):
+      self.val = arg
+    <font color=#0000ff>def</font> __str__(self):
+      <font color=#0000ff>return</font> &#180;self&#180; + self.val
+  instance = None
+  <font color=#0000ff>def</font> __init__(self, arg):
+    <font color=#0000ff>if</font> <font color=#0000ff>not</font> OnlyOne.instance:
+      OnlyOne.instance = OnlyOne.__OnlyOne(arg)
+    <font color=#0000ff>else</font>:
+      OnlyOne.instance.val = arg
+  <font color=#0000ff>def</font> __getattr__(self, name):
+    <font color=#0000ff>return</font> getattr(self.instance, name)
+
+x = OnlyOne('sausage')
+<font color=#0000ff>print</font> x
+y = OnlyOne('eggs')
+<font color=#0000ff>print</font> y
+z = OnlyOne('spam')
+<font color=#0000ff>print</font> z
+<font color=#0000ff>print</font> x
+<font color=#0000ff>print</font> y
+<font color=#0000ff>print</font> &#180;x&#180;
+<font color=#0000ff>print</font> &#180;y&#180;
+<font color=#0000ff>print</font> &#180;z&#180;
+output = '''
+&lt;__main__.__OnlyOne instance at 0076B7AC&gt;sausage
+&lt;__main__.__OnlyOne instance at 0076B7AC&gt;eggs
+&lt;__main__.__OnlyOne instance at 0076B7AC&gt;spam
+&lt;__main__.__OnlyOne instance at 0076B7AC&gt;spam
+&lt;__main__.__OnlyOne instance at 0076B7AC&gt;spam
+&lt;__main__.OnlyOne instance at 0076C54C&gt;
+&lt;__main__.OnlyOne instance at 0076DAAC&gt;
+&lt;__main__.OnlyOne instance at 0076AA3C&gt;
+'''
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Because the inner class is named
+with a double underscore, it is private so the user cannot directly access it.
+The inner class contains all the methods that you would normally put  in the
+class if it weren&#146;t going to be a singleton, and then it is wrapped in the
+outer class which controls creation by using its constructor. The first time you
+create an <B>OnlyOne</B>, it initializes <B>instance</B>, but after that it just
+ignores you.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_60">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Access comes through delegation, using
+the <B>__getattr__(&#160;)</B> method to redirect calls to the single instance.
+You can see from the output that even though it appears that multiple objects
+have been created, the same <B>__OnlyOne</B> object is used for both. The
+instances of <B>OnlyOne</B> are distinct but they all proxy to the same
+<B>__OnlyOne</B> object.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_61">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Note that the above approach
+doesn&#146;t restrict you to creating only one object. This is also a technique
+to create a limited pool of objects. In that situation, however, you can be
+confronted with the problem of sharing objects in the pool. If this is an issue,
+you can create a solution involving a check-out and check-in of the shared
+objects.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_62">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">A variation on this technique uses the
+class method <B>__new__</B> added in Python 2.2:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c01:NewSingleton.py
+
+<font color=#0000ff>class</font> OnlyOne(object):
+  <font color=#0000ff>class</font> __OnlyOne:
+    <font color=#0000ff>def</font> __init__(self):
+      self.val = None
+    <font color=#0000ff>def</font> __str__(self):
+      <font color=#0000ff>return</font> &#180;self&#180; + self.val
+  instance = None
+  <font color=#0000ff>def</font> __new__(cls): # __new__ always a classmethod
+    <font color=#0000ff>if</font> <font color=#0000ff>not</font> OnlyOne.instance:
+      OnlyOne.instance = OnlyOne.__OnlyOne()
+    <font color=#0000ff>return</font> OnlyOne.instance
+  <font color=#0000ff>def</font> __getattr__(self, name):
+    <font color=#0000ff>return</font> getattr(self.instance, name)
+  <font color=#0000ff>def</font> __setattr__(self, name):
+    <font color=#0000ff>return</font> setattr(self.instance, name)
+
+x = OnlyOne()
+x.val = 'sausage'
+<font color=#0000ff>print</font> x
+y = OnlyOne()
+y.val = 'eggs'
+<font color=#0000ff>print</font> y
+z = OnlyOne()
+z.val = 'spam'
+<font color=#0000ff>print</font> z
+<font color=#0000ff>print</font> x
+<font color=#0000ff>print</font> y
+#&lt;hr&gt;
+output = '''
+&lt;__main__.__OnlyOne instance at 0x00798900&gt;sausage
+&lt;__main__.__OnlyOne instance at 0x00798900&gt;eggs
+&lt;__main__.__OnlyOne instance at 0x00798900&gt;spam
+&lt;__main__.__OnlyOne instance at 0x00798900&gt;spam
+&lt;__main__.__OnlyOne instance at 0x00798900&gt;spam
+'''
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Alex Martelli makes the
+<A HREF="http://www.aleax.it/Python/5ep.html">observation</A> that what we
+really want with a Singleton is to have a single set of state data for all
+objects. That is, you could create as many objects as you want and as long as
+they all refer to the same state information then you achieve the effect of
+Singleton. He accomplishes this with what he calls the
+<I>Borg</I></FONT><A NAME="fnB9" HREF="#fn9">[9]</A><FONT FACE="Georgia">, which
+is accomplished by setting all the <B>__dict__</B>s to the same static piece of
+storage:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_63">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c01:BorgSingleton.py
+# Alex Martelli's 'Borg'
+
+<font color=#0000ff>class</font> Borg:
+  _shared_state = {}
+  <font color=#0000ff>def</font> __init__(self):
+    self.__dict__ = self._shared_state
+
+<font color=#0000ff>class</font> Singleton(Borg):
+  <font color=#0000ff>def</font> __init__(self, arg):
+    Borg.__init__(self)
+    self.val = arg
+  <font color=#0000ff>def</font> __str__(self): <font color=#0000ff>return</font> self.val
+
+x = Singleton('sausage')
+<font color=#0000ff>print</font> x
+y = Singleton('eggs')
+<font color=#0000ff>print</font> y
+z = Singleton('spam')
+<font color=#0000ff>print</font> z
+<font color=#0000ff>print</font> x
+<font color=#0000ff>print</font> y
+<font color=#0000ff>print</font> &#180;x&#180;
+<font color=#0000ff>print</font> &#180;y&#180;
+<font color=#0000ff>print</font> &#180;z&#180;
+output = '''
+sausage
+eggs
+spam
+spam
+spam
+&lt;__main__.Singleton instance at 0079EF2C&gt;
+&lt;__main__.Singleton instance at 0079E10C&gt;
+&lt;__main__.Singleton instance at 00798F9C&gt;
+'''
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This has an identical effect as
+<B>SingletonPattern.py</B> does, but it&#146;s more elegant. In the former
+case, you must wire in <I>Singleton</I> behavior to each of your classes, but
+<I>Borg</I> is designed to be easily reused through inheritance.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_64">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Two other interesting ways to define
+singleton</FONT><A NAME="fnB10" HREF="#fn10">[10]</A><FONT FACE="Georgia">
+include wrapping a class and using metaclasses. The first approach could be
+thought of as a <I>class decorator</I> (decorators will be defined later in the
+book), because it takes the class of interest and adds functionality to it by
+wrapping it in another class:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c01:SingletonDecorator.py
+<font color=#0000ff>class</font> SingletonDecorator:
+  <font color=#0000ff>def</font> __init__(self,klass):
+    self.klass = klass
+    self.instance = None
+  <font color=#0000ff>def</font> __call__(self,*args,**kwds):
+    <font color=#0000ff>if</font> self.instance == None:
+      self.instance = self.klass(*args,**kwds)
+    <font color=#0000ff>return</font> self.instance
+
+<font color=#0000ff>class</font> foo: <font color=#0000ff>pass</font>
+foo = SingletonDecorator(foo)
+
+x=foo()
+y=foo()
+z=foo()
+x.val = 'sausage'
+y.val = 'eggs'
+z.val = 'spam'
+<font color=#0000ff>print</font> x.val
+<font color=#0000ff>print</font> y.val
+<font color=#0000ff>print</font> z.val
+<font color=#0000ff>print</font> x <font color=#0000ff>is</font> y <font color=#0000ff>is</font> z
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">[[ Description ]]
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A1_64">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The second approach uses metaclasses, a
+topic I do not yet understand but which looks very interesting and powerful
+indeed (note that Python 2.2 has improved/simplified the metaclass syntax, and
+so this example may change):</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c01:SingletonMetaClass.py
+<font color=#0000ff>class</font> SingletonMetaClass(type):
+  <font color=#0000ff>def</font> __init__(cls,name,bases,dict):
+    super(SingletonMetaClass,cls)\
+      .__init__(name,bases,dict)
+    original_new = cls.__new__
+    <font color=#0000ff>def</font> my_new(cls,*args,**kwds):
+      <font color=#0000ff>if</font> cls.instance == None:
+        cls.instance = \
+          original_new(cls,*args,**kwds)
+      <font color=#0000ff>return</font> cls.instance
+    cls.instance = None
+    cls.__new__ = staticmethod(my_new)
+
+<font color=#0000ff>class</font> bar(object):
+  __metaclass__ = SingletonMetaClass
+  <font color=#0000ff>def</font> __init__(self,val):
+    self.val = val
+  <font color=#0000ff>def</font> __str__(self):
+    <font color=#0000ff>return</font> &#180;self&#180; + self.val
+
+x=bar('sausage')
+y=bar('eggs')
+z=bar('spam')
+<font color=#0000ff>print</font> x
+<font color=#0000ff>print</font> y
+<font color=#0000ff>print</font> z
+<font color=#0000ff>print</font> x <font color=#0000ff>is</font> y <font color=#0000ff>is</font> z
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">[[ Long, detailed, informative
+description of what metaclasses are and how they work, magically inserted here
+]]
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A1_65">Add Comment</A></FONT><BR></P></DIV>
+<A NAME="Heading18"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H4 ALIGN="LEFT">
+Exercise:</H4></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Modify <B>BorgSingleton.py</B> so that it
+uses a class <B>__new__( )</B> method.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_65">Add Comment</A></FONT><A NAME="_Toc476705895"></A><A NAME="_Toc534420068"></A><BR></P></DIV>
+<A NAME="Heading19"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Classifying patterns</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <I>Design Patterns</I> book discusses
+23 different patterns, classified under three purposes (all of which revolve
+around the particular aspect that can vary). The three purposes are:
+<A NAME="Index12"></A><A NAME="Index13"></A><A NAME="Index14"></A><A NAME="Index15"></A><A NAME="Index16"></A><A NAME="Index17"></A><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_66">Add Comment</A></FONT><BR></P></DIV>
+<OL>
+<LI><FONT FACE="Verdana"><B>	</B></FONT><FONT FACE="Georgia"><B>Creational</B>:
+how an object can be created. This often involves isolating the details of
+object creation so your code isn&#146;t dependent on what types of objects
+there are and thus doesn&#146;t have to be changed when you add a new type of
+object. The aforementioned <I>Singleton</I> is classified as a creational
+pattern, and later in this book you&#146;ll see examples of <I>Factory
+Method</I> and <I>Prototype</I>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_67">Add Comment</A></FONT><LI><FONT FACE="Verdana"><B>	</B></FONT><FONT FACE="Georgia"><B>Structural</B>:
+designing objects to satisfy particular project constraints. These work with the
+way objects are connected with other objects to ensure that changes in the
+system don&#146;t require changes to those connections.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_68">Add Comment</A></FONT><LI><FONT FACE="Verdana"><B>	</B></FONT><FONT FACE="Georgia"><B>Behavioral</B>:
+objects that handle particular types of actions within a program. These
+encapsulate processes that you want to perform, such as interpreting a language,
+fulfilling a request, moving through a sequence (as in an iterator), or
+implementing an algorithm. This book contains examples of the <I>Observer</I>
+and the <I>Visitor</I> patterns.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_69">Add Comment</A></FONT></OL><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The
+<I>Design Patterns</I> book has a section on each of its 23 patterns along with
+one or more examples for each, typically in C++ but sometimes in Smalltalk.
+(You&#146;ll find that this doesn&#146;t matter too much since you can easily
+translate the concepts from either language into Python.) This book will not
+repeat all the patterns shown in <I>Design Patterns</I> since that book stands
+on its own and should be studied separately. Instead, this book will give some
+examples that should provide you with a decent feel for what patterns are about
+and why they are so important.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_70">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">After years of looking at these things,
+it began to occur to me that the patterns themselves use basic principles of
+organization, other than (and more fundamental than) those described in
+<I>Design Patterns</I>. These principles are based on the structure of the
+implementations, which is where I have seen great similarities between patterns
+(more than those expressed in <I>Design Patterns</I>). Although we generally try
+to avoid implementation in favor of interface,<I> </I>I have found that
+it&#146;s often easier to think about, and especially to learn about, the
+patterns in terms of these structural principles. This book will attempt to
+present the patterns based on their structure instead of the categories
+presented in <I>Design Patterns</I>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_71">Add Comment</A></FONT><A NAME="_Toc534420069"></A><BR></P></DIV>
+<A NAME="Heading20"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+The development challenge</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Issues of development, the UML process,
+Extreme Programming.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_72">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Is evaluation valuable? The Capability
+Immaturity Model:</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Wiki Page:
+<A HREF="http://c2.com/cgi-bin/wiki?CapabilityImMaturityModel">http://c2.com/cgi-bin/wiki?CapabilityImMaturityModel</A></FONT><BR><FONT FACE="Georgia">Article:
+<A HREF="http://www.embedded.com/98/9807br.htm">http://www.embedded.com/98/9807br.htm</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia" COLOR="Blue"><U>
+</U></FONT><FONT FACE="Georgia"><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_73">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><I>Pair programming</I>
+research:</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><A HREF="http://collaboration.csc.ncsu.edu/laurie/">http://collaboration.csc.ncsu.edu/laurie/</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_74">Add Comment</A></FONT><A NAME="_Toc534420070"></A><BR></P></DIV>
+<A NAME="Heading21"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Exercises</H2></FONT>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia"><B>SingletonPattern.py</B>
+always creates an object, even if it&#146;s never used. Modify this program to
+use <I>lazy initialization</I>, so the singleton object is only created the
+first time that it is needed.<B>
+</B><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_75">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Using
+<B>SingletonPattern.py</B> as a starting point, create a class that manages a
+fixed number of its own objects. Assume the objects are database connections and
+you only have a license to use a fixed quantity of these at any one time.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_76">Add Comment</A></FONT></OL>
+<HR><DIV ALIGN="LEFT"><P><A NAME="fn3" HREF="#fnB3">[3]</A><FONT FACE="Georgia"> From
+Mark Johnson.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="fn4" HREF="#fnB4">[4]</A><FONT FACE="Georgia">
+</FONT><FONT FACE="Georgia">But be warned: the examples are in
+C++.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="fn5" HREF="#fnB5">[5]</A><FONT FACE="Georgia"> This
+list includes suggestions by Kevlin Henney, David Scott, and
+others.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="fn6" HREF="#fnB6">[6]</A><FONT FACE="Georgia"> A free
+email publication. See www.BruceEckel.com to subscribe.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="fn7" HREF="#fnB7">[7]</A><FONT FACE="Georgia"> This
+idea is generally attributed to Antoine de St. Exupery from <I>The Little
+Prince</I>: "La perfection est atteinte non quand il ne reste rien &agrave;
+ajouter, mais quand il ne reste rien &agrave; enlever," or: "perfection is
+reached not when there's nothing left to add, but when there's nothing left to
+remove".  </FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="fn8" HREF="#fnB8">[8]</A><FONT FACE="Georgia"> From
+an email from Kevlin Henney.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="fn9" HREF="#fnB9">[9]</A><FONT FACE="Georgia"> From
+the television show <I>Star Trek: The Next Generation</I>. The Borg are a
+hive-mind collective: &#147;we are all one.&#148;</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="fn10" HREF="#fnB10">[10]</A><FONT FACE="Georgia">
+Suggested by Chih-Chung Chang.</FONT><BR></P></DIV>
+
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect01.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect03.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:12/31/2001</P></DIV>
+
+</BODY>
+
+</HTML>

@@ -1,0 +1,770 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPython.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:12/31/2001
+Translation Time:08:24:13
+Translation Platform:Win32
+Number of Output files:18
+This File:Sect12.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>10: Callbacks</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    <!-- [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.htm">Revision History</a> ] -->
+    [ <a href="http://www.mindview.net/Books/TIPython/">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  Thinking in Python<br>
+  <small>Revision 0.1.2 (12/31/01) -- Incomplete and Unfinished</small></FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Bruce Eckel &copy;2002 MindView, Inc.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect11.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect13.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc476705913"></A><A NAME="_Toc534420123"></A><A NAME="Heading74"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+10: Callbacks</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Decoupling code behavior</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><I>Observer</I>, and a category of
+callbacks called &#147;multiple dispatching (not in <I>Design
+Patterns</I>)&#148; including the <I>Visitor</I> from <I>Design Patterns</I>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_292">Add Comment</A></FONT><A NAME="_Toc462393595"></A><A NAME="_Toc476705914"></A><A NAME="_Toc534420124"></A><BR></P></DIV>
+<A NAME="Heading75"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Observer</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Like the other forms of callback, this
+contains a hook point where you can change code. The difference is in the
+observer&#146;s completely dynamic nature. It is often used for the specific
+case of changes based on other object&#146;s change of state, but is also the
+basis of event management. Anytime you want to decouple the source of the call
+from the called code in a completely dynamic way.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_293">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The
+<A NAME="Index18"></A><A NAME="Index19"></A>observer pattern solves a fairly
+common problem: What if a group of objects needs to update themselves when some
+object changes state? This can be seen in the &#147;model-view&#148; aspect of
+Smalltalk&#146;s MVC (model-view-controller), or the almost-equivalent
+&#147;Document-View Architecture.&#148; Suppose that you have some data (the
+&#147;document&#148;) and more than one view, say a plot and a textual view.
+When you change the data, the two views must know to update themselves, and
+that&#146;s what the observer facilitates. It&#146;s a common enough problem
+that its solution has been made a part of the standard <B>java.util</B> library.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_294">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">There are two types of objects used to
+implement the observer pattern in Python. The
+<A NAME="Index20"></A><B>Observable</B> class keeps track of everybody who wants
+to be informed when a change happens, whether the &#147;state&#148; has
+changed or not. When someone says &#147;OK, everybody should check and
+potentially update themselves,&#148; the <B>Observable</B> class performs this
+task by calling the <A NAME="Index21"></A><B>notifyObservers(&#160;)</B> method
+for each one on the list. The <B>notifyObservers(&#160;)</B> method is part of
+the base class <B>Observable</B>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_295">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">There are actually two &#147;things that
+change&#148; in the observer pattern: the quantity of observing objects and the
+way an update occurs. That is, the observer pattern allows you to modify both of
+these without affecting the surrounding code.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_296">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">-------------</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><B>Observer</B> is an
+&#147;interface&#148; class that only has one member function,
+<B>update(&#160;)</B>. This function is called by the object that&#146;s being
+observed, when that object decides its time to update all its observers. The
+arguments are optional; you could have an <B>update(&#160;)</B> with no
+arguments and that would still fit the observer pattern; however this is more
+general&#151;it allows the observed object to pass the object that caused the
+update (since an <B>Observer </B>may be registered with more than one observed
+object) and any extra information if that&#146;s helpful, rather than forcing
+the <B>Observer</B> object to hunt around to see who is updating and to fetch
+any other information it needs.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_297">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The &#147;observed object&#148; that
+decides when and how to do the updating will be called the <B>Observable</B>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_298">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><B>Observable</B> has a flag to indicate
+whether it&#146;s been changed. In a simpler design, there would be no flag; if
+something happened, everyone would be notified. The flag allows you to wait, and
+only notify the <B>Observer</B>s when you decide the time is right. Notice,
+however, that the control of the flag&#146;s state is <B>protected</B>, so that
+only an inheritor can decide what constitutes a change, and not the end user of
+the resulting derived <B>Observer</B> class.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_299">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Most of the work is done in
+<B>notifyObservers(&#160;)</B>. If the <B>changed</B> flag has not been set,
+this does nothing. Otherwise, it first clears the <B>changed</B> flag so
+repeated calls to <B>notifyObservers(&#160;)</B> won&#146;t waste time. This is
+done before notifying the observers in case the calls to <B>update(&#160;)</B>
+do anything that causes a change back to this <B>Observable</B> object. Then it
+moves through the <B>set</B> and calls back to the <B>update(&#160;)</B> member
+function of each <B>Observer</B>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_300">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">At first it may appear that you can use
+an ordinary <B>Observable</B> object to manage the updates. But this
+doesn&#146;t work; to get an effect, you <I>must</I> inherit from
+<B>Observable</B> and somewhere in your derived-class code call
+<A NAME="Index22"></A><B>setChanged(&#160;)</B>. This is the member function
+that sets the &#147;changed&#148; flag, which means that when you call
+<A NAME="Index23"></A><B>notifyObservers(&#160;)</B> all of the observers will,
+in fact, get notified. <I>Where</I> you call <B>setChanged(&#160;)</B> depends
+on the logic of your program.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_301">Add Comment</A></FONT><A NAME="_Toc534420125"></A><BR></P></DIV>
+<A NAME="Heading76"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H3 ALIGN="LEFT">
+Observing flowers</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Since Python doesn&#146;t have standard
+library components to support the observer pattern (like Java does), we must
+first create one. The simplest thing to do is translate the Java standard
+library <B>Observer</B> and <B>Observable</B> classes. This also provides easier
+translation from Java code that uses these libraries.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_302">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In trying to do this, we encounter a
+minor snag, which is the fact that Java has a <B>synchronized</B> keyword that
+provides built-in support for thread synchronization. We could certainly
+accomplish the same thing by hand, using code like this:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_303">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>import</font> threading 
+<font color=#0000ff>class</font> ToSynch:
+  <font color=#0000ff>def</font> __init__(self):
+    self.mutex = threading.RLock()
+    self.val = 1
+  <font color=#0000ff>def</font> aSynchronizedMethod(self):
+    self.mutex.acquire()
+    <font color=#0000ff>try</font>:
+      self.val += 1
+      <font color=#0000ff>return</font> self.val
+    <font color=#0000ff>finally</font>:
+      self.mutex.release()</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">But this
+rapidly becomes tedious to write and to read. Peter Norvig provided me with a
+much nicer solution:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_304">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: util:Synchronization.py
+'''Simple emulation of Java's 'synchronized'
+keyword, <font color=#0000ff>from</font> Peter Norvig.'''
+<font color=#0000ff>import</font> threading
+
+<font color=#0000ff>def</font> synchronized(method):
+  <font color=#0000ff>def</font> f(*args):
+    self = args[0]
+    self.mutex.acquire();  
+    # <font color=#0000ff>print</font> method.__name__, 'acquired'
+    <font color=#0000ff>try</font>:
+      <font color=#0000ff>return</font> apply(method, args)
+    <font color=#0000ff>finally</font>:
+      self.mutex.release();  
+      # <font color=#0000ff>print</font> method.__name__, 'released'
+  <font color=#0000ff>return</font> f
+
+<font color=#0000ff>def</font> synchronize(klass, names=None):
+  <font color=#004488>""</font>"Synchronize methods <font color=#0000ff>in</font> the given <font color=#0000ff>class</font>.  
+  Only synchronize the methods whose names are 
+  given, <font color=#0000ff>or</font> all methods <font color=#0000ff>if</font> names=None.<font color=#004488>""</font>"
+  <font color=#0000ff>if</font> type(names)==type(''): names = names.split()
+  <font color=#0000ff>for</font> (name, val) <font color=#0000ff>in</font> klass.__dict__.items():
+    <font color=#0000ff>if</font> callable(val) <font color=#0000ff>and</font> name != '__init__' <font color=#0000ff>and</font> \
+      (names == None <font color=#0000ff>or</font> name <font color=#0000ff>in</font> names):
+        # <font color=#0000ff>print</font> <font color=#004488>"synchronizing"</font>, name
+        klass.__dict__[name] = synchronized(val)
+
+# You can create your own self.mutex, <font color=#0000ff>or</font> inherit
+# <font color=#0000ff>from</font> this <font color=#0000ff>class</font>:
+<font color=#0000ff>class</font> Synchronization:
+  <font color=#0000ff>def</font> __init__(self):
+    self.mutex = threading.RLock()
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <B>synchronized(&#160;)</B>
+function takes a method and wraps it in a function that adds the mutex
+functionality. The method is called inside this function:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_305">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>return</font> apply(method, args)</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">and
+as the <B>return</B> statement passes through the <B>finally</B> clause, the
+mutex is released.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_306">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This is in some ways the <I>Decorator</I>
+design pattern, but much simpler to create and use. All you have to say
+is:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>myMethod = synchronized(myMethod)</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To
+surround your method with a mutex.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_307">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><B>synchronize(&#160;)</B> is a
+convenience function that applies <B>synchronized(&#160;)</B> to an entire
+class, either all the methods in the class (the default) or selected methods
+which are named in a string as the second argument.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_308">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Finally, for <B>synchronized( )</B> to
+work there must be a <B>self.mutex</B> created in every class that uses
+<B>synchronized( )</B>. This can be created by hand by the class author, but
+it&#146;s more consistent to use inheritance, so the base class
+<B>Synchronization</B> is provided.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_309">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here&#146;s a simple test of the
+<B>Synchronization</B> module.</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: util:TestSynchronization.py
+<font color=#0000ff>from</font> Synchronization <font color=#0000ff>import</font> * 
+
+# To use <font color=#0000ff>for</font> a method:
+<font color=#0000ff>class</font> C(Synchronization):
+  <font color=#0000ff>def</font> __init__(self):
+    Synchronization.__init__(self)
+    self.data = 1
+  <font color=#0000ff>def</font> m(self):
+    self.data += 1
+    <font color=#0000ff>return</font> self.data
+  m = synchronized(m)
+  <font color=#0000ff>def</font> f(self): <font color=#0000ff>return</font> 47
+  <font color=#0000ff>def</font> g(self): <font color=#0000ff>return</font> 'spam'
+
+# So m <font color=#0000ff>is</font> synchronized, f <font color=#0000ff>and</font> g are <font color=#0000ff>not</font>.
+c = C()
+
+# On the <font color=#0000ff>class</font> level:
+<font color=#0000ff>class</font> D(C):
+  <font color=#0000ff>def</font> __init__(self):
+    C.__init__(self)
+  # You must override an un-synchronized method
+  # <font color=#0000ff>in</font> order to synchronize it (just like Java):
+  <font color=#0000ff>def</font> f(self): C.f(self)
+
+# Synchronize every (defined) method <font color=#0000ff>in</font> the <font color=#0000ff>class</font>:
+synchronize(D)
+d = D()
+d.f() # Synchronized
+d.g() # Not synchronized
+d.m() # Synchronized (<font color=#0000ff>in</font> the base <font color=#0000ff>class</font>)
+
+<font color=#0000ff>class</font> E(C):
+  <font color=#0000ff>def</font> __init__(self):
+    C.__init__(self)
+  <font color=#0000ff>def</font> m(self): C.m(self)
+  <font color=#0000ff>def</font> g(self): C.g(self)
+  <font color=#0000ff>def</font> f(self): C.f(self)
+# Only synchronizes m <font color=#0000ff>and</font> g. Note that m ends up
+# being doubly-wrapped <font color=#0000ff>in</font> synchronization, which
+# doesn't hurt anything but <font color=#0000ff>is</font> inefficient:
+synchronize(E, 'm g')
+e = E()
+e.f()
+e.g()
+e.m()
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You must call the base class
+constructor for <B>Synchronization</B>, but that&#146;s all. In class <B>C</B>
+you can see the use of <B>synchronized( )</B> for <B>m</B>, leaving <B>f</B> and
+<B>g</B> alone. Class <B>D</B> has all it&#146;s methods synchronized en masse,
+and class <B>E</B> uses the convenience function to synchronize <B>m</B> and
+<B>g</B>. Note that since <B>m</B> ends up being synchronized twice, it will be
+entered and left twice for every call, which isn&#146;t very desirable [there
+may be a fix for this]
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_310">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: util:Observer.py
+# Class support <font color=#0000ff>for</font> <font color=#004488>"observer"</font> pattern.
+<font color=#0000ff>from</font> Synchronization <font color=#0000ff>import</font> *
+
+<font color=#0000ff>class</font> Observer:
+  <font color=#0000ff>def</font> update(observable, arg):
+    '''Called when the observed object <font color=#0000ff>is</font> 
+    modified. You call an Observable object's 
+    notifyObservers method to notify all the 
+    object's observers of the change.'''
+    <font color=#0000ff>pass</font>
+
+<font color=#0000ff>class</font> Observable(Synchronization):
+  <font color=#0000ff>def</font> __init__(self):
+    self.obs = []
+    self.changed = 0
+    Synchronization.__init__(self)
+
+  <font color=#0000ff>def</font> addObserver(self, observer):
+    <font color=#0000ff>if</font> observer <font color=#0000ff>not</font> <font color=#0000ff>in</font> self.obs:
+      self.obs.append(observer)
+
+  <font color=#0000ff>def</font> deleteObserver(self, observer):
+    self.obs.remove(observer)
+
+  <font color=#0000ff>def</font> notifyObservers(self, arg = None):
+    '''If 'changed' indicates that this object 
+    has changed, notify all its observers, then 
+    call clearChanged(). Each observer has its 
+    update() called with two arguments: this 
+    observable object <font color=#0000ff>and</font> the generic 'arg'.'''
+
+    self.mutex.acquire()
+    <font color=#0000ff>try</font>:
+      <font color=#0000ff>if</font> <font color=#0000ff>not</font> self.changed: <font color=#0000ff>return</font>
+      # Make a local copy <font color=#0000ff>in</font> case of synchronous
+      # additions of observers:
+      localArray = self.obs[:]
+      self.clearChanged()
+    <font color=#0000ff>finally</font>:
+      self.mutex.release()
+    # Updating <font color=#0000ff>is</font> <font color=#0000ff>not</font> required to be synchronized:
+    <font color=#0000ff>for</font> observer <font color=#0000ff>in</font> localArray:
+      observer.update(self, arg)
+
+  <font color=#0000ff>def</font> deleteObservers(self): self.obs = []
+  <font color=#0000ff>def</font> setChanged(self): self.changed = 1
+  <font color=#0000ff>def</font> clearChanged(self): self.changed = 0
+  <font color=#0000ff>def</font> hasChanged(self): <font color=#0000ff>return</font> self.changed
+  <font color=#0000ff>def</font> countObservers(self): <font color=#0000ff>return</font> len(self.obs)
+
+synchronize(Observable, 
+  <font color=#004488>"addObserver deleteObserver deleteObservers "</font> +
+  <font color=#004488>"setChanged clearChanged hasChanged "</font> +
+  <font color=#004488>"countObservers"</font>)
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Using this library,
+</FONT><FONT FACE="Georgia">here is an example of the observer pattern:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_311">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c10:ObservedFlower.py
+# Demonstration of <font color=#004488>"observer"</font> pattern.
+<font color=#0000ff>import</font> sys
+sys.path += ['../util']
+<font color=#0000ff>from</font> Observer <font color=#0000ff>import</font> Observer, Observable
+
+<font color=#0000ff>class</font> Flower:
+  <font color=#0000ff>def</font> __init__(self): 
+    self.isOpen = 0
+    self.openNotifier = Flower.OpenNotifier(self)
+    self.closeNotifier= Flower.CloseNotifier(self)
+  <font color=#0000ff>def</font> open(self): # Opens its petals
+    self.isOpen = 1
+    self.openNotifier.notifyObservers()
+    self.closeNotifier.open()
+  <font color=#0000ff>def</font> close(self): # Closes its petals
+    self.isOpen = 0
+    self.closeNotifier.notifyObservers()
+    self.openNotifier.close()
+  <font color=#0000ff>def</font> closing(self): <font color=#0000ff>return</font> self.closeNotifier 
+
+  <font color=#0000ff>class</font> OpenNotifier(Observable):
+    <font color=#0000ff>def</font> __init__(self, outer):
+      Observable.__init__(self)
+      self.outer = outer
+      self.alreadyOpen = 0
+    <font color=#0000ff>def</font> notifyObservers(self):
+      <font color=#0000ff>if</font> self.outer.isOpen <font color=#0000ff>and</font> \
+      <font color=#0000ff>not</font> self.alreadyOpen:
+        self.setChanged()
+        Observable.notifyObservers(self)
+        self.alreadyOpen = 1
+    <font color=#0000ff>def</font> close(self): 
+      self.alreadyOpen = 0 
+
+  <font color=#0000ff>class</font> CloseNotifier(Observable):
+    <font color=#0000ff>def</font> __init__(self, outer):
+      Observable.__init__(self)
+      self.outer = outer
+      self.alreadyClosed = 0
+    <font color=#0000ff>def</font> notifyObservers(self):
+      <font color=#0000ff>if</font> <font color=#0000ff>not</font> self.outer.isOpen <font color=#0000ff>and</font> \
+      <font color=#0000ff>not</font> self.alreadyClosed:
+        self.setChanged()
+        Observable.notifyObservers(self)
+        self.alreadyClosed = 1
+    <font color=#0000ff>def</font> open(self): 
+      alreadyClosed = 0 
+
+<font color=#0000ff>class</font> Bee:
+  <font color=#0000ff>def</font> __init__(self, name):
+    self.name = name
+    self.openObserver = Bee.OpenObserver(self)
+    self.closeObserver = Bee.CloseObserver(self)
+  # An inner <font color=#0000ff>class</font> <font color=#0000ff>for</font> observing openings:
+  <font color=#0000ff>class</font> OpenObserver(Observer):
+    <font color=#0000ff>def</font> __init__(self, outer):
+      self.outer = outer
+    <font color=#0000ff>def</font> update(self, observable, arg):
+      <font color=#0000ff>print</font> <font color=#004488>"Bee "</font> + self.outer.name + \
+        <font color=#004488>"'s breakfast time!"</font>
+  # Another inner <font color=#0000ff>class</font> <font color=#0000ff>for</font> closings:
+  <font color=#0000ff>class</font> CloseObserver(Observer):
+    <font color=#0000ff>def</font> __init__(self, outer):
+      self.outer = outer
+    <font color=#0000ff>def</font> update(self, observable, arg):
+      <font color=#0000ff>print</font> <font color=#004488>"Bee "</font> + self.outer.name + \
+        <font color=#004488>"'s bed time!"</font>
+
+<font color=#0000ff>class</font> Hummingbird:
+  <font color=#0000ff>def</font> __init__(self, name): 
+    self.name = name
+    self.openObserver = \
+      Hummingbird.OpenObserver(self)
+    self.closeObserver = \
+      Hummingbird.CloseObserver(self)
+  <font color=#0000ff>class</font> OpenObserver(Observer):
+    <font color=#0000ff>def</font> __init__(self, outer):
+      self.outer = outer
+    <font color=#0000ff>def</font> update(self, observable, arg):
+      <font color=#0000ff>print</font> <font color=#004488>"Hummingbird "</font> + self.outer.name + \
+        <font color=#004488>"'s breakfast time!"</font>
+  <font color=#0000ff>class</font> CloseObserver(Observer):
+    <font color=#0000ff>def</font> __init__(self, outer):
+      self.outer = outer
+    <font color=#0000ff>def</font> update(self, observable, arg):
+      <font color=#0000ff>print</font> <font color=#004488>"Hummingbird "</font> + self.outer.name + \
+        <font color=#004488>"'s bed time!"</font>
+
+f = Flower()
+ba = Bee(<font color=#004488>"Eric"</font>)
+bb = Bee(<font color=#004488>"Eric 0.5"</font>)
+ha = Hummingbird(<font color=#004488>"A"</font>)
+hb = Hummingbird(<font color=#004488>"B"</font>)
+f.openNotifier.addObserver(ha.openObserver)
+f.openNotifier.addObserver(hb.openObserver)
+f.openNotifier.addObserver(ba.openObserver)
+f.openNotifier.addObserver(bb.openObserver)
+f.closeNotifier.addObserver(ha.closeObserver)
+f.closeNotifier.addObserver(hb.closeObserver)
+f.closeNotifier.addObserver(ba.closeObserver)
+f.closeNotifier.addObserver(bb.closeObserver)
+# Hummingbird 2 decides to sleep <font color=#0000ff>in</font>:
+f.openNotifier.deleteObserver(hb.openObserver)
+# A change that interests observers:
+f.open()
+f.open() # It's already open, no change.
+# Bee 1 doesn't want to go to bed:
+f.closeNotifier.deleteObserver(ba.closeObserver)
+f.close()
+f.close() # It's already closed; no change
+f.openNotifier.deleteObservers()
+f.open()
+f.close()
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The events of interest are that
+a <B>Flower</B> can open or close. Because of the use of the inner class idiom,
+both these events can be separately observable phenomena. <B>OpenNotifier</B>
+and <B>CloseNotifier</B> both inherit <B>Observable</B>, so they have access to
+<B>setChanged(&#160;)</B> and can be handed to anything that needs an
+<B>Observable</B>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_312">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The inner class idiom also comes in handy
+to define more than one kind of <B>Observer</B>, in <B>Bee</B> and
+<B>Hummingbird</B>, since both those classes may want to independently observe
+<B>Flower</B> openings and closings. Notice how the inner class idiom provides
+something that has most of the benefits of inheritance (the ability to access
+the <B>private</B> data in the outer class, for example) without the same
+restrictions.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_313">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In <B>main(&#160;)</B>, you can see one
+of the prime benefits of the observer pattern: the ability to change behavior at
+run time by dynamically registering and un-registering <B>Observer</B>s with
+<B>Observable</B>s.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_314">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">If you study the code above you&#146;ll
+see that <B>OpenNotifier </B>and <B>CloseNotifier</B> use the basic
+<B>Observable</B> interface. This means that you could inherit other completely
+different <B>Observer</B> classes; the only connection the <B>Observer</B>s have
+with <B>Flower</B>s is the <B>Observer</B> interface.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_315">Add Comment</A></FONT><A NAME="_Toc462393596"></A><A NAME="_Toc476705915"></A><A NAME="_Toc534420126"></A><BR></P></DIV>
+<A NAME="Heading77"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+A visual example of observers</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The following example is similar to the
+<B>ColorBoxes</B> example from Chapter 14 in <I>Thinking in Java, 2<SUP>nd</SUP>
+Edition</I>. Boxes are placed in a grid on the screen and each one is
+initialized to a random color. In addition, each box <B>implements</B> the
+<A NAME="Index24"></A><B>Observer</B> interface and is registered with an
+<B>Observable</B> object. When you click on a box, all of the other boxes are
+notified that a change has been made because the <B>Observable</B> object
+automatically calls each <B>Observer </B>object&#146;s <B>update(&#160;)</B>
+method. Inside this method, the box checks to see if it&#146;s adjacent to the
+one that was clicked, and if so it changes its color to match the clicked box.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_316">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>[[ NOTE: this example has <font color=#0000ff>not</font> been converted. See further down <font color=#0000ff>for</font> a version that has the GUI but <font color=#0000ff>not</font> the Observers, <font color=#0000ff>in</font> PythonCard. ]]
+#  c10:BoxObserver.py
+# Demonstration of Observer pattern using
+# Java's built-<font color=#0000ff>in</font> observer classes.
+
+# You must inherit a type of Observable:
+<font color=#0000ff>class</font> BoxObservable(Observable):
+  <font color=#0000ff>def</font> notifyObservers(self, Object b):
+    # Otherwise it won't propagate changes:
+    setChanged()
+    super.notifyObservers(b)
+
+<font color=#0000ff>class</font> BoxObserver(JFrame):
+  Observable notifier = BoxObservable()
+  <font color=#0000ff>def</font> __init__(self, int grid):
+    setTitle(<font color=#004488>"Demonstrates Observer pattern"</font>)
+    Container cp = getContentPane()
+    cp.setLayout(GridLayout(grid, grid))
+    <font color=#0000ff>for</font>(int x = 0 x &lt; grid x++)
+      <font color=#0000ff>for</font>(int y = 0 y &lt; grid y++)
+        cp.add(OCBox(x, y, notifier))
+     
+  <font color=#0000ff>def</font> main(self, String[] args):
+    int grid = 8
+    <font color=#0000ff>if</font>(args.length &gt; 0)
+      grid = Integer.parseInt(args[0])
+    JFrame f = BoxObserver(grid)
+    f.setSize(500, 400)
+    f.setVisible(1)
+    # JDK 1.3:
+    f.setDefaultCloseOperation(EXIT_ON_CLOSE)
+    # Add a WindowAdapter <font color=#0000ff>if</font> you have JDK 1.2
+
+<font color=#0000ff>class</font> OCBox(JPanel) implements Observer:
+  Observable notifier
+  int x, y # Locations <font color=#0000ff>in</font> grid
+  Color cColor = newColor()
+  static final Color[] colors =: 
+    Color.black, Color.blue, Color.cyan, 
+    Color.darkGray, Color.gray, Color.green,
+    Color.lightGray, Color.magenta, 
+    Color.orange, Color.pink, Color.red, 
+    Color.white, Color.yellow 
+
+  static final Color newColor():
+    <font color=#0000ff>return</font> colors[
+      (int)(Math.random() * colors.length)
+    ]
+
+  <font color=#0000ff>def</font> __init__(self, int x, int y, Observable notifier):
+    self.x = x
+    self.y = y
+    notifier.addObserver(self)
+    self.notifier = notifier
+    addMouseListener(ML())
+
+  <font color=#0000ff>def</font> paintComponent(self, Graphics g):
+    super.paintComponent(g)
+    g.setColor(cColor)
+    Dimension s = getSize()
+    g.fillRect(0, 0, s.width, s.height)
+
+  <font color=#0000ff>class</font> ML(MouseAdapter):
+    <font color=#0000ff>def</font> mousePressed(self, MouseEvent e):
+      notifier.notifyObservers(OCBox.self)
+
+  <font color=#0000ff>def</font> update(self, Observable o, Object arg):
+    OCBox clicked = (OCBox)arg
+    <font color=#0000ff>if</font>(nextTo(clicked)):
+      cColor = clicked.cColor
+      repaint()
+
+  private final boolean nextTo(OCBox b):
+    <font color=#0000ff>return</font> Math.abs(x - b.x) &lt;= 1 &amp;&amp; 
+           Math.abs(y - b.y) &lt;= 1
+
+# :~
+</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">When you first look at the online
+documentation for <B>Observable</B>, it&#146;s a bit confusing because it
+appears that you can use an ordinary <B>Observable</B> object to manage the
+updates. But this doesn&#146;t work; try it&#151;inside <B>BoxObserver</B>,
+create an <B>Observable</B> object instead of a <B>BoxObservable</B> object and
+see what happens: nothing. To get an effect, you <I>must</I> inherit from
+<B>Observable</B> and somewhere in your derived-class code call
+<A NAME="Index25"></A><B>setChanged(&#160;)</B>. This is the method that sets
+the &#147;changed&#148; flag, which means that when you call
+<A NAME="Index26"></A><B>notifyObservers(&#160;)</B> all of the observers will,
+in fact, get notified. In the example above <B>setChanged(&#160;)</B> is simply
+called within <B>notifyObservers(&#160;)</B>, but you could use any criterion
+you want to decide when to call <B>setChanged(&#160;)</B>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_317">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><B>BoxObserver</B> contains a single
+<B>Observable </B>object called <B>notifier</B>, and every time an <B>OCBox</B>
+object is created, it is tied to <B>notifier</B>. In <B>OCBox</B>, whenever you
+click the mouse the <B>notifyObservers(&#160;)</B> method is called, passing the
+clicked object in as an argument so that all the boxes receiving the message (in
+their <B>update(&#160;) </B>method) know who was clicked and can decide whether
+to change themselves or not. Using a combination of code in
+<B>notifyObservers(&#160;)</B> and <B>update(&#160;)</B> you can work out some
+fairly complex schemes.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_318">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">It might appear that the way the
+observers are notified must be frozen at compile time in the
+<B>notifyObservers(&#160;)</B> method. However, if you look more closely at the
+code above you&#146;ll see that the only place in <B>BoxObserver</B> or
+<B>OCBox</B> where you're aware that you&#146;re working with a
+<B>BoxObservable</B> is at the point of creation of the <B>Observable
+</B>object&#151;from then on everything uses the basic <B>Observable</B>
+interface. This means that you could inherit other <B>Observable</B> classes and
+swap them at run time if you want to change notification behavior then.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_319">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here is a version of the above that
+doesn&#146;t use the Observer pattern, written by Kevin Altis using PythonCard,
+and placed here as a starting point for a translation that does include
+Observer:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c10:BoxObserver.py
+<font color=#004488>""</font>" Written by Kevin Altis as a first-cut <font color=#0000ff>for</font>
+converting BoxObserver to Python. The Observer
+hasn't been integrated yet.
+To run this program, you must:
+Install WxPython <font color=#0000ff>from</font>
+http:<font color=#009900>//www.wxpython.org/download.php</font>
+Install PythonCard. See:
+http:<font color=#009900>//pythoncard.sourceforge.net</font>
+<font color=#004488>""</font>"
+
+<font color=#0000ff>from</font> PythonCardPrototype <font color=#0000ff>import</font> log, model
+<font color=#0000ff>import</font> random
+
+GRID = 8
+
+<font color=#0000ff>class</font> ColorBoxesTest(model.Background):
+  <font color=#0000ff>def</font> on_openBackground(self, target, event):
+    self.document = []
+    <font color=#0000ff>for</font> row <font color=#0000ff>in</font> range(GRID):
+      line = []
+      <font color=#0000ff>for</font> column <font color=#0000ff>in</font> range(GRID):
+        line.append(self.createBox(row, column))
+      self.document.append(line[:])
+  <font color=#0000ff>def</font> createBox(self, row, column):
+    colors = ['black', 'blue', 'cyan',
+    'darkGray', 'gray', 'green',
+    'lightGray', 'magenta',
+    'orange', 'pink', 'red',
+    'white', 'yellow']
+    width, height = self.panel.GetSizeTuple()
+    boxWidth = width / GRID
+    boxHeight = height / GRID
+    log.info(<font color=#004488>"width:"</font> + str(width) +
+      <font color=#004488>" height:"</font> + str(height))
+    log.info(<font color=#004488>"boxWidth:"</font> + str(boxWidth) +
+      <font color=#004488>" boxHeight:"</font> + str(boxHeight))
+    # use an empty image, though some other
+    # widgets would work just as well
+    boxDesc = {'type':'Image',
+      'size':(boxWidth, boxHeight), 'file':''}
+    name = 'box-%d-%d' % (row, column)
+    # There <font color=#0000ff>is</font> probably a 1 off error <font color=#0000ff>in</font> the
+    # calculation below since the boxes should
+    # probably have a slightly different offset
+    # to prevent overlaps
+    boxDesc['position'] =
+      (column * boxWidth, row * boxHeight)
+    boxDesc['name'] = name
+    boxDesc['backgroundColor'] =
+      random.choice(colors)
+    self.components[name] =  boxDesc
+    <font color=#0000ff>return</font> self.components[name]
+
+  <font color=#0000ff>def</font> changeNeighbors(self, row, column, color):
+
+    # This algorithm will result <font color=#0000ff>in</font> changing the
+    # color of some boxes more than once, so an
+    # OOP solution where only neighbors are asked
+    # to change <font color=#0000ff>or</font> boxes check to see <font color=#0000ff>if</font> they are
+    # neighbors before changing would be better
+    # per the original example does the whole grid
+    # need to change its state at once like <font color=#0000ff>in</font> a
+    # Life program? should the color change 
+    # <font color=#0000ff>in</font> the propogation of another notification
+    # event?
+
+    <font color=#0000ff>for</font> r <font color=#0000ff>in</font> range(max(0, row - 1), 
+                   min(GRID, row + 2)):
+      <font color=#0000ff>for</font> c <font color=#0000ff>in</font> range(max(0, column - 1), 
+                     min(GRID, column + 2)):
+        self.document[r][c].backgroundColor=color
+
+  # this <font color=#0000ff>is</font> a background handler, so it isn't  
+  # specific to a single widget. Image widgets 
+  # don't have a mouseClick event (wxCommandEvent
+  # <font color=#0000ff>in</font> wxPython)
+  <font color=#0000ff>def</font> on_mouseUp(self, target, event):
+    prefix, row, column = target.name.split('-')
+    self.changeNeighbors(int(row), int(column), 
+                         target.backgroundColor)
+
+<font color=#0000ff>if</font> __name__ == '__main__':
+  app = model.PythonCardApp(ColorBoxesTest)
+  app.MainLoop()
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This is the resource file for
+running the program (see PythonCard for details):</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c10:BoxObserver.rsrc.py
+{'stack':{'type':'Stack',
+          'name':'BoxObserver',
+    'backgrounds': [
+      { 'type':'Background',
+        'name':'bgBoxObserver',
+        'title':'Demonstrates Observer pattern',
+        'position':(5, 5),
+        'size':(500, 400),
+        'components': [
+
+] # end components
+} # end background
+] # end backgrounds
+} }
+#:~<A NAME=<font color=#004488>"_Toc534420127"</font>></A></PRE></FONT></BLOCKQUOTE><A NAME="Heading78"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Exercises</H2></FONT>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Using the approach in
+<B>Synchronization.py</B>, create a tool that will automatically wrap all the
+methods in a class to provide an execution trace, so that you can see the name
+of the method and when it is entered and exited.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_320">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create
+a minimal Observer-Observable design in two classes. Just create the bare
+minimum in the two classes, then demonstrate your design by creating one
+<B>Observable</B> and many <B>Observer</B>s, and cause the <B>Observable</B> to
+update the <B>Observer</B>s.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_321">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+<B>BoxObserver.py</B> to turn it into a simple game. If any of the squares
+surrounding the one you clicked is part of a contiguous patch of the same color,
+then all the squares in that patch are changed to the color you clicked on. You
+can configure the game for competition between players or to keep track of the
+number of clicks that a single player uses to turn the field into a single
+color. You may also want to restrict a player's color to the first one that was
+chosen.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_322">Add Comment</A></FONT></OL>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect11.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect13.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:12/31/2001</P></DIV>
+
+</BODY>
+
+</HTML>

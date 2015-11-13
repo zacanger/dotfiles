@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="1865"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$ThtjNpGlGc9</title>
+</head>
+<body><h1>Kyle McDonald</h1><p>SFPC 2013</p><p>__________________________________________________________________________________</p><p>editing</p><p><b>Projection Mapping</b></p><ul style="list-style: none;"><li><b>Pablo Valbuena</b></li></ul>
+<p>*</p><p><a href="http://vimeo.com/pablovalbuena"></a>http://vimeo.com/pablovalbuena</p><ul style="list-style: none;"><li><b>Snake The Planet</b></li></ul>
+<p>*</p><p><a href="http://vimeo.com/37637793"></a>http://vimeo.com/37637793</p><ul><li>go around the city and play the game snake.</li>
+<li>create obstacles based on scanned objects on the wall.</li>
+<li>Done in OpenFrameworks</li>
+<li>I think we;re missing on the possibility of interactive art with pets.</li></ul>
+<ul style="list-style: none;"><li><b>Projection Mapping Tetragram</b></li></ul>
+<p>*</p><p><a href="http://vimeo.com/5374101"></a>http://vimeo.com/5374101</p><ul style="list-style: none;"><li><b>Box</b></li></ul>
+<p>*</p><p><a href="http://vimeo.com/75260457"></a>http://vimeo.com/75260457</p><ul><li>Making the real world look like CGI.</li></ul>
+<p><b>Mapamok</b></p><ul style="list-style: none;"><li><b>ProCamToolkitPage</b></li><ul><li><a href="https://github.com/YCAMInterlab/ProCamToolkit/wiki/mapamok-(English)"></a>https://github.com/YCAMInterlab/ProCamToolkit/wiki/mapamok-(English)</li></ul>
+<ul style="list-style: none;"><li><b>Shaders</b><ul style="list-style: none;"><li><b>Difference between the GPU and the CPU</b></li><ul><li>maybe the CPU better called &quot;SPU&quot; (Serial Processing Unit)</li>
+<li>maybe the GPU is better called &quot;PPU&quot; (Parallel Processing Unit)<ul><li>historically there was no GPU, until video games</li>
+<li>Main Part<ul><li>math</li>
+<li>stores information (RAM)</li>
+<li>connected to your hardrive, mouse, keyboard, internet, sound</li></ul>
+</li>
+<li>Graphics Card<ul><li>math</li>
+<li>stores information (RAM)</li>
+<li>display</li></ul>
+</li></ul>
+</li>
+<li>Both have their specialties, what they are good at doing, GPU is good at things that happen in parallel, CPU and do things in serial.<ul><li>Parallel<ul><li>Manipuating Images</li>
+<li>Lighting 3d models</li>
+<li>Math processes that you have to do at the same time.</li></ul>
+</li>
+<li>Procedurally<ul><li>Processing Audio</li></ul>
+</li></ul>
+</li>
+<li>CPU pushes to the GPU<ul><li>update( ); --&gt;</li>
+<li>read to pixels &lt;--</li>
+<li>conenction exist on your motherboard.</li></ul>
+</li>
+<li>When writing code in the CPU<ul><li>Javascript, Ruby, Node, Haskell, Pascal, C++, OpenGL, OpenMax</li>
+<li>this code can manipulate your GPU but runs on your CPU&nbsp;</li>
+<li>The flow of your code can be varied.</li>
+<li>Can control how the rendering is done on the GPU.</li></ul>
+</li>
+<li>Writing in the GPU<ul><li>GLSL, HLSL, OpenCL, Cuda, Nvidia New Shading Language for Game Developments</li>
+<li>Runs directly on your GPU</li>
+<li>When writing for the graphics card the flow is always the same. Your code runs once per pixel, once per vertex.</li>
+<li>Fragment is another word for pixel.</li>
+<li>The main thing that has been driving graphics cards, is video games.<ul><li>Artist get whatever the video game industry releases.</li></ul>
+</li></ul>
+</li>
+<li>Shared Memory<ul><li>....</li>
+<li>You can have memory on the GPU that you upload directly to the CPU.</li></ul>
+</li>
+<li>Master Render Farm</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>Fragment</b></li><ul><li>What color is this pixel.</li>
+<li>Bump Mapping<ul><li>Changes the look based on some texture you&rsquo;ve given it.</li></ul>
+</ul>
+</ul>
+<ul style="list-style: none;"><li><b>Vertex</b></li><ul><li>Where should this vertex be.</li>
+<li>Displacement Mapping<ul><li>Changes vertices based on on some texture you&rsquo;ve given it.</li></ul>
+</ul>
+</ul>
+<ul style="list-style: none;"><li><b>Geometry</b></li><ul><li>Given a vertex, what vertices should we create from that.</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>Tesselation</b></li><ul><li>advance shader.</li></ul>
+</li></ul>
+</li>
+<li>What is hard to do with the graphics card, that can&rsquo;t be done for game.</li><ul><li>Computer vision algorythms on the GPU.<ul><li>Can do but the tools for it haven&rsquo;t existed till recent;y.</li></ul>
+</li>
+<li>Sound processing.<ul><li>Reverb.</li>
+<li>Things that are the sound level of latency.</li></ul>
+</li></ul>
+</li>
+<li>What happens when an image is drawn to your screen.</li><ul><li>Traingles have teture coordinates.</li>
+<li>Each of these coordinates, have a varying value.</li>
+<li>Fragment shader runs across your whole screen.<ul><li>Gets an interpolated version of that varying value.</li></ul>
+</li>
+<li>Thowing sheets of mirrorball material over a couch.<ul><li>Light Leaks <a href='/ep/profile/AjoEgpixAMl'/>Kyle McDonald</a></li></ul>
+</ul>
+</ul>
+</ul>
+<p>*</p><p><a href="http://vimeo.com/66167082"></a>http://vimeo.com/66167082</p><ul><li>Structures on the walls are based on the reflection coming from the Mirrorballs that are being projected onto.</li>
+<li>Computer Vision with Structure Light</li>
+<li>Take a 3d models and line it up.</li>
+<li>Camamuk</li>
+<li>Line up vertices with an image.</li>
+<li>Easy to Prototype with GLSL.</li>
+<li>Normally when doing processing, your code is being compiled or interpreted, but width Glsl, its compiled by the graphic card.</li>
+<li>can write new code.</li>
+<li>artist who generatively make art on the graphics card.</li></li>
+<li><b>Johnathan McCabe</b></li>
+<li><a href="http://www.jonathanmccabe.com/"></a>http://www.jonathanmccabe.com/</li>
+<li>Most of his work is done on the GPU.</li>
+<li>Taking advantage that the code is compiled on the graphics card.</li>
+<li>Generates the code to generate the image with code.</li>
+<li>Reaction diffusion and feedback.</li>
+<li>Reaction Diffusion - really common algorithms for a lot of animal patterns and shapes in nature.&nbsp;</li></ul>
+<p>*</p><p><a href="http://www.flickr.com/photos/jonathanmccabe/"></a>http://www.flickr.com/photos/jonathanmccabe/</p><ul style="list-style: none;"><li><b>Scoot Draves</b></li><ul><li>scootdraves.com<ul><li>Creator of Electric Sheep.</li></ul>
+</li>
+<li>works at google.</li>
+<li>tends to use fractals, and recursion.</li>
+<li>Unallocated texture Glitch</li>
+<li>Uninitialized Variable Memory</li></li>
+<li><br/></li></ul>
+</ul>
+
+</body>
+</html>

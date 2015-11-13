@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="653"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$di3UJGBdVag</title>
+</head>
+<body><h1>Command Line Tutorials</h1><p><a href="http://cli.learncodethehardway.org/"></a>http://cli.learncodethehardway.org/</p><p><a href="http://en.flossmanuals.net/command-line/"></a>http://en.flossmanuals.net/command-line/</p><p>Advanced Bash-Scripting Guide - <a href="http://www.tldp.org/LDP/abs/html/"></a>http://www.tldp.org/LDP/abs/html/</p><p></p><p><b>theory of the command line</b></p><p><a href="http://theody.net/elements.html"></a>http://theody.net/elements.html</p><p><a href="http://reader.lgru.net/texts/echo-echo-echo-echo-command-line-poetics/"></a>http://reader.lgru.net/texts/echo-echo-echo-echo-command-line-poetics/</p><p><a href="http://adam.shand.net/library/in_the_beginning_was_the_command_line/"></a>http://adam.shand.net/library/in_the_beginning_was_the_command_line/</p><ul class="comment"><li><a href="http://en.wikipedia.org/wiki/Unix_philosophy"></a>http://en.wikipedia.org/wiki/Unix_philosophy</li></ul>
+
+<p><b>suggestions from the community:&nbsp;</b></p><p>*</p><p><a href="https://twitter.com/zachlieberman/status/458954412481069056"></a>https://twitter.com/zachlieberman/status/458954412481069056</p><p></p><p><b>fun</b></p><ul class="code"><li>telnet towel.blinkenlights.nl</li></ul>
+
+<p><b>directory</b></p><ul class="code"><li>cd&nbsp;&nbsp;&nbsp;&nbsp; (change directory&nbsp; cd ../ goes back a level)</li>
+<li>pwd&nbsp;&nbsp;&nbsp; (show where you are at)</li>
+<li>mv important.txt notSoImportant.txt (Rename `important.txt` to `notSoImportant.txt`)</li>
+<li>mv important.txt ~/Desktop/important.txt (Move `important.txt` to `Desktop` folder)</li>
+<li>pushd .&nbsp;&nbsp; (push the current directory on to the stack)</li>
+<li>popd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (go back to the top most pushd folder)</li>
+<li>diff -qr /path_to_dir_A /path_to_dir&nbsp;&nbsp; (compare two folders)</li></ul>
+<p><a href="https://github.com/rupa/z"></a>https://github.com/rupa/z</p><p><i>missing : cp</i></p><p></p><p><b>memory</b></p><ul class="code"><li>history | grep part_of_command</li></ul>
+
+<p><b>looking at text files</b></p><ul class="code"><li>wc -l&nbsp;&nbsp; (word count lines)</li>
+<li>head&nbsp;</li>
+<li>tail</li>
+<li>tail -f&nbsp;&nbsp; (for viewing realtime logs... ie tail -f&nbsp; /var/log/system.log)</li>
+<li>cat file.txt&nbsp; (spit out file)</li>
+<li><br/></li></ul>
+<p><b>ffmpeg</b></p><ul class="code"><li>ffmpeg</li>
+<li>ffmpeg -i inputfile.avi -r 1 -f image2 image-%3d.jpeg</li>
+<li>ffmpeg -i inputfile.avi -r 1 -s 4cif -f image2 image-%3d.jpeg</li></ul>
+<p><a href="http://linuxers.org/tutorial/how-extract-images-video-using-ffmpeg"></a>http://linuxers.org/tutorial/how-extract-images-video-using-ffmpeg</p><p></p><p><b>internet&nbsp;</b></p><p>use curl or wget or browse the web with lynx</p><ul class="code"><li>curl <a href="http://www.theguardian.com/us"></a>http://www.theguardian.com/us -s | grep &quot;war &quot;</li>
+<li>curl <a href="http://neon.wavestreamer.com:8459"></a>http://neon.wavestreamer.com:8459&nbsp; (warning this is crazy! raw mp3 data to the console)</li>
+<li>curl <a href="http://neon.wavestreamer.com:8459"></a>http://neon.wavestreamer.com:8459 &gt; out.mp3&nbsp; (ctrl c/z to stop)</li>
+<li><br/></li>
+<li><a href="http://www.telesthetic.org/woven/popup.htm?woven_presents_600.jpg"></a>http://www.telesthetic.org/woven/popup.htm?woven_presents_600.jpg</li></ul>
+
+<p><b>OSX</b></p><p>sips - <a href="http://www.ainotenshi.org/818/resizing-images-using-the-command-line"></a>http://www.ainotenshi.org/818/resizing-images-using-the-command-line</p><p>pbcopy (copy to the clipboard)</p><ul class="code"><li>history | pbcopy&nbsp;&nbsp;&nbsp; (pipe history into pbcopy)</li></ul>
+<p>say&nbsp;</p><ul class="code"><li>say &quot;hello&quot;</li></ul>
+<p>cal&nbsp;</p><p>hexdump&nbsp; (view hex info on files)</p><p></p><p><b>expansion</b></p><ul class="code"><li>echo {Z..A}</li>
+<li>echo {0..15}</li>
+<li>for run in {1..10}; do echo hello; done</li></ul>
+
+<p><b>text sorting</b></p><ul class="code"><li>tr &rsquo; &rsquo; &rsquo;&#92;n&rsquo; &lt; a.txt &gt;&gt; b.txt</li>
+<li>sort b.txt &gt;&gt; c.txt</li>
+<li>tr &rsquo;&#92;n&rsquo; &rsquo; &rsquo; &lt; c.txt &gt;&gt; d.txt</li>
+<li>(change spaces to newlines in a.txt into a new file b.txt)</li>
+<li>(sort b.txt into a new file c.txt)</li>
+<li>(change newlines to space in c.txt into a new file d.txt)</li></ul>
+
+<p>Missing:&nbsp;</p><p>xargs, alias, tr, sort...&nbsp;&nbsp;</p><p>explanation of what I did with that bible file</p><p></p><p></p></body>
+</html>

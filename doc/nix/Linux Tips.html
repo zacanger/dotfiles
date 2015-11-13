@@ -1,0 +1,383 @@
+<!doctype html>
+<html>
+<head>
+<title>Linux Tips</title>
+<!-- INCLUDE /incl/head.incl -->
+<!--ignore_search-->
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<link rel="shortcut icon" type="image/ico" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="search" type="application/opensearchdescription+xml" title="7is7.com" href="http://www.7is7.com/software/firefox/plugins/7is7.xml">
+<link rel="alternate" href="http://www.7is7.com/otto/about/new.atom" type="application/atom+xml" title="What's new on 7is7.com (Atom)">
+<!--/ignore_search-->
+<!-- ENDINCL -->
+<style type="text/css">
+<!--
+@import "/sitestyle.css";
+@import "/software/linux/mystyle.css";
+-->
+</style>
+<style type="text/css" media="print">
+<!--
+@import "/printstyle.css";
+-->
+</style>
+<script type="text/javascript" src="/sitescript.js"></script>
+</head>
+
+<body>
+<div class="dhead">
+<!--ignore_search-->
+<!-- stateye.gif (http://www.stateye.com/) -->
+<script type="text/javascript" src="/stateye/stateye.js"></script>
+<noscript><div><img src="/cgi-bin/stateye/stateye.gif?docloc=referer&amp;docref=noscript" width="1" height="1" alt="" style="margin:0;border:0;padding:0;display:block;"></div></noscript>
+<!-- end stateye.gif -->
+<div class="locator">
+<a href="/">7is7.com</a>&nbsp;&gt;
+<a href="/software/">Software</a>&nbsp;&gt;
+Linux Tips
+</div>
+<!-- INCLUDE /incl/searchbox.incl -->
+<form class="nospace" method="get" action="/cgi-bin/perlfect/search/search.pl">
+<p class="searchbox">
+<input type="hidden" name="p" value="1">
+<input type="hidden" name="lang" value="en">
+<input type="hidden" name="include" value="">
+<input type="hidden" name="exclude" value="">
+<input type="hidden" name="penalty" value="0">
+<input type="hidden" name="mode" value="any">
+<input type="text" size="16" name="q">
+<input type="submit" value="Search">
+</p>
+</form>
+<!-- ENDINCL -->
+<div class="spacer"></div>
+<!--/ignore_search-->
+</div><!-- dhead -->
+<div class="dmain">
+
+<div class="HeadImage">
+<img src="linux100x120.png" alt="Linux Penguin" width="100" height="120">
+</div>
+
+<h1 class="PageTitle">Linux Tips</h1>
+
+<p>
+This page contains a selection of tips for Linux (and UNIX) that I have
+collected. It's more of a memo to myself and not intended as a
+guide or anything. So just see it as notes that I share with whoever is
+interested.
+Most of these tips are for the bash shell environment.
+</p>
+
+<h3 class="hd3">Manipulating command line instructions</h3>
+
+<p>replace "<em>str1</em>" by "<em>str2</em>" in previous command:
+<blockquote class="code">^<em>str1</em>^<em>str2</em>[^]</blockquote>
+<p>repeat event from 2 events ago:
+<blockquote class="code">!-2</blockquote>
+<p>repeat most recent event starting with "<em>string</em>":
+<blockquote class="code">!<em>string</em></blockquote>
+<p>repeat most recent event containing "<em>string</em>":
+<blockquote class="code">!?<em>string</em>[?]</blockquote>
+<p>repeat the entire command line typed so far:
+<blockquote class="code">!#</blockquote>
+
+<h3 class="hd3">Directory Contents</h3>
+
+<p>Directory listing including non-printable chars
+<blockquote class="code">ls -q *</blockquote>
+<p>list directory names not their contents
+<blockquote class="code">ls -d *</blockquote>
+<p>List all entries in current directory that are files (not directories),
+alternatively use <code>find</code> with the <code>-depth</code> option.
+<blockquote class="code">for i in *; do [ -f $i ] &amp;&amp; echo $i; done</blockquote>
+<p>And inversely list only directories:
+<blockquote class="code">for i in *; do [ -d $i ] &amp;&amp; echo $i; done</blockquote>
+
+<h3 class="hd3">Directory Manipulation</h3>
+
+<p>Push current directory to directory stack:
+<blockquote class="code">pushd .</blockquote>
+<p>Pop directory from directory stack:
+<blockquote class="code">popd</blockquote>
+
+<h3 class="hd3">System</h3>
+
+<p>Information about the system:</p>
+<blockquote class="code">uname -a</blockquote>
+<p>How many cores does the system have:</p>
+<blockquote class="code">grep "model name" /proc/cpuinfo | wc -l</blockquote>
+
+<h3 class="hd3">Files</h3>
+
+<p>Viewing file with line numbers:
+<blockquote class="code">cat -n <em>filename</em></blockquote>
+<p>"more" file starting at a certain linenumber:
+<blockquote class="code">more +<em>linenumber</em> <em>filename</em></blockquote>
+<p>"more" file starting at a certain pattern:
+<blockquote class="code">more +/<em>pattern</em> <em>filename</em></blockquote>
+<p>Rename all .htm files to .html in one go:
+<blockquote class="code">
+rename .htm .html *.htm
+</blockquote>
+
+<p>Destroy a file:
+<blockquote class="code">shred -uz <em>filename</em></blockquote>
+
+<h3 class="hd3">Mail</h3>
+
+<p>Mail a file as plain text:
+<blockquote class="code">
+mail -s "<em>subject</em>" <em>e-mail_address</em> < <em>file</em>
+</blockquote>
+<p>Mail an attachement (if uuencode present and in path):
+<blockquote class="code">
+uuencode attachment.txt | 
+mail -s "<em>subject</em>" <em>e-mail_address</em>
+</blockquote>
+
+<h3 class="hd3">Arithmetics</h3>
+
+<p>Do some quick maths (whole numbers only):
+<blockquote class="code">echo $((7*8+5))</blockquote>
+
+<h3 class="hd3">Sorting</h3>
+
+<p>To sort based on a section of each line in a file use the --key argument.
+For instance to list countries in alphabetical order of name rather than
+their country code:</p>
+<blockquote class="code">grep -v "^#" /usr/share/zoneinfo/iso3166.tab |sort --key=2.1</blockquote>
+
+<h3 class="hd3">Processes</h3>
+
+<p>Display current processes
+<blockquote class="code">ps -ef|cut -c49-</blockquote>
+<p>Display the processes of user <em>userid</em>
+<blockquote class="code">ps -fu <em>userid</em></blockquote>
+<p>Show the processes started on <em>tty</em>
+<blockquote class="code">ps -ft <em>tty</em></blockquote>
+<p>Show the process with PID <em>pid</em>
+<blockquote class="code">ps -fp <em>pid</em></blockquote>
+<p>Restarting a process with PID <em>pid</em>:
+<blockquote class="code">kill -HUP <em>pid</em></blockquote>
+<p>Restarting sshd:
+<blockquote class="code">kill -s HUP $(cat /var/run/sshd.pid)</blockquote>
+<p>Editing ssh settings:
+<blockquote class="code">vi /etc/ssh/sshd_config</blockquote>
+<p>Changing (lowering) a running process' priority:
+<blockquote class="code">renice +10 -p <em>pid</em></blockquote>
+
+<h3 class="hd3">ftp</h3>
+
+<p>Commands you can use in an FTP session.</p> 
+<p>File permissions on target site:
+<blockquote class="code">site mask 133</blockquote>
+<blockquote class="code">site chmod 644 <em>filename</em></blockquote>
+<p>Toggle interactive prompting of multiple arguments commands:
+<blockquote class="code">prompt</blockquote>
+<p>Status of current connection:
+<blockquote class="code">status</blockquote>
+
+<h3 class="hd3">sftp and ssh</h3>
+
+<p>Setting up passwordless login for sftp and ssh:</p>
+<blockquote class="code">
+ssh-keygen -t rsa<br>
+ssh-copy-id -i ~/.ssh/id_rsa.pub username@remote_host<br>
+sftp username@remote_host
+</blockquote>
+
+<p>Checking the last logins of the current user:</p>
+<blockquote class="code">
+last -i | grep $USER
+</blockquote>
+<p>Last logins of all users on a machine:</p>
+<blockquote class="code">
+last -i
+</blockquote>
+
+<h3 class="hd3">misc</h3>
+
+<p>Run one instruction as user <em>id</em>:</p>
+<blockquote class="code">su - <em>id</em> -c "<em>instruction</em>"</blockquote>
+
+<p>Display terminal settings:</p>
+<blockquote class="code">stty -a</blockquote>
+
+<p>Display configuration of system variable:</p>
+<blockquote class="code">getconf CHILD_MAX</blockquote>
+
+<p>Set tab-stop interval to 4 in the terminal:</p>
+<blockquote class="code">tabs -4</blockquote>
+
+<h3 class="hd3">tr</h3>
+<p>tr also works with these kind of constructions:</p>
+<blockquote class="code">tr '[:lower:]' '[:upper:]'</blockquote>
+Forgetting the 's (single quotes) will cause problems if there is a file in
+your current directory with the name: l, o, w, e, r, u, p or :
+Try 
+<code>touch u &amp;&amp; echo tr [:lower:] [:upper:]</code>
+
+<p>To remove CRs (^M) from ascii files ftp&#39;d in binary mode from
+Windows to Linux. An EOF (^Z) remains at the end of the file.</p>
+<blockquote class="code">
+tr -d '\r' &lt; <em>file_with_CR</em> &gt; <em>file_without_CR</em>
+</blockquote>
+
+<h3 class="hd3">tar</h3>
+<p>Extract a single file from tar archive into the current directory,
+whitout needing to know the full path (obviously only works if the
+filename is unique):</p>
+<blockquote class="code">tar -xf <em>tarfile</em> --transform='s,.*/,,' $(tar -tf <em>tarfile</em> | grep <em>filename</em>)</blockquote>
+
+<h3 class="hd3">services / daemons</h3>
+
+<p>You need to be <em>root</em> to run these instructions:</p>
+
+<p>Status of all services:
+<blockquote class="code">service --status-all</blockquote>
+<p>Restart a service (for example the network service)
+(similar with start or stop):
+<blockquote class="code">service network --full-restart</blockquote>
+<p>List all services settings for all runlevels:
+<blockquote class="code">chkconfig --list</blockquote>
+<p>Example: turn mysql deamon on for runlevels 2 to 5:
+<blockquote class="code">chkconfig mysqld on</blockquote>
+<p style="font-weight:bolder">With systemd<p>
+<p>Status of all daemons:</p>
+<blockquote class="code">systemctl</blockquote>
+<p>Restart the http daemon (stop and start also work):</p>
+<blockquote class="code">systemctl restart httpd.service</blockquote>
+<p>Turn the http daemon on in default runlevel:</p>
+<blockquote class="code">systemctl enable httpd.service</blockquote>
+<p>Stopping and starting gnome:</p>
+<blockquote class="code" class="code">gdm-stop<br>gdm-start</blockquote>
+
+<h3 class="hd3">yum</h3>
+
+<p>Run <em>yum</em> instructions as <em>root</em>:</p>
+
+<p>Clean up packages downloaded by yum:
+<blockquote class="code">yum clean packages</blockquote>
+<p>Exclude a package from being updated, handy if a package is causing
+a missing dependency error:
+<blockquote class="code">yum update --exclude=<em>package</em></blockquote>
+<p>Example to update everything except the kernel:</p>
+<blockquote class="code">yum update --exclude=kernel*</blockquote>
+<p>Search for a package:
+<blockquote class="code">yum search <em>word</em></blockquote>
+
+<h3 class="hd3">Gnome Tricks</h3>
+
+<p>Make a screenshot of the window in focus in 5 seconds:
+<blockquote class="code">gnome-screenshot --window --delay=5</blockquote>
+
+<p>Flush the Gnome keyring passphrases from memory</p>
+<blockquote class="code">gnome-keyring-daemon -r -d</blockquote>
+
+<p>Turn off screensaver and powersave mode (can also use <code>dconf-editor</code>):</p>
+<blockquote class="code">gsettings set org.gnome.desktop.screensaver idle-activation-enabled false<br>gsettings set org.gnome.settings-daemon.plugins.power sleep-display-ac 0</blockquote>
+<p>DO NOT "set org.gnome.settings-daemon.plugins.power active false" this removes the battery icon.</p>
+
+<h3 class="hd3">FFmpeg and mencoder (Media Conversions)</h3>
+
+<p>
+ffmpeg can be used for all video and audio formats, these examples just
+use one as an example.
+</p>
+
+<p>Convert a .mov file to a .flv file (-s optional resize):
+<blockquote class="code">ffmpeg -i <em>input_filename</em>.mov -s <em>width</em>x<em>height</em> <em>output_filename</em>.flv</blockquote>
+
+<p>Cut a section from an MP3 sound file (-t = total length of clip):
+<blockquote class="code">ffmpeg -i <em>input_filename</em>.mp3 -ss <em>HH:MM:SS</em> -t <em>HH:MM:SS</em> <em>output_filename</em>.mp3</blockquote>
+
+<p>Rotate a video clip:
+<blockquote class="code">mencoder -vf <em>rotate=1</em> -ovc lavc -oac copy -o <em>output.avi</em> <em>input.avi</em></blockquote>
+<p>Rotate right: <em>rotate=1</em>, rotate left: <em>rotate=2</em></p>
+
+<p>Extract sound from a .WebM video clip:
+<blockquote class="code">ffmpeg -i <em>input_filename.webm</em> -vn -acodec copy <em>output_filename.ogg</em></blockquote>
+
+<p>Remove sound from a video file:
+<blockquote class="code">ffmpeg -i <em>input_filename.webm</em> -an <em>output_filename.webm</em></blockquote>
+
+<h3 class="hd3">Image to PDF conversion</h3>
+
+<p>Convert an image to a PDF document:</p>
+
+<blockquote class="code">
+convert <em>imagefile</em> <em>docname</em>.pdf
+</blockquote>
+
+<p>You need to have <code>imagemagick</code> installed for the
+<code>convert</code> utility.</p>
+
+<h3 class="hd3">Creating a new user</h3>
+
+<p>To create a new user from the command line, log in as <em>root</em></p>
+<blockquote class="code">adduser <em>username</em></blockquote>
+<blockquote class="code">passwd <em>username</em></blockquote>
+
+<h3 class="hd3">Internet based services</h3>
+
+<p>Look up the definition of a <em>word</em> (in English) from the command line:
+<blockquote class="code">curl dict://dict.org/d:<em>word</em></blockquote>
+
+<p>
+&nbsp;
+</p>
+
+<hr class="hrmain">
+
+<div class="FootImage">
+<a href="http://linuxcounter.net/user/425492.html"><img src="http://linuxcounter.net/cert/425492.png" alt="Linux user 425492"><!-- linuxuser_425492_tr.png" width="180" height="101" alt="Linux User 425492" --></a>
+</div>
+
+<div class="spacer"></div>
+
+</div><!-- dmain -->
+<div class="dfoot">
+<!--ignore_search-->
+<!-- INCLUDE /incl/links.incl -->
+<p class="footlinks">
+<a href="/" title="7is7.com Home Page">7is7.com</a> |
+<a href="/software/" title="Software Index">Software</a> |
+<a href="/otto/" title="Otto's Home Page">Otto</a> |
+<a href="/otto/travel/" title="Central America, South America, Eastern Europe, East Asia and the Indian Subcontinent.">Travel&nbsp;Stories</a> |
+<a href="/otto/countdclock.html" title="Add a free countdown clock to your site.">Countdown Clock</a> |
+<a href="/software/firefox/" title="Firefox Utilities">Firefox</a> |
+<a href="/software/stateye/" title="Open source traffic analysis package for your website.">StatEye</a>
+</p>
+<!-- ENDINCL -->
+<!-- INCLUDE /incl/aboutlinks.incl -->
+<p class="aboutlinks">
+<a href="/otto/about/new.html" title="Recent additions and changes">New</a> |
+<a href="/otto/about/" title="Information about 7is7.com">About</a> |
+<a href="/otto/about/contact.html" title="Contact Otto de Voogd">Contact</a> |
+<a rel="author" href="/otto/about/connect.html" title="Connect with Otto de Voogd">Connect</a> |
+<a href="/otto/about/friends.html" title="Friends of 7is7.com">Friends</a> |
+<a href="/promo/" title="Offers and Promotions">Promotions</a> |
+<a href="/otto/about/copy.html" title="7is7.com copyright policy">Copyright</a> |
+<a href="/promo/advertise.html" title="Advertise on 7is7.com">Advertise</a>
+</p>
+<!-- ENDINCL -->
+<!-- INCLUDE /incl/footbuttons.incl -->
+<div class="FootButtons">
+<p class="RedButtons">
+<!-- Get Firefox button -->
+<a href="http://www.mozilla.com/firefox/" title="Get Firefox!"><img width="110" height="32" alt="Get Firefox!" src="/red/imgs/firefox/110x32_gold.png"></a>
+<!-- LibreOffice button -->
+<a href="http://www.libreoffice.org/" title="Download LibreOffice"><img src="/red/imgs/libreoffice/110x32.png" width="110" height="32" alt="Download LibreOffice"></a>
+<a href="http://fedoraproject.com/" title="Use Fedora"><img src="/red/imgs/fedora/110x32_f8.png" width="110" height="32" alt="Use Fedora"></a>
+</p>
+</div>
+<!-- ENDINCL -->
+<!--/ignore_search-->
+</div><!-- dfoot -->
+<!--
+while(!asleep()) sheep++;
+-->
+</body>
+</html>

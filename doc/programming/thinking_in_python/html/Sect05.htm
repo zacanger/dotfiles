@@ -1,0 +1,1021 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPython.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:12/31/2001
+Translation Time:08:24:12
+Translation Platform:Win32
+Number of Output files:18
+This File:Sect05.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>4:Fronting for an implementation</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    <!-- [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.htm">Revision History</a> ] -->
+    [ <a href="http://www.mindview.net/Books/TIPython/">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  Thinking in Python<br>
+  <small>Revision 0.1.2 (12/31/01) -- Incomplete and Unfinished</small></FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Bruce Eckel &copy;2002 MindView, Inc.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect04.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect06.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc476705898"></A><A NAME="_Toc534420083"></A><A NAME="Heading34"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+4:Fronting for an implementation</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Both <I>Proxy</I> and <I>State</I>
+provide a surrogate class that you use in your code; the real class that does
+the work is hidden behind this surrogate class. When you call a method in the
+surrogate, it simply turns around and calls the method in the implementing
+class. These two patterns are so similar that the <I>Proxy</I> is simply a
+special case of <I>State</I>. One is tempted to just lump the two together into
+a pattern called <I>Surrogate</I>, but the term &#147;proxy&#148; has a
+long-standing and specialized meaning, which probably explains the reason for
+the two different patterns.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_126">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The basic idea is simple: from a base
+class, the surrogate is derived along with the class or classes that provide the
+actual implementation:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_127">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="CENTER"><FONT FACE="Georgia"><IMG SRC="TIPyth00.gif"></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">When a surrogate object is created, it is
+given an implementation to which to send all of the method calls.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_128">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Structurally, the difference between
+<I>Proxy</I> and <I>State</I> is simple: a <I>Proxy</I> has only one
+implementation, while <I>State</I> has more than one. The application of the
+patterns is considered (in <I>Design Patterns</I>) to be distinct: <I>Proxy</I>
+is used to control access to its implementation, while <I>State</I> allows you
+to change the implementation dynamically. However, if you expand your notion of
+&#147;controlling access to implementation&#148; then the two fit neatly
+together.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_129">Add Comment</A></FONT><A NAME="_Toc476705899"></A><A NAME="_Toc534420084"></A><BR></P></DIV>
+<A NAME="Heading35"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Proxy</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">If we implement <I>Proxy</I> by following
+the above diagram, it looks like this:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_130">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c04:ProxyDemo.py
+# Simple demonstration of the Proxy pattern.
+
+<font color=#0000ff>class</font> Implementation:
+  <font color=#0000ff>def</font> f(self): 
+    <font color=#0000ff>print</font> <font color=#004488>"Implementation.f()"</font>
+  <font color=#0000ff>def</font> g(self): 
+    <font color=#0000ff>print</font> <font color=#004488>"Implementation.g()"</font> 
+  <font color=#0000ff>def</font> h(self): 
+    <font color=#0000ff>print</font> <font color=#004488>"Implementation.h()"</font> 
+
+<font color=#0000ff>class</font> Proxy:
+  <font color=#0000ff>def</font> __init__(self): 
+    self.__implementation = Implementation() 
+  # Pass method calls to the implementation:
+  <font color=#0000ff>def</font> f(self): self.__implementation.f() 
+  <font color=#0000ff>def</font> g(self): self.__implementation.g() 
+  <font color=#0000ff>def</font> h(self): self.__implementation.h() 
+
+p = Proxy()
+p.f(); p.g(); p.h()
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">It isn&#146;t necessary that
+<B>Implementation</B> have the same interface as <B>Proxy</B>; as long as
+<B>Proxy</B> is somehow &#147;speaking for&#148; the class that it is
+referring method calls to then the basic idea is satisfied (note that this
+statement is at odds with the definition for Proxy in GoF). However, it is
+convenient to have a common interface so that <B>Implementation</B> is forced to
+fulfill all the methods that <B>Proxy</B> needs to call.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_131">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Of course, in Python we have a delegation
+mechanism built in, so it makes the <B>Proxy</B> even simpler to implement:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_132">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c04:ProxyDemo2.py
+# Simple demonstration of the Proxy pattern.
+
+<font color=#0000ff>class</font> Implementation2:
+  <font color=#0000ff>def</font> f(self): 
+    <font color=#0000ff>print</font> <font color=#004488>"Implementation.f()"</font>
+  <font color=#0000ff>def</font> g(self): 
+    <font color=#0000ff>print</font> <font color=#004488>"Implementation.g()"</font> 
+  <font color=#0000ff>def</font> h(self): 
+    <font color=#0000ff>print</font> <font color=#004488>"Implementation.h()"</font> 
+
+<font color=#0000ff>class</font> Proxy2:
+  <font color=#0000ff>def</font> __init__(self): 
+    self.__implementation = Implementation2() 
+  <font color=#0000ff>def</font> __getattr__(self, name):
+    <font color=#0000ff>return</font> getattr(self.__implementation, name)
+
+p = Proxy2()
+p.f(); p.g(); p.h();
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The beauty of using
+<B>__getattr__(&#160;)</B> is that <B>Proxy2</B> is completely generic, and not
+tied to any particular implementation (in Java, a rather complicated
+&#147;dynamic proxy&#148; has been invented to accomplish this same thing).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_133">Add Comment</A></FONT><A NAME="_Toc476705900"></A><A NAME="_Toc534420085"></A><BR></P></DIV>
+<A NAME="Heading36"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+State</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <I>State</I> pattern adds more
+implementations to <I>Proxy</I>, along with a way to switch from one
+implementation to another during the lifetime of the surrogate:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_134">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c04:StateDemo.py
+# Simple demonstration of the State pattern.
+
+<font color=#0000ff>class</font> State_d:
+  <font color=#0000ff>def</font> __init__(self, imp): 
+    self.__implementation = imp 
+  <font color=#0000ff>def</font> changeImp(self, newImp):
+    self.__implementation = newImp
+  # Delegate calls to the implementation:
+  <font color=#0000ff>def</font> __getattr__(self, name):
+    <font color=#0000ff>return</font> getattr(self.__implementation, name)
+
+<font color=#0000ff>class</font> Implementation1:
+  <font color=#0000ff>def</font> f(self): 
+    <font color=#0000ff>print</font> <font color=#004488>"Fiddle de dum, Fiddle de dee,"</font> 
+  <font color=#0000ff>def</font> g(self): 
+    <font color=#0000ff>print</font> <font color=#004488>"Eric the half a bee."</font> 
+  <font color=#0000ff>def</font> h(self): 
+    <font color=#0000ff>print</font> <font color=#004488>"Ho ho ho, tee hee hee,"</font> 
+
+<font color=#0000ff>class</font> Implementation2:
+  <font color=#0000ff>def</font> f(self): 
+    <font color=#0000ff>print</font> <font color=#004488>"We're Knights of the Round Table."</font> 
+  <font color=#0000ff>def</font> g(self): 
+    <font color=#0000ff>print</font> <font color=#004488>"We dance whene'er we're able."</font> 
+  <font color=#0000ff>def</font> h(self): 
+    <font color=#0000ff>print</font> <font color=#004488>"We do routines and chorus scenes"</font> 
+
+<font color=#0000ff>def</font> run(b):
+  b.f()
+  b.g()
+  b.h()
+  b.g()
+
+b = State_d(Implementation1())
+run(b)
+b.changeImp(Implementation2())
+run(b)
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can see that the first
+implementation is used for a bit, then the second implementation is swapped in
+and that is used.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_135">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The difference between <I>Proxy</I> and
+<I>State</I> is in the problems that are solved. The common uses for
+<I>Proxy</I> as described in <I>Design Patterns</I> are:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_136">Add Comment</A></FONT><BR></P></DIV>
+<OL>
+<LI><FONT FACE="Verdana"><B>	</B></FONT><FONT FACE="Georgia"><B>Remote
+proxy</B>. This proxies for an object in a different address space. A remote
+proxy is created for you automatically by the RMI compiler <B>rmic</B> as it
+creates stubs and skeletons.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_137">Add Comment</A></FONT><LI><FONT FACE="Verdana"><B>	</B></FONT><FONT FACE="Georgia"><B>Virtual
+proxy</B>. This provides &#147;lazy initialization&#148; to create expensive
+objects on demand.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_138">Add Comment</A></FONT><LI><FONT FACE="Verdana"><B>	</B></FONT><FONT FACE="Georgia"><B>Protection
+proxy</B>. Used when you don&#146;t want the client programmer to have full
+access to the proxied object.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_139">Add Comment</A></FONT><LI><FONT FACE="Verdana"><B>	</B></FONT><FONT FACE="Georgia"><B>Smart
+reference</B>. To add additional actions when the proxied object is accessed.
+For example, or to keep track of the number of references that are held for a
+particular object, in order to implement the <I>copy-on-write</I> idiom and
+prevent object aliasing. A simpler example is keeping track of the number of
+calls to a particular method.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_140">Add Comment</A></FONT></OL><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You
+could look at a Python reference as a kind of protection proxy, since it
+controls access to the actual object on the heap (and ensures, for example, that
+you don&#146;t use a <B>null </B>reference).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_141">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">[[ Rewrite this: In <I>Design
+Patterns</I>, <I>Proxy</I> and <I>State</I> are not seen as related to each
+other because the two are given (what I consider arbitrarily) different
+structures. <I>State</I>, in particular, uses a separate implementation
+hierarchy but this seems to me to be unnecessary unless you have decided that
+the implementation is not under your control (certainly a possibility, but if
+you own all the code there seems to be no reason not to benefit from the
+elegance and helpfulness of the single base class). In addition, <I>Proxy</I>
+need not use the same base class for its implementation, as long as the proxy
+object is controlling access to the object it &#147;fronting&#148; for.
+Regardless of the specifics, in both <I>Proxy </I>and <I>State</I> a surrogate
+is passing method calls through to an implementation object.]]]
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_142">Add Comment</A></FONT><A NAME="_Toc476705901"></A><A NAME="_Toc534420086"></A><BR></P></DIV>
+<A NAME="Heading37"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+StateMachine</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">While <I>State</I> has a way to allow the
+client programmer to change the implementation, <I>StateMachine</I> imposes a
+structure to automatically change the implementation from one object to the
+next. The current implementation represents the state that a system is in, and
+the system behaves differently from one state to the next (because it uses
+<I>State</I>). Basically, this is a &#147;state machine&#148; using objects.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_143">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The code that moves the system from one
+state to the next is often a <I>Template Method</I>, as seen in the following
+framework for a basic state machine.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_144">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Each state can be <B>run(&#160;)</B> to
+perform its behavior, and (in this design) you can also pass it an
+&#147;input&#148; object so it can tell you what new state to move to based on
+that &#147;input&#148;. The key distinction between this design and the next
+is that here, each <B>State</B> object decides what other states it can move to,
+based on the &#147;input&#148;, whereas in the subsequent design all of the
+state transitions are held in a single table. Another way to put it is that
+here, each <B>State</B> object has its own little <B>State</B> table, and in the
+subsequent design there is a single master state transition table for the whole
+system.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_145">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c04:statemachine:State.py
+# A State has an operation, <font color=#0000ff>and</font> can be moved
+# into the next State given an Input:
+
+<font color=#0000ff>class</font> State:
+  <font color=#0000ff>def</font> run(self): 
+    <font color=#0000ff>assert</font> 1, <font color=#004488>"run not implemented"</font>
+  <font color=#0000ff>def</font> next(self, input):
+    <font color=#0000ff>assert</font> 1, <font color=#004488>"next not implemented"</font>
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This class is clearly
+unnecessary, but it allows us to say that something is a <B>State</B> object in
+code, and provide a slightly different error message when all the methods are
+not implemented. We could have gotten basically the same effect by saying:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_146">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>class</font> State: <font color=#0000ff>pass</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">because we
+would still get exceptions if <B>run(&#160;)</B> or <B>next(&#160;)</B> were
+called for a derived type, and they hadn&#146;t been implemented.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_147">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <B>StateMachine</B> keeps track of
+the current state, which is initialized by the constructor. The
+<B>runAll(&#160;)</B> method takes a list of <B>Input</B> objects. This method
+not only moves to the next state, but it also calls <B>run(&#160;)</B> for each
+state object &#150; thus you can see it&#146;s an expansion of the idea of the
+<B>State</B> pattern, since <B>run(&#160;)</B> does something different
+depending on the state that the system is in.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_148">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c04:statemachine:StateMachine.py
+# Takes a list of Inputs to move <font color=#0000ff>from</font> State to 
+# State using a template method.
+
+<font color=#0000ff>class</font> StateMachine:
+  <font color=#0000ff>def</font> __init__(self, initialState):
+    self.currentState = initialState
+    self.currentState.run()
+  # Template method:
+  <font color=#0000ff>def</font> runAll(self, inputs):
+    <font color=#0000ff>for</font> i <font color=#0000ff>in</font> inputs:
+      <font color=#0000ff>print</font> i
+      self.currentState = self.currentState.next(i)
+      self.currentState.run()
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">I&#146;ve also treated
+<B>runAll(&#160;)</B> as a template method. This is typical, but certainly not
+required &#150; you could concievably want to override it, but typically the
+behavior change will occur in <B>State</B>&#146;s <B>run(&#160;)</B> instead.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_149">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">At this point the basic framework for
+this style of <I>StateMachine</I> (where each state decides the next states) is
+complete. As an example, I&#146;ll use a fancy mousetrap that can move through
+several states in the process of trapping a
+mouse</FONT><A NAME="fnB13" HREF="#fn13">[13]</A><FONT FACE="Georgia">. The
+mouse classes and information are stored in the <B>mouse</B> package, including
+a class representing all the possible moves that a mouse can make, which will be
+the inputs to the state machine:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_150">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c04:mouse:MouseAction.py
+
+<font color=#0000ff>class</font> MouseAction:
+  <font color=#0000ff>def</font> __init__(self, action): 
+    self.action = action
+  <font color=#0000ff>def</font> __str__(self): <font color=#0000ff>return</font> self.action 
+  <font color=#0000ff>def</font> __cmp__(self, other):
+    <font color=#0000ff>return</font> cmp(self.action, other.action)
+  # Necessary when __cmp__ <font color=#0000ff>or</font> __eq__ <font color=#0000ff>is</font> defined
+  # <font color=#0000ff>in</font> order to make this <font color=#0000ff>class</font> usable as a
+  # dictionary key:
+  <font color=#0000ff>def</font> __hash__(self): 
+    <font color=#0000ff>return</font> hash(self.action)
+
+# Static fields; an enumeration of instances:
+MouseAction.appears = MouseAction(<font color=#004488>"mouse appears"</font>)
+MouseAction.runsAway = MouseAction(<font color=#004488>"mouse runs away"</font>)
+MouseAction.enters = MouseAction(<font color=#004488>"mouse enters trap"</font>)
+MouseAction.escapes = MouseAction(<font color=#004488>"mouse escapes"</font>)
+MouseAction.trapped = MouseAction(<font color=#004488>"mouse trapped"</font>)
+MouseAction.removed = MouseAction(<font color=#004488>"mouse removed"</font>)
+#:~
+</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You&#146;ll note that
+<B>__cmp__(&#160;)</B> has been overidden to implement a comparison between
+<B>action</B> values. Also, each possible move by a mouse is enumerated as a
+<B>MouseAction</B> object, all of which are static fields in <B>MouseAction</B>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_151">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">For creating test code, a sequence of
+mouse inputs is provided from a text file:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_152">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#:! c04:mouse:MouseMoves.txt
+mouse appears
+mouse runs away
+mouse appears
+mouse enters trap
+mouse escapes
+mouse appears
+mouse enters trap
+mouse trapped
+mouse removed
+mouse appears
+mouse runs away
+mouse appears
+mouse enters trap
+mouse trapped
+mouse removed
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">With these tools in place,
+it&#146;s now possible to create the first version of the mousetrap program.
+Each <B>State</B> subclass defines its <B>run(&#160;)</B> behavior, and also
+establishes its next state with an <B>if-else</B> clause:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_153">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c04:mousetrap1:MouseTrapTest.py
+# State Machine pattern using '<font color=#0000ff>if</font>' statements
+# to determine the next state.
+<font color=#0000ff>import</font> string, sys
+sys.path += ['../statemachine', '../mouse']
+<font color=#0000ff>from</font> State <font color=#0000ff>import</font> State
+<font color=#0000ff>from</font> StateMachine <font color=#0000ff>import</font> StateMachine
+<font color=#0000ff>from</font> MouseAction <font color=#0000ff>import</font> MouseAction
+# A different subclass <font color=#0000ff>for</font> each state:
+
+<font color=#0000ff>class</font> Waiting(State):
+  <font color=#0000ff>def</font> run(self): 
+    <font color=#0000ff>print</font> <font color=#004488>"Waiting: Broadcasting cheese smell"</font>
+
+  <font color=#0000ff>def</font> next(self, input):
+    <font color=#0000ff>if</font> input == MouseAction.appears:
+      <font color=#0000ff>return</font> MouseTrap.luring
+    <font color=#0000ff>return</font> MouseTrap.waiting
+
+<font color=#0000ff>class</font> Luring(State):
+  <font color=#0000ff>def</font> run(self):
+    <font color=#0000ff>print</font> <font color=#004488>"Luring: Presenting Cheese, door open"</font>
+
+  <font color=#0000ff>def</font> next(self, input):
+    <font color=#0000ff>if</font> input == MouseAction.runsAway:
+      <font color=#0000ff>return</font> MouseTrap.waiting
+    <font color=#0000ff>if</font> input == MouseAction.enters:
+      <font color=#0000ff>return</font> MouseTrap.trapping
+    <font color=#0000ff>return</font> MouseTrap.luring
+
+<font color=#0000ff>class</font> Trapping(State):
+  <font color=#0000ff>def</font> run(self):
+    <font color=#0000ff>print</font> <font color=#004488>"Trapping: Closing door"</font>
+
+  <font color=#0000ff>def</font> next(self, input):
+    <font color=#0000ff>if</font> input == MouseAction.escapes:
+      <font color=#0000ff>return</font> MouseTrap.waiting
+    <font color=#0000ff>if</font> input == MouseAction.trapped:
+      <font color=#0000ff>return</font> MouseTrap.holding
+    <font color=#0000ff>return</font> MouseTrap.trapping
+
+<font color=#0000ff>class</font> Holding(State):
+  <font color=#0000ff>def</font> run(self):
+    <font color=#0000ff>print</font> <font color=#004488>"Holding: Mouse caught"</font>
+
+  <font color=#0000ff>def</font> next(self, input):
+    <font color=#0000ff>if</font> input == MouseAction.removed:
+      <font color=#0000ff>return</font> MouseTrap.waiting
+    <font color=#0000ff>return</font> MouseTrap.holding
+
+<font color=#0000ff>class</font> MouseTrap(StateMachine):
+  <font color=#0000ff>def</font> __init__(self): 
+    # Initial state
+    StateMachine.__init__(self, MouseTrap.waiting)
+
+# Static variable initialization:
+MouseTrap.waiting = Waiting()
+MouseTrap.luring = Luring()
+MouseTrap.trapping = Trapping()
+MouseTrap.holding = Holding()
+
+moves = map(string.strip, 
+  open(<font color=#004488>"..</font><font color=#004488>/mouse</font><font color=#004488>/MouseMoves.txt"</font>).readlines())
+MouseTrap().runAll(map(MouseAction, moves))
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <B>StateMachine</B> class
+simply defines all the possible states as static objects, and also sets up the
+initial state. The <B>UnitTest</B> creates a <B>MouseTrap</B> and then tests it
+with all the inputs from a <B>MouseMoveList</B>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_154">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">While the</FONT><FONT FACE="Georgia"> use
+of <B>if</B> statements inside the <B>next(&#160;)</B> methods is perfectly
+reasonable, managing a large number of these could become difficult. Another
+approach is to create tables inside each <B>State</B> object defining the
+various next states based on the input.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_155">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Initially, this seems like it ought to be
+quite simple. You should be able to define a static table in each <B>State</B>
+subclass that defines the transitions in terms of the other <B>State</B>
+objects. However, it turns out that this approach generates cyclic
+initialization dependencies. To solve the problem, I&#146;ve had to delay the
+initialization of the tables until the first time that the <B>next(&#160;)</B>
+method is called for a particular <B>State</B> object. Initially, the
+<B>next(&#160;)</B> methods can appear a little strange because of this.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_156">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <B>StateT</B> class is an
+implementation of <B>State</B> (so that the same <B>StateMachine</B> class can
+be used from the previous example) that adds a <B>Map</B> and a method to
+initialize the map from a two-dimensional array. The <B>next(&#160;)</B> method
+has a base-class implementation which must be called from the overridden derived
+class <B>next(&#160;)</B> methods after they test for a <B>null Map</B> (and
+initialize it if it&#146;s <B>null</B>):
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_157">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c04:mousetrap2:MouseTrap2Test.py
+# A better mousetrap using tables
+<font color=#0000ff>import</font> string, sys
+sys.path += ['../statemachine', '../mouse']
+<font color=#0000ff>from</font> State <font color=#0000ff>import</font> State
+<font color=#0000ff>from</font> StateMachine <font color=#0000ff>import</font> StateMachine
+<font color=#0000ff>from</font> MouseAction <font color=#0000ff>import</font> MouseAction
+
+<font color=#0000ff>class</font> StateT(State):
+  <font color=#0000ff>def</font> __init__(self):
+    self.transitions = None
+  <font color=#0000ff>def</font> next(self, input):
+    <font color=#0000ff>if</font> self.transitions.has_key(input):
+      <font color=#0000ff>return</font> self.transitions[input]
+    <font color=#0000ff>else</font>:
+      <font color=#0000ff>raise</font> <font color=#004488>"Input not supported for current state"</font>
+
+<font color=#0000ff>class</font> Waiting(StateT):
+  <font color=#0000ff>def</font> run(self): 
+    <font color=#0000ff>print</font> <font color=#004488>"Waiting: Broadcasting cheese smell"</font>
+  <font color=#0000ff>def</font> next(self, input):
+    # Lazy initialization:
+    <font color=#0000ff>if</font> <font color=#0000ff>not</font> self.transitions:
+      self.transitions = { 
+        MouseAction.appears : MouseTrap.luring 
+      }
+    <font color=#0000ff>return</font> StateT.next(self, input)
+
+<font color=#0000ff>class</font> Luring(StateT):
+  <font color=#0000ff>def</font> run(self):
+    <font color=#0000ff>print</font> <font color=#004488>"Luring: Presenting Cheese, door open"</font>
+  <font color=#0000ff>def</font> next(self, input):
+    # Lazy initialization:
+    <font color=#0000ff>if</font> <font color=#0000ff>not</font> self.transitions:
+      self.transitions = {
+        MouseAction.enters : MouseTrap.trapping,
+        MouseAction.runsAway : MouseTrap.waiting
+      }
+    <font color=#0000ff>return</font> StateT.next(self, input)
+
+<font color=#0000ff>class</font> Trapping(StateT):
+  <font color=#0000ff>def</font> run(self):
+    <font color=#0000ff>print</font> <font color=#004488>"Trapping: Closing door"</font>
+  <font color=#0000ff>def</font> next(self, input):
+    # Lazy initialization:
+    <font color=#0000ff>if</font> <font color=#0000ff>not</font> self.transitions:
+      self.transitions = {
+        MouseAction.escapes : MouseTrap.waiting,
+        MouseAction.trapped : MouseTrap.holding
+      }
+    <font color=#0000ff>return</font> StateT.next(self, input)
+
+<font color=#0000ff>class</font> Holding(StateT):
+  <font color=#0000ff>def</font> run(self):
+    <font color=#0000ff>print</font> <font color=#004488>"Holding: Mouse caught"</font>
+  <font color=#0000ff>def</font> next(self, input):
+    # Lazy initialization:
+    <font color=#0000ff>if</font> <font color=#0000ff>not</font> self.transitions:
+      self.transitions = {
+        MouseAction.removed : MouseTrap.waiting
+      }
+    <font color=#0000ff>return</font> StateT.next(self, input)
+
+<font color=#0000ff>class</font> MouseTrap(StateMachine):
+  <font color=#0000ff>def</font> __init__(self): 
+    # Initial state
+    StateMachine.__init__(self, MouseTrap.waiting)
+
+# Static variable initialization:
+MouseTrap.waiting = Waiting()
+MouseTrap.luring = Luring()
+MouseTrap.trapping = Trapping()
+MouseTrap.holding = Holding()
+
+moves = map(string.strip, 
+  open(<font color=#004488>"..</font><font color=#004488>/mouse</font><font color=#004488>/MouseMoves.txt"</font>).readlines())
+mouseMoves = map(MouseAction, moves)
+MouseTrap().runAll(mouseMoves)
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The rest of the code is
+identical &#150; the difference is in the <B>next(&#160;)</B> methods and the
+<B>StateT</B> class.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_158">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">If you have to create and maintain a lot
+of <B>State</B> classes, this approach is an improvement, since it&#146;s
+easier to quickly read and understand the state transitions from looking at the
+table.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_159">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="_Toc534420087"></A><BR></P></DIV>
+<A NAME="Heading38"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Table-Driven State Machine</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The advantage of the previous design is
+that all the information about a state, including the state transition
+information, is located within the state class itself. This is generally a good
+design principle.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_160">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">However, in a pure state machine, the
+machine can be completely represented by a single state-transition table. This
+has the advantage of locating all the information about the state machine in a
+single place, which means that you can more easily create and maintain the table
+based on a classic state-transition diagram.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_161">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The classic state-transition diagram uses
+a circle to represent each state, and lines from the state pointing to all
+states that state can transition into. Each transition line is annotated with
+conditions for transition and an action during transition. Here&#146;s what it
+looks like:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_162">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">(Simple State Machine Diagram)
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_163">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Goals:</FONT><BR></P></DIV>
+<UL>
+<LI><FONT FACE="Georgia">translation of state diagram
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_164">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia">Vector
+of change: the state diagram representation
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_165">Add Comment</A></FONT><LI><FONT FACE="Georgia">implementation
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_166">Add Comment</A></FONT><LI><FONT FACE="Georgia">excess
+of states (you could represent every single change with a new state)
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_167">Add Comment</A></FONT><LI><FONT FACE="Georgia">and
+flexibility
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_168">Add Comment</A></FONT></UL><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Observations:</FONT><BR></P></DIV>
+<UL>
+<LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia">States are trivial &#150;
+no information or functions/data, just an identity
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_169">Add Comment</A></FONT><LI><FONT FACE="Georgia">like
+the State pattern!
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_170">Add Comment</A></FONT><LI><FONT FACE="Georgia">machine
+governs the move from state to state
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_171">Add Comment</A></FONT><LI><FONT FACE="Georgia">to
+flyweight
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_172">Add Comment</A></FONT><LI><FONT FACE="Georgia">state
+may move to many others
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_173">Add Comment</A></FONT><LI><FONT FACE="Georgia">&amp;
+action functions must also be external to states
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_174">Add Comment</A></FONT><LI><FONT FACE="Georgia">description
+in a single table containing all variations, for ease of configuration
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_175">Add Comment</A></FONT></UL><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Example:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_176">Add Comment</A></FONT><BR></P></DIV>
+<UL>
+<LI><FONT FACE="Georgia">Machine &amp; Table-Driven Code
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_177">Add Comment</A></FONT><LI><FONT FACE="Georgia">a
+vending machine
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_178">Add Comment</A></FONT><LI><FONT FACE="Georgia">several
+other patterns
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_179">Add Comment</A></FONT><LI><FONT FACE="Georgia">common
+state-machine code from specific application (like template method)
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_180">Add Comment</A></FONT><LI><FONT FACE="Georgia">input
+causes a seek for appropriate solution (like chain of responsibility)
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_181">Add Comment</A></FONT><LI><FONT FACE="Georgia">and
+transitions are encapsulated in function objects (objects that hold functions)
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_182">Add Comment</A></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia">Java
+constraint: methods are not first-class objects
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_183">Add Comment</A></FONT></UL><DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><IMG SRC="TIPyth01.gif"></FONT><A NAME="_Toc534420088"></A><BR></P></DIV>
+<A NAME="Heading39"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H3 ALIGN="LEFT">
+The State class</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <B>State</B> class is distinctly
+different from before, since it is really just a placeholder with a name. Thus
+it is not inherited from previous <B>State</B> classes:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_184">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c04:statemachine2:State.py
+
+<font color=#0000ff>class</font> State:
+  <font color=#0000ff>def</font> __init__(self, name): self.name = name
+  <font color=#0000ff>def</font> __str__(self): <font color=#0000ff>return</font> self.name 
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><A NAME="_Toc534420089"></A><BR></P></DIV>
+<A NAME="Heading40"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H3 ALIGN="LEFT">
+Conditions for transition</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In the state transition diagram, an input
+is tested to see if it meets the condition necessary to transfer to the state
+under question. As before, the <B>Input</B> is just a tagging interface:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_185">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c04:statemachine2:Input.py
+# Inputs to a state machine
+
+<font color=#0000ff>class</font> Input: <font color=#0000ff>pass</font>
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <B>Condition</B> evaluates
+the <B>Input</B> to decide whether this row in the table is the correct
+transition:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_186">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c04:statemachine2:Condition.py
+# Condition function object <font color=#0000ff>for</font> state machine
+
+<font color=#0000ff>class</font> Condition:
+  boolean condition(input) : 
+    <font color=#0000ff>assert</font> 1, <font color=#004488>"condition() not implemented"</font>
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><A NAME="_Toc534420090"></A><BR></P></DIV>
+<A NAME="Heading41"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H3 ALIGN="LEFT">
+Transition actions</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">If the <B>Condition</B> returns
+<B>true</B>, then the transition to a new state is made, and as that transition
+is made some kind of action occurs (in the previous state machine design, this
+was the <B>run(&#160;)</B> method):
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_187">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c04:statemachine2:Transition.py
+# Transition function object <font color=#0000ff>for</font> state machine
+
+<font color=#0000ff>class</font> Transition:
+  <font color=#0000ff>def</font> transition(self, input):
+    <font color=#0000ff>assert</font> 1, <font color=#004488>"transition() not implemented"</font>
+# :~<A NAME=<font color=#004488>"_Toc534420091"</font>></A></PRE></FONT></BLOCKQUOTE><A NAME="Heading42"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H3 ALIGN="LEFT">
+The table</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">With these classes in place, we can set
+up a 3-dimensional table where </FONT><FONT FACE="Georgia">each row completely
+describes a state. The first element in the row is the current state, and the
+rest of the elements are each a row indicating what the <I>type </I>of the input
+can be, the condition that must be satisfied in order for this state change to
+be the correct one, the action that happens during transition, and the new state
+to move into. Note that the <B>Input</B> object is not just used for its type,
+it is also a <I>Messenger</I> object that carries information to the
+<B>Condition</B> and <B>Transition</B> objects:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_188">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>{(CurrentState, InputA) : (ConditionA, TransitionA, NextA),
+ (CurrentState, InputB) : (ConditionB, TransitionB, NextB),
+ (CurrentState, InputC) : (ConditionC, TransitionC, NextC),
+ ...
+}
+</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><A NAME="_Toc534420092"></A><BR></P></DIV>
+<A NAME="Heading43"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H3 ALIGN="LEFT">
+The basic machine</H3></FONT>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c04:statemachine2:StateMachine.py
+# A table-driven state machine
+
+<font color=#0000ff>class</font> StateMachine:
+  <font color=#0000ff>def</font> __init__(self, initialState, tranTable):
+    self.state = initialState
+    self.transitionTable = tranTable
+
+  <font color=#0000ff>def</font> nextState(self, input):
+    
+    Iterator it=((List)map.get(state)).iterator()
+    <font color=#0000ff>while</font>(it.hasNext()):
+      Object[] tran = (Object[])it.next()
+      <font color=#0000ff>if</font>(input == tran[0] || 
+         input.getClass() == tran[0]):
+        <font color=#0000ff>if</font>(tran[1] != null):
+          Condition c = (Condition)tran[1]
+          <font color=#0000ff>if</font>(!c.condition(input))
+            <font color=#0000ff>continue</font> # Failed test
+        
+        <font color=#0000ff>if</font>(tran[2] != null)
+          ((Transition)tran[2]).transition(input)
+        state = (State)tran[3]
+        <font color=#0000ff>return</font>
+      
+
+    throw RuntimeException(
+      <font color=#004488>"Input not supported for current state"</font>)
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><A NAME="_Toc534420093"></A><BR></P></DIV>
+<A NAME="Heading44"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H3 ALIGN="LEFT">
+Simple vending machine</H3></FONT>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c04:vendingmachine:VendingMachine.py
+# Demonstrates use of StateMachine.py
+<font color=#0000ff>import</font> sys
+sys.path += ['../statemachine2']
+<font color=#0000ff>import</font> StateMachine
+
+<font color=#0000ff>class</font> State:
+  <font color=#0000ff>def</font> __init__(self, name): self.name = name
+  <font color=#0000ff>def</font> __str__(self): <font color=#0000ff>return</font> self.name 
+
+State.quiescent = State(<font color=#004488>"Quiesecent"</font>)
+State.collecting = State(<font color=#004488>"Collecting"</font>)
+State.selecting = State(<font color=#004488>"Selecting"</font>)
+State.unavailable = State(<font color=#004488>"Unavailable"</font>)
+State.wantMore = State(<font color=#004488>"Want More?"</font>)
+State.noChange = State(<font color=#004488>"Use Exact Change Only"</font>)
+State.makesChange = State(<font color=#004488>"Machine makes change"</font>)
+
+<font color=#0000ff>class</font> HasChange:
+  <font color=#0000ff>def</font> __init__(self, name): self.name = name
+  <font color=#0000ff>def</font> __str__(self): <font color=#0000ff>return</font> self.name 
+
+HasChange.yes = HasChange(<font color=#004488>"Has change"</font>)
+HasChange.no = HasChange(<font color=#004488>"Cannot make change"</font>)
+
+<font color=#0000ff>class</font> ChangeAvailable(StateMachine):
+  <font color=#0000ff>def</font> __init__(self):
+    StateMachine.__init__(State.makesChange, {
+      # Current state, input
+      (State.makesChange, HasChange.no) :
+        # test, transition, next state:
+        (null, null, State.noChange),
+      (State.noChange, HasChange.yes) :
+        (null, null, State.noChange)
+    })
+
+<font color=#0000ff>class</font> Money:
+  <font color=#0000ff>def</font> __init__(self, name, value):
+    self.name = name
+    self.value = value
+  <font color=#0000ff>def</font> __str__(self): <font color=#0000ff>return</font> self.name 
+  <font color=#0000ff>def</font> getValue(self): <font color=#0000ff>return</font> self.value 
+
+Money.quarter = Money(<font color=#004488>"Quarter"</font>, 25)
+Money.dollar = Money(<font color=#004488>"Dollar"</font>, 100)
+
+<font color=#0000ff>class</font> Quit:
+  <font color=#0000ff>def</font> __str__(self): <font color=#0000ff>return</font> <font color=#004488>"Quit"</font> 
+
+Quit.quit = Quit()
+
+<font color=#0000ff>class</font> Digit:
+  <font color=#0000ff>def</font> __init__(self, name, value):
+    self.name = name
+    self.value = value
+  <font color=#0000ff>def</font> __str__(self): <font color=#0000ff>return</font> self.name 
+  <font color=#0000ff>def</font> getValue(self): <font color=#0000ff>return</font> self.value 
+  
+<font color=#0000ff>class</font> FirstDigit(Digit): <font color=#0000ff>pass</font>
+FirstDigit.A = FirstDigit(<font color=#004488>"A"</font>, 0)
+FirstDigit.B = FirstDigit(<font color=#004488>"B"</font>, 1)
+FirstDigit.C = FirstDigit(<font color=#004488>"C"</font>, 2)
+FirstDigit.D = FirstDigit(<font color=#004488>"D"</font>, 3)
+
+<font color=#0000ff>class</font> SecondDigit(Digit): <font color=#0000ff>pass</font>
+SecondDigit.one = SecondDigit(<font color=#004488>"one"</font>, 0)
+SecondDigit.two = SecondDigit(<font color=#004488>"two"</font>, 1)
+SecondDigit.three = SecondDigit(<font color=#004488>"three"</font>, 2)
+SecondDigit.four = SecondDigit(<font color=#004488>"four"</font>, 3)
+
+<font color=#0000ff>class</font> ItemSlot:
+  id = 0
+  <font color=#0000ff>def</font> __init__(self, price, quantity):
+    self.price = price
+    self.quantity = quantity
+  <font color=#0000ff>def</font> __str__(self): <font color=#0000ff>return</font> &#180;ItemSlot.id&#180;
+  <font color=#0000ff>def</font> getPrice(self): <font color=#0000ff>return</font> self.price 
+  <font color=#0000ff>def</font> getQuantity(self): <font color=#0000ff>return</font> self.quantity 
+  <font color=#0000ff>def</font> decrQuantity(self): self.quantity -= 1
+
+<font color=#0000ff>class</font> VendingMachine(StateMachine):
+  changeAvailable = ChangeAvailable()
+  amount = 0
+  FirstDigit first = null
+  ItemSlot[][] items = ItemSlot[4][4]
+
+  # Conditions:
+  <font color=#0000ff>def</font> notEnough(self, input):
+    i1 = first.getValue()
+    i2 = input.getValue()
+    <font color=#0000ff>return</font> items[i1][i2].getPrice() &gt; amount
+
+  <font color=#0000ff>def</font> itemAvailable(self, input):
+    i1 = first.getValue()
+    i2 = input.getValue()
+    <font color=#0000ff>return</font> items[i1][i2].getQuantity() &gt; 0
+
+  <font color=#0000ff>def</font> itemNotAvailable(self, input):
+    <font color=#0000ff>return</font> !itemAvailable.condition(input)
+    #i1 = first.getValue()
+    #i2 = input.getValue()
+    #<font color=#0000ff>return</font> items[i1][i2].getQuantity() == 0
+
+  # Transitions:
+  <font color=#0000ff>def</font> clearSelection(self, input):
+    i1 = first.getValue()
+    i2 = input.getValue()
+    ItemSlot <font color=#0000ff>is</font> = items[i1][i2]
+    <font color=#0000ff>print</font> (
+      <font color=#004488>"Clearing selection: item "</font> + <font color=#0000ff>is</font> +
+      <font color=#004488>" costs "</font> + <font color=#0000ff>is</font>.getPrice() +
+      <font color=#004488>" and has quantity "</font> + <font color=#0000ff>is</font>.getQuantity())
+    first = null
+
+  <font color=#0000ff>def</font> dispense(self, input):
+    i1 = first.getValue()
+    i2 = input.getValue()
+    ItemSlot <font color=#0000ff>is</font> = items[i1][i2]
+    <font color=#0000ff>print</font> (<font color=#004488>"Dispensing item "</font> + 
+      <font color=#0000ff>is</font> + <font color=#004488>" costs "</font> + <font color=#0000ff>is</font>.getPrice() +
+      <font color=#004488>" and has quantity "</font> + <font color=#0000ff>is</font>.getQuantity())
+    items[i1][i2].decrQuantity()
+    <font color=#0000ff>print</font> (<font color=#004488>"Quantity "</font> + 
+      <font color=#0000ff>is</font>.getQuantity())
+    amount -= <font color=#0000ff>is</font>.getPrice()
+    <font color=#0000ff>print</font>(<font color=#004488>"Amount remaining "</font> + 
+      amount)
+
+  <font color=#0000ff>def</font> showTotal(self, input):
+    amount += ((Money)input).getValue()
+    <font color=#0000ff>print</font> <font color=#004488>"Total amount = "</font> + amount
+
+  <font color=#0000ff>def</font> returnChange(self, input):
+    <font color=#0000ff>print</font> <font color=#004488>"Returning "</font> + amount
+    amount = 0
+
+  <font color=#0000ff>def</font> showDigit(self, input):
+    first = (FirstDigit)input
+    <font color=#0000ff>print</font> <font color=#004488>"First Digit= "</font>+ first
+
+  <font color=#0000ff>def</font> __init__(self):
+    StateMachine.__init__(self, State.quiescent)
+    <font color=#0000ff>for</font>(int i = 0 i &lt; items.length i++)
+      <font color=#0000ff>for</font>(int j = 0 j &lt; items[i].length j++)
+        items[i][j] = ItemSlot((j+1)*25, 5)
+    items[3][0] = ItemSlot(25, 0)
+    buildTable(Object[][][]{
+     ::State.quiescent, # Current state
+        # Input, test, transition, next state:
+       :Money.<font color=#0000ff>class</font>, null, 
+         showTotal, State.collecting,
+     ::State.collecting, # Current state
+        # Input, test, transition, next state:
+       :Quit.quit, null, 
+         returnChange, State.quiescent,
+       :Money.<font color=#0000ff>class</font>, null, 
+         showTotal, State.collecting,
+       :FirstDigit.<font color=#0000ff>class</font>, null, 
+         showDigit, State.selecting,
+     ::State.selecting, # Current state
+        # Input, test, transition, next state:
+       :Quit.quit, null, 
+         returnChange, State.quiescent,
+       :SecondDigit.<font color=#0000ff>class</font>, notEnough, 
+         clearSelection, State.collecting,
+       :SecondDigit.<font color=#0000ff>class</font>, itemNotAvailable, 
+         clearSelection, State.unavailable,
+       :SecondDigit.<font color=#0000ff>class</font>, itemAvailable, 
+         dispense, State.wantMore,
+     ::State.unavailable, # Current state
+        # Input, test, transition, next state:
+       :Quit.quit, null, 
+         returnChange, State.quiescent,
+       :FirstDigit.<font color=#0000ff>class</font>, null, 
+         showDigit, State.selecting,
+     ::State.wantMore, # Current state
+        # Input, test, transition, next state:
+       :Quit.quit, null, 
+         returnChange, State.quiescent,
+       :FirstDigit.<font color=#0000ff>class</font>, null, 
+         showDigit, State.selecting,
+    )
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><A NAME="_Toc534420094"></A><BR></P></DIV>
+<A NAME="Heading45"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H3 ALIGN="LEFT">
+Testing the machine</H3></FONT>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c04:vendingmachine:VendingMachineTest.py
+# Demonstrates use of StateMachine.py
+
+vm = VendingMachine()
+<font color=#0000ff>for</font> input <font color=#0000ff>in</font> [  
+    Money.quarter,
+    Money.quarter,
+    Money.dollar,
+    FirstDigit.A,
+    SecondDigit.two,
+    FirstDigit.A,
+    SecondDigit.two,
+    FirstDigit.C,
+    SecondDigit.three,
+    FirstDigit.D,
+    SecondDigit.one,
+    Quit.quit]:
+  vm.nextState(input)
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><A NAME="_Toc534420095"></A><BR></P></DIV>
+<A NAME="Heading46"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Tools</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Another approach, as your state machine
+gets bigger, is to use an automation tool whereby you configure a table and let
+the tool generate the state machine code for you. This can be created yourself
+using a language like Python, but there are also free, open-source tools such as
+<I>Libero</I>, at <A HREF="http://www.imatix.com">http://www.imatix.com</A>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_189">Add Comment</A></FONT><A NAME="_Toc534420096"></A><BR></P></DIV>
+<A NAME="Heading47"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Exercises</H2></FONT>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create an example of the
+&#147;virtual proxy.&#148;
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_190">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create
+an example of the &#147;Smart reference&#148; proxy where you keep count of
+the number of method calls to a particular object.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_191">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create
+a program similar to certain DBMS systems that only allow a certain number of
+connections at any time. To implement this, use a singleton-like system that
+controls the number of &#147;connection&#148; objects that it creates. When a
+user is finished with a connection, the system must be informed so that it can
+check that connection back in to be reused. To guarantee this, provide a proxy
+object instead of a reference to the actual connection, and design the proxy so
+that it will cause the connection to be released back to the system.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_192">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Using
+the <I>State</I>,<I> </I>make a class called <B>UnpredictablePerson</B> which
+changes the kind of response to its <B>hello(&#160;)</B> method depending on
+what kind of <B>Mood</B> it&#146;s in. Add an additional kind of <B>Mood</B>
+called <B>Prozac</B>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_193">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create
+a simple copy-on write implementation.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_194">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Apply
+<B>TransitionTable.py</B> to the &#147;Washer&#148; problem.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_195">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create
+a <I>StateMachine</I> system whereby the current state along with input
+information determines the next state that the system will be in. To do this,
+each state must store a reference back to the proxy object (the state
+controller) so that it can request the state change. Use a <B>HashMap</B> to
+create a table of states, where the key is a <B>String</B> naming the new state
+and the value is the new state object. Inside each state subclass override a
+method <B>nextState(&#160;)</B> that has its own state-transition table. The
+input to <B>nextState(&#160;)</B> should be a single word that comes from a text
+file containing one word per line.<B>
+</B><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_196">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+the previous exercise so that the state machine can be configured by
+creating/modifying a single multi-dimensional array.<B>
+</B><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_197">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+the &#147;mood&#148; exercise from the previous session so that it becomes a
+state machine using StateMachine.java
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_198">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create
+an elevator state machine system using StateMachine.java
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_199">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create
+a heating/air-conditioning system using StateMachine.java<B>
+</B><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_200">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">A
+<I>generator</I> is an object that produces other objects, just like a factory,
+except that the generator function doesn&#146;t require any arguments. Create a
+<B>MouseMoveGenerator</B> which produces correct <B>MouseMove</B> actions as
+outputs each time the generator function is called (that is, the mouse must move
+in the proper sequence, thus the possible moves are based on the previous move
+&#150; it&#146;s another state machine). Add a method <B>iterator(&#160;)
+</B>to produce an iterator, but this method should take an <B>int</B> argument
+that specifies the number of moves to produce before <B>hasNext(&#160;)</B>
+returns <B>false</B>.<B>
+</B><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_201">Add Comment</A></FONT></OL>
+<HR><DIV ALIGN="LEFT"><P><A NAME="fn13" HREF="#fnB13">[13]</A><FONT FACE="Georgia"> No
+mice were harmed in the creation of this example.</FONT><BR></P></DIV>
+
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect04.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect06.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:12/31/2001</P></DIV>
+
+</BODY>
+
+</HTML>

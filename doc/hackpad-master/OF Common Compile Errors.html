@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="469"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$ucGMwZ1jU01</title>
+</head>
+<body><h1>OF Common Compile Errors</h1><p><b>Post Errors here and let&rsquo;s look for common errors to troubleshoot:</b></p><p></p><p>While trying to compile ofxVoronoi example file:&nbsp;&nbsp;</p><p><a href="https://github.com/vanderlin/ofxVoronoi"></a>https://github.com/vanderlin/ofxVoronoi</p><p>Problem with Compile Utils.cpp</p><p></p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_ucGMwZ1jU01_p.77236_1414509627560_letterman-top-10.jpg'/></p><p></p><p>TOP 5 problems&nbsp;</p><ul><li>set to build openframeworks not the project (target)<ul><li>soluton : be sure to pick the target you are compiling in the top left corner</li>
+<li><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_ucGMwZ1jU01_p.77236_1414517449580_Screen Shot 2014-10-28 at 1.30.25 PM.png'/></li></ul>
+</li>
+<li>64 bit vs 32 bit<ul><li>sometimes it&rsquo;s set to build for 64 bit not 32 bit, you can change this by hightlighting the blue file for the project in the sidebar and adjusting build settings</li>
+<li><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_ucGMwZ1jU01_p.77236_1414517552194_Screen Shot 2014-10-28 at 1.31.38 PM.png'/></li></ul>
+</li>
+<li>missing frameworks from older projects<ul><li>older projects (0.8.0 for example) might be missing frameworks needed in newer OF</li>
+<li>solution-- navigate to system frameworks, right click to say &quot;reveal in finder&quot; and find the missing frameworks (likely coreVideo and qtkit) and drag them into the older project</li>
+<li><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_ucGMwZ1jU01_p.77236_1414517699758_Screen Shot 2014-10-28 at 1.33.11 PM.png'/></li></ul>
+</li>
+<li>project in wrong place<ul><li>check if &quot;openframeworks&quot; is red in the sidebar</li></ul>
+</ul>
+
+</body>
+</html>

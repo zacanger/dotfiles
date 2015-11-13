@@ -1,0 +1,328 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPython.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:12/31/2001
+Translation Time:08:24:15
+Translation Platform:Win32
+Number of Output files:18
+This File:Sect15.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>13: Projects</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    <!-- [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.htm">Revision History</a> ] -->
+    [ <a href="http://www.mindview.net/Books/TIPython/">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  Thinking in Python<br>
+  <small>Revision 0.1.2 (12/31/01) -- Incomplete and Unfinished</small></FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Bruce Eckel &copy;2002 MindView, Inc.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect14.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+    
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc534420148"></A><A NAME="Heading99"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+13: Projects</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia" SIZE=4 COLOR="Red">This chapter has not
+had any significant translation yet.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia" SIZE=4>A number of more challenging
+projects for you to solve. [[Some of these may turn into examples in the book,
+and so at some point might disappear from here]]
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_459">Add Comment</A></FONT><A NAME="_Toc534420149"></A><BR></P></DIV>
+<A NAME="Heading100"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Rats &amp; Mazes</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">First, create a <I>Blackboard</I> (cite
+reference) which is an object on which anyone may record information. This
+particular blackboard draws a maze, and is used as information comes back about
+the structure of a maze from the rats that are investigating it.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_460">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Now create the maze itself. Like a real
+maze, this object reveals very little information about itself &#151; given a
+coordinate, it will tell you whether there are walls or spaces in the four
+directions immediately surrounding that coordinate, but no more. For starters,
+read the maze in from a text file but consider hunting on the internet for a
+maze-generating algorithm. In any event, the result should be an object that,
+given a maze coordinate, will report walls and spaces around that coordinate.
+Also, you must be able to ask it for an entry point to the maze.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_461">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Finally, create the maze-investigating
+<B>Rat</B> class. Each rat can communicate with both the blackboard to give the
+current information and the maze to request new information based on the current
+position of the rat. However, each time a rat reaches a decision point where the
+maze branches, it creates a new rat to go down each of the branches. Each rat is
+driven by its own thread. When a rat reaches a dead end, it terminates itself
+after reporting the results of its final investigation to the blackboard.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_462">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The goal is to completely map the maze,
+but you must also determine whether the end condition will be naturally found or
+whether the blackboard must be responsible for the decision.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_463">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">An example implementation by Jeremy
+Meyer:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c13:Maze.py
+
+<font color=#0000ff>class</font> Maze(Canvas):
+  private Vector lines # a line <font color=#0000ff>is</font> a char array
+  private int width = -1
+  private int height = -1
+  public static void main (String [] args) 
+  throws IOException:
+    <font color=#0000ff>if</font> (args.length &lt; 1):
+      <font color=#0000ff>print</font> &#147;Enter filename&#147;
+      System.exit(0)
+
+    Maze m = Maze()
+    m.load(args[0])
+    Frame f = Frame()
+    f.setSize(m.width*20, m.height*20)
+    f.add(m)     
+    Rat r = Rat(m, 0, 0)
+    f.setVisible(1)
+
+  <font color=#0000ff>def</font> __init__(self):
+    lines = Vector()
+    setBackground(Color.lightGray)
+
+  synchronized public boolean 
+  isEmptyXY(int x, int y):
+    <font color=#0000ff>if</font> (x &lt; 0) x += width
+    <font color=#0000ff>if</font> (y &lt; 0) y += height 
+    # Use mod arithmetic to bring rat <font color=#0000ff>in</font> line:
+    byte[] by = 
+      (byte[])(lines.elementAt(y%height))  
+    <font color=#0000ff>return</font> by[x%width]==' '
+
+  synchronized public void 
+  setXY(int x, int y, byte newByte):
+    <font color=#0000ff>if</font> (x &lt; 0) x += width
+    <font color=#0000ff>if</font> (y &lt; 0) y += height 
+    byte[] by = 
+      (byte[])(lines.elementAt(y%height))
+    by[x%width] = newByte
+    repaint()
+
+  public void 
+  load(String filename) throws IOException:
+    String currentLine = null
+    BufferedReader br = BufferedReader(
+      FileReader(filename))
+    <font color=#0000ff>for</font>(currentLine = br.readLine() 
+        currentLine != null
+        currentLine = br.readLine()) :
+      lines.addElement(currentLine.getBytes())       
+      <font color=#0000ff>if</font>(width &lt; 0 || 
+         currentLine.getBytes().length &gt; width)
+        width = currentLine.getBytes().length
+
+    height = len(lines)
+    br.close()
+         
+  <font color=#0000ff>def</font> update(self, Graphics g): paint(g) 
+  public void paint (Graphics g):
+    int canvasHeight = self.getBounds().height
+    int canvasWidth  = self.getBounds().width
+    <font color=#0000ff>if</font> (height &lt; 1 || width &lt; 1) 
+      <font color=#0000ff>return</font> # nothing to do 
+    int width = 
+      ((byte[])(lines.elementAt(0))).length
+    <font color=#0000ff>for</font> (int y = 0 y &lt; len(lines) y++):
+      byte[] b
+      b = (byte[])(lines.elementAt(y))
+      <font color=#0000ff>for</font> (int x = 0 x &lt; width x++):
+        switch(b[x]):
+          case ' ': # empty part of maze
+            g.setColor(Color.lightGray)
+            g.fillRect(
+              x*(canvasWidth/width),
+              y*(canvasHeight/height),
+              canvasWidth/width,
+              canvasHeight/height)
+            <font color=#0000ff>break</font>
+          case '*':     # a wall 
+            g.setColor(Color.darkGray)
+            g.fillRect(
+              x*(canvasWidth/width),
+              y*(canvasHeight/height),
+              (canvasWidth/width)-1,
+              (canvasHeight/height)-1)
+            <font color=#0000ff>break</font>
+          default:      # must be rat
+            g.setColor(Color.red)
+            g.fillOval(x*(canvasWidth/width),
+            y*(canvasHeight/height),
+            canvasWidth/width,
+            canvasHeight/height)
+            <font color=#0000ff>break</font>              
+              
+           
+
+# :~</PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c13:Rat.py
+
+<font color=#0000ff>class</font> Rat:
+  static int ratCount = 0
+  private Maze prison
+  private int vertDir = 0 
+  private int horizDir = 0
+  private int x,y
+  private int myRatNo = 0
+  <font color=#0000ff>def</font> __init__(self, Maze maze, int xStart, int yStart):
+    myRatNo = ratCount++
+    <font color=#0000ff>print</font> (<font color=#004488>"Rat no."</font> + myRatNo + 
+      <font color=#004488>" ready to scurry."</font>)
+    prison = maze
+    x = xStart
+    y = yStart
+    prison.setXY(x,y, (byte)'R')
+    Thread():
+      <font color=#0000ff>def</font> run(self){ scurry() 
+    .start()
+
+  <font color=#0000ff>def</font> scurry(self):
+    # Try <font color=#0000ff>and</font> maintain direction <font color=#0000ff>if</font> possible.
+    # Horizontal backward
+    boolean ratCanMove = 1
+    <font color=#0000ff>while</font>(ratCanMove):
+      ratCanMove = 0
+      # South 
+      <font color=#0000ff>if</font> (prison.isEmptyXY(x, y + 1)):
+        vertDir = 1 horizDir = 0         
+        ratCanMove = 1
+      
+      # North
+      <font color=#0000ff>if</font> (prison.isEmptyXY(x, y - 1))
+        <font color=#0000ff>if</font> (ratCanMove)
+          Rat(prison, x, y-1)
+          # Rat can move already, so give 
+          # this choice to the next rat.
+        <font color=#0000ff>else</font>:
+          vertDir = -1 horizDir = 0         
+          ratCanMove = 1
+        
+      # West
+      <font color=#0000ff>if</font> (prison.isEmptyXY(x-1, y))
+        <font color=#0000ff>if</font> (ratCanMove)
+          Rat(prison, x-1, y)   
+          # Rat can move already, so give 
+          # this choice to the next rat.
+        <font color=#0000ff>else</font>:
+          vertDir = 0 horizDir = -1         
+          ratCanMove = 1
+        
+      # East
+      <font color=#0000ff>if</font> (prison.isEmptyXY(x+1, y))
+        <font color=#0000ff>if</font> (ratCanMove)
+          Rat(prison, x+1, y)   
+          # Rat can move already, so give 
+          # this choice to the next rat.
+        <font color=#0000ff>else</font>:
+          vertDir = 0 horizDir = 1         
+          ratCanMove = 1
+        
+      <font color=#0000ff>if</font> (ratCanMove): # Move original rat.
+        x += horizDir
+        y += vertDir
+        prison.setXY(x,y,(byte)'R')
+        # If <font color=#0000ff>not</font> then the rat will die.
+      <font color=#0000ff>try</font>:
+        Thread.sleep(2000)   
+       catch(InterruptedException ie):
+
+    <font color=#0000ff>print</font> (<font color=#004488>"Rat no."</font> + myRatNo + 
+      <font color=#004488>" can't move..dying..aarrgggh."</font>)
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The maze initialization file:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_464">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#:! c13:Amaze.txt
+   * **      *  * **      *
+ ***    * *******    * ****
+     ***          ***      
+ *****   **********   *****
+ * * * * **  ** * * * **  *
+   * * *  * **  * * *  * **
+ *     **     *     **     
+   * **   * **  * **   * **
+ *** *  *** ***** *  *** **
+ *      *   * *      *   * 
+   * ** * *     * ** * *   
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><A NAME="_Toc534420150"></A><BR></P></DIV>
+<A NAME="Heading101"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H3 ALIGN="LEFT">
+Other maze resources</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">A discussion of algorithms to create
+mazes as well as Java source code to implement them:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_465">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><A HREF="http://www.mazeworks.com/mazegen/mazegen.htm">http://www.mazeworks.com/mazegen/mazegen.htm</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">A discussion of algorithms for collision
+detection and other individual/group moving behavior for autonomous physical
+objects:</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><A HREF="http://www.red3d.com/cwr/steer/">http://www.red3d.com/cwr/steer/</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="_Toc534420151"></A><BR></P></DIV>
+<A NAME="Heading102"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+XML Decorator</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Create a pair of decorators for I/O
+Readers and Writers that encode (for the Writer decorator) and decode (for the
+reader decorator)
+XML</FONT><FONT FACE="Georgia"><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_466">Add Comment</A></FONT><BR></P></DIV>
+
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect14.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+    
+    </FONT>
+    <BR>
+ Last Update:12/31/2001</P></DIV>
+
+</BODY>
+
+</HTML>

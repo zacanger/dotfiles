@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPython.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:12/31/2001
+Translation Time:08:24:13
+Translation Platform:Win32
+Number of Output files:18
+This File:Sect10.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>7: Changing the interface</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    <!-- [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.htm">Revision History</a> ] -->
+    [ <a href="http://www.mindview.net/Books/TIPython/">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  Thinking in Python<br>
+  <small>Revision 0.1.2 (12/31/01) -- Incomplete and Unfinished</small></FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Bruce Eckel &copy;2002 MindView, Inc.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect09.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect11.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc476705909"></A><DIV ALIGN="LEFT"><P><A NAME="_Toc534420117"></A><BR></P></DIV>
+<A NAME="Heading68"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+7: Changing the interface</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Sometimes the problem that you&#146;re
+solving is as simple as &#147;I don&#146;t have the interface that I
+want.&#148; Two of the patterns in <I>Design Patterns</I> solve this problem:
+<I>Adapter</I> takes one type and produces an interface to some other type.
+<I>Fa&ccedil;ade</I> creates an interface to a set of classes, simply to provide
+a more comfortable way to deal with a library or bundle of resources.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_284">Add Comment</A></FONT><A NAME="_Toc476705910"></A><A NAME="_Toc534420118"></A><BR></P></DIV>
+<A NAME="Heading69"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Adapter</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">When you&#146;ve got <I>this</I>, and
+you need <I>that</I>, <I>Adapter</I> solves the problem. The only requirement is
+to produce a <I>that</I>, and there are a number of ways you can accomplish this
+adaptation.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_285">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c07:Adapter.py
+# Variations on the Adapter pattern.
+
+<font color=#0000ff>class</font> WhatIHave:
+  <font color=#0000ff>def</font> g(self): <font color=#0000ff>pass</font>
+  <font color=#0000ff>def</font> h(self): <font color=#0000ff>pass</font>
+
+<font color=#0000ff>class</font> WhatIWant:
+  <font color=#0000ff>def</font> f(self): <font color=#0000ff>pass</font>
+
+<font color=#0000ff>class</font> ProxyAdapter(WhatIWant):
+  <font color=#0000ff>def</font> __init__(self, whatIHave):
+    self.whatIHave = whatIHave
+
+  <font color=#0000ff>def</font> f(self):
+    # Implement behavior using 
+    # methods <font color=#0000ff>in</font> WhatIHave:
+    self.whatIHave.g()
+    self.whatIHave.h()
+
+<font color=#0000ff>class</font> WhatIUse:
+  <font color=#0000ff>def</font> op(self, whatIWant):
+    whatIWant.f()
+
+# Approach 2: build adapter use into op():
+<font color=#0000ff>class</font> WhatIUse2(WhatIUse):
+  <font color=#0000ff>def</font> op(self, whatIHave):
+    ProxyAdapter(whatIHave).f()
+
+# Approach 3: build adapter into WhatIHave:
+<font color=#0000ff>class</font> WhatIHave2(WhatIHave, WhatIWant):
+  <font color=#0000ff>def</font> f(self):
+    self.g()
+    self.h()
+
+# Approach 4: use an inner <font color=#0000ff>class</font>:
+<font color=#0000ff>class</font> WhatIHave3(WhatIHave):
+  <font color=#0000ff>class</font> InnerAdapter(WhatIWant):
+    <font color=#0000ff>def</font> __init__(self, outer):
+      self.outer = outer
+    <font color=#0000ff>def</font> f(self):
+      self.outer.g()
+      self.outer.h()
+
+  <font color=#0000ff>def</font> whatIWant(self): 
+    <font color=#0000ff>return</font> WhatIHave3.InnerAdapter(self)
+
+whatIUse = WhatIUse()
+whatIHave = WhatIHave()
+adapt= ProxyAdapter(whatIHave)
+whatIUse2 = WhatIUse2()
+whatIHave2 = WhatIHave2()
+whatIHave3 = WhatIHave3()
+whatIUse.op(adapt)
+# Approach 2:
+whatIUse2.op(whatIHave)
+# Approach 3:
+whatIUse.op(whatIHave2)
+# Approach 4:
+whatIUse.op(whatIHave3.whatIWant())
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">I&#146;m taking liberties with
+the term &#147;proxy&#148; here, because in <I>Design Patterns</I> they assert
+that a proxy must have an identical interface with the object that it is a
+surrogate for. However, if you have the two words together: &#147;proxy
+adapter,&#148; it is perhaps more reasonable.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_286">Add Comment</A></FONT><A NAME="_Toc476705911"></A><A NAME="_Toc534420119"></A><BR></P></DIV>
+<A NAME="Heading70"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Fa&ccedil;ade</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">A general principle that I apply when
+I&#146;m casting about trying to mold requirements into a first-cut object is
+&#147;If something is ugly, hide it inside an object.&#148; This is basically
+what <I>Fa&ccedil;ade</I> accomplishes. If you have a rather confusing
+collection of classes and interactions that the client programmer doesn&#146;t
+really need to see, then you can create an interface that is useful for the
+client programmer and that only presents what&#146;s necessary.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_287">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Fa&ccedil;ade is often implemented as
+singleton abstract factory. Of course, you can easily get this effect by
+creating a class containing <B>static</B> factory methods:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_288">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c07:Facade.py
+<font color=#0000ff>class</font> A:
+  <font color=#0000ff>def</font> __init__(self, x): <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> B:
+  <font color=#0000ff>def</font> __init__(self, x): <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> C:
+  <font color=#0000ff>def</font> __init__(self, x): <font color=#0000ff>pass</font>
+
+# Other classes that aren't exposed by the
+# facade go here ...
+
+<font color=#0000ff>class</font> Facade:
+  <font color=#0000ff>def</font> makeA(x): <font color=#0000ff>return</font> A(x)
+  makeA = staticmethod(makeA)
+  <font color=#0000ff>def</font> makeB(x): <font color=#0000ff>return</font> B(x)
+  makeB = staticmethod(makeB)
+  <font color=#0000ff>def</font> makeC(x): <font color=#0000ff>return</font> C(x)
+  makeC = staticmethod(makeC)
+
+# The client programmer gets the objects
+# by calling the static methods:
+a = Facade.makeA(1);
+b = Facade.makeB(1);
+c = Facade.makeC(1.0);
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">[rewrite this section using
+research from Larman&#146;s
+book]</FONT><FONT FACE="Georgia"><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_289">Add Comment</A></FONT><A NAME="_Toc534420120"></A><BR></P></DIV>
+<A NAME="Heading71"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Exercises</H2></FONT>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create an adapter class
+that automatically loads a two-dimensional array of objects into a dictionary as
+key-value pairs.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_290">Add Comment</A></FONT><LI></OL>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect09.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect11.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:12/31/2001</P></DIV>
+
+</BODY>
+
+</HTML>

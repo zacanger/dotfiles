@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="1678"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$VCZ2oGTI1sx</title>
+</head>
+<body><h1>Binary Numbers (Oct. 2)</h1><p></p><p></p><p>There are ten types of people in the world, those that know binary ad those that don&rsquo;t. (Anon)</p><p></p><p>All data, images... are illusions encoded in 0&rsquo;s and 1&rsquo;s&nbsp;</p><p>(*summarized paragraph from Hal Abelson, Ken Ledeen, Harry Lewis in &quot;Blown to bits&quot;)</p><p></p><p>Photoshop &amp; Audicity experiment&nbsp;</p><p>1) make an image in PS w 50% gray and save it as raw</p><p>2) open audicity and import &rsquo;as raw&rsquo; the image you just made as unsigned 8-bit mono</p><ul><li>notice it is imported as one straight line as the image file is being interpreted line by line - the solid color has no variation so it is a straight line&nbsp;</li></ul>
+<p>3) back in photoshop ad noise to the image and resave then import again in audicity</p><ul><li>notice the pattern when you open it</li>
+<li>try again manipulating the image by hand &quot; :) &quot;</li>
+<li>the frequency you hear is caused by the width of the image</li></ul>
+
+<p>Signaling System</p><ul><li>it&rsquo;s a way to encode data through numbers much like morse code or the &rsquo;fax machine&rsquo; game we played on day one</li>
+<li>Hannah Weiner, &rsquo;Code Poems&rsquo; - used the international flag signals to make poems and also to translate existing works like romeo and juliet&nbsp;<ul><li><a href="http://monoskop.org/images/a/ab/Weiner_Hannah_Code_Poems.pdf"></a>http://monoskop.org/images/a/ab/Weiner_Hannah_Code_Poems.pdf</li>
+<li>her work is here also <a href="http://www.youtube.com/watch?v=DF0IoXUGkKU"></a>http<a href='https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;ved=0CCAQtwIwAA&amp;url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DDF0IoXUGkKU&amp;ei=XWctVOO7CMLIsASc9IG4DA&amp;usg=AFQjCNEYHd2OhzJKwebJ9DWmGJ75ptc-3A&amp;sig2=zznTn6BLh_rTvz2OngPeHg&amp;bvm=bv.76477589,d.cWc'/>://www.youtube.com/watch?v=DF0IoXUGkKU</a></li></ul>
+</li>
+<li>Binary can also be thought of as information display (ex: candle in the window, one if by land and two if by sea and none if they are not coming)</li></ul>
+
+<p>Counting in binary</p><ul><li>groups of 8, &rsquo;xxxxxxxx&rsquo; some are more significant then others as the one on the far left changes the overall number in a significant way whereas the number on the far right has little change in the number ex &rsquo;11111111 = 255 and 01111111 = 127&rsquo;<ul><li>binary numbers debug tool</li></ul>
+</li>
+<li>&quot;signed bit&quot;, you may have one of the bits represent something significant like a negative. Ex: the most significant bit could represent negative&nbsp;</li></ul>
+<p>image example:&nbsp;</p><ul><li>white is always 255, but looking at the differences between images the contrast between changes is more severe when a significant value is changes because the change is larger (black vs white) where as the changes in images with a lower significance you see more noise but the changes are more minute and less dramatic</li>
+<li><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_VCZ2oGTI1sx_p.252113_1412264981240_undefined'/></li>
+<li><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_VCZ2oGTI1sx_p.252113_1412264514077_undefined'/><ul><li>absolute encoders: coded wheels (binary wheels)&nbsp;<img src='http://julioterra.com/journal/wp-content/uploads/2013/01/encoder_body_2.png'/></li></ul>
+</ul>
+
+<p>Binary as permutation</p><ul><li>&rsquo;Every Icon&rsquo; by John F. Simon: <a href="http://www.numeral.com/eicon.html"></a>http://www.numeral.com/eicon.html - applet w/ 32x32 grid that will run through every combination of what can be represented in that grid. The idea is that at some point your face will be shown, anything will be shown at least once.&nbsp;</li>
+<li>Every Unicode by Joerg Piringer - <a href="http://joerg.piringer.net/index.php?href=unicode/unicode.xml"></a>http://joerg.piringer.net/index.php?href=unicode/unicode.xml &amp; <a href="http://www.youtube.com/watch?v=Z_sl99D2a18"></a>http://www.youtube.com/watch?v=Z_sl99D2a18</li>
+<li>Chris Harrison, Lumitrak - <a href="http://chrisharrison.net/index.php/Research/Lumitrack"></a>http://chrisharrison.net/index.php/Research/Lumitrack</li>
+<li>Roman Olpaca - <a href="http://www.juxtapoz.com/current/one-canvas-count-from-1-to-56m"></a>http://www.juxtapoz.com/current/one-canvas-count-from-1-to-56m</li>
+<li>Arthur Ganson - machine w concrete - <a href="http://www.youtube.com/watch?v=5q-BH-tvxEg"></a>http://www.youtube.com/watch?v=5q-BH-tvxEg</li></ul>
+<p>Tools:</p><ul><li>xxd, command line tool that will take a text file and print it out in binary format<ul><li>xxd -b filename&nbsp; (print out binary info)</li></ul>
+</li>
+<li>use the mac calculator using &rsquo;command 3&rsquo; to see the binary and ascii values&nbsp;</li>
+<li><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_VCZ2oGTI1sx_p.252113_1412270902394_undefined'/><img src='/static/img/pixel.gif'/></li></ul>
+
+<p></p><p></p><p></p><p></p><p></p></body>
+</html>

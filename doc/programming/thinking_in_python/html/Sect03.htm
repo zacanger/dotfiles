@@ -1,0 +1,639 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPython.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:12/31/2001
+Translation Time:08:24:12
+Translation Platform:Win32
+Number of Output files:18
+This File:Sect03.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>2: Unit Testing</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    <!-- [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.htm">Revision History</a> ] -->
+    [ <a href="http://www.mindview.net/Books/TIPython/">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  Thinking in Python<br>
+  <small>Revision 0.1.2 (12/31/01) -- Incomplete and Unfinished</small></FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Bruce Eckel &copy;2002 MindView, Inc.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect02.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect04.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc534420071"></A><A NAME="Heading22"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+2: Unit Testing</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia" SIZE=4 COLOR="Red">This chapter has not
+had any significant translation yet.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia" SIZE=4>One of the important recent
+realizations is the dramatic value of unit testing.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_77">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This is the process of building
+integrated tests into all the code that you create, and running those tests
+every time you do a build. It&#146;s as if you are extending the compiler,
+telling it more about what your program is supposed to do. That way, the build
+process can check for more than just syntax errors, since you teach it how to
+check for semantic errors as well.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_78">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">C-style programming languages, and C++ in
+particular, have typically valued performance over programming safety. The
+reason that developing programs in Java is so much faster than in C++ (roughly
+twice as fast, by most accounts) is because of Java&#146;s safety net: features
+like better type checking, enforced exceptions and garbage collection. By
+integrating unit testing into your build process, you are extending this safety
+net, and the result is that you can develop faster. You can also be bolder in
+the changes that you make, and more easily refactor your code when you discover
+design or implementation flaws, and in general produce a better product, faster.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_79">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Unit testing is not generally considered
+a design pattern; in fact, it might be considered a &#147;development
+pattern,&#148; but perhaps there are enough &#147;pattern&#148; phrases in
+the world already. Its effect on development is so significant that it will be
+used throughout this book, and thus will be introduced here.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_80">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">My own experience with unit testing began
+when I realized that every program in a book must be automatically extracted and
+organized into a source tree, along with appropriate makefiles (or some
+equivalent technology) so that you could just type <B>make</B> to build the
+whole tree. The effect of this process on the code quality of the book was so
+immediate and dramatic that it soon became (in my mind) a requisite for any
+programming book&#151;how can you trust code that you didn&#146;t compile? I
+also discovered that if I wanted to make sweeping changes, I could do so using
+search-and-replace throughout the book, and also bashing the code around at
+will. I knew that if I introduced a flaw, the code extractor and the makefiles
+would flush it out.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_81">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">As programs became more complex, however,
+I also found that there was a serious hole in my system. Being able to
+successfully compile programs is clearly an important first step, and for a
+published book it seemed a fairly revolutionary one&#151;usually due to the
+pressures of publishing, it&#146;s quite typical to randomly open a programming
+book and discover a coding flaw. However, I kept getting messages from readers
+reporting semantic problems in my code (in <I>Thinking in Java</I>). These
+problems could only be discovered by running the code. Naturally, I understood
+this and had taken some early faltering steps towards implementing a system that
+would perform automatic execution tests, but I had succumbed to the pressures of
+publishing, all the while knowing that there was definitely something wrong with
+my process and that it would come back to bite me in the form of embarrassing
+bug reports (in the open source world, embarrassment is one of the prime
+motivating factors towards increasing the quality of one&#146;s code!).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_82">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The other problem was that I was lacking
+a structure for the testing system. Eventually, I started hearing about unit
+testing and
+JUnit</FONT><A NAME="fnB11" HREF="#fn11">[11]</A><FONT FACE="Georgia">, which
+provided a basis for a testing structure. However, even though JUnit is intended
+to make the creation of test code easy, I wanted to see if I could make it even
+easier, applying the Extreme Programming principle of &#147;do the simplest
+thing that could possibly work&#148; as a starting point, and then evolving the
+system as usage demands (In addition, I wanted to try to reduce the amount of
+test code, in an attempt to fit more functionality in less code for screen
+presentations). This chapter is the result.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_83">Add Comment</A></FONT><A NAME="_Toc534420072"></A><BR></P></DIV>
+<A NAME="Heading23"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Write tests first</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">As I mentioned, one of the problems that
+I encountered&#151;that most people encounter, it turns out&#151;was
+submitting to the pressures of publishing and as a result letting tests fall by
+the wayside. This is easy to do if you forge ahead and write your program code
+because there&#146;s a little voice that tells you that, after all,
+you&#146;ve got it working now, and wouldn&#146;t it be more
+interesting/useful/expedient to just go on and write that other part (we can
+always go back and write the tests later). As a result, the tests take on less
+importance, as they often do in a development project.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_84">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The answer to this problem, which I first
+found described in <I>Extreme Programming Explained</I>, is to write the tests
+<I>before</I> you write the code. This may seem to artificially force testing to
+the forefront of the development process, but what it actually does is to give
+testing enough additional value to make it essential. If you write the tests
+first, you:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_85">Add Comment</A></FONT><BR></P></DIV>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Describe what the code is
+supposed to do, not with some external graphical tool but with code that
+actually lays the specification down in concrete, verifiable terms.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_86">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Provide
+an example of how the code should be used; again, this is a working, tested
+example, normally showing all the important method calls, rather than just an
+academic description of a library.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_87">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Provide
+a way to verify when the code is finished (when all the tests run correctly).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_88">Add Comment</A></FONT></OL><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Thus,
+if you write the tests first then testing becomes a development tool, not just a
+verification step that can be skipped if you happen to feel comfortable about
+the code that you just wrote (a comfort, I have found, that is usually wrong).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_89">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can find convincing arguments in
+<I>Extreme Programming Explained</I>, as &#147;write tests first&#148; is a
+fundamental principle of XP. If you aren&#146;t convinced you need to adopt any
+of the changes suggested by XP, note that according to Software Engineering
+Institute (SEI) studies, nearly 70% of software organizations are stuck in the
+first two levels of SEI's scale of sophistication: chaos, and slightly better
+than chaos. If you change nothing else, add automated testing.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_90">Add Comment</A></FONT><A NAME="_Toc534420073"></A><BR></P></DIV>
+<A NAME="Heading24"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Simple Python testing</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Sanity check for a quick test of the
+programs in this book, and to append the output of each program (as a string) to
+its listing:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_91">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: SanityCheck.py
+<font color=#0000ff>import</font> string, glob, os
+# Do <font color=#0000ff>not</font> include the following <font color=#0000ff>in</font> the automatic
+# tests:
+exclude = (<font color=#004488>"SanityCheck.py"</font>, <font color=#004488>"BoxObserver.py"</font>,)
+
+<font color=#0000ff>def</font> visitor(arg, dirname, names):
+  dir = os.getcwd()
+  os.chdir(dirname)
+  <font color=#0000ff>try</font>:
+    pyprogs = [p <font color=#0000ff>for</font> p <font color=#0000ff>in</font> glob.glob('*.py') 
+               <font color=#0000ff>if</font> p <font color=#0000ff>not</font> <font color=#0000ff>in</font> exclude ]
+    <font color=#0000ff>if</font> <font color=#0000ff>not</font> pyprogs: <font color=#0000ff>return</font>
+    <font color=#0000ff>print</font> '[' + os.getcwd() + ']'
+    <font color=#0000ff>for</font> program <font color=#0000ff>in</font> pyprogs:
+      <font color=#0000ff>print</font> '\t', program
+      os.system(<font color=#004488>"python %s &gt; tmp"</font> % program)
+      file = open(program).read()
+      output = open('tmp').read()
+      # Append output <font color=#0000ff>if</font> it's <font color=#0000ff>not</font> already there:
+      <font color=#0000ff>if</font> file.find(<font color=#004488>"output = '''"</font>) == -1 <font color=#0000ff>and</font> \
+        len(output) &gt; 0:
+        divider = '#' * 50 + '\n'
+        file = file.replace('#' + ':~', '#&lt;hr&gt;\n')
+        file += <font color=#004488>"output = '''\n"</font> + \
+          open('tmp').read() + <font color=#004488>"'''\n"</font>
+        open(program,'w').write(file)
+  <font color=#0000ff>finally</font>:
+    os.chdir(dir)
+
+<font color=#0000ff>if</font> __name__ == <font color=#004488>"__main__"</font>:
+  os.path.walk('.', visitor, None)
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Just run this from the root
+directory of the code listings for the book; it will descend into each
+subdirectory and run the program there. An easy way to check things is to
+redirect standard output to a file, then if there are any errors they will be
+the only thing that appears at the console during program execution.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_92">Add Comment</A></FONT><A NAME="_Toc534420074"></A><BR></P></DIV>
+<A NAME="Heading25"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+A very simple framework</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">As mentioned, a primary goal of this code
+is to make the writing of unit testing code very simple, even simpler than with
+JUnit. As further needs are discovered <I>during the use</I> of this system,
+then that functionality can be added, but to start with the framework will just
+provide a way to easily create and run tests, and report failure if something
+breaks (success will produce no results other than normal output that may occur
+during the running of the test). My intended use of this framework is in
+makefiles, and <B>make</B> aborts if there is a non-zero return value from the
+execution of a command. The build process will consist of compilation of the
+programs and execution of unit tests, and if <B>make</B> gets all the way
+through successfully then the system will be validated, otherwise it will abort
+at the place of failure. The error messages will report the test that failed but
+not much else, so that you can provide whatever granularity that you need by
+writing as many tests as you want, each one covering as much or as little as you
+find necessary.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_93">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In some sense, this framework provides an
+alternative place for all those &#147;print&#148; statements I&#146;ve
+written and later erased over the years.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_94">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To create a set of tests, you start by
+making a <B>static </B> inner class inside the class you wish to test (your test
+code may also test other classes; it&#146;s up to you). This test code is
+distinguished by inheriting from <B>UnitTest</B>:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_95">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#  test:UnitTest.py
+# The basic unit testing <font color=#0000ff>class</font>
+
+<font color=#0000ff>class</font> UnitTest:
+  static String testID
+  static List errors = ArrayList()
+  # Override cleanup() <font color=#0000ff>if</font> test object 
+  # creation allocates non-memory 
+  # resources that must be cleaned up:
+  <font color=#0000ff>def</font> cleanup(self):
+  # Verify the truth of a condition:
+  protected final void affirm(boolean condition){
+    <font color=#0000ff>if</font>(!condition)
+      errors.add(<font color=#004488>"failed: "</font> + testID)
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The only testing method [[ So
+far ]] is
+<B>affirm(&#160;)</B></FONT><A NAME="fnB12" HREF="#fn12">[12]</A><FONT FACE="Georgia">,
+which is <B>protected</B> so that it can be used from the inheriting class. All
+this method does is verify that something is <B>true</B>. If not, it adds an
+error to the list, reporting that the current test (established by the <B>static
+testID</B>, which is set by the test-running program that you shall see shortly)
+has failed. Although this is not a lot of information&#151;you might also wish
+to have the line number, which could be extracted from an exception&#151;it may
+be enough for most situations.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_96">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Unlike JUnit (which uses
+<B>setUp(&#160;)</B> and <B>tearDown(&#160;)</B> methods), test objects will be
+built using ordinary Python construction. You define the test objects by
+creating them as ordinary class members of the test class, and a new test class
+object will be created for each test method (thus preventing any problems that
+might occur from side effects between tests). Occasionally, the creation of a
+test object will allocate non-memory resources, in which case you must override
+<B>cleanup(&#160;)</B> to release those resources.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_97">Add Comment</A></FONT><A NAME="_Toc534420075"></A><BR></P></DIV>
+<A NAME="Heading26"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Writing tests</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Writing tests becomes very simple.
+Here&#146;s an example that creates the necessary <B>static</B> inner class and
+performs trivial tests:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_98">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#  c02:TestDemo.py
+# Creating a test
+
+<font color=#0000ff>class</font> TestDemo:
+  private static int objCounter = 0
+  private int id = ++objCounter
+  public TestDemo(String s):
+    <font color=#0000ff>print</font> (s + <font color=#004488>": count = "</font> + id)
+
+  <font color=#0000ff>def</font> close(self):
+    <font color=#0000ff>print</font> (<font color=#004488>"Cleaning up: "</font> + id)
+
+  <font color=#0000ff>def</font> someCondition(self): <font color=#0000ff>return</font> 1 
+  public static <font color=#0000ff>class</font> Test(UnitTest):
+    TestDemo test1 = TestDemo(<font color=#004488>"test1"</font>)
+    TestDemo test2 = TestDemo(<font color=#004488>"test2"</font>)
+    <font color=#0000ff>def</font> cleanup(self): 
+      test2.close()
+      test1.close()
+
+    <font color=#0000ff>def</font> testA(self): 
+      <font color=#0000ff>print</font> &#147;TestDemo.testA&#147; 
+      affirm(test1.someCondition())
+
+    <font color=#0000ff>def</font> testB(self): 
+      <font color=#0000ff>print</font> &#147;TestDemo.testB&#147;
+      affirm(test2.someCondition())
+      affirm(TestDemo.objCounter != 0)
+
+    # Causes the build to halt:
+    #! public void test3(): affirm(0) 
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <B>test3(&#160;)</B> 
+method is commented out because, as you&#146;ll see, it causes the automatic
+build of this book&#146;s source-code tree to stop.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_99">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can name your inner class anything
+you&#146;d like; the only important factor is that it <B>extends UnitTest</B>.
+You can also include any necessary support code in other methods. Only <B>public
+</B>methods that take no arguments and return <B>void</B> will be treated as
+tests (the names of these methods are also not constrained).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_100">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The above test class creates two
+instances of <B>TestDemo</B>. The <B>TestDemo </B>constructor prints something,
+so that we can see it being called. You could also define a default constructor
+(the only kind that is used by the test framework), although none is necessary
+here. The <B>TestDemo</B> class has a <B>close(&#160;)</B> method which suggests
+it is used as part of object cleanup, so this is called in the overridden
+<B>cleanup(&#160;)</B> method in <B>Test</B>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_101">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The testing methods use the
+<B>affirm(&#160;)</B> method to validate expressions, and if there is a failure
+the information is stored and printed after all the tests are run.  Of course,
+the <B>affirm(&#160;)</B> arguments are usually more complicated than this;
+you&#146;ll see more examples throughout the rest of this book.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_102">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Notice that in <B>testB(&#160;)</B>, the
+<B>private</B> field <B>objCounter</B> is accessible to the testing
+code&#151;this is because <B>Test</B> has the permissions of an inner class.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_103">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can see that writing test code
+requires very little extra effort, and no knowledge other than that used for
+writing ordinary classes.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_104">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To run the tests, you use
+<B>RunUnitTests.py</B> (which will be introduced shortly). The command for the
+above code looks like this:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_105">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><B>java com.bruceeckel.test.RunUnitTests
+TestDemo</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">It produces the following
+output:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>test1: count = 1
+test2: count = 2
+TestDemo.testA
+Cleaning up: 2
+Cleaning up: 1
+test1: count = 3
+test2: count = 4
+TestDemo.testB
+Cleaning up: 4
+Cleaning up: 3</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">All the output is
+noise as far as the success or failure of the unit testing is concerned. Only if
+one or more of the unit tests fail does the program returns a non-zero value to
+terminate the <B>make</B> process after the error messages are produced. Thus,
+you can choose to produce output or not, as it suits your needs, and the test
+class becomes a good place to put any printing code you might need&#151;if you
+do this, you tend to keep such code around rather than putting it in and
+stripping it out as is typically done with tracing code.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_106">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">If you need to add a test to a class
+derived from one that already has a test class, it&#146;s no problem, as you
+can see here:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#  c02:TestDemo2.py
+# Inheriting <font color=#0000ff>from</font> a <font color=#0000ff>class</font> that 
+# already has a test <font color=#0000ff>is</font> no problem.
+
+<font color=#0000ff>class</font> TestDemo2(TestDemo):
+  public TestDemo2(String s): .__init__(s) 
+  # You can even use the same name 
+  # as the test <font color=#0000ff>class</font> <font color=#0000ff>in</font> the base <font color=#0000ff>class</font>:
+  public static <font color=#0000ff>class</font> Test(UnitTest):
+    <font color=#0000ff>def</font> testA(self):
+      <font color=#0000ff>print</font> &#147;TestDemo2.testA&#147;
+      affirm(1 + 1 == 2)
+
+    <font color=#0000ff>def</font> testB(self):
+      <font color=#0000ff>print</font> &#147;TestDemo2.testB&#147; 
+      affirm(2 * 2 == 4)
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Even the name of the inner
+class can be the same. In the above code, all the assertions are always true so
+the tests will never fail.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_107">Add Comment</A></FONT><A NAME="_Toc534420076"></A><BR></P></DIV>
+<A NAME="Heading27"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+White-box &amp; black-box tests</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The unit test examples so far are what
+are traditionally called <I>white-box</I> <I>tests</I>. This means that the test
+code has complete access to the internals of the class that&#146;s being tested
+(so it might be more appropriately called &#147;transparent box&#148;
+testing). White-box testing happens automatically when you make the unit test
+class as an inner class of the class being tested, since inner classes
+automatically have access to all their outer class elements, even those that are
+<B>private</B>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_108">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">A possibly more common form of testing is
+<I>black-box testing</I>, which refers to treating the class under test as an
+impenetrable box. You can&#146;t see the internals; you can only access the
+<B>public</B> portions of the class. Thus, black-box testing corresponds more
+closely to functional testing, to verify the methods that the client programmer
+is going to use. In addition, black-box testing provides a minimal instruction
+sheet to the client programmer &#150; in the absence of all other
+documentation, the black-box tests at least demonstrate how to make basic calls
+to the <B>public</B> class methods.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_109">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To perform black-box tests using the
+unit-testing framework presented in this book, all you need to do is create your
+test class as a global class instead of an inner class. All the other rules are
+the same (for example, the unit test class must be <B>public</B>, and derived
+from <B>UnitTest</B>).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_110">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">There&#146;s one other caveat, which
+will also provide a little review of Java packages. If you want to be completely
+rigorous, you must put your black-box test class in a separate directory than
+the class it tests, otherwise it will have package access to the elements of the
+class being tested. That is, you&#146;ll be able to access <B>protected</B> and
+<B>friendly</B> elements of the class being tested. Here&#146;s an example:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_111">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#  c02:Testable.py
+
+<font color=#0000ff>class</font> Testable:
+  private void f1():
+  <font color=#0000ff>def</font> f2(self): # <font color=#004488>"Friendly"</font>: package access
+  <font color=#0000ff>def</font> f3(self): # Also package access
+  <font color=#0000ff>def</font> f4(self):
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Normally, the only method that
+should be directly accessible to the client programmer is <B>f4(&#160;)</B>.
+However, if you put your black-box test in the same directory, it automatically
+becomes part of the same package (in this case, the default package since none
+is specified) and then has inappropriate access:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_112">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#  c02:TooMuchAccess.py
+
+<font color=#0000ff>class</font> TooMuchAccess(UnitTest):
+  Testable tst = Testable()
+  <font color=#0000ff>def</font> test1(self):
+    tst.f2() # Oops!
+    tst.f3() # Oops!
+    tst.f4() # OK
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can solve the problem by
+moving <B>TooMuchAccess.py</B> into its own subdirectory, thereby putting it in
+its own default package (thus a different package from <B>Testable.py</B>). Of
+course, when you do this, then <B>Testable</B> must be in its own package, so
+that it can be imported (note that it is also possible to import a
+&#147;package-less&#148; class by giving the class name in the <B>import</B>
+statement and ensuring that the class is in your CLASSPATH):
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_113">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#  c02:testable:Testable.py
+package c02.testable
+
+<font color=#0000ff>class</font> Testable:
+  private void f1():
+  <font color=#0000ff>def</font> f2(self): # <font color=#004488>"Friendly"</font>: package access
+  <font color=#0000ff>def</font> f3(self): # Also package access
+  <font color=#0000ff>def</font> f4(self):
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here&#146;s the black-box test
+in its own package, showing how only public methods may be called:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_114">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#  c02:test:BlackBoxTest.py
+
+<font color=#0000ff>class</font> BlackBoxTest(UnitTest):
+  Testable tst = Testable()
+  <font color=#0000ff>def</font> test1(self):
+    #! tst.f2() # Nope!
+    #! tst.f3() # Nope!
+    tst.f4() # Only public methods available
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Note that the above program is
+indeed very similar to the one that the client programmer would write to use
+your class, including the imports and available methods. So it does make a good
+programming example. Of course, it&#146;s easier from a coding standpoint to
+just make an inner class, and unless you&#146;re ardent about the need for
+specific black-box testing you may just want to go ahead and use the inner
+classes (with the knowledge that if you need to you can later extract the inner
+classes into separate black-box test classes, without too much effort).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_115">Add Comment</A></FONT><A NAME="_Toc534420077"></A><BR></P></DIV>
+<A NAME="Heading28"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Running tests</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The program that runs the tests makes
+significant use of reflection so that writing the tests can be simple for the
+client programmer.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_116">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># test:RunUnitTests.py
+# Discovering the unit test
+# <font color=#0000ff>class</font> <font color=#0000ff>and</font> running each test.
+
+<font color=#0000ff>class</font> RunUnitTests:
+  public static void 
+  require(boolean requirement, String errmsg):
+    <font color=#0000ff>if</font>(!requirement):
+      System.err.println(errmsg)
+      System.exit(1)
+
+  <font color=#0000ff>def</font> main(self, String[] args):
+    require(args.length == 1,
+      <font color=#004488>"Usage: RunUnitTests qualified-class"</font>)
+    <font color=#0000ff>try</font>:
+      Class c = Class.forName(args[0])
+      # Only finds the inner classes 
+      # declared <font color=#0000ff>in</font> the current <font color=#0000ff>class</font>:
+      Class[] classes = c.getDeclaredClasses()
+      Class ut = null
+      <font color=#0000ff>for</font>(int j = 0 j &lt; classes.length j++):
+        # Skip inner classes that are 
+        # <font color=#0000ff>not</font> derived <font color=#0000ff>from</font> UnitTest:
+        <font color=#0000ff>if</font>(!UnitTest.<font color=#0000ff>class</font>.
+            isAssignableFrom(classes[j]))
+              <font color=#0000ff>continue</font>
+        ut = classes[j]
+        <font color=#0000ff>break</font> # Finds the first test <font color=#0000ff>class</font> only
+      
+      # If it found an inner <font color=#0000ff>class</font>, 
+      # that <font color=#0000ff>class</font> must be static:
+      <font color=#0000ff>if</font>(ut != null)
+        require(
+          Modifier.isStatic(ut.getModifiers()),
+          <font color=#004488>"inner UnitTest class must be static"</font>)
+      # If it couldn't find the inner <font color=#0000ff>class</font>, 
+      # maybe it's a regular <font color=#0000ff>class</font> (<font color=#0000ff>for</font> black-
+      # box testing:
+      <font color=#0000ff>if</font>(ut == null)
+        <font color=#0000ff>if</font>(UnitTest.<font color=#0000ff>class</font>.isAssignableFrom(c))
+          ut = c
+      require(ut != null, 
+        <font color=#004488>"No UnitTest class found"</font>)
+      require(
+        Modifier.isPublic(ut.getModifiers()),
+        <font color=#004488>"UnitTest class must be public"</font>)
+      Method[] methods = ut.getDeclaredMethods()
+      <font color=#0000ff>for</font>(int k = 0 k &lt; methods.length k++):
+        Method m = methods[k]
+        # Ignore overridden UnitTest methods:
+        <font color=#0000ff>if</font>(m.getName().equals(<font color=#004488>"cleanup"</font>)) 
+          <font color=#0000ff>continue</font>
+        # Only public methods with no 
+        # arguments <font color=#0000ff>and</font> void <font color=#0000ff>return</font> 
+        # types will be used as test code:
+        <font color=#0000ff>if</font>(m.getParameterTypes().length == 0 &amp;&amp;
+           m.getReturnType() == void.<font color=#0000ff>class</font> &amp;&amp;
+           Modifier.isPublic(m.getModifiers())):
+             # The name of the test <font color=#0000ff>is</font> 
+             # used <font color=#0000ff>in</font> error messages:
+             UnitTest.testID = m.getName()
+             # A instance of the 
+             # test object <font color=#0000ff>is</font> created <font color=#0000ff>and</font> 
+             # cleaned up <font color=#0000ff>for</font> each test:
+             Object test = ut.newInstance()
+             m.invoke(test, Object[0])
+             ((UnitTest)test).cleanup()
+        
+      
+     catch(Exception e):
+      e.printStackTrace(System.err)
+      # Any exception will <font color=#0000ff>return</font> a nonzero 
+      # value to the console, so that 
+      # 'make' will abort:
+      System.err.println(<font color=#004488>"Aborting make"</font>)
+      System.exit(1)
+
+    # After all tests <font color=#0000ff>in</font> this <font color=#0000ff>class</font> are run,
+    # display any results. If there were errors,
+    # abort 'make' by returning a nonzero value.
+    <font color=#0000ff>if</font>(UnitTest.errors.size() != 0):
+      Iterator it = UnitTest.errors.iterator()
+      <font color=#0000ff>while</font>(it.hasNext())
+        System.err.println(it.next())
+      System.exit(1)
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><A NAME="_Toc534420078"></A><BR></P></DIV>
+<A NAME="Heading29"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Automatically executing tests</H2></FONT>
+<DIV ALIGN="LEFT"><P><A NAME="_Toc534420079"></A><BR></P></DIV>
+<A NAME="Heading30"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Exercises</H2></FONT>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Install this book&#146;s
+source code tree and ensure that you have a <B>make</B> utility installed on
+your system (Gnu <B>make</B> is freely available on the internet at various
+locations). In <B>TestDemo.py</B>, un-comment <B>test3(&#160;)</B>, then type
+<B>make</B> and observe the results.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_117">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+TestDemo.java by adding a new test that throws an exception. Type <B>make</B>
+and observe the results.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_118">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+your solutions to the exercises in Chapter 1 by adding unit tests. Write
+makefiles that incorporate the unit tests.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_119">Add Comment</A></FONT></OL>
+<HR><DIV ALIGN="LEFT"><P><A NAME="fn11" HREF="#fnB11">[11]</A><FONT FACE="Georgia">
+</FONT><FONT FACE="Georgia">http://www.junit.org</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="fn12" HREF="#fnB12">[12]</A><FONT FACE="Georgia"> I
+had originally called this <B>assert()</B>, but that word became reserved in JDK
+1.4 when assertions were added to the language.</FONT><BR></P></DIV>
+
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect02.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect04.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:12/31/2001</P></DIV>
+
+</BODY>
+
+</HTML>

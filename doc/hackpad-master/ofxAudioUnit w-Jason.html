@@ -1,0 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="633"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$dAjKDN8GqcQ</title>
+</head>
+<body><h1>ofxAudioUnit w/Jason</h1><p></p><p>Source code from workshop: <a href="https://github.com/SFPC/Audio-Unit-Workshop.git"></a>https://github.com/SFPC/Audio-Unit-Workshop.git</p><p></p><p><b><u>Step 1: Getting set up</u></b></p><p>Download ofxAudioUnit : <a href="https://github.com/admsyn/ofxAudioUnit"></a>https://github.com/admsyn/ofxAudioUnit</p><p>Place it in your addons folder</p><p>Create a new project using projectgenerator and include ofxAudioUnit</p><p>Open the project and add the audiounit.framework and coreaudiokit.framework</p><p>Now your project should run without errors</p><p></p><p></p><p><b><u>Step 2: Playing a file</u></b></p><p><i>at the top of your .h file add:</i></p><p>#include &quot;ofxAudioUnit.h</p><p></p><p><i>inside your testApp class add:</i></p><p>ofxAudioUnitFilePlayer player;</p><p>ofxAudioUnitOutput output;</p><p></p><p><i>inside your .cpp file add:</i></p><p><i>in setup():</i></p><p>player.setFile(ofToDataPath(mySoundFile.mp3));</p><p>player.connectTo(output);</p><p>output.start();</p><p>player.play();</p><p></p><p>Now running your project will play your chosen file!!! Now, go ahead and erase iTunes!</p><p></p><p><i>coming soon: adding effects to the DSP chain...</i></p><p>&nbsp;</p><p></p><p>try `auval -a` in terminal to see what audio units you have to work with</p><ul class="comment"><li>all of these arguments are 4 characters! if its 3, like aumu dls appl, make sure you append a space to the dls argument so its `&rsquo;aumu&rsquo; &rsquo;dls &rsquo; &rsquo;appl&rsquo;</li></ul>
+
+<p>background info:&nbsp;</p><ul><li><a href="http://en.wikipedia.org/wiki/Audio_Units"></a>http://en.wikipedia.org/wiki/Audio_Units</li>
+<li><a href="https://developer.apple.com/library/mac/documentation/MusicAudio/Conceptual/AudioUnitProgrammingGuide/Introduction/Introduction.html"></a>https://developer.apple.com/library/mac/documentation/MusicAudio/Conceptual/AudioUnitProgrammingGuide/Introduction/Introduction.html</li></ul>
+
+</body>
+</html>

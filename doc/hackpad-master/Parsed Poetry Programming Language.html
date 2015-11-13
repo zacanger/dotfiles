@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="2108"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$Smv7hWK8gsV</title>
+</head>
+<body><h1>Parsed Poetry Programming Language</h1><p>Search Engine Dependent Parsing Programming Language</p><p></p><ul><li>apologies for the weird name don&rsquo;t know how else to describe this project at the time!</li>
+<li>&nbsp;this is a hackpad for breaking down the steps it would take to make the programming language that <a href='/ep/profile/m5rLOYYylrl'/>Jason Levine</a> and <a href='/ep/profile/sOovaDOwuJq'/>Claire Lin</a> proposed in <a href='/ep/profile/tkesLTea5Bv'/>Amit Pitaru</a>&rsquo;s #LearningCurves class.</li></ul>
+
+<p><b>OVERVIEW OF PROGRAMMING LANGUAGE</b></p><p>This programming language creates visual collage in the spirit of randomness. By returning unpredictable visual results, the language forces the user to think about the notion and definiting/definition in code.&nbsp;</p><p></p><p><b>DEADLINE</b></p><p>__________________________________________________________________________________</p><p>October 17</p><ul><li><a href='/ep/profile/v6pSS8EP8fM'/>Moises Sanabria</a><ul><li>Have a small web app that calls the google api based on a text search.</li></ul>
+</li>
+<li><a href='/ep/profile/sOovaDOwuJq'/>Claire Lin</a><ul><li>More robust reference for the syntax</li>
+<li>Some user testing to get feedback about documentation and programming language.</li></ul>
+</ul>
+<p>October 24</p><ul><li><a href='/ep/profile/v6pSS8EP8fM'/>Moises Sanabria</a><ul><li>Able to parse text into seaprate searche.</li>
+<li>Maybe overlay images on top of each other.</li></ul>
+</li>
+<li><a href='/ep/profile/sOovaDOwuJq'/>Claire Lin</a><ul><li>Mockups of the IDE</li></ul>
+</ul>
+
+<p><b>Reason</b></p><ul style="list-style: none;"><li>I think the that the possibility of making this language is &quot;doable&quot;.&nbsp; I find the idea of writing poetry that compiles into visuals to be really interesting. It could also be an interesting way in which users could be introduced to programming from a meta point of view.</li></ul>
+
+<p><b>Write User Instructions</b></p><ul><li>This is for the person who encounters this language in a website or gallery setting.</li>
+<li>Have available example code that people can look at.</li></ul>
+
+<p><b>Scope</b></p><ul><li>Recreate magic wand eraser and use it on searched image to get rid of background.</li></ul>
+
+<p><b>Use Cases</b></p><ul><li>poetry night with dynamic live visuals compiled by the language listening to the poet?</li>
+<li>introduction to mental models in computation?</li></ul>
+
+<p></p><p></p><p><b>TECHNOLOGIES NEEDED</b></p><ul><li>Google Search API<ul><li>Custom Search API<ul><li>With this API, you can use RESTful requests to get either <b>web search</b> or <b>image search</b> results in JSON or Atom format.</li>
+<li><a href="https://developers.google.com/custom-search/json-api/v1/overview"></a>https://developers.google.com/custom-search/json-api/v1/overview</li></ul>
+</li></ul>
+</li>
+<li>Wolfram-Alpha API</li>
+<li>voice recognition API<ul><li>I started working with some voice recognition stuff over the weekend.&nbsp; I forked the ofxSpeech addon, fixed it and added some new things.&nbsp; It uses the speech recognition library built into OSX... we might be able to find a better tool?</li>
+<li><a href="https://github.com/latrokles/ofxSpeech"></a>https://github.com/latrokles/ofxSpeech</li></ul>
+</li>
+<li>Node?</li>
+<li>A way to write and parse the code</li>
+<li>A large data set of images with transparent background? Maybe using ImageMagick to take the white off images? In terms of shapes we can create SVG masks on top of images in CSS3 to do something similar.</li></ul>
+
+<p></p><p><b>MOCKUPS</b></p><p></p><p><b>Example 1:</b> Drawing the circle-triangle-rectangle</p><p></p><p>The canvas is 600px x 400px</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A circle should be on top of a triangle</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The circle could be orange</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The circle edges do not go beyond the triangle edges.</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The triangle is bigger than the circle.</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The triangle should be on top of a rectangle</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The triangle edges do not go beyond the rectangle edges</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The rectangle is bigger than the triangle</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The rectangle fills the canvas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; All objects are centered</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_Smv7hWK8gsV_p.77412_1380754811586_sketch-1.png'/></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_Smv7hWK8gsV_p.77412_1380754825987_sketch-2.png'/></p><p></p><p></p><p><b>Example 2:</b> If Statement</p><p></p><p>The background is the sky</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; There is one circle</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If the circle is orange, draw a green square</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The green square should be the same width as the circle&nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Or else, draw a light blue line</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The line should be 2px wide and intersect two corners of the canvas</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_Smv7hWK8gsV_p.77412_1380754905009_if-1.png'/></p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_Smv7hWK8gsV_p.77412_1380754915199_if-2.png'/></p><p></p><p></p><p><b>Example 3</b>: For Loop</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The background is red</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For every triangle, draw two circles</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Triangles should be bigger than circles</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Triangles are on top of circles</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Circles are identical</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Draw five triangles</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Triangles are identical</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Triangles are centered</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Triangles are equally spaced vertically</p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_Smv7hWK8gsV_p.77412_1380754949541_for-loop.png'/></p><p></p><p></p><p></p><p></p><p><b>DOCUMENTATION</b></p><p>__________________________________________________________________________________</p><p></p><p><b>Programming Language Rules</b></p><ul><li>Canvas<ul><li>When nothing is specified the language randomly chooses a size for the canvas.</li>
+<li>It could also be the size of the largest image found.</li></ul>
+</li>
+<li>Descriptors<ul><li>ex.<ul><li>The circle is blue / The circle should be blue.</li>
+<li>The circle might be blue. The circle could be blue.<ul><li>comment: different syntax but would give you the same output.</li></ul>
+</ul>
+</li>
+<li><br/></li></ul>
+</li>
+<li>with, next, on, top,<ul><li>Separate objects from other objects and creates relations.</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>Idea for IDE interface</b></li><ul><li>Interface could auto complete the language words so that the user starts understanding the syntax.</li></ul>
+</ul>
+
+<p></p><p></p><p></p></body>
+</html>

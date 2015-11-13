@@ -1,0 +1,394 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPython.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:12/31/2001
+Translation Time:08:24:13
+Translation Platform:Win32
+Number of Output files:18
+This File:Sect09.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>6: Function objects</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    <!-- [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.htm">Revision History</a> ] -->
+    [ <a href="http://www.mindview.net/Books/TIPython/">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  Thinking in Python<br>
+  <small>Revision 0.1.2 (12/31/01) -- Incomplete and Unfinished</small></FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Bruce Eckel &copy;2002 MindView, Inc.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect08.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect10.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc462393592"></A><A NAME="_Toc462393593"></A><A NAME="_Toc476705905"></A><A NAME="_Toc534420112"></A><A NAME="Heading63"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+6: Function objects</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In <I>Advanced C++:Programming Styles And
+Idioms (Addison-Wesley, 1992)</I>, Jim Coplien coins the term <I>functor</I>
+which is an object whose sole purpose is to encapsulate a function (since
+&#147;functor&#148; has a meaning in mathematics, in this book I shall use the
+more explicit term <I>function object</I>). The point is to decouple the choice
+of function to be called from the site where that function is called.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_269">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This term is mentioned but not used in
+<I>Design Patterns</I>. However, the theme of the function object is repeated in
+a number of patterns in that book.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_270">Add Comment</A></FONT><A NAME="_Toc476705906"></A><A NAME="_Toc534420113"></A><BR></P></DIV>
+<A NAME="Heading64"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Command: choosing the operation at run-time</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This is the function object in its purest
+sense: a method that&#146;s an
+object</FONT><A NAME="fnB14" HREF="#fn14">[14]</A><FONT FACE="Georgia">. By
+wrapping a method in an object, you can pass it to other methods or objects as a
+parameter, to tell them to perform this particular operation in the process of
+fulfilling your request.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_271">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c06:CommandPattern.py
+
+<font color=#0000ff>class</font> Command:
+  <font color=#0000ff>def</font> execute(self): <font color=#0000ff>pass</font>
+
+<font color=#0000ff>class</font> Loony(Command):
+  <font color=#0000ff>def</font> execute(self):
+    <font color=#0000ff>print</font> <font color=#004488>"You're a loony."</font>
+
+<font color=#0000ff>class</font> NewBrain(Command):
+  <font color=#0000ff>def</font> execute(self):
+    <font color=#0000ff>print</font> <font color=#004488>"You might even need a new brain."</font>
+
+<font color=#0000ff>class</font> Afford(Command):
+  <font color=#0000ff>def</font> execute(self):
+    <font color=#0000ff>print</font> <font color=#004488>"I couldn't afford a whole new brain."</font>
+
+# An object that holds commands:
+<font color=#0000ff>class</font> Macro:
+  <font color=#0000ff>def</font> __init__(self):
+    self.commands = []
+  <font color=#0000ff>def</font> add(self, command): 
+    self.commands.append(command) 
+  <font color=#0000ff>def</font> run(self):
+    <font color=#0000ff>for</font> c <font color=#0000ff>in</font> self.commands:
+      c.execute()
+
+macro = Macro()
+macro.add(Loony())
+macro.add(NewBrain())
+macro.add(Afford())
+macro.run()
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The primary point of
+<I>Command</I> is to allow you to hand a desired action to a method or object.
+In the above example, this provides a way to queue a set of actions to be
+performed collectively. In this case, it allows you to dynamically create new
+behavior, something you can normally only do by writing new code but in the
+above example could be done by interpreting a script (see the <I>Interpreter</I>
+pattern if what you need to do gets very complex).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_272">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><I>Design Patterns</I> says that
+&#147;Commands are an object-oriented replacement for
+callbacks</FONT><A NAME="fnB15" HREF="#fn15">[15]</A><FONT FACE="Georgia">.&#148;
+However, I think that the word &#147;back&#148; is an essential part of the
+concept of callbacks. That is, I think a callback actually reaches back to the
+creator of the callback. On the other hand, with a <I>Command</I> object you
+typically just create it and hand it to some method or object, and are not
+otherwise connected over time to the <I>Command</I> object. That&#146;s my take
+on it, anyway. Later in this book, I combine a group of design patterns under
+the heading of &#147;callbacks.&#148;
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_273">Add Comment</A></FONT><A NAME="_Toc462393594"></A><A NAME="_Toc476705907"></A><A NAME="_Toc534420114"></A><BR></P></DIV>
+<A NAME="Heading65"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Strategy: choosing the algorithm at run-time</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><I>Strategy</I> appears to be a family of
+<I>Command</I> classes, all inherited from the same base. But if you look at
+<I>Command</I>, you&#146;ll see that it has the same structure: a hierarchy of
+function objects. The difference is in the way this hierarchy is used. As seen
+in <B>c12:DirList.py</B>, you use <I>Command</I> to solve a particular
+problem&#151;in that case, selecting files from a list. The &#147;thing that
+stays the same&#148; is the body of the method that&#146;s being called, and
+the part that varies is isolated in the function object. I would hazard to say
+that <I>Command</I> provides flexibility while you&#146;re writing the program,
+whereas <I>Strategy</I>&#146;s flexibility is at run time.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_274">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><I>Strategy</I> also adds a
+&#147;Context&#148; which can be a surrogate class that controls the selection
+and use of the particular strategy object&#151;just like <I>State</I>!
+Here&#146;s what it looks like:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_275">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c06:StrategyPattern.py
+
+# The strategy interface:
+<font color=#0000ff>class</font> FindMinima:
+  # Line <font color=#0000ff>is</font> a sequence of points:
+  <font color=#0000ff>def</font> algorithm(self, line) : <font color=#0000ff>pass</font>
+
+# The various strategies:
+<font color=#0000ff>class</font> LeastSquares(FindMinima):
+  <font color=#0000ff>def</font> algorithm(self, line):
+    <font color=#0000ff>return</font> [ 1.1, 2.2 ] # Dummy
+
+<font color=#0000ff>class</font> NewtonsMethod(FindMinima):
+  <font color=#0000ff>def</font> algorithm(self, line):
+    <font color=#0000ff>return</font> [ 3.3, 4.4 ]  # Dummy
+
+<font color=#0000ff>class</font> Bisection(FindMinima):
+  <font color=#0000ff>def</font> algorithm(self, line):
+    <font color=#0000ff>return</font> [ 5.5, 6.6 ] # Dummy
+
+<font color=#0000ff>class</font> ConjugateGradient(FindMinima):
+  <font color=#0000ff>def</font> algorithm(self, line):
+    <font color=#0000ff>return</font> [ 3.3, 4.4 ] # Dummy
+
+# The <font color=#004488>"Context"</font> controls the strategy:
+<font color=#0000ff>class</font> MinimaSolver:
+  <font color=#0000ff>def</font> __init__(self, strategy):
+    self.strategy = strategy
+
+  <font color=#0000ff>def</font> minima(self, line):
+    <font color=#0000ff>return</font> self.strategy.algorithm(line)
+
+  <font color=#0000ff>def</font> changeAlgorithm(self, newAlgorithm):
+    self.strategy = newAlgorithm
+
+solver = MinimaSolver(LeastSquares())
+line = [
+    1.0, 2.0, 1.0, 2.0, -1.0, 3.0, 4.0, 5.0, 4.0 
+  ]
+<font color=#0000ff>print</font> solver.minima(line)
+solver.changeAlgorithm(Bisection())
+<font color=#0000ff>print</font> solver.minima(line)
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Note similarity with template
+method &#150; TM claims distinction that it has more than one method to call,
+does things piecewise. However, it&#146;s not unlikely that strategy object
+would have more than one method call; consider Shalloway&#146;s order
+fulfullment system with country information in each strategy.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_276">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Strategy example from standard Python:
+<B>sort(&#160;)</B> takes a second optional argument that acts as a comparator
+object; this is a strategy.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_277">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="_Toc476705908"></A><A NAME="_Toc534420115"></A><BR></P></DIV>
+<A NAME="Heading66"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Chain of responsibility</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><I>Chain of Responsibility</I> might be
+thought of as a dynamic generalization of recursion using <I>Strategy
+</I>objects. You make a call, and each <I>Strategy</I> in a linked sequence
+tries to satisfy the call. The process ends when one of the strategies is
+successful or the chain ends. In recursion, one method calls itself over and
+over until a termination condition is reached; with <I>Chain of
+Responsibility</I>, a method calls itself, which (by moving down the chain of
+<I>Strategies</I>)<I> </I>calls a different implementation of the method, etc.,
+until a termination condition is reached. The termination condition is either
+the bottom of the chain is reached (in which case a default object is returned;
+you may or may not be able to provide a default result so you must be able to
+determine the success or failure of the chain) or one of the <I>Strategies</I>
+is successful.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_278">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Instead of calling a single method to
+satisfy a request, multiple methods in the chain have a chance to satisfy the
+request, so it has the flavor of an expert system. Since the chain is
+effectively a linked list, it can be dynamically created, so you could also
+think of it as a more general, dynamically-built <B>switch</B> statement.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_279">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In the GoF, there&#146;s a fair amount
+of </FONT><FONT FACE="Georgia">discussion of how to create the chain of
+responsibility as a linked list. However, when you look at the pattern it really
+shouldn&#146;t matter how the chain is maintained; that&#146;s an
+implementation detail. Since GoF was written before the Standard Template
+Library (STL) was incorporated into most C++ compilers, the reason for this is
+most likely (1) there was no list and thus they had to create one and (2) data
+structures are often taught as a fundamental skill in academia, and the idea
+that data structures should be standard tools available with the programming
+language may not have occurred to the GoF authors. I maintain that the
+implementation of <I>Chain of Responsibility</I> as a chain (specifically, a
+linked list) adds nothing to the solution and can just as easily be implemented
+using a standard Python list, as shown below. Furthermore, you&#146;ll see that
+I&#146;ve gone to some effort to separate the chain-management parts of the
+implementation from the various <I>Strategies</I>, so that the code can be more
+easily reused.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_280">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In <B>StrategyPattern.py</B>, above, what
+you probably want is to automatically find a solution. <I>Chain of
+Responsibility</I> provides a way to do this by chaining the <I>Strategy</I>
+objects together and providing a mechanism for them to automatically recurse
+through each one in the chain:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_281">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c06:ChainOfResponsibility.py
+
+# Carry the information into the strategy:
+<font color=#0000ff>class</font> Messenger: <font color=#0000ff>pass</font>
+
+# The Result object carries the result data <font color=#0000ff>and</font>
+# whether the strategy was successful:
+<font color=#0000ff>class</font> Result:
+  <font color=#0000ff>def</font> __init__(self):
+    self.succeeded = 0
+  <font color=#0000ff>def</font> isSuccessful(self): 
+    <font color=#0000ff>return</font> self.succeeded 
+  <font color=#0000ff>def</font> setSuccessful(self, succeeded): 
+    self.succeeded = succeeded
+
+<font color=#0000ff>class</font> Strategy:
+  <font color=#0000ff>def</font> __call__(messenger): <font color=#0000ff>pass</font>
+  <font color=#0000ff>def</font> __str__(self): 
+    <font color=#0000ff>return</font> <font color=#004488>"Trying "</font> + self.__class__.__name__ \
+      + <font color=#004488>" algorithm"</font>
+
+# Manage the movement through the chain <font color=#0000ff>and</font>
+# find a successful result:
+<font color=#0000ff>class</font> ChainLink:
+  <font color=#0000ff>def</font> __init__(self, chain, strategy):
+    self.strategy = strategy
+    self.chain = chain
+    self.chain.append(self)
+
+  <font color=#0000ff>def</font> next(self):
+    # Where this link <font color=#0000ff>is</font> <font color=#0000ff>in</font> the chain:
+    location = self.chain.index(self)
+    <font color=#0000ff>if</font> <font color=#0000ff>not</font> self.end():
+      <font color=#0000ff>return</font> self.chain[location + 1]
+
+  <font color=#0000ff>def</font> end(self):
+    <font color=#0000ff>return</font> (self.chain.index(self) + 1 &gt;= 
+            len(self.chain))
+
+  <font color=#0000ff>def</font> __call__(self, messenger):
+    r = self.strategy(messenger)
+    <font color=#0000ff>if</font> r.isSuccessful() <font color=#0000ff>or</font> self.end(): <font color=#0000ff>return</font> r
+    <font color=#0000ff>return</font> self.next()(messenger)
+
+# For this example, the Messenger
+# <font color=#0000ff>and</font> Result can be the same type:
+<font color=#0000ff>class</font> LineData(Result, Messenger):
+  <font color=#0000ff>def</font> __init__(self, data):
+    self.data = data
+  <font color=#0000ff>def</font> __str__(self): <font color=#0000ff>return</font> &#180;self.data&#180;
+
+<font color=#0000ff>class</font> LeastSquares(Strategy):
+  <font color=#0000ff>def</font> __call__(self, messenger):
+    <font color=#0000ff>print</font> self
+    linedata = messenger
+    # [ Actual test/calculation here ]
+    result = LineData([1.1, 2.2]) # Dummy data
+    result.setSuccessful(0)
+    <font color=#0000ff>return</font> result
+
+<font color=#0000ff>class</font> NewtonsMethod(Strategy):
+  <font color=#0000ff>def</font> __call__(self, messenger):
+    <font color=#0000ff>print</font> self
+    linedata = messenger
+    # [ Actual test/calculation here ]
+    result = LineData([3.3, 4.4]) # Dummy data
+    result.setSuccessful(0)
+    <font color=#0000ff>return</font> result
+
+<font color=#0000ff>class</font> Bisection(Strategy):
+  <font color=#0000ff>def</font> __call__(self, messenger):
+    <font color=#0000ff>print</font> self
+    linedata = messenger
+    # [ Actual test/calculation here ]
+    result = LineData([5.5, 6.6]) # Dummy data
+    result.setSuccessful(1)
+    <font color=#0000ff>return</font> result
+
+<font color=#0000ff>class</font> ConjugateGradient(Strategy):
+  <font color=#0000ff>def</font> __call__(self, messenger):
+    <font color=#0000ff>print</font> self
+    linedata = messenger
+    # [ Actual test/calculation here ]
+    result = LineData([7.7, 8.8]) # Dummy data
+    result.setSuccessful(1)
+    <font color=#0000ff>return</font> result
+
+solutions = []
+solutions = [
+  ChainLink(solutions, LeastSquares()),
+  ChainLink(solutions, NewtonsMethod()),
+  ChainLink(solutions, Bisection()),
+  ChainLink(solutions, ConjugateGradient())
+]
+
+line = LineData([ 
+  1.0, 2.0, 1.0, 2.0, -1.0, 
+  3.0, 4.0, 5.0, 4.0 
+])
+
+<font color=#0000ff>print</font> solutions[0](line)
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><A NAME="_Toc534420116"></A><BR></P></DIV>
+<A NAME="Heading67"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Exercises</H2></FONT>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Use <I>Command</I> in
+Chapter 3, Exercise 1.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_282">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Implement
+<I>Chain of Responsibility</I> to create an "expert system" that solves problems
+by successively trying one solution after another until one matches. You should
+be able to dynamically add solutions to the expert system. The test for solution
+should just be a string match, but when a solution fits, the expert system
+should return the appropriate type of <B>ProblemSolver</B> object. What other
+pattern/patterns show up here?
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_283">Add Comment</A></FONT></OL><HR><DIV ALIGN="LEFT"><P><A NAME="fn14" HREF="#fnB14">[14]</A><FONT FACE="Georgia">
+</FONT><FONT FACE="Georgia">In the Python language, all functions are already
+objects and so the <I>Command</I> pattern is often redundant.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="fn15" HREF="#fnB15">[15]</A><FONT FACE="Georgia">
+</FONT><FONT FACE="Georgia">Page 235.</FONT><BR></P></DIV>
+
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect08.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect10.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:12/31/2001</P></DIV>
+
+</BODY>
+
+</HTML>

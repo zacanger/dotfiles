@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="1075"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$vK7XoSiXFa1</title>
+</head>
+<body><h1>Command line Video Scraping</h1><p><b>Space Thumbnail</b></p><p>Search youtube for words from a .txt and download the thumbnail. Using youtube-dl <a href="http://rg3.github.io/youtube-dl/documentation.html#d1"></a><a href='http://rg3.github.io/youtube-dl/documentation.html#d1'/>http://rg3.github.io/youtube-dl/documentation.html#d1</a></p><p></p><p><b>Downloads Small Video</b></p><p>youtube-dl -a, --batch-file /Users/admin/Desktop/_SFPC/videoscrape/videoLog.txt --no-warnings -v webm --add-metadata --prefer-ffmpeg -f worstvideo --console-title</p><p>-i skips 404 links</p><p></p><p><b>Messing Around</b></p><ul class="code"><li>youtube-dl -a /Users/admin/Desktop/_SFPC/videoscrape/videoLog.txt --no-warnings -v &gt;&gt; verbose.txt --write-description -o &rsquo;%(autonumber)s %(title)s %(extractor)s&rsquo;&nbsp; stdout &gt;&gt; out.txt --skip-download</li></ul>
+
+<ul class="code"><li>youtube-dl -a /Users/admin/Desktop/_SFPC/videoscrape/videoLog.txt --no-warnings -v &gt;&gt; verbose.txt -o &rsquo;%(autonumber)s %(title)s %(extractor)s&rsquo; &gt;&gt; out.txt --skip-download --autonumber-size 4</li></ul>
+
+<p><b>Bash Script for Scraping Vids with Youtube-dl:</b></p><p></p><p><a href='/ep/profile/tHuEvnWBdcR'/>Jonathan Dahan</a> : so we&rsquo;re using youtube-dl to scrape a .csv of video URLs. Works great. Now I&rsquo;m working on a bash .sh script that will create a timestamped directory, go there, execute youtube-dl and make a couple folders for stuff</p><p></p><ul class="code"><li># Make dir with timestamp and go there</li>
+<li><br/></li>
+<li>folder=$(date +%H%M%S)</li>
+<li>mkdir $folder &amp;&amp; cd $folder</li>
+<li><br/></li>
+<li># just in case the second changes between those two commands</li>
+<li># YTDL scrape from this .csv&nbsp;&nbsp;</li>
+<li>youtube-dl -a /Users/scottleinweber/Dropbox/SFPC/Day6_Sat_AlexHacks/AllVideos/data/allvideos_urlonly.csv -i —write-thumbnail /Users/scottleinweber/Dropbox/SFPC/Day7_Videoscrape/AllVideos/thumbs --no-warnings &#92;</li>
+<li># this stuff isn&rsquo;t working super good, probably obvious fixes</li>
+<li>-v &gt;&gt; verbose.txt&nbsp; --write-description &gt;&gt; desc.txt -o &rsquo;%(autonumber)s %(title)s %(extractor)s&rsquo;&nbsp; stdout &gt;&gt; out.txt --skip-download</li>
+<li># are lines 6 and 8 supposed to be on the same line? yeah, one long string of flags is how I&rsquo;m running it right now. Supposed to get thumbnails, dump into folder, get titles, dump into file</li>
+<li><br/></li>
+<li># to show multi-line commands, append a &#92; at the end of each line you want to continue (ah got it)</li>
+<li><br/></li>
+<li># ok, so the main problem is you are trying to run the output from one command to multiple files</li>
+<li># each command just connects to 1 stdin, 1 stdout, and 1 stderr for input/output/error</li>
+<li># those options for youtube-dl, if you choose them all, will output everything</li>
+<li># then you have to parse that file to do the things you want</li>
+<li># hmm can you || or &gt;&gt; them out in one line?</li>
+<li># so it should look something like</li>
+<li># oh wow, gist is way better here, good call on the &#92;operator</li></ul>
+<p>*</p><p><a href="https://gist.github.com/jedahan/11376532"></a>https://gist.github.com/jedahan/11376532</p><p>So then if you want to split out the information, you have to parse that file with some other utilities.</p><p>Cool, let me mess around and I&rsquo;ll report back. Thanks <a href='/ep/profile/tHuEvnWBdcR'/>Jonathan Dahan</a>&nbsp;</p><p>Yup, gonna go to lunch now but i&rsquo;ll be back here and on slack - Primo</p><p></p></body>
+</html>

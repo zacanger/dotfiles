@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="769"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$sF1aY4lLaqa</title>
+</head>
+<body><h1>Raspberry Pi + OF Workshop</h1><p>With Jason van Cleave</p><p></p><p>Today we are interfacing RPi, OF and linux.&nbsp;</p><p></p><p>RP Specs:</p><ul><li>has microcontroller features (GPIO)</li>
+<li>GPU - OpenGL ES 2, OpenMax</li>
+<li>RAM shared between GPU/CPU</li>
+<li>Component/HDMI audio</li>
+<li>Ethernet</li>
+<li>GPI/O&nbsp; - like arduino however it has less protection - it is possible to fry your board.</li>
+<li>Need an additional chip to deal with analog inputs&nbsp;</li></ul>
+
+<p>Github repository for OF that will run on the Raspberry Pi</p><ul><li><a href="https://github.com/openFrameworks-arm"></a>https://github.com/openFrameworks-arm</li></ul>
+
+<ul><li>If you want to do a 10 screen project - can use 10 Pis instead of 10 mac minis.&nbsp;</li></ul>
+
+<p>OpenMax (OMX)</p><ul><li>think of it like an openGL for accelerated video</li>
+<li>provides hardware accelerated - video decoding, encoding, audio decoding, camera access</li>
+<li>Allows 1080p playback</li>
+<li>Large texture access (720p at full framerate)</li></ul>
+
+<p>CV</p><ul><li>OpenCV is CPU bound so it will eventually hit the slower processor (can&rsquo;t run from the GPU only)</li></ul>
+
+<p>Textures - live in the GPU which is fast</p><ul><li>Pixel access however requires the CPU - makes it much slower.&nbsp;</li>
+<li>Can get pixels from a texture but then it goes to CPU - and that makes it slow.</li></ul>
+
+<p>Cross-compiling</p><ul><li>SLOW!</li>
+<li>Workflow: Develop on the desktop and port to the Pi</li></ul>
+
+<p>Node also runs on the Pi</p><p></p><p>FOR set up instructions see here:</p><p><a href="http://www.openframeworks.cc/setup/raspberrypi/"></a>http://www.openframeworks.cc/setup/raspberrypi/</p><p></p><p>Also see Jason&rsquo;s github:&nbsp;&nbsp;</p><p><a href="https://github.com/jvcleave/openFrameworksRPiWorkspace"></a>https://github.com/jvcleave/openFrameworksRPiWorkspace</p><p>If you see .bin files it means that it has already been compiled.&nbsp;</p><p></p></body>
+</html>

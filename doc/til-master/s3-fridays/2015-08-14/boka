@@ -1,0 +1,35 @@
+Possession of burglar's tools {
+  //A person commits the offense of possession of burglar's tools
+  if (/*the person knowingly possesses any*/
+    (
+      explosive,
+      tool,
+      instrument,
+      other article
+      (
+        adapted,
+        designed,
+        or commonly used for
+        (
+          committing or facilitating the commission of an offense involving forcible entry into premises,
+          or theft by a physical taking
+        )
+      )
+    )
+    and
+    (/*the person intends to use the*/
+      (
+        explosive,
+        tool,
+        instrument,
+        or article
+      )
+    )
+    or
+    (/*knows some person intends ultimately to use it*/
+      {
+        in the commission of the offense of the nature described aforesaid….
+      }
+    )
+  )
+}

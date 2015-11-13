@@ -1,0 +1,1878 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPython.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:12/31/2001
+Translation Time:08:24:14
+Translation Platform:Win32
+Number of Output files:18
+This File:Sect14.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>12: Pattern refactoring</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    <!-- [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.htm">Revision History</a> ] -->
+    [ <a href="http://www.mindview.net/Books/TIPython/">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  Thinking in Python<br>
+  <small>Revision 0.1.2 (12/31/01) -- Incomplete and Unfinished</small></FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Bruce Eckel &copy;2002 MindView, Inc.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect13.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect15.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc476705918"></A><A NAME="_Toc534420131"></A><A NAME="Heading82"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+12: Pattern refactoring</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia" SIZE=4 COLOR="Red">This chapter has not
+had any significant translation yet.
+</FONT><FONT FACE="Georgia" SIZE=4><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_336">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This chapter will look at the process of
+solving a problem by applying design patterns in an evolutionary fashion. That
+is, a first cut design will be used for the initial solution, and then this
+solution will be examined and various design patterns will be applied to the
+problem (some of which will work, and some of which won&#146;t). The key
+question that will always be asked in seeking improved solutions is &#147;what
+will change?&#148;
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_337">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This process is similar to what Martin
+Fowler talks about in his book <I>Refactoring: Improving the Design of Existing
+Code</I></FONT><A NAME="fnB16" HREF="#fn16">[16]</A><FONT FACE="Georgia">
+(although he tends to talk about pieces of code more than pattern-level
+designs). You start with a solution, and then when you discover that it
+doesn&#146;t continue to meet your needs, you fix it. Of course, this is a
+natural tendency but in computer programming it&#146;s been extremely difficult
+to accomplish with procedural programs, and the acceptance of the idea that we
+<I>can</I> refactor code and designs adds to the body of proof that
+object-oriented programming is &#147;a good thing.&#148;
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_338">Add Comment</A></FONT><A NAME="_Toc476705919"></A><A NAME="_Toc534420132"></A><BR></P></DIV>
+<A NAME="Heading83"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Simulating the trash recycler</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The nature of this problem is that the
+trash is thrown unclassified into a single bin, so the specific type information
+is lost. But later, the specific type information must be recovered to properly
+sort the trash. In the initial solution, RTTI (described in Chapter 12 of
+<I>Thinking in Java, 2<SUP>nd</SUP> edition</I>) is used.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_339">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This is not a trivial design because it
+has an added constraint. That&#146;s what makes it interesting&#151;it&#146;s
+more like the messy problems you&#146;re likely to encounter in your work. The
+extra constraint is that the trash arrives at the trash recycling plant all
+mixed together. The program must model the sorting of that trash. This is where
+RTTI comes in: you have a bunch of anonymous pieces of trash, and the program
+figures out exactly what type they are.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_340">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:recyclea:RecycleA.py 
+# Recycling with RTTI.
+
+<font color=#0000ff>class</font> Trash:
+  private double weight
+  <font color=#0000ff>def</font> __init__(self, double wt): weight = wt 
+  abstract double getValue()
+  double getWeight(): <font color=#0000ff>return</font> weight 
+  # Sums the value of Trash <font color=#0000ff>in</font> a bin:
+  static void sumValue(Iterator it):
+    double val = 0.0f
+    <font color=#0000ff>while</font>(it.hasNext()):
+      # One kind of RTTI:
+      # A dynamically-checked cast
+      Trash t = (Trash)it.next()
+      # Polymorphism <font color=#0000ff>in</font> action:
+      val += t.getWeight() * t.getValue()
+      <font color=#0000ff>print</font> (
+        <font color=#004488>"weight of "</font> +
+        # Using RTTI to get type
+        # information about the <font color=#0000ff>class</font>:
+        t.getClass().getName() +
+        <font color=#004488>" = "</font> + t.getWeight())
+
+    <font color=#0000ff>print</font> <font color=#004488>"Total value = "</font> + val
+
+<font color=#0000ff>class</font> Aluminum(Trash):
+  static double val  = 1.67f
+  <font color=#0000ff>def</font> __init__(self, double wt): .__init__(wt) 
+  double getValue(): <font color=#0000ff>return</font> val 
+  static void setValue(double newval):
+    val = newval
+
+<font color=#0000ff>class</font> Paper(Trash):
+  static double val = 0.10f
+  <font color=#0000ff>def</font> __init__(self, double wt): .__init__(wt) 
+  double getValue(): <font color=#0000ff>return</font> val 
+  static void setValue(double newval):
+    val = newval
+
+<font color=#0000ff>class</font> Glass(Trash):
+  static double val = 0.23f
+  <font color=#0000ff>def</font> __init__(self, double wt): .__init__(wt) 
+  double getValue(): <font color=#0000ff>return</font> val 
+  static void setValue(double newval):
+    val = newval
+
+<font color=#0000ff>class</font> RecycleA(UnitTest):
+  Collection 
+    bin = ArrayList(),
+    glassBin = ArrayList(),
+    paperBin = ArrayList(),
+    alBin = ArrayList()
+  <font color=#0000ff>def</font> __init__(self):
+    # Fill up the Trash bin:
+    <font color=#0000ff>for</font>(int i = 0 i &lt; 30 i++)
+      switch((int)(Math.random() * 3)):
+        case 0 :
+          bin.add(new
+            Aluminum(Math.random() * 100))
+          <font color=#0000ff>break</font>
+        case 1 :
+          bin.add(new
+            Paper(Math.random() * 100))
+          <font color=#0000ff>break</font>
+        case 2 :
+          bin.add(new
+            Glass(Math.random() * 100))
+
+  <font color=#0000ff>def</font> test(self):
+    Iterator sorter = bin.iterator()
+    # Sort the Trash:
+    <font color=#0000ff>while</font>(sorter.hasNext()):
+      Object t = sorter.next()
+      # RTTI to show <font color=#0000ff>class</font> membership:
+      <font color=#0000ff>if</font>(t instanceof Aluminum)
+        alBin.add(t)
+      <font color=#0000ff>if</font>(t instanceof Paper)
+        paperBin.add(t)
+      <font color=#0000ff>if</font>(t instanceof Glass)
+        glassBin.add(t)
+
+    Trash.sumValue(alBin.iterator())
+    Trash.sumValue(paperBin.iterator())
+    Trash.sumValue(glassBin.iterator())
+    Trash.sumValue(bin.iterator())
+
+  <font color=#0000ff>def</font> main(self, String args[]):
+    RecycleA().test()
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><A NAME="_Toc305593314"></A><A NAME="_Toc305628786"></A><FONT FACE="Georgia">In
+the source code listings available for this book, this file will be placed in
+the subdirectory <B>recyclea</B> that branches off from the subdirectory
+<B>c12</B> (for Chapter 12). The unpacking tool takes care of placing it into
+the correct subdirectory. The reason for doing this is that this chapter
+rewrites this particular example a number of times and by putting each version
+in its own directory (using the default package in each directory so that
+invoking the program is easy), the class names will not clash.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_341">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Several
+<A NAME="Index33"></A><B>ArrayList</B> objects are created to hold <B>Trash</B>
+references. Of course, <B>ArrayList</B>s<B> </B>actually hold <B>Object</B>s so
+they&#146;ll hold anything at all. The reason they hold <B>Trash </B>(or
+something derived from <B>Trash</B>) is only because you&#146;ve been careful
+to not put in anything except <B>Trash</B>. If you do put something
+&#147;wrong&#148; into the <B>ArrayList</B>, you won&#146;t get any
+compile-time warnings or errors&#151;you&#146;ll find out only via an
+exception at run time.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_342">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">When the <B>Trash</B> references are
+added, they lose their specific identities and become simply <B>Object
+reference</B>s (they are <A NAME="Index34"></A><I>upcast</I>). However, because
+of polymorphism <A NAME="Index35"></A>the proper behavior still occurs when the
+dynamically-bound methods<A NAME="Index36"></A> are called through the
+<A NAME="Index37"></A><B>Iterator</B> <B>sorter</B>, once the resulting
+<A NAME="Index38"></A><B>Object</B> has been cast back to <B>Trash</B>.
+<B>sumValue(&#160;)</B> also takes an <B>Iterator </B>to perform operations on
+every object in the <B>ArrayList</B>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_343">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">It looks silly to upcast the types of
+<B>Trash</B> into a container holding base type references, and then turn around
+and downcast. Why not just put the trash into the appropriate receptacle in the
+first place? (Indeed, this is the whole enigma of recycling). In this program it
+would be easy to repair, but sometimes a system&#146;s structure and
+flexibility can benefit greatly from downcasting.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_344">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The program satisfies the design
+requirements: it works. This might be fine as long as it&#146;s a one-shot
+solution. However, a useful program tends to evolve over time, so you must ask,
+&#147;What if the situation changes?&#148; For example, cardboard is now a
+valuable recyclable commodity, so how will that be integrated into the system
+(especially if the program is large and complicated). Since the above
+<A NAME="Index39"></A>type-check coding in the <B>switch</B> statement could be
+scattered throughout the program, you must go find all that code every time a
+new type is added, and if you miss one the compiler won&#146;t give you any
+help by pointing out an error.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_345">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The key to the
+<A NAME="Index40"></A>misuse of RTTI here is that <I>every type is tested</I>.
+If you&#146;re looking for only a subset of types because that subset needs
+special treatment, that&#146;s probably fine. But if you&#146;re hunting for
+every type inside a switch statement, then you&#146;re probably missing an
+important point, and definitely making your code less maintainable. In the next
+section we&#146;ll look at how this program evolved over several stages to
+become much more flexible. This should prove a valuable example in program
+design.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_346">Add Comment</A></FONT><A NAME="_Toc375545414"></A><A NAME="_Toc476705920"></A><A NAME="_Toc534420133"></A><BR></P></DIV>
+<A NAME="Heading84"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Improving the design</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The solutions in <I>Design Patterns</I>
+are organized around the question &#147;What will change as this program
+evolves?&#148; This is usually the most important question that you can ask
+about any design. If you can build your system around the answer, the results
+will be two-pronged: not only will your system allow easy (and inexpensive)
+maintenance, but you might also produce components that are reusable, so that
+other systems can be built more cheaply. This is the promise of object-oriented
+programming, but it doesn&#146;t happen automatically; it requires thought and
+insight on your part. In this section we&#146;ll see how this process can
+happen during the refinement of a system.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_347">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The answer to the question &#147;What
+will change?&#148; for the recycling system is a common one: more types will be
+added to the system. The goal of the design, then, is to make this addition of
+types as painless as possible. In the recycling program, we&#146;d like to
+encapsulate all places where specific type information is mentioned, so (if for
+no other reason) any changes can be localized to those encapsulations. It turns
+out that this process also cleans up the rest of the code considerably.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_348">Add Comment</A></FONT><A NAME="_Toc375545415"></A><A NAME="_Toc476705921"></A><A NAME="_Toc534420134"></A><BR></P></DIV>
+<A NAME="Heading85"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H3 ALIGN="LEFT">
+&#147;Make more objects&#148;</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This brings up a general object-oriented
+design principle that I first heard spoken by <A NAME="Index41"></A>Grady Booch:
+&#147;If the design is too complicated, make more objects.&#148; This is
+simultaneously counterintuitive and ludicrously simple, and yet it&#146;s the
+most useful guideline I&#146;ve found. (You might observe that &#147;making
+more objects&#148; is often equivalent to &#147;add another level of
+indirection.&#148;) In general, if you find a place with messy code, consider
+what sort of class would clean that up. Often the side effect of cleaning up the
+code will be a system that has better structure and is more flexible.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_349">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Consider first the place where
+<B>Trash</B> objects are created, which is a <B>switch</B> statement inside
+<B>main(&#160;)</B>:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_350">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>    <font color=#0000ff>for</font>(int i = 0 i &lt; 30 i++)
+      switch((int)(Math.random() * 3)):
+        case 0 :
+          bin.add(new
+            Aluminum(Math.random() * 100))
+          <font color=#0000ff>break</font>
+        case 1 :
+          bin.add(new
+            Paper(Math.random() * 100))
+          <font color=#0000ff>break</font>
+        case 2 :
+          bin.add(new
+            Glass(Math.random() * 100))
+      </PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This is definitely messy, and
+also a place where you must change code whenever a new type is added. If new
+types are commonly added, a better solution is a single method that takes all of
+the necessary information and produces a reference to an object of the correct
+type, already upcast to a trash object. In <I>Design Patterns</I> this is
+broadly referred to as a
+<A NAME="Index42"></A><A NAME="Index43"></A><I>creational pattern</I> (of which
+there are several). The specific pattern that will be applied here is a variant
+of the <A NAME="Index44"></A><A NAME="Index45"></A><I>Factory Method</I>. Here,
+the factory method is a <B>static</B> member of <B>Trash</B>, but more commonly
+it is a method that is overridden in the derived class.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_351">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The idea of the factory method is that
+you pass it the essential information it needs to know to create your object,
+then stand back and wait for the reference (already upcast to the base type) to
+pop out as the return value. From then on, you treat the object polymorphically.
+Thus, you never even need to know the exact type of object that&#146;s created.
+In fact, the factory method hides it from you to prevent accidental misuse. If
+you want to use the object without polymorphism, you must explicitly use RTTI
+and casting.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_352">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">But there&#146;s a little problem,
+especially when you use the more complicated approach (not shown here) of making
+the factory method in the base class and overriding it in the derived classes.
+What if the information required in the derived class requires more or different
+arguments? &#147;Creating more objects&#148; solves this problem. To implement
+the factory method, the <B>Trash</B> class gets a new method called
+<B>factory</B>. To hide the creational data, there&#146;s a new class called
+<B>Messenger</B> that carries all of the necessary information for the
+<B>factory</B> method to create the appropriate <B>Trash</B> object (we&#146;ve
+started referring to <I>Messenger</I> as a design pattern, but it&#146;s simple
+enough that you may not choose to elevate it to that status). Here&#146;s a
+simple implementation of <B>Messenger</B>:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_353">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>class</font> Messenger:
+  int type
+  # Must change this to add another type:
+  static final int MAX_NUM = 4
+  double data
+  <font color=#0000ff>def</font> __init__(self, int typeNum, double val):
+    type = typeNum % MAX_NUM
+    data = val
+</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">A <B>Messenger</B> object&#146;s
+only job is to hold information for the <B>factory(&#160;)</B> method. Now, if
+there&#146;s a situation in which <B>factory(&#160;)</B> needs more or
+different information to create a new type of <B>Trash</B> object, the
+<B>factory(&#160;)</B> interface doesn&#146;t need to be changed. The
+<B>Messenger</B> class can be changed by adding new data and new constructors,
+or in the more typical object-oriented fashion of subclassing.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_354">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <B>factory(&#160;)</B> method for
+this simple example looks like this:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>  static Trash factory(Messenger i):
+    switch(i.type):
+      default: # To quiet the compiler
+      case 0:
+        <font color=#0000ff>return</font> Aluminum(i.data)
+      case 1:
+        <font color=#0000ff>return</font> Paper(i.data)
+      case 2:
+        <font color=#0000ff>return</font> Glass(i.data)
+      # Two lines here:
+      case 3: 
+        <font color=#0000ff>return</font> Cardboard(i.data)
+</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here, the determination of the
+exact type of object is simple, but you can imagine a more complicated system in
+which <B>factory(&#160;)</B> uses an elaborate algorithm. The point is that
+it&#146;s now hidden away in one place, and you know to come to this place when
+you add new types.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_355">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The creation of new objects is now much
+simpler in <B>main(&#160;)</B>:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>    <font color=#0000ff>for</font>(int i = 0 i &lt; 30 i++)
+      bin.add(
+        Trash.factory(
+          Messenger(
+            (int)(Math.random() * Messenger.MAX_NUM),
+            Math.random() * 100)))</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">A
+<B>Messenger</B> object is created to pass the data into <B>factory(&#160;)</B>,
+which in turn produces some kind of <B>Trash</B> object on the heap and returns
+the reference that&#146;s added to the <B>ArrayList</B> <B>bin</B>. Of course,
+if you change the quantity and type of argument, this statement will still need
+to be modified, but that can be eliminated if the creation of the
+<B>Messenger</B> object is automated. For example, an <B>ArrayList</B> of
+arguments can be passed into the constructor of a <B>Messenger</B> object (or
+directly into a <B>factory(&#160;)</B> call, for that matter). This requires
+that the arguments be parsed and checked at run time, but it does provide the
+greatest flexibility.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_356">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can see from this code what
+&#147;<A NAME="Index46"></A><A NAME="Index47"></A><A NAME="Index48"></A>vector
+of change&#148; problem the factory is responsible for solving: if you add new
+types to the system (the change), the only code that must be modified is within
+the factory, so the factory isolates the effect of that change.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_357">Add Comment</A></FONT><A NAME="_Toc375545418"></A><A NAME="_Toc476705922"></A><A NAME="_Toc534420135"></A><BR></P></DIV>
+<A NAME="Heading86"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+A pattern for prototyping creation</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">A problem with the design above is that
+it still requires a central location where all the types of the objects must be
+known: inside the <B>factory(&#160;)</B> method. If new types are regularly
+being added to the system, the <B>factory(&#160;)</B> method must be changed for
+each new type. When you discover something like this, it is useful to try to go
+one step further and move <I>all</I> of the information about the
+type&#151;including its creation&#151;into the class representing that type.
+This way, the only thing you need to do to add a new type to the system is to
+inherit a single class.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_358">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To move the information concerning type
+creation into each specific type of <B>Trash</B>,<B> </B>the
+&#147;<A NAME="Index49"></A><A NAME="Index50"></A>prototype&#148; pattern
+(from the <I>Design Patterns </I>book) will be used. The general idea is that
+you have a master sequence of objects, one of each type you&#146;re interested
+in making. The objects in this sequence are used <I>only</I> for making new
+objects, using an operation that&#146;s not unlike the
+<A NAME="Index51"></A><B>clone(&#160;)</B> scheme built into Java&#146;s root
+class <B>Object</B>. In this case, we&#146;ll name the cloning method
+<B>tClone(&#160;)</B>.<B> </B>When you&#146;re ready to make a new object,
+presumably you have some sort of information that establishes the type of object
+you want to create, then you move through the master sequence comparing your
+information with whatever appropriate information is in the prototype objects in
+the master sequence. When you find one that matches your needs, you clone it.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_359">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In this scheme there is no hard-coded
+information for creation. Each object knows how to expose appropriate
+information and how to clone itself. Thus, the <B>factory(&#160;)</B> method
+doesn&#146;t need to be changed when a new type is added to the system.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_360">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">One approach to the problem of
+prototyping is to add a number of methods to support the creation of new
+objects. However, in Java 1.1 there&#146;s already support for creating new
+objects if you have a reference to the <B>Class</B> object. With
+<A NAME="Index52"></A><A NAME="Index53"></A>Java 1.1 <I>reflection</I>
+(introduced in Chapter 12 of <I>Thinking in Java, 2<SUP>nd</SUP> edition</I>)
+you can call a constructor even if you have only a reference to the <B>Class</B>
+object. This is the perfect solution for the prototyping problem.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_361">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The list of prototypes will be
+represented indirectly by a list of references to all the <B>Class</B> objects
+you want to create. In addition, if the prototyping fails, the
+<B>factory(&#160;)</B> method will assume that it&#146;s because a particular
+<B>Class</B> object wasn&#146;t in the list, and it will attempt to load it. By
+loading the prototypes dynamically like this, the <B>Trash</B> class
+doesn&#146;t need to know what types it is working with, so it doesn&#146;t
+need any modifications when you add new types. This allows it to be easily
+reused throughout the rest of the chapter.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_362">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:trash:Trash.py
+# Base <font color=#0000ff>class</font> <font color=#0000ff>for</font> Trash recycling examples.
+
+<font color=#0000ff>class</font> Trash:
+  private double weight
+  <font color=#0000ff>def</font> __init__(self, double wt): weight = wt 
+  <font color=#0000ff>def</font> __init__(self):
+  <font color=#0000ff>def</font> getValue(self)
+  <font color=#0000ff>def</font> getWeight(self): <font color=#0000ff>return</font> weight 
+  # Sums the value of Trash given an
+  # Iterator to any container of Trash:
+  <font color=#0000ff>def</font> sumValue(self, Iterator it):
+    double val = 0.0f
+    <font color=#0000ff>while</font>(it.hasNext()):
+      # One kind of RTTI:
+      # A dynamically-checked cast
+      Trash t = (Trash)it.next()
+      val += t.getWeight() * t.getValue()
+      <font color=#0000ff>print</font> (
+        <font color=#004488>"weight of "</font> +
+        # Using RTTI to get type
+        # information about the <font color=#0000ff>class</font>:
+        t.getClass().getName() +
+        <font color=#004488>" = "</font> + t.getWeight())
+
+    <font color=#0000ff>print</font> <font color=#004488>"Total value = "</font> + val
+
+  # Remainder of <font color=#0000ff>class</font> provides 
+  # support <font color=#0000ff>for</font> prototyping:
+  private static List trashTypes = 
+    ArrayList()
+  <font color=#0000ff>def</font> factory(self, Messenger info):
+    <font color=#0000ff>for</font>(int i = 0 i &lt; len(trashTypes) i++):
+      # Somehow determine the type
+      # to create, <font color=#0000ff>and</font> create one:
+      Class tc = (Class)trashTypes.get(i)
+      <font color=#0000ff>if</font> (tc.getName().index(info.id) != -1):
+        <font color=#0000ff>try</font>:
+          # Get the dynamic constructor method
+          # that takes a double argument:
+          Constructor ctor = tc.getConstructor(
+              Class[]{ double.<font color=#0000ff>class</font> )
+          # Call the constructor  
+          # to create a object:
+          <font color=#0000ff>return</font> (Trash)ctor.newInstance(
+            Object[]{Double(info.data))
+         catch(Exception ex):
+          ex.printStackTrace(System.err)
+          throw RuntimeException(
+            <font color=#004488>"Cannot Create Trash"</font>)
+        
+      
+
+    # Class was <font color=#0000ff>not</font> <font color=#0000ff>in</font> the list. Try to load it,
+    # but it must be <font color=#0000ff>in</font> your <font color=#0000ff>class</font> path!
+    <font color=#0000ff>try</font>:
+      <font color=#0000ff>print</font> <font color=#004488>"Loading "</font> + info.id
+      trashTypes.add(Class.forName(info.id))
+     catch(Exception e):
+      e.printStackTrace(System.err)
+      throw RuntimeException(
+        <font color=#004488>"Prototype not found"</font>)
+
+    # Loaded successfully. 
+    # Recursive call should work:
+    <font color=#0000ff>return</font> factory(info)
+
+  public static <font color=#0000ff>class</font> Messenger:
+    public String id
+    public double data
+    public Messenger(String name, double val):
+      id = name
+      data = val
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The basic <B>Trash</B> class
+and <B>sumValue(&#160;)</B> remain as before. The rest of the class supports the
+prototyping pattern. You first see two
+<A NAME="Index54"></A><A NAME="Index55"></A>inner classes (which are made
+<B>static</B>, so they are inner classes only for code organization purposes)
+describing exceptions that can occur. This is followed by an <B>ArrayList
+</B>called <B>trashTypes</B>, which is used to hold the <B>Class</B> references.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_363">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In <B>Trash.factory(&#160;)</B>, the
+<B>String</B> inside the <B>Messenger </B>object <B>id </B>(a different version
+of the <B>Messenger</B> class than that of the prior discussion) contains the
+type name of the <B>Trash </B>to be created; this <B>String</B> is compared to
+the <B>Class</B> names in the list. If there&#146;s a match, then that&#146;s
+the object to create. Of course, there are many ways to determine what object
+you want to make. This one is used so that information read in from a file can
+be turned into objects.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_364">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Once you&#146;ve discovered which kind
+of <B>Trash</B> to create, then the <A NAME="Index56"></A>reflection methods
+come into play. The <A NAME="Index57"></A><B>getConstructor(&#160;)</B> method
+takes an argument that&#146;s an array of <A NAME="Index58"></A><B>Class</B>
+references. This array represents the arguments, in their proper order, for the
+constructor that you&#146;re looking for. Here, the
+<A NAME="Index59"></A><A NAME="Index60"></A>array is dynamically created using
+the Java 1.1<A NAME="Index61"></A> array-creation syntax:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_365">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>Class[]:double.<font color=#0000ff>class</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This code
+assumes that every <B>Trash</B> type has a constructor that takes a <B>double
+</B>(and notice that <B>double.class</B> is distinct from <B>Double.class</B>).
+It&#146;s also possible, for a more flexible solution, to call
+<A NAME="Index62"></A><B>getConstructors(&#160;)</B>, which returns an array of
+the possible constructors.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_366">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">What comes back from
+<B>getConstructor(&#160;) </B>is a reference to a
+<A NAME="Index63"></A><B>Constructor</B> object (part of
+<B>java.lang.reflect</B>). You call the constructor dynamically with the method
+<A NAME="Index64"></A><B>newInstance(&#160;)</B>, which takes an array of
+<B>Object</B> containing the actual arguments. This array is again created using
+the Java 1.1<A NAME="Index65"></A> syntax:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_367">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>Object[]{Double(Messenger.data)</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In
+this case, however, the <B>double</B> must be placed inside a wrapper class so
+that it can be part of this array of objects. The process of calling
+<B>newInstance(&#160;)</B> extracts the <B>double</B>, but you can see it is a
+bit confusing&#151;an argument might be a <B>double </B>or a <B>Double</B>, but
+when you make the call you must always pass in a <B>Double</B>. Fortunately,
+this issue exists only for the primitive types.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_368">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Once you understand how to do it, the
+process of creating a new object given only a <B>Class</B> reference is
+remarkably simple. Reflection also allows you to call methods in this same
+dynamic fashion.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_369">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Of course, the appropriate <B>Class</B>
+reference might not be in the <B>trashTypes</B> list. In this case, the
+<B>return</B> in the inner loop is never executed and you&#146;ll drop out at
+the end. Here, the program tries to rectify the situation by loading the
+<B>Class</B> object dynamically and adding it to the <B>trashTypes</B> list. If
+it still can&#146;t be found something is really wrong, but if the load is
+successful then the <B>factory</B> method is called
+<A NAME="Index66"></A><A NAME="Index67"></A>recursively to try again.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_370">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">As you&#146;ll see, the beauty of this
+design is that this code doesn&#146;t need to be changed, regardless of the
+different situations it will be used in (assuming that all <B>Trash</B>
+subclasses contain a constructor that takes a single <B>double</B> argument).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_371">Add Comment</A></FONT><A NAME="_Toc534420136"></A><BR></P></DIV>
+<A NAME="Heading87"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H3 ALIGN="LEFT">
+Trash subclasses</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To fit into the prototyping scheme, the
+only thing that&#146;s required of each new subclass of <B>Trash</B> is that it
+contain a constructor that takes a <B>double</B> argument. Java reflection
+handles everything else.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_372">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here are the different types of
+<B>Trash</B>, each in their own file but part of the <B>Trash</B> package
+(again, to facilitate reuse within the chapter):
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_373">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:trash:Aluminum.py 
+# The Aluminum <font color=#0000ff>class</font> with prototyping.
+
+<font color=#0000ff>class</font> Aluminum(Trash):
+  private static double val = 1.67f
+  <font color=#0000ff>def</font> __init__(self, double wt): .__init__(wt) 
+  <font color=#0000ff>def</font> getValue(self): <font color=#0000ff>return</font> val 
+  <font color=#0000ff>def</font> setValue(self, double newVal):
+    val = newVal
+
+# :~</PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:trash:Paper.py 
+# The Paper <font color=#0000ff>class</font> with prototyping.
+
+<font color=#0000ff>class</font> Paper(Trash):
+  private static double val = 0.10f
+  <font color=#0000ff>def</font> __init__(self, double wt): .__init__(wt) 
+  <font color=#0000ff>def</font> getValue(self): <font color=#0000ff>return</font> val 
+  <font color=#0000ff>def</font> setValue(self, double newVal):
+    val = newVal
+
+# :~</PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:trash:Glass.py 
+# The Glass <font color=#0000ff>class</font> with prototyping.
+
+<font color=#0000ff>class</font> Glass(Trash):
+  private static double val = 0.23f
+  <font color=#0000ff>def</font> __init__(self, double wt): .__init__(wt) 
+  <font color=#0000ff>def</font> getValue(self): <font color=#0000ff>return</font> val 
+  <font color=#0000ff>def</font> setValue(self, double newVal):
+    val = newVal
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">And here&#146;s a new type of
+<B>Trash</B>:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_374">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:trash:Cardboard.py 
+# The Cardboard <font color=#0000ff>class</font> with prototyping.
+
+<font color=#0000ff>class</font> Cardboard(Trash):
+  private static double val = 0.23f
+  <font color=#0000ff>def</font> __init__(self, double wt): .__init__(wt) 
+  <font color=#0000ff>def</font> getValue(self): <font color=#0000ff>return</font> val 
+  <font color=#0000ff>def</font> setValue(self, double newVal):
+    val = newVal
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can see that, other than
+the constructor, there&#146;s nothing special about any of these classes.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_375">Add Comment</A></FONT><A NAME="_Toc534420137"></A><BR></P></DIV>
+<A NAME="Heading88"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H3 ALIGN="LEFT">
+Parsing Trash from an external file</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The information about <B>Trash</B>
+objects will be read from an outside file. The file has all of the necessary
+information about each piece of trash on a single line in the form
+<B>Trash:weight</B>, such as:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_376">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:trash:Trash.dat
+c12.trash.Glass:54
+c12.trash.Paper:22
+c12.trash.Paper:11
+c12.trash.Glass:17
+c12.trash.Aluminum:89
+c12.trash.Paper:88
+c12.trash.Aluminum:76
+c12.trash.Cardboard:96
+c12.trash.Aluminum:25
+c12.trash.Aluminum:34
+c12.trash.Glass:11
+c12.trash.Glass:68
+c12.trash.Glass:43
+c12.trash.Aluminum:27
+c12.trash.Cardboard:44
+c12.trash.Aluminum:18
+c12.trash.Paper:91
+c12.trash.Glass:63
+c12.trash.Glass:50
+c12.trash.Glass:80
+c12.trash.Aluminum:81
+c12.trash.Cardboard:12
+c12.trash.Glass:12
+c12.trash.Glass:54
+c12.trash.Aluminum:36
+c12.trash.Aluminum:93
+c12.trash.Glass:93
+c12.trash.Paper:80
+c12.trash.Glass:36
+c12.trash.Glass:12
+c12.trash.Glass:60
+c12.trash.Paper:66
+c12.trash.Aluminum:36
+c12.trash.Cardboard:22
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Note that the class path must
+be included when giving the class names, otherwise the class will not be found.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_377">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This file is read using the
+previously-defined <B>StringList </B>tool, and each line is picked aparat using
+</FONT><FONT FACE="Georgia"> the <A NAME="Index68"></A><B>String </B>method
+<A NAME="Index69"></A><B>indexOf(&#160;)</B> to produce the index of the
+&#145;<B>:</B>&#146;. This is first used with the <B>String </B>method
+<A NAME="Index70"></A><A NAME="Index71"></A><B>substring(&#160;) </B>to extract
+the name of the trash type, and next to get the weight that is turned into a
+<B>double </B>with the <B>static <A NAME="Index72"></A>Double.valueOf(&#160;)
+</B>method. The <A NAME="Index73"></A><A NAME="Index74"></A><B>trim(&#160;)</B>
+method removes white space at both ends of a string.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_378">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <B>Trash </B>parser is placed in a
+separate file since it will be reused throughout this chapter:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_379">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:trash:ParseTrash.py 
+# Parse file contents into Trash objects,
+# placing each into a Fillable holder.
+
+<font color=#0000ff>class</font> ParseTrash:
+  <font color=#0000ff>def</font> fillBin(String filename, Fillable bin):
+    <font color=#0000ff>for</font> line <font color=#0000ff>in</font> open(filename).readlines():
+      String type = line.substring(0, 
+        line.index(':')).strip()
+      double weight = Double.valueOf(
+        line.substring(line.index(':') + 1)
+          .strip()).doubleValue()
+      bin.addTrash(
+        Trash.factory(
+          Trash.Messenger(type, weight)))
+
+  # Special case to handle Collection:
+  <font color=#0000ff>def</font> fillBin(String filename, Collection bin):
+    fillBin(filename, FillableCollection(bin))
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In <B>RecycleA.py</B>, an
+<B>ArrayList</B> was used to hold the <B>Trash</B> objects. However, other types
+of containers can be used as well. To allow for this, the first version of
+<B>fillBin(&#160;)</B> takes a reference to a <B>Fillable</B>, which is simply
+an <B>interface</B> that supports a method called <B>addTrash(&#160;)</B>:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_380">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:trash:Fillable.py 
+# Any object that can be filled with Trash.
+
+<font color=#0000ff>class</font> Fillable:
+  <font color=#0000ff>def</font> addTrash(self, Trash t)
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Anything that supports this
+interface can be used with <B>fillBin</B>. Of course, <B>Collection</B>
+doesn&#146;t implement <B>Fillable</B>, so it won&#146;t work. Since
+<B>Collection</B> is used in most of the examples, it makes sense to add a
+second overloaded <B>fillBin(&#160;)</B> method that takes a <B>Collection</B>.
+Any <B>Collection</B> can then be used as a <B>Fillable</B> object using an
+adapter class:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_381">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:trash:FillableCollection.py 
+# Adapter that makes a Collection Fillable.
+
+<font color=#0000ff>class</font> FillableCollection(Fillable):
+  private Collection c
+  <font color=#0000ff>def</font> __init__(self, Collection cc): 
+    c = cc 
+
+  <font color=#0000ff>def</font> addTrash(self, Trash t):
+    c.add(t)
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can see that the only job
+of this class is to connect <B>Fillable</B>&#146;s <B>addTrash(&#160;)</B>
+method to <B>Collection&#146;s</B> <B>add(&#160;)</B>. With this class in hand,
+the overloaded <B>fillBin(&#160;)</B> method can be used with a
+<B>Collection</B> in <B>ParseTrash.py</B>:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_382">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>  public static void 
+  fillBin(String filename, Collection bin):
+    fillBin(filename, FillableCollection(bin))
+</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This approach works for any
+container class that&#146;s used frequently. Alternatively, the container class
+can provide its own adapter that implements <B>Fillable</B>. (You&#146;ll see
+this later, in <B>DynaTrash.py</B>.)
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_383">Add Comment</A></FONT><A NAME="_Toc534420138"></A><BR></P></DIV>
+<A NAME="Heading89"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H3 ALIGN="LEFT">
+Recycling with prototyping</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Now you can see the revised version of
+<B>RecycleA.py</B> using the
+<A NAME="Index75"></A><A NAME="Index76"></A>prototyping technique:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_384">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:recycleap:RecycleAP.py 
+# Recycling with RTTI <font color=#0000ff>and</font> Prototypes.
+
+<font color=#0000ff>class</font> RecycleAP(UnitTest):
+  Collection
+    bin = ArrayList(), 
+    glassBin = ArrayList(),
+    paperBin = ArrayList(),
+    alBin = ArrayList()
+  <font color=#0000ff>def</font> __init__(self):
+    # Fill up the Trash bin:
+    ParseTrash.fillBin(
+      <font color=#004488>"..</font><font color=#004488>/trash</font><font color=#004488>/Trash.dat"</font>, bin)
+
+  <font color=#0000ff>def</font> test(self):
+    Iterator sorter = bin.iterator()
+    # Sort the Trash:
+    <font color=#0000ff>while</font>(sorter.hasNext()):
+      Object t = sorter.next()
+      # RTTI to show <font color=#0000ff>class</font> membership:
+      <font color=#0000ff>if</font>(t instanceof Aluminum)
+        alBin.add(t)
+      <font color=#0000ff>if</font>(t instanceof Paper)
+        paperBin.add(t)
+      <font color=#0000ff>if</font>(t instanceof Glass)
+        glassBin.add(t)
+
+    Trash.sumValue(alBin.iterator())
+    Trash.sumValue(paperBin.iterator())
+    Trash.sumValue(glassBin.iterator())
+    Trash.sumValue(bin.iterator())
+
+  <font color=#0000ff>def</font> main(self, String args[]):
+    RecycleAP().test()
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">All of the <B>Trash</B>
+objects, as well as the <B>ParseTrash</B> and support classes, are now part of
+the package <B>c12.trash</B>, so they are simply imported.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_385">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The process of opening the data file
+containing <B>Trash</B> descriptions and the parsing of that file have been
+wrapped into the <B>static</B> method <B>ParseTrash.fillBin(&#160;)</B>, so now
+it&#146;s no longer a part of our design focus. You will see that throughout
+the rest of the chapter, no matter what new classes are added,
+<B>ParseTrash.fillBin(&#160;)</B> will continue to work without change, which
+indicates a good design.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_386">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In terms of object creation, this design
+does indeed severely localize the changes you need to make to add a new type to
+the system. However, there&#146;s a significant problem in the use of RTTI that
+shows up clearly here. The program seems to run fine, and yet it never detects
+any cardboard, even though there is cardboard in the list! This happens
+<I>because</I> of the use of RTTI, which looks for only the types that you tell
+it to look for. The clue that <A NAME="Index77"></A>RTTI is being misused is
+that <I>every type in the system </I>is being tested, rather than a single type
+or subset of types. As you will see later, there are ways to use polymorphism
+instead when you&#146;re testing for every type. But if you use RTTI a lot in
+this fashion, and you add a new type to your system, you can easily forget to
+make the necessary changes in your program and produce a difficult-to-find bug.
+So it&#146;s worth trying to eliminate RTTI in this case, not just for
+aesthetic reasons&#151;it produces more maintainable code.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_387">Add Comment</A></FONT><A NAME="_Toc375545416"></A><A NAME="_Toc476705923"></A><A NAME="_Toc534420139"></A><BR></P></DIV>
+<A NAME="Heading90"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Abstracting usage</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">With creation out of the way, it&#146;s
+time to tackle the remainder of the design: where the classes are used. Since
+it&#146;s the act of sorting into bins that&#146;s particularly ugly and
+exposed, why not take that process and hide it inside a class? This is the
+principle of &#147;If you must do something ugly, at least localize the
+ugliness inside a class.&#148; It looks like this:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_388">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="CENTER"><FONT FACE="Georgia"><IMG SRC="TIPyth06.gif"></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <B>TrashSorter</B> object
+initialization must now be changed whenever a new type of <B>Trash</B> is added
+to the model. You could imagine that the <B>TrashSorter</B> class might look
+something like this:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_389">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>class</font> TrashSorter(ArrayList):
+  <font color=#0000ff>def</font> sort(self, Trash t): <font color=#009900>/* ... */</font> 
+</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">That is, <B>TrashSorter</B> is an
+<B>ArrayList</B> of references to <B>ArrayList</B>s of <B>Trash</B> references,
+and with <B>add(&#160;)</B> you can install another one, like so:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_390">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>TrashSorter ts = TrashSorter()
+ts.add(ArrayList())</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Now, however,
+<B>sort(&#160;)</B> becomes a problem. How does the statically-coded method deal
+with the fact that a new type has been added? To solve this, the type
+information must be removed from <B>sort(&#160;)</B> so that all it needs to do
+is call a generic method that takes care of the details of type. This, of
+course, is another way to describe a dynamically-bound method. So
+<B>sort(&#160;)</B> will simply move through the sequence and call a
+dynamically-bound method for each <B>ArrayList</B>. Since the job of this method
+is to grab the pieces of trash it is interested in, it&#146;s called
+<B>grab(Trash)</B>. The structure now looks like:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_391">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="CENTER"><FONT FACE="Georgia"><IMG SRC="TIPyth07.gif"></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><B>TrashSorter</B> needs to call each
+<B>grab(&#160;)</B> method and get a different result depending on what type of
+<B>Trash</B> the current <B>ArrayList</B> is holding. That is, each
+<B>ArrayList</B> must be aware of the type it holds. The classic approach to
+this problem is to create a base &#147;<B>Trash</B> bin&#148; class and
+inherit a new derived class for each different type you want to hold. If Java
+had a parameterized type mechanism that would probably be the most
+straightforward approach. But rather than hand-coding all the classes that such
+a mechanism should be building for us, further observation can produce a better
+approach.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_392">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">A basic OOP design principle is
+&#147;Use data members for variation in state, use
+<A NAME="Index78"></A>polymorphism for variation in behavior.&#148; Your first
+thought might be that the <B>grab(&#160;)</B> method certainly behaves
+differently for an <B>ArrayList</B> that holds <B>Paper</B> than for one that
+holds <B>Glass</B>. But what it does is strictly dependent on the type, and
+nothing else. This could be interpreted as a different state, and since Java has
+a class to represent type (<B>Class</B>) this can be used to determine the type
+of <B>Trash</B> a particular <B>Tbin</B> will hold.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_393">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The constructor for this <B>Tbin
+</B>requires that you hand it the <B>Class</B> of your choice. This tells the
+<B>ArrayList</B> what type it is supposed to hold. Then the <B>grab(&#160;)</B>
+method uses <B>Class BinType</B> and RTTI to see if the <B>Trash</B> object
+you&#146;ve handed it matches the type it&#146;s supposed to grab.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_394">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here is the new version of the
+program:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:recycleb:RecycleB.py
+# Containers that grab objects of interest.
+
+# A container that admits only the right type
+# of Trash (established <font color=#0000ff>in</font> the constructor):
+<font color=#0000ff>class</font> Tbin:
+  private Collection list = ArrayList()
+  private Class type
+  <font color=#0000ff>def</font> __init__(self, Class binType): type = binType 
+  <font color=#0000ff>def</font> grab(self, Trash t):
+    # Comparing <font color=#0000ff>class</font> types:
+    <font color=#0000ff>if</font>(t.getClass().equals(type)):
+      list.add(t)
+      <font color=#0000ff>return</font> 1 # Object grabbed
+
+    <font color=#0000ff>return</font> 0 # Object <font color=#0000ff>not</font> grabbed
+
+  <font color=#0000ff>def</font> iterator(self):
+    <font color=#0000ff>return</font> list.iterator()
+
+<font color=#0000ff>class</font> TbinList(ArrayList):
+  <font color=#0000ff>def</font> sort(self, Trash t):
+    Iterator e = iterator() # Iterate over self
+    <font color=#0000ff>while</font>(e.hasNext())
+      <font color=#0000ff>if</font>(((Tbin)e.next()).grab(t)) <font color=#0000ff>return</font>
+    # Need a Tbin <font color=#0000ff>for</font> this type:
+    add(Tbin(t.getClass()))
+    sort(t) # Recursive call
+
+<font color=#0000ff>class</font> RecycleB(UnitTest):
+  Collection bin = ArrayList()
+  TbinList trashBins = TbinList()
+  <font color=#0000ff>def</font> __init__(self):
+    ParseTrash.fillBin(<font color=#004488>"..</font><font color=#004488>/trash</font><font color=#004488>/Trash.dat"</font>,bin)
+
+  <font color=#0000ff>def</font> test(self):
+    Iterator it = bin.iterator()
+    <font color=#0000ff>while</font>(it.hasNext())
+      trashBins.sort((Trash)it.next())
+    Iterator e = trashBins.iterator()
+    <font color=#0000ff>while</font>(e.hasNext()):
+      Tbin b = (Tbin)e.next()
+      Trash.sumValue(b.iterator())
+
+    Trash.sumValue(bin.iterator())
+
+  <font color=#0000ff>def</font> main(self, String args[]):
+    RecycleB().test()
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><B>Tbin</B> contains a
+<B>Class</B> reference <B>type</B> which establishes in the constructor what
+what type it should grab. The <B>grab()</B> method checks this type against the
+object you pass it. Note that in this design, <B>grab()</B> only accepts
+<B>Trash</B> objects so you get compile-time type checking on the base type, but
+you could also just accept <B>Object</B> and it would still work.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_395">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><B>T</B></FONT><FONT FACE="Georgia"><B>binList</B>
+holds a set of <B>Tbin</B> references, so that <B>sort(&#160;)</B> can iterate
+through the <B>Tbin</B>s when it&#146;s looking for a match for the
+<B>Trash</B> object you&#146;ve handed it. If it doesn&#146;t find a match, it
+creates a new <B>Tbin</B> for the type that hasn&#146;t been found, and makes a
+recursive call to itself &#150; the next time around, the new bin will be
+found.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_396">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Notice the genericity of this code: it
+doesn&#146;t change at all if new types are added. If the bulk of your code
+doesn&#146;t need changing when a new type is added (or some other change
+occurs) then you have an easily extensible
+system.</FONT><FONT FACE="Georgia"><A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_397">Add Comment</A></FONT><A NAME="_Toc375545417"></A><A NAME="_Toc476705924"></A><A NAME="_Toc534420140"></A><BR></P></DIV>
+<A NAME="Heading91"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Multiple dispatching</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The above design is certainly
+satisfactory. Adding new types to the system consists of adding or modifying
+distinct classes without causing code changes to be propagated throughout the
+system. In addition, RTTI is not &#147;misused&#148; as it was in
+<B>RecycleA.py</B>. However, it&#146;s possible to go one step further and take
+a purist viewpoint about <A NAME="Index79"></A>RTTI and say that it should be
+eliminated altogether from the operation of sorting the trash into bins.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_398">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To accomplish this, you must first take
+the perspective that all type-dependent activities&#151;such as detecting the
+type of a piece of trash and putting it into the appropriate bin&#151;should be
+controlled through polymorphism and dynamic binding.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_399">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The previous examples first sorted by
+type, then acted on sequences of elements that were all of a particular type.
+But whenever you find yourself picking out particular types, stop and think. The
+whole idea of polymorphism (dynamically-bound method calls) is to handle
+type-specific information for you. So why are you hunting for types?
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_400">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The answer is something you probably
+don&#146;t think about: Python performs only single dispatching. That is, if
+you are performing an operation on more than one object whose type is unknown,
+Python will invoke the dynamic binding mechanism on only one of those types.
+This doesn&#146;t solve the problem, so you end up detecting some types
+manually and effectively producing your own dynamic binding behavior.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_401">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The solution is called
+<A NAME="Index80"></A><A NAME="Index81"></A><I>multiple dispatching</I>, which
+means setting up a configuration such that a single method call produces more
+than one dynamic method call and thus determines more than one type in the
+process. To get this effect, you need to work with more than one type hierarchy:
+you&#146;ll need a type hierarchy for each dispatch. The following example
+works with two hierarchies: the existing <B>Trash</B> family and a hierarchy of
+the types of trash bins that the trash will be placed into. This second
+hierarchy isn&#146;t always obvious and in this case it needed to be created in
+order to produce multiple dispatching (in this case there will be only two
+dispatches, which is referred to as
+<A NAME="Index82"></A><A NAME="Index83"></A><I>double dispatching</I>).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_402">Add Comment</A></FONT><A NAME="_Toc476705925"></A><A NAME="_Toc534420141"></A><BR></P></DIV>
+<A NAME="Heading92"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H3 ALIGN="LEFT">
+Implementing the double dispatch</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Remember that polymorphism can occur only
+via method calls, so if you want double dispatching to occur, there must be two
+method calls: one used to determine the type within each hierarchy. In the Trash
+hierarchy there will be a new method called addToBin(&#160;), which takes an
+argument of an array of TypedBin. It uses this array to step through and try to
+add itself to the appropriate bin, and this is where you'll see the double
+dispatch. <IMG SRC="TIPyth08.gif"></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The new hierarchy is TypedBin, and it
+contains its own method called add(&#160;) that is also used polymorphically.
+But here's an additional twist: add(&#160;) is overloaded to take arguments of
+the different types of trash. So an essential part of the double dispatching
+scheme also involves overloading.Redesigning the program produces a dilemma:
+it&#146;s now necessary for the base class <B>Trash</B> to contain an
+<B>addToBin(&#160;)</B> method. One approach is to copy all of the code and
+change the base class. Another approach, which you can take when you don&#146;t
+have control of the source code, is to put the <B>addToBin(&#160;)</B> method
+into an <B>interface</B>, leave <B>Trash</B> alone, and inherit new specific
+types of <B>Aluminum</B>, <B>Paper</B>, <B>Glass</B>, and <B>Cardboard</B>. This
+is the approach that will be taken here.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_403">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Most of the classes in this design must
+be <B>public</B>, so they are placed in their own files. Here&#146;s the
+interface:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_404">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:doubledispatch:TypedBinMember.py
+# An <font color=#0000ff>class</font> <font color=#0000ff>for</font> adding the double 
+# dispatching method to the trash hierarchy 
+# without modifying the original hierarchy.
+
+<font color=#0000ff>class</font> TypedBinMember:
+  # The method:
+  boolean addToBin(TypedBin[] tb)
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In each particular subtype of
+<B>Aluminum</B>, <B>Paper</B>, <B>Glass,</B> and <B>Cardboard</B>, the
+<B>addToBin(&#160;)</B> method in the <B>interface TypedBinMember</B> is
+implemented, but it <I>looks</I> like the code is exactly the same in each case:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_405">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:doubledispatch:DDAluminum.py
+# Aluminum <font color=#0000ff>for</font> double dispatching.
+
+<font color=#0000ff>class</font> DDAluminum(Aluminum) 
+    implements TypedBinMember:
+  <font color=#0000ff>def</font> __init__(self, double wt): .__init__(wt) 
+  <font color=#0000ff>def</font> addToBin(self, TypedBin[] tb):
+    <font color=#0000ff>for</font>(int i = 0 i &lt; tb.length i++)
+      <font color=#0000ff>if</font>(tb[i].add(self))
+        <font color=#0000ff>return</font> 1
+    <font color=#0000ff>return</font> 0
+
+# :~</PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:doubledispatch:DDPaper.py
+# Paper <font color=#0000ff>for</font> double dispatching.
+
+<font color=#0000ff>class</font> DDPaper(Paper) 
+    implements TypedBinMember:
+  <font color=#0000ff>def</font> __init__(self, double wt): .__init__(wt) 
+  <font color=#0000ff>def</font> addToBin(self, TypedBin[] tb):
+    <font color=#0000ff>for</font>(int i = 0 i &lt; tb.length i++)
+      <font color=#0000ff>if</font>(tb[i].add(self))
+        <font color=#0000ff>return</font> 1
+    <font color=#0000ff>return</font> 0
+
+# :~</PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:doubledispatch:DDGlass.py
+# Glass <font color=#0000ff>for</font> double dispatching.
+
+<font color=#0000ff>class</font> DDGlass(Glass) 
+    implements TypedBinMember:
+  <font color=#0000ff>def</font> __init__(self, double wt): .__init__(wt) 
+  <font color=#0000ff>def</font> addToBin(self, TypedBin[] tb):
+    <font color=#0000ff>for</font>(int i = 0 i &lt; tb.length i++)
+      <font color=#0000ff>if</font>(tb[i].add(self))
+        <font color=#0000ff>return</font> 1
+    <font color=#0000ff>return</font> 0
+
+# :~</PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:doubledispatch:DDCardboard.py
+# Cardboard <font color=#0000ff>for</font> double dispatching.
+
+<font color=#0000ff>class</font> DDCardboard(Cardboard) 
+    implements TypedBinMember:
+  <font color=#0000ff>def</font> __init__(self, double wt): .__init__(wt) 
+  <font color=#0000ff>def</font> addToBin(self, TypedBin[] tb):
+    <font color=#0000ff>for</font>(int i = 0 i &lt; tb.length i++)
+      <font color=#0000ff>if</font>(tb[i].add(self))
+        <font color=#0000ff>return</font> 1
+    <font color=#0000ff>return</font> 0
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The code in each
+<B>addToBin(&#160;) </B>calls <B>add(&#160;)</B> for each <B>TypedBin</B> object
+in the array. But notice the argument: <B>this</B>. The type of <B>this</B> is
+different for each subclass of <B>Trash</B>, so the code is different. (Although
+this code will benefit if a
+<A NAME="Index84"></A><A NAME="Index85"></A>parameterized type mechanism is ever
+added to Java.) So this is the first part of the double dispatch, because once
+you&#146;re inside this method you know you&#146;re <B>Aluminum</B>, or
+<B>Paper</B>, etc. During the call to <B>add(&#160;)</B>, this information is
+passed via the type of <B>this</B>. The compiler resolves the call to the proper
+overloaded version of <B>add(&#160;)</B>. But<B> </B>since <B>tb[i]</B> produces
+a reference to the base type <B>TypedBin</B>,<B> </B>this call will end up
+calling a different method depending on the type of <B>TypedBin</B> that&#146;s
+currently selected. That is the second dispatch.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_406">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here&#146;s the base class for
+<B>TypedBin</B>:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_407">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:doubledispatch:TypedBin.py
+# A container <font color=#0000ff>for</font> the second dispatch.
+
+<font color=#0000ff>class</font> TypedBin:
+  Collection c = ArrayList()
+  <font color=#0000ff>def</font> addIt(self, Trash t):
+    c.add(t)
+    <font color=#0000ff>return</font> 1
+
+  <font color=#0000ff>def</font> iterator(self):
+    <font color=#0000ff>return</font> c.iterator()
+
+  <font color=#0000ff>def</font> add(self, DDAluminum a):
+    <font color=#0000ff>return</font> 0
+
+  <font color=#0000ff>def</font> add(self, DDPaper a):
+    <font color=#0000ff>return</font> 0
+
+  <font color=#0000ff>def</font> add(self, DDGlass a):
+    <font color=#0000ff>return</font> 0
+
+  <font color=#0000ff>def</font> add(self, DDCardboard a):
+    <font color=#0000ff>return</font> 0
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can see that the overloaded
+<B>add(&#160;)</B> methods all return <B>false</B>. If the method is not
+overloaded in a derived class, it will continue to return <B>false</B>, and the
+caller (<B>addToBin(&#160;)</B>, in this case) will assume that the current
+<B>Trash</B> object has not been added successfully to a container, and continue
+searching for the right container.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_408">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In each of the subclasses of
+<B>TypedBin</B>, only one overloaded method is overridden, according to the type
+of bin that&#146;s being created. For example, <B>CardboardBin</B> overrides
+<B>add(DDCardboard)</B>. The overridden method adds the trash object to its
+container and returns <B>true</B>, while all the rest of the <B>add(&#160;)
+</B>methods in <B>CardboardBin </B>continue to return <B>false</B>, since they
+haven&#146;t been overridden. This is another case in which a parameterized
+type mechanism in Java would allow automatic generation of code. (With
+<A NAME="Index86"></A><A NAME="Index87"></A>C++ <B>template</B>s, you
+wouldn&#146;t have to explicitly write the subclasses or place the
+<B>addToBin(&#160;)</B> method in <B>Trash</B>.)
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_409">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Since for this example the trash types
+have been customized and placed in a different directory, you&#146;ll need a
+different trash data file to make it work. Here&#146;s a possible
+<B>DDTrash.dat</B>:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_410">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:doubledispatch:DDTrash.dat
+DDGlass:54
+DDPaper:22
+DDPaper:11
+DDGlass:17
+DDAluminum:89
+DDPaper:88
+DDAluminum:76
+DDCardboard:96
+DDAluminum:25
+DDAluminum:34
+DDGlass:11
+DDGlass:68
+DDGlass:43
+DDAluminum:27
+DDCardboard:44
+DDAluminum:18
+DDPaper:91
+DDGlass:63
+DDGlass:50
+DDGlass:80
+DDAluminum:81
+DDCardboard:12
+DDGlass:12
+DDGlass:54
+DDAluminum:36
+DDAluminum:93
+DDGlass:93
+DDPaper:80
+DDGlass:36
+DDGlass:12
+DDGlass:60
+DDPaper:66
+DDAluminum:36
+DDCardboard:22
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here&#146;s the rest of the
+program:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_411">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:doubledispatch:DoubleDispatch.py
+# Using multiple dispatching to handle more
+# than one unknown type during a method call.
+
+<font color=#0000ff>class</font> AluminumBin(TypedBin):
+  <font color=#0000ff>def</font> add(self, DDAluminum a):
+    <font color=#0000ff>return</font> addIt(a)
+
+<font color=#0000ff>class</font> PaperBin(TypedBin):
+  <font color=#0000ff>def</font> add(self, DDPaper a):
+    <font color=#0000ff>return</font> addIt(a)
+
+<font color=#0000ff>class</font> GlassBin(TypedBin):
+  <font color=#0000ff>def</font> add(self, DDGlass a):
+    <font color=#0000ff>return</font> addIt(a)
+
+<font color=#0000ff>class</font> CardboardBin(TypedBin):
+  <font color=#0000ff>def</font> add(self, DDCardboard a):
+    <font color=#0000ff>return</font> addIt(a)
+
+<font color=#0000ff>class</font> TrashBinSet:
+  private TypedBin[] binSet =:
+    AluminumBin(),
+    PaperBin(),
+    GlassBin(),
+    CardboardBin()
+
+  <font color=#0000ff>def</font> sortIntoBins(self, Collection bin):
+    Iterator e = bin.iterator()
+    <font color=#0000ff>while</font>(e.hasNext()):
+      TypedBinMember t = 
+        (TypedBinMember)e.next()
+      <font color=#0000ff>if</font>(!t.addToBin(binSet))
+        System.err.println(<font color=#004488>"Couldn't add "</font> + t)
+
+  public TypedBin[] binSet(): <font color=#0000ff>return</font> binSet 
+
+<font color=#0000ff>class</font> DoubleDispatch(UnitTest):
+  Collection bin = ArrayList()
+  TrashBinSet bins = TrashBinSet()
+  <font color=#0000ff>def</font> __init__(self):
+    # ParseTrash still works, without changes:
+    ParseTrash.fillBin(<font color=#004488>"DDTrash.dat"</font>, bin)
+
+  <font color=#0000ff>def</font> test(self):
+    # Sort <font color=#0000ff>from</font> the master bin into 
+    # the individually-typed bins:
+    bins.sortIntoBins(bin)
+    TypedBin[] tb = bins.binSet()
+    # Perform sumValue <font color=#0000ff>for</font> each bin...
+    <font color=#0000ff>for</font>(int i = 0 i &lt; tb.length i++)
+      Trash.sumValue(tb[i].c.iterator())
+    # ... <font color=#0000ff>and</font> <font color=#0000ff>for</font> the master bin
+    Trash.sumValue(bin.iterator())
+
+  <font color=#0000ff>def</font> main(self, String args[]):
+    DoubleDispatch().test()
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><B>TrashBinSet</B> encapsulates
+all of the different types of <B>TypedBin</B>s, along with the
+<B>sortIntoBins(&#160;)</B> method, which is where all the double dispatching
+takes place. You can see that once the structure is set up, sorting into the
+various <B>TypedBin</B>s is remarkably easy. In addition, the efficiency of two
+dynamic method calls is probably better than any other way you could sort.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_412">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Notice the ease of use of this system in
+<B>main(&#160;)</B>, as well as the complete independence of any specific type
+information within <B>main(&#160;)</B>. All other methods that talk only to the
+<B>Trash</B> base-class interface will be equally invulnerable to changes in
+<B>Trash</B> types.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_413">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The changes necessary to add a new type
+are relatively isolated: you modify <B>TypedBin</B>,<B> </B>inherit the new type
+of <B>Trash</B> with its <B>addToBin(&#160;)</B> method, then inherit a new
+<B>TypedBin</B> (this is really just a copy and simple edit), and finally add a
+new type into the aggregate initialization for <B>TrashBinSet</B>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_414">Add Comment</A></FONT><A NAME="_Toc476705926"></A><A NAME="_Toc534420142"></A><BR></P></DIV>
+<A NAME="Heading93"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+The Visitor pattern</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Now consider applying a design pattern
+that has an entirely different goal to the trash sorting problem.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_415">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">For this pattern, we are no longer
+concerned with optimizing the addition of new types of <B>Trash </B>to the
+system. Indeed, this pattern makes adding a new type of <B>Trash </B><I>more</I>
+complicated. The assumption is that you have a primary class hierarchy that is
+fixed; perhaps it&#146;s from another vendor and you can&#146;t make changes
+to that hierarchy. However, you&#146;d like to add new polymorphic methods to
+that hierarchy, which means that normally you&#146;d have to add something to
+the base class interface. So the dilemma is that you need to add methods to the
+base class, but you can&#146;t touch the base class. How do you get around
+this?
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_416">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The design pattern that solves this kind
+of problem is called a &#147;visitor&#148; (the final one in the <I>Design
+Patterns</I> book), and it builds on the double<I> </I>dispatching scheme shown
+in the last section.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_417">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The
+<A NAME="Index88"></A><A NAME="Index89"></A>visitor pattern allows you to extend
+the interface of the primary type by creating a separate class hierarchy of type
+<B>Visitor </B>to virtualize the operations performed upon the primary type. The
+objects of the primary type simply &#147;accept&#148; the visitor, then call
+the visitor&#146;s dynamically<B>-</B>bound method. It looks like this:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_418">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="CENTER"><FONT FACE="Georgia"><IMG SRC="TIPyth09.gif"></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Now, if <B>v</B> is a <B>Visitable
+</B>reference to an <B>Aluminum</B> object, the code:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_419">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>PriceVisitor pv = PriceVisitor()
+v.accept(pv)</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">uses double dispatching
+to cause two polymorphic method calls: the first one to select
+<B>Aluminum</B>&#146;s version of <B>accept(&#160;)</B>, and the second one
+within <B>accept(&#160;)</B> when the specific version of <B>visit(&#160;)</B>
+is called dynamically using the base-class <B>Visitor</B> reference <B>v</B>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_420">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This configuration means that new
+functionality can be added to the system in the form of new subclasses of
+<B>Visitor</B>. The <B>Trash </B>hierarchy doesn&#146;t need to be touched.
+This is the prime benefit of the visitor pattern: you can add new polymorphic
+functionality to a class hierarchy without touching that hierarchy (once the
+<B>accept(&#160;)</B> methods have been installed). Note that the benefit is
+helpful here but not exactly what we started out to accomplish, so at first
+blush you might decide that this isn&#146;t the desired solution.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_421">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">But look at one thing that&#146;s been
+accomplished: the visitor solution avoids sorting from the master <B>Trash</B>
+sequence into individual typed sequences. Thus, you can leave everything in the
+single master sequence and simply pass through that sequence using the
+appropriate visitor to accomplish the goal. Although this behavior seems to be a
+side effect of visitor, it does give us what we want (avoiding RTTI).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_422">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The
+<A NAME="Index90"></A><A NAME="Index91"></A>double dispatching in the visitor
+pattern takes care of determining both the type of <B>Trash </B>and the type of
+<B>Visitor</B>.<B> </B>In the following example, there are two implementations
+of <B>Visitor</B>: <B>PriceVisitor</B> to both determine and sum the price, and
+<B>WeightVisitor</B> to keep track of the weights.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_423">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can see all of this implemented in
+the new, improved version of the recycling program.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_424">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">As with <B>DoubleDispatch.py</B>, the
+<B>Trash</B> class is left alone and a new interface is created to add the
+<B>accept(&#160;)</B> method:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_425">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:trashvisitor:Visitable.py
+# An <font color=#0000ff>class</font> to add visitor functionality 
+# to the Trash hierarchy without 
+# modifying the base <font color=#0000ff>class</font>.
+
+<font color=#0000ff>class</font> Visitable:
+  # The method:
+  <font color=#0000ff>def</font> accept(self, Visitor v)
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Since there&#146;s nothing
+concrete in the <B>Visitor</B> base class, it can be created as an
+<B>interface</B>:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_426">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:trashvisitor:Visitor.py
+# The base <font color=#0000ff>class</font> <font color=#0000ff>for</font> visitors.
+
+<font color=#0000ff>class</font> Visitor:
+  <font color=#0000ff>def</font> visit(self, Aluminum a)
+  <font color=#0000ff>def</font> visit(self, Paper p)
+  <font color=#0000ff>def</font> visit(self, Glass g)
+  <font color=#0000ff>def</font> visit(self, Cardboard c)
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><A NAME="_Toc534420143"></A><BR></P></DIV>
+<A NAME="Heading94"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H3 ALIGN="LEFT">
+A Reflective Decorator</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">At this point, you <I>could </I> follow
+the same approach that was used for double dispatching and create new subtypes
+of <B>Aluminum</B>,<B> Paper</B>,<B> Glass, </B>and<B> Cardboard</B> that
+implement the <B>accept(&#160;)</B> method. For example, the new
+<B>Visitable</B> <B>Aluminum</B> would look like this:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_427">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:trashvisitor:VAluminum.py
+# Taking the previous approach of creating a
+# specialized Aluminum <font color=#0000ff>for</font> the visitor pattern.
+
+<font color=#0000ff>class</font> VAluminum(Aluminum) 
+    implements Visitable:
+  <font color=#0000ff>def</font> __init__(self, double wt): .__init__(wt) 
+  <font color=#0000ff>def</font> accept(self, Visitor v):
+    v.visit(self)
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">However, we seem to be
+encountering an &#147;explosion of interfaces:&#148; basic <B>Trash</B>,
+special versions for double dispatching, and now more special versions for
+visitor. Of course, this &#147;explosion of interfaces&#148; is
+arbitrary&#151;one could simply put the additional methods in the <B>Trash</B>
+class. If we ignore that we can instead see an opportunity to use the
+<I>Decorator</I> pattern: it seems like it should be possible to create a
+<I>Decorator</I> that can be wrapped around an ordinary <B>Trash</B> object and
+will produce the same interface as <B>Trash</B> and add the extra
+<B>accept(&#160;)</B> method. In fact, it&#146;s a perfect example of the value
+of <I>Decorator</I>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_428">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The double dispatch creates a problem,
+however. Since it relies on overloading of both <B>accept(&#160;) </B>and
+<B>visit(&#160;)</B>,<B> </B>it would seem to require specialized code for each
+different version of the <B>accept(&#160;)</B> method. With C++ templates, this
+would be fairly easy to accomplish (since templates automatically generate
+type-specialized code) but Python has no such mechanism&#151;at least it does
+not appear to. However, reflection allows you to determine type information at
+run time, and it turns out to solve many problems that would seem to require
+templates (albeit not as simply). Here&#146;s the decorator that does the
+trick</FONT><A NAME="fnB17" HREF="#fn17">[17]</A><FONT FACE="Georgia">:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_429">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:trashvisitor:VisitableDecorator.py
+# A decorator that adapts the generic Trash
+# classes to the visitor pattern.
+
+<font color=#0000ff>class</font> VisitableDecorator
+extends Trash implements Visitable:
+  private Trash delegate
+  private Method dispatch
+  <font color=#0000ff>def</font> __init__(self, Trash t):
+    delegate = t
+    <font color=#0000ff>try</font>:
+      dispatch = Visitor.<font color=#0000ff>class</font>.getMethod (
+        <font color=#004488>"visit"</font>, Class[]: t.getClass() 
+      )
+     catch (Exception ex):
+      ex.printStackTrace()
+
+  <font color=#0000ff>def</font> getValue(self):
+    <font color=#0000ff>return</font> delegate.getValue()
+
+  <font color=#0000ff>def</font> getWeight(self):
+    <font color=#0000ff>return</font> delegate.getWeight()
+
+  <font color=#0000ff>def</font> accept(self, Visitor v):
+    <font color=#0000ff>try</font>:
+      dispatch.invoke(v, Object[]{delegate)
+     catch (Exception ex):
+      ex.printStackTrace()
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">[[ Description of Reflection
+use  ]]
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_430">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The only other tool we need is a new type
+of <B>Fillable </B>adapter that automatically decorates the objects as they are
+being created from the original <B>Trash.dat</B> file. But this might as well be
+a decorator itself, decorating any kind of <B>Fillable</B>:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_431">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:trashvisitor:FillableVisitor.py 
+# Adapter Decorator that adds the visitable 
+# decorator as the Trash objects are 
+# being created.
+
+<font color=#0000ff>class</font> FillableVisitor
+implements Fillable:
+  private Fillable f
+  <font color=#0000ff>def</font> __init__(self, Fillable ff): f = ff 
+  <font color=#0000ff>def</font> addTrash(self, Trash t):
+    f.addTrash(VisitableDecorator(t))
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Now you can wrap it around any
+kind of existing <B>Fillable</B>, or any new ones that haven&#146;t yet been
+created.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_432">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The rest of the program creates specific
+<B>Visitor</B> types and sends them through a single list of <B>Trash</B>
+objects:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_433">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:trashvisitor:TrashVisitor.py 
+# The <font color=#004488>"visitor"</font> pattern with VisitableDecorators.
+
+# Specific group of algorithms packaged
+# <font color=#0000ff>in</font> each implementation of Visitor:
+<font color=#0000ff>class</font> PriceVisitor(Visitor):
+  private double alSum # Aluminum
+  private double pSum # Paper
+  private double gSum # Glass
+  private double cSum # Cardboard
+  <font color=#0000ff>def</font> visit(self, Aluminum al):
+    double v = al.getWeight() * al.getValue()
+    <font color=#0000ff>print</font> <font color=#004488>"value of Aluminum= "</font> + v
+    alSum += v
+
+  <font color=#0000ff>def</font> visit(self, Paper p):
+    double v = p.getWeight() * p.getValue()
+    <font color=#0000ff>print</font> <font color=#004488>"value of Paper= "</font> + v
+    pSum += v
+
+  <font color=#0000ff>def</font> visit(self, Glass g):
+    double v = g.getWeight() * g.getValue()
+    <font color=#0000ff>print</font> <font color=#004488>"value of Glass= "</font> + v
+    gSum += v
+
+  <font color=#0000ff>def</font> visit(self, Cardboard c):
+    double v = c.getWeight() * c.getValue()
+    <font color=#0000ff>print</font> <font color=#004488>"value of Cardboard = "</font> + v
+    cSum += v
+
+  <font color=#0000ff>def</font> total(self):
+    <font color=#0000ff>print</font> (
+      <font color=#004488>"Total Aluminum: $"</font> + alSum +
+      <font color=#004488>"\n Total Paper: $"</font> + pSum + 
+      <font color=#004488>"\nTotal Glass: $"</font> + gSum + 
+      <font color=#004488>"\nTotal Cardboard: $"</font> + cSum +
+      <font color=#004488>"\nTotal: $"</font> + 
+        (alSum + pSum + gSum + cSum))
+
+<font color=#0000ff>class</font> WeightVisitor(Visitor):
+  private double alSum # Aluminum
+  private double pSum # Paper
+  private double gSum # Glass
+  private double cSum # Cardboard
+  <font color=#0000ff>def</font> visit(self, Aluminum al):
+    alSum += al.getWeight()
+    <font color=#0000ff>print</font> (<font color=#004488>"weight of Aluminum = "</font>
+        + al.getWeight())
+
+  <font color=#0000ff>def</font> visit(self, Paper p):
+    pSum += p.getWeight()
+    <font color=#0000ff>print</font> (<font color=#004488>"weight of Paper = "</font>
+        + p.getWeight())
+
+  <font color=#0000ff>def</font> visit(self, Glass g):
+    gSum += g.getWeight()
+    <font color=#0000ff>print</font> (<font color=#004488>"weight of Glass = "</font>
+        + g.getWeight())
+
+  <font color=#0000ff>def</font> visit(self, Cardboard c):
+    cSum += c.getWeight()
+    <font color=#0000ff>print</font> (<font color=#004488>"weight of Cardboard = "</font>
+        + c.getWeight())
+
+  <font color=#0000ff>def</font> total(self):
+    <font color=#0000ff>print</font> (
+      <font color=#004488>"Total weight Aluminum: "</font>  + alSum +
+      <font color=#004488>"\nTotal weight Paper: "</font> + pSum +
+      <font color=#004488>"\nTotal weight Glass: "</font> + gSum +
+      <font color=#004488>"\nTotal weight Cardboard: "</font> + cSum +
+      <font color=#004488>"\nTotal weight: "</font> + 
+        (alSum + pSum + gSum + cSum))
+
+<font color=#0000ff>class</font> TrashVisitor(UnitTest):
+  Collection bin = ArrayList()
+  PriceVisitor pv = PriceVisitor()
+  WeightVisitor wv = WeightVisitor()
+  <font color=#0000ff>def</font> __init__(self):
+    ParseTrash.fillBin(<font color=#004488>"..</font><font color=#004488>/trash</font><font color=#004488>/Trash.dat"</font>, 
+      FillableVisitor(
+        FillableCollection(bin)))
+
+  <font color=#0000ff>def</font> test(self):
+    Iterator it = bin.iterator()
+    <font color=#0000ff>while</font>(it.hasNext()):
+      Visitable v = (Visitable)it.next()
+      v.accept(pv)
+      v.accept(wv)
+
+    pv.total()
+    wv.total()
+
+  <font color=#0000ff>def</font> main(self, String args[]):
+    TrashVisitor().test()
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In <B>Test(&#160;)</B>, note
+how visitability is added by simply creating a different kind of bin using the
+decorator. Also notice that the <B>FillableCollection</B> adapter has the
+appearance of being used as a decorator (for <B>ArrayList</B>) in this
+situation. However, it completely changes the interface of the <B>ArrayList</B>,
+whereas the definition of <I>Decorator</I> is that the interface of the
+decorated class must still be there after decoration.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_434">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Note that the shape of the client code
+(shown in the <B>Test</B> class) has changed again, from the original approaches
+to the problem. Now there&#146;s only a single <B>Trash</B> bin. The two
+<B>Visitor</B> objects are accepted into every element in the sequence, and they
+perform their operations. The visitors keep their own internal data to tally the
+total weights and prices.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_435">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Finally, there&#146;s no run time type
+identification other than the inevitable cast to <B>Trash</B> when pulling
+things out of the sequence. This, too, could be eliminated with the
+implementation of parameterized types in Java.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_436">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">One way you can distinguish this solution
+from the double dispatching solution described previously is to note that, in
+the double dispatching solution, only one of the overloaded methods,
+<B>add(&#160;)</B>, was overridden when each subclass was created, while here
+<I>each</I> one of the overloaded <B>visit(&#160;)</B> methods is overridden in
+every subclass of <B>Visitor</B>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_437">Add Comment</A></FONT><A NAME="_Toc534420144"></A><BR></P></DIV>
+<A NAME="Heading95"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H3 ALIGN="LEFT">
+More coupling?</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">There&#146;s a lot more code here, and
+there&#146;s definite coupling between the <B>Trash</B> hierarchy and the
+<B>Visitor</B> hierarchy. However, there&#146;s also high cohesion within the
+respective sets of classes: they each do only one thing (<B>Trash </B>describes
+Trash, while <B>Visitor </B>describes actions performed on <B>Trash</B>), which
+is an indicator of a good design. Of course, in this case it works well only if
+you&#146;re adding new <B>Visitor</B>s, but it gets in the way when you add new
+types of <B>Trash</B>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_438">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Low coupling between classes and high
+cohesion within a class is definitely an important design goal. Applied
+mindlessly, though, it can prevent you from achieving a more elegant design. It
+seems that some classes inevitably have a certain intimacy with each other.
+These often occur in pairs that could perhaps be called
+<A NAME="Index92"></A><I>couplets</I>; for example, containers and iterators.
+The <B>Trash-Visitor</B> pair above appears to be another such couplet.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_439">Add Comment</A></FONT><A NAME="_Toc375545419"></A><A NAME="_Toc476705927"></A><A NAME="_Toc534420145"></A><BR></P></DIV>
+<A NAME="Heading96"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+RTTI considered harmful?</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Various designs in this chapter attempt
+to remove RTTI, which might give you the impression that it&#146;s
+&#147;considered harmful&#148; (the condemnation used for poor, ill-fated
+<B>goto</B>, which was thus never put into Java). This isn&#146;t true; it is
+the <A NAME="Index93"></A><I>misuse</I> of RTTI that is the problem. The reason
+our designs removed RTTI is because the misapplication of that feature prevented
+<A NAME="Index94"></A>extensibility, while the stated goal was to be able to add
+a new type to the system with as little impact on surrounding code as possible.
+Since RTTI is often misused by having it look for every single type in your
+system, it causes code to be non-extensible: when you add a new type, you have
+to go hunting for all the code in which RTTI is used, and if you miss any you
+won&#146;t get help from the compiler.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_440">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">However, RTTI doesn&#146;t automatically
+create non-extensible code. Let&#146;s revisit the trash recycler once more.
+This time, a new tool will be introduced, which I call a <B>TypeMap</B>. It
+contains a <B>HashMap</B> that holds <B>ArrayList</B>s, but the interface is
+simple: you can <B>add(&#160;)</B> a new object, and you can <B>get(&#160;)</B>
+an <B>ArrayList</B> containing all the objects of a particular type. The keys
+for the contained <B>HashMap</B> are the types in the associated
+<B>ArrayList</B>. The beauty of this design (suggested by Larry O&#146;Brien)
+is that the <B>TypeMap</B> dynamically adds a new pair whenever it encounters a
+new type, so whenever you add a new type to the system (even if you add the new
+type at run time), it adapts.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_441">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Our example will again build on the
+structure of the <B>Trash</B> types in <B>package c12.Trash</B> (and the
+<B>Trash.dat</B> file used there can be used here without change):
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_442">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># c12:dynatrash:DynaTrash.py 
+# Using a Map of Lists <font color=#0000ff>and</font> RTTI
+# to automatically sort trash into
+# ArrayLists. This solution, despite the
+# use of RTTI, <font color=#0000ff>is</font> extensible.
+
+# Generic TypeMap works <font color=#0000ff>in</font> any situation:
+<font color=#0000ff>class</font> TypeMap:
+  private Map t = HashMap()
+  <font color=#0000ff>def</font> add(self, Object o):
+    Class type = o.getClass()
+    <font color=#0000ff>if</font>(t.has_key(type))
+      ((List)t.get(type)).add(o)
+    <font color=#0000ff>else</font>:
+      List v = ArrayList()
+      v.add(o)
+      t.put(type,v)
+
+  <font color=#0000ff>def</font> get(self, Class type):
+    <font color=#0000ff>return</font> (List)t.get(type)
+
+  <font color=#0000ff>def</font> keys(self): 
+    <font color=#0000ff>return</font> t.keySet().iterator() 
+
+# Adapter <font color=#0000ff>class</font> to allow callbacks
+# <font color=#0000ff>from</font> ParseTrash.fillBin():
+<font color=#0000ff>class</font> TypeMapAdapter(Fillable):
+  TypeMap map
+  <font color=#0000ff>def</font> __init__(self, TypeMap tm): map = tm 
+  <font color=#0000ff>def</font> addTrash(self, Trash t): map.add(t) 
+
+<font color=#0000ff>class</font> DynaTrash(UnitTest):
+  TypeMap bin = TypeMap()
+  <font color=#0000ff>def</font> __init__(self):
+    ParseTrash.fillBin(<font color=#004488>"..</font><font color=#004488>/trash</font><font color=#004488>/Trash.dat"</font>, 
+      TypeMapAdapter(bin))
+
+  <font color=#0000ff>def</font> test(self):
+    Iterator keys = bin.keys()
+    <font color=#0000ff>while</font>(keys.hasNext())
+      Trash.sumValue(
+        bin.get((Class)keys.next()).iterator())
+
+  <font color=#0000ff>def</font> main(self, String args[]):
+    DynaTrash().test()
+
+# :~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Although powerful, the
+definition for <B>TypeMap</B> is simple. It contains a <B>HashMap</B>, and the
+<B>add(&#160;)</B> method does most of the work. When you <B>add(&#160;)</B> a
+new object, the reference for the <B>Class</B> object for that type is
+extracted. This is used as a key to determine whether an <B>ArrayList</B>
+holding objects of that type is already present in the <B>HashMap</B>. If so,
+that <B>ArrayList</B> is extracted and the object is added to the
+<B>ArrayList</B>. If not, the <B>Class</B> object and a new <B>ArrayList</B> are
+added as a key-value pair.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_443">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can get an <B>Iterator</B> of all the
+<B>Class</B> objects from <B>keys(&#160;)</B>, and use each <B>Class</B> object
+to fetch the corresponding <B>ArrayList</B> with <B>get(&#160;)</B>. And
+that&#146;s all there is to it.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_444">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <B>filler(&#160;)</B> method is
+interesting because it takes advantage of the design of
+<B>ParseTrash.fillBin(&#160;)</B>, which doesn&#146;t just try to fill an
+<B>ArrayList</B> but instead anything that implements the <B>Fillable</B>
+interface with its <B>addTrash(&#160;)</B> method. All <B>filler(&#160;)</B>
+needs to do is to return a reference to an <B>interface</B> that implements
+<B>Fillable</B>, and then this reference can be used as an argument to
+<B>fillBin(&#160;)</B> like this:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_445">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>ParseTrash.fillBin(<font color=#004488>"Trash.dat"</font>, bin.filler())</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To
+produce this reference, an
+<A NAME="Index95"></A><A NAME="Index96"></A><A NAME="Index97"></A><I>anonymous
+inner class</I> (described in Chapter 8 of <I>Thinking in Java, 2<SUP>nd</SUP>
+edition</I>) is used. You never need a named class to implement <B>Fillable</B>,
+you just need a reference to an object of that class, thus this is an
+appropriate use of anonymous inner classes.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_446">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">An interesting thing about this design is
+that even though it wasn&#146;t created to handle the sorting,
+<B>fillBin(&#160;)</B> is performing a sort every time it inserts a <B>Trash</B>
+object into <B>bin</B>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_447">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Much of <B>class DynaTrash</B> should be
+familiar from the previous examples. This time, instead of placing the new
+<B>Trash</B> objects into a <B>bin</B> of type <B>ArrayList</B>, the <B>bin</B>
+is of type <B>TypeMap</B>, so when the trash is thrown into <B>bin</B>
+it&#146;s immediately sorted by <B>TypeMap</B>&#146;s internal sorting
+mechanism. Stepping through the <B>TypeMap</B> and operating on each individual
+<B>ArrayList</B> becomes a simple matter.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_448">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">As you can see, adding a new type to the
+system won&#146;t affect this code at all, and the code in <B>TypeMap</B> is
+completely independent. This is certainly the smallest solution to the problem,
+and arguably the most elegant as well. It does rely heavily on RTTI, but notice
+that each key-value pair in the <B>HashMap</B> is looking for only one type. In
+addition, there&#146;s no way you can &#147;forget&#148; to add the proper
+code to this system when you add a new type, since there isn&#146;t any code
+you need to add.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_449">Add Comment</A></FONT><A NAME="_Toc476705928"></A><A NAME="_Toc534420146"></A><BR></P></DIV>
+<A NAME="Heading97"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Summary</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Coming up with a design such as
+<B>TrashVisitor.py </B>that contains a larger amount of code than the earlier
+designs can seem at first to be counterproductive. It pays to notice what
+you&#146;re trying to accomplish with various designs. Design patterns in
+general strive to <I>separate the things that change from the things that stay
+the same</I>. The &#147;things that change&#148; can refer to many different
+kinds of changes. Perhaps the change occurs because the program is placed into a
+new environment or because something in the current environment changes (this
+could be: &#147;The user wants to add a new shape to the diagram currently on
+the screen&#148;). Or, as in this case, the change could be the evolution of
+the code body. While previous versions of the trash sorting example emphasized
+the addition of new <I>types</I> of <B>Trash </B>to the system,
+<B>TrashVisitor.py</B> allows you to easily add new <I>functionality</I> without
+disturbing the <B>Trash</B> hierarchy. There&#146;s more code in
+<B>TrashVisitor.py</B>, but adding new functionality to <B>Visitor</B> is cheap.
+If this is something that happens a lot, then it&#146;s worth the extra effort
+and code to make it happen more easily.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_450">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The discovery of the
+<A NAME="Index98"></A>vector of change is no trivial matter; it&#146;s not
+something that an analyst can usually detect before the program sees its initial
+design. The necessary information will probably not appear until later phases in
+the project: sometimes only at the design or implementation phases do you
+discover a deeper or more subtle need in your system. In the case of adding new
+types (which was the focus of most of the &#147;recycle&#148; examples) you
+might realize that you need a particular inheritance hierarchy only when you are
+in the maintenance phase and you begin extending the system!
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_451">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">One of the most important things that
+you&#146;ll learn by studying design patterns seems to be an about-face from
+what has been promoted so far in this book. That is: &#147;OOP is all about
+polymorphism.&#148; This statement can produce the &#147;two-year-old with a
+hammer&#148; syndrome (everything looks like a nail). Put another way,
+it&#146;s hard enough to &#147;get&#148; polymorphism, and once you do, you
+try to cast all your designs into that one particular mold.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_452">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">What design patterns say is that OOP
+isn&#146;t just about polymorphism. It&#146;s about &#147;separating the
+things that change from the things that stay the same.&#148;
+<A NAME="Index99"></A>Polymorphism is an especially important way to do this,
+and it turns out to be helpful if the programming language directly supports
+polymorphism (so you don&#146;t have to wire it in yourself, which would tend
+to make it prohibitively expensive). But design patterns in general show
+<I>other</I> ways to accomplish the basic goal, and once your eyes have been
+opened to this you will begin to search for more creative designs.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_453">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Since the <I>Design Patterns</I> book
+came out and made such an impact, people have been searching for other patterns.
+You can expect to see more of these appear as time goes on. Here are some sites
+recommended by Jim Coplien, of C++ fame (<I>http://www.bell-labs.com/~cope</I>),
+who is one of the main proponents of the patterns movement:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_454">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><I>http://st-www.cs.uiuc.edu/users/patterns</I></FONT><BR><FONT FACE="Georgia"><I>http://c2.com/cgi/wiki</I></FONT><BR><FONT FACE="Georgia"><I>http://c2.com/ppr</I></FONT><BR><FONT FACE="Georgia"><I>http://www.bell-labs.com/people/cope/Patterns/Process/index.html</I></FONT><BR><FONT FACE="Georgia"><I>http://www.bell-labs.com/cgi-user/OrgPatterns/OrgPatterns</I></FONT><BR><FONT FACE="Georgia"><I>http://st-www.cs.uiuc.edu/cgi-bin/wikic/wikic</I></FONT><BR><FONT FACE="Georgia"><I>http://www.cs.wustl.edu/~schmidt/patterns.html</I></FONT><BR><FONT FACE="Georgia"><I>http://www.espinc.com/patterns/overview.html</I></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Also note there has been a yearly
+conference on design patterns, called PLOP, that produces a published
+proceedings, the third of which came out in late 1997 (all published by
+Addison-Wesley).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_455">Add Comment</A></FONT><A NAME="_Toc375545420"></A><A NAME="_Toc476705929"></A><A NAME="_Toc534420147"></A><BR></P></DIV>
+<A NAME="Heading98"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Exercises</H2></FONT>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Add a class <B>Plastic</B>
+to <B>TrashVisitor.py</B>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_456">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Add
+a class <B>Plastic</B> to <B>DynaTrash.py</B>.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_457">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create
+a decorator like <B>VisitableDecorator</B>, but for the multiple dispatching
+example, along with an &#147;adapter decorator&#148; class like the one
+created for <B>VisitableDecorator</B>. Build the rest of the example and show
+that it works.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_458">Add Comment</A></FONT></OL>
+<HR><DIV ALIGN="LEFT"><P><A NAME="fn16" HREF="#fnB16">[16]</A><FONT FACE="Georgia">
+</FONT><FONT FACE="Georgia">Addison-Wesley, 1999.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="fn17" HREF="#fnB17">[17]</A><FONT FACE="Georgia">
+</FONT><FONT FACE="Georgia">This was a solution created by Jaroslav Tulach in a
+design patterns class that I gave in Prague.</FONT><BR></P></DIV>
+
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect13.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect15.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:12/31/2001</P></DIV>
+
+</BODY>
+
+</HTML>

@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="3442"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$fmuY2tuqYVG</title>
+</head>
+<body><h1>Lab 2&nbsp;</h1><p>Goal: Manipulate TTL QUAD NAND gates to make All possible binary logic gates including XOR&nbsp;</p><p>Concepts: Functional completeness of NAND&nbsp;</p><p></p><p>Let&rsquo;s be friends with NAND CAT today!!!!&nbsp;</p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380643546593_undefined'/></p><p><a href='http://www.youtube.com/watch?v=QH2-TGUlwu4'/>OHHH YEAHHH</a>&nbsp;</p><p></p><p></p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_daAp1gyCF9r_p.77239_1380635756427_undefined'/></p><p></p><p><b>Working with breadboard:&nbsp;</b></p><p>Ground (either Blue or Red) needs to be connected with ground of battery. Voltage (4.5~5V) needs to be connected to red line. Both sides of breadboard needs to be connected with jumper wire.&nbsp;</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380636344497_Screen Shot 2013-10-01 at 10.05.28 AM.png'/></p><p>This shows three AAA batteries but, of course it can be three AA batteries or 9V battery with voltage regulator.</p><p></p><p>Let&rsquo;s start by building Not gates and make record of it by writing truth table and taking picture (or video)</p><p></p><p>Before we move on, let&rsquo;s look at the spec sheet for 7400. you can find them by searching TTL 7400 online.&nbsp;</p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380636793627_Screen Shot 2013-10-01 at 10.12.23 AM.png'/></p><p></p><p>Remember when I was explaining Boolean logic for NAND, I wrote&nbsp;</p><p></p><p>A | B | Y</p><p>0 | 0 | 1&nbsp;</p><p>0 | 1 | 1&nbsp;</p><p>1 | 0 | 1&nbsp;</p><p>1 | 1 | 0&nbsp;</p><p></p><table style="font-size:13px;cell-spacing: 0px; border-collapse: collapse;"><tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">A</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">B</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Y</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+</tr>
+</table>
+<p>(Im trying to make tables with hackpad.. it&rsquo;s a bit weird and makes extra column everytime the boxes are filled. )&nbsp;</p><p></p><p>now you see that we have four NAND in one chip, thus the name Quad Nand makes sense.</p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380637626432_Screen Shot 2013-10-01 at 10.26.08 AM.png'/></p><p>This image is taken from TTL cook book, which I recommend you keep close to your working area because sometimes it is easier to look through the book than search for spec sheet each time.&nbsp;</p><p></p><p>Note that we have four gates in the chip. How cool! Make sure to note pin outs, starting from #1, there are Nand gates with outputs at #3, #6, #8 and #11.&nbsp;</p><p></p><p>First step, connect Pin #7 to ground and #14 to voltage. you don&rsquo;t need to use red and blue cable, although i prefer to do so Just make sure you are not connecting ground to voltage. what would be worse is to connect #7 to voltage and #14 to ground. Reversing them will likely to damage this chip.&nbsp;</p><ul style="list-style: none;"><li>&nbsp;<img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380636568411_Screen%20Shot%202013-10-01%20at%2010.09.08%20AM.png'/></li></ul>
+
+<p>First step will be to check NAND works.</p><p><b>SPDT&nbsp;</b></p><p>Connect SPDT switch to ground and voltage.&nbsp;</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380638807548_undefined'/></p><p>SPDT stands for Single Pole Double Throw. It means COM switches between L1 and L2 according to the diagram above. Oh, by the way, these differences between switches are super important for our future investigation because SPST looks similar but only swtich on and off (closed and open circuit). Take a minute to look at all these options of switches.&nbsp; <a href="http://en.wikipedia.org/wiki/Switch"></a>http://en.wikipedia.org/wiki/Switch They also come in all kinds of cool shape, and also we can make them with paper and conductive material.&nbsp;</p><p></p><p>&nbsp;<img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380639004157_Screen Shot 2013-10-01 at 10.49.57 AM.png'/></p><p>Sfpc kit uses these mini switches. middle pin COM stands for Common. That provides signal from one to another state.&nbsp;</p><p>&nbsp;</p><ol><li>We have two of them connected on the breadboard. COM pin is connected to A1 and B1 of Nand gate. Let&rsquo;s call the left one A switch and the right one B switch.&nbsp;</li>
+<li>Connect pin #3 which is Y of the first gate, to anode of LED, the longer leg. connect cathode of LED to 470 ohm resistor which connects to ground. If both switches are HIGH (or 0), the LED must turn off, thus LOW state (or 0).&nbsp;</li></ol>
+<p>&nbsp;</p><p>&nbsp;</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380638759383_Screen Shot 2013-10-01 at 10.45.24 AM.png'/></p><p>If that works, take a picture of the gate with truth table and move on. Taking picture is for you to remember each gate and also to record how gates can be manipulated as<a href='http://en.wikipedia.org/wiki/Combinational_logic'/> combinational logic</a>.&nbsp;</p><p></p><p>These are gates which you can build with one Quad Nand Chip&nbsp;</p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380635941598_undefined'/></p><p>Allrite, everyone ready to twist some logic?</p><p></p><p></p><p><b>NOT&nbsp;</b></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380647833040_undefined'/></p><p>Start making NOT gate by Connecting both inputs of gate together. You would do that by putting wire between 1A and 1B .</p><p>&nbsp;<img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380640526525_Screen Shot 2013-10-01 at 11.15.15 AM.png'/></p><p>Notice orange wire between 1A and 1B. and thae right switch (which was connected to 1B) is now disconnected. We will need to do that because NOT gate is a single input inverter. If both switches are connected to the inputs and giving opposing signals, it will short out the circuit.&nbsp;&nbsp;</p><p></p><p>If all are done, you should be getting&nbsp;</p><table style="font-size:13px;cell-spacing: 0px; border-collapse: collapse;"><tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">A</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Y</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+</tr>
+</table>
+<p></p><p><b>AND</b></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380647858234_undefined'/></p><p>Now let&rsquo;s make AND gate. as we saw on the drawing, you can do that by inverting NAND gate, which gets rid of Bubble infront of NAND, because it is double inversion.</p><p>&nbsp;</p><p>&nbsp;<img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380641723344_Screen Shot 2013-10-01 at 11.35.07 AM.png'/></p><p>&nbsp;</p><p>You will connect B switch again to 1B. 1Y (which is outcome of the first NAND) is connected to 2A (which is pin #4) which is also connected to 2B (which is pin #5). Now it will return following values. Make sure you get lights on when both of switch is HIGH.&nbsp;</p><table style="font-size:13px;cell-spacing: 0px; border-collapse: collapse;"><tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">A</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">B</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Y</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+</tr>
+</table>
+<p><b>OR</b>&nbsp;</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380647883991_undefined'/></p><p>Now, let&rsquo;s make OR gate. Things are getting more busier now because to make two inverters&nbsp;</p><p>&nbsp;<img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380642400547_Screen Shot 2013-10-01 at 11.46.21 AM.png'/></p><p></p><p></p><p>Ohhha. First two gates are used as inverter which feed in to 3A and 3B of the third gate. It&rsquo;s 3Y output is connected to LED, thus giving OR value of following table.</p><table style="font-size:13px;cell-spacing: 0px; border-collapse: collapse;"><tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">A</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">B</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Y</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+</tr>
+</table>
+<p><b>NOR</b>&nbsp;</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380647913062_undefined'/></p><p>NOR is using another inverter on the Y of OR gate. Once again, we are going to trick NAND to make NOT gate. I will not include simulation of the circuit, but simply give you logic diagram one more time.</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380642938458_undefined'/></p><p>Let&rsquo;s try to make this on our own! It should be self explanatory by now! :)&nbsp;</p><p>(*__*)V&nbsp;</p><p></p><p></p><p>More complex gates are waiting for us.&nbsp;</p><p></p><p><b>XOR&nbsp;</b></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380647990234_undefined'/></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380643687897_undefined'/>&nbsp;</p><p>This is an XOR Gate which has a truth table like the following.&nbsp;</p><p></p><table style="font-size:13px;cell-spacing: 0px; border-collapse: collapse;"><tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">A</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">B</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Y</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+</tr>
+</table>
+<p><b>XNOR&nbsp;</b></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380643779267_undefined'/></p><p></p><p>This is XNOR gate which can be achieved by adding an inverter (Not gate) in the Y of XOR gate. You need another IC or work with transistors. Ask for more chips, it&rsquo;s easier!&nbsp;</p><table style="font-size:13px;cell-spacing: 0px; border-collapse: collapse;"><tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">A</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">B</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">Y</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">0</td>
+</tr>
+<tr><td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+<td style="border:1px solid #999; min-width: 50px;height: 22px;line-height: 16px;padding: 0 4px 0 4px;" class="added">1</td>
+</tr>
+</table>
+<p>XNOR gate is very cool, but it&rsquo;s hardly used, where as XOR is instrumental in binary addition and so on. XNOR gate also needs additonal NAND gate made into Not gate. so, it can&rsquo;t be made with Quad NAND chip. You will need another NAND or Not (made with one transistor!) or Inverter chip. So, it&rsquo;s taking more foot prints on the precious real estate of your breadboard.&nbsp;</p><p>&nbsp;</p><p><b>Teaser for next class&nbsp;</b></p><p>Now, with all the logic gates we built, you can start to take advantage of its characteristics for binary calucation.&nbsp;</p><p></p><p>Next week, we will start to make Adders and Subtractors.&nbsp;</p><p></p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380647255350_undefined'/></p><p>This is what we want to make so we can add A and B and get sum of S and carry out to C incase A and B are HIGH.&nbsp;<b>&nbsp;</b></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380642736909_Screen%20Shot%202013-10-01%20at%2011.51.58%20AM.png'/></p><p>&nbsp;You can implement it by making NAND into XOR and making AND with two NPN transistors.</p><p>You might ask,&nbsp;</p><p>Q: &quot;why in the world should we be making XOR from NAND, when we have<a href='http://www.cs.smith.edu/~thiebaut/270/datasheets/sn74ls86rev5.pdf'/> XOR chips </a>available for less than a dollar?&quot;&nbsp;</p><p>A: &quot;it&rsquo;s so that we can to utilize logic values from different points ot XOR(made of NAND) to get various gates and minimize clutter in logic design&quot;</p><p></p><p>Oh oh, we have been already taking advantage of <a href='http://en.wikipedia.org/wiki/De_Morgan&rsquo;s_laws'/>de Morgan&rsquo;s Law</a> which basically states &quot;principles that conjunction and disjunction, or union and intersection, are dual. Thus the negation of P &amp; Q is equivalent to not-P or not-Q&quot; according to online library. Will explain in next lecture.&nbsp;&nbsp;</p><p></p><p>&nbsp;</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380642736909_Screen Shot 2013-10-01 at 11.51.58 AM.png'/></p><p>Note NPN transistors are put in series to turn Emitter on when both inputs are high.&nbsp;</p><p></p><p>You can also use only NAND gates by making final NAND into AND by tying both inputs.&nbsp;</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_fmuY2tuqYVG_p.77239_1380637326626_undefined'/></p><p></p><p></p></body>
+</html>

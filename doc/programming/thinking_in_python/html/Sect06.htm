@@ -1,0 +1,455 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPython.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:12/31/2001
+Translation Time:08:24:12
+Translation Platform:Win32
+Number of Output files:18
+This File:Sect06.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>X: Decorators: dynamic type selection</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    <!-- [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.htm">Revision History</a> ] -->
+    [ <a href="http://www.mindview.net/Books/TIPython/">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  Thinking in Python<br>
+  <small>Revision 0.1.2 (12/31/01) -- Incomplete and Unfinished</small></FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Bruce Eckel &copy;2002 MindView, Inc.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect05.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect07.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc476705902"></A><A NAME="_Toc534420097"></A><A NAME="Heading48"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+X: Decorators: dynamic type selection</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia" SIZE=4>The use of layered objects to
+dynamically and transparently add responsibilities to individual objects is
+referred to as the <I>decorator</I> pattern.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_202">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Used when subclassing creates too many
+(&amp; inflexible) classes
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_203">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">All decorators that wrap around the
+original object must have the same basic interface
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_204">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Dynamic proxy/surrogate?
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_205">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This accounts for the odd inheritance
+structure
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_206">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Tradeoff: coding is more complicated when
+using decorators
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_207">Add Comment</A></FONT><A NAME="_Toc534420098"></A><BR></P></DIV>
+<A NAME="Heading49"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Basic decorator structure</H2></FONT>
+<DIV ALIGN="CENTER"><FONT FACE="Georgia"><IMG SRC="TIPyth02.gif"></FONT><A NAME="_Toc534420099"></A><BR></P></DIV>
+<A NAME="Heading50"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+A coffee example</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Consider going down to the local coffee
+shop, <I>BeanMeUp</I>, for a coffee.  There are typically many different drinks
+on offer -- espressos, lattes, teas, iced coffees, hot chocolate to name a few,
+as well as a number of extras (which cost extra too) such as whipped cream or an
+extra shot of espresso. You can also make certain changes to your drink at no
+extra cost, such as asking for decaf coffee instead of regular coffee.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_208">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Quite clearly if we are going to model
+all these drinks and combinations, there will be sizeable class diagrams. So for
+clarity we will only consider a subset of the coffees: Espresso, Espresso Con
+Panna, Caf&eacute; Late, Cappuccino and Caf&eacute; Mocha. We'll include 2
+extras - whipped cream ("whipped") and an extra shot of espresso; and three
+changes - decaf, steamed milk ("wet") and foamed milk ("dry").
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_209">Add Comment</A></FONT><A NAME="_Toc534420100"></A><BR></P></DIV>
+<A NAME="Heading51"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Class for each combination </H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">One solution is to create an individual
+class for every combination. Each class describes the drink and is responsible
+for the cost etc. The resulting menu is huge, and a part of the class diagram
+would look something like this:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_210">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="CENTER"><FONT FACE="Georgia">
+<IMG SRC="TIPyth03.gif"></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here is one of the combinations, a simple
+implementation of a Cappuccino:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_211">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>class</font> Cappuccino:
+  <font color=#0000ff>def</font> __init__(self):
+    self.cost = 1
+    self.description = <font color=#004488>"Cappucino"</font>
+  <font color=#0000ff>def</font> getCost(self):
+    <font color=#0000ff>return</font> self.cost
+  <font color=#0000ff>def</font> getDescription(self):
+    <font color=#0000ff>return</font> self.description
+
+</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The key to using this method is to
+find the particular combination you want.  So, once you've found the drink you
+would like, here is how you would use it, as shown in the CoffeeShop class in
+the following code:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_212">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: cX:decorator:nodecorators:CoffeeShop.py
+# Coffee example with no decorators
+
+<font color=#0000ff>class</font> Espresso: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> DoubleEspresso: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> EspressoConPanna: <font color=#0000ff>pass</font>
+
+<font color=#0000ff>class</font> Cappuccino:
+  <font color=#0000ff>def</font> __init__(self):
+    self.cost = 1
+    self.description = <font color=#004488>"Cappucino"</font>
+  <font color=#0000ff>def</font> getCost(self):
+    <font color=#0000ff>return</font> self.cost
+  <font color=#0000ff>def</font> getDescription(self):
+    <font color=#0000ff>return</font> self.description
+
+<font color=#0000ff>class</font> CappuccinoDecaf: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> CappuccinoDecafWhipped: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> CappuccinoDry: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> CappuccinoDryWhipped: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> CappuccinoExtraEspresso: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> CappuccinoExtraEspressoWhipped: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> CappuccinoWhipped: <font color=#0000ff>pass</font>
+
+<font color=#0000ff>class</font> CafeMocha: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> CafeMochaDecaf: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> CafeMochaDecafWhipped:
+  <font color=#0000ff>def</font> __init__(self):
+    self.cost = 1.25
+    self.description = \
+      <font color=#004488>"Cafe Mocha decaf whipped cream"</font>
+  <font color=#0000ff>def</font> getCost(self):
+    <font color=#0000ff>return</font> self.cost
+  <font color=#0000ff>def</font> getDescription(self):
+    <font color=#0000ff>return</font> self.description
+
+<font color=#0000ff>class</font> CafeMochaExtraEspresso: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> CafeMochaExtraEspressoWhipped: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> CafeMochaWet: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> CafeMochaWetWhipped: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> CafeMochaWhipped: <font color=#0000ff>pass</font>
+
+<font color=#0000ff>class</font> CafeLatte: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> CafeLatteDecaf: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> CafeLatteDecafWhipped: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> CafeLatteExtraEspresso: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> CafeLatteExtraEspressoWhipped: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> CafeLatteWet: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> CafeLatteWetWhipped: <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> CafeLatteWhipped: <font color=#0000ff>pass</font>
+
+cappuccino = Cappuccino()
+<font color=#0000ff>print</font> (cappuccino.getDescription() + <font color=#004488>": $"</font> + 
+  &#180;cappuccino.getCost()&#180;)
+
+cafeMocha = CafeMochaDecafWhipped()
+<font color=#0000ff>print</font> (cafeMocha.getDescription()
+  + <font color=#004488>": $"</font> + &#180;cafeMocha.getCost()&#180;)
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">And here is the corresponding
+output:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_213">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>Cappucino: $1.0Cafe Mocha decaf whipped cream: $1.25</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You
+can see that creating the particular combination you want is easy, since you are
+just creating an instance of a class. However, there are a number of problems
+with this approach. Firstly, the combinations are fixed statically so that any
+combination a customer may wish to order needs to be created up front. Secondly,
+the resulting menu is so huge that finding your particular combination is
+difficult and time consuming.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_214">Add Comment</A></FONT><A NAME="_Toc534420101"></A><BR></P></DIV>
+<A NAME="Heading52"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+The decorator approach</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Another approach would be to break the
+drinks down into the various components such as espresso and foamed milk, and
+then let the customer combine the components to describe a particular coffee.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_215">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In order to do this programmatically, we
+use the Decorator pattern.  A Decorator adds responsibility to a component by
+wrapping it, but the Decorator conforms to the interface of the component it
+encloses, so the wrapping is transparent. Decorators can also be nested without
+the loss of this transparency.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_216">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="CENTER"><FONT FACE="Georgia"><IMG SRC="TIPyth04.gif"></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Methods invoked on the Decorator can in
+turn invoke methods in the component, and can of course perform processing
+before or after the invocation.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_217">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">So if we added <B>getTotalCost()</B> and
+<B>getDescription()</B> methods to the <B>DrinkComponent</B> interface, an
+Espresso looks like this:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_218">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>class</font> Espresso(Decorator):
+  cost = 0.75f
+  description = <font color=#004488>" espresso"</font>
+  public Espresso(DrinkComponent):
+    Decorator.__init__(self, component)
+
+  <font color=#0000ff>def</font> getTotalCost(self):
+    <font color=#0000ff>return</font> self.component.getTotalCost() + cost
+
+  <font color=#0000ff>def</font> getDescription(self):
+    <font color=#0000ff>return</font> self.component.getDescription() +
+      description
+</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You combine the components to
+create a drink as follows, as shown in the code below:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_219">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: cX:decorator:alldecorators:CoffeeShop.py
+# Coffee example using decorators
+
+<font color=#0000ff>class</font> DrinkComponent:
+  <font color=#0000ff>def</font> getDescription(self):
+    <font color=#0000ff>return</font> self.__class__.__name__
+  <font color=#0000ff>def</font> getTotalCost(self):
+    <font color=#0000ff>return</font> self.__class__.cost
+
+<font color=#0000ff>class</font> Mug(DrinkComponent):
+  cost = 0.0
+
+<font color=#0000ff>class</font> Decorator(DrinkComponent):
+  <font color=#0000ff>def</font> __init__(self, drinkComponent):
+    self.component = drinkComponent
+  <font color=#0000ff>def</font> getTotalCost(self):
+    <font color=#0000ff>return</font> self.component.getTotalCost() + \
+      DrinkComponent.getTotalCost(self)
+  <font color=#0000ff>def</font> getDescription(self):
+    <font color=#0000ff>return</font> self.component.getDescription() + \
+      ' ' + DrinkComponent.getDescription(self)
+
+<font color=#0000ff>class</font> Espresso(Decorator):
+  cost = 0.75
+  <font color=#0000ff>def</font> __init__(self, drinkComponent):
+    Decorator.__init__(self, drinkComponent)
+
+<font color=#0000ff>class</font> Decaf(Decorator):
+  cost = 0.0
+  <font color=#0000ff>def</font> __init__(self, drinkComponent):
+    Decorator.__init__(self, drinkComponent)
+
+<font color=#0000ff>class</font> FoamedMilk(Decorator):
+  cost = 0.25
+  <font color=#0000ff>def</font> __init__(self, drinkComponent):
+    Decorator.__init__(self, drinkComponent)
+
+<font color=#0000ff>class</font> SteamedMilk(Decorator):
+  cost = 0.25
+  <font color=#0000ff>def</font> __init__(self, drinkComponent):
+    Decorator.__init__(self, drinkComponent)
+
+<font color=#0000ff>class</font> Whipped(Decorator):
+  cost = 0.25
+  <font color=#0000ff>def</font> __init__(self, drinkComponent):
+    Decorator.__init__(self, drinkComponent)
+
+<font color=#0000ff>class</font> Chocolate(Decorator):
+  cost = 0.25
+  <font color=#0000ff>def</font> __init__(self, drinkComponent):
+    Decorator.__init__(self, drinkComponent)
+
+cappuccino = Espresso(FoamedMilk(Mug()))
+<font color=#0000ff>print</font> cappuccino.getDescription().strip() + \
+  <font color=#004488>": $"</font> + &#180;cappuccino.getTotalCost()&#180;
+
+cafeMocha = Espresso(SteamedMilk(Chocolate(
+  Whipped(Decaf(Mug())))))
+
+<font color=#0000ff>print</font> cafeMocha.getDescription().strip() + \
+  <font color=#004488>": $"</font> + &#180;cafeMocha.getTotalCost()&#180;
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This approach would certainly
+provide the most flexibility and the smallest menu. You have a small number of
+components to choose from, but assembling the description of the coffee then
+becomes rather arduous.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_220">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">If you want to describe a plain
+cappuccino, you create it with</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>plainCap = Espresso(FoamedMilk(Mug()))</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Creating
+a decaf Caf&eacute; Mocha with whipped cream requires an even longer
+description.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_221">Add Comment</A></FONT><A NAME="_Toc534420102"></A><BR></P></DIV>
+<A NAME="Heading53"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Compromise</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The previous approach takes too long to
+describe a coffee. There will also be certain combinations that you will
+describe regularly, and it would be convenient to have a quick way of describing
+them.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_222">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The 3rd approach is a mixture of the
+first 2 approaches, and combines flexibility with ease of use. This compromise
+is achieved by creating a reasonably sized menu of basic selections, which would
+often work exactly as they are, but if you wanted to decorate them (whipped
+cream, decaf etc.) then you would use decorators to make the modifications. This
+is the type of menu you are presented with in most coffee shops.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_223">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="CENTER"><FONT FACE="Georgia"><IMG SRC="TIPyth05.gif"></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here is how to create a basic selection,
+as well as a decorated selection:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: cX:decorator:compromise:CoffeeShop.py
+# Coffee example with a compromise of basic
+# combinations <font color=#0000ff>and</font> decorators
+
+<font color=#0000ff>class</font> DrinkComponent:
+  <font color=#0000ff>def</font> getDescription(self):
+    <font color=#0000ff>return</font> self.__class__.__name__
+  <font color=#0000ff>def</font> getTotalCost(self):
+    <font color=#0000ff>return</font> self.__class__.cost
+
+<font color=#0000ff>class</font> Espresso(DrinkComponent):
+  cost = 0.75
+
+<font color=#0000ff>class</font> EspressoConPanna(DrinkComponent):
+  cost = 1.0
+
+<font color=#0000ff>class</font> Cappuccino(DrinkComponent):
+  cost = 1.0
+
+<font color=#0000ff>class</font> CafeLatte(DrinkComponent):
+  cost = 1.0
+
+<font color=#0000ff>class</font> CafeMocha(DrinkComponent):
+  cost = 1.25
+
+<font color=#0000ff>class</font> Decorator(DrinkComponent):
+  <font color=#0000ff>def</font> __init__(self, drinkComponent):
+    self.component = drinkComponent
+  <font color=#0000ff>def</font> getTotalCost(self):
+    <font color=#0000ff>return</font> self.component.getTotalCost() + \
+      DrinkComponent.getTotalCost(self)
+  <font color=#0000ff>def</font> getDescription(self):
+    <font color=#0000ff>return</font> self.component.getDescription() + \
+      ' ' + DrinkComponent.getDescription(self)
+
+<font color=#0000ff>class</font> ExtraEspresso(Decorator):
+  cost = 0.75
+  <font color=#0000ff>def</font> __init__(self, drinkComponent):
+    Decorator.__init__(self, drinkComponent)
+
+<font color=#0000ff>class</font> Whipped(Decorator):
+  cost = 0.50
+  <font color=#0000ff>def</font> __init__(self, drinkComponent):
+    Decorator.__init__(self, drinkComponent)
+
+<font color=#0000ff>class</font> Decaf(Decorator):
+  cost = 0.0
+  <font color=#0000ff>def</font> __init__(self, drinkComponent):
+    Decorator.__init__(self, drinkComponent)
+
+<font color=#0000ff>class</font> Dry(Decorator):
+  cost = 0.0
+  <font color=#0000ff>def</font> __init__(self, drinkComponent):
+    Decorator.__init__(self, drinkComponent)
+
+<font color=#0000ff>class</font> Wet(Decorator):
+  cost = 0.0
+  <font color=#0000ff>def</font> __init__(self, drinkComponent):
+    Decorator.__init__(self, drinkComponent)
+
+cappuccino = Cappuccino()
+<font color=#0000ff>print</font> cappuccino.getDescription() + <font color=#004488>": $"</font> + \
+  &#180;cappuccino.getTotalCost()&#180;
+
+cafeMocha = Whipped(Decaf(CafeMocha()))
+<font color=#0000ff>print</font> cafeMocha.getDescription() + <font color=#004488>": $"</font> + \
+  &#180;cafeMocha.getTotalCost()&#180;
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can see that creating a
+basic selection is quick and easy, which makes sense since they will be
+described regularly.  Describing a decorated drink is more work than when using
+a class per combination, but clearly less work than when only using decorators.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_224">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The final result is not too many classes,
+but not too many decorators either. Most of the time it's possible to get away
+without using any decorators at all, so we have the benefits of both approaches.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_225">Add Comment</A></FONT><A NAME="_Toc534420103"></A><BR></P></DIV>
+<A NAME="Heading54"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Other considerations</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">What happens if we decide to change the
+menu at a later stage, such as by adding a new type of drink? If we had used the
+class per combination approach, the effect of adding an extra such as syrup
+would be an exponential growth in the number of classes. However, the
+implications to the all decorator or compromise approaches are the same - one
+extra class is created.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_226">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">How about the effect of changing the cost
+of steamed milk and foamed milk, when the price of milk goes up? Having a class
+for each combination means that you need to change a method in each class, and
+thus maintain many classes. By using decorators, maintenance is reduced by
+defining the logic in one place.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_227">Add Comment</A></FONT><A NAME="_Toc534420104"></A><BR></P></DIV>
+<A NAME="Heading55"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Exercises</H2></FONT>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Add a Syrup class to the
+decorator approach described above. Then create a Caf&eacute; Latte (you'll need
+to use steamed milk with an espresso) with syrup.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_228">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Repeat
+Exercise 1 for the compromise approach.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_229">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Implement
+the decorator pattern to create a Pizza restaurant, which has a set menu of
+choices as well as the option to design your own pizza.  Follow the compromise
+approach to create a menu consisting of a Margherita, Hawaiian, Regina, and
+Vegetarian pizzas, with toppings (decorators) of Garlic, Olives, Spinach,
+Avocado, Feta and Pepperdews. Create a Hawaiian pizza, as well as a Margherita
+decorated with Spinach, Feta, Pepperdews and Olives.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_230">Add Comment</A></FONT></OL>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect05.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect07.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:12/31/2001</P></DIV>
+
+</BODY>
+
+</HTML>

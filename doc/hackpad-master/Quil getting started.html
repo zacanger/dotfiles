@@ -1,0 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="6"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$QSXS6DM9LV1</title>
+</head>
+<body><h1>Quil getting started</h1><p>Quil is Clojure wrapper for Processing</p><p><a href='https://github.com/quil/quil'/>Github&nbsp;</a></p><p></p><p><b>Install Leiningen</b></p><p>&quot;Leiningen is the easiest way to use <a href='http://clojure.org/'/>Clojure</a>. &quot;</p><p>You need to install it also to use Quil.</p><p><a href='http://leiningen.org/'/>Official page&nbsp;</a></p><p><a href='https://github.com/technomancy/leiningen'/>Github</a></p><p></p><ol><li>Copy the script from <a href='https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein'/>here</a> and saved with a name &quot;lein&quot;.</li>
+<li>Then put on `/usr/bin/` folder on your Mac.&nbsp; (make `$PATH` to `/usr/bin/`, means you can run lein by just type `lein` in Terminal)&nbsp;&nbsp;</li>
+<li>You may need to change the permission by `$ chmod 755 /usr/bin/lein`.&nbsp;&nbsp;</li>
+<li>Test with `$ lein -v`.&nbsp; It shows a version if the install was successful</li></ol>
+
+<p>---&nbsp;</p><p></p><p><b>Make a Quil project</b></p><p></p><p>1. `$ lein new quil myapp`&nbsp; //create a project</p><p>2. `$ cd myapp` //go inside the folder just created</p><p>3. `$ lein repl` //launch repl&nbsp;&nbsp;</p><p>4. `user=&gt; (require &rsquo;myapp.core :reload)` // *run the project&nbsp;&nbsp;</p><p>*the location of the project is `src/myapp/core.clj` in this case.&nbsp;&nbsp;&nbsp;</p><p>In repl, use `.` instead of `/` (not `myapp/core.clj` but `myapp.core`)&nbsp;</p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_zYGDPTgodYz_p.257357_1416327250923_Screen%20Shot%202014-11-17%20at%2017.58.52.png'/></p><p></p><p>There are many examples on github (<a href="https://github.com/quil/quil-examples)"></a><a href='https://github.com/quil/quil-examples'/>https://github.com/quil/quil-examples</a>).&nbsp;</p><p>The tutorial on this page is helpful.</p><p></p><p></p></body>
+</html>

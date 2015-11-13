@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="1460"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$dJv1JnYG56s</title>
+</head>
+<body><h1>Zach&rsquo;s Animation Class</h1><p></p><p><b>Class on github</b></p><p>here - <a href="https://github.com/ofZach/algo2012"></a>https://github.com/ofZach/algo2012</p><p></p><p><b>Examples</b></p><p>Mushroom on an oscilloscope - <a href='https://www.youtube.com/watch?v=rtR63-ecUNo'/>youtube</a></p><p>Jerobeam Fenderson - <a href='https://www.youtube.com/watch?v=YqSvkNjWnnQ'/>nuclear black noise</a></p><p>John Whitney&rsquo;s use of analogue computers (<a href='https://www.youtube.com/watch?v=5eMSPtm6u5Y'/>video</a>) (<a href='http://en.wikipedia.org/wiki/John_Whitney_(animator)'/>wikipedia</a>) (<a href='https://www.youtube.com/watch?v=TbV7loKp69s'/>catalog 1961</a>) - made the graphics manually (math/by hand) and photographed them on the computer then animated them (<a href='http://rhizome.org/editorial/2013/may/9/did-vertigo-introduce-computer-graphics-cinema/'/>vertigo title sequence</a>) (<a href='https://www.youtube.com/watch?v=BzB31mD4NmA'/>permutations</a>)</p><p>lissajous - <a href="http://en.wikipedia.org/wiki/Lissajous_curve"></a><a href='http://en.wikipedia.org/wiki/Lissajous_curve'/>http://en.wikipedia.org/wiki/Lissajous_curve</a></p><p></p><p><b>sine and cosine</b></p><p>...think of the dot moving around the circle</p><ul><li>sine follows the height of the dot</li>
+<li>cosine follows the movement back and forth of the dot</li></ul>
+
+<p>example in OF</p><ul><li>sin thinks in radiants so every 6.28 seconds it will repeat (2 pi)</li></ul>
+<ul class="code"><li>void ofApp::draw(){</li>
+<li>&nbsp;&nbsp;&nbsp; ofBackground(0,0,0);</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp; float pct = (sin(ofGetElapsedTimef()) / 2.0) + 0.5;</li>
+<li>&nbsp;&nbsp;&nbsp; cout &lt;&lt; pct &lt;&lt; endl;</li>
+<li><br/></li>
+<li>&nbsp;&nbsp;&nbsp; float xPos = 250;</li>
+<li>&nbsp;&nbsp;&nbsp; ofCircle(xPos,250,30);</li>
+<li>}</li></ul>
+<p>*gives us the small numbers (see in debug). you can convert to percent and remap to scale and offset to get big numbers (replace line 7)</p><ul class="code"><li>float xPos = 300 + pct * 200;</li></ul>
+<p>This is the long way, a short way to do it is&nbsp;</p><ul class="code"><li>float xPos = ofMap( sin(ofGetElapsedTimef()), -1, 1, 300, 500);</li></ul>
+<p>Can make it go faster by adding this</p><ul class="code"><li>float xPos = ofMap( sin(ofGetElapsedTimef()*15), -1, 1, 300, 500);</li></ul>
+
+<p><b>Combining sine waves</b></p><p>...using volume to turn the &rsquo;frequency&rsquo; of the other sine</p><ul><li>carrier - the underlying frequency</li>
+<li>modulator - the frequency that is changing the carrier</li></ul>
+<ul class="code"><li>code here...</li></ul>
+<p><a href='/ep/profile/AUZb6pnTdHj'/>Zach Lieberman</a></p><p></p><p><b>Moving sine and cosinein a circle</b></p><p>X = xorig + r * cos(angle)</p><p>y = yorig + r * sin(angle)</p><ul class="code"><li>...code example...</li></ul>
+<ul><li>in OF you&rsquo;ll see the sin represented as &rsquo;-sin&rsquo;, its because 0,0 is the top left corner</li>
+<li>hard to see what is happening but can record the path the cursor to see the movement</li></ul>
+<ul class="code"><li>...code example...</li></ul>
+
+<p>At this point he goes into week <a href='https://github.com/ofZach/algo2012/tree/master/week4'/>4 &amp; 5 of the git hub examples</a></p><ul><li>next week - &rsquo;atan&rsquo; lines, magnitude (how long the line is) &amp; orientation (angle)&nbsp;</li>
+<li>push/pop Matrix<ul><li>translate, rotate then redraw the box</li></ul>
+</ul>
+
+<p><b>Homework from 10/27</b></p><ul class="task"><li>Create your own John Whitney art using sine &amp; cosine</li>
+<li>make a creature, can it breathe - can it have wings</li></ul>
+
+<p><b>Useful resources</b></p><p>CODING MATH youtube channel. The guy is using very basic javascript so it&rsquo;s also good for learning basic js stuff.</p><p><a href="https://www.youtube.com/channel/UCF6F8LdCSWlRwQm_hfA2bcQ"></a><a href='https://www.youtube.com/channel/UCF6F8LdCSWlRwQm_hfA2bcQ'/>https://www.youtube.com/channel/UCF6F8LdCSWlRwQm_hfA2bcQ</a></p><p>You can find Trigonometry in video lessons 1 to 5 and easing in lessons 27 and 28.</p><p></p><p></p><p></p></body>
+</html>

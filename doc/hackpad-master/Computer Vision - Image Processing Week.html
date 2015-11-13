@@ -1,0 +1,426 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="4334"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$3EkjrZWnTNN</title>
+</head>
+<body><h1>Computer Vision &amp; Image Processing Week</h1><p>Proffesor Zach Lieberman</p><p>SFPC 2013</p><p></p><p>code:&nbsp; <a href="https://github.com/ofZach/sfpc_image_cv"></a>https://github.com/ofZach/sfpc_image_cv</p><p>_____________________________________________________________________</p><p></p><p><b>Day 1</b></p><ul><li>Create their own computer vision library. <a href='https://moises404.hackpad.com/ep/search/?q=%23idea3learning&amp;via=x1d05NEslZG'/>#idea</a>s<a href='/ep/search/?q=%23idealearning&amp;via=3EkjrZWnTNN'/>4</a><a href='https://moises404.hackpad.com/ep/search/?q=%23idea3learning&amp;via=x1d05NEslZG'/>learning</a><ul><li>Statistical, deriving.</li></ul>
+</li>
+<li>Two types of Algorythms<ul><li>Brute Force (For Loops)<ul><li>&nbsp;(muscle algorithms)</li>
+<li>Lots of pixels, nested For Loops</li></ul>
+</li>
+<li>Brain Algorythms<ul><li>Deriving information (statistics, smart things)</li></ul>
+</li></ul>
+</li>
+<li>The things that you learn when thinking about images have great resonance when thinking about images.</li>
+<li>Data Visualization, Signal Analysis.</li>
+<li>Resolutions, Sizes<ul><li>1024 x 768 (XGA)</li>
+<li>640 x 480 (VGA)</li>
+<li>1920 x 1080 (HD)<ul><li>&rsquo;i&rsquo; means interlaced or not</li>
+<li>renders every other line</li></ul>
+</li></ul>
+</li>
+<li>How big in size is a 640 x 480 image.<ul><li>Assume that is three channels</li>
+<li>921,600 / 1024 = .88 mb</li>
+<li>Theres a ton of information there, plus each frame.</li></ul>
+</li>
+<li>Our job is take this thing that has alot of information and to still it down.<ul><li>A Funnel: still it down into smaller pieces of information.</li></ul>
+</li>
+<li>How images are laid down in memory.</li></ul>
+<ul style="list-style: none;"><li><b>Libraries, Tools and Approaches</b></li><ul><li>How can we take an image as input and derive meaning.<ul><li>Character recognition</li>
+<li>Face Detection</li>
+<li>Image similarity</li>
+<li>3D view</li></ul>
+</li>
+<li>OpenCV<ul><li>Intel created an open sourced computer vision library.</li></ul>
+</ul>
+</ul>
+<ul style="list-style: none;"><li><b>Phototomemitry</b></li><ul><li>The science of sending photographs.</li>
+<li>Patents around phototomemitry.</li>
+<li>Encode and Image send it and decode it.</li>
+<li>jmcvey.net<ul><li><a href="http://www.jmcvey.net/cable/elements/letters1.htm"></a>http://www.jmcvey.net/cable/elements/letters1.htm</li>
+<li><a href="http://www.jmcvey.net/cable/elements/pictures1.htm"></a>http://www.jmcvey.net/cable/elements/pictures1.htm</li>
+<li><a href="http://www.jmcvey.net/cable/elements/pictures2.htm"></a>http://www.jmcvey.net/cable/elements/pictures2.htm</li>
+<li><a href="http://www.jmcvey.net/cable/elements/signs1.htm"></a>http://www.jmcvey.net/cable/elements/signs1.htm</li></ul>
+</li>
+<li>How you would analyse an image and decode it.</li>
+<li>It would take about three hours to get an image across the atlantic at first</li>
+<li>note: see gonazalez and woods digital image processing for some history.</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>Images</b></li><ul><li>Images are laid out in memory</li>
+<li>Images are sequences in memory.</li>
+<li><u>Images Project Example</u><ul><li>Take a sheet of paper</li>
+<li>Draw a grid, figure out how many pixels you want to have. 3 ~ 10</li>
+<li>Cut it into strips.</li>
+<li>In the end the memory is just laid out into sequences.</li></ul>
+</li>
+<li>Usually refers to images as a two dimensional for loop</li>
+<li>Two dimensional array.</li>
+<li>Its helpeful to refer to horizontal and vertical (x, y) variables</li>
+<li>y * w + x is an important idea.&nbsp; we use this routine alot (you can also write x * h + y depending on how you layout the data).&nbsp; 2d access to 1d array.&nbsp;&nbsp;&nbsp;</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>Synthesize images</b></li><ul><li>create an image and put it in two places.</li>
+<li>actually try to generate an image, put values into the pixels.</li>
+<li>Disneyland vs. Detroit (ofPixels vs. unsigned char *)</li>
+<li>Allocate an image from scratch.</li>
+<li>If you don&rsquo;t allocate your image would crash.<ul><li>Stored in two places(array of pixel values in RAM and a Texture in Video RAM.<ul><li>Alter the memory and uploaded to ram.</li>
+<li>Has memory, and texture, which is on the memory on the graphics card.</li>
+<li>Graphics does bilinear interpolation.</li>
+<li>The data is one to one.</li>
+<li>Getting access to the pixels.<ul><li>ofGetPixels<ul><li>returns an unsigned char pointer<ul><li>An adress in memory where bytes are.</li>
+<li>500 x 500 = 250,000 bytes.</li>
+<li>Sequential memory.</li>
+<li>You can treat pointers like an array.</li>
+<li>You can step by that byte (ex. 1 by, or char 32 bits)</li></ul>
+</li>
+<li>very low level</li>
+<li>giving you the position in memory where the pixels are.</li>
+<li>update transfers the pixel&nbsp; in the graphics card.</li></ul>
+</li></ul>
+</li>
+<li>OpenGL<ul><li>Is a glorified triangle engine</li>
+<li>textures is how we get pixel data on to the screen, upload from ram to texture, texture is applied to triangles.&nbsp;</li></ul>
+</li>
+<li>2 dimensional Way<ul><li>2 dimensional for loop to acces the pixels.</li>
+<li>pixels[] J * img.Width + i ] = ???</li></ul>
+</ul>
+</ul>
+</ul>
+<ul style="list-style: none;"><li><b>Protected Memory</b></li><ul><li>OS 9 would crash really hard<ul><li>You had unprotected memory, that would explode on the operating system.</li>
+<li>You can bounce in memory but keeps you away from the OS system.</li></ul>
+</li>
+<li>Data Diaries by Corey Archangel</li>
+<li>Zachs example load from RAM (in the l2l examples, called memory dumper)</li></ul>
+</ul>
+</ul>
+<ul style="list-style: none;"><li><b>Mosaic</b></li><ul><li>If you wanted to be precise you would actually average the pixels.</li>
+<li>Scale based on the brightness of the pixel.</li>
+<li>Computer VIsion tend to work really well with grayscale images.<ul><li>Easier to think about and do the operations in gray scale.</li></ul>
+</li>
+<li>Full Screen Anti Alising</li>
+<li>Makes images smooth.</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>Small Aissignment</b></li><ul><li>What are the limits of perception. <a href='https://moises404.hackpad.com/ep/search/?q=%23quote&amp;via=x1d05NEslZG'/>#quote</a></li>
+<li>What is the borderline of perception.</li>
+<li>Animate the limits of perception.<ul><li>Change the mapping based on some parameter</li>
+<li>From no acuracy to accuracy.</li></ul>
+</li>
+<li>How much information do you need to perceibe an image.</li>
+<li>Small things you can do to show information of an image.</li>
+<li>Science Channel: Limits of Perception<ul><li><a href="http://www.youtube.com/watch?v=4zaM2eIZDKg"></a><a href='http://www.youtube.com/watch?v=4zaM2eIZDKg'/>http://www.youtube.com/watch?v=4zaM2eIZDKg</a></li></ul>
+</li>
+<li>Ex. Using the brightness value of a pixel to rotate a line.</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>Asking Pixels Questions</b></li><ul><li>Basic Level of Talking Image Processing</li>
+<li>Threshold Operations</li>
+<li>BInary Images<ul><li>True or False (256 values =&gt; 2 values )</li>
+<li>Cut the data to be smaller amounts.</li></ul>
+</li>
+<li>Where we go from this, the realtionship of pixels and their neighbors.<ul><li>Creating systsms by which you find something interesting is to still it down to something you find meaningful. <a href='https://moises404.hackpad.com/ep/search/?q=%23quote&amp;via=x1d05NEslZG'/>#quote</a></li></ul>
+</li>
+<li>Thresholds of perception.</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>PushMatrix &amp; PopMatrix</b></li><ul><li>Push and Pop</li>
+<li>Two boxes of numbers</li>
+<li>When you pass the number in it goes through the box.</li>
+<li>Identity matrix comes out the same on the other side.</li>
+<li>ModelView Matrix &amp; Projection ViewMatrix (OpenGL)<ul><li>ModelView<ul><li>Manipulating the things that you are drawing.</li></ul>
+</li>
+<li>Projections<ul><li>One things are moved in 3D how are they projected and flatend back to 2D.</li></ul>
+</li></ul>
+</li>
+<li>Linear Algebra is the study of Boxes of Numbers</li>
+<li>Mental Model of Graph Paper<ul><li>Everything is oriented from (0, 0)</li></ul>
+</li>
+<li>Snapshots &rsquo;Queue&rsquo;<ul><li>Nested Snapshot.</li>
+<li>Last in, first out&nbsp; (LIFO)</li>
+<li>Lunch Trays.</li>
+<li>World Coordinates and Earth coordinates.</li></ul>
+</li>
+<li>One of the hardest things to do is having an object rotate around itself.<ul><li>You translate out to the center of the object.</li></ul>
+</li>
+<li>OF stores 32 Push Pops Matrix. (I think! -- zach)</li>
+<li>Scene Graph System</li>
+<li>Algorythms for Segmenatation</li>
+<li>Statistics</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>Frequency Information</b></li><ul><li>Low Frenquency &amp; High Frequency Information</li>
+<li>Optical Illusion: Marilyn Monroe, Albert Einstein</li>
+<li>Frequency Space</li>
+<li>ITP Proffesor Projects</li>
+<li>JPEG compresion.</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>Aritist &amp; Projects</b></li><ul><li>Parag K Mitai<ul><li>Vimeo</li></ul>
+</li>
+<li>Daniel Rozlen ITP Proffesor<ul><li>Wooden Pixels</li>
+<li>Mirrors out objects</li>
+<li>Interesting Physical Pixels</li></ul>
+</li>
+<li>Army of Luck<ul><li>Global Pursuit of Hapiness</li></ul>
+</li>
+<li>Zamzara<ul><li>Timeline zoom of Mecca</li>
+<li>4K</li></ul>
+</li>
+<li>Carragara Torrent Site<ul><li>Private Bitorrent Site</li>
+<li>Have to keep a ratio</li>
+<li>They hando subtitles<ul><li>Culture of subtitles</li></ul>
+</li></ul>
+</li>
+<li>Golan Animation Tool</li>
+<li>Chuck Close<ul><li>extremely large portrait paintings.</li>
+<li>Very computational approach to painting.</li>
+<li>Had some sort of nervous problem were he became paralyzed.<ul><li>His style of painting changed.<ul><li>Changed his style.</li></ul>
+</li>
+<li>Where the pixels of his painting changed color.</li>
+<li>His studio is right on bond street.</li></ul>
+</li>
+<li>Chuck Close Generator.<ul><li>Figured out the vocabulary.</li></ul>
+</li></ul>
+</li>
+<li>Ken Knowlton<ul><li>He was at Bell Labs in the 50s and 60s</li>
+<li>Experimenting with how you can get data out of the computer system.</li>
+<li>Taking images as input and creating an ascci based output.</li>
+<li>Started creating mosaics.</li>
+<li>Now becaise we have so many tools, its really hard to look at his artwork.</li>
+<li>Running 27 iMac with DOS emulator.</li></ul>
+</li>
+<li>Aram Bartholl<ul><li>Creating physical real world examples of digital things.</li>
+<li>Feels like a digital system but its a physical thing.</li>
+<li>Random Screen.<ul><li>Little Candles, the heat making the candle spin.</li>
+<li>The pattern is derived from the physical properties of a candle.</li></ul>
+</li></ul>
+</li>
+<li>Kelly Tonyhugh<ul><li>Pixel Faucet</li></ul>
+</li>
+<li>Thomas Bayrle<ul><li>Documenta</li></ul>
+</ul>
+</ul>
+<ul style="list-style: none;"><li><b>History</b></li><ul><li>Bartiene System</li>
+<li>Typography automatic systems for drawing.<ul><li>People were designing these kinds of type faces in 1912.</li></ul>
+</li></ul>
+</li>
+<li>The future of art is set to include computer wizardry <a href='https://moises404.hackpad.com/ep/search/?q=%23quote&amp;via=x1d05NEslZG'/>#quote</a></li></ul>
+
+<p><b>Day 2</b></p><ul><li>One of the most important things in computer vision is understanding statistics.</li></ul>
+<ul style="list-style: none;"><li><b>Asking Questions about Pixels</b><ul style="list-style: none;"><li><b>Connectivity</b></li><ul><li>Look at the relationships of pixels and their neighbors.</li>
+<li>Box Model, 2 dimensional box<ul><li>An aproximation of a hill</li></ul>
+</ul>
+</ul>
+<ul style="list-style: none;"><li><b>Binary Data</b> (Foreground, Background)</li><ul><li>READING: <i>The Handbook of Image Processing Algorithms in C</i> (Zach&rsquo;s favorite book of all time!!!!)<ul><li><a href="http://adaptiveart.eecs.umich.edu/2011/wp-content/uploads/2011/09/The-pocket-handbook-of-image-processing-algorithms-in-C.pdf"></a>http://adaptiveart.eecs.umich.edu/2011/wp-content/uploads/2011/09/The-pocket-handbook-of-image-processing-algorithms-in-C.pdf</li>
+<li>(look how unhappy she looks!!)&nbsp;</li>
+<li><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_3EkjrZWnTNN_p.77542_1381243675085_sample.jpg'/></li>
+<li>so simple you can write them down on a piece of paper.</li>
+<li>photoshop techniques reproducible in code.<ul><li>Pixel exercise with 9 people and paper.</li>
+<li>ex. sharpening, blurring, noise, finding edges</li>
+<li>One pixel has eight pixels around it, and those are the most important neighbors.&nbsp;</li>
+<li>This group of nine neighbors are known as the kernel</li>
+<li>Averaging all of these values and applying it to the middle pixel is a &quot;box blur&quot;</li>
+<li>Using a kernel for image processing like this is known as &quot;convolution&quot;, taking one signal and &quot;convolving&quot; it signal with another</li>
+<li><a href="http://en.wikipedia.org/wiki/Kernel_(image_processing)"></a>http://en.wikipedia.org/wiki/Kernel_(image_processing)</li></ul>
+</li></ul>
+</li>
+<li>Photoshop Examples<ul><li>Kernel Image Processing<ul><li>Convoution<img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_3EkjrZWnTNN_p.77541_1381244500439_3D_Convolution_Animation.gif'/></li></ul>
+</li>
+<li>Creating your own photoshop kernels.</li>
+<li>Filter =&gt; Other =&gt; Custom</li>
+<li>Examples for box blur, gaussian blur, sharpen, find edges</li></ul>
+</ul>
+</ul>
+<ul style="list-style: none;"><li>READING: Vision by David Mar</li><ul><li><a href="http://www.amazon.com/Vision-Computational-Investigation-Representation-Information/dp/0262514621"></a>http://www.amazon.com/Vision-Computational-Investigation-Representation-Information/dp/0262514621</li>
+<li><a href="http://en.wikipedia.org/wiki/David_Marr_(neuroscientist)"></a>http://en.wikipedia.org/wiki/David_Marr_(neuroscientist)</li>
+<li>ImageJ (Java)<ul><li><a href="http://rsbweb.nih.gov/ij/"></a>http://rsbweb.nih.gov/ij/</li></ul>
+</li>
+<li>Standard test image</li></ul>
+</li>
+<li>Zach demonstrates blur and sharpening with kernelExample in OpenFrameworks</li></ul>
+</li>
+<li><b>Basic Principles of Computers Vision</b></li><ul><li>Background Subtraction</li>
+<li>Motion Detection</li>
+<li>Libraries: OpenCV (as ofxOpenCV in OpenFrameworks) and ofxCV<ul><li>OpenCV is by Intel, ofxOpenCV is a wrapper around it in C style (which Zach uses), ofxCV is the C++ style by Kyle McDonald</li>
+<li>ofx and open cv are both wrapping open cv</li>
+<li>Some weird things about OpenCV to know about:</li><ol><li>When you allocate an image, it goes through a data alignment process. There are big performance benefits to this, to jump between lines but you have to keep track of its allocated width vs its actual width. ofxOpenCV makes this easier to deal with</li>
+<li>When you create an image and perform an operation, that operation needs to be done from one image into another, you always need to have two images around. ofxOpenCV has an image object that contains two images in it to handle all of the vv&quot;ping ponging&quot; between images while processing</li></ol>
+</ul>
+</ul>
+<ul><li>A good camera for CV is Sony&rsquo;s PS3 Eye</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>Artist &amp; Projects</b></li><ul><li>Paul Pfeifer<ul><li>Algorithmic Thinking</li></ul>
+</li>
+<li>Jason Salavon<ul><li>Find the average pixel</li></ul>
+</li>
+<li>Chris Jordan</li>
+<li>Thomas Bayrle</li>
+<li>Scanning flicker for Logos and sending cease and desist letter.</li>
+<li>Golan<ul><li>interest in satelite photographs</li></ul>
+</ul>
+</ul>
+<p><b>Day 3</b></p><ul><li>1st Lvl Measuring Things in the World&nbsp;</li>
+<li>2nd Lvl Detecting things in the World</li></ul>
+<ul style="list-style: none;"><li><b>Connected Components</b></li><ul><li>If you have a black and white image, you have white regions and the rest of the image is black.&nbsp;<ul><li>4 connectivity, 8 connectivity<ul><li>If a pixel is touching another pixels then they are in the same grouping.</li>
+<li><a href="http://en.wikipedia.org/wiki/Connected_component_(graph_theory)"></a>http://en.wikipedia.org/wiki/Connected_component_(graph_theory)</li>
+<li><a href="http://en.wikipedia.org/wiki/Connected_component_(topology)"></a>http://en.wikipedia.org/wiki/Connected_component_(topology)</li></ul>
+</li>
+<li>Once you know which pixels are connected, you can figure out the centroid (center of gravity), the orientation (based on the distribution of pixels in the object, more accurate if the object is long and narrow)</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>Chain Coding</b></li><ul><li>There&rsquo;s even more info you can get out of this pixel blob if you can vectorize it, using a Chain Code, moving around the perimeter of the shape&nbsp;</li>
+<li>Walking around the edge of the shape: &quot;Freeman Chain Code&quot; is one name for a process, the data is made up of a set of direction changes.</li>
+<li>Mathematical descriptop of the shape, instead of raster data.</li>
+<li>Circularity<ul><li>relationships between the length of the shape and shapes area.</li></ul>
+</li>
+<li>Much smaller definiton of your shape.</li>
+<li>Higher level CV<ul><li>How do i undertand that the blob that ive found is the same as the frame before.</li></ul>
+</li>
+<li>Piece Wise Contour Histogram<ul><li>Distance from the ceneter to every single point.</li>
+<li>Becomes a pattern, a way to describe the shape as a series of distances.</li>
+<li>The histogram of distances from the center to the edges can be compared to the histogram of another object to figure out if the shapes relate</li>
+<li><a href="http://www.youtube.com/watch?v=3paLKLZbRY4"></a>http://www.youtube.com/watch?v=3paLKLZbRY4</li></ul>
+</li>
+<li>Break the code down into a mix of techniques:<ul><li><i>Measuring</i>: Find the shape and then find its contour</li>
+<li><i>Detecting</i>: After the shape is identified, find areas of curvature on fingertips for example (looking for angle change at the end of a finger, etc.)</li>
+<li><a href="http://www.cs.utoronto.ca/~smalik/downloads/2503_project_report.pdf"></a>http://www.cs.utoronto.ca/~smalik/downloads/2503_project_report.pdf</li></ul>
+</li>
+<li>I suspect we&rsquo;re getting to a place where the more hard problems will be easy.</li>
+<li>Algorythm Bias<ul><li>The training set sometimes dictates what is detectable.</li></ul>
+</li>
+<li>Memory Tour</li>
+<li>What I want is for you to learn the skils to make what you want to make.</li></ul>
+</ul>
+</ul>
+<ul style="list-style: none;"><li><b>Pattern Recognition</b></li><ul><li>Find Characters</li>
+<li>Hands, Faces, etc.</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>Morphological Operators</b></li><ul><li>Computer Vision Algorythms and Applications</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>CV and Animation</b></li><ul><li>Contour Interaction<ul><li>Messa Di Voce Example</li></ul>
+</li>
+<li>Vector Fields<ul><li>Multi Variable Calculus<ul><li>You cant plot things as a line but you can plot them as a field.</li></ul>
+</li>
+<li>You can create an environment and object live on top of it.</li></ul>
+</li>
+<li><b>Technique: </b>Using a blurred thresholded image and follow the gradient to see which direction the path is going. Compare neighbors along this blurred edge, for every given pixel figure out which way you need to move to get more toward white or black. Then, a particle can more towrad or away from the shape by following the direction of this vector field</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>Tracking</b></li><ul><li>OpenCV will give you, identifying things.</li>
+<li>Example, Community Core Vision<ul><li><a href="http://www.youtube.com/watch?v=Clp1cKg0xks"></a><a href='http://www.youtube.com/watch?v=Clp1cKg0xks'/>http://www.youtube.com/watch?v=Clp1cKg0xks</a></li></ul>
+</li>
+<li>Consistency<ul><li>ex. Finding things that look like skin.</li>
+<li>This persons face is on this persons body.</li>
+<li>This is a higher level problem than just identifiying objects/background etc.&nbsp;</li></ul>
+</ul>
+</ul>
+<ul style="list-style: none;"><li><b>Optical Flow</b></li><ul><li>In general from frame to frame the pixels of a video are the same.</li>
+<li>Optical Flow Demo.<ul><li><a href="http://www.youtube.com/watch?v=ysGM3CfBVpU"></a>http://www.youtube.com/watch?v=ysGM3CfBVpU</li></ul>
+</li>
+<li>Statistical.</li>
+<li>Dense Optical Flow.</li>
+<li>Features.</li>
+<li>In general gives you where everything in the video is moving.<ul><li>You can predict where the in between frames are.</li>
+<li>Interpolating.</li>
+<li><a href="http://vimeo.com/38012516"></a>http://vimeo.com/38012516</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>Image Stabalization</b></li><ul><li>If from the optical flow you know how the camera moves you can make it smoother.</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>Brightness Constancy assumption</b></li><ul><li>We make an assumption that the luminosity is the same just the pixel has moved.</li>
+<li>BGF 1-1 Matchmoving Tracking</li>
+<li>Introduction to Camera Tracking in Blender</li>
+<li>PFTrack</li>
+<li><u>Use</u><ul><li>Structure from Motion</li>
+<li>Matchmoving Tracking<ul><li><a href="http://vimeo.com/61187389"></a>http://vimeo.com/61187389</li></ul>
+</ul>
+</ul>
+<ul style="list-style: none;"><li><b>Displacement Vector( compression)</b></li><ul><li>MPEG compression.</li>
+<li>p frame and i frame</li>
+<li>rosa-menka.blogspot.com</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>Data Moshing</b></li><ul><li>aviglitch: <a href="http://ucnv.github.io/aviglitch/"></a><a href='http://ucnv.github.io/aviglitch/'/>http://ucnv.github.io/aviglitch/</a></li>
+<li><a href="http://rosa-menkman.blogspot.com/search/label/datamoshing"></a><a href='http://rosa-menkman.blogspot.com/search/label/datamoshing'/>http://rosa-menkman.blogspot.com/search/label/datamoshing</a></li></li>
+<li><a href="http://www.youtube.com/watch?v=TxFeesWL5OI"></a>http://www.youtube.com/watch?v=TxFeesWL5OI</li>
+<li>Separating the content and the movement</li>
+<li>Takeshi Murata pink dot 2007</li>
+<li>Limitation of Compression Format</li>
+<li>FFMpeg</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>Freature Tracking&nbsp;</b></li><ul><li>Slam Augemented Reality<ul><li>3D Object Tracking Mapping</li>
+<li>Simultaneous Localization and Mapping</li></ul>
+</li>
+<li>Parallel Tracking and Mapping<ul><li>PTam</li>
+<li><a href="http://www.youtube.com/watch?v=Y9HMn6bd-v8"></a>http://www.youtube.com/watch?v=Y9HMn6bd-v8</li>
+<li>EPFL Switzerland CVLAB<ul><li>Computer Vision</li>
+<li>Markerless AR</li></ul>
+</li></ul>
+</li>
+<li>Interaction, trying to compute global movement.</li>
+<li>Theres dense and not dense optical flow.</li>
+<li>Corner Detector</li>
+<li>Color Space<ul><li>HSV<ul><li>Cone</li></ul>
+</li>
+<li>RGB<ul><li>Cube</li></ul>
+</ul>
+</ul>
+</ul>
+<ul style="list-style: none;"><li><b>Template Matching</b></li><ul><li>Trying to find a subimage inside of an image.</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>Image Similarity</b></li><ul><li>statistics</li>
+<li>search OpenCv forums&nbsp;</li>
+<li>MPEG-17</li>
+<li>Wiki Visuals Descriptors</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>RGBD Toolkit</b></li><ul><li>Combining a Kinect with an SLR Camera.</li>
+<li><a href="http://www.rgbdtoolkit.com/"></a>http://www.rgbdtoolkit.com/</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>RGBD Demo</b></li><ul><li>Projector to Kinnect</li>
+<li><a href="http://labs.manctl.com/rgbdemo/"></a>http://labs.manctl.com/rgbdemo/</li></ul>
+</ul>
+<ul style="list-style: none;"><li><b>Image Similarity</b></li><ul><li>See the wiki for image descriptors to compare images.&nbsp;</li>
+<li><a href="http://en.wikipedia.org/wiki/Visual_descriptors"></a>http://en.wikipedia.org/wiki/Visual_descriptors</li>
+<li>See zach example of mpeg&amp;_v2</li>
+<li>See example of Recursive Google Image Search</li>
+<li><a href="http://gizmodo.com/5876112/recursive-google-image-search-is-mindflippingly-nuts"></a>http://gizmodo.com/5876112/recursive-google-image-search-is-mindflippingly-nuts</li></ul>
+</ul>
+</ul>
+</ul>
+<ul style="list-style: none;"><li><br/></li>
+<li>&nbsp;</li>
+<li><b><u>Artists and Projects</u></b></li><ul><li>Computer Vision Aesthetics</li>
+<li>Logo Hallucination</li>
+<li>Robot Readable World <a href="https://vimeo.com/36239715"></a>https://vimeo.com/36239715<ul><li>Supercut of computer vision research.</li></ul>
+</li>
+<li>James Briddle<ul><li>New Aesthetic</li>
+<li>Images around Data Acquisition</li>
+<li>Studying the relationship of technology and the physical world.</li>
+<li><a href="http://new-aesthetic.tumblr.com/"></a>http://new-aesthetic.tumblr.com/</li></ul>
+</li>
+<li>Zach, Golan<ul><li>Manual Input Sessions<ul><li><a href="http://www.youtube.com/watch?v=3paLKLZbRY4"></a><a href='http://www.youtube.com/watch?v=3paLKLZbRY4'/>http://www.youtube.com/watch?v=3paLKLZbRY4</a></li></ul>
+</li>
+<li>Messa Di Voce<ul><li>Jaap Blonk Performance</li>
+<li><a href="http://www.youtube.com/watch?v=GfoqiyB1ndE"></a>http://www.youtube.com/watch?v=GfoqiyB1ndE</li></ul>
+</li>
+<li>Drawn<ul><li><a href="http://vimeo.com/44601359"></a>http://vimeo.com/44601359</li></ul>
+</li></ul>
+</li>
+<li>Alvaro Cassenelli<ul><li>Kronos Projector</li>
+<li><a href="http://www.youtube.com/watch?v=uUDvGJ5ZnY4"></a>http://www.youtube.com/watch?v=uUDvGJ5ZnY4</li>
+<li>Khronos Projector : <a href="http://www.k2.t.u-tokyo.ac.jp/members/alvaro/Khronos/"></a><a href='http://www.k2.t.u-tokyo.ac.jp/members/alvaro/Khronos/'/>http://www.k2.t.u-tokyo.ac.jp/members/alvaro/Khronos/</a></li></ul>
+</li>
+<li>Supercut<ul><li>Enhance: <a href="http://www.youtube.com/watch?v=LhF_56SxrGk"></a><a href='http://www.youtube.com/watch?v=LhF_56SxrGk'/>http://www.youtube.com/watch?v=LhF_56SxrGk</a></li></ul>
+</li>
+<li>Masahiko Sato<ul><li>Book: Attributes</li>
+<li>&quot;The Definition of Self&quot; exhibition: <a href="http://www.designboom.com/art/masahiko-sato-the-definition-of-self-exhibition-at-21-21-design-sight/"></a>http://www.designboom.com/art/masahiko-sato-the-definition-of-self-exhibition-at-21-21-design-sight/</li></ul>
+</li>
+<li>cvdazzle.com<ul><li>Shows how face detecton works in OpenCV</li></ul>
+</li>
+<li>Lukaz Karluk<ul><li>Julapy</li>
+<li>Graffiti</li></ul>
+</li>
+<li>Adam Harvey</li>
+<li>Yung Jake<ul><li>DataMosh</li>
+<li><a href="http://www.youtube.com/watch?v=nS7QvOX8LVk"></a>http://www.youtube.com/watch?v=nS7QvOX8LVk</li></ul>
+</li>
+<li>Damien Stewart<ul><li>damienstewart.com</li>
+<li>Wind</li></ul>
+</ul>
+</ul>
+
+<p></p><p></p><p></p><p>Computer Vision Map</p><p></p></body>
+</html>

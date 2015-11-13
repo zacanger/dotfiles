@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="813"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$Uk1UmCE7MAN</title>
+</head>
+<body><h1>PS3 Eye camera with OpenFrameworks</h1><p></p><p>Notes on getting the PS3 Eye camera working with OF:</p><p></p><p>(note, you do *not* need macam installed, this works on any mac w/ out macam.... just tested)&nbsp;</p><p></p><ul><li><s>Download the &quot;Looking for the latest version? maccam-cvs-build-2009-09-25.zip&quot; at the top of this page:</s></li></ul>
+<ul style="list-style: none;"><li><a href="http://sourceforge.net/projects/webcam-osx/files/cvs-build/"></a><s>http://sourceforge.net/projects/webcam-osx/files/cvs-build/</s></li></ul>
+
+<ul><li><s>Copy the &quot;.component&quot; file into Macintosh HD/Library/QuickTime</s></li></ul>
+
+<ul><li><s>Download Jon Wohl&rsquo;s fork of ofxMacamPs3Eye:</s></li></ul>
+<ul style="list-style: none;"><li><a href="https://github.com/jmwohl/ofxMacamPs3Eye"></a><s>https://github.com/jmwohl/ofxMacamPs3Eye</s></li>
+<li>The pull request for the minor change I made was merged back in to the original repo:</li>
+<li><a href="https://github.com/paulobarcelos/ofxMacamPs3Eye"></a>https://github.com/paulobarcelos/ofxMacamPs3Eye</li></ul>
+
+<ul><li>Add that to your &quot;addons&quot; folder in OpenFrameworks and include this in your project</li></ul>
+
+<p></p><p><b>Using the camera:</b></p><p></p><ul><li>In the header:</li><ul style="list-style: none;"><li>#include &quot;ofxMacamPs3Eye.h&quot;</li>
+<li>in class testApp : public ofBaseApp{}<ul style="list-style: none;"><li>ofxMacamPs3Eye ps3eye;</li>
+<li><br/></li></ul>
+</ul>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p><ul><li>In the cpp:</li></ul>
+
+<ul style="list-style: none;"><li>&nbsp;&nbsp;&nbsp; In setup():<ul style="list-style: none;"><li>&nbsp;&nbsp;&nbsp; ps3eye.initGrabber(320, 240);</li></ul>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p><ul style="list-style: none;"><li>&nbsp;&nbsp;&nbsp; In update():<ul style="list-style: none;"><li>&nbsp;&nbsp;&nbsp; ps3eye.update();</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp; if (ps3eye.isFrameNew()) {</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sourceImage.setFromPixels(ps3eye.getPixels(), ps3eye.getWidth(), ps3eye.getHeight());</li>
+<li>&nbsp;&nbsp;&nbsp; }</li></ul>
+</ul>
+<p>&nbsp;&nbsp;&nbsp; ...etc etc...</p><p></p><p></p><p></p><p>if you add this code to another project, you might need to make sure .m files compile as objective-c++ not objective-c (had some linking errors otherwise)</p><p></p><p>After I changed the Type from Objective-C to Objective-C++, I was able to compile it.&nbsp;</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_Uk1UmCE7MAN_p.90780_1384471800674_Screen Shot 2013-11-14 at 6.29.23 PM.jpg'/></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_Uk1UmCE7MAN_p.90780_1384471810154_Screen Shot 2013-11-14 at 6.29.34 PM.jpg'/></p><p></p><p>Now I have another error, &quot;Field type &rsquo;ofxMacamPs3Eye&rsquo; is an abstract class&quot;</p><p></p><p>helpful?&nbsp; <a href="http://forum.openframeworks.cc/index.php?topic=10547.0"></a>http://forum.openframeworks.cc/index.php?topic=10547.0</p><p>yes. i&rsquo;m looking at the same page but don&rsquo;t know where to put the following.&nbsp;</p><p><s>bool setPixelFormat(ofPixelFormat pixelFormat) { return true;}</s></p><p><s>ofPixelFormat getPixelFormat() { return OF_PIXELS_MONO;};&nbsp;&nbsp;&nbsp;&nbsp;</s></p><p><s>void videoSettings() {}</s></p><p><s>void setVerbose(bool bTalkToMe) {}</s>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;-this didn&rsquo;t work.</p><p>I was able to clear the error, &quot;Field type &rsquo;ofxMacamPs3Eye&rsquo; is an abstract class&quot; by doing this.&nbsp;</p><p>In ofxMacamPs3Eye.h</p><p>class ofxMacamPs3Eye<s> : public ofBaseVideoGrabber, public ofBaseVideoDraws </s>{</p><p>I removed &quot; : public ofBaseVideoGrabber, public ofBaseVideoDraws&quot;</p><p>I got this idea from <a href='http://forum.openframeworks.cc/index.php?topic=364.15'/>here</a></p><p></p></body>
+</html>

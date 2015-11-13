@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="197"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$TXqZi99eYWa</title>
+</head>
+<body><h1>Shaders are fun</h1><p>Check out typing.io!</p><p></p><p>The following code goes in your bin/data folder</p><p></p><p>Here is the code for the vertex shader &quot;bin/data/shader.vert&quot;</p><p></p><ul class="code"><li>void main(void)</li>
+<li>{</li>
+<li>&nbsp;&nbsp;&nbsp; gl_TexCoord[0] = gl_MultiTexCoord0;</li>
+<li>&nbsp;&nbsp;&nbsp; gl_Position&nbsp;&nbsp;&nbsp; = ftransform();</li>
+<li>}</li></ul>
+
+<p>here is the code for the fragment(pixel) shader &quot;bin/data/shader.frag&quot;</p><p></p><ul class="code"><li>#version 120</li>
+<li><br/></li>
+<li>void main( void )</li>
+<li>{</li>
+<li>&nbsp;&nbsp;&nbsp; float width = 1024.0;</li>
+<li>&nbsp;&nbsp;&nbsp; float height = 768.0;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; float x = gl_FragCoord.x / width;</li>
+<li>&nbsp;&nbsp;&nbsp; float y = gl_FragCoord.y / height;</li>
+<li><br/></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li><br/></li>
+<li>&nbsp;&nbsp;&nbsp; float gray = (x * y);</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp; gl_FragColor = vec4(gray, gray, gray, 1.0);</li>
+<li>}</li>
+<li><br/></li></ul>
+<p>for Defne:</p><ul class="code"><li><br/></li>
+<li>//--------------------------------------------------------------</li>
+<li><br/></li>
+<li>void ofApp::setup(){</li>
+<li><br/></li>
+<li>&nbsp;&nbsp;&nbsp; shader.load(&quot;shader&quot;);</li>
+<li><br/></li>
+<li><br/></li>
+<li><br/></li>
+<li>}</li>
+<li><br/></li>
+<li><br/></li>
+<li><br/></li>
+<li>//--------------------------------------------------------------</li>
+<li><br/></li>
+<li>void ofApp::update(){</li>
+<li><br/></li>
+<li>&nbsp;&nbsp;&nbsp; ofSetWindowTitle(&quot;FPS: &quot; + ofToString(ofGetFrameRate()));</li>
+<li><br/></li>
+<li><br/></li>
+<li><br/></li>
+<li>}</li>
+<li><br/></li>
+<li><br/></li>
+<li><br/></li>
+<li>//--------------------------------------------------------------</li>
+<li><br/></li>
+<li>void ofApp::draw(){</li>
+<li><br/></li>
+<li>&nbsp;&nbsp;&nbsp; shader.begin();</li>
+<li><br/></li>
+<li>&nbsp;&nbsp;&nbsp; ofRect(0, 0, ofGetWidth(), ofGetHeight());</li>
+<li><br/></li>
+<li>&nbsp;&nbsp;&nbsp; shader.end();&nbsp;&nbsp;&nbsp;</li>
+<li><br/></li>
+<li><br/></li>
+<li><br/></li>
+<li>}</li>
+<li><br/></li>
+<li>Examples:</li>
+<li>#version 120</li>
+<li><br/></li>
+<li>void main(void)</li>
+<li>{</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; float width = 1024.0;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; float height = 768.0;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; float x = gl_FragCoord.x / width;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; float y = gl_FragCoord.y / height;</li>
+<li><br/></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; float gray;</li>
+<li><br/></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (sin(x * 80) &gt; cos(y * 50)) {</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gray = tan(sin((x * y) * 40.0) * 34.0);</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gray = tan(y + x);</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</li>
+<li><br/></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gl_FragColor = vec4(gray, gray, gray, 1.0);</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);</li>
+<li>}</li></ul>
+
+<p></p><p>Defne&rsquo;s Shader:</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_TXqZi99eYWa_p.260528_1417733079151_Screen Shot 2014-12-04 at 5.43.47 PM.png'/></p><p>code:</p><p>#version 120</p><p></p><p>void main( void )</p><p>{</p><p>&nbsp;&nbsp;&nbsp; float width = 1024.0;</p><p>&nbsp;&nbsp;&nbsp; float height = 768.0;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; float x = gl_FragCoord.x / width;</p><p>&nbsp;&nbsp;&nbsp; float y = gl_FragCoord.y / height;</p><p></p><p>&nbsp;&nbsp;&nbsp; float red, green, blue;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp; if (x &gt; 0.5) {</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; red = sin(x * (40 * x *x));</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; green = sin(x * (20 * x *x));</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; blue = sin(x * (10 * x *x));</p><p>&nbsp;&nbsp;&nbsp; }</p><p>&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;&nbsp;&nbsp; gl_FragColor = vec4(red, green, blue, 1.0);</p><p>}</p><p></p><p>another:</p><p>#version 120</p><p></p><p>void main(void)</p><p>{</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; float width = 1024.0;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; float height = 768.0;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; float x = gl_FragCoord.x / width;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; float y = gl_FragCoord.y / height;</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; float red, green, blue;</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (tan(x * 30) &gt; cos(y * 50)) {</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; red = sin(x / (y + 1));</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; blue = cos(y - x);</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; green = tan(x);</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else {</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; red = tan(y + x);</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; blue = cos(sin(x * y));</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; green = sin(tan(x + y));</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gl_FragColor = vec4(red, green, blue, 1.0);</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);</p><p>}</p><p></p><p></p></body>
+</html>

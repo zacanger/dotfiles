@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="284"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$BFOmTnoeOOU</title>
+</head>
+<body><h1>Some notes on particle systems in oF</h1><p>I&rsquo;m trying out a few things and experimenting with particle systems in oF. My goal is to have some functioning systems&nbsp; that display swarm behavior, so I&rsquo;m noting here what&rsquo;s going on. Nowhere close to swarms and emergence yet, but I&rsquo;ve got some nice particle systems going on.&nbsp;</p><p>I have some code in here:</p><p><a href="https://github.com/francamps/particles_oF"></a>https://github.com/francamps/particles_oF</p><p></p><p>And following Cinder tutorials, sections 1 and 2:</p><p><a href="http://libcinder.org/docs/v0.8.4/hello_cinder.html"></a>http://libcinder.org/docs/v0.8.4/hello_cinder.html</p><p><a href="http://libcinder.org/docs/v0.8.4/flocking_chapter1.html"></a>http://libcinder.org/docs/v0.8.4/flocking_chapter1.html&nbsp;</p><p></p><p><b>Sequential containers</b></p><ul><li>Vectors Use &rsquo;&rsquo;&rsquo;.push_back&rsquo;&rsquo;&rsquo; to add a new element to the end of the vector. Use a <i>for</i> loop &rsquo;&rsquo;&rsquo;vec[i]&rsquo;&rsquo;&rsquo; to iterate over the vector Calling methods on its elements like: p.update();</li>
+<li>Lists Containers whose elements can&rsquo;t be called by index, but rather sequentially. They need <i>iterators</i> to go over its elements, such as in:</li></ul>
+<ul class="code"><li>for( list&lt;Particle&gt;::iterator p = mParticles.begin(); p != mParticles.end(); ){</li></ul>
+<ul style="list-style: none;"><li>Calling methods on its elements like:</li></ul>
+<ul class="code"><li>p-&gt;update();</li></ul>
+
+<p><b>Particle physics</b></p><p>Create individual particles</p><ul class="code"><li>Particle()</li></ul>
+<p>And collect them in a larger object, which uses a container (vector, lists, etc)</p><p></p><p><b>Layout</b></p><ul><li>Start them at random, or using a 2D Perlin noise (ofNoise).</li>
+<li>Place them on a grid and apply trig. functions on its radius according to position, such as:</li></ul>
+<ul class="code"><li>&nbsp;&nbsp;&nbsp; radius = sin(pos.x*0.1)*2*cos(pos.y*0.1 + 0.1)*4;//ofRandom(2, 5);</li></ul>
+<ul><li>Start them on mouse pressed and then scatter with the velocity of the mouse. Calculate mouseVel:</li></ul>
+<ul class="code"><li>&nbsp;&nbsp;&nbsp; mouseVel = ofVec2f(ofGetMouseX() - mouseLoc.x, ofGetMouseY() - mouseLoc.y);</li>
+<li>&nbsp;&nbsp;&nbsp; mouseLoc = ofPoint(ofGetMouseX(), ofGetMouseY());</li></ul>
+<p>And start particles with a proportion of this vel.</p><p></p><p><b>Particle movement</b></p><p>Position gets updated every frame with its velocity: pos += vel;</p><p>Velocity can decay using a <i>decay</i> factor between 0 and 1: vel *= decay;</p><p>Or we can use different sets of forces.</p><p></p><undefined><li><b>Particle death</b></li></undefined>
+<p>Create <b>age</b> and <b>lifespans</b></p><ul class="code"><li>int mAge = 0; //Add one per frame</li>
+<li>int mLifespan = 600;</li>
+<li>bool mIsDead;</li></ul>
+<p>Use then the ratio between this as a factor on the radius:</p><ul class="code"><li>radius = radius*(1.0f - ( mAge / (float)mLifespan ));</li></ul>
+
+<p><b>Make particles know about each other: repulsive force</b></p><p>Give every particle an acceleration <i>acc</i> and a <i>mass</i>, and we&rsquo;ll iterate over every pair of particles to see the distance and how they affect each other.</p><ul class="code"><li>&nbsp;&nbsp;&nbsp; for (unsigned int i = 0; i &lt; vp.size(); i++){</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (unsigned int j = i; j &lt; vp.size(); j++){</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; float d = ofDist(vp[i].pos.x, vp[i].pos.y, vp[j].pos.x, vp[j].pos.y);</li>
+<li><br/></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (d &gt; 0.0f){</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ofVec2f dir = vp[i].pos - vp[j].pos;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dir.normalize();</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; float f = 1.0f / pow(d, 2);</li>
+<li><br/></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; vp[i].acc += dir * (f / vp[i].mass);</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; vp[j].acc -= dir * (f / vp[j].mass);</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</li>
+<li>&nbsp;&nbsp;&nbsp; }</li></ul>
+<p>This is going really slow :/ What is going on?</p><ul class="comment"><li>particle particle interaction can be *very* slow, I will talk about this next week and strategies for speeding this up</li></ul>
+
+</body>
+</html>

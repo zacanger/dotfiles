@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="1"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$D9EgUtoGFWQ</title>
+</head>
+<body><h1>OF + RPi Setup Manual</h1><p></p><p>References</p><p><a href="http://www.openframeworks.cc/setup/raspberrypi/Raspberry-Pi-Getting-Started.html"></a><a href='http://www.openframeworks.cc/setup/raspberrypi/Raspberry-Pi-Getting-Started.html'/>http://www.openframeworks.cc/setup/raspberrypi/Raspberry-Pi-Getting-Started.html</a></p><p></p><h2>Preparation</h2><p></p><undefined><li>Things you&rsquo;ll need on hand:</li></undefined>
+<ol><li>A Raspberry Pi with appropriate usb cable for power.</li>
+<li>A blank 8+ GB SD card, the faster the better. I&rsquo;ve been using a <b>Lexar Professional 16GB 10/400x Speed </b>card with good results, but any fast SD card should be fine.</li>
+<li>A USB keyboard for the Pi</li>
+<li>A screen for the Pi, either an HDMI monitor or a screen with a composite input.</li>
+<li>A WiFi dongle for the Pi</li></ol>
+
+<p></p><h2>Installation and Setup</h2><p></p><p><b>Install linux on your SD card</b></p><p>Reference: <a href="http://elinux.org/RPi_Easy_SD_Card_Setup"></a><a href='http://elinux.org/RPi_Easy_SD_Card_Setup'/>http://elinux.org/RPi_Easy_SD_Card_Setup</a></p><p></p><p>First, grab the latest image of Raspbian Debian Wheezy from the RaspberryPi site: <a href="http://www.raspberrypi.org/downloads/"></a><a href='http://www.raspberrypi.org/downloads/'/>http://www.raspberrypi.org/downloads/</a></p><p></p><p>Insert the SD card into the slot on your computer, or use a card reader. On mac, go to the terminal and take a look at the available disks in order to find the SD card:</p><p></p><ul class="code"><li>$ diskutil list</li></ul>
+
+<p>This will show a list of all of the disks:<img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_lNjZ1a9zgk2_p.89063_1398531907152_Screen%20Shot%202014-04-26%20at%201.04.40%20PM.png'/></p><p></p><p>From this list you should be able to determine which disk is the SD card (look at the name and size). In my case it was <b>/dev/disk6</b>, so that&rsquo;s what I&rsquo;ll be using here, but yours will very likely have a different number.</p><p></p><undefined><li><b><u>It is VERY IMPORTANT that you get the path of the SD card correct! A mistake here could result in the loss of your entire hard disk!</u></b></li></undefined>
+
+<p>Now that we know the path to the disk, lets unmount it so that we can overwrite it:</p><p></p><ul class="code"><li>diskutil unmountDisk /dev/disk6</li></ul>
+
+<p>Finally, we&rsquo;ll us dd to overwrite the SD card with the Raspian image:</p><p></p><ul class="code"><li>sudo dd bs=1m if=2014-01-07-wheezy-raspbian.img of=/dev/disk6</li></ul>
+
+<p>This will take several minutes (maybe 10? 20?). Be patient. Once it&rsquo;s done, it&rsquo;s ready for your Pi. Eject the SD card (probably now called &rsquo;boot&rsquo;) from your computer and stick it in the Pi. Plug in the Pi&rsquo;s power, a keyboard, monitor, and WiFi dongle, and start &rsquo;er up!</p><p></p><p><b>Basic Pi Configuration</b></p><p>Upon initial startup you&rsquo;ll be kicked into the Pi&rsquo;s configuration program. You can get back here anytime from the command line by typing `raspiconfig`. We&rsquo;re going to make some changes in here.</p><p></p><undefined><li>1 Expand the Filesystem</li></undefined>
+<p>First first option is to expand the filesystem, which we want to do. Press enter and wait a couple seconds for it to finish. (This does exactly what it sounds like.)</p><p></p><undefined><li>2 Change the User Password</li></undefined>
+<p>We&rsquo;ll change the default user password to <b>pi</b>. Yeah, <b>user: pi, password: pi</b>. We&rsquo;re clearly security experts.</p><p></p><undefined><li>3 Internationalisation Options</li></undefined>
+<p>If we&rsquo;re in the US, we do want to change this. By default, Raspian Wheezy is setup for a GB keyboard as opposed to US — this hung me up when I was trying to enter a WiFi password with special characters and couldn&rsquo;t for the life of me find them. I changed my Local to <b>en_US.UTF-8</b>, set my timezone to <b>US - Eastern</b>, then changed my keyboard to <b>English (US) - English (Macintosh) </b>because I&rsquo;m using an old Mac keyboard.</p><p></p><undefined><li>4 Force audio output</li></undefined>
+<p>You may or may not want to do this. By default the Pi will automatically send audio where it thinks you want it, either to the audio jack or the HDMI output. For my purposes, I wanted to ensure that all audio was sent out of the audio jack, even if I was using the HDMI output for my monitor. This can be set under Advanced Options-&gt;Audio.</p><p></p><p><b>WiFi Setup</b></p><ol><li>Plug in the wifi dongle.</li>
+<li>Log into the Raspbian GUI: `$ startx`</li>
+<li>Double click the WiFi Config application on the Desktop and go through GUI wifi setup steps.</li>
+<li>Log out of the terminal.</li></ol>
+
+<p><b>Update Linux Packages</b></p><p>Now that we&rsquo;re connected to the interweb, let&rsquo;s update the software that&rsquo;s already installed on the Pi.</p><p></p><ul class="code"><li>$ sudo apt-get clean</li>
+<li>$ sudo apt-get update -y</li>
+<li>$ sudo apt-get upgrade -y</li></ul>
+
+<p>Each of the steps might take a little while to complete.</p><p></p><p><b>Add Samba Support</b></p><p>Adding a samba server to the Pi will let you mount it on your computer as a remote drive. This is a good way to share files between the Pi and your computer, and can let you edit files directly on the Pi using your preferred editor. Rather than repeat the steps here, just follow this guide:</p><p></p><p><a href="http://www.openframeworks.cc/setup/raspberrypi/Raspberry-Pi-SMB.html"></a><a href='http://www.openframeworks.cc/setup/raspberrypi/Raspberry-Pi-SMB.html'/>http://www.openframeworks.cc/setup/raspberrypi/Raspberry-Pi-SMB.html</a></p><p></p><p><b>Install and Compile openFrameworks</b></p><p>Navigate to the user home directory and install the latest release of OF.</p><p></p><ul class="code"><li>$ cd</li>
+<li>$ mkdir openFrameworks</li>
+<li>$ curl -O <a href="http://www.openframeworks.cc/versions/v0.8.1/of_v0.8.1_linuxarmv6l_release.tar.gz"></a><a href='http://www.openframeworks.cc/versions/v0.8.1/of_v0.8.1_linuxarmv6l_release.tar.gz'/>http://www.openframeworks.cc/versions/v0.8.1/of_v0.8.1_linuxarmv6l_release.tar.gz</a></li>
+<li>$ tar xfz of_v0.8.1_linuxarmv6l_release.tar.gz -C openFrameworks --strip-components 1</li></ul>
+
+<p>Now we&rsquo;ll install the OF dependencies and compile the framework.</p><p></p><ul class="code"><li>$ cd ~/openFrameworks/scripts/linux/debian_armv6l</li>
+<li>$ sudo ./install_dependencies.sh -y</li></ul>
+
+<p>You&rsquo;ll get asked some questions during this install, just blindly answer yes. Once that&rsquo;s done, we&rsquo;re ready to compile. <b>This next step takes a loooong time, on the order of an hour.</b> Once you kick it off, go get lunch.</p><p></p><ul class="code"><li>$ cd &amp;&amp; sudo make Release -C /home/pi/openFrameworks/libs/openFrameworksCompiled/project</li></ul>
+
+<p><b>Run your first OF app on the Pi!</b></p><p></p><p>Whew, you made it. Let&rsquo;s try building and running one of the examples.</p><p></p><ul class="code"><li>$ cd ~/openFrameworks/examples/graphics/polygonExample</li>
+<li>$ make</li>
+<li>$ make run</li></ul>
+
+<p>The `make` step is where the actual application gets compiled. It might take a few minutes. When it&rsquo;s complete it will give you some little instructions, one option of which is `make run` which will run the application. Woo hoo!</p><p></p></body>
+</html>

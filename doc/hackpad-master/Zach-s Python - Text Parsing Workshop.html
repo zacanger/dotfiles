@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="2199"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$TKWc7jgqsIY</title>
+</head>
+<body><h1>Zach&rsquo;s Python &amp; Text Parsing Workshop</h1><p></p><p>(class notes)</p><p></p><p>Recommends book on programming for biologists</p><ul class="comment"><li>need proper book reference</li></ul>
+
+<p><b>Basic text parsing with Python</b></p><p>Starting out with a text file of the bible.</p><p>There are various databases of text available for parsing, either through project gutenburg or what have you.</p><p></p><p></p><p>Frequent uese of &quot;print&quot; to get a sense of what&rsquo;s happening.&nbsp;</p><ul class="code"><li>print &quot;hello&quot;</li></ul>
+<p>And lists, aka arrays, but thery are called lists in Python. They are indexed.</p><ul class="code"><li>words = [&rsquo;hello&rsquo;,&rsquo;mom&rsquo;,&rsquo;how&rsquo;,&rsquo;are&rsquo;,&rsquo;you&rsquo;]</li></ul>
+
+<p>Like many other higher level languages, you can easily iterate through a list or set of words without typing much text, way more convenient than C++ loops, for example.</p><ul class="code"><li>for word in words:</li>
+<li>&nbsp;&nbsp;&nbsp; print word</li></ul>
+
+<p>Sorted takes a list and sorts it.&nbsp;</p><p></p><p>All tools make is easy to generate text by iterating over lists.</p><p></p><p></p><p></p><p>Open file and read it out -&nbsp;</p><ul class="code"><li>with open (&quot;bible-j=kjv.txt&quot;, &quot;r&quot;) as myfile:</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; data=myfile.read()</li></ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>(Everything in this lesson is the product of a google search. Zach is not a Python pro.)</p><p></p><p>Split is a tokenizer, take a string and break it up at a certain token. To take all the words and spit them at spaces into alist:</p><ul class="code"><li>words = data.split()</li></ul>
+
+<p>clean out white space on either end of list items</p><p>then transform everything lowercase</p><p>put it in a new list called cleanWords</p><p></p><ul class="code"><li>cleanWords = []</li>
+<li>for word in words:</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; word = word.strip()</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; word = word.lower()</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; cleanWords.append(word)</li></ul>
+
+<p></p><p>There is no function for removing punctuation, but we can make a for loop and iteratively remove puncturations.</p><p>(see Zach&rsquo;s code for the punctuation string)</p><p></p><p>But what about Triple Quoted String Literals!?!?</p><p><a href="http://anh.cs.luc.edu/python/hands-on/3.1/handsonHtml/strings2.html"></a><a href='http://anh.cs.luc.edu/python/hands-on/3.1/handsonHtml/strings2.html'/>http://anh.cs.luc.edu/python/hands-on/3.1/handsonHtml/strings2.html</a></p><p></p><p>And what about scoping? It&rsquo;s different and kinda funky.</p><p></p><p>Nice thing about python is that it reads like English, much like Lingo.</p><p></p><p>Once you&rsquo;ve defined the punctuations, clean out all punctuartion marks and put it in a new list.</p><ul class="code"><li>superCleanWords = []</li>
+<li><br/></li>
+<li>for word in cleanWords:</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; noPunct = &quot;&quot;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; for char in word:</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if char not in punctuations:</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; noPunct = noPunct + char</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; if noPunct is not &quot;&quot;:</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print noPunct</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; superCleanwords.append(noPunct)</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li></ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>Now sort the super clean word list alphabetically -</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p>&nbsp;All example code is in this repo:</p><p><a href="https://github.com/ofZach/pythonTextExamples"></a><a href='https://github.com/ofZach/pythonTextExamples'/>https://github.com/ofZach/pythonTextExamples</a></p><p></p><p>You can discover somethign about a text by opening it up and sorting it.&nbsp;</p><p></p><ul class="comment"><li>nee to add photo</li></ul>
+
+<p>a colon operator allows us to indicate where a slice starts or ends.&nbsp;</p><p></p><p>to run a python script, type &rsquo;python&rsquo; followed by the file name into the command line.&nbsp;</p><p></p><p><b>Data Scaping</b></p><p>Zach is a fan of not using APIs and just scraping websites. Sometimes websites will block you if you do this too much.</p><p></p><p>onelook.com is handy for this.&nbsp;</p><p></p><p>To get around this, use a proxy or a useragent. Or add human style delays.</p><p></p><p>Beautiful Soup</p><p><a href="http://www.crummy.com/software/BeautifulSoup/"></a><a href='http://www.crummy.com/software/BeautifulSoup/'/>http://www.crummy.com/software/BeautifulSoup/</a></p><p></p><ul style="list-style: none;"><li>Beautiful Soup is a Python library designed for quick turnaround projects like screen-scraping. Three features make it powerful.</li></ul>
+
+<p>When using a new Python library, you can use various command line installers. pip is one example.</p><p></p><p>From the command line</p><ul class="code"><li>sudo pip install BeautifulSoup</li>
+<li><br/></li></ul>
+<p>Some packages like urllib come packaged with Python, no need to install it to use it.</p><p><a href="https://docs.python.org/2/library/urllib.html"></a><a href='https://docs.python.org/2/library/urllib.html'/>https://docs.python.org/2/library/urllib.html</a></p><p></p><p>Once all your libraries are installed, import the libraries at teh top of your python file so your script can use them.</p><p></p><p>For example, let&rsquo;s scrap all the images off the CNN website</p><p></p><ul class="code"><li>import urllib</li>
+<li>from bs4 import BeautifulSoup</li>
+<li><br/></li>
+<li>page = urllib.urlopen(&quot;<a href="http://www.cnn.com/"></a>http://www.cnn.com/&quot;).read()</li>
+<li>soup = BeautifulSoup(page)</li>
+<li>print soup</li>
+<li>imgTags = soup.final_all(&rsquo;img&rsquo;)</li>
+<li>form ime in imgTags:</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; print img[&rsquo;src&rsquo;]</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; call([&quot;wget&quot;, img[&rsquo;src&rsquo;]])</li>
+<li><br/></li></ul>
+<ul class="comment"><li>you may need to install wget, use brew on osx (brew install wget).&nbsp; If you don&rsquo;t have brew install, install brew :)</li></ul>
+
+<p>So, how would we scrape search results off of onelook.com?</p><p>See if you can find patterns in teh site.&nbsp;</p><p>In the case of onelook.com, the links have a regualr pattern. You could grab the results based on a link pattern.</p><p>In the case of onelook.com, results are paginated, so include a loop to load the next page.</p><p></p><ul class="code"><li>def loadPage( urlToOpen );</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; page = urllib.urlopen(urlToOpen).read()</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; soup = BeautifulSoup(page)</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; aTags = soup.find_all(&rsquo;a&rsquo;)</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; for aTag in aTags:</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if &quot;lool&quot; in aTag.text:</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print aText.text</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if &quot;&gt;&gt;&quot; in aTag.text:</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; url = &quot;<a href="http://www.onelook.com"></a>http://www.onelook.com&quot; + aTag[&quot;href&quot;]</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; loadPage(url)</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li>&nbsp;loadPage(&quot;<a href="http://www.onelook.com/?w=look&ls=a"></a><a href='http://www.onelook.com/?w=look&amp;ls=a#all_misc'/>http://www.onelook.com/?w=look&amp;ls=a</a>&quot;)</li>
+<li>&nbsp;</li>
+<li>&nbsp;</li>
+<li>&nbsp;</li>
+<li>&nbsp;</li></ul>
+<ul class="comment"><li>Be sure to reference Zach&rsquo;s github for vetted code. The code here hasn&rsquo;t been tested and&nbsp; might contain errors. These notes are to help wiht understanding, not execution!</li></ul>
+<p>python-Levenstein</p><p>&nbsp;&nbsp;&nbsp;&nbsp; <a href="https://pypi.python.org/pypi/python-Levenshtein/0.11.2"></a><a href='https://pypi.python.org/pypi/python-Levenshtein/0.11.2'/>https://pypi.python.org/pypi/python-Levenshtein/0.11.2</a></p><p>&quot;<i>Python extension for computing string edit distances and similarities.&quot;</i></p><p>Assesses the numerical distance between each other.</p><p>&nbsp;<a href="http://en.m.wikipedia.org/wiki/Levenshtein_distance"></a><a href='http://en.m.wikipedia.org/wiki/Levenshtein_distance'/>http://en.m.wikipedia.org/wiki/Levenshtein_distance</a></p><p>&nbsp;</p><p>&nbsp;Play around with worldclock</p><p>&nbsp;<a href="http://nickm.com/post/2013/11/world-clock/"></a><a href='http://nickm.com/post/2013/11/world-clock/'/>http://nickm.com/post/2013/11/world-clock/</a></p><p>&nbsp;Reverse engineer the code</p><p>&nbsp;</p><p>The fresh function takes the item in teh front of the list and puts it at the end.</p><p>The modifiers list takes a positive and negative descriptor and combines them with the word yet to produce many more options.</p><p>Smart systems for iterating through a set of lists makes for a very wide set of possibilities in teh generated literature&nbsp; with a very limited set of input.</p><p>&nbsp;</p><p></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p></p></body>
+</html>

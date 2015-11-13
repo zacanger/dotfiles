@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="1173"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$pIHR19CZawU</title>
+</head>
+<body><h1>Motors w/ Jacob</h1><p></p><p>aka Motors for Artists</p><p></p><p><b>Motor Theory</b></p><p></p><p>Basic theory of magnets: opposite poles attract</p><p>&quot;Magnets, how do they work?&quot; Magic.</p><p></p><p>Electromagnets: As an experiment, a coil of insulated copper wire around an iron nail, with the wire attached to a power source, it will act like a magnet as long as power is flowing.</p><p></p><p>Solenoids are simple devices that use an electromagnet to push/pull a rod, creating a small amount of linear motion.</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_pIHR19CZawU_p.77281_1382625316618_undefined'/></p><p><a href="https://www.sparkfun.com/products/10391"></a>https://www.sparkfun.com/products/10391</p><p></p><p>Ohm&rsquo;s law: The higher the voltage, the greater the current (more electricity) flows through the circuit</p><p><a href="http://en.wikipedia.org/wiki/Ohm"></a>http://en.wikipedia.org/wiki/Ohm&rsquo;s_law</p><p></p><p>By hooking up a bunch of electromagnets in sequence and switching them on and off in order, you can move a permanent magnet linearly.&nbsp; If you set up the electromagnets in a ring, you make a permanent magnet spin... a motor.</p><p></p><p>A generator is the opposite of a motor — spinning the permanent magnet produces current in the coils.</p><p></p><p>Switching is called &quot;Commutation&quot; — how this happens is the biggest difference between the different types of motors.</p><p></p><p>Stator — stationary part</p><p>Rotor — the part that rotates</p><p></p><p>Brushed DC Motor</p><ul><li>Regular DC motors use &rsquo;self-commutation,&rsquo; meaning their position can not be controlled</li>
+<li>They always want to move into the next position</li>
+<li>They wear out due to the friction of the brushes touching the contacts</li>
+<li>Controlling the voltage controls the speed</li>
+<li>They tend to move really fast — in the thousands of RPMs</li></ul>
+
+<p></p><p><b>Shopping for motors:</b></p><p><a href="http://www.robotshop.com/motors-actuators.html"></a>http://www.robotshop.com/motors-actuators.html</p><p><a href="http://www.andymark.com/"></a>http://www.andymark.com/</p><p><a href="http://allelectronics.com/"></a>http://allelectronics.com/</p><p><a href="http://www.servocity.com"></a>http://www.servocity.com</p><p><a href="http://www.pololu.com/"></a>http://www.pololu.com/</p><p></p><p></p><p><b>DC Motors&nbsp;</b></p><ul><li>Easy to control, just change the voltage</li>
+<li>Can use Pulse Width Modulation with an Arduino to change the speed as well.</li></ul>
+
+<p><b>Gear Motors</b></p><ul><li>Spur Gear Motors<ul><li>The shaft is off center from the gearing, sometimes these are cheaper but less balanced, and make more noise.</li></ul>
+</li>
+<li>Planetary Gear Motors<ul><li>Little gears wrap around the main gear and the main shaft from the motor, so the output shaft is still lined up with the motor&rsquo;s shaft.</li>
+<li>Cost more but stronger and quieter.</li></ul>
+</li>
+<li>Rear Shaft motors<ul><li>Another motor shaft out the back to attach a rotary encoder, to tell the microcontroller the location of the rotation of the motor (i.e. to count the number of rotations since power was applied)</li>
+<li>Adding a little bit more logic to this kind of motor (with an encoder) and you get a Servo</li></ul>
+</ul>
+
+<p><b>Servo Motors</b></p><ul><li>Knows its position with either a rotary encoder (which would let it rotate around and around as a continuous motor), or with a potentiometer (which would limit it to 180°)</li>
+<li>Come in standard sizes</li>
+<li><a href="http://www.servocity.com/html/what_servo_do_you_need_.html"></a>http://www.servocity.com/html/what_servo_do_you_need_.html</li></ul>
+
+<p><b>Stepper Motors</b></p><ul><li>For controlling direction</li>
+<li>Externally commutated</li>
+<li>Ex: Printers</li>
+<li>Attach encoder if you need feedback</li></ul>
+
+<p><b>Linear Actuator</b></p><ul><li>Rotational motor with a gear that turns like a screw</li>
+<li>Push and pull motion&nbsp;</li>
+<li>Ex: opening doors</li></ul>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPython.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:12/31/2001
+Translation Time:08:24:10
+Translation Platform:Win32
+Number of Output files:18
+This File:Intro.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>Introduction</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    <!-- [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.htm">Revision History</a> ] -->
+    [ <a href="http://www.mindview.net/Books/TIPython/">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  Thinking in Python<br>
+  <small>Revision 0.1.2 (12/31/01) -- Incomplete and Unfinished</small></FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Bruce Eckel &copy;2002 MindView, Inc.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Preface.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect01.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc534420053"></A><A NAME="Heading2"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+Introduction</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia" SIZE=4>This is a book about design that I
+have been working on for years, basically ever since I first started trying to
+read <I>Design Patterns</I> (Gamma, Helm, Johnson &amp; Vlissides,
+Addison-Wesley, 1995), commonly referred to as the <I>Gang of
+Four</I></FONT><A NAME="fnB1" HREF="#fn1">[1]</A><FONT FACE="Georgia" SIZE=4> or
+just GoF).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_6">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">There is a chapter on design patterns in
+the first edition of <I>Thinking in C++</I>, which has evolved in Volume 2 of
+the second edition of <I>Thinking in C++</I>, and you&#146;ll also find a
+chapter on patterns in the first edition of <I>Thinking in Java</I>. I took that
+chapter out of the second edition of <I>Thinking in Java</I> because that book
+was getting too big, and also because I had decided to write <I>Thinking in
+Patterns</I>. That book, still to be finished, has become this one. The ease of
+expressing these more complex ideas in Python will, I think, finally allow me to
+get it all out.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_7">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This is not an introductory book. I am
+assuming that you have worked your way through at least <I>Learning Python</I>
+(by Mark Lutz &amp; David Ascher; OReilly, 1999) or an equivalent text before
+coming to this book.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_8">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In addition, I assume you have more than
+just a grasp of the syntax of Python. You should have a good understanding of
+objects and what they&#146;re about, including polymorphism.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_9">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">On the other hand, by going through this
+book you&#146;re going to learn a <I>lot</I> about object-oriented programming
+by seeing objects used in many different situations. If your knowledge of
+objects is rudimentary, it will get much stronger in the process of
+understanding the designs in this book.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_10">Add Comment</A></FONT><A NAME="_Toc534420054"></A><BR></P></DIV>
+<A NAME="Heading3"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+The Y2K syndrome</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In a book that has &#147;problem-solving
+techniques&#148; in its subtitle, it&#146;s worth mentioning one of the
+biggest pitfalls in programming: premature optimization. Every time I bring this
+concept forward, virtually everyone agrees to it. Also, everyone seems to
+reserve in their own mind a special case &#147;except for this thing that I
+happen to know is a particular problem.&#148;
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_11">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The reason I call this the Y2K syndrome
+has to do with that special knowledge. Computers are a mystery to most people,
+so when someone announced that those silly computer programmers had forgotten to
+put in enough digits to hold dates past the year 1999, then suddenly everyone
+became a computer expert &#150; &#147;these things aren&#146;t so difficult
+after all, if I can see such an obvious problem.&#148; For example, my
+background was originally in computer engineering, and I started out by
+programming embedded systems. As a result, I know that many embedded systems
+have no idea what the date or time is, and even if they do that data often
+isn&#146;t used in any important calculations. And yet I was told in no
+uncertain terms that all the embedded systems were going to crash on January 1,
+2000</FONT><A NAME="fnB2" HREF="#fn2">[2]</A><FONT FACE="Georgia">. As far as I
+can tell the only memory that was lost on that particular date was that of the
+people who were predicting doom &#150; it&#146;s as if they had never said any
+of that stuff.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_12">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The point is that it&#146;s very easy to
+fall into a habit of thinking that the particular algorithm or piece of code
+that you happen to partly or thoroughly understand is naturally going to be the
+bottleneck in your system, simply because you can imagine what&#146;s going on
+in that piece of code and so you think that it must somehow be much less
+efficient than all the other pieces of code that you don&#146;t know about. But
+unless you&#146;ve run actual tests, typically with a profiler, you can&#146;t
+really know what&#146;s going on. And even if you are right, that a piece of
+code is very inefficient, remember that most programs spend something like 90%
+of their time in less than 10% of the code in the program, so unless the piece
+of code you&#146;re thinking about happens to fall into that 10% it isn&#146;t
+going to be important.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_13">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">&#147;Premature optimization is the root
+of all evil.&#148; is sometimes referred to as &#147;Knuth&#146;s law&#148;
+(from Donald E. Knuth).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_14">Add Comment</A></FONT><A NAME="_Toc534420055"></A><BR></P></DIV>
+<A NAME="Heading4"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Context and composition</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">One of the terms you will see used over
+and over in design patterns literature is <I>context</I>. In fact, one common
+definition of a design pattern is &#147;a solution to a problem in a
+context.&#148; The GoF patterns often have a &#147;context object&#148; that
+the client programmer interacts with. At one point it occurred to me that such
+objects seemed to dominate the landscape of many patterns, and so I began asking
+what they were about.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_15">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The context object often acts as a little
+fa&ccedil;ade to hide the complexity of the rest of the pattern, and in addition
+it will often be the controller that manages the operation of the pattern.
+Initially, it seemed to me that these were not really essential to the
+implementation, use and understanding of the pattern. However, I remembered one
+of the more dramatic statements made in the GoF: &#147;prefer composition to
+inheritance.&#148; The context object allows you to use the pattern in a
+composition, and that may be its primary value.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A1_15">Add Comment</A></FONT><BR></P></DIV>
+<HR><DIV ALIGN="LEFT"><P><A NAME="fn1" HREF="#fnB1">[1]</A><FONT FACE="Georgia"> This
+is a tongue-in-cheek reference to an event in China after the death of Mao-Tze
+Tung, when four persons including Mao&#146;s widow made a power play, and were
+demonized by the Chinese Communist Party under that name.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="fn2" HREF="#fnB2">[2]</A><FONT FACE="Georgia"> These
+same people were also convinced that all the computers were going to crash then,
+too. But since virtually everyone had the experience of their Windows machine
+crashing all the time without particularly dire results, this didn&#146;t seem
+to carry the same drama of impending doom.</FONT><BR></P></DIV>
+
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Preface.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect01.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:12/31/2001</P></DIV>
+
+</BODY>
+
+</HTML>

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="972"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$hqAiuJMmBGV</title>
+</head>
+<body><h1>the internets</h1><p>[wtf is] the <b>internets</b>?</p><ul><li>facebook</li>
+<li>connecting computers +1</li><ul class="comment"><li>this is just networking</li></ul>
+</ul>
+<ul><li><b>networks of networks</b></li>
+<li>tcp/ip</li>
+<li><b>wires</b> // its physical</li>
+<li>gifs and cats</li>
+<li>a communication protocol to send data between computers in disparate locations</li></ul>
+
+<p>what&rsquo;s the <b>world wide web</b>?</p><ul><li>things you put in front of the url (www.) +1<ul><li><a href="http://no-www.org/"></a>http://no-www.org/</li>
+<li><a href="http://www.yes-www.org/"></a>http://www.yes-www.org/</li></ul>
+</li>
+<li>address pointers to where things are stored digitally on disparate computers on the network</li>
+<li>servers</li>
+<li>body of knowledge managed by straaaange people</li>
+<li>protocols</li>
+<li><b>public internet</b> +1</li></ul>
+
+<p>&quot;Things that are addressable over http&quot;</p><p></p><h2>wires</h2><p>There is a physical presence to the internet.&nbsp;</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_hqAiuJMmBGV_p.78223_1398361740082_undersea_cable_map.png'/></p><p><img src='http://sleepout.com/nomad/wp-content/uploads/2013/10/roll-out.jpeg'/></p><p>Created by DARPA&nbsp;</p><p>We tried a few things:&nbsp;</p><ul class="code"><li>ping yoursite.com</li>
+<li>curl yoursite.com</li></ul>
+
+<p><b>http response codes:</b></p><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes"></a>https://developer.mozilla.org/en-US/docs/Web/HTTP/Response_codes</p><ul style="list-style: none;"><li>For example a &quot;404&quot; error is &quot;Not Found –&nbsp; Server can not find requested resource. This response code probably is most famous one due to its frequency to occur in web.&quot;</li></ul>
+
+<p>Making HTTP requests in the terminal:</p><p><a href="http://blog.tonycode.com/tech-stuff/http-notes/making-http-requests-via-telnet"></a>http://blog.tonycode.com/tech-stuff/http-notes/making-http-requests-via-telnet</p><p></p><p><b>Vintage Terminal Emulator for Mac and iOS: Cathode</b></p><p><a href="http://www.secretgeometry.com/apps/cathode/"></a>http://www.secretgeometry.com/apps/cathode/</p><p><img src='http://www.secretgeometry.com/media/iPhone5cCathodeFlatOptimized.png'/></p><p>&quot;BACK TO THE FUTURE Disregard decades of user interface progress.&quot;</p><p></p><ul class="code"><li>ifconfig en0 //to look up own ip address</li></ul>
+
+<p><a href="http://www.kimonolabs.com/"></a>http://www.kimonolabs.com/</p><p>An easy tool for creating APIs for pages where there is none.&nbsp;</p><p></p><p>We used the following code to pull a specific image from the Met database using the api from <a href="http://scrapi.org"></a>http://scrapi.org</p><ul class="code"><li>JSONObject json;</li>
+<li>PImage img;</li>
+<li>String image_url=&quot;&quot;;</li>
+<li><br/></li>
+<li>void setup() {</li>
+<li>&nbsp; json = loadJSONObject(&quot;<a href="http://scrapi.org/object/81781"></a>http://scrapi.org/object/81781&quot;);&nbsp;&nbsp;</li>
+<li>&nbsp; img = loadImage(json.getString(&quot;image&quot;));</li>
+<li>&nbsp; size(img.width,img.height);</li>
+<li>}</li>
+<li><br/></li>
+<li>void draw() {</li>
+<li>&nbsp; image(img, 0, 0, img.width/4, img.height/4);</li>
+<li>}</li></ul>
+
+<p><b>Assignment:</b></p><p>Use two different pieces of data that [don&rsquo;t require authentication] and combine them to make a &rsquo;data visualization.&rsquo;&nbsp;</p><ul style="list-style: none;"><li><b>Potential APIs:</b></li><ul><li>Open Weather Maps (requires registration, then include API key in url request)</li>
+<li><a href='http://www.nyc.gov/html/dob/html/home/home.shtml'/>Department of Buildings</a>&nbsp; - I&rsquo;d love to be able to track building violations and map open or old violations. It&rsquo;s a good way to find landlords who aren&rsquo;t very invested in their properties. (might not have an aip, might have to scrape...) Examples for the building where I live - <a href="http://a810-bisweb.nyc.gov/bisweb/PropertyProfileOverviewServlet?boro=3&houseno=139%20&street=plymouth%20st&requestid=0&s=A03C41B885B461E4F46BD08866A7430E"></a>http://a810-bisweb.nyc.gov/bisweb/PropertyProfileOverviewServlet?boro=3&amp;houseno=139%20&amp;street=plymouth%20st&amp;requestid=0&amp;s=A03C41B885B461E4F46BD08866A7430E</li></ul>
+</ul>
+
+<p></p><p>And here&rsquo;s this: <a href="http://casperjs.org/"></a>http://casperjs.org/</p><p></p><p></p><p>API Tutorial: <a href="https://zapier.com/learn/apis/"></a>https://zapier.com/learn/apis/</p><p></p><p></p></body>
+</html>

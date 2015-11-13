@@ -1,0 +1,383 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPython.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:12/31/2001
+Translation Time:08:24:14
+Translation Platform:Win32
+Number of Output files:18
+This File:Sect13.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>11: Multiple dispatching</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    <!-- [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.htm">Revision History</a> ] -->
+    [ <a href="http://www.mindview.net/Books/TIPython/">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  Thinking in Python<br>
+  <small>Revision 0.1.2 (12/31/01) -- Incomplete and Unfinished</small></FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Bruce Eckel &copy;2002 MindView, Inc.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect12.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect14.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc476705916"></A><A NAME="_Toc534420128"></A><A NAME="Heading79"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+11: Multiple dispatching</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">When dealing with multiple types which
+are interacting, a program can get particularly messy. For example, consider a
+system that parses and executes mathematical expressions. You want to be able to
+say <B>Number + Number</B>, <B>Number * Number</B>, etc., where <B>Number</B> is
+the base class for a family of numerical objects. But when you say <B>a + b</B>,
+and you don&#146;t know the exact type of either <B>a</B> or <B>b</B>, so how
+can you get them to interact properly?
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_323">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The answer starts with something you
+probably don&#146;t think about: Python performs only single dispatching. That
+is, if you are performing an operation on more than one object whose type is
+unknown, Python can invoke the dynamic binding mechanism on only one of those
+types. This doesn&#146;t solve the problem, so you end up detecting some types
+manually and effectively producing your own dynamic binding behavior.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_324">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The solution is called
+<A NAME="Index27"></A><A NAME="Index28"></A><I>multiple dispatching</I>.
+Remember that polymorphism can occur only via member function calls, so if you
+want double dispatching to occur, there must be two member function calls: the
+first to determine the first unknown type, and the second to determine the
+second unknown type. With multiple dispatching, you must have a polymorphic
+method call to determine each of the types. Generally, you&#146;ll set up a
+configuration such that a single member function call produces more than one
+dynamic member function call and thus determines more than one type in the
+process. To get this effect, you need to work with more than one polymorphic
+method call: you&#146;ll need one call for each dispatch. The methods in the
+following example are called <B>compete(&#160;) </B>and <B>eval(&#160;)</B>, and
+are both members of the same type. (In this case there will be only two
+dispatches, which is referred to as
+<A NAME="Index29"></A><A NAME="Index30"></A><I>double dispatching</I>). If you
+are working with two different type hierarchies that are interacting, then
+you&#146;ll have to have a polymorphic method call in each hierarchy.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_325">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here&#146;s an example of multiple
+dispatching:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c11:PaperScissorsRock.py
+# Demonstration of multiple dispatching.
+<font color=#0000ff>from</font> __future__ <font color=#0000ff>import</font> generators
+<font color=#0000ff>import</font> random
+
+# An enumeration type:
+<font color=#0000ff>class</font> Outcome:
+  <font color=#0000ff>def</font> __init__(self, value, name): 
+    self.value = value
+    self.name = name
+  <font color=#0000ff>def</font> __str__(self): <font color=#0000ff>return</font> self.name 
+  <font color=#0000ff>def</font> __eq__(self, other):
+      <font color=#0000ff>return</font> self.value == other.value
+
+Outcome.WIN = Outcome(0, <font color=#004488>"win"</font>)
+Outcome.LOSE = Outcome(1, <font color=#004488>"lose"</font>)
+Outcome.DRAW = Outcome(2, <font color=#004488>"draw"</font>)
+
+<font color=#0000ff>class</font> Item(object):
+  <font color=#0000ff>def</font> __str__(self): 
+    <font color=#0000ff>return</font> self.__class__.__name__ 
+
+<font color=#0000ff>class</font> Paper(Item):
+  <font color=#0000ff>def</font> compete(self, item):
+    # First dispatch: self was Paper
+    <font color=#0000ff>return</font> item.evalPaper(self)
+  <font color=#0000ff>def</font> evalPaper(self, item):
+    # Item was Paper, we're <font color=#0000ff>in</font> Paper
+    <font color=#0000ff>return</font> Outcome.DRAW
+  <font color=#0000ff>def</font> evalScissors(self, item):
+    # Item was Scissors, we're <font color=#0000ff>in</font> Paper
+    <font color=#0000ff>return</font> Outcome.WIN
+  <font color=#0000ff>def</font> evalRock(self, item):
+    # Item was Rock, we're <font color=#0000ff>in</font> Paper
+    <font color=#0000ff>return</font> Outcome.LOSE
+
+<font color=#0000ff>class</font> Scissors(Item):
+  <font color=#0000ff>def</font> compete(self, item): 
+    # First dispatch: self was Scissors
+    <font color=#0000ff>return</font> item.evalScissors(self)
+  <font color=#0000ff>def</font> evalPaper(self, item):
+    # Item was Paper, we're <font color=#0000ff>in</font> Scissors
+    <font color=#0000ff>return</font> Outcome.LOSE
+  <font color=#0000ff>def</font> evalScissors(self, item):
+    # Item was Scissors, we're <font color=#0000ff>in</font> Scissors
+    <font color=#0000ff>return</font> Outcome.DRAW
+  <font color=#0000ff>def</font> evalRock(self, item):
+    # Item was Rock, we're <font color=#0000ff>in</font> Scissors
+    <font color=#0000ff>return</font> Outcome.WIN
+
+<font color=#0000ff>class</font> Rock(Item):
+  <font color=#0000ff>def</font> compete(self, item):
+    # First dispatch: self was Rock
+    <font color=#0000ff>return</font> item.evalRock(self)
+  <font color=#0000ff>def</font> evalPaper(self, item):
+    # Item was Paper, we're <font color=#0000ff>in</font> Rock
+    <font color=#0000ff>return</font> Outcome.WIN
+  <font color=#0000ff>def</font> evalScissors(self, item):
+    # Item was Scissors, we're <font color=#0000ff>in</font> Rock
+    <font color=#0000ff>return</font> Outcome.LOSE
+  <font color=#0000ff>def</font> evalRock(self, item):
+    # Item was Rock, we're <font color=#0000ff>in</font> Rock
+    <font color=#0000ff>return</font> Outcome.DRAW
+
+<font color=#0000ff>def</font> match(item1, item2):
+  <font color=#0000ff>print</font> <font color=#004488>"%s &lt;--&gt; %s : %s"</font> % (
+    item1, item2, item1.compete(item2))
+
+# Generate the items:
+<font color=#0000ff>def</font> itemPairGen(n):
+  # Create a list of instances of all Items:
+  Items = Item.__subclasses__()
+  <font color=#0000ff>for</font> i <font color=#0000ff>in</font> range(n):
+    <font color=#0000ff>yield</font> (random.choice(Items)(), 
+           random.choice(Items)())
+
+<font color=#0000ff>for</font> item1, item2 <font color=#0000ff>in</font> itemPairGen(20):
+  match(item1, item2)
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This was a fairly literal
+translation from the Java version, and one of the things you might notice is
+that the information about the various combinations is encoded into each type of
+<B>Item</B>. It actually ends up being a kind of table, except that it is spread
+out through all the classes. This is not very easy to maintain if you ever
+expect to modify the behavior or to add a new <B>Item</B> class. Instead, it can
+be more sensible to make the table explicit, like this:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_326">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c11:PaperScissorsRock2.py
+# Multiple dispatching using a table
+<font color=#0000ff>from</font> __future__ <font color=#0000ff>import</font> generators
+<font color=#0000ff>import</font> random
+
+<font color=#0000ff>class</font> Outcome:
+  <font color=#0000ff>def</font> __init__(self, value, name): 
+    self.value = value
+    self.name = name
+  <font color=#0000ff>def</font> __str__(self): <font color=#0000ff>return</font> self.name 
+  <font color=#0000ff>def</font> __eq__(self, other):
+      <font color=#0000ff>return</font> self.value == other.value
+
+Outcome.WIN = Outcome(0, <font color=#004488>"win"</font>)
+Outcome.LOSE = Outcome(1, <font color=#004488>"lose"</font>)
+Outcome.DRAW = Outcome(2, <font color=#004488>"draw"</font>)
+
+<font color=#0000ff>class</font> Item(object):
+  <font color=#0000ff>def</font> compete(self, item):
+    # Use a tuple <font color=#0000ff>for</font> table lookup:
+    <font color=#0000ff>return</font> outcome[self.__class__, item.__class__]
+  <font color=#0000ff>def</font> __str__(self): 
+    <font color=#0000ff>return</font> self.__class__.__name__ 
+
+<font color=#0000ff>class</font> Paper(Item): <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> Scissors(Item): <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> Rock(Item): <font color=#0000ff>pass</font>
+
+outcome = {
+  (Paper, Rock): Outcome.WIN,
+  (Paper, Scissors): Outcome.LOSE,
+  (Paper, Paper): Outcome.DRAW,
+  (Scissors, Paper): Outcome.WIN,
+  (Scissors, Rock): Outcome.LOSE,
+  (Scissors, Scissors): Outcome.DRAW,
+  (Rock, Scissors): Outcome.WIN,
+  (Rock, Paper): Outcome.LOSE,
+  (Rock, Rock): Outcome.DRAW,
+}
+
+<font color=#0000ff>def</font> match(item1, item2):
+  <font color=#0000ff>print</font> <font color=#004488>"%s &lt;--&gt; %s : %s"</font> % (
+    item1, item2, item1.compete(item2))
+
+# Generate the items:
+<font color=#0000ff>def</font> itemPairGen(n):
+  # Create a list of instances of all Items:
+  Items = Item.__subclasses__()
+  <font color=#0000ff>for</font> i <font color=#0000ff>in</font> range(n):
+    <font color=#0000ff>yield</font> (random.choice(Items)(), 
+           random.choice(Items)())
+
+<font color=#0000ff>for</font> item1, item2 <font color=#0000ff>in</font> itemPairGen(20):
+  match(item1, item2)
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">It&#146;s a tribute to the
+flexibility of dictionaries that a tuple can be used as a key just as easily as
+a single object.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_327">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="_Toc462393597"></A><A NAME="_Toc476705917"></A><A NAME="_Toc534420129"></A><BR></P></DIV>
+<A NAME="Heading80"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Visitor, a type of multiple dispatching</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The assumption is that you have a primary
+class hierarchy that is fixed; perhaps it&#146;s from another vendor and you
+can&#146;t make changes to that hierarchy. However, you&#146;d like to add new
+polymorphic methods to that hierarchy, which means that normally you&#146;d
+have to add something to the base class interface. So the dilemma is that you
+need to add methods to the base class, but you can&#146;t touch the base class.
+How do you get around this?
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_328">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The design pattern that solves this kind
+of problem is called a &#147;visitor&#148; (the final one in the <I>Design
+Patterns</I> book), and it builds on the double<I> </I>dispatching scheme shown
+in the last section.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_329">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The
+<A NAME="Index31"></A><A NAME="Index32"></A>visitor pattern allows you to extend
+the interface of the primary type by creating a separate class hierarchy of type
+<B>Visitor </B>to virtualize the operations performed upon the primary type. The
+objects of the primary type simply &#147;accept&#148; the visitor, then call
+the visitor&#146;s dynamically<B>-</B>bound member function.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_330">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c11:FlowerVisitors.py
+# Demonstration of <font color=#004488>"visitor"</font> pattern.
+<font color=#0000ff>from</font> __future__ <font color=#0000ff>import</font> generators
+<font color=#0000ff>import</font> random
+
+# The Flower hierarchy cannot be changed:
+<font color=#0000ff>class</font> Flower(object):  
+  <font color=#0000ff>def</font> accept(self, visitor):
+    visitor.visit(self)
+  <font color=#0000ff>def</font> pollinate(self, pollinator):
+    <font color=#0000ff>print</font> self, <font color=#004488>"pollinated by"</font>, pollinator
+  <font color=#0000ff>def</font> eat(self, eater):
+    <font color=#0000ff>print</font> self, <font color=#004488>"eaten by"</font>, eater
+  <font color=#0000ff>def</font> __str__(self): 
+    <font color=#0000ff>return</font> self.__class__.__name__
+
+<font color=#0000ff>class</font> Gladiolus(Flower): <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> Runuculus(Flower): <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> Chrysanthemum(Flower): <font color=#0000ff>pass</font> 
+
+<font color=#0000ff>class</font> Visitor:
+  <font color=#0000ff>def</font> __str__(self): 
+    <font color=#0000ff>return</font> self.__class__.__name__
+
+<font color=#0000ff>class</font> Bug(Visitor): <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> Pollinator(Bug): <font color=#0000ff>pass</font>
+<font color=#0000ff>class</font> Predator(Bug): <font color=#0000ff>pass</font>
+
+# Add the ability to do <font color=#004488>"Bee"</font> activities:
+<font color=#0000ff>class</font> Bee(Pollinator):
+  <font color=#0000ff>def</font> visit(self, flower):
+      flower.pollinate(self)
+
+# Add the ability to do <font color=#004488>"Fly"</font> activities:
+<font color=#0000ff>class</font> Fly(Pollinator):
+  <font color=#0000ff>def</font> visit(self, flower):
+      flower.pollinate(self)
+
+# Add the ability to do <font color=#004488>"Worm"</font> activities:
+<font color=#0000ff>class</font> Worm(Predator):
+  <font color=#0000ff>def</font> visit(self, flower):
+      flower.eat(self)
+
+<font color=#0000ff>def</font> flowerGen(n):
+  flwrs = Flower.__subclasses__()
+  <font color=#0000ff>for</font> i <font color=#0000ff>in</font> range(n):
+    <font color=#0000ff>yield</font> random.choice(flwrs)()
+
+# It's almost as <font color=#0000ff>if</font> I had a method to Perform
+# various <font color=#004488>"Bug"</font> operations on all Flowers:
+bee = Bee()
+fly = Fly()
+worm = Worm()
+<font color=#0000ff>for</font> flower <font color=#0000ff>in</font> flowerGen(10):
+  flower.accept(bee)
+  flower.accept(fly)
+  flower.accept(worm)
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_331">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="_Toc534420130"></A><BR></P></DIV>
+<A NAME="Heading81"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Exercises</H2></FONT>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create a business-modeling
+environment with three types of <B>Inhabitant</B>: <B>Dwarf</B> (for engineers),
+<B>Elf</B> (for marketers) and <B>Troll</B> (for managers). Now create a class
+called <B>Project</B> that creates the different inhabitants and causes them to
+<B>interact(&#160;)</B> with each other using multiple dispatching.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_332">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+the above example to make the interactions more detailed. Each <B>Inhabitant</B>
+can randomly produce a <B>Weapon</B> using <B>getWeapon(&#160;)</B>: a
+<B>Dwarf</B> uses <B>Jargon</B> or <B>Play</B>, an <B>Elf</B> uses
+<B>InventFeature</B> or <B>SellImaginaryProduct</B>, and a <B>Troll</B> uses
+<B>Edict</B> and <B>Schedule</B>. You must decide which weapons
+&#147;win&#148; and &#147;lose&#148; in each interaction (as in
+<B>PaperScissorsRock.py</B>). Add a <B>battle(&#160;)</B> member function to
+<B>Project</B> that takes two <B>Inhabitant</B>s and matches them against each
+other. Now create a <B>meeting(&#160;)</B> member function for <B>Project</B>
+that creates groups of <B>Dwarf</B>, <B>Elf</B> and <B>Manager</B> and battles
+the groups against each other until only members of one group are left standing.
+These are the &#147;winners.&#148;
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_333">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+<B>PaperScissorsRock.py</B> to replace the double dispatching with a table
+lookup. The easiest way to do this is to create a <B>Map </B>of <B>Map</B>s,
+with the key of each <B>Map </B>the class of each object. Then you can do the
+lookup by
+saying:</FONT><BR><FONT FACE="Georgia">(<B>(Map)map.get(o1.getClass())).get(o2.getClass())</B></FONT><BR><FONT FACE="Georgia">Notice
+how much easier it is to reconfigure the system. When is it more appropriate to
+use this approach vs. hard-coding the dynamic dispatches? Can you create a
+system that has the syntactic simplicity of use of the dynamic dispatch but uses
+a table lookup?
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_334">Add Comment</A></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+Exercise 2 to use the table lookup technique described in Exercise 3.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_335">Add Comment</A></FONT></OL>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect12.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect14.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:12/31/2001</P></DIV>
+
+</BODY>
+
+</HTML>

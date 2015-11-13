@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="1722"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$KlnSWNLoEVO</title>
+</head>
+<body><h1>Spacebrew Workshop</h1><p><a href="http://docs.spacebrew.cc/"></a>http://docs.spacebrew.cc/</p><p>Our host: Brett Renfer!!!</p><p></p><p><a href="http://www.robotconscience.com/v5/"></a>http://www.robotconscience.com/v5/</p><p>&nbsp;Collins and before that, Rockwell Group&nbsp;</p><p>&nbsp;</p><p>&nbsp;What is it?</p><ul><li>&nbsp;Service and toolkit for interactive spaces.</li>
+<li>&nbsp;makes it easy to connect things to other things over networks</li>
+<li>was developed to support prototyping driven design efforts</li></ul>
+<p>&nbsp;</p><p>&nbsp;Why is it useful?</p><ul><li>Becomes the glue</li>
+<li>Enables real time communication</li>
+<li>A toolkit&nbsp; with a low floor, high ceiling workflow</li></ul>
+<p>&nbsp;</p><p>&nbsp;Examples:</p><ul><li>&nbsp;visualizing human or tech behavior</li>
+<li>play and interact with living objects (animals, plants)</li>
+<li><a href='http://www.google.com/aclk?sa=l&amp;ai=CtSUXOdtPVJ_2CqiAsAeO-oCoC-7k3aoGzvOn2M8BqaCQCggAEAEgtlRQvZvXyvz_____AWDJxqmLwKTYD6AB3-nu6gPIAQGqBCBP0LVPF8iKZziuj-3o3uoBjcq_B8G3xkE4ndGO3Y_nzIAFkE6AB_b52SiIBwGQBwKoB6a-Gw&amp;sig=AOD64_0WzMrFk0yr6jeymL74KXRh_5qrXg&amp;adurl=http://www.converged.ciscosolution.net%3FSWAPPID%3D91%26RegPageManagedID%3D787033%26ManagedSWTHEMEID%3D13372%26swcampaignid%3D811848%26utm_campaign%3DCampaign%2520Syndication:%2520Conferencing%2520%2520Video%26utm_source%3DGoogle%2520-%2520Search%26utm_medium%3DPay%2520Per%2520Click&amp;rct=j&amp;q='/>T</a>elepresence</li></ul>
+
+<p>&nbsp;</p><p>&nbsp;Client-Server Model:</p><ul><li>&nbsp;Server can be your computer or other server (even a small microprocessor Arduino/Pi).</li>
+<li>&nbsp;Can have one or more &quot;publishers&quot; and &quot;subscriber&quot;</li>
+<li>&nbsp;Local Network or Online</li>
+<li>Uses websockets</li>
+<li>Data formatted at JSON</li>
+<li>Connected via switchboard - connections can be live/real time swapped</li>
+<li>Data Types that are available on Spacebrew - Each publisher and subscriber announces its type, allowing automatic routing between different apps.<ul><li>Boolean (true/false) - yellow</li>
+<li>Range (0-29842) - purple</li>
+<li>String (some text) - red</li>
+<li>+ custom types</li></ul>
+</ul>
+
+<p>Libraries Available:</p><ul><li>Processing</li>
+<li>Arduino</li>
+<li>OF</li>
+<li>Python</li>
+<li>Cinder</li>
+<li>Unity</li>
+<li>JS</li>
+<li>More in the future!</li></ul>
+
+<p>Low Floor and High Ceiling!!! = easy to get started with tremendous growth potential</p><p></p><p><a href="http://docs.spacebrew.cc/examples"></a><b>http://docs.spacebrew.cc/examples</b></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_KlnSWNLoEVO_p.251586_1414520800037_IMG_2708.JPG'/></p><p>&nbsp;image: blinking with OF face tracking to turn lamp on/off</p><p>&nbsp;Possibilities</p><ul><li>&nbsp;spacebrew can get many if not all data types connected to your phone (accelerometer, wifi, range, distance etc) to interact with other items</li>
+<li>facetracking (winking) to use switches / booleans&nbsp;</li></ul>
+
+<p><b>Using Spacebrew:</b></p><ul><li>the idea is to Silo apps wherever possible.&nbsp;&nbsp;</li>
+<li>Make one simple app that can be used with many other simple apps&nbsp;</li>
+<li>this simplicity helps *you* when you are working with different programming language</li></ul>
+
+<p><b>Prototyping</b></p><ul><li>What&rsquo;s the quickest path to a prototype?</li>
+<li>Can you use one of existing examples?</li>
+<li>Or multiple examples?<ul><li>ex: phone can become a jump sensor, string example can stand in for twitter or text messaging</li></ul>
+</li>
+<li>Libraries<ul><li>Connect to object</li></ul>
+</li>
+<li>Publisher:&nbsp;<ul><li>//3 arguments (name, type, default value)</li>
+<li>type: is boolean, string, range</li></ul>
+</li>
+<li>Subscriber:&nbsp;<ul><li>//2 arguments (name, type)</li></ul>
+</li>
+<li>Function to send data (Processing)<ul><li>sb.send(name,value);</li></ul>
+</ul>
+
+<p><b>JSON Objects:</b></p><p>Notes needed here</p><p></p><p><b>Set up your own server:</b></p><ul style="list-style: none;"><li><b>From terminal:</b></li></ul>
+<ul><li>install node.js and node dependencies</li>
+<li>enter:npm install ws</li>
+<li>enter: cd/Users/akleindolph/Desktop/sfpc/Spacebrew/spacebrew_server&nbsp; (this should be the route to your spacebrew server folder)</li>
+<li>enter:npm install forever-monitor</li>
+<li>enter: node node_server_forever.js</li>
+<li>change processing sketch (or whatever sketch) to have your IP address or &quot;Localhost&quot;</li></ul>
+
+<ul><li>If you want to control things out in the world you&rsquo;ll have to have server space somewhere else: Amazon, google, etc.</li></ul>
+<ul style="list-style: none;"><li>Amazon web server is free for one year.</li></ul>
+
+<p></p><p></p><p></p><p></p><ul style="list-style: none;"><li><br/></li></ul>
+
+<p></p><p></p></body>
+</html>

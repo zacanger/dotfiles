@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="576"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$NaiB4bnjW7F</title>
+</head>
+<body><h1>Tools Oct 3</h1><p></p><p><b>Context Free Art</b></p><p></p><p></p><p>Context free art - contextfreeart.org</p><p>*this is adorable <a href="http://www.contextfreeart.org/gallery/view.php?id=3520"></a>http://www.contextfreeart.org/gallery/view.php?id=3520</p><ul style="list-style: none;"><li><br/></li></ul>
+<p>code ex for square: *where &rsquo;x&rsquo; is &quot;shift over&quot; &amp; &rsquo;s&rsquo; is &quot;size&quot; &amp; &rsquo;r&rsquo; is &quot;rotate&quot;</p><ul class="code"><li>startshape myCoolSquare</li>
+<li><br/></li>
+<li>rule myCoolSquare {</li>
+<li>&nbsp;&nbsp;&nbsp; SQUARE [size 2]</li>
+<li>&nbsp;&nbsp;&nbsp; myCoolSquare [x 1.5 s 0.9 r 5</li></ul>
+
+<p></p><p>the curves / straight line example:&nbsp;</p><p></p><ul class="code"><li>startshape k</li>
+<li>&nbsp;</li>
+<li>background { h 90 sat 0 b -.7 }</li>
+<li>&nbsp;</li>
+<li>rule k {20*{x 1}{20*{y 1}A{ h 90 sat 0.7 b 1.0}}}</li>
+<li>rule A{pa{}}</li>
+<li>rule A{pa{r 90}}</li>
+<li>rule A{pad{}}</li>
+<li>rule A{pad{r 90}}</li>
+<li>&nbsp;</li>
+<li>path pa{</li>
+<li>MOVETO{x 0 y -.5}</li>
+<li>ARCTO{x -.5 y 0 r .5}</li>
+<li>MOVETO{x 0 y .5}</li>
+<li>ARCTO{x .5 y 0 r .5}</li>
+<li>STROKE{width .2 p roundcap}</li>
+<li>}</li>
+<li>&nbsp;</li>
+<li>path pad{</li>
+<li>MOVETO{x -.5 y 0}</li>
+<li>LINETO{x .5 y 0 }</li>
+<li>STROKE{width .2 p roundcap}</li>
+<li>}</li></ul>
+
+<p></p><p>This is the branching example:&nbsp;</p><p></p><p></p><ul class="code"><li>startshape myCoolNonSquare</li>
+<li><br/></li>
+<li>rule myCoolNonSquare&nbsp; {</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CIRCLE [size 1]</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fork { }</li>
+<li>}</li>
+<li><br/></li>
+<li>rule fork {</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; myCoolNonSquare [y 1.5 s 0.95 r 3]</li>
+<li>}</li>
+<li><br/></li>
+<li>rule fork 0.01 {</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; myCoolNonSquare&nbsp; [y 1.5 s 0.95 rotate 1]</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; myCoolNonSquare&nbsp; [y 2.5 s 0.95 rotate 320]</li>
+<li>}</li>
+<li><br/></li>
+<li>rule fork 0.1 {</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; myCoolNonSquare&nbsp; [y 1.5 s 0.9 rotate 1]</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; myCoolNonSquare&nbsp; [y 2.5 s 0.9 rotate 30]</li>
+<li>}</li>
+<li><br/></li></ul>
+<p><b>Nodebox</b></p><p></p><p><a href="http://nodebox.net/"></a>http://nodebox.net/</p><ul><li>nodebox 1 <a href="http://nodebox.net/code/index.php/Home"></a>http://nodebox.net/code/index.php/Home</li>
+<li>nodebox 3 <a href="http://nodebox.net/"></a>http://nodebox.net/</li></ul>
+
+<ul class="code"><li>size(500, 500)</li>
+<li><br/></li>
+<li># Set the background color to a specific hue of red</li>
+<li>background(0.16, 0, 0)</li>
+<li><br/></li>
+<li># Set filling off, so ovals will be stroked only</li>
+<li>nofill()</li>
+<li><br/></li>
+<li>for i in range(10):</li>
+<li>&nbsp;&nbsp;&nbsp; stroke(1.0, 1.0, 1.0, 1.0)</li>
+<li>&nbsp;&nbsp;&nbsp; strokewidth(random(0.1, 0.4))</li>
+<li>&nbsp;&nbsp;&nbsp; radius = random(40,900)</li>
+<li>&nbsp;&nbsp;&nbsp; oval(random(WIDTH)-radius, random(HEIGHT)-radius, radius*2, radius*2)</li></ul>
+
+<p>spider example</p><p></p><p></p><ul class="code"><li># This example uses the points method to connect letters together.</li>
+<li># It actually draws lines between points of each letter contour</li>
+<li># that are a certain distance from eachother.</li>
+<li><br/></li>
+<li>size(600, 207)</li>
+<li>background(0.3,0,0.2)</li>
+<li><br/></li>
+<li># This utility method calculates the length between points.</li>
+<li># It&rsquo;s just a standard Pythagoras algorithm.</li>
+<li>def calc_length(x1, y1, x2, y2):</li>
+<li>&nbsp;&nbsp;&nbsp; from math import sqrt, pow</li>
+<li>&nbsp;&nbsp;&nbsp; return sqrt(pow(x2-x1, 2) + pow(y2-y1, 2))</li>
+<li><br/></li>
+<li><br/></li>
+<li># First, create a textpath that we will use further on.</li>
+<li>fontsize(150)</li>
+<li>path = textpath(&quot;SFPC&quot;,20, 150)</li>
+<li><br/></li>
+<li># Select a color for the lines.</li>
+<li>nofill()</li>
+<li>stroke(1)</li>
+<li>strokewidth(0.3)</li>
+<li><br/></li>
+<li># The mutation adds a little extra randomness to each calculated point.</li>
+<li># Increase it to make the lines deviate more from the template path.</li>
+<li>mutation = 10.0</li>
+<li><br/></li>
+<li># The maximum distance between two points. Increase this to get a more</li>
+<li># &quot;spidery&quot; effect.</li>
+<li>maxdist = 40.0</li>
+<li><br/></li>
+<li># Amount of lines for each contour.</li>
+<li>lines_per_contour = 30</li>
+<li><br/></li>
+<li># A path has a contours property that returns each seperate contours.</li>
+<li># Note that &quot;holes&quot; in a letter (such as a P or D) are contours as well.</li>
+<li>for contour in path.contours:</li>
+<li>&nbsp;&nbsp;&nbsp; # Get a list of 100 points on each contour, properly divided amongst</li>
+<li>&nbsp;&nbsp;&nbsp; # the path. This is different from the elements of the path, because</li>
+<li>&nbsp;&nbsp;&nbsp; # the points are evenly distributed along the path.</li>
+<li>&nbsp;&nbsp;&nbsp; path_points = list(contour.points(100))</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp; # We want a certain amount of lines.</li>
+<li>&nbsp;&nbsp;&nbsp; for i in range(lines_per_contour):</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # Choose a point on the path</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pt1 = choice(path_points)</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # To find the second point, we use a &quot;brute-force&quot; approach.</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # We randomly select a point on the path, and see if its distance</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # from the first point is smaller than the maximum allowed distance.</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # If it is, the point is selected; otherwise, we try another point.</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # Note that this might loop infinitely for very short (or negative) distances.</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # Use Command-Period to break out of the loop.</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # Initialize the current length to &quot;infinity&quot;, which means it won&rsquo;t get selected.</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; length = float(&quot;inf&quot;)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while length &gt; maxdist:</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pt2&nbsp; = choice(path_points)&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; length = calc_length(pt1.x, pt1.y, pt2.x, pt2.y)</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # Once we&rsquo;ve found a second point, draw it. Use the mutation parameter to add a bit</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # of randomness to the position of the line.</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; line(pt1.x + random(-mutation, mutation), pt1.y + random(-mutation, mutation), &#92;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pt2.x + random(-mutation, mutation), pt2.y + random(-mutation, mutation))</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li></ul>
+<p>&nbsp;&nbsp;</p><p><b>SuperCollider&nbsp;</b></p><p>&nbsp;&nbsp;&nbsp;</p><ul><li>&nbsp;<a href="http://supercollider.sourceforge.net/"></a>http://supercollider.sourceforge.net/</li>
+<li>&nbsp;album made w 140 characters per song - <a href="http://supercollider.sourceforge.net/sc140/"></a>http://supercollider.sourceforge.net/sc140/</li>
+<li>&nbsp;supercollider code from in class: <a href="https://gist.github.com/ofZach/f64f27f03cd0e57b4434"></a>https://gist.github.com/ofZach/f64f27f03cd0e57b4434</li>
+<li>check out Nick Collins&rsquo; info on his 12 week class, a lot of good info <a href="http://www.sussex.ac.uk/Users/nc81/modules/cm1/workshop.html"></a>http://www.sussex.ac.uk/Users/nc81/modules/cm1/workshop.html</li></ul>
+
+<p><b>Chuck</b></p><p></p><ul><li><a href="http://chuck.cs.princeton.edu/"></a>http://chuck.cs.princeton.edu/</li>
+<li>examples from in class: <a href="https://github.com/ofZach/chuckExamples"></a>https://github.com/ofZach/chuckExamples</li></ul>
+
+</body>
+</html>

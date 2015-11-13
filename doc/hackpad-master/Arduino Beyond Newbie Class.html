@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="4549"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$9RyFb9XmDbK</title>
+</head>
+<body><h1>Arduino Beyond Newbie Class</h1><p><b>Short review from class 1 (5 min)</b></p><ul><li>TBD</li>
+<li>Questions from class one?</li>
+<li>A quick note about libraries&nbsp;<ul><li>Install - libraries will show up in your Arduino folder in &quot;Documents&quot;</li></ul>
+</ul>
+<p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_9RyFb9XmDbK_p.251586_1418087703411_undefined'/></p><ul style="list-style: none;"><li>Be sure to check the examples to see if your library came with examples:</li>
+<li><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_9RyFb9XmDbK_p.251586_1418087827323_undefined'/></li>
+<li><br/></li>
+<li>Get some libraries:</li>
+<li><a href="http://arduino.cc/en/Reference/Libraries"></a>http://arduino.cc/en/Reference/Libraries</li></ul>
+
+<ul><li>No special characters in library names!!!</li></ul>
+
+<ul style="list-style: none;"><li>What a standard library includes (keypad below):</li></ul>
+<p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_9RyFb9XmDbK_p.251586_1418088079061_Screenshot 2014-12-08 20.21.00.png'/></p><p></p><p>It can be helpful to look at the keywords file:</p><ul style="list-style: none;"><li><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_9RyFb9XmDbK_p.251586_1418088186363_Screenshot 2014-12-08 20.22.23.png'/></li>
+<li><br/></li></ul>
+<p><b>Storing a value in EEPROM (10 min)</b></p><ul><li>EEPROM = Electronically Erasable Programmable Read Only Memory</li>
+<li>Ram is zeroed when power is removed from the microcontroller.&nbsp; EEPROM is the only way to record variables without an external SD card.</li>
+<li>EEPROM addresses are 8 bits (0-255).</li></ul>
+<p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_9RyFb9XmDbK_p.251586_1418088540950_AVR_memory_01_lrg.jpg'/></p><p></p><p>Example code ( a device that does something different each time it&rsquo;s restarted:</p><p>*</p><p><a href="https://gist.github.com/extrasleepy/187225991a36bfa95cd9#file-gistfile1-txt"></a>https://gist.github.com/extrasleepy/187225991a36bfa95cd9#file-gistfile1-txt</p><p>Similar example: does a different thing each time you turn it on: <a href="https://vimeo.com/89358523"></a>https://vimeo.com/89358523</p><p></p><p><u>Storing numbers larger than a byte in EEPROM:</u></p><p>Example: a device that changes based on how many times it has been reset/unplugged:</p><p>(requires LED on pin 12)</p><p>*</p><p><a href="https://gist.github.com/extrasleepy/72aee868899c6ae3493d"></a>https://gist.github.com/extrasleepy/72aee868899c6ae3493d</p><p></p><p><b>AVR Direct Port Manipulation (5 min)</b></p><p>Control many pins with less code.&nbsp; Get close to the metal!</p><p>Ports:</p><ul><li>B (digital pin 8 to 13)</li>
+<li>C (analog input pins)</li>
+<li>D (digital pins 0 to 7)</li></ul>
+
+<ul><li>DDR(port) = B00000000 //sets port as input or output</li>
+<li>PORTD = B00000000 //sets all pins low</li></ul>
+<p>*</p><p><a href="https://gist.github.com/extrasleepy/9ad7c6439b7b1b93b59b"></a>https://gist.github.com/extrasleepy/9ad7c6439b7b1b93b59b</p><p>more here:</p><p><a href="http://www.arduino.cc/en/Reference/PortManipulation"></a>http://www.arduino.cc/en/Reference/PortManipulation</p><p></p><p></p><p><b>Making Arduino random( ) = MORE random! (5 min)</b></p><p><a href="http://arduino.cc/en/Reference/Random"></a><a href='http://arduino.cc/en/Reference/Random'/>http://arduino.cc/en/Reference/Random</a></p><p><a href="http://arduino.cc/en/Reference/RandomSeed"></a>http://arduino.cc/en/Reference/RandomSeed</p><p>randomSeed(analogRead(0));&nbsp;&nbsp;&nbsp; //use this as a seed value.&nbsp; Reads analog value on pin that has nothing actually hooked to analog pin.&nbsp; This is also known as a floating input.</p><p></p><p>*</p><p><a href="https://gist.github.com/extrasleepy/3cd2872c4359601850c8"></a>https://gist.github.com/extrasleepy/3cd2872c4359601850c8</p><p></p><p><b>Hardware Interrupts and Sleep ( 5 min)</b></p><p><u>What are they good for?</u> = A button that can be pressed at any time in the program!</p><ul><li>Uno Interrupts are on Digital 2 (Interrupt 0) and Digital 3 (Interrupt 1)</li>
+<li>Interrupt can detect LOW, RISING, FALLING, CHANGE, HIGH</li>
+<li>AttachInterrupt(interrupt address, function, detection constant);&nbsp;</li>
+<li>ISR (interrupt service routines) cannot pass variables&nbsp;</li>
+<li>Interrupts wake Arduino from sleep.</li></ul>
+
+<p>BUILD: Add button to from Digital Pin 2 to GND.</p><p></p><p>CODE:</p><p>*</p><p><b>Sleeping:</b></p><p>The Arduino has a handful of sleeping functions that it understands by invoking commands specific to the atmel chip. To use sleep functions, we <i>usually</i> need to include these three header files:</p><ul class="code"><li>#include &lt;avr/sleep.h&gt;</li>
+<li>#include &lt;avr/power.h&gt;</li>
+<li>#include &lt;avr/wdt.h&gt;</li></ul>
+
+<p>These allow us to use power saving modes like:</p><p></p><ul><li>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp;&nbsp; SLEEP_MODE_IDLE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -the least power savings</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp;&nbsp; SLEEP_MODE_ADC</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp;&nbsp; SLEEP_MODE_PWR_SAVE</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp;&nbsp; SLEEP_MODE_STANDBY</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp;&nbsp; SLEEP_MODE_PWR_DOWN&nbsp;&nbsp;&nbsp;&nbsp; -the most power savings</li></ul>
+
+<p>Each of these modes allows different circuitry (timers, oscillators) to go to &rsquo;sleep&rsquo; and help save power.&nbsp; There are two ways an Atmel Chip can be awoken from a sleep, by a special kind of timer, or by a signal using our friend the interrupt.&nbsp;&nbsp;</p><p></p><p>For waking with a timer there&rsquo;s a separate clock on the chip, called a <i>watchdog timer</i>, which periodically wakes the MCU back up. Watchdog timers typically have an 8 sec maximum wait before they &quot;bite&quot; or check for an interrupt but can be as quick as 30 ms.&nbsp;&nbsp;</p><p></p><p>There are other libraries that simplify low power commands, enerlib is one example.&nbsp; A new favorite is Narcoleptic!&nbsp;&nbsp;</p><p></p><p>Download the library here:&nbsp;&nbsp;</p><p><a href="https://code.google.com/p/narcoleptic/downloads/detail?name=Narcoleptic_v1a.zip"></a>https://code.google.com/p/narcoleptic/downloads/detail?name=Narcoleptic_v1a.zip</p><p></p><p>Here&rsquo;s a simple example:&nbsp;&nbsp;</p><ul class="code"><li>{</li>
+<li>#include &lt;Narcoleptic.h&gt;</li>
+<li><br/></li>
+<li>void setup() {</li>
+<li>&nbsp; pinMode(2,INPUT);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // set pin 2 as input&nbsp;</li>
+<li>&nbsp; digitalWrite(2,HIGH);&nbsp;&nbsp; //&nbsp; pull it high initially&nbsp;</li>
+<li>&nbsp; pinMode(13,OUTPUT);&nbsp;&nbsp;&nbsp;&nbsp; //&nbsp; make 13 an output&nbsp;</li>
+<li>&nbsp; digitalWrite(13,LOW);&nbsp;&nbsp; //&nbsp; initially set it low&nbsp;</li>
+<li>}</li>
+<li><br/></li>
+<li>void loop() {</li>
+<li>&nbsp; int a;</li>
+<li><br/></li>
+<li>&nbsp; // Merlin the cat is snoozing... Connect digital pin 2 to ground to wake him up.</li>
+<li>&nbsp; Narcoleptic.delay(500); // During this time power consumption is minimised</li>
+<li><br/></li>
+<li>&nbsp; while (digitalRead(2) == LOW) {</li>
+<li>&nbsp;&nbsp;&nbsp; // Wake up CPU. Unfortunately, Merlin does not like waking up.</li>
+<li><br/></li>
+<li>&nbsp;&nbsp;&nbsp; // Swipe claws left</li>
+<li>&nbsp;&nbsp;&nbsp; digitalWrite(13,HIGH);</li>
+<li>&nbsp;&nbsp;&nbsp; delay(50);</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp; // Swipe claws right</li>
+<li>&nbsp;&nbsp;&nbsp; digitalWrite(13,LOW);</li>
+<li>&nbsp;&nbsp;&nbsp; delay(50);</li>
+<li>&nbsp; }</li>
+<li><br/></li></ul>
+
+<p>Here&rsquo;s another example using an interrupt and the avr library instead.&nbsp;&nbsp;</p><p></p><ul class="code"><li>&nbsp;&nbsp;&nbsp;&nbsp;</li></ul>
+
+<p></p><p><a href="https://gist.github.com/extrasleepy/e120be94dccda907a206"></a>https://gist.github.com/extrasleepy/e120be94dccda907a206</p><p></p><p><b>Talk with Processing or OF. (15 min)</b></p><p><u>First, communicate without Firmata!!!</u></p><p>use Serial.write( );</p><p></p><p>Code on Arduino:</p><p>*</p><p><a href="https://gist.github.com/extrasleepy/c2807755b6276da6bdac"></a>https://gist.github.com/extrasleepy/c2807755b6276da6bdac</p><p>Processing Code:</p><p>*</p><p><a href="https://gist.github.com/extrasleepy/3269fc604e0bde755128"></a>https://gist.github.com/extrasleepy/3269fc604e0bde755128</p><ul class="code"><li>//Processing function to print serial ports</li>
+<li>println(Serial.list());</li>
+<li><br/></li>
+<li>//Listing the available serial ports with a for loop!!</li>
+<li>for (int i = 0; i &lt; Arduino.list().length; i++) {</li>
+<li>&nbsp;&nbsp;&nbsp; println(i + &quot; --&gt; &quot; + Arduino.list()[i]);</li>
+<li>&nbsp; }</li></ul>
+
+<p></p><p></p><p><u>Going the other way:</u></p><p></p><p>Upload &rsquo;Standard Firmata&rsquo; to the UNO:</p><p>Examples -&gt; Firmata -&gt; Standard Firmata&nbsp;</p><p></p><p>In processing install the Arduino library here-&gt;&nbsp;</p><p><a href="http://playground.arduino.cc/Interfacing/Processing"></a>http://playground.arduino.cc/Interfacing/Processing</p><p>Then run the &rsquo;Arduino Output&rsquo; skectch in:&nbsp;</p><p>Processing-&gt;Examples-&gt;Contributed Libraries-&gt;Arduino Output</p><p></p><p></p><p><u>Super Simple Arduino/OF sketch using Firmata:</u></p><p><a href="https://www.dropbox.com/s/43i9jk5koglxd65/arduinoControl.zip?dl=0"></a>https://www.dropbox.com/s/43i9jk5koglxd65/arduinoControl.zip?dl=0</p><p></p><p><b>I2C other modules (20 min)&nbsp;&nbsp;</b></p><p><u>I2C = synchronous, bus (devices can be chained to one &quot;master&quot; device)</u></p><p></p><ul><li>2-wire communication standard</li>
+<li>SDA = (Serial Data) OR Analog 4</li>
+<li>SCL = (Serial Clock) OR Analog 5</li>
+<li>Use &quot;Wire&quot; library for I2C.</li></ul>
+
+<p><img src='http://www.best-microcontroller-projects.com/images/i2c-tutorial-typical-signals.png'/></p><p></p><ul><li>1. Send the START bit (S).</li>
+<li>2. Send the slave address (ADDR).</li>
+<li>3. Send the Read(R)-1 / Write(W)-0 bit.</li>
+<li>4. Wait for/Send an acknowledge bit (A).</li>
+<li>5. Send/Receive the data byte (8 bits) (DATA).</li>
+<li>6. Expect/Send acknowledge bit (A).</li>
+<li>7. Send the STOP bit (P).</li></ul>
+
+<p><u>Since the devices are addressable, you can have many devices on one bus!!!!</u></p><p></p><p><img src='http://embedded-lab.com/blog/wp-content/uploads/2011/05/MutipleI2C_Devices.png'/></p><p><a href="http://embedded-lab.com/blog/wp-content/uploads/2011/05/MutipleI2C_Devices.png"></a>http://embedded-lab.com/blog/wp-content/uploads/2011/05/MutipleI2C_Devices.png</p><p></p><p><u>Exercise: Have two Arduinos talk to each other!!!</u></p><p>Build this:</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_9RyFb9XmDbK_p.251586_1418265089249_i2c.PNG'/></p><p></p><p><u>Code for Transmitting Arduino:</u></p><p>*</p><p><a href="https://gist.github.com/extrasleepy/f82e11d15073228f42ef"></a>https://gist.github.com/extrasleepy/f82e11d15073228f42ef</p><p></p><p><u>Code for Receiving Arduino:</u></p><p>*</p><p><a href="https://gist.github.com/extrasleepy/580d8e8e2708a4b00478"></a>https://gist.github.com/extrasleepy/580d8e8e2708a4b00478</p><p></p><p><u>More on I2C</u></p><p>I2C: <a href="http://www.arduino.cc/en/Reference/Wire"></a>http://www.arduino.cc/en/Reference/Wire</p><p></p><p>More about Synchronous and Asynchonous communication.</p><p><a href="https://learn.sparkfun.com/tutorials/serial-communication"></a><a href='https://learn.sparkfun.com/tutorials/serial-communication'/>https://learn.sparkfun.com/tutorials/serial-communication</a></p><p></p><p>Time Permitting: Try these I2C ready devices: Neopixels, Digit-display, LED Matrix, Accelerometer.</p><p></p><p><a href='/ep/profile/okfl7kqsZvK'/>Zachary Dunham</a></p><p></p><p><b>Short Lecture -Nothing Hands on: Different Arduino devices.&nbsp; Which one is for me? Breadboarding an Arduino / ATtiny (10 min)</b></p><p></p><p><a href='http://arduino.cc/en/Main/arduinoBoardUno'/>Uno</a> (most popular - tons of examples)</p><p><a href='https://Leonardo'/>Leonardo</a> (good for serial control easily acts as keyboard or mouse)</p><p><a href='http://arduino.cc/en/Main/ArduinoBoardDue'/>Due</a> (54 I/O pins, 3.3v only, more powerful CPU, faster, bigger, more storage</p><p><a href='http://arduino.cc/en/Main/ArduinoBoardYun'/>Yun</a> (wifi / ethernet built in $75+, long startup time)</p><p><a href='http://arduino.cc/en/Main/ArduinoBoardEthernet'/>Arduino Ethernet</a> (Cheaper/Faster way to connect to Internet, PoE powered by Ethernet)*</p><p><a href='https://www.sparkfun.com/products/10915'/>Arduino Pro</a> (Cheap,&nbsp; Almost same footprint as UNO, $15 without requiring building)*</p><p><a href='https://www.sparkfun.com/products/11113'/>Arduino Pro Mini</a> (Cheap, $10, smallest footprint)*</p><p><a href='https://www.sparkfun.com/products/9266'/>LilyPad Arduino</a> (Designed for wearables)*</p><p></p><p><a href='https://www.pjrc.com/teensy/'/>Teensy</a> (super small, 32bit, powerful, inexpensive and powerful for Audio)</p><p></p><p>Easy tool for bootloading a raw ATMEGA:</p><p><a href="http://shop.evilmadscientist.com/productsmenu/tinykitlist/253"></a>http://shop.evilmadscientist.com/productsmenu/tinykitlist/253</p><p></p><p>RAW ATMEGA*</p><p><a href="http://www.digikey.com/product-detail/en/ATMEGA328P-PU/ATMEGA328P-PU-ND/1914589"></a>http://www.digikey.com/product-detail/en/ATMEGA328P-PU/ATMEGA328P-PU-ND/1914589</p><p></p><p>PRE-BOOTLOADED ATMEGA*</p><p><a href="https://www.sparkfun.com/products/10524"></a>https://www.sparkfun.com/products/10524</p><p></p><p>Breadboard Arduino*</p><p><a href="http://arduino.cc/en/Main/Standalone"></a>http://arduino.cc/en/Main/Standalone</p><p></p><p>Breadboard ATtiny</p><p><a href="https://www.sparkfun.com/products/11801"></a>https://www.sparkfun.com/products/11801</p><p><a href="https://www.sparkfun.com/products/9378"></a>https://www.sparkfun.com/products/9378</p><p><a href="https://learn.sparkfun.com/tutorials/tiny-avr-programmer-hookup-guide/?_ga=1.117748937.1776796729.1410905664"></a>https://learn.sparkfun.com/tutorials/tiny-avr-programmer-hookup-guide/?_ga=1.117748937.1776796729.1410905664</p><p></p><p>*Requires FTDI cable to program: <a href='https://www.sparkfun.com/products/9716'/>This</a> or <a href='https://www.sparkfun.com/products/9718'/>This</a></p><p></p><p><b>Short Lecture -Nothing Hands on: Tried and True Sensors and Add ons</b></p><p><b>Multiplexing (10 min)</b></p><p></p><p>Multiplexing!&nbsp;&nbsp;</p><p>-Allows us to control many digital states without using an equal number of digital pins on the Arduino. With a common chip like the 74HC595 16 leds can be controlled by using only 3 digital pins on the arduino.&nbsp;&nbsp;</p><p>-Achieved by quickly scanning across each intersection of the &rsquo;rows and columns&rsquo; hundreds of times a second the multiplexer is able to uniquely control each intersection or led in this example.&nbsp;&nbsp;</p><p>A nice instructable <a href='http://www.instructables.com/id/Multiplexing-with-Arduino-and-the-74HC595/'/>here</a></p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_9RyFb9XmDbK_p.251746_1418275199670_FMMWU6BH2TJ4FPQ.LARGE.gif'/></p><p>Ultrasonic (distance): <a href="https://www.sparkfun.com/products/8501"></a>https://www.sparkfun.com/products/8501</p><p></p><p>Infrared (distance): <a href="https://www.sparkfun.com/products/242"></a><a href='https://www.sparkfun.com/products/242'/>https://www.sparkfun.com/products/242</a></p><p></p><p>Wide angle motion: <a href="https://www.adafruit.com/products/189"></a>https://www.adafruit.com/products/189</p><p></p><p>Basic wifi: <a href="https://www.adafruit.com/products/1469"></a>https://www.adafruit.com/products/1469</p><p></p><p>tilt/acceleration: <a href="https://www.adafruit.com/products/2019"></a>https://www.adafruit.com/products/2019</p><p></p><p>SMS: <a href="https://www.adafruit.com/products/1963"></a>https://www.adafruit.com/products/1963</p><p></p><p>Radio Control:&nbsp;</p><p><a href="https://www.adafruit.com/products/128"></a>https://www.adafruit.com/products/128</p><p><a href="https://www.adafruit.com/products/126"></a>https://www.adafruit.com/products/126</p><p></p><p>Serial Lcd: <a href="https://www.sparkfun.com/products/9394"></a>https://www.sparkfun.com/products/9394</p><p></p><p>Parallel lcd: <a href="https://www.sparkfun.com/products/255"></a>https://www.sparkfun.com/products/255</p><p></p><p>Triggering samples: <a href="https://www.sparkfun.com/products/10628"></a>https://www.sparkfun.com/products/10628</p><p>or&nbsp; <a href="https://www.sparkfun.com/products/12646"></a>https://www.sparkfun.com/products/12646<a href='https://www.sparkfun.com/products/12646https://www.sparkfun.com/products/12767'/> </a>with <a href="https://www.sparkfun.com/products/12767"></a>https://www.sparkfun.com/products/12767&nbsp;</p><p></p><p>Stepper motor control: <a href="https://www.sparkfun.com/products/11876"></a>https://www.sparkfun.com/products/11876</p><p></p><p>Control many servos: <a href="https://www.adafruit.com/products/815"></a>https://www.adafruit.com/products/815</p><p></p><p>Adding Outputs / multiplexing (shift register): <a href="https://www.sparkfun.com/products/10680"></a>https://www.sparkfun.com/products/10680</p><p></p><p>Digit Display:</p><p><a href="https://www.adafruit.com/products/880"></a>https://www.adafruit.com/products/880</p><p></p><p>LED Matrix:</p><p><a href="https://www.adafruit.com/products/902"></a>https://www.adafruit.com/products/902</p><p></p><p>Barometric Pressure:</p><p><a href="https://www.adafruit.com/product/992"></a>https://www.adafruit.com/product/992</p><p></p><p>Pressure (force):</p><p><a href="https://www.sparkfun.com/products/8712"></a>https://www.sparkfun.com/products/8712</p><p></p><p>RFID:</p><p><a href="https://www.sparkfun.com/products/11827"></a>https://www.sparkfun.com/products/<a href='https://www.sparkfun.com/products/retired/8419'/>11827</a></p><p>with:</p><p><a href="https://www.sparkfun.com/products/13030"></a>https://www.sparkfun.com/products/13030</p><p></p><p>Pulse:</p><p><a href="https://www.sparkfun.com/products/11574"></a>https://www.sparkfun.com/products/11574</p><p></p><p>Audio Detection:</p><p><a href="https://www.adafruit.com/products/1713"></a>https://www.adafruit.com/products/1713</p><p></p><p>Capacitive Touch:</p><p><a href="https://www.sparkfun.com/products/12017"></a>https://www.sparkfun.com/products/12017</p><p></p><p>Small Joystick:</p><p><a href="https://www.adafruit.com/products/512"></a>https://www.adafruit.com/products/512</p><p></p><p></p><p></p><p></p><p></p><p></p></body>
+</html>

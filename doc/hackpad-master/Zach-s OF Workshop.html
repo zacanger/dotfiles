@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="3073"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$Ag0nPcx0dAw</title>
+</head>
+<body><h1>Zach&rsquo;s OF Workshop</h1><h2>OF</h2><p><b>History</b></p><ul><li>ACU (aesthetics and computation group) -- MIT Media Lab / John Maeda / Elise Co / Peter Cho / Ben Fry / Casey Reas&nbsp;<ul><li>Theo Watson / MAC</li>
+<li>Arturo Castro / Linux</li>
+<li>c++ / 90&rsquo;s, not open source</li></ul>
+</ul>
+<p><b>Philosophy</b></p><ul><li>DIWO - do it with others</li>
+<li>Simplicity</li>
+<li>consistant and intuitive naming convention</li>
+<li>cross platform - can compile for multiple devices</li>
+<li>powerful - utilize existing libraries</li>
+<li>extendable - ofx addons</li></ul>
+<p><b>Resources</b></p><ul><li>forum.openframeworks.cc - the library/toolkit is an entry point but the people using it and the community is more powerful.</li>
+<li>tutorials (on tutorial page) and books&nbsp;</li>
+<li>mastering openframeworks book</li>
+<li>the Japanese book - great code examples and graphics, who needs the text... ;-)&nbsp;</li>
+<li><a href='https://sites.google.com/site/ofauckland/people/colab-auckland'/>auckland openframeworks </a>site has small code examples&nbsp;&nbsp;</li>
+<li>there is a <a href='https://github.com/openframeworks/ofBook'/>book on GitHub</a> that is currently being written</li>
+<li><a href='http://vimeo.com/tag:openframeworks'/>vimeo</a> &amp; <a href='https://www.flickr.com/groups/openframeworks/'/>flickr</a> for inspiration or <a href='http://forum.openframeworks.cc/category/examples'/>forum/examples</a></li>
+<li>OF notes here: <a href="http://www.jeffcrouse.info/teaching/intermediate-of/"></a>http://www.jeffcrouse.info/teaching/intermediate-of/</li>
+<li><a href="http://www.jeffcrouse.info/teaching/code-for-art/"></a>http://www.jeffcrouse.info/teaching/code-for-art/</li></ul>
+<p><b>C++</b></p><ul><li>Process 4 steps<ul><li>text<ul><li>.h &amp; .cpp</li>
+<li>.h = header (e.g. table of contents - it&rsquo;s like a map for the compiler)</li>
+<li>.cpp = implementation (e.g. the text of the book)</li></ul>
+</li>
+<li>pre-process<ul><li>&quot;#&quot; this symbol will define specific rules for the target it will be compiled for</li>
+<li>most important one is &quot;#include &quot;ofMain.h&quot;&quot; which says &rsquo;take allllll the text in all of the h files and put it in here&rsquo; *called an include guard</li>
+<li>when your program can&rsquo;t find a file it is a problem at this level</li></ul>
+</li>
+<li>compile<ul><li>.cpp -&gt; .o</li>
+<li>does not care about your .h files!!!!!!!&nbsp;&nbsp; (the h files are put into .cpp files in preprocess)</li>
+<li>different settings so you can compile and debug or compile and release</li>
+<li>compiling creates lots of &rsquo;o&rsquo; files that will reference each other&nbsp;</li></ul>
+</li>
+<li>link<ul><li>takes allllll the .o files and smashes them together to make one file</li></ul>
+</li></ul>
+</li>
+<li>helpfull places&nbsp;<ul><li>cplusplus.com</li>
+<li>a few books in the library</li>
+<li>c &amp; c++ in five days - <a href='https://www.box.com/shared/static/qqtm40rory.pdf'/>pdf</a>&nbsp;</li>
+<li>use existing code</li></ul>
+</li>
+<li>Folder structure<ul><li>There are different folders inside libs, libraries that come with it that do cool things (fmod, freetype, rtaudio -low level audio-, etc). oF comes with some curated libraries.</li>
+<li>Inside the library &rsquo;openframeworks&rsquo;, there are a bunch of core folders that can give you a good idea of the main <i>design philosophy ;)</i> of the language (math, gl, 3d, etc).&nbsp;</li>
+<li>openFrameworksCompiled is where the built core of oF can be found<ul><li>Raspberry Pi compile for oF takes a long time!</li></ul>
+</li>
+<li>Scripts: shell scripts or templates for making projects.&nbsp;</li>
+<li>Random folders like other - small processing sketch for serial? Export - things that get added to your project after it is compiled.&nbsp;</li>
+<li>Docs: general documentation&nbsp;</li>
+<li>Changelog: useful to look at what&rsquo;s changing - see what priorities and history are. Document is a pretty fast way of seeing what the activity is.&nbsp;<ul><li>*love the notation, &rsquo;+&rsquo; is new features, &rsquo;-&rsquo; is removed and &rsquo;/&rsquo; are changes</li></ul>
+</li>
+<li>Examples are sorted by topic - examples about math, using noise, trig, libraries about sound, both high and low level sound work.&nbsp;</li>
+<li><u>Go through and compile them</u>. Take a look at them - can find a lot of things. Try to ship with a lot of examples, which become a way of digging into things you like in the code.&nbsp;</li>
+<li>Addons - additional libraries. A lot of people wanted different things, some people wanted 3D, XML, CV, if you add everything to the core, the core library gets too big, which is hard to maintain. Means projects will also be very big! Additional code that you can add to a project - think about them as mini-libraries. They could be small but also really complex. A simple example - a vector graphics addon for saving postscript.&nbsp;</li></ul>
+</li>
+<li>Make a new Project<ul><li>Tool - project generator application, a GUI for letting you adjust properties of a sketch as well as select addons. You can say where the sketch goes - recommend putting them inside of <u>apps &gt; myapps</u>.&nbsp;</li>
+<li>When creating a project with the project generator, you can name it whatever and select addOns that you want to use in it.&nbsp;</li>
+<li>You&rsquo;ll be able to add more addOns later on.</li>
+<li>in OSX: dependencies - need to select what target you&rsquo;re using - Debug vs. Release - you want to build debug project.&nbsp;<ul><li><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_Ag0nPcx0dAw_p.252113_1413903188738_undefined'/></li></ul>
+</li></ul>
+</li>
+<li>Questions<ul><li>Why is there no main.h?<ul><li>main is an entry point, its job in life is to run code - just read and do things but <u>every program needs a place to start and this is it</u>.&nbsp;</li>
+<li><a href="http://en.wikipedia.org/wiki/Entry_point"></a>http://en.wikipedia.org/wiki/Entry_point</li>
+<li>No other code calls main, so there doesn&rsquo;t need to be an .h file for main.&nbsp;</li>
+<li>Here, main() sets up a window and calls ofRunApp and repeatedly calls draw/update functions</li>
+<li>You typically don&rsquo;t alter main, but there are instances where you want to change it, for example, the size of the window.</li></ul>
+</li>
+<li>Majority of code you write is in ofApp (used to be testApp? before that triangleApp? -- you&rsquo;ll see these if you download older example code) - this is your root level, the thing that is&nbsp; running. There&rsquo;s a trick happening here similar to Processing (they don&rsquo;t show it to you) - here in oF, we&rsquo;ve created an object, ofApp, this extends ofBaseApp (takes the recipe of ofBaseApp and extends it). In Processing, there&rsquo;s an object called PApplet and you are running your own version of setup and draw.&nbsp;<ul><li>BaseApp already exists. ofApp is our extension of BaseApp</li></ul>
+</li></ul>
+</li>
+<li>Different events that happen in oF -&nbsp;<ul><li><a href="http://www.openframeworks.cc/tutorials/developers/001_how_openFrameworks_works.html"></a>http://www.openframeworks.cc/tutorials/developers/001_how_openFrameworks_works.html</li>
+<li>setup() - LIKE YOUR BIRTH. Setup only gets called once. The <i>ideal place to allocate memory</i>, like if we need to load in an image, sound, movie- you don&rsquo;t want to do this repeatedly, you want to do this once at the beginning. We can give variables values, set up the world.&nbsp;</li>
+<li>Update and draw get called repeatedly. (In Processing, setup() and draw() only). <u>Update</u>() - for updating non-visual, <u>draw</u>() is for visual things. draw() - sending commands to openGL to draw. Having the non-visual and visual separated makes it easier to find out what&rsquo;s going wrong, <i>for example in debugging</i> you can comment out drawing or updating to see. Do something to any variables.</li>
+<li>draw() - draw to the screen</li>
+<li>Other functions like mousePressed, keyPressed, etc. are event driven.&nbsp;</li>
+<li>ofVerticalSync() - takes care of synchronization with your monitor<ul><li>in &rsquo;void ofApp::setup(){ to get synching to break do this:</li></ul>
+</ul>
+</ul>
+<ul class="code"><li>void ofApp::setup(){</li>
+<li>ofSetVerticalSync(false);</li>
+<li>}</li><ul><li>gotMessage() - different ways of passing messages around if you need to do more event driven programming.</li>
+<li><b>variables</b> are scoped - strongly typed in c++ meaning you need to specify what kind of object a thing is. (versus other languages which are loosely typed). For a float, it&rsquo;s like saying &quot;give me space in memory to store a float.&quot; In C++ variables are scoped, it exists within blocks of code if they are defined within {//some code}&nbsp;</li>
+<li>We put variables in the .h file so that they are accessible to all the functions in .cpp<ul><li>ie, it&rsquo;s scoped to the object (ofApp) so it&rsquo;s accessible in all the object functions like setup / update / draw</li></ul>
+</li>
+<li>When you don&rsquo;t initialize variables, it might lead to weird behavior - the memory for that variable might be storing something beforehand. You can&rsquo;t initialize variables in .h files. Initialize them in setup.&nbsp;</li>
+<li>Public vs. private variables - you can specify what you want people using your object to use. There are variables I don&rsquo;t want anyone outside of this project to use.&nbsp;</li></ul>
+</ul>
+
+<p></p><p></p><p></p></body>
+</html>

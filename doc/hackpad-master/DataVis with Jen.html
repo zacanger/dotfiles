@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="1317"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$wmWhkbeXRFb</title>
+</head>
+<body><h1>DataVis with Jen</h1><p></p><p>When looking for data behind data visualisations.&nbsp;</p><p>Use google developer tools and open the html of the site.</p><ul><li>In the html we are looking for links to the json files or equivalent to find the data used in the visualisations.&nbsp;</li>
+<li>Looking at the peoplemovin website.&nbsp;</li>
+<li>Look for json but if there is none.</li>
+<li>look at javascript files.&nbsp;</li>
+<li>In the javascript there is a php script to connect to some json files in this example.</li>
+<li>This takes us to the data.</li></ul>
+
+<p>JSON TOOLS</p><p>JSON Validators are really useful for checking JSON files.&nbsp;</p><ul><li><a href='http://www.jsonlint.com'/>www.jsonlint.com</a> is really useful for this.</li>
+<li><a href="http://shancarter.github.io/mr-data-converter/"></a>http://shancarter.github.io/mr-data-converter/</li></ul>
+
+<p></p><p>Binning&nbsp;</p><ul><li>Taking a dataset and dividing it up into bins (or sections). It means a person has selected where the important distinctions in the data. It is a way that data cab be manipulated (for good or evil).&nbsp;</li></ul>
+
+<ul><li>How does data visualisation obscure the assumptions upon which it is based?</li></ul>
+
+<p>Working with APIs</p><ul><li>Some are well documented, some are not.&nbsp;</li>
+<li>Looking at forecast.io</li>
+<li>An API call - this is an call that will return a slice of the data to you, you can type this into your browser and the data will be returned to you.&nbsp;</li>
+<li>You are requesting just a slice of the data from the database.&nbsp;</li></ul>
+
+<p>Python is great for working with data- it has a good community and history.&nbsp;</p><ul><li>Python wrapper libraries have been written for many APIs.&nbsp;</li>
+<li>The forecast API, has a few python wrappers</li>
+<li>PIP is a thing that takes care of the installation for you.&nbsp;</li>
+<li>If you can avoid downloading zips of python and installing AVOID THIS!</li>
+<li>PIP is a thing that will manage the installation of the python stuff for you. Saves you a lot of complications of the manual installation.&nbsp;</li></ul>
+
+<p>Using Python with Homebrew.</p><p>5 STEPS FOR WORKING WITH PYTHON WITHOUT LOSING YOUR MIND</p><ul><li>go to the homebrew webpage.</li>
+<li>Install homebrew</li>
+<li>Install python: $brew install python</li>
+<li>*change the path for python - you may or may not need to do this - use if pip isn&rsquo;t found*&nbsp;</li>
+<li>$nano .bash_profile</li>
+<li>add this line to your .bash_profile: export PATH=/bin:/usr/local/bin:$PATH</li>
+<li>save your .bash_profile</li>
+<li>Now you can install using &quot;pip install&quot; to install python libraries</li></ul>
+
+<p>pip install requests</p><p>pip install python-forecastio</p><p></p><p>Sublime Text + Python</p><p></p><p>Save this as test.py in SublimeText:</p><p></p><p></p><p>import requests</p><p>import forecastio</p><p></p><p>print &rsquo;hello python!&rsquo;</p><p></p><p>api_key = &quot;31f38d07c51ba765afceb5189f2906e5&quot;</p><p>lat = -31.967819</p><p>lng = 115.87718</p><p></p><p>forecast = forecastio.load_forecast(api_key, lat, lng)</p><p></p><p>byHour = forecast.hourly()</p><p>print byHour.summary</p><p></p><p>Hit Command-B - it should run......</p><p></p><p></p><p>TERMINAL STUFF</p><ul><li>if you have a giant file that you cannot open, you can use the terminal to type head and the file name and it will just open the file header.&nbsp;<ul><li>likewise &quot;tail&quot; which opens the end</li></ul>
+</li>
+<li><br/></li></ul>
+
+<p></p><p></p><p></p><p></p><p></p></body>
+</html>

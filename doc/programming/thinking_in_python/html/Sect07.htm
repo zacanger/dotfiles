@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPython.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:12/31/2001
+Translation Time:08:24:13
+Translation Platform:Win32
+Number of Output files:18
+This File:Sect07.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>Y: Iterators: decoupling algorithms from containers</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    <!-- [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.htm">Revision History</a> ] -->
+    [ <a href="http://www.mindview.net/Books/TIPython/">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  Thinking in Python<br>
+  <small>Revision 0.1.2 (12/31/01) -- Incomplete and Unfinished</small></FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Bruce Eckel &copy;2002 MindView, Inc.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect06.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect08.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc534420105"></A><A NAME="Heading56"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+Y: Iterators: decoupling algorithms from containers</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia" SIZE=4 COLOR="Red">This chapter has not
+had any significant translation yet.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia" SIZE=4>Alexander Stepanov thought for
+years about the problem of generic programming techniques before creating the
+STL (along with Dave Musser). He came to the conclusion that all algorithms are
+defined on algebraic structures &#150; what we would call containers.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_231">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In the process, he realized that
+iterators are central to the use of algorithms, because they decouple the
+algorithms from the specific type of container that the algorithm might
+currently be working with. This means that you can describe the algorithm
+without worrying about the particular sequence it is operating on. More
+generally, <I>any</I> code that you write using iterators is decoupled from the
+data structure that the code is manipulating, and thus your code is more general
+and reusable.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_232">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The use of iterators also extends your
+code into the realm of <I>functional programming</I>, whose objective is to
+describe <I>what</I> a program is doing at every step rather than <I>how</I> it
+is doing it. That is, you say &#147;sort&#148; rather than describing the
+sort. The objective of the C++ STL was to provide this <I>generic
+programming</I> approach for C++ (how successful this approach will actually be
+remains to be seen).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_233">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">If you&#146;ve used containers in Java
+(and it&#146;s hard to write code without using them), you&#146;ve used
+iterators &#150; in the form of the <B>Enumeration</B> in Java 1.0/1.1 and the
+<B>Iterator</B> in Java 2. So you should already be familiar with their general
+use. If not, see Chapter 9, <I>Holding Your Objects</I>, under <I>Iterators</I>
+in <I>Thinking in Java, 2<SUP>nd</SUP> edition</I> (freely downloadable from
+<I>www.BruceEckel.com</I>).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_234">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Because the Java 2 containers rely
+heavily on iterators they become excellent candidates for generic/functional
+programming techniques. This chapter will explore these techniques by converting
+the STL algorithms to Java, for use with the Java 2 container library.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_235">Add Comment</A></FONT><A NAME="_Toc534420106"></A><BR></P></DIV>
+<A NAME="Heading57"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Type-safe iterators</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In <I>Thinking in Java, 2<SUP>nd</SUP>
+edition</I>, I show the creation of a type-safe container that will only accept
+a particular type of object. A reader, Linda Pazzaglia, asked for the other
+obvious type-safe component, an iterator that would work with the basic
+<B>java.util</B> containers, but impose the constraint that the type of objects
+that it iterates over be of a particular type.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_236">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">If Java ever includes a template
+mechanism, this kind of iterator will have the added advantage of being able to
+return a specific type of object, but without templates you are forced to return
+generic <B>Object</B>s, or to require a bit of hand-coding for every type that
+you want to iterate through. I will take the former approach.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_237">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">A second design decision involves the
+time that the type of object is determined. One approach is to take the type of
+the first object that the iterator encounters, but this is problematic because
+the containers may rearrange the objects according to an internal ordering
+mechanism (such as a hash table) and thus you may get different results from one
+iteration to the next. The safe approach is to require the user to establish the
+type during construction of the iterator.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_238">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Lastly, how do we build the iterator? We
+cannot rewrite the existing Java library classes that already produce
+<B>Enumeration</B>s and <B>Iterator</B>s. However, we can use the
+<I>Decorator</I> design pattern, and create a class that simply wraps the
+<B>Enumeration</B> or <B>Iterator</B> that is produced, generating a new object
+that has the iteration behavior that we want (which is, in this case, to throw a
+<B>RuntimeException</B> if an incorrect type is encountered) but with the same
+interface as the original <B>Enumeration</B> or <B>Iterator</B>, so that it can
+be used in the same places (you may argue that this is actually a <I>Proxy</I>
+pattern, but it&#146;s more likely <I>Decorator</I> because of its intent).
+Here is the code:
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_239">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE># util:TypedIterator.py
+
+<font color=#0000ff>class</font> TypedIterator(Iterator):
+  private Iterator imp
+  private Class type
+  <font color=#0000ff>def</font> __init__(self, Iterator it, Class type):
+    imp = it
+    self.type = type
+
+  <font color=#0000ff>def</font> hasNext(self): 
+    <font color=#0000ff>return</font> imp.hasNext() 
+
+  <font color=#0000ff>def</font> remove(self): imp.remove() 
+  <font color=#0000ff>def</font> next(self):
+    Object obj = imp.next()
+    <font color=#0000ff>if</font>(!type.isInstance(obj))
+      throw ClassCastException(
+        <font color=#004488>"TypedIterator for type "</font> + type +
+        <font color=#004488>" encountered type: "</font> + obj.getClass())
+    <font color=#0000ff>return</font> obj
+# :~</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect06.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect08.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:12/31/2001</P></DIV>
+
+</BODY>
+
+</HTML>

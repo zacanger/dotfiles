@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="version" content="2272"/>
+<style>body {font-family:Helvetica}ul.comment{list-style-image:url('https://hackpad.com/static/img/comment.png');} ul.task{list-style-image:url('https://hackpad.com/static/img/unchecked.png');}ul.taskdone{list-style-image:url('https://hackpad.com/static/img/checked.png');} </style><title>/3668$IqMNRKbzfdJ</title>
+</head>
+<body><h1>A Firm Memory Stack</h1><p>parallel memoir with <a href='/hb2hDEJ722N'/>A Firm Project Stack</a></p><p></p><h2>Sunday April 20</h2><p><b>6 : make a process or sculpture about physical memory.</b></p><p><i>first assignment from <u>Tega&nbsp;</u></i></p><p><i>collaborated with Ida, Shobun</i></p><p></p><p><a href="http://instagram.com/p/nBf0fUNH58/"></a><a href='http://instagram.com/p/nBf0fUNH58/'/>http://instagram.com/p/nBf0fUNH58/</a></p><p>*</p><p></p><h2>Monday April 21</h2><p><b>questions</b></p><p>in zach&rsquo;s class</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_IqMNRKbzfdJ_p.78223_1398121138320_2014-04-21 17.25.05.jpg'/></p><p></p><p></p><p><b>8-bit binary typing tutor</b></p><p><i>&rsquo;teaching binary&rsquo;&nbsp; in-class assignment from Zach</i></p><p><i>collaborated/in conjunction with Hiro</i></p><p>inspired from patatap.com</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_IqMNRKbzfdJ_p.78223_1398121169485_2014-04-21 17.30.08.jpg'/></p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_IqMNRKbzfdJ_p.78223_1398121180614_2014-04-21 15.54.34.jpg'/></p><p></p><p><b>a new language proposition</b></p><p><b><i>&rsquo;</i></b><i>from</i></p><p></p><p>what kind of sorcery is happening in this if statement?</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_IqMNRKbzfdJ_p.78223_1398151678986_Screenshot 2014-04-22 03.25.42.png'/></p><p></p><p>two operators are helpful to understand here: &gt;&gt; is a bit shift operator.&nbsp;&nbsp; You can take a number (in binary) like</p><p></p><ul class="code"><li>10010 &gt;&gt; 1 = 1001&nbsp;</li>
+<li>10010 &lt;&lt; 1 = 100100</li></ul>
+
+<p>it&rsquo;s kind of like a divide or multiply by two (in a primitive sense without rounding, floating point numbers, etc....&nbsp;&nbsp; 1011 (11) &gt;&gt; 1 = 101 (5), for example)</p><p></p><p>The second operator is &amp;, which is an and operator.&nbsp; It returns true if both bits are true.&nbsp;</p><p><a href="http://www.ee.surrey.ac.uk/Projects/CAL/digital-logic/gatesfunc/index.html#andgate"></a>http://www.ee.surrey.ac.uk/Projects/CAL/digital-logic/gatesfunc/index.html#andgate</p><p></p><ul class="code"><li>0 &amp; 0 = 0</li>
+<li>1 &amp; 0 = 0</li>
+<li>0 &amp; 1 = 0</li>
+<li>1 &amp; 1 = 1</li></ul>
+
+<p>So this code is, in a for loop, shifting the number down.&nbsp; The 7-i is because we are drawing from right to left, so we want to look from the top most bit when i = 0.&nbsp;&nbsp;&nbsp; We are shifting down to different directions, ie,&nbsp;</p><p></p><ul class="code"><li>10010111 is being checked as</li>
+<li>10010111&nbsp; &gt;&gt; 7 = 1</li>
+<li>10010111&nbsp; &gt;&gt; 6 = 10</li>
+<li>10010111&nbsp; &gt;&gt; 5 = 100</li>
+<li>10010111&nbsp; &gt;&gt; 4 = 1001</li>
+<li>10010111&nbsp; &gt;&gt; 3 = 10010</li>
+<li>10010111&nbsp; &gt;&gt; 2 = 100101</li>
+<li>10010111&nbsp; &gt;&gt; 1 = 1001011</li>
+<li>10010111&nbsp; &gt;&gt; 0= 10010111</li></ul>
+
+<p>then, we see if the last bit = 1, by &amp; with 1 (0x01 is a way of writing 1 in hex)</p><p></p><ul class="code"><li>1 &amp; 0x01 = 1</li>
+<li>10 &amp; 0x01 = 0</li>
+<li>100 &amp; 0x01 = 0</li>
+<li>1001 &amp; 0x01 = 1</li>
+<li>... etc</li></ul>
+
+<p>hope this helps!</p><p></p><p>indeed! thank you!</p><p>also this link also super helpful&nbsp;</p><p><a href="http://stackoverflow.com/questions/47981/how-do-you-set-clear-and-toggle-a-single-bit-in-c-c"></a>http://stackoverflow.com/questions/47981/how-do-you-set-clear-and-toggle-a-single-bit-in-c-c</p><p></p><p></p><p></p><p></p><h2>Tuesday</h2><p>Coding language assignment from Zach</p><p></p><p>first iteration&nbsp;</p><p><b>PercussiveDraw</b></p><p><a href="http://tothong.com/files/Movie%20on%204-21-14%20at%209.23%20PM.mov"></a>http://tothong.com/files/Movie%20on%204-21-14%20at%209.23%20PM.mov</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_IqMNRKbzfdJ_p.78223_1398286095932_Screenshot 2014-04-23 14.51.36.png'/></p><p></p><p><b>BalloonDraw</b></p><p>a lot of thought process on thinking about inside&nbsp;</p><p><a href="https://github.com/firmread/firm_sfpc/tree/master/blowUpShapes"></a>https://github.com/firmread/firm_sfpc/tree/master/blowUpShapes</p><p>&lt;&lt; using simple OF app that talk to arduino through standard firmata</p><p></p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_IqMNRKbzfdJ_p.78223_1398278653881_photo 2.JPG'/></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_IqMNRKbzfdJ_p.78223_1398278657176_photo 1.JPG'/></p><p></p><h2>Wednesday</h2><p></p><p><b>Negation constraint</b></p><undefined><li><b>my output</b></li></undefined>
+<p>constraint from <a href='/ep/profile/CmJtyfdsaNb'/>Alexander Porter</a>&nbsp;</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_IqMNRKbzfdJ_p.78223_1398277948747_Photo on 4-23-14 at 2.24 PM copy.jpg'/></p><p>I just changed my number so here&rsquo;s what i got...&nbsp;</p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_IqMNRKbzfdJ_p.78223_1398278062482_2014-04-23 14.25.14.png'/></p><p></p><p>searching on google, without quotes i got:&nbsp;</p><p></p><ul class="code"><li><b>Youtube</b></li>
+<li>Loading...</li>
+<li>Are you sure you want to remove the &quot;Watch it again&quot; section?</li></ul>
+
+<p></p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_IqMNRKbzfdJ_p.78223_1398278142357_Screenshot 2014-04-23 14.35.10.png'/></p><p></p><p></p><p></p><p>,,, with quote I got:</p><p></p><ul class="code"><li>&quot;And you are lynching Negroes&quot;</li></ul>
+
+<p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_IqMNRKbzfdJ_p.78223_1398278249759_Screenshot 2014-04-23 14.34.58.png'/></p><p></p><undefined><li><b>my instruction to <a href='/ep/profile/Bc4vLk9ynDm'/>Nathan Koch</a></b></li></undefined>
+<p>&quot;Blindly, Randomly, type one letter on the keyboard from one foot away, complete the word, repeat&quot;</p><p></p><p>This is what come out&nbsp;</p><ul class="code"><li>gsjllj ggghygmvv kkkkubufn ffyfhhghg jjjkjjkkuyghgd vvnnb,mb. ggthff kjikgmgk lhhgf hf hhhj ;ykd jfmnc li,jg ccv kjkjoyr jhjhjh. liklkh fgfkda hesyrydhdcv. ajfdlll; jirnvigtmlou jjyjuolklhjf.</li>
+<li>&nbsp;</li>
+<li>siqmdoe,jui. kuwplandhwuooihy. wxxxtkdpw. sowncvhdwi. wwiwmsha. ijmncwod,i/ powmcjuwom/ wwwwjwpcpm;wow[s.</li></ul>
+
+<p>It have a nice phonic rhythm to it when computer read it, a lot of &rsquo;misspell&rsquo;</p><p></p><p></p><p></p><p></p><h2>write in other languages</h2><p>as I&rsquo;ve never done any text adventure before,,,</p><p></p><p><b>sfpc text adventure</b></p><p><b>Scratch&nbsp;</b></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_IqMNRKbzfdJ_p.78223_1398707154181_Screenshot%202014-04-28%2013.45.35.png'/></p><p>here goes one the most misused way to use scratch</p><p><a href="http://scratch.mit.edu/projects/"></a>http://scratch.mit.edu/projects/</p><p></p><undefined><li><b>Python</b></li></undefined>
+<p>developing....</p><p></p><p></p><p><b>other languages that i like</b></p><ul><li>whitespace <a href="http://en.wikipedia.org/wiki/Whitespace_(programming_language)"></a><a href='http://en.wikipedia.org/wiki/Whitespace_(programming_language'/>http://en.wikipedia.org/wiki/Whitespace_(programming_language</a>)</li>
+<li>shakespeare <a href="http://en.wikipedia.org/wiki/Shakespeare_(programming_language)"></a><a href='http://en.wikipedia.org/wiki/Shakespeare_(programming_language'/>http://en.wikipedia.org/wiki/Shakespeare_(programming_language</a>)</li>
+<li>Chef <a href="http://en.wikipedia.org/wiki/Chef_(programming_language)#Chef"></a><a href='http://en.wikipedia.org/wiki/Chef_(programming_language)#Chef'/>http://en.wikipedia.org/wiki/Chef_(programming_language)</a><a href='https://sfpc.hackpad.com/ep/search/?q=%23Chef&amp;via=IqMNRKbzfdJ'/>#Chef</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Octave_(language)"></a><a href='http://en.wikipedia.org/wiki/Octave_(language'/>http://en.wikipedia.org/wiki/Octave_(language</a>)</li></ul>
+
+<p></p><h2>Thursday</h2><p><b>Drawings and circuit</b></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_IqMNRKbzfdJ_p.78223_1398479072291_2014-04-25 22.12.31.jpg'/></p><p></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_IqMNRKbzfdJ_p.78223_1398479008342_2014-04-24 18.48.44.jpg'/></p><p></p><h2>Friday</h2><p><b>Drawings and circuit part 2</b></p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_IqMNRKbzfdJ_p.78223_1398479105446_2014-04-25 22.12.20.jpg'/></p><p></p><p>Hiro teach me Serialport &gt; node server &gt; client stuffs&nbsp;</p><p>code is on the wall</p><p><img src='https://hackpad-attachments.s3.amazonaws.com/hackpad.com_IqMNRKbzfdJ_p.78223_1398478224752_2014-04-25 21.54.42.jpg'/></p><p></p><h2>Assignments (propositions) // buffer // pre-project stack</h2><ul><li>Jonathan&rsquo;s Combining two pieces of data</li>
+<li>Zach&rsquo;s Tuesday assignment<ul><li><b>a)</b> create tools / systems / scenarios for writing and reading code not on the screen.&nbsp;&nbsp;</li></ul>
+<ul style="list-style: none;"><li>are there better systems you can develop for working with code?&nbsp;&nbsp; For identifying questions and understanding?</li></ul>
+<ul><li><b>b)</b> tell a story using variable names.&nbsp; you code should compile, but also be interesting and evocative to read as text. focus on code as text, can you play with this?&nbsp;&nbsp;</li></ul>
+<ul style="list-style: none;"><li>Look at poems by apollinaire.&nbsp;&nbsp; outrageous examples can be found in the obfuscated code contest (<a href="http://www.ioccc.org/2000/bmeyer.c)"></a><a href='http://www.ioccc.org/2000/bmeyer.c'/>http://www.ioccc.org/2000/bmeyer.c</a>) and also in ishac&rsquo;s code poems:</li>
+<li><a href="http://www.creativeapplications.net/processing/code-poems-by-ishac-bertran-poetry-with-code/"></a><a href='http://www.creativeapplications.net/processing/code-poems-by-ishac-bertran-poetry-with-code/'/>http://www.creativeapplications.net/processing/code-poems-by-ishac-bertran-poetry-with-code/</a>&nbsp;</li>
+<li>(there should be a copy at school)</li></ul>
+<ul><li><b>c)</b> feel comfortable with scope and variables and arrays.&nbsp;&nbsp; make some sketches.&nbsp;&nbsp;</li>
+<li><b>d)</b> read some code that&rsquo;s out of your comfort level, generate a bunch of question about it.&nbsp;</li>
+<li><b>e)</b> play with memory in weird ways - make programs that crash.</li></ul>
+</li>
+<li>&gt;&gt;&gt; memories and name project</li>
+<li>explore more languages</li>
+<li>make one thing out of what Hiro taught me,, arduino - node - browser</li>
+<li>poem/game out of &rsquo;the dawn&rsquo; poem</li><ul class="code"><li><br/></li></ul class="code">
+</li>
+<li><b>At Dawn</b></li></ul>
+<ul class="code"><li><br/></li>
+<li>In my dream the head of a child was in the center.</li>
+<li><br/></li>
+<li>If the clouds gather on your roof and the rain spares you, will you keep the secret of this double miracle?</li>
+<li><br/></li>
+<li>But no voice calls you. If you get up, barefoot, you&rsquo;ll get sick. Where would you go, anyway, across these ravines of light.</li>
+<li><br/></li>
+<li>The quilts keep the silence. Legs folded under, he walks on his wings and goes out. He was an angel and the whiter morning that was rising.</li>
+<li><br/></li></ul>
+<ul><li>node libs cross using from what Jonathan taught in the session today</li></ul>
+
+<p></p></body>
+</html>

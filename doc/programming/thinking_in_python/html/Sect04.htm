@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPython.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:12/31/2001
+Translation Time:08:24:12
+Translation Platform:Win32
+Number of Output files:18
+This File:Sect04.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>3: Building application frameworks</TITLE>
+
+<script language="JavaScript">
+</script>
+</head>
+
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+    <!-- [ <a href="README.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.htm">Revision History</a> ] -->
+    [ <a href="http://www.mindview.net/Books/TIPython/">Book Home Page</a> ]
+    [ <a href="http://www.mindview.net/Etc/MailingList.html">Free Newsletter</a> ] <br>
+    [ <a href="http://www.mindview.net/Seminars">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CDs">Seminars on CD ROM</a> ]
+    [ <a href="http://www.mindview.net/Services">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  Thinking in Python<br>
+  <small>Revision 0.1.2 (12/31/01) -- Incomplete and Unfinished</small></FONT></H2>
+  <H3><FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans">
+  by Bruce Eckel &copy;2002 MindView, Inc.</FONT></H3>
+  
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect03.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect05.htm">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc375545413"></A><A NAME="_Toc455024531"></A><A NAME="_Toc476705896"></A><DIV ALIGN="LEFT"><P><A NAME="_Toc534420080"></A><BR></P></DIV>
+<A NAME="Heading31"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H1 ALIGN="LEFT">
+3: Building application frameworks</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">An application framework allows you to
+inherit from a class or set of classes and create a new application, reusing
+most of the code in the existing classes and overriding one or more methods in
+order to customize the application to your needs. A fundamental concept in the
+application framework is the <I>Template Method</I> which is typically hidden
+beneath the covers and drives the application by calling the various methods in
+the base class (some of which you have overridden in order to create the
+application).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_120">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">For example, whenever you create an
+applet you&#146;re using an application framework: you inherit from
+<B>JApplet</B> and then override <B>init(&#160;)</B>. The applet mechanism
+(which is a <I>Template Method</I>)<I> </I>does the rest by drawing the screen,
+handling the event loop, resizing, etc.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_121">Add Comment</A></FONT><A NAME="_Toc476705897"></A><A NAME="_Toc534420081"></A><BR></P></DIV>
+<A NAME="Heading32"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Template method</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">An important characteristic of the
+<I>Template Method</I> is that it is defined in the base class and cannot be
+changed. It&#146;s sometimes a <B>private</B> method but it&#146;s virtually
+always <B>final</B>. It calls other base-class methods (the ones you override)
+in order to do its job, but it is usually called only as part of an
+initialization process (and thus the client programmer isn&#146;t necessarily
+able to call it directly).
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_122">Add Comment</A></FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c03:TemplateMethod.py
+# Simple demonstration of Template Method.
+
+<font color=#0000ff>class</font> ApplicationFramework:
+  <font color=#0000ff>def</font> __init__(self):
+    self.__templateMethod()
+  <font color=#0000ff>def</font> __templateMethod(self):
+    <font color=#0000ff>for</font> i <font color=#0000ff>in</font> range(5):
+      self.customize1()
+      self.customize2()
+
+# Create a <font color=#004488>"application"</font>:
+<font color=#0000ff>class</font> MyApp(ApplicationFramework):
+  <font color=#0000ff>def</font> customize1(self):
+    <font color=#0000ff>print</font> <font color=#004488>"Nudge, nudge, wink, wink! "</font>,
+  <font color=#0000ff>def</font> customize2(self): 
+    <font color=#0000ff>print</font> <font color=#004488>"Say no more, Say no more!"</font>
+
+MyApp()
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The base-class constructor is
+responsible for performing the necessary initialization and then starting the
+&#147;engine&#148; (the template method) that runs the application (in a GUI
+application, this &#147;engine&#148; would be the main event loop). The client
+programmer simply provides definitions for <B>customize1(&#160;)</B> and
+<B>customize2(&#160;)</B> and the &#147;application&#148; is ready to run.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_123">Add Comment</A></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">We&#146;ll see <I>Template Method</I>
+numerous other times throughout the book.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_124">Add Comment</A></FONT><A NAME="_Toc534420082"></A><BR></P></DIV>
+<A NAME="Heading33"></A><FONT FACE = "Verdana, Tahoma, Arial, Helvetica, Sans"><H2 ALIGN="LEFT">
+Exercises</H2></FONT>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create a framework that
+takes a list of file names on the command line. It opens each file except the
+last for reading, and the last for writing. The framework will process each
+input file using an undetermined policy and write the output to the last file.
+Inherit to customize this framework to create two separate
+applications:</FONT><BR><FONT FACE="Georgia">1) Converts all the letters in each
+file to uppercase.</FONT><BR><FONT FACE="Georgia">2) Searches the files for
+words given in the first file.
+<A HREF="http://www.mindview.net/Books/TIPython/BackTalk/FindPage/A_125">Add Comment</A></FONT></OL>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana, Tahoma, Arial, Helvetica, Sans" size = "-1">
+     [ <a href="Sect03.htm">Previous Chapter</a> ] 
+    
+    [ <a href="javascript:window.location.href = 'Index.htm';">Table of Contents</a> ] 
+  
+        [ <a href="DocIdx.htm">Index</a> ]
+        
+     [ <a href="Sect05.htm">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:12/31/2001</P></DIV>
+
+</BODY>
+
+</HTML>
