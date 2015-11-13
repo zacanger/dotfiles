@@ -1,5 +1,0 @@
-CHAPTERS = {
-        'ethercalc': {
-            '
-            }
-        }
