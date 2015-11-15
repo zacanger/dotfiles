@@ -1,0 +1,695 @@
+# ============== shell
+# Case-insensitive globbing.
+shopt -s nocaseglob;
+
+# Do not overwrite files when redirecting using ">", ">&" or "<>".
+# Note that you can still override this with ">|".
+set -o noclobber;
+
+# UTF-8 all the way.
+export LC_ALL='en_GB.UTF-8';
+export LANG='en_GB';
+
+# Expand "!" history when pressing space
+bind Space:magic-space;
+
+# ANSI colours and font properties.
+FG_BLACK=$'\e[30m';
+FG_RED=$'\e[31m';
+FG_GREEN=$'\e[32m';
+FG_YELLOW=$'\e[33m';
+FG_BLUE=$'\e[34m';
+FG_MAGENTA=$'\e[35m';
+FG_CYAN=$'\e[36m';
+FG_WHITE=$'\e[37m';
+BG_BLACK=$'\e[40m';
+BG_RED=$'\e[41m';
+BG_GREEN=$'\e[42m';
+BG_YELLOW=$'\e[43m';
+BG_BLUE=$'\e[44m';
+BG_MAGENTA=$'\e[45m';
+BG_CYAN=$'\e[46m';
+BG_WHITE=$'\e[47m';
+FONT_RESET=$'\e[0m';
+FONT_BOLD=$'\e[1m';
+FONT_BRIGHT="$FONT_BOLD";
+FONT_DIM=$'\e[2m';
+FONT_UNDERLINE=$'\e[4m';
+FONT_BLINK=$'\e[5m';
+FONT_REVERSE=$'\e[7m';
+FONT_HIDDEN=$'\e[8m';
+FONT_INVISIBLE="$FONT_HIDDEN";
+
+# Git prompt.
+git_branch () {
+	branch="$(git symbolic-ref -q HEAD 2>/dev/null)";
+	ret=$?;
+	case $ret in
+		0) echo "(${FG_WHITE}${branch##*/}${PROMPT_COLOUR})";;
+		1) echo '(no branch)';;
+		128) echo -n;;
+		*) echo 'WTF?';;
+	esac;
+	return $ret;
+}
+[ -f ~/git-completion.bash ] && source ~/git-completion.bash;
+
+# Show a one-line process tree of the given process, defaulting to the current shell.
+process-tree () {
+	pid="${1:-$$}";
+	orig_pid="$pid";
+	local commands=();
+	while [ "$pid" != "$ppid" ]; do
+		# Read the parent's process ID and the current process's command line.
+		{ read -d ' ' ppid; read command; } < <(ps c -p "$pid" -o ppid= -o command= | sed 's/^ *//');
+
+		# Stop when we have reached the first process, or an sshd/login process.
+		[ "$ppid" -eq 0 -o "$ppid" -eq 1 -o "$command" = 'login' -o "$command" = 'sshd' ] && break;
+
+		# Insert the command in the front of the process array.
+		commands=("$command" "${commands[@]}");
+
+		# Prepare for the next iteration.
+		pid="$ppid";
+		ppid=;
+	done;
+
+	# Hide the first bash process.
+	set -- "${commands[@]}";
+	if [ "$1" = '-bash' -o "$1" = 'bash' ]; then
+		shift;
+		commands=("$@");
+	fi;
+
+	# Print the tree with the specified separator.
+	separator='→';
+	output="$(IFS="$separator"; echo "${commands[*]}")";
+	echo "${output//$separator/ $separator }";
+}
+
+# More advanced prompt.
+export PROMPT_COLOUR="$FG_CYAN";
+[ "$USER" = "root" ] && export PROMPT_COLOUR="$FONT_BRIGHT$FG_RED";
+export PS1="${FONT_RESET}${PROMPT_COLOUR}-----[ \t ]$([ $SHLVL -gt 1 ] && echo " (${FONT_REVERSE}level $SHLVL${FONT_RESET}${PROMPT_COLOUR}: $(process-tree))") (${FONT_BRIGHT}${FG_WHITE}!\!${FONT_RESET}${PROMPT_COLOUR}) [ ${FONT_RESET}${FONT_BRIGHT}\${PROMPT_ERR_ICON}${FONT_RESET}${PROMPT_COLOUR} ] \u@\h \w \$(git_branch)\033[m\n\$ ";
+[[ "$TERM" =~ ^xterm ]] && export PS1="\033]0;\${PROMPT_TITLE}\W \a$PS1";
+export PROMPT_COMMAND='
+	PROMPT_ERR_ICON="$(([ $? -eq 0 ] && echo $FG_GREEN":-)") || echo -ne $FG_RED":-(")";
+	PROMPT_HOST="${HOSTNAME%.local}";
+	PROMPT_TITLE="${PROMPT_HOST}$([ "$USER" = "root" ] && echo "#" || echo ":") "
+';
+
+# Intelligent command completion
+complete -d cd pushd;
+complete -u finger mail;
+complete -v set unset;
+
+# Paths
+export PATH="$HOME/bin:/opt/janmoesen/bin:/opt/janmoesen/sbin:/opt/local/bin:/opt/local/sbin:/bin:/usr/bin:/sbin:/usr/sbin:$PATH";
+
+# Override MacPorts' ssh
+for x in /usr/bin/ssh*; do
+	[ -x "$x" ] && alias "$(basename "$x")"="$x";
+done;
+
+# ============== history
+export HISTSIZE=16384;
+export HISTFILESIZE=$HISTSIZE;
+export HISTCONTROL=ignoredups;
+
+# ============== editors
+alias nano='nano -w';
+alias pico='nano';
+export EDITOR=vi;
+
+# ============== file manipulation
+alias cp='cp -i';
+alias mv='mv -i';
+alias rm='rm -i';
+udiff () {
+	diff -wU4 -x .svn "$@" | colordiff | less -XFIRd;
+	return ${PIPESTATUS[0]};
+}
+
+# Move the given file(s) to the Trash.
+trash () {
+	for path in "$@"; do
+		# Make relative paths "absolutey".
+		[ "${path:0:1}" = '/' ] || path="$PWD/$1";
+
+		# Execute the AppleScript to nudge Finder.
+		echo "$(cat <<-EOD
+			tell application "Finder"
+				delete POSIX file "${path//\"/\"}"
+			end
+		EOD)" | osascript;
+	done;
+}
+
+
+# ============== navigation
+export CDPATH=".:~/Sites";
+export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:';
+
+# Always use colour output for ls.
+[[ "$OSTYPE" =~ ^darwin ]] && alias ls='command ls -G' || alias ls='command ls --color';
+
+# Show the given file(s) in the Finder.
+show () {
+	# Default to the current directory.
+	[ $# -eq 0 ] && set -- .;
+
+	# Build the array of paths for AppleScript.
+	local paths=();
+	for path in "$@"; do
+		# Make sure each path exists.
+		if ! [ -e "$path" ]; then
+			echo "show: $path: No such file or directory";
+			continue;
+		fi;
+
+		# Crappily re-implement "readlink -f" ("realpath") for Darwin.
+		# (The "cd ... > /dev/null" hides CDPATH noise.)
+		[ -d "$path" ] \
+			&& path="$(cd "$path" > /dev/null && pwd)" \
+			|| path="$(cd "$(dirname "$path")" > /dev/null && \
+			           echo "$PWD/$(basename "$path")")";
+
+		# Use the "POSIX file" AppleScript syntax.
+		paths+=("POSIX file \"${path//\"/\"}\"");
+	done;
+	[ "${#paths[@]}" -eq 0 ] && return;
+
+	# Group all output to pipe through osacript.
+	{
+		echo 'tell application "Finder"';
+		echo -n 'select {'; # "reveal" would select only the last file.
+
+		for ((i = 0; i < ${#paths[@]}; i++)); do
+			echo -n "${paths[$i]}";
+			[ $i -lt $(($# - 1)) ] && echo -n ', '; # Ugly array.join()...
+		done;
+
+		echo '}';
+		echo 'activate';
+		echo 'end tell';
+	} | osascript;
+}
+
+# ============== misc
+alias pro='vi ~/.bash_profile; source ~/.bash_profile'
+
+# Convert the parameters or STDIN to lowercase.
+lc () {
+	if [ $# -eq 0 ]; then
+		tr '[:upper:]' '[:lower:]';
+	else
+		tr '[:upper:]' '[:lower:]' <<< "$@";
+	fi;
+}
+
+# Convert the parameters or STDIN to uppercase.
+uc () {
+	if [ $# -eq 0 ]; then
+		tr '[:lower:]' '[:upper:]';
+	else
+		tr '[:lower:]' '[:upper:]' <<< "$@";
+	fi;
+}
+function which { which="$(command which "$@")"; local ret=$?; if [ $ret -eq 0 ]; then ls -dalF "$which"; fi; return $ret; }
+
+# Because OS X is case-sensitive by default, use aliases to get GET/HEAD/… working.
+for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
+	alias "$method"="/opt/janmoesen/bin/lwp-request/$method";
+done;
+
+# Use PHP's built-in support to encode and decode base64.
+function base64 {
+	if [ $# -eq 0 ]; then
+		 echo 'Usage: base64 [encode|decode] <string>';
+		 return;
+	elif [ "$1" = 'decode' ]; then
+		action='decode';
+		shift;
+	elif [ "$1" = 'encode' ]; then
+		action='encode';
+		shift;
+	else
+		action='decode';
+	fi;
+	echo "$@" | php -r "echo base64_$action(file_get_contents('php://stdin'));";
+	echo;
+}
+
+# Highlight STDIN based on PCRE patterns.
+function highlight {
+    local color=33;
+    local perl_regex='';
+    while [ $# -gt 0 ]; do
+        local brightness=1;
+        local param="$1";
+        if [ "${param:0:2}" = "--" ]; then
+            if [ "${param:2:5}" == "dark-" ]; then
+                    brightness=0;
+                    param="--${param:7}";
+            elif [ "${param:2:6}" == "light-" ]; then
+                    brightness=1;
+                    param="--${param:8}";
+            fi;
+            case "${param:2}" in
+                'black' | 'red' | 'green' | 'yellow' | 'blue' | 'magenta' | 'pink' | 'cyan' | 'white')
+                    param="--color=${param:2}";
+                    ;;
+            esac;
+        fi;
+        if [[ "${param:0:8}" = '--color=' ]]; then
+            case ${param:8} in
+                'black')
+                    color=30;;
+                'red')
+                    color=31;;
+                'green')
+                    color=32;;
+                'yellow')
+                    color=33;;
+                'blue')
+                    color=34;;
+                'magenta' | 'pink')
+                    color=35;;
+                'cyan')
+                    color=36;;
+                'white')
+                    color=37;;
+                *) echo default;;
+            esac
+            shift;
+        fi
+        perl_regex="$perl_regex;s@${1//@/\\@/}@$(echo -n $'\e['$brightness';'$color'm$&'$'\e[m')@g";
+        shift;
+    done;
+    perl -p -e "select(STDOUT); $| = 1; ${perl_regex:1}";
+}
+#alias difflight='highlight --dark-red ^-.* | highlight --dark-green ^+.* | highlight --yellow ^Only.* | highlight --yellow ^Files.*differ$ | less -XFIRd'
+alias difflight='colordiff | less -XFIRd'
+
+# Print a line of dashes or the given string across the entire screen.
+function line {
+	width=$(tput cols);
+	str=${1--};
+	len=${#str};
+	for ((i = 0; i < $width; i += $len)); do
+		echo -n "${str:0:$(($width - $i))}";
+	done;
+	echo;
+}
+
+# Print the given text in the center of the screen.
+function center {
+	width=$(tput cols);
+	str="$@";
+	len=${#str};
+	[ $len -ge $width ] && echo "$str" && return;
+	for ((i = 0; i < $(((($width - $len)) / 2)); i++)); do
+		echo -n " ";
+	done;
+	echo "$str";
+}
+alias plistbuddy=/usr/libexec/PlistBuddy;
+alias firefox='/Applications/Aurora.app/Contents/MacOS/firefox-bin -p test -no-remote > /dev/null 2>&1 & disown %1';
+alias forkbugs='/Applications/Thunderbird.app/Contents/MacOS/thunderbird-bin -p Fork\ bugs -no-remote > /dev/null 2>&1 & disown %1';
+alias md5sum='md5';
+
+# Open the man page for the previous command.
+lman () { set -- $(fc -nl -1); while [ "$#" -gt 0 -a '(' "sudo" = "$1" -o "-" = "${1:0:1}" ')' ]; do shift; done; man "$1" || help "$1"; }
+
+# Sort du's output but use human-readable units.
+function duh {
+	du -sk "$@" | sort -n;
+	du -sk "$@" | sort -n | while read size fname; do
+		for unit in KiB MiB GiB TiB PiB EiB ZiB YiB; do
+			if [ "$size" -lt 1024 ]; then
+				echo -e "${size}${unit}\t${fname}";
+				break;
+			fi;
+			size=$((size/1024));
+		done;
+	done;
+}
+
+svndiff () {
+	svn diff "$@" | colordiff | less -XFIRd;
+	return ${PIPESTATUS[0]};
+}
+svnlog () {
+	svn log "$@" | sed -l '
+		# Delete the last ----- commit separator line.
+		$d
+
+		# Catch the ----- other commit separator lines.
+		/^-\{72\}$/ {
+			a\
+			 
+
+			# Replace the line of dashes with an empty line (i.e. "delete without going to the next cycle").
+			c\
+
+			# Go to the next line, which lists the revision, author, date and number of comment lines
+			n
+
+			# Put the current (revision) line in the hold space.
+			h
+
+			# Go to the next line, which is a blank line.
+			n
+
+			# Get the revision line from the hold space.
+			g
+
+			# Delete the current (blank) line and continue with the next cycle.
+			d
+		}
+
+		# Indent all non-dashes lines.
+		s/^/    /
+	' | tail +2 | highlight \
+		--dark-cyan '^r[1-9][0-9]* .*' \
+	| less -XFIRd;
+	return ${PIPESTATUS[0]};
+}
+svnshow () {
+	local rev="$1";
+	[[ "$rev" =~ ^[0-9]+$ ]] && rev="r$rev";
+	{
+		svnlog -"$rev";
+		echo;
+		svndiff -c "$rev" -x -w;
+	} | less -XFIRd;
+}
+svnstatus () {
+	declare -a modified_files;
+	declare -a untracked_files;
+	while read line; do
+		status="${line:0:1}";
+		file="${line:2}";
+		while [ "${file:0:1}" = ' ' -a "${#file}" -gt 0 ]; do
+			file="${file# }";
+		done;
+		case "$status" in
+			'M' | 'A' | 'D' | '!')
+				modified_files+=("$status$file");
+				;;
+			*)
+				untracked_files+=("$file");
+		esac;
+	done < <(svn status "$@" | egrep -v '(front|back)end/files');
+	if [ ${#modified_files[@]} -gt 0 ]; then
+		echo 'Changes to be committed:';
+		for file in "${modified_files[@]}"; do
+			status="${file:0:1}";
+			case "$status" in
+				'M') status='modified';;
+				'A') status='   added';;
+				'D') status=' deleted';;
+				'!') status=' missing';;
+			esac;
+			file="${file:1}";
+			echo $'\t'"$status: $file";
+		done | highlight --dark-green '.*' --dark-red 'missing.*';
+	fi;
+	if [ ${#untracked_files[@]} -gt 0 ]; then
+		[ ${#modified_files[@]} -gt 0 ] && echo;
+		echo 'Untracked files:';
+		for file in "${untracked_files[@]}"; do
+			echo $'\t'"$file";
+		done | highlight --dark-red '.*';
+	fi;
+}
+vack () {
+	local cmd='';
+	if [ $# -eq 0 ]; then
+		cmd="$(fc -nl -1)";
+		cmd="${cmd:2}";
+	else
+		cmd='ack';
+		for x in "$@"; do
+			cmd="$cmd $(printf '%q' "$x")";
+		done;
+		echo "$cmd";
+	fi;
+	if [ "${cmd:0:4}" != 'ack ' ]; then
+		$cmd;
+		return $?;
+	fi;
+	declare -a files;
+	while read -r file; do
+		echo "$file";
+		files+=("$file");
+	done < <(bash -c "${cmd/ack/ack -l}");
+	"${EDITOR:-vi}" "${files[@]}";
+}
+
+# Get/set the clipboard contents.
+#
+# I created these aliases to have the same command on Cygwin and OS X.
+alias getclip='pbpaste';
+alias putclip='pbcopy';
+
+# Back up the given files and directories using an incremental backup
+# that looks like a full backup, like Time Machine does.
+backup () {(
+	# Backup format.
+	local backup_dir="$HOME/backups";
+	local date_format='%Y-%m-%d-%H-%M-%S';
+
+	# Usage.
+	if [ $# -eq 0 -o "$1" = '--help' ] || [ $# -eq 1 -a "$1" = '--' ]; then
+		echo 'Usage: backup [[USER@]HOST:]FILE...';
+		echo;
+		echo "Back up the given files and directories to $backup_dir/$(date +"$date_format")";
+		[ "$1" = '--' ] && shift;
+		[ $# -gt 0 ];
+		exit $?;
+	fi;
+
+	# Skip the "enough with the options; it's files only from now on" delimiter "--".
+	[ "$1" = '--' ] && shift;
+
+	# Loop the command-line arguments.
+	local i=0;
+	for path in "$@"; do
+		# Update the backup directory timestamp for each file being backed up.
+		local curr_date="$(date +"$date_format")";
+
+		# Check if this is a remote source.
+		! [[ "$path" =~ ^([^/]+):(.*) ]];
+		is_remote=$?;
+
+		# Determine the full source path, source location and target path.
+		# For local files, the source path and location are the same. For
+		# remote files, the location is [user@]host:path.
+		if [ $is_remote -eq 1 ]; then
+			# For SSH sources, use SSH to find the full path.
+			host="${BASH_REMATCH[1]}";
+			local source_path="$(ssh "$host" "$(printf "$(cat <<-'EOD'
+				host=%q;
+				path=%q;
+				if ! [ -z "$path" -o -e "$path" ]; then
+					echo "$host:$path does not exist." 1>&2;
+					exit 1;
+				fi;
+				{ [ -d "$path" ] && cd -- "$path" && pwd; } || { cd -- "$(dirname -- "$path")" && echo "$PWD/$(basename -- "$path")"; }
+			EOD)" "$host" "${BASH_REMATCH[2]}")")" || exit 1;
+			local source_location="$host:$source_path";
+			local source_path="/ssh=$host$source_path";
+		elif [ -z "$path" -o -e "$path" ]; then
+			# For local sources, go to the directory or the file's parent directory and use the working directory.
+			local source_path="$({ [ -d "$path" ] && cd -- "$path" && pwd; } || { cd -- "$(dirname -- "$path")" && echo "$PWD/$(basename -- "$path")"; })";
+			local source_location="$source_path";
+		else
+			echo "$path does not exist." 1>&2;
+			exit 1;
+		fi;
+
+		# Determine the target directory for the current backup.
+		local curr_backup="$backup_dir/$curr_date$source_path";
+		# if [ $is_remote -eq 1 ]; then
+		local curr_backup_dir="$(dirname "$curr_backup")";
+		local curr_backup_dir="$curr_backup";
+
+		# Check for previous backups.
+		local prev_backup='';
+		shopt -s nullglob;
+		for prev_backup in "$backup_dir/"*"$source_path"; do
+			:
+		done;
+
+for x in path is_remote source_path source_location curr_backup curr_backup_dir prev_backup; do printf $'%12s: "%s"\n' "$x" "${!x}"; done
+		# Back up using rsync, hard-linking unchanged files to the previous backup, if any.
+		mkdir -p "$curr_backup_dir";
+		if [ "$(basename "$source_path")" = "$path" ]; then
+			echo "Now backing up:  \"$path\"";
+		else
+			echo "Now backing up:  \"$path\" (\"$source_path\")";
+		fi;
+		echo "Backing up to:   \"$curr_backup\"";
+		if [ -z "$prev_backup" ]; then
+			echo 'Previous backup: (none)';
+			echo;
+			echo rsync --itemize-changes --archive -- "$source_location" "$curr_backup_dir";
+		else
+			echo "Previous backup: \"$prev_backup\"";
+			echo;
+			echo rsync --itemize-changes --archive --link-dest="$(dirname "$prev_backup")" -- "$source_location" "$curr_backup_dir"; # | sed '/\/\.svn\//d; /^cd+++++++ .*\/$/d';
+		fi;
+
+		# Print a blank line between two backups.
+		let i++;
+		[ $i -eq $# ] || echo;
+	done;
+)}
+
+diff-to-backup () {(
+	local backup_dir="$HOME/backups";
+
+	for x in "${@:-.}"; do
+		full_path="$(php -r 'echo realpath($_SERVER["argv"][1]);' "$x")";
+
+		# Check for previous backups.
+		local prev_backup='';
+		shopt -s nullglob;
+		for prev_backup in "$backup_dir/"*"$full_path"; do
+			:
+		done;
+
+		if [ -z "$prev_backup" ]; then
+			echo "There are no backups of \"$x\"";
+			exit 1;
+		else
+			udiff -x .svn -r "$prev_backup" "$x";
+		fi;
+		echo;
+	done;
+)}
+
+# XXX: Move this to ~/.ackrc
+alias ack='ack --type-add html=tpl --type-add php=inc --ignore-dir=docs';
+alias ack-svn-spaces='svn_files="$(svn status | awk '\''$2 !~ /^tags$/ {print $2; }'\'')"; echo "Looking through:"; sed "s/^/* /" <<< "$svn_files"; ack --php '\''(if|for|foreach|switch) \('\'' $svn_files';
+
+# Check the modified SVN files for todos.
+check-svn-files () {
+	declare -a svn_files;
+	if [ $# -eq 0 ]; then
+		while read file; do
+			svn_files+=("$file");
+		done < <(svn status | awk '$2 !~ /^tags$/ {print $2; }');
+	else
+		for file in "$@"; do
+			svn_files+=("$file");
+		done;
+	fi;
+	[ ${#svn_files[@]} -eq 0 ] && return;
+	echo "Looking through:";
+	for file in "${svn_files[@]}"; do
+		echo "* $file";
+	done;
+	ack --php --html '((if|for|foreach|switch) \()|todo|XXX|delme' "${svn_files[@]}";
+}
+
+tail-php-log () {
+	tail -fn0 /opt/local/var/log/lighttpd/error.log | grep --line-buffered -v 'PHP Warning:  filesize.*\.swf' | (
+		prefix='^\[..-...-.... ..:..:..\]';
+		# XXX delme
+		prefix='.*';
+		sed -l 's/(mod_fastcgi.c.2701) FastCGI-stderr: //' |\
+		highlight \
+			--red '.*PHP [^:]*[Ee]rror: .*' \
+			--dark-red '.*PHP Notice: .*[Uu]ndefined.*' \
+			--dark-green '.*PHP Notice: .*' \
+			--dark-yellow '.*PHP Warning: .*' \
+			--magenta '^#[0-9]\{1,\}[^(]*\(([^(]\{0,120\})\)\{0,1\}' \
+			--yellow "$prefix \[warn\].*" \
+			--green "$prefix \[info\].*" \
+			--red "$prefix \[[Ff]atal\].*" \
+			--black '^\[2010/.*\.php:[0-9]*';
+	);
+}
+
+diff-url () {(
+	cd /tmp || return $?;
+	declare -a urls;
+	declare -a before;
+	declare -a after;
+
+	# Remember all URLs.
+	for url in "$@"; do
+		urls+=("$url");
+	done;
+
+	# Save all URLs to "before and after".
+	for curr in {before,after}; do
+		read -p "Press Enter to save $curr...";
+
+		# Loop through all URLs.
+		for ((i = 0; i < ${#urls[@]}; i++)); do
+			url="${urls[$i]}";
+			num="$(printf '%02d' "$i")";
+			file="$curr-$num.html";
+			[ "$curr" = 'before' ] \
+				&& before+=("$file") \
+				|| after+=("$file");
+			wget -qO- "$url" | sed 's/m=[0-9]*//g; s/[0-9a-f]\{32\}//g; s/[0-9]* keer bekeken//' > "$file";
+			[ -z "$prev_x" ] && prev_x="$x";
+		done;
+	done;
+
+	# Loop through all URLs to diff their before and after.
+	for ((i = 0; i < ${#urls[@]}; i++)); do
+		url="${urls[$i]}";
+		num="$(printf '%02d' "$i")";
+		before="${before[$i]}";
+		after="${after[$i]}";
+		udiff --label="$url (before)" --label="$url (after)" "$before" "$after";
+		rm -f "$before" "$after";
+	done | colordiff | less -XFIRd;
+)}
+
+alias ctags='ctags --exclude={docs,cache,tiny_mce,layout} --recurse';
+
+# Set the terminal's title.
+title () {
+	echo -ne '\033]0;'"$@"'\a';
+}
+
+# Van Dale online dictionary look-up.
+vd () {
+	# Try to find the screen width. Make it a minimum of 35 so our awk patterns still match.
+	[ -z "$COLUMNS" ] && COLUMNS="$(tput cols)";
+	[ -z "$COLUMNS" -o "$COLUMNS" -lt 35 ] && COLUMNS=35;
+
+	# Dump the vandale.nl page. Because links does not support setting arbitrary headers or cookies, we hack the user agent string to include a newline and smuggle in our own Cookie: header.
+	lynx -dump -nolist -display_charset=UTF-8 -width="$COLUMNS" -useragent=$'Lynx\nCookie: country=nl' "http://www.vandale.nl/vandale/zoekService.do?selectedDictionary=nn&selectedDictionaryName=Nederlands&searchQuery=${*// /+}" |\
+		awk '
+			# This line is the first line after the word definition, so we can quit here.
+			/Gebruik dit woordenboek/ {
+				exit;
+			}
+
+			# Only print the interesting lines.
+			is_printing;
+
+			# Print everything after this line.
+			/Je hebt gezocht/ {
+				is_printing = 1;
+			}';
+}
+
+# Copy the bookmarklet that was modified last to the clipboard.
+copy-last-bookmarklet () {
+	file="$(find . -name '*.js' -exec ls -1rt {} + | tail -1)";
+	echo "$file" 1>&2;
+	putclip < "$file";
+}
+
+# Commit the latest bookmarks.html.
+alias book="git commit -m 'bookmarks.html: latest update' bookmarks.html";
+
+alias php54=~/src/php-5.4.0alpha1/sapi/cli/php

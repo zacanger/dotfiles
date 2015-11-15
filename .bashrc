@@ -101,7 +101,7 @@ if ! shopt -oq posix; then
 fi
 
 
-# XTERM_TITLE='\[\033]0;\h\007\]'
+#  XTERM_TITLE='\[\033]0;\h\007\]'
 # [ "$IS_VIRTUAL_CONSOLE" ] && XTERM_TITLE=''
 # PS1=$XTERM_TITLE'\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
@@ -117,7 +117,7 @@ shopt -s dirspell
 #include
 
 . /usr/share/autojump/autojump.sh
-
+export CDPATH='.:/home/z/Dropbox/skool:/home/z/bin:/home/z/Dropbox/z:/usr/local/lib'
 export PATH=$PATH:/usr/local/share/npm/bin:~/bin:/opt:~/Downloads/textadept:~/Downloads/firefox:$(find $HOME/bin -type d | paste -s -d:)
 ### MOTD ###
 # Display MotD
@@ -189,4 +189,4 @@ esac
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
 echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
 
-
+export SLACK_TOKEN='xoxp-3318091984-8228669395-14582732308-0f9a575714'
