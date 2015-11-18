@@ -1,5 +1,5 @@
 favorites=exo-terminal-emulator.desktop,exo-file-manager.desktop,exo-mail-reader.desktop,exo-web-browser.desktop,slack.desktop
-recent=chrome-gbchcmhmhahfdphkhkmpfmihenigjmpp-Default.desktop,slack.desktop,display-im6.q16.desktop,wicd.desktop,ceni.desktop,nm-connection-editor.desktop,inkscape.desktop,xfce-keyboard-settings.desktop,xfce4-settings-editor.desktop,xfce-settings-manager.desktop
+recent=exo-web-browser.desktop,xfce-session-settings.desktop,qBittorrent.desktop,hdajackretask.desktop,sysinfo.desktop,alsamixergui.desktop,paman.desktop,dropbox.desktop,Qt-MaintenanceTool.desktop,wammu.desktop
 button-title=Applications
 button-icon=xfce4-whiskermenu
 button-single-row=false
@@ -17,8 +17,8 @@ display-recent-default=false
 position-search-alternate=false
 position-commands-alternate=false
 position-categories-alternate=false
-menu-width=397
-menu-height=500
+menu-width=891
+menu-height=880
 menu-opacity=100
 command-settings=xfce4-settings-manager
 show-command-settings=true

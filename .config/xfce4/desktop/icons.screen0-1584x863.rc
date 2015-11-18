@@ -1,25 +1,65 @@
 [xfdesktop-version-4.10.3+-rcfile_format]
 4.10.3+=true
 
-[/home/z/Desktop/firefox]
+[/home/z/fbterm-bi]
 row=5
 col=0
 
-[/home/z/Desktop/roaster]
+[/home/z/bin]
 row=4
-col=0
+col=1
 
-[/home/z/Desktop/imn]
+[/home/z/Dropbox]
+row=1
+col=2
+
+[/home/z/db.json]
+row=1
+col=1
+
+[/home/z/OnionDir]
 row=7
 col=0
 
-[/home/z/Desktop/bbqsystool]
+[/home/z/install]
+row=0
+col=2
+
+[/home/z/asdf]
+row=3
+col=1
+
+[/home/z/lplinux]
+row=5
+col=1
+
+[/home/z/Downloads]
+row=4
+col=0
+
+[/home/z/templatesnsnippets]
+row=7
+col=1
+
+[/home/z/prompt]
+row=0
+col=1
+
+[/home/z/completer.hist]
+row=6
+col=0
+
+[/home/z/bookmark.db]
+row=2
+col=1
+
+[/home/z/music]
 row=3
 col=0
 
-[677C-1D4D]
+[/home/z/un]
 row=6
-col=0
+col=1
 
 [Trash]
 row=0

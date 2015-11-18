@@ -27,7 +27,7 @@
     <property name="frame_opacity" type="int" value="83"/>
     <property name="full_width_title" type="bool" value="true"/>
     <property name="horiz_scroll_opacity" type="bool" value="false"/>
-    <property name="inactive_opacity" type="int" value="87"/>
+    <property name="inactive_opacity" type="int" value="94"/>
     <property name="maximized_offset" type="int" value="0"/>
     <property name="mousewheel_rollup" type="bool" value="true"/>
     <property name="move_opacity" type="int" value="78"/>
@@ -55,7 +55,7 @@
     <property name="snap_to_border" type="bool" value="true"/>
     <property name="snap_to_windows" type="bool" value="false"/>
     <property name="snap_width" type="int" value="10"/>
-    <property name="sync_to_vblank" type="bool" value="false"/>
+    <property name="sync_to_vblank" type="bool" value="true"/>
     <property name="theme" type="string" value="NumixDarker"/>
     <property name="tile_on_move" type="bool" value="true"/>
     <property name="title_alignment" type="string" value="left"/>
@@ -69,7 +69,7 @@
     <property name="toggle_workspaces" type="bool" value="false"/>
     <property name="unredirect_overlays" type="bool" value="true"/>
     <property name="urgent_blink" type="bool" value="false"/>
-    <property name="use_compositing" type="bool" value="false"/>
+    <property name="use_compositing" type="bool" value="true"/>
     <property name="workspace_count" type="int" value="8"/>
     <property name="wrap_cycle" type="bool" value="true"/>
     <property name="wrap_layout" type="bool" value="true"/>
@@ -86,6 +86,14 @@
       <value type="string" value="sfm"/>
       <value type="string" value="free"/>
       <value type="string" value="free"/>
+      <value type="string" value="Workspace 9"/>
+      <value type="string" value="Workspace 10"/>
+      <value type="string" value="Workspace 11"/>
+      <value type="string" value="Workspace 12"/>
+      <value type="string" value="Workspace 13"/>
+      <value type="string" value="Workspace 14"/>
+      <value type="string" value="Workspace 15"/>
+      <value type="string" value="Workspace 16"/>
     </property>
   </property>
 </channel>

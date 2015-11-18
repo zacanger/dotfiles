@@ -1,0 +1,6 @@
+[Data]
+Name=Xfce
+Thumbnail=/home/zacanger/.config/XfceThemeManager/meta/Xfce.png
+GtkTheme=Xfce
+Xfwm4Theme=Xfce
+

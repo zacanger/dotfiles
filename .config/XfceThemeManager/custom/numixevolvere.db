@@ -1,0 +1,25 @@
+[Data]
+Name=numixevolvere
+Thumbnail=/home/zacanger/.config/XfceThemeManager/custom/numixevolvere.png
+GtkTheme=Blackbird-master
+IconTheme=evolvere-black-folders-dark-fallback
+CursorTheme=Adwaita
+Xfwm4Theme=NumixDarkest
+BackgroundImage=/home/zacanger/Pictures/debjoe1.png
+TitleButtonLayout=O|SHMC
+TitlePosition=left
+WMFont=Play 10
+AppFont=Play 10
+BackdropStyle=0
+BackdropBright=-60
+BackdropSatu=-3.000000
+CursorSize=16
+[Panel-1]
+PanelImage=/home/zacanger
+PanelStyle=0
+PanelSize=26
+PanelAlpha=50
+PanelRed=65535
+PanelGreen=65535
+PanelBlue=65535
+

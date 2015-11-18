@@ -39,8 +39,16 @@
     </property>
   </property>
   <property name="last" type="empty">
-    <property name="window-height" type="int" value="400"/>
-    <property name="window-width" type="int" value="400"/>
+    <property name="window-height" type="int" value="854"/>
+    <property name="window-width" type="int" value="1596"/>
     <property name="pane-position" type="int" value="180"/>
+    <property name="category" type="string" value="System"/>
   </property>
+  <property name="item-icon-size" type="uint" value="0"/>
+  <property name="category-icon-size" type="uint" value="0"/>
+  <property name="icon-view" type="bool" value="false"/>
+  <property name="text-beside-icons" type="bool" value="false"/>
+  <property name="enable-service" type="bool" value="true"/>
+  <property name="always-center" type="bool" value="false"/>
+  <property name="remember-category" type="bool" value="true"/>
 </channel>

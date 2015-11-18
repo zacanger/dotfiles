@@ -162,3 +162,6 @@ alias cl='clone'
 alias le='less'
 alias most='less'
 
+## returns just the http status code, on a newline. obvs append the url.
+alias htst='curl -s -o /dev/null -w "%{http_code}\n"' 
+

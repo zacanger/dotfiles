@@ -118,7 +118,7 @@ shopt -s dirspell
 
 . /usr/share/autojump/autojump.sh
 export CDPATH='.:/home/z/Dropbox/skool:/home/z/bin:/home/z/Dropbox/z:/usr/local/lib'
-export PATH=$PATH:/usr/local/share/npm/bin:~/bin:/opt:~/Downloads/textadept:~/Downloads/firefox:$(find $HOME/bin -type d | paste -s -d:)
+export PATH=$PATH:/usr/local/share/npm/bin:~/bin:/opt:$(find $HOME/bin/ -type d | paste -s -d:)
 ### MOTD ###
 # Display MotD
 # if [[ -e $HOME/.motd ]]; then cat $HOME/.motd; fi

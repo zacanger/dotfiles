@@ -1,0 +1,25 @@
+[Data]
+Name=custom dark Custom
+Thumbnail=/home/zacanger/.config/XfceThemeManager/custom/custom dark Custom.png
+GtkTheme=Blackbird-master
+IconTheme=Numix-Circle-Light
+CursorTheme=Adwaita
+Xfwm4Theme=Ashen
+BackgroundImage=/home/zacanger/Pictures/debjoe1.png
+TitleButtonLayout=O|SHMC
+TitlePosition=left
+WMFont=FontAwesome 10
+AppFont=FontAwesome 10
+BackdropStyle=0
+BackdropBright=-60
+BackdropSatu=-3.000000
+CursorSize=16
+[Panel-1]
+PanelImage=/home/zacanger
+PanelStyle=0
+PanelSize=26
+PanelAlpha=50
+PanelRed=0
+PanelGreen=0
+PanelBlue=0
+

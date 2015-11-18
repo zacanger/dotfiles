@@ -1,0 +1,13 @@
+size=20
+label=$:
+history-length=25
+use-url=true
+use-email=true
+use-dir=true
+use-wordexp=true
+use-bang=true
+use-backslash=true
+use-smartbookmark=false
+use-shell=true
+smartbookmark-url=
+

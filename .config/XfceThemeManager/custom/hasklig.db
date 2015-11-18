@@ -1,0 +1,25 @@
+[Data]
+Name=hasklig
+Thumbnail=/home/zacanger/.config/XfceThemeManager/custom/hasklig.png
+GtkTheme=NumixDark
+IconTheme=evolvere-black-folders-dark-fallback
+CursorTheme=DMZ-Black
+Xfwm4Theme=Numix Daily
+BackgroundImage=/home/zacanger/Pictures/debjoe1.png
+TitleButtonLayout=O|SHMC
+TitlePosition=left
+WMFont=Hasklig Medium 10
+AppFont=Hasklig Medium 10
+BackdropStyle=0
+BackdropBright=-50
+BackdropSatu=-3.000000
+CursorSize=16
+[Panel-1]
+PanelImage=/home/zacanger
+PanelStyle=1
+PanelSize=26
+PanelAlpha=50
+PanelRed=18498
+PanelGreen=18498
+PanelBlue=18498
+

@@ -27,7 +27,7 @@
             <value type="uint" value="65535"/>
           </property>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/home/z/Pictures/walls/gnulinux2.png"/>
+          <property name="last-image" type="string" value="/home/z/Dropbox/Pictures/walls/asdfasdf.png"/>
           <property name="backdrop-cycle-enable" type="bool" value="true"/>
           <property name="backdrop-cycle-period" type="int" value="2"/>
           <property name="backdrop-cycle-timer" type="uint" value="1"/>
@@ -168,7 +168,7 @@
             <value type="uint" value="65535"/>
           </property>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/home/z/Dropbox/Pictures/walls/wall1600x1200bw.png"/>
+          <property name="last-image" type="string" value="/home/z/Dropbox/Pictures/walls/asdfasdf.png"/>
           <property name="backdrop-cycle-enable" type="bool" value="true"/>
           <property name="backdrop-cycle-period" type="int" value="2"/>
           <property name="backdrop-cycle-timer" type="uint" value="1"/>
@@ -223,7 +223,7 @@
             <value type="uint" value="65535"/>
           </property>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/images/desktop-base/default"/>
+          <property name="last-image" type="string" value="/home/z/Dropbox/Pictures/walls/gnunix.png"/>
         </property>
         <property name="workspace4" type="empty">
           <property name="color-style" type="int" value="1"/>
@@ -293,8 +293,289 @@
           <property name="image-style" type="int" value="5"/>
           <property name="last-image" type="string" value="/usr/share/images/desktop-base/default"/>
         </property>
+        <property name="workspace8" type="empty">
+          <property name="color-style" type="int" value="1"/>
+          <property name="color1" type="array">
+            <value type="uint" value="7936"/>
+            <value type="uint" value="16128"/>
+            <value type="uint" value="28416"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="color2" type="array">
+            <value type="uint" value="26880"/>
+            <value type="uint" value="34048"/>
+            <value type="uint" value="46848"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/images/desktop-base/default"/>
+        </property>
+        <property name="workspace9" type="empty">
+          <property name="color-style" type="int" value="1"/>
+          <property name="color1" type="array">
+            <value type="uint" value="7936"/>
+            <value type="uint" value="16128"/>
+            <value type="uint" value="28416"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="color2" type="array">
+            <value type="uint" value="26880"/>
+            <value type="uint" value="34048"/>
+            <value type="uint" value="46848"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/images/desktop-base/default"/>
+        </property>
+        <property name="workspace10" type="empty">
+          <property name="color-style" type="int" value="1"/>
+          <property name="color1" type="array">
+            <value type="uint" value="7936"/>
+            <value type="uint" value="16128"/>
+            <value type="uint" value="28416"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="color2" type="array">
+            <value type="uint" value="26880"/>
+            <value type="uint" value="34048"/>
+            <value type="uint" value="46848"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/images/desktop-base/default"/>
+        </property>
+        <property name="workspace11" type="empty">
+          <property name="color-style" type="int" value="1"/>
+          <property name="color1" type="array">
+            <value type="uint" value="7936"/>
+            <value type="uint" value="16128"/>
+            <value type="uint" value="28416"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="color2" type="array">
+            <value type="uint" value="26880"/>
+            <value type="uint" value="34048"/>
+            <value type="uint" value="46848"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/images/desktop-base/default"/>
+        </property>
+        <property name="workspace12" type="empty">
+          <property name="color-style" type="int" value="1"/>
+          <property name="color1" type="array">
+            <value type="uint" value="7936"/>
+            <value type="uint" value="16128"/>
+            <value type="uint" value="28416"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="color2" type="array">
+            <value type="uint" value="26880"/>
+            <value type="uint" value="34048"/>
+            <value type="uint" value="46848"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/images/desktop-base/default"/>
+        </property>
+        <property name="workspace13" type="empty">
+          <property name="color-style" type="int" value="1"/>
+          <property name="color1" type="array">
+            <value type="uint" value="7936"/>
+            <value type="uint" value="16128"/>
+            <value type="uint" value="28416"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="color2" type="array">
+            <value type="uint" value="26880"/>
+            <value type="uint" value="34048"/>
+            <value type="uint" value="46848"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/images/desktop-base/default"/>
+        </property>
+        <property name="workspace14" type="empty">
+          <property name="color-style" type="int" value="1"/>
+          <property name="color1" type="array">
+            <value type="uint" value="7936"/>
+            <value type="uint" value="16128"/>
+            <value type="uint" value="28416"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="color2" type="array">
+            <value type="uint" value="26880"/>
+            <value type="uint" value="34048"/>
+            <value type="uint" value="46848"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/images/desktop-base/default"/>
+        </property>
+        <property name="workspace15" type="empty">
+          <property name="color-style" type="int" value="1"/>
+          <property name="color1" type="array">
+            <value type="uint" value="7936"/>
+            <value type="uint" value="16128"/>
+            <value type="uint" value="28416"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="color2" type="array">
+            <value type="uint" value="26880"/>
+            <value type="uint" value="34048"/>
+            <value type="uint" value="46848"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/images/desktop-base/default"/>
+        </property>
+      </property>
+      <property name="monitorVGA-0" type="empty">
+        <property name="workspace0" type="empty">
+          <property name="color-style" type="int" value="3"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/home/z/Dropbox/Pictures/walls/gnunix.png"/>
+          <property name="backdrop-cycle-enable" type="bool" value="true"/>
+          <property name="backdrop-cycle-timer" type="uint" value="5"/>
+          <property name="backdrop-cycle-random-order" type="bool" value="true"/>
+          <property name="color1" type="array">
+            <value type="uint" value="7936"/>
+            <value type="uint" value="16128"/>
+            <value type="uint" value="28416"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="color2" type="array">
+            <value type="uint" value="26880"/>
+            <value type="uint" value="34048"/>
+            <value type="uint" value="46848"/>
+            <value type="uint" value="65535"/>
+          </property>
+        </property>
+        <property name="workspace1" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/xfce/xfce-teal.jpg"/>
+          <property name="color1" type="array">
+            <value type="uint" value="7936"/>
+            <value type="uint" value="16128"/>
+            <value type="uint" value="28416"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="color2" type="array">
+            <value type="uint" value="26880"/>
+            <value type="uint" value="34048"/>
+            <value type="uint" value="46848"/>
+            <value type="uint" value="65535"/>
+          </property>
+        </property>
+        <property name="workspace2" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/xfce/xfce-teal.jpg"/>
+          <property name="color1" type="array">
+            <value type="uint" value="7936"/>
+            <value type="uint" value="16128"/>
+            <value type="uint" value="28416"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="color2" type="array">
+            <value type="uint" value="26880"/>
+            <value type="uint" value="34048"/>
+            <value type="uint" value="46848"/>
+            <value type="uint" value="65535"/>
+          </property>
+        </property>
+        <property name="workspace3" type="empty">
+          <property name="color-style" type="int" value="2"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/home/z/Dropbox/Pictures/walls/debjoe1.png"/>
+          <property name="backdrop-cycle-enable" type="bool" value="false"/>
+          <property name="backdrop-cycle-random-order" type="bool" value="true"/>
+          <property name="color1" type="array">
+            <value type="uint" value="25368"/>
+            <value type="uint" value="25368"/>
+            <value type="uint" value="25368"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="color2" type="array">
+            <value type="uint" value="12684"/>
+            <value type="uint" value="12684"/>
+            <value type="uint" value="12684"/>
+            <value type="uint" value="65535"/>
+          </property>
+        </property>
+        <property name="workspace4" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/xfce/xfce-teal.jpg"/>
+          <property name="color1" type="array">
+            <value type="uint" value="7936"/>
+            <value type="uint" value="16128"/>
+            <value type="uint" value="28416"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="color2" type="array">
+            <value type="uint" value="26880"/>
+            <value type="uint" value="34048"/>
+            <value type="uint" value="46848"/>
+            <value type="uint" value="65535"/>
+          </property>
+        </property>
+        <property name="workspace5" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/xfce/xfce-teal.jpg"/>
+          <property name="color1" type="array">
+            <value type="uint" value="7936"/>
+            <value type="uint" value="16128"/>
+            <value type="uint" value="28416"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="color2" type="array">
+            <value type="uint" value="26880"/>
+            <value type="uint" value="34048"/>
+            <value type="uint" value="46848"/>
+            <value type="uint" value="65535"/>
+          </property>
+        </property>
+        <property name="workspace6" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/xfce/xfce-teal.jpg"/>
+          <property name="color1" type="array">
+            <value type="uint" value="7936"/>
+            <value type="uint" value="16128"/>
+            <value type="uint" value="28416"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="color2" type="array">
+            <value type="uint" value="26880"/>
+            <value type="uint" value="34048"/>
+            <value type="uint" value="46848"/>
+            <value type="uint" value="65535"/>
+          </property>
+        </property>
+        <property name="workspace7" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/xfce/xfce-teal.jpg"/>
+          <property name="color1" type="array">
+            <value type="uint" value="7936"/>
+            <value type="uint" value="16128"/>
+            <value type="uint" value="28416"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="color2" type="array">
+            <value type="uint" value="26880"/>
+            <value type="uint" value="34048"/>
+            <value type="uint" value="46848"/>
+            <value type="uint" value="65535"/>
+          </property>
+        </property>
       </property>
     </property>
+    <property name="single-workspace-mode" type="bool" value="true"/>
+    <property name="single-workspace-number" type="int" value="3"/>
   </property>
   <property name="last" type="empty">
     <property name="window-width" type="int" value="685"/>

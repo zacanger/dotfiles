@@ -4,8 +4,9 @@
   <property name="configver" type="int" value="2"/>
   <property name="panels" type="array">
     <value type="int" value="1"/>
+    <value type="int" value="2"/>
     <property name="panel-1" type="empty">
-      <property name="position" type="string" value="p=8;x=232;y=889"/>
+      <property name="position" type="string" value="p=12;x=2734;y=1092"/>
       <property name="length" type="uint" value="100"/>
       <property name="position-locked" type="bool" value="true"/>
       <property name="size" type="uint" value="20"/>
@@ -14,7 +15,7 @@
         <value type="int" value="10"/>
         <value type="int" value="2"/>
         <value type="int" value="11"/>
-        <value type="int" value="26"/>
+        <value type="int" value="32"/>
         <value type="int" value="20"/>
         <value type="int" value="6"/>
         <value type="int" value="15"/>
@@ -23,31 +24,46 @@
         <value type="int" value="4"/>
         <value type="int" value="8"/>
         <value type="int" value="23"/>
+        <value type="int" value="5"/>
         <value type="int" value="40"/>
-        <value type="int" value="14"/>
         <value type="int" value="24"/>
-        <value type="int" value="19"/>
         <value type="int" value="9"/>
         <value type="int" value="22"/>
         <value type="int" value="25"/>
         <value type="int" value="12"/>
-        <value type="int" value="13"/>
         <value type="int" value="21"/>
         <value type="int" value="17"/>
-        <value type="int" value="18"/>
         <value type="int" value="7"/>
       </property>
       <property name="background-style" type="uint" value="0"/>
-      <property name="background-alpha" type="uint" value="70"/>
+      <property name="background-alpha" type="uint" value="90"/>
       <property name="background-color" type="array">
         <value type="uint" value="14344"/>
         <value type="uint" value="14344"/>
         <value type="uint" value="14344"/>
         <value type="uint" value="65535"/>
       </property>
-      <property name="enter-opacity" type="uint" value="80"/>
-      <property name="leave-opacity" type="uint" value="60"/>
+      <property name="enter-opacity" type="uint" value="93"/>
+      <property name="leave-opacity" type="uint" value="81"/>
       <property name="length-adjust" type="bool" value="true"/>
+      <property name="autohide-behavior" type="uint" value="0"/>
+    </property>
+    <property name="panel-2" type="empty">
+      <property name="position" type="string" value="p=6;x=1766;y=15"/>
+      <property name="plugin-ids" type="array">
+        <value type="int" value="35"/>
+        <value type="int" value="14"/>
+        <value type="int" value="18"/>
+        <value type="int" value="31"/>
+      </property>
+      <property name="size" type="uint" value="20"/>
+      <property name="length" type="uint" value="5"/>
+      <property name="nrows" type="uint" value="1"/>
+      <property name="background-alpha" type="uint" value="69"/>
+      <property name="enter-opacity" type="uint" value="80"/>
+      <property name="leave-opacity" type="uint" value="70"/>
+      <property name="autohide-behavior" type="uint" value="2"/>
+      <property name="position-locked" type="bool" value="true"/>
     </property>
   </property>
   <property name="plugins" type="empty">
@@ -56,8 +72,9 @@
       <property name="show-handle" type="bool" value="false"/>
       <property name="sort-order" type="uint" value="1"/>
       <property name="show-wireframes" type="bool" value="true"/>
-      <property name="include-all-workspaces" type="bool" value="true"/>
+      <property name="include-all-workspaces" type="bool" value="false"/>
       <property name="show-labels" type="bool" value="true"/>
+      <property name="include-all-monitors" type="bool" value="true"/>
     </property>
     <property name="plugin-15" type="string" value="separator">
       <property name="expand" type="bool" value="false"/>
@@ -69,18 +86,18 @@
     <property name="plugin-6" type="string" value="systray">
       <property name="names-visible" type="array">
         <value type="string" value="geany"/>
-        <value type="string" value="vlc"/>
         <value type="string" value="thunar"/>
         <value type="string" value="pglgui"/>
+        <value type="string" value="slack-desktop"/>
         <value type="string" value="networkmanager applet"/>
         <value type="string" value="nw"/>
         <value type="string" value="wicd-client.py"/>
+        <value type="string" value="qbittorrent"/>
         <value type="string" value="zeal"/>
         <value type="string" value="chromium"/>
         <value type="string" value="clipman"/>
         <value type="string" value="xfce4-power-manager"/>
         <value type="string" value="slack"/>
-        <value type="string" value="farbox"/>
       </property>
       <property name="names-hidden" type="array">
       </property>
@@ -95,6 +112,7 @@
     <property name="plugin-9" type="string" value="launcher">
       <property name="items" type="array">
         <value type="string" value="14409701551.desktop"/>
+        <value type="string" value="14458727651.desktop"/>
       </property>
     </property>
     <property name="plugin-1" type="string" value="thunar-tpa"/>
@@ -113,15 +131,9 @@
       <property name="style" type="uint" value="0"/>
     </property>
     <property name="plugin-11" type="string" value="battery"/>
-    <property name="plugin-18" type="string" value="xfce4-verve-plugin"/>
     <property name="plugin-2" type="string" value="launcher">
       <property name="items" type="array">
         <value type="string" value="14415293891.desktop"/>
-      </property>
-    </property>
-    <property name="plugin-14" type="string" value="launcher">
-      <property name="items" type="array">
-        <value type="string" value="14423541874.desktop"/>
       </property>
     </property>
     <property name="plugin-17" type="string" value="launcher">
@@ -132,15 +144,10 @@
       </property>
     </property>
     <property name="plugin-20" type="string" value="mixer">
-      <property name="sound-card" type="string" value="HDAIntelPCHAlsamixer"/>
-      <property name="track" type="string" value="Master"/>
+      <property name="sound-card" type="string" value="HDAATIHDMIAlsamixer"/>
+      <property name="track" type="string" value=""/>
       <property name="command" type="string" value="xfce4-mixer"/>
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-    </property>
-    <property name="plugin-19" type="string" value="launcher">
-      <property name="items" type="array">
-        <value type="string" value="14439192311.desktop"/>
-      </property>
     </property>
     <property name="plugin-21" type="string" value="launcher">
       <property name="items" type="array">
@@ -167,21 +174,17 @@
       <property name="tweaks" type="empty">
         <property name="never-confirm-history-clear" type="bool" value="false"/>
         <property name="paste-on-activate" type="uint" value="2"/>
-        <property name="reverse-menu-order" type="bool" value="true"/>
+        <property name="reverse-menu-order" type="bool" value="false"/>
+        <property name="popup-at-pointer" type="bool" value="true"/>
       </property>
       <property name="settings" type="empty">
-        <property name="max-texts-in-history" type="uint" value="25"/>
+        <property name="max-texts-in-history" type="uint" value="50"/>
         <property name="enable-actions" type="bool" value="true"/>
       </property>
     </property>
     <property name="plugin-40" type="string" value="launcher">
       <property name="items" type="array">
-        <value type="string" value="14444283842.desktop"/>
-      </property>
-    </property>
-    <property name="plugin-13" type="string" value="launcher">
-      <property name="items" type="array">
-        <value type="string" value="14446170741.desktop"/>
+        <value type="string" value="14460060472.desktop"/>
       </property>
     </property>
     <property name="plugin-25" type="string" value="launcher">
@@ -189,6 +192,20 @@
         <value type="string" value="14450185391.desktop"/>
       </property>
     </property>
-    <property name="plugin-26" type="string" value="clock"/>
+    <property name="plugin-32" type="string" value="datetime"/>
+    <property name="plugin-5" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="14460060813.desktop"/>
+      </property>
+    </property>
+    <property name="plugin-14" type="string" value="xfce4-verve-plugin"/>
+    <property name="plugin-18" type="string" value="weather"/>
+    <property name="plugin-31" type="string" value="linelight"/>
+    <property name="plugin-35" type="string" value="applicationsmenu">
+      <property name="show-menu-icons" type="bool" value="true"/>
+      <property name="show-tooltips" type="bool" value="true"/>
+      <property name="show-button-title" type="bool" value="false"/>
+      <property name="custom-menu" type="bool" value="false"/>
+    </property>
   </property>
 </channel>

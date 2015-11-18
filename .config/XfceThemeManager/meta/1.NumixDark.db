@@ -1,0 +1,6 @@
+[Data]
+Name=Numix
+Thumbnail=/home/zacanger/.config/XfceThemeManager/meta/NumixDark.png
+GtkTheme=Numix
+Xfwm4Theme=NumixDark
+

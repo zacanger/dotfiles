@@ -1,0 +1,25 @@
+[Data]
+Name=Blackbird-master Custom
+Thumbnail=/home/zacanger/.config/XfceThemeManager/custom/Blackbird-master Custom.png
+GtkTheme=Blackbird-master
+IconTheme=Numix-Circle-Light
+CursorTheme=Adwaita
+Xfwm4Theme=Ashen
+BackgroundImage=/home/zacanger/Pictures/debjoe1.png
+TitleButtonLayout=O|SHMC
+TitlePosition=left
+WMFont=Fira Code 10
+AppFont=FontAwesome 10
+BackdropStyle=0
+BackdropBright=0
+BackdropSatu=0.000000
+CursorSize=0
+[Panel-1]
+PanelImage=/home/zacanger
+PanelStyle=0
+PanelSize=48
+PanelAlpha=100
+PanelRed=0
+PanelGreen=0
+PanelBlue=0
+

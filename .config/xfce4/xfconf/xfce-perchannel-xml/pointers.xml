@@ -23,6 +23,12 @@
       </property>
       <property name="Synaptics_Circular_Scrolling" type="int" value="0"/>
       <property name="Synaptics_Circular_Scrolling_Trigger" type="int" value="0"/>
+      <property name="Device_Enabled" type="int" value="1"/>
+    </property>
+  </property>
+  <property name="PS2_Generic_Mouse" type="empty">
+    <property name="Properties" type="empty">
+      <property name="Device_Enabled" type="int" value="1"/>
     </property>
   </property>
 </channel>

@@ -1,1 +1,1 @@
-g() { cd `cat ~/.going/${1-_back} || echo .` ; }
+g() { cd `cat ~/.g/${1-_back} || echo .` ; }
