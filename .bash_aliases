@@ -144,7 +144,7 @@ alias localbin='zerobin && lt -p 8000'
 alias vi='nvim'
 alias vim='nvim'
 alias locate='locate -i'
-alias sf='semistandard-format'
+alias sf='standard-format'
 alias pip='pip3.5'
 alias sw='time cat'
 alias ds='dirsize'
@@ -161,7 +161,19 @@ alias gv='gpicview'
 alias cl='clone'
 alias le='less'
 alias most='less'
+alias kafe='coffee -c'
+alias ta='textadept'
+alias mc='msee'
+alias mp='mplayer2'
 
-## returns just the http status code, on a newline. obvs append the url.
-alias htst='curl -s -o /dev/null -w "%{http_code}\n"' 
+## temporary aliases, for http while using mongo locally
+
+## returns just the http status code, on a newline. obvs append the url
+alias htst='curl -s -o /dev/null -w "%{http_code}\n"'
+## follow this one with the json and then the url
+alias cpost='curl -H "Content-Type: application/json" -X "POST" -d'
+## append the url
+alias cget='curl -H "Content-Type: application/json" -X "GET"'
+## mongo alias, for temporary school project purposes
+alias mdb='mongod --dbpath=data/'
 
