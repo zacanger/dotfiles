@@ -1,0 +1,34 @@
+-- Copyright 2015 Mitchell mitchell.att.foicica.com. See LICENSE.
+
+---
+-- Userdata representing a spellchecker created by `spell()`.
+module('spellchecker')
+
+---
+-- Adds words from dictionary file path *dic* to spellchecker *sc*.
+-- @param sc A spellchecker created by `spell()`.
+-- @param dic Path to the Hunspell dictionary file to load.
+function add_dic(sc, dic) end
+
+---
+-- Returns `true` if string *word* is spelled correctly; `false` otherwise.
+-- @param sc A spellchecker created by `spell()`.
+-- @param word The word to check spelling of.
+-- @return `true` or `false`
+function spell(sc, word) end
+
+---
+-- Returns a list of spelling suggestions for string *word*.
+-- If *word* is spelled correctly, the returned list will be empty.
+-- @param sc A spellchecker created by `spell()`.
+-- @param word The word to get spelling suggestions for.
+-- @return list of suggestions
+function suggest(sc, word) end
+
+---
+-- Adds string *word* to spellchecker *sc*.
+-- Note: this is not a permanent addition. It only persists for the life of
+-- *sc* and applies only to *sc*.
+-- @param sc A spellchecker created by `spell()`.
+-- @param word The word to add.
+function add_word(sc, word) end

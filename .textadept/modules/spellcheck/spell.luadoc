@@ -1,0 +1,14 @@
+-- Copyright 2015 Mitchell mitchell.att.foicica.com. See LICENSE.
+
+---
+-- Returns a Hunspell spellchecker that utilizes affix file path *aff* and
+-- dictionary file path *dic*.
+-- @param aff Path to the Hunspell affix file to use.
+-- @param dic Path to the Hunspell dictionary file to use.
+-- @param key Optional string key for encrypted *dic*.
+-- @return spellchecker
+-- @usage spellchecker = spell('/usr/share/hunspell/en_US.aff',
+--                             '/usr/share/hunspell/en_US.dic')
+--        spellchecker:spell('foo') --> false
+-- @see spellchecker
+function spell(aff, dic, key) end

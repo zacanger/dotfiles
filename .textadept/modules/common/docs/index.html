@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>init.lua</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="locco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    <div id="jump_to">
+  Jump To &hellip;
+  <div id="jump_wrapper">
+  <div id="jump_page">
+  <a class="source" href="bracematching.html">bracematching.lua</a>
+  <a class="source" href="display_filename.html">display_filename.lua</a>
+  <a class="source" href="enclose.html">enclose.lua</a>
+  <a class="source" href="filename.html">filename.lua</a>
+  <a class="source" href="findall.html">findall.lua</a>
+  <a class="source" href="highlight.html">highlight.lua</a>
+  <a class="source" href="index.html">init.lua</a>
+  <a class="source" href="lastbuffer.html">lastbuffer.lua</a>
+  <a class="source" href="multiedit.html">multiedit.lua</a>
+  <a class="source" href="project.html">project.lua</a>
+  <a class="source" href="save_strips_ws.html">save_strips_ws.lua</a>
+    </div>
+  </div>
+</div>
+
+    <table cellpadding="0" cellspacing="0">
+      <thead>
+        <tr>
+          <th class="docs">
+            <h1>
+              init.lua
+            </h1>
+          </th>
+          <th class="code">
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+<tr id="section-1">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-1">&#182;</a>
+  </div>
+  
+<p>Some functions, key commands and modifications that change
+<a href="http://code.google.com/p/textadept/">Textadept</a>'s
+default behaviour.
+It contains modifications to Mitchell's Textadept modules, code from
+Brian Schott and others who posted to the mailing list or the
+<a href="http://caladbolg.net/textadeptwiki/">Textadept wiki</a>.
+Otherwise it is written and maintained by
+<a href="https://github.com/rgieseke">Robert Gieseke</a>.<br>
+The source is on
+<a href="https://github.com/rgieseke/ta-common">GitHub</a>,
+released under the
+<a href="http://www.opensource.org/licenses/mit-license.php">MIT license</a>.</p>
+
+<h2>Installation</h2>
+<p>Download a
+<a href="https://github.com/rgieseke/ta-common/zipball/master">zipped</a>
+version and save the contained directory as <code>.textadept/modules/common</code>
+or clone the git repository:</p>
+<pre><code>cd ~/.textadept/modules
+git clone https://github.com/rgieseke/ta-common.git common
+</code></pre>
+<p>Put</p>
+<pre><code>require 'common'
+</code></pre>
+<p>in your <code>.textadept/init.lua</code>.<br></p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+<span class="k">local</span> keys = keys
+
+<span class="k">local</span> M = {}
+
+M.bracematching = <span class="nt">require</span> <span class="s">'common.bracematching'</span>
+M.display_filename = <span class="nt">require</span> <span class="s">'common.display_filename'</span>
+M.enclose = <span class="nt">require</span> <span class="s">'common.enclose'</span>
+M.filename = <span class="nt">require</span> <span class="s">'common.filename'</span>
+<span class="k">if</span> <span class="o">not</span> CURSES <span class="k">then</span> <span class="nt">require</span> <span class="s">'common.highlight'</span> <span class="k">end</span>
+M.lastbuffer = <span class="nt">require</span> <span class="s">'common.lastbuffer'</span>
+M.multiedit = <span class="nt">require</span> <span class="s">'common.multiedit'</span>
+M.project = <span class="nt">require</span> <span class="s">'common.project'</span>
+<span class="nt">require</span> <span class="s">'common.save_strips_ws'</span>
+</pre></div>
+</td>
+</tr><tr id="section-2">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-2">&#182;</a>
+  </div>
+  
+
+<h2>Key commands</h2>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+</pre></div>
+</td>
+</tr><tr id="section-3">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-3">&#182;</a>
+  </div>
+  
+<p>Snapopen.<br>
+(Filtering out some folders and file extensions)<br>
+Textadept home: <code>Alt/⌘</code>+<code>Shift</code>+<code>U</code><br>
+User home : <code>Alt/⌘</code>+<code>U</code><br>
+Current project <code>Alt/⌘</code>+<code>P</code><br></p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>keys[OSX <span class="o">and</span> <span class="s">'mU'</span> <span class="o">or</span> <span class="s">'aU'</span>] = { io.snapopen, _HOME, { <span class="s">'.+&#37;.luadoc'</span>,
+              folders = { <span class="s">'images'</span>, <span class="s">'doc'</span>, <span class="s">'manual'</span>, <span class="s">'&#37;.hg'</span>, <span class="s">'&#37;.git'</span> } } }
+keys[OSX <span class="o">and</span> <span class="s">'mu'</span> <span class="o">or</span> <span class="s">'au'</span>] = { io.snapopen, _USERHOME,
+              { folders = { <span class="s">'&#37;.hg'</span>, <span class="s">'&#37;.git'</span> } } }
+keys[OSX <span class="o">and</span> <span class="s">'mp'</span> <span class="o">or</span> <span class="s">'ap'</span>] = <span class="k">function</span> ()
+  <span class="k">local</span> root = _M.common.project.root()
+  io.snapopen(root, { <span class="s">'pyc$'</span>})
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr><tr id="section-4">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-4">&#182;</a>
+  </div>
+  
+<p>Insert a filename: <code>Ctrl</code>+<code>Alt/⌘</code>+<code>Shift</code>+<code>O</code></p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>keys[OSX <span class="o">and</span> <span class="s">'cmO'</span> <span class="o">or</span> <span class="s">'caO'</span>] = M.filename.insert_filename
+</pre></div>
+</td>
+</tr><tr id="section-5">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-5">&#182;</a>
+  </div>
+  
+<p>Save and reset Lua state: <code>F9</code></p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>keys[<span class="s">'f9'</span>] = <span class="k">function</span>()
+  io.save_file()
+  reset()
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr><tr id="section-6">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-6">&#182;</a>
+  </div>
+  
+<p>Go to the matching brace: <code>Ctrl</code>+<code>M</code></p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>keys.cm = M.bracematching.match_brace
+</pre></div>
+</td>
+</tr><tr id="section-7">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-7">&#182;</a>
+  </div>
+  
+<p>Add another cursor position: <code>Ctrl</code>+<code>Shift</code>+<code>M</code><br>
+Select all occurrences of a word: <code>Ctrl</code>+<code>Alt/⌘</code>+<code>Shift</code>+<code>M</code></p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>keys.cM = M.multiedit.add_position
+keys[OSX <span class="o">and</span> <span class="s">'cmM'</span> <span class="o">or</span> <span class="s">'caM'</span>] = M.multiedit.select_all
+</pre></div>
+</td>
+</tr><tr id="section-8">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-8">&#182;</a>
+  </div>
+  
+<p>Switch to last buffer: <code>Ctrl</code>+<code>2</code></p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>keys.c2 = M.lastbuffer.last_buffer
+</pre></div>
+</td>
+</tr><tr id="section-9">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-9">&#182;</a>
+  </div>
+  
+<p>Enclose selection or insert chars: <code>'</code> , <code>"</code>, <code>(</code>, <code>[</code>, <code>{</code></p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>keys[<span class="s">"'"</span>] = { M.enclose.enclose_selection, <span class="s">"'"</span>, <span class="s">"'"</span> }
+keys[<span class="s">'"'</span>] = { M.enclose.enclose_selection, <span class="s">'"'</span>, <span class="s">'"'</span> }
+keys[<span class="s">'('</span>] = { M.enclose.enclose_selection, <span class="s">'('</span>, <span class="s">')'</span> }
+keys[<span class="s">'['</span>] = { M.enclose.enclose_selection, <span class="s">'['</span>, <span class="s">']'</span> }
+keys[<span class="s">'{'</span>] = { M.enclose.enclose_selection, <span class="s">'{'</span>, <span class="s">'}'</span> }
+</pre></div>
+</td>
+</tr><tr id="section-10">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-10">&#182;</a>
+  </div>
+  
+<p>Enclose selection and keep selection or insert single char
+if nothing is selected: <code>Ctrl</code>+<code>Alt/⌘</code>+<code>'</code> or <code>"</code> or <code>(</code> or <code>[</code> or <code>{</code></p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>keys[OSX <span class="o">and</span> <span class="s">"cm'"</span> <span class="o">or</span> <span class="s">"ca'"</span>] = { M.enclose.paste_or_grow_enclose, <span class="s">"'"</span>, <span class="s">"'"</span> }
+keys[OSX <span class="o">and</span> <span class="s">'cm"'</span> <span class="o">or</span> <span class="s">'ca"'</span>] = { M.enclose.paste_or_grow_enclose, <span class="s">'"'</span>, <span class="s">'"'</span> }
+keys[OSX <span class="o">and</span> <span class="s">'cm('</span> <span class="o">or</span> <span class="s">'ca('</span>] = { M.enclose.paste_or_grow_enclose, <span class="s">'('</span>, <span class="s">')'</span> }
+keys[OSX <span class="o">and</span> <span class="s">'cm['</span> <span class="o">or</span> <span class="s">'ca['</span>] = { M.enclose.paste_or_grow_enclose, <span class="s">'['</span>, <span class="s">']'</span> }
+keys[OSX <span class="o">and</span> <span class="s">'cm{'</span> <span class="o">or</span> <span class="s">'ca{'</span>] = { M.enclose.paste_or_grow_enclose, <span class="s">'{'</span>, <span class="s">'}'</span> }
+
+<span class="k">return</span> M
+</pre></div>
+</td>
+</tr></tbody>
+    </table>
+  </div>
+</body>
+</html>

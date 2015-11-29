@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>project.lua</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="locco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    <div id="jump_to">
+  Jump To &hellip;
+  <div id="jump_wrapper">
+  <div id="jump_page">
+  <a class="source" href="bracematching.html">bracematching.lua</a>
+  <a class="source" href="display_filename.html">display_filename.lua</a>
+  <a class="source" href="enclose.html">enclose.lua</a>
+  <a class="source" href="filename.html">filename.lua</a>
+  <a class="source" href="findall.html">findall.lua</a>
+  <a class="source" href="highlight.html">highlight.lua</a>
+  <a class="source" href="index.html">init.lua</a>
+  <a class="source" href="lastbuffer.html">lastbuffer.lua</a>
+  <a class="source" href="multiedit.html">multiedit.lua</a>
+  <a class="source" href="project.html">project.lua</a>
+  <a class="source" href="save_strips_ws.html">save_strips_ws.lua</a>
+    </div>
+  </div>
+</div>
+
+    <table cellpadding="0" cellspacing="0">
+      <thead>
+        <tr>
+          <th class="docs">
+            <h1>
+              project.lua
+            </h1>
+          </th>
+          <th class="code">
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+<tr id="section-1">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-1">&#182;</a>
+  </div>
+  
+<p>The <strong>common.project</strong> module tries to figure out the project root directory
+for a given file. If you have a directory structure
+like</p>
+<pre><code>code
+  project1
+    src
+      file1.lua
+  project2
+    src
+</code></pre>
+<p>the function <strong>root</strong> returns <em>project1</em> for <code>file1.lua</code>
+if <code>code</code> is part of the <code>common.project.DIRS</code> table.
+If the project root is not found in <code>DIRS</code> the file's directory is returned.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+<span class="k">local</span> M = {}
+</pre></div>
+</td>
+</tr><tr id="section-2">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-2">&#182;</a>
+  </div>
+  
+<h2>Fields</h2>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+</pre></div>
+</td>
+</tr><tr id="section-3">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-3">&#182;</a>
+  </div>
+  
+<p>This <code>DIRS</code> field can be overwritten or added to in your <code>init.lua</code> after
+the <em>common</em> module has been loaded, for example:</p>
+<pre><code>_M.common.project.DIRS = { _USERHOME..'/modules',
+                           '/home/username/code',
+                           '/home/username/projects' }
+</code></pre>
+<p>The default value contains Textadept's directory and the user's
+modules directory.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>M.DIRS = { _HOME, _USERHOME..<span class="s">'/modules'</span> }
+</pre></div>
+</td>
+</tr><tr id="section-4">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-4">&#182;</a>
+  </div>
+  
+<h2>Commands</h2>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+</pre></div>
+</td>
+</tr><tr id="section-5">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-5">&#182;</a>
+  </div>
+  
+<p>Match a file's path with project root directories and try to return the
+project root.  If the project root is not found the file's directory
+is returned.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">function</span> <span class="nf">M.root</span>()
+  <span class="k">local</span> filename = buffer.filename
+  <span class="k">local</span> project_root
+  <span class="k">if</span> filename <span class="k">then</span>
+    <span class="k">for</span> i=1, #M.DIRS <span class="k">do</span>
+      project_root = filename:match(<span class="s">'('</span>..M.DIRS[i]..<span class="s">'[/\\][^/\\]+)[/\\].+'</span>)
+      <span class="k">if</span> project_root <span class="k">then</span>
+        <span class="k">break</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+  <span class="k">return</span> project_root <span class="o">or</span> buffer.filename:match(<span class="s">'(.+)[/\\]'</span>)
+<span class="k">end</span>
+
+<span class="k">return</span> M
+</pre></div>
+</td>
+</tr></tbody>
+    </table>
+  </div>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>Textredux</title>
+<link href='http://fonts.googleapis.com/css?family=Bowlby+One+SC' rel='stylesheet' type='text/css'>
+<link href="ldoc.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div id="sidebar">
+<ul class='menu'>
+<li><a href="#">Textredux</a></li>
+<li><a href="index.html#Installation">Installation</a></li>
+<li><a href="index.html#Usage">Usage</a></li>
+<li><a href="index.html#Code">Code</a></li>
+<li><a href="index.html#Contribute">Contribute</a></li>
+<li><a href="index.html#Changelog">Changelog</a></li>
+<li><a href="tour.html">Screen Shots</a></li>
+<li><a href="api.html">API Docs</a></li>
+</ul>
+</div>
+
+<div class="container">
+<div class="content">
+<h1>Textredux</h1>
+
+<p>Textredux is a module for the <a href="http://foicica.com/textadept/">Textadept editor</a>
+that offers text-based interfaces for core Textadept
+functionality.</p>
+<img class='border' src='images/bufferlist.gif'>
+
+<h2 id="Features"><a href="#Features">Features</a></h2>
+<ul>
+<li>A text-based file browser. Completely keyboard driven, with powerful search
+and seamless switching between traditional and
+snapopen (recursive) listings.</li>
+<li>A text-based replacement for the buffer list, also
+providing an easy way to close buffers and directories.</li>
+<li>A simple function call that automatically integrates all Textredux
+functionality in the Textadept editor. No need to configure anything further
+unless you want to – once you’ve loaded this you will be using Textredux.
+In addition to integrating the above modules, it will hook into Textadept and
+inject text based interfaces whereever it can (e.g. file open or theme selection).</li>
+</ul>
+
+
+<h2 id="Installation"><a href="#Installation">Installation</a></h2>
+
+<p>The Textredux module itself can be downloaded from the
+<a href="https://github.com/rgieseke/textredux/releases">releases page</a> or
+by getting the latest version on master
+<a href="https://github.com/rgieseke/textredux/archive/master.zip">as a zip file</a>.
+</p>
+
+<p>To install the module, just unpack the module into the</p>
+
+<pre>~/.textadept/modules/textredux</pre>
+
+<p>directory.
+Alternatively you can clone Textredux into it:</p>
+
+<pre>
+cd ~/.textadept/modules
+git clone https://github.com/rgieseke/textredux.git
+</pre>
+
+<h2 id="Usage"><a href="#Usage">Usage</a></h2>
+
+<p>Having installed the module, there are two ways you can use it. Note that due to
+Textredux re-using colors defined in your theme file, loading Textredux should happen
+after a custom theme is set using <code>ui.set_theme</code> in your <code>init.lua</code>.
+</p>
+
+<p>1) Cherrypick the functionality you want from the different modules by assigning
+key bindings to the desired functions. As an example, if you would like to use
+the text based file browser and normally open files using <code>Ctrl-O</code>, then the
+following code in your <code>init.lua</code> would do the trick:</p>
+
+<pre>
+textredux = require 'textredux'
+keys.co = textredux.fs.open_file
+</pre>
+
+<p>2) If you can’t get enough of text based interfaces and the joy they provide,
+then the Textredux <code>hijack</code> function is for you. Simple place this in your
+<code>init.lua</code>:</p>
+
+<pre><code>require('textredux').hijack()
+</code></pre>
+
+<p>As the name suggest, Textredux has now hijacked your environment. All your
+regular key bindings should now use Textredux where applicable. Clicking the
+menu will still open the standard GUI dialogs.</p>
+
+<p>Regardless of the approach chosen, the
+<a href="api.html">module documentation</a> contains more
+in-depth documentation for the various modules, including customization tips.</p>
+
+<p>Also, make sure to take a brief look at the <a href="tour.html">screen shots</a> for some
+quick tips on using Textredux.</p>
+
+<h2 id="Code"><a href="#Code">Code</a></h2>
+
+<p>Textredux is released under the MIT license (see the LICENSE file in the source
+for the full details). The <a href="https://github.com/rgieseke/textredux">source code</a>
+is available from GitHub. It was written by
+<a href="https://github.com/nilnor">Nils Nordman</a>
+and is now maintained by <a href="https://github.com/rgieseke">Robert Gieseke</a>.</p>
+
+<h2 id="Contribute"><a href="#Contribute">Contribute</a></h2>
+
+<p>Any feedback, be it patches, feature request or bug reports is most welcome.</p>
+
+<p>If you want to provide patches, the preferred way of doing so would be as a pull
+request via GitHub, or as a pull request from some other Git server. Should that
+not be an option patches are gladly accepted through other means as well.</p>
+
+<p>If you have any bug reports or feature requests, please submit them to the
+<a href="https://github.com/rgieseke/textredux/issues">Github issue tracker</a>
+or send an email to Textadept’s <a href="http://foicica.com/lists/">mailing list</a>.</p>
+
+<h2 id="Changelog"><a href="#Changelog">Changelog</a></h2>
+
+<h3>1.0.3 (2014-09-08)</h3>
+
+<ul>
+<li>Requires a nightly build with fixes for <code>spawn</code> on OS X and the terminal version</li>
+<li>Fix console window popup on Windows for Ctags list (Thanks to Feng Li)</li>
+<li>Add example file to show output of <code>git ls-files</code></li>
+</ul>
+
+
+<h3>1.0.2 (2014-08-15)</h3>
+
+<ul>
+<li>Fix bug caused by loading <code>lfs</code> explicitly after Textadept switched to <code>lfs</code> v1.6.2</li>
+</ul>
+
+<h3>1.0.1 (2014-06-27)</h3>
+
+<ul>
+<li>Fix styling bugs</li>
+<li>Add note on updating styles</li>
+</ul>
+
+<h3>1.0.0 (2014-06-24)</h3>
+
+<ul>
+<li>Requires Textadept 7.4 or later</li>
+<li>Hijack is now a function, no longer a module</li>
+<li>Waiting for <code>events.INITIALIZED</code> is no longer necessary when requiring Textredux</li>
+<li>Keys use Textadept's <code>keys.MODE</code> under the hood</li>
+<li>Removed support for on_keypress events</li>
+<li>Add support for <code>on_char_added</code> events, see <code>list.lua</code> for an example</li>
+<li>Removed (flaky) support for modifiers on key presses and mouse clicks</li>
+<li>Removed reduxbuffer.newline function</li>
+<li>Hide Textadept's line numbers in Textredux buffers</li>
+<li>All Textredux buffers can be closed with <code>Esc</code> by default</li>
+<li>Indicators and styles are now set using an <code>apply</code> function bound to each table</li>
+<li>The Ctags list colorises the kind of symbol (class, function, …)</li>
+<li>The current search is kept when toggling between snapopen and directory view</li>
+<li>In lists scrolling is limited to the selectable items</li>
+<li>The search in lists can be reset using <code>Ctrl/Alt/Meta-Backspace</code></li>
+</ul>
+
+<h3>0.11 (2014-03-04)</h3>
+
+<ul>
+<li>Workaround for bug on Windows</li>
+</ul>
+
+<h3>0.10 (2013-10-29)</h3>
+
+<ul>
+<li>New layout and updates for the documentation</li>
+<li>Renamed <code>core.gui</code> to <code>core.ui</code>
+<li>Fix using default filtered list when not hi-jacked</li>
+<li>Fix bug when opening buffers in a new view</li>
+<li>Fix indicator example</li>
+</ul>
+
+
+<h3>0.9 (2013-10-01)</h3>
+
+<ul>
+<li>Update for API changes until Textadept 7.0 beta 4</li>
+</ul>
+
+
+<h3>0.8 (2013-07-11)</h3>
+
+<ul>
+<li>Update for module name change to <code>file_types</code> in Textadept 7.0 beta</li>
+</ul>
+
+
+<h3>0.7 (2013-07-02)</h3>
+
+<ul>
+<li>Compatibility with Textadept 7.0 alpha 2</li>
+<li>Better workaround for item selection in Curses version
+(Thanks to Chris Emerson)</li>
+</ul>
+
+
+<h3>0.6 (2013-06-08)</h3>
+
+<ul>
+<li>Compatibility with Textadept 6.6 and 7.0 alpha</li>
+<li>Added ctags symbol filtered list search</li>
+<li>Removed workaround for Curses version</li>
+</ul>
+
+
+<h3>0.5 (2013-05-02)</h3>
+
+<ul>
+<li>Updates for API changes in Textadept 6.5 and 6.6 beta.</li>
+</ul>
+
+
+<h3>0.4 (2013-03-05)</h3>
+
+<ul>
+<li>Integrate TextUI module back into Textredux as the <code>core</code> submodule.</li>
+<li>Update to snapopen API change in Textadept 6.2.</li>
+</ul>
+
+
+<h3>0.3 (2012-11-28)</h3>
+
+<ul>
+<li>Updates for API changes until Textadept 6.</li>
+<li>Don&rsquo;t hijack menu entries, use the default widgets when clicking the menu.</li>
+</ul>
+
+
+<h3>0.2 (2012-03-08)</h3>
+
+<ul>
+<li>Make ctrl+enter open entries in another view (buffer list / file browser)</li>
+<li>Make buffer list keys configurable</li>
+<li>Handle buffers with nil directories in the buffer list</li>
+<li>TextUI:
+
+<ul>
+<li>Added support for indicators</li>
+<li>Improved auto-loading of not-shown list items</li>
+<li>Added highlighting of list matches</li>
+<li>Added mouse support for buffer hotspots</li>
+<li>Font names are now included for default styles</li>
+<li>List selection callbacks now receive modifiers as well</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>0.1 (2012-01-20)</h3>
+
+<p>First public release.</p>
+</div>
+</div>
+</body>
+</html>

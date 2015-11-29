@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>common/ack.lua</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="locco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    <div id="jump_to">
+  Jump To &hellip;
+  <div id="jump_wrapper">
+  <div id="jump_page">
+  <a class="source" href="ack.html">common/ack.lua</a>
+  <a class="source" href="bracematching.html">common/bracematching.lua</a>
+  <a class="source" href="display_filename.html">common/display_filename.lua</a>
+  <a class="source" href="enclose.html">common/enclose.lua</a>
+  <a class="source" href="filename.html">common/filename.lua</a>
+  <a class="source" href="findall.html">common/findall.lua</a>
+  <a class="source" href="highlight.html">common/highlight.lua</a>
+  <a class="source" href="index.html">common/init.lua</a>
+  <a class="source" href="lastbuffer.html">common/lastbuffer.lua</a>
+  <a class="source" href="multiedit.html">common/multiedit.lua</a>
+  <a class="source" href="project.html">common/project.lua</a>
+  <a class="source" href="save_strips_ws.html">common/save_strips_ws.lua</a>
+    </div>
+  </div>
+</div>
+
+    <table cellpadding="0" cellspacing="0">
+      <thead>
+        <tr>
+          <th class="docs">
+            <h1>
+              common/ack.lua
+            </h1>
+          </th>
+          <th class="code">
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+<tr id="section-1">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-1">&#182;</a>
+  </div>
+  
+<p>The <strong>common.ack</strong> module provides an interface to the
+<a href="http://betterthangrep.com/">ack</a> command line utility for searching
+in a directory of source files.<br>
+As an alternative Textadept's find in files can be used.
+Ack runs on Windows as well, but since it is not a package
+repository away, Lua search is the default on Windows.<br>
+Using <code>Alt/⌘</code>+<code>L</code> and<code>Alt/⌘</code>+<code>A</code> you can toggle between the two search
+modes.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">local</span> M = {}
+</pre></div>
+</td>
+</tr><tr id="section-2">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-2">&#182;</a>
+  </div>
+  
+<p>To start a search in the project's root directory we use the
+<a href="project.html">common.project</a> module.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">local</span> project = <span class="nt">require</span> <span class="s">'common.project'</span>
+</pre></div>
+</td>
+</tr><tr id="section-3">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-3">&#182;</a>
+  </div>
+  
+<h3>Fields</h3>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+</pre></div>
+</td>
+</tr><tr id="section-4">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-4">&#182;</a>
+  </div>
+  
+<p>Ack settings.
+They can be overwritten in your <code>init.lua</code> after loading the
+<em>common</em> module, for example:</p>
+<pre><code>_M.common.ack.OPTIONS = '--nocolor --nogroup --ignore-case'
+</code></pre>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>M.OPTIONS = <span class="s">'--nocolor --nogroup'</span>
+</pre></div>
+</td>
+</tr><tr id="section-5">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-5">&#182;</a>
+  </div>
+  
+<h2>Setup</h2>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">local</span> events = events
+
+<span class="k">local</span> buffer_type = _L[<span class="s">'Files Found Buffer'</span>]
+</pre></div>
+</td>
+</tr><tr id="section-6">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-6">&#182;</a>
+  </div>
+  
+<h2>Functions</h2>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+</pre></div>
+</td>
+</tr><tr id="section-7">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-7">&#182;</a>
+  </div>
+  
+<p>If the command entry is open and a search with ack or Lua
+is active run the search after pressing enter.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>events.connect(events.COMMAND_ENTRY_COMMAND,
+  <span class="k">function</span>(text)
+    <span class="k">if</span> ack_search <span class="k">then</span>
+      <span class="k">local</span> search_dir = project.root()
+      ui.command_entry.focus()
+      <span class="k">local</span> command = <span class="s">'ack '</span>..M.OPTIONS..<span class="s">' '</span>..text
+      <span class="k">local</span> p = io.popen(command..<span class="s">' '</span>..search_dir..<span class="s">' 2&gt;&1'</span>)
+      <span class="k">local</span> out = p:read(<span class="s">'*all'</span>)
+      p:close()
+      ui._<span class="nt">print</span>(buffer_type, <span class="s">'ack: '</span>..search_dir..<span class="s">'\n\n'</span>..out)
+      ack_search = <span class="k">false</span>
+      buffer:goto_pos(0)
+      buffer.read_only = 1
+      <span class="k">return</span> <span class="k">true</span>
+    <span class="k">end</span>
+    <span class="k">if</span> textadept_find_in_files <span class="k">then</span>
+      <span class="k">local</span> search_dir = project.root()
+      ui.command_entry.focus()
+      ui.find.find_entry_text = text
+      ui.find.find_in_files(search_dir)
+      textadept_find_in_files = <span class="k">false</span>
+      <span class="k">return</span> <span class="k">true</span>
+    <span class="k">end</span>
+  <span class="k">end</span>, 1)
+</pre></div>
+</td>
+</tr><tr id="section-8">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-8">&#182;</a>
+  </div>
+  
+<p>Switch the search mode in the command entry.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>events.connect(events.COMMAND_ENTRY_KEYPRESS,
+  <span class="k">function</span>(code, shift, control, alt)
+    <span class="k">local</span> K = _G.keys.KEYSYMS
+    <span class="k">if</span> ack_search <span class="o">or</span> textadept_find_in_files <span class="k">then</span>
+      <span class="k">if</span> K[code] == <span class="s">'esc'</span> <span class="k">then</span>
+        ack_search = <span class="k">nil</span>
+        textadept_find_in_files = <span class="k">nil</span>
+        ui.command_entry.focus()
+        ui.statusbar_text = <span class="s">''</span>
+        <span class="k">return</span> <span class="k">true</span>
+      <span class="k">elseif</span> control <span class="o">and</span> string.char(code) == <span class="s">'l'</span> <span class="k">then</span>
+        ack_search = <span class="k">nil</span>
+        textadept_find_in_files = <span class="k">true</span>
+        ui.statusbar_text = <span class="s">"Lua find in files: "</span>..project.root()
+      <span class="k">elseif</span> control <span class="o">and</span> string.char(code) == <span class="s">'k'</span> <span class="k">then</span>
+        ack_search = <span class="k">true</span>
+        textadept_find_in_files = <span class="k">false</span>
+        ui.statusbar_text = <span class="s">"ack: "</span>..project.root()
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>, 1)
+</pre></div>
+</td>
+</tr><tr id="section-9">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-9">&#182;</a>
+  </div>
+  
+<p>Open command entry to enter search term.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">function</span> <span class="nf">M.search_entry</span>()
+  <span class="k">if</span> buffer.filename <span class="k">then</span>
+    <span class="k">if</span> WIN32 <span class="k">then</span>
+      textadept_find_in_files = <span class="k">true</span>
+    <span class="k">else</span>
+      ack_search = <span class="k">true</span>
+    <span class="k">end</span>
+    ui.command_entry.entry_text = <span class="s">''</span>
+    ui.command_entry.focus()
+    ui.statusbar_text = <span class="s">"ack: "</span>..project.root()
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">return</span> M
+</pre></div>
+</td>
+</tr></tbody>
+    </table>
+  </div>
+</body>
+</html>

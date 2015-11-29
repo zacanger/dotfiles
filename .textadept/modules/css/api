@@ -1,0 +1,199 @@
+link link [Selector]\nSelects all unvisited links
+visited visited [Selector]\nSelects all visited links
+active active [Selector]\nSelects the active link
+hover hover [Selector]\nSelects links on mouse over
+focus focus [Selector]\nSelects the input element which has focus
+first-letter first-letter [Selector]\nSelects the first letter of every <p> element
+first-line first-line [Selector]\nSelects the first line of every <p> element
+first-child first-child [Selector]\nSelects every <p> elements that is the first child of its parent
+before before [Selector]\nInsert content before every <p> element
+after after [Selector]\nInsert content after every <p> element
+lang lang(language) [Selector]\nSelects every <p> element with a lang attribute value starting with `language`
+background background [Property]\nSets all the background properties in one declaration
+background-attachment background-attachment [Property]\nSets whether a background image is fixed or scrolls with the rest of the page
+background-color background-color [Property]\nSets the background color of an element
+background-image background-image [Property]\nSets the background image for an element
+background-position background-position [Property]\nSets the starting position of a background image
+background-repeat background-repeat [Property]\nSets how a background image will be repeated
+border border [Property]\nSets all the border properties in one declaration
+border-bottom border-bottom [Property]\nSets all the bottom border properties in one declaration
+border-bottom-color border-bottom-color [Property]\nSets the color of the bottom border
+border-bottom-style border-bottom-style [Property]\nSets the style of the bottom border
+border-bottom-width border-bottom-width [Property]\nSets the width of the bottom border
+border-color border-color [Property]\nSets the color of the four borders
+border-left border-left [Property]\nSets all the left border properties in one declaration
+border-left-color border-left-color [Property]\nSets the color of the left border
+border-left-style border-left-style [Property]\nSets the style of the left border
+border-left-width border-left-width [Property]\nSets the width of the left border
+border-right border-right [Property]\nSets all the right border properties in one declaration
+border-right-color border-right-color [Property]\nSets the color of the right border
+border-right-style border-right-style [Property]\nSets the style of the right border
+border-right-width border-right-width [Property]\nSets the width of the right border
+border-style border-style [Property]\nSets the style of the four borders
+border-top border-top [Property]\nSets all the top border properties in one declaration
+border-top-color border-top-color [Property]\nSets the color of the top border
+border-top-style border-top-style [Property]\nSets the style of the top border
+border-top-width border-top-width [Property]\nSets the width of the top border
+border-width border-width [Property]\nSets the width of the four borders
+outline outline [Property]\nSets all the outline properties in one declaration
+outline-color outline-color [Property]\nSets the color of an outline
+outline-style outline-style [Property]\nSets the style of an outline
+outline-width outline-width [Property]\nSets the width of an outline
+height height [Property]\nSets the height of an element
+max-height max-height [Property]\nSets the maximum height of an element
+max-width max-width [Property]\nSets the maximum width of an element
+min-height min-height [Property]\nSets the minimum height of an element
+min-width min-width [Property]\nSets the minimum width of an element
+width width [Property]\nSets the width of an element
+font font [Property]\nSets all the font properties in one declaration
+font-family font-family [Property]\nSpecifies the font family for text
+font-size font-size [Property]\nSpecifies the font size of text
+font-style font-style [Property]\nSpecifies the font style for text
+font-variant font-variant [Property]\nSpecifies whether or not a text should be displayed in a small-caps font
+font-weight font-weight [Property]\nSpecifies the weight of a font
+content content [Property]\nUsed with the :before and :after pseudo-elements, to insert generated content
+counter-increment counter-increment [Property]\nIncrements one or more counters
+counter-reset counter-reset [Property]\nCreates or resets one or more counters
+quotes quotes [Property]\nSets the type of quotation marks for embedded quotations
+list-style list-style [Property]\nSets all the properties for a list in one declaration
+list-style-image list-style-image [Property]\nSpecifies an image as the list-item marker
+list-style-position list-style-position [Property]\nSpecifies if the list-item markers should appear inside or outside the content\nflow
+list-style-type list-style-type [Property]\nSpecifies the type of list-item marker
+margin margin [Property]\nSets all the margin properties in one declaration
+margin-bottom margin-bottom [Property]\nSets the bottom margin of an element
+margin-left margin-left [Property]\nSets the left margin of an element
+margin-right margin-right [Property]\nSets the right margin of an element
+margin-top margin-top [Property]\nSets the top margin of an element
+padding padding [Property]\nSets all the padding properties in one declaration
+padding-bottom padding-bottom [Property]\nSets the bottom padding of an element
+padding-left padding-left [Property]\nSets the left padding of an element
+padding-right padding-right [Property]\nSets the right padding of an element
+padding-top padding-top [Property]\nSets the top padding of an element
+bottom bottom [Property]\nSets the bottom margin edge for a positioned box
+clear clear [Property]\nSpecifies which sides of an element where other floating elements are not\nallowed
+clip clip [Property]\nClips an absolutely positioned element
+cursor cursor [Property]\nSpecifies the type of cursor to be displayed
+display display [Property]\nSpecifies the type of box an element should generate
+float float [Property]\nSpecifies whether or not a box should float
+left left [Property]\nSets the left margin edge for a positioned box
+overflow overflow [Property]\nSpecifies what happens if content overflows an element's box
+position position [Property]\nSpecifies the type of positioning for an element
+right right [Property]\nSets the right margin edge for a positioned box
+top top [Property]\nSets the top margin edge for a positioned box
+visibility visibility [Property]\nSpecifies whether or not an element is visible
+z-index z-index [Property]\nSets the stack order of an element
+orphans orphans [Property]\nSets the minimum number of lines that must be left at the bottom of a page when\na page break occurs inside an element
+page-break-after page-break-after [Property]\nSets the page-breaking behavior after an element
+page-break-before page-break-before [Property]\nSets the page-breaking behavior before an element
+page-break-inside page-break-inside [Property]\nSets the page-breaking behavior inside an element
+widows widows [Property]\nSets the minimum number of lines that must be left at the top of a page when a\npage break occurs inside an element
+border-collapse border-collapse [Property]\nSpecifies whether or not table borders should be collapsed
+border-spacing border-spacing [Property]\nSpecifies the distance between the borders of adjacent cells
+caption-side caption-side [Property]\nSpecifies the placement of a table caption
+empty-cells empty-cells [Property]\nSpecifies whether or not to display borders and background on empty cells in a\ntable
+table-layout table-layout [Property]\nSets the layout algorithm to be used for a table
+color color [Property]\nSets the color of text
+direction direction [Property]\nSpecifies the text direction/writing direction
+letter-spacing letter-spacing [Property]\nIncreases or decreases the space between characters in a text
+line-height line-height [Property]\nSets the line height
+text-align text-align [Property]\nSpecifies the horizontal alignment of text
+text-decoration text-decoration [Property]\nSpecifies the decoration added to text
+text-indent text-indent [Property]\nSpecifies the indentation of the first line in a text-block
+text-shadow text-shadow [Property]\nSpecifies the shadow effect added to text
+text-transform text-transform [Property]\nControls the capitalization of text
+unicode-bidi unicode-bidi [Property]
+vertical-align vertical-align [Property]\nSets the vertical alignment of an element
+white-space white-space [Property]\nSpecifies how white-space inside an element is handled
+word-spacing word-spacing [Property]\nIncreases or decreases the space between words in a text
+a a\nDefines an anchor
+abbr abbr\nDefines an abbreviation
+acronym acronym\nDefines an acronym
+address address\nDefines contact information for the author/owner of a document
+applet applet\nDeprecated. Defines an embedded applet
+area area\nDefines an area inside an image-map
+b b\nDefines bold text
+base base\nDefines a default address or a default target for all links on a page
+basefont basefont\nDeprecated. Defines a default font, color, or size for the text in a page
+bdo bdo\nDefines the text direction
+big big\nDefines big text
+blockquote blockquote\nDefines a long quotation
+body body\nDefines the document's body
+br br\nDefines a single line break
+button button\nDefines a push button
+caption caption\nDefines a table caption
+center center\nDeprecated. Defines centered text
+cite cite\nDefines a citation
+code code\nDefines computer code text
+col col\nDefines attribute values for one or more columns in a table
+colgroup colgroup\nDefines a group of columns in a table for formatting
+dd dd\nDefines a description of a term in a definition list
+del del\nDefines deleted text
+dfn dfn\nDefines a definition term
+dir dir\nDeprecated. Defines a directory list
+div div\nDefines a section in a document
+dl dl\nDefines a definition list
+dt dt\nDefines a term (an item) in a definition list
+em em\nDefines emphasized text
+fieldset fieldset\nDefines a border around elements in a form
+font font\nDeprecated. Defines font, color, and size for text
+form form\nDefines an HTML form for user input
+frame frame\nDefines a window (a frame) in a frameset
+frameset frameset\nDefines a set of frames
+h1 h1\nDefines HTML heading
+h2 h2\nDefines HTML heading
+h3 h3\nDefines HTML heading
+h4 h4\nDefines HTML heading
+h5 h5\nDefines HTML heading
+h6 h6\nDefines HTML heading
+head head\nDefines information about the document
+hr hr\nDefines a horizontal line
+html html\nDefines an HTML document
+i i\nDefines italic text
+iframe iframe\nDefines an inline frame
+img img\nDefines an image
+input input\nDefines an input control
+ins ins\nDefines inserted text
+isindex isindex\nDeprecated. Defines a searchable index related to a document
+kbd kbd\nDefines keyboard text
+label label\nDefines a label for an input element
+legend legend\nDefines a caption for a fieldset element
+li li\nDefines a list item
+link link\nDefines the relationship between a document and an external resource
+map map\nDefines an image-map
+menu menu\nDeprecated. Defines a menu list
+meta meta\nDefines metadata about an HTML document
+noframes noframes\nDefines an alternate content for users that do not support frames
+noscript noscript\nDefines an alternate content for users that do not support client-side scripts
+object object\nDefines an embedded object
+ol ol\nDefines an ordered list
+optgroup optgroup\nDefines a group of related options in a select list
+option option\nDefines an option in a select list
+p p\nDefines a paragraph
+param param\nDefines a parameter for an object
+pre pre\nDefines preformatted text
+q q\nDefines a short quotation
+s s\nDeprecated. Defines strikethrough text
+samp samp\nDefines sample computer code
+script script\nDefines a client-side script
+select select\nDefines a select list (drop-down list)
+small small\nDefines small text
+span span\nDefines a section in a document
+strike strike\nDeprecated. Defines strikethrough text
+strong strong\nDefines strong text
+style style\nDefines style information for a document
+sub sub\nDefines subscripted text
+sup sup\nDefines superscripted text
+table table\nDefines a table
+tbody tbody\nGroups the body content in a table
+td td\nDefines a cell in a table
+textarea textarea\nDefines a multi-line text input control
+tfoot tfoot\nGroups the footer content in a table
+th th\nDefines a header cell in a table
+thead thead\nGroups the header content in a table
+title title\nDefines the title of a document
+tr tr\nDefines a row in a table
+tt tt\nDefines teletype text
+u u\nDeprecated. Defines underlined text
+ul ul\nDefines an unordered list
+var var\nDefines a variable part of a text
+xmp xmp\nDeprecated. Defines preformatted text

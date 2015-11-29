@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>enclose.lua</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="locco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    <div id="jump_to">
+  Jump To &hellip;
+  <div id="jump_wrapper">
+  <div id="jump_page">
+  <a class="source" href="bracematching.html">bracematching.lua</a>
+  <a class="source" href="display_filename.html">display_filename.lua</a>
+  <a class="source" href="enclose.html">enclose.lua</a>
+  <a class="source" href="filename.html">filename.lua</a>
+  <a class="source" href="findall.html">findall.lua</a>
+  <a class="source" href="highlight.html">highlight.lua</a>
+  <a class="source" href="index.html">init.lua</a>
+  <a class="source" href="lastbuffer.html">lastbuffer.lua</a>
+  <a class="source" href="multiedit.html">multiedit.lua</a>
+  <a class="source" href="project.html">project.lua</a>
+  <a class="source" href="save_strips_ws.html">save_strips_ws.lua</a>
+    </div>
+  </div>
+</div>
+
+    <table cellpadding="0" cellspacing="0">
+      <thead>
+        <tr>
+          <th class="docs">
+            <h1>
+              enclose.lua
+            </h1>
+          </th>
+          <th class="code">
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+<tr id="section-1">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-1">&#182;</a>
+  </div>
+  
+<p>This module adds functions for enclosing selections with a single key
+and for inserting single chars with a short cut.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">local</span> M = {}
+</pre></div>
+</td>
+</tr><tr id="section-2">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-2">&#182;</a>
+  </div>
+  
+<h2>Setup</h2>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">local</span> events = events
+<span class="k">local</span> m_editing = textadept.editing
+<span class="k">local</span> keys = keys
+<span class="k">local</span> string_char = string.char
+</pre></div>
+</td>
+</tr><tr id="section-3">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-3">&#182;</a>
+  </div>
+  
+<p>Table with char codes as indices.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>braces = { <span class="c">-- () [] {}
+</span>  [40] = 1, [91] = 1, [123] = 1,
+  [41] = 1, [93] = 1, [125] = 1,
+}
+
+</pre></div>
+</td>
+</tr><tr id="section-4">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-4">&#182;</a>
+  </div>
+  
+<h2>Commands</h2>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+</pre></div>
+</td>
+</tr><tr id="section-5">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-5">&#182;</a>
+  </div>
+  
+<p>Enclose selected text.<br>
+Parameters:<br>
+<em>left</em>: char on the left<br>
+<em>right</em>: char on the right</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">function</span> <span class="nf">M.enclose_selection</span>(left, right)
+  <span class="k">if</span> buffer:get_sel_text() == <span class="s">''</span> <span class="k">then</span>
+    <span class="k">return</span> <span class="k">false</span>
+  <span class="k">else</span>
+    m_editing.enclose(left, right)
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr><tr id="section-6">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-6">&#182;</a>
+  </div>
+  
+<p>Encloses selected text and keeps the selection for another enclosure.
+If nothing is selected, the char is inserted. Useful to avoid automatically
+matched braces.<br>
+Parameters:<br>
+<em>left</em>: char on the left<br>
+<em>right</em>: char on the right</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">function</span> <span class="nf">M.paste_or_grow_enclose</span> (left, right)
+  <span class="k">if</span> buffer:get_sel_text() == <span class="s">''</span> <span class="k">then</span>
+    buffer:add_text(left)
+    <span class="k">return</span>
+  <span class="k">else</span>
+    start = buffer.anchor
+    stop = buffer.current_pos
+    <span class="k">if</span> start &gt; stop <span class="k">then</span>
+      start, stop = stop, start
+    <span class="k">end</span>
+    add_start = #left
+    add_stop = #right
+    m_editing.enclose(left, right)
+    buffer:set_sel(start, stop + add_start + add_stop)
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">return</span> M
+</pre></div>
+</td>
+</tr></tbody>
+    </table>
+  </div>
+</body>
+</html>

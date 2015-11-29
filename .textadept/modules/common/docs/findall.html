@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>findall.lua</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="locco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    <div id="jump_to">
+  Jump To &hellip;
+  <div id="jump_wrapper">
+  <div id="jump_page">
+  <a class="source" href="bracematching.html">bracematching.lua</a>
+  <a class="source" href="display_filename.html">display_filename.lua</a>
+  <a class="source" href="enclose.html">enclose.lua</a>
+  <a class="source" href="filename.html">filename.lua</a>
+  <a class="source" href="findall.html">findall.lua</a>
+  <a class="source" href="highlight.html">highlight.lua</a>
+  <a class="source" href="index.html">init.lua</a>
+  <a class="source" href="lastbuffer.html">lastbuffer.lua</a>
+  <a class="source" href="multiedit.html">multiedit.lua</a>
+  <a class="source" href="project.html">project.lua</a>
+  <a class="source" href="save_strips_ws.html">save_strips_ws.lua</a>
+    </div>
+  </div>
+</div>
+
+    <table cellpadding="0" cellspacing="0">
+      <thead>
+        <tr>
+          <th class="docs">
+            <h1>
+              findall.lua
+            </h1>
+          </th>
+          <th class="code">
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+<tr id="section-1">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-1">&#182;</a>
+  </div>
+  
+<p>Finds occurences of word under the cursor.<br>
+Copyright (c) 2010 <a href="http://caladbolg.net/textadeptwiki/index.php?n=Main.Multiedit">Brian Schott (Sir Alaran)</a>.<br>
+License: <a href="http://www.opensource.org/licenses/mit-license.php">MIT</a>.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">local</span> M = {}
+</pre></div>
+</td>
+</tr><tr id="section-2">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-2">&#182;</a>
+  </div>
+  
+<h2>Commands</h2>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+</pre></div>
+</td>
+</tr><tr id="section-3">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-3">&#182;</a>
+  </div>
+  
+<p>Returns a table consisting of the start and end positions of the occurences
+of the word at the cursor position</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">function</span> <span class="nf">M.find_all_at_cursor</span>()
+  <span class="k">local</span> ret_val = {}
+  <span class="k">local</span> position = buffer.current_pos
+</pre></div>
+</td>
+</tr><tr id="section-4">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-4">&#182;</a>
+  </div>
+  
+<p>Grab the word at the current position</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>  buffer:word_left()
+  buffer:word_right_end_extend()
+  needle = buffer:get_sel_text()
+</pre></div>
+</td>
+</tr><tr id="section-5">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-5">&#182;</a>
+  </div>
+  
+<p>Trim any whitespace</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>  needle = needle:gsub(<span class="s">'&#37;s'</span>, <span class="s">''</span>)
+</pre></div>
+</td>
+</tr><tr id="section-6">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-6">&#182;</a>
+  </div>
+  
+<p>Escape unwanted characters</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>  needle = needle:gsub(<span class="s">'([().*+?^$&#37;&#37;[&#37;]-])'</span>, <span class="s">'&#37;&#37;&#37;1'</span>)
+</pre></div>
+</td>
+</tr><tr id="section-7">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-7">&#182;</a>
+  </div>
+  
+<p>Don't look for zero-length strings</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>  <span class="k">if</span> #needle &gt; 0 <span class="k">then</span>
+    <span class="k">for</span> i = 0, buffer.line_count <span class="k">do</span>
+      <span class="k">local</span> text = buffer:get_line(i)
+      <span class="k">if</span> #text&gt;0 <span class="k">then</span>
+        <span class="k">local</span> first, last = 0, 0
+        <span class="k">while</span> first <span class="k">do</span>
+          first, last = text:find(<span class="s">"&#37;f[&#37;w]"</span>..needle..<span class="s">"&#37;f[&#37;W]"</span>,last)
+          <span class="k">if</span> last <span class="k">then</span>
+            <span class="k">if</span> (first ~= <span class="k">nil</span>) <span class="o">and</span> (first &gt;0) <span class="k">then</span>
+              first = first - 1
+            <span class="k">end</span>
+            table.insert(ret_val, {buffer:position_from_line(i) + first,
+                                  buffer:position_from_line(i) + last})
+            last = last + 1
+          <span class="k">end</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+  buffer:set_sel(position, position)
+  <span class="k">return</span> ret_val
+<span class="k">end</span>
+
+<span class="k">return</span> M
+</pre></div>
+</td>
+</tr></tbody>
+    </table>
+  </div>
+</body>
+</html>

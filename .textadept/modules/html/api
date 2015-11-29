@@ -1,0 +1,366 @@
+a <a>\nDefines an anchor
+abbr <abbr>\nDefines an abbreviation
+acronym <acronym>\nDefines an acronym
+address <address>\nDefines contact information for the author/owner of a document
+applet <applet>\nDeprecated. Defines an embedded applet
+area <area />\nDefines an area inside an image-map
+b <b>\nDefines bold text
+base <base />\nDefines a default address or a default target for all links on a page
+basefont <basefont />\nDeprecated. Defines a default font, color, or size for the text in a page
+bdo <bdo>\nDefines the text direction
+big <big>\nDefines big text
+blockquote <blockquote>\nDefines a long quotation
+body <body>\nDefines the document's body
+br <br />\nDefines a single line break
+button <button>\nDefines a push button
+caption <caption>\nDefines a table caption
+center <center>\nDeprecated. Defines centered text
+cite <cite>\nDefines a citation
+code <code>\nDefines computer code text
+col <col />\nDefines attribute values for one or more columns in a table
+colgroup <colgroup>\nDefines a group of columns in a table for formatting
+dd <dd>\nDefines a description of a term in a definition list
+del <del>\nDefines deleted text
+dfn <dfn>\nDefines a definition term
+dir <dir>\nDeprecated. Defines a directory list
+div <div>\nDefines a section in a document
+dl <dl>\nDefines a definition list
+dt <dt>\nDefines a term (an item) in a definition list
+em <em>\nDefines emphasized text
+fieldset <fieldset>\nDefines a border around elements in a form
+font <font>\nDeprecated. Defines font, color, and size for text
+form <form>\nDefines an HTML form for user input
+frame <frame />\nDefines a window (a frame) in a frameset
+frameset <frameset>\nDefines a set of frames
+h1 <h1>\nDefines HTML heading
+h2 <h2>\nDefines HTML heading
+h3 <h3>\nDefines HTML heading
+h4 <h4>\nDefines HTML heading
+h5 <h5>\nDefines HTML heading
+h6 <h6>\nDefines HTML heading
+head <head>\nDefines information about the document
+hr <hr />\nDefines a horizontal line
+html <html>\nDefines an HTML document
+i <i>\nDefines italic text
+iframe <iframe>\nDefines an inline frame
+img <img />\nDefines an image
+input <input />\nDefines an input control
+ins <ins>\nDefines inserted text
+isindex <isindex>\nDeprecated. Defines a searchable index related to a document
+kbd <kbd>\nDefines keyboard text
+label <label>\nDefines a label for an input element
+legend <legend>\nDefines a caption for a fieldset element
+li <li>\nDefines a list item
+link <link />\nDefines the relationship between a document and an external resource
+map <map>\nDefines an image-map
+menu <menu>\nDeprecated. Defines a menu list
+meta <meta />\nDefines metadata about an HTML document
+noframes <noframes>\nDefines an alternate content for users that do not support frames
+noscript <noscript>\nDefines an alternate content for users that do not support client-side scripts
+object <object>\nDefines an embedded object
+ol <ol>\nDefines an ordered list
+optgroup <optgroup>\nDefines a group of related options in a select list
+option <option>\nDefines an option in a select list
+p <p>\nDefines a paragraph
+param <param />\nDefines a parameter for an object
+pre <pre>\nDefines preformatted text
+q <q>\nDefines a short quotation
+s <s>\nDeprecated. Defines strikethrough text
+samp <samp>\nDefines sample computer code
+script <script>\nDefines a client-side script
+select <select>\nDefines a select list (drop-down list)
+small <small>\nDefines small text
+span <span>\nDefines a section in a document
+strike <strike>\nDeprecated. Defines strikethrough text
+strong <strong>\nDefines strong text
+style <style>\nDefines style information for a document
+sub <sub>\nDefines subscripted text
+sup <sup>\nDefines superscripted text
+table <table>\nDefines a table
+tbody <tbody>\nGroups the body content in a table
+td <td>\nDefines a cell in a table
+textarea <textarea>\nDefines a multi-line text input control
+tfoot <tfoot>\nGroups the footer content in a table
+th <th>\nDefines a header cell in a table
+thead <thead>\nGroups the header content in a table
+title <title>\nDefines the title of a document
+tr <tr>\nDefines a row in a table
+tt <tt>\nDefines teletype text
+u <u>\nDeprecated. Defines underlined text
+ul <ul>\nDefines an unordered list
+var <var>\nDefines a variable part of a text
+xmp <xmp>\nDeprecated. Defines preformatted text
+class class [Core Attribute]\nSpecifies a classname for an element
+id id [Core Attribute]\nSpecifies a unique id for an element
+style style [Core Attribute]\nSpecifies an inline style for an element
+title style [Core Attribute]\nSpecifies extra information about an element
+dir dir [Language Attribute]\nSpecifies the text direction for the content in an element
+lang lang [Language Attribute]\nSpecifies a language code for the content in an element
+accesskey accesskey [Keyboard Attribute]\nSpecifies a keyboard shortcut to access an element
+tabindex tabindex [Keyboard Attribute]\nSpecifies the tab order of an element
+onload onload [Event]\nScript to be run when a document load
+onunload onunload [Event]\nScript to be run when a document unload
+onblur onblur [Form Event]\nScript to be run when an element loses focus
+onchange onchange [Form Event]\nScript to be run when an element change
+onfocus onfocus [Form Event]\nScript to be run when an element gets focus
+onreset onreset [Form Event]\nScript to be run when a form is reset
+onselect onselect [Form Event]\nScript to be run when an element is selected
+onsubmit onsubmit [Form Event]\nScript to be run when a form is submitted
+onabort onabort [Image Event]\nScript to be run when loading of an image is interrupted
+onkeydown onkeydown [Key Event]\nScript to be run when a key is pressed
+onkeypress onkeypress [Key Event]\nScript to be run when a key is pressed and released
+onkeyup onkeyup [Key Event]\nScript to be run when a key is released
+onclick onclick [Mouse Event]\nScript to be run on a mouse click
+ondblclick ondblclick [Mouse Event]\nScript to be run on a mouse double-click
+onmousedown onmousedown [Mouse Event]\nScript to be run when mouse button is pressed
+onmousemove onmousemove [Mouse Event]\nScript to be run when mouse pointer moves
+onmouseout onmouseout [Mouse Event]\nScript to be run when mouse pointer moves out of an element
+onmouseover onmouseover [Mouse Event]\nScript to be run when mouse pointer moves over an element
+onmouseup onmouseup [Mouse Event]\nScript to be run when mouse button is released
+charset a.charset\nSpecifies the character-set of a linked document
+coords a.coords\nSpecifies the character-set of a linked document
+href a.href\nSpecifies the destination of a link
+hreflang a.hreflang\nSpecifies the language of a linked document
+name a.name\nSpecifies the name of an anchor
+rel a.rel\nSpecifies the relationship between the current document and the linked document
+rev a.rev\nSpecifies the relationship between the linked document and the current document
+shape a.shape\nSpecifies the shape of a link
+target a.target\nSpecifies where to open the linked document
+code  applet.code [Required]\nSpecifies the file name of a Java applet
+object applet.object [Require]\nSpecifies a reference to a serialized representation of an applet
+align applet.align\nSpecifies the alignment of an applet according to surrounding elements
+alt applet.alt\nSpecifies an alternate text for an applet
+archive applet.archive\nSpecifies the location of an archive file
+codebase applet.codebase\nSpecifies a relative base URL for applets specified in the code attribute
+height applet.height\nSpecifies the height of an applet
+hspace applet.hspace\nDefines the horizontal spacing around an applet
+name applet.name\nDefines the name for an applet (to use in scripts)
+vspace applet.vspace\nDefines the vertical spacing around an applet
+width applet.width\nSpecifies the width of an applet
+alt area.alt [Required]\nSpecifies an alternate text for an area
+coords area.coords\nSpecifies the coordinates of an area
+href area.href\nSpecifies the destination of a link in an area
+nohref area.nohref\nSpecifies that an area has no associated link
+shape area.shape\nSpecifies the shape of an area
+target area.target\nSpecifies where to open the linked page specified in the href attribute
+href base.href\nSpecifies a base URL for all relative URLs on a page (must be absolute).
+target base.target\nSpecifies where to open all the links on a page
+color basefont.color [Deprecated]\nSpecifies the default color for text in a document
+face basefont.face [Deprecated]\nSpecifies the default font for text in a document
+size basefont.size [Deprecated]\nSpecifies the default size of text in a document
+cite blockquote.cite\nSpecifies the source of a quotation
+alink body.alink [Deprecated]\nSpecifies the color of an active link in a document
+background body.background [Deprecated]\nSpecifies a background image for a document
+bgcolor body.bgcolor [Deprecated]\nSpecifies the background color of a document
+link body.link [Deprecated]\nSpecifies the default color of unvisited links in a document
+text body.text [Deprecated]\nSpecifies the color of the text in a document
+vlink body.vlink [Deprecated]\nSpecifies the color of the visited links in a document
+disabled button.disabled\nSpecifies that a button should be disabled
+name button.name\nSpecifies the name for a button
+type button.type\nSpecifies the type of a button
+value button.value\nSpecifies the underlying value of a button
+align caption.align [Deprecated]\nDefines the alignment of a caption
+align col.align\nSpecifies the alignment of the content related to a col element
+char col.char\nSpecifies the alignment of the content related to a col element to a character
+charoff col.charoff\nSpecifies the number of characters the content will be aligned from the\ncharacter specified by the char attribute
+span col.span\nSpecifies the number of columns a col element should span
+valign col.valign\nSpecifies the vertical alignment of the content related to a col element
+width col.width\nSpecifies the width of a col element
+align colgroup.align\nAligns the content in a column group
+char colgroup.char\nAligns the content in a column group to a character
+charoff colgroup.charoff\nSets the number of characters the content will be aligned from the character\nspecified by the char attribute
+span colgroup.span\nSpecifies the number of columns a column group should span
+valign colgroup.valign\nVertical aligns the content in a column group
+width colgroup.width\nSpecifies the width of a column group
+cite del.cite\nSpecifies a URL to a document which explains why the text was deleted
+datetime del.datetime\nSpecifies the date and time when the text was deleted
+compact dir.compact [Deprecated]\nSpecifies that the list should render smaller than normal
+align div.align [Deprecated]\nSpecifies the alignment of the content inside a div element
+color font.color [Deprecated]\nSpecifies the color of text
+face font.face [Deprecated]\nSpecifies the font of text
+size font.size [Deprecated]\nSpecifies the size of text
+action form.action [Required]\nSpecifies where to send the form-data when a form is submitted
+accept form.accept\nSpecifies the types of files that can be submitted through a file upload
+accept-charset form.accept-charset\nSpecifies the character-sets the server can handle for form-data
+enctype form.enctype\nSpecifies how form-data should be encoded before sending it to a server
+method form.method\nSpecifies how to send form-data
+name form.name\nSpecifies the name for a form
+target form.target [Deprecated]\Specifies where to open the action URL
+frameborder frame.frameborder\nSpecifies whether or not to display a border around a frame
+longdesc frame.longdesc\nSpecifies a page that contains a long description of the content of a frame
+marginheight frame.marginheight\nSpecifies the top and bottom margins of a frame
+marginwidth frame.marginwidth\nSpecifies the left and right margins of a frame
+name frame.name\nSpecifies the name of a frame
+noresize frame.noresize\nSpecifies that a frame cannot be resized
+scrolling frame.scrolling\nSpecifies whether or not to display scrollbars in a frame
+src frame.src\nSpecifies the URL of the document to show in a frame
+cols frameset.cols\nSpecifies the number and size of columns in a frameset
+rows frameset.rows\nSpecifies the number and size of rows in a frameset
+profile head.profile\nSpecifies a URL to a document that contains a set of rules. The rules can be\nread by browsers to clearly understand the information in the <meta> tag's\ncontent attribute
+align h1.align [Deprecated]\nSpecifies the alignment of a heading
+align h2.align [Deprecated]\nSpecifies the alignment of a heading
+align h3.align [Deprecated]\nSpecifies the alignment of a heading
+align h4.align [Deprecated]\nSpecifies the alignment of a heading
+align h5.align [Deprecated]\nSpecifies the alignment of a heading
+align h6.align [Deprecated]\nSpecifies the alignment of a heading
+align hr.align [Deprecated]\nSpecifies the alignment of a hr element
+noshade hr.noshade [Deprecated]\nSpecifies that a hr element should render in one solid color (noshaded), instead\nof a shaded color
+size hr.size [Deprecated]\nSpecifies the height of a hr element
+width hr.width [Deprecated]\nSpecifies the width of a hr element
+xmlns html.xmlns [Required]\nSpecifies the namespace to use (only for XHTML documents!)
+align iframe.align [Deprecated]\nSpecifies the alignment of an iframe according to surrounding elements
+frameborder iframe.frameborder\nSpecifies whether or not to display a border around an iframe
+height iframe.height\nSpecifies the height of an iframe
+longdesc iframe.longdesc\nSpecifies a page that contains a long description of the content of an iframe
+marginheight iframe.marginheight\nSpecifies the top and bottom margins of an iframe
+marginwidth iframe.marginwidth\nSpecifies the left and right margins of an iframe
+name iframe.name\nSpecifies the name of an iframe
+scrolling iframe.scrolling\nSpecifies whether or not to display scrollbars in an iframe
+src iframe.src\nSpecifies the URL of the document to show in an iframe
+width iframe.width\nSpecifies the width of an iframe
+alt img.alt [Required]\nSpecifies an alternate text for an image
+src img.src [Required]\nSpecifies the URL of an image
+align img.align [Deprecated]\nSpecifies the alignment of an image according to surrounding elements
+border img.border [Deprecated]\nSpecifies the width of the border around an image
+height img.height\nSpecifies the height of an image
+hspace img.hspace[Deprecated]\nSpecifies the whitespace on left and right side of an image
+ismap img.ismap\nSpecifies an image as a server-side image-map
+longdesc img.longdesc\nSpecifies the URL to a document that contains a long description of an image
+usemap img.usemap\nSpecifies an image as a client-side image-map
+vspace img.vspace [Deprecated]\nSpecifies the whitespace on top and bottom of an image
+width img.width\nSpecifies the width of an image
+accept input.accept\nSpecifies the types of files that can be submitted through a file upload (only\nfor type="file")
+align input.align [Deprecated]\nSpecifies the alignment of an image input (only for type="image")
+alt input.alt\nSpecifies an alternate text for an image input (only for type="image")
+checked input.checked\nSpecifies that an input element should be preselected when the page loads (for\ntype="checkbox" or type="radio")
+disabled input.disabled\nSpecifies that an input element should be disabled when the page loads
+maxlength input.maxlength\nSpecifies the maximum length (in characters) of an input field (for type="text"\nor type="password")
+name input.name\nSpecifies a name for an input element
+readonly input.readonly\nSpecifies that an input field should be read-only (for type="text" or\ntype="password")
+size input.size\nSpecifies the width of an input field
+src input.src\nSpecifies the URL to an image to display as a submit button
+type input.type\nSpecifies the type of an input element
+value input.value\nSpecifies the value of an input element
+cite ins.cite\nSpecifies a URL to a document which explains why the text was inserted/changed
+datetime ins.datetime\nSpecifies the date and time when the text was inserted/changed
+for label.for\nSpecifies which form element a label is bound to
+align legend.align [Deprecated]\nSpecifies the alignment of the caption in a fieldset
+type li.type [Deprecated]\nSpecifies which kind of bullet point will be used
+value li.value [Deprecated]\nSpecifies the number of a list item
+charset link.charset\nSpecifies the character encoding of the linked document
+href link.href\nSpecifies the location of the linked document
+hreflang link.hreflang\nSpecifies the language of the text in the linked document
+media link.media\nSpecifies on what device the linked document will be displayed
+rel link.rel\nSpecifies the relationship between the current document and the linked document
+rev link.rev\nSpecifies the relationship between the linked document and the current document
+target link.target\nSpecifies where the linked document is to be loaded
+type link.type\nSpecifies the MIME type of the linked document
+name map.name\nSpecifies the name for an image-map
+compact menu.compact [Deprecated]\nSpecifies that the list should render smaller than normal
+content meta.content [Required]\nSpecifies the content of the meta information
+http-equiv meta.http-equiv\nProvides an HTTP header for the information in the content attribute
+name meta.name\nProvides a name for the information in the content attribute
+scheme meta.scheme\nSpecifies a scheme to be used to interpret the value of the content attribute
+align object.align\nDefines the text alignment around the object
+archive object.archive\nA space separated list of URL's to archives. The archives contains resources\nrelevant to the object
+border object.border\nDefines a border around the object
+classid object.classid\nDefines a class ID value as set in the Windows Registry or a URL
+codebase object.codebase\nDefines where to find the code for the object
+codetype object.codetype\nThe internet media type of the code referred to by the classid attribute
+data object.data\nDefines a URL that refers to the object's data
+declare object.declare\nDefines that the object should only be declared, not created or instantiated\nuntil needed
+height object.height\nDefines the height of the object
+hspace object.hspace\nDefines the horizontal spacing around the object
+name object.name\nDefines the name for an object (to use in scripts)
+standby object.standby\nDefines a text to display while the object is loading
+type object.type\nDefines the MIME type of data specified in the data attribute
+usemap object.usemap\nSpecifies a URL of a client-side image map to be used with the object
+vspace object.vspace\nDefines the vertical spacing around the object
+width object.width\nDefines the width of the object
+compact ol.compact [Deprecated]\nSpecifies that the list should render smaller than normal
+start ol.start [Deprecated]\nSpecifies the start point in a list
+type ol.type [Deprecated]\nSpecifies which kind of bullet points will be used
+label optgroup.label [Required]\nSpecifies a description for a group of options
+disabled optgroup.disabled\nSpecifies that an option group should be disabled
+disabled option.disabled\nSpecifies that an option should be disabled
+label option.label\nSpecifies a shorter label for an option
+selected option.selected\nSpecifies that an option should be selected by default
+value option.value\nSpecifies the value to be sent to a server when a form is submitted
+align p.align [Deprecated]\nSpecifies the alignment of the text within a paragraph
+name param.name [Required]\nDefines the name for a parameter (to use in script)
+type param.type\nSpecifies the MIME type for a parameter
+value param.value\nSpecifies the value of a parameter
+valuetype param.valuetype\nSpecifies the type of the value
+width pre.width [Deprecated]\nSpecifies the maximum number of characters per line
+cite q.cite\nSpecifies the source of a quotation
+type script.type [Required]\nSpecifies the MIME type of a script
+charset script.charset\nSpecifies the character encoding used in an external script file
+defer script.defer\nSpecifies that the execution of a script should be deferred (delayed) until\nafter the page has been loaded
+src script.src\nSpecifies the URL of an external script file
+disabled select.disabled\nSpecifies that a drop-down list should be disabled
+multiple select.multiple\nSpecifies that multiple options can be selected
+name select.name\nSpecifies the name of a drop-down list
+size select.size\nSpecifies the number of visible options in a drop-down list
+type style.type [Required]\nSpecifies the MIME type of the style sheet
+media style.media\nSpecifies styles for different media types
+align table.align [Deprecated]\nSpecifies the alignment of a table according to surrounding text
+bgcolor table.bgcolor [Deprecated]\nSpecifies the background color for a table
+border table.border\nSpecifies the width of the borders around a table
+cellpadding table.cellpadding\nSpecifies the space between the cell wall and the cell content
+cellspacing table.cellspacing\nSpecifies the space between cells
+frame table.frame\nSpecifies which parts of the outside borders that should be visible
+rules table.rules\nSpecifies which parts of the inside borders that should be visible
+summary table.summary\nSpecifies a summary of the content of a table
+width table.width\nSpecifies the width of a table
+align tbody.align\nAligns the content inside the tbody element
+char tbody.char\nAligns the content inside the tbody element to a character
+charoff tbody.charoff\nSets the number of characters the content inside the tbody element will be\naligned from the character specified by the char attribute
+valign tbody.valign\nVertical aligns the content inside the tbody element
+abbr td.abbr\nSpecifies an abbreviated version of the content in a cell
+align td.align\nAligns the content in a cell
+axis td.axis\nCategorizes cells
+bgcolor td.bgcolor [Deprecated]\nSpecifies a background color for a cell
+char td.char\nAligns the content in a cell to a character
+charoff td.charoff\nSets the number of characters the content will be aligned from the character\nspecified by the char attribute
+colspan td.colspan\nSpecifies the number of columns a cell should span
+headers td.headers\nSpecifies the table headers related to a cell
+height td.height [Deprecated]\nSets the height of a cell
+nowrap td.nowrap [Deprecated]\nSpecifies that the content inside a cell should not wrap
+rowspan td.rowspan\nSets the number of rows a cell should span
+scope td.scope\nDefines a way to associate header cells and data cells in a table
+valign td.valign\nVertical aligns the content in a cell
+width td.width\nSpecifies the width of a cell
+cols textarea.cols [Required]\nSpecifies the visible width of a text-area
+rows textarea.rows [Required]\nSpecifies the visible number of rows in a text-area
+disabled textarea.disabled\nSpecifies that a text-area should be disabled
+name textarea.name\nSpecifies the name for a text-area
+readonly textarea.readonly\nSpecifies that a text-area should be read-only
+align tfoot.align\nAligns the content inside the tfoot element
+char tfoot.char\nAligns the content inside the tfoot element to a character
+charoff tfoot.charoff\nSets the number of characters the content inside the tfoot element will be\naligned from the character specified by the char attribute
+valign tfoot.valign\nVertical aligns the content inside the tfoot element
+abbr th.abbr\nSpecifies an abbreviated version of the content in a cell
+align th.align\nAligns the content in a cell
+axis th.axis\nCategorizes cells
+bgcolor th.bgcolor [Deprecated]\nSpecifies a background color for a cell
+char th.char\nAligns the content in a cell to a character
+charoff th.charoff\nSets the number of characters the content will be aligned from the character\nspecified by the char attribute
+colspan th.colspan\nSpecifies the number of columns a cell should span
+headers th.headers\nSpecifies the table headers related to a cell
+height th.height [Deprecated]\nSets the height of a cell
+nowrap th.nowrap [Deprecated]\nSpecifies that the content inside a cell should not wrap
+rowspan th.rowspan\nSets the number of rows a cell should span
+scope th.scope\nDefines a way to associate header cells and data cells in a table
+valign th.valign\nVertical aligns the content in a cell
+width th.width\nSpecifies the width of a cell
+align thead.align\nAligns the content inside the tfoot element
+char thead.char\nAligns the content inside the tfoot element to a character
+charoff thead.charoff\nSets the number of characters the content inside the tfoot element will be\naligned from the character specified by the char attribute
+valign thead.valign\nVertical aligns the content inside the tfoot element
+align tr.align\nAligns the content in a table row
+bgcolor tr.bgcolor [Deprecated]\nSpecifies a background color for a table row
+char tr.char\nAligns the content in a table row to a character
+charoff tr.charoff\nSets the number of characters the content will be aligned from the character\nspecified by the char attribute
+valign tr.valign\nVertical aligns the content in a table row
+compact ul.compact [Deprecated]\nSpecifies that the list should render smaller than normal
+type ul.type [Deprecated]\nSpecifies the style of the bullet points of the list items

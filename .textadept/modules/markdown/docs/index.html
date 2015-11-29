@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>markdown/init.lua</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="locco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <table cellpadding="0" cellspacing="0">
+      <thead>
+        <tr>
+          <th class="docs">
+            <h1>
+              markdown/init.lua
+            </h1>
+          </th>
+          <th class="code">
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+<tr id="section-1">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-1">&#182;</a>
+  </div>
+  <p>A Markdown module for the
+<a href="http://foicica.com/textadept/">Textadept</a> editor with some short cuts and
+snippets for writing
+<a href="http://daringfireball.net/projects/markdown/">Markdown</a>.<br></p>
+
+<p>Installation:<br>
+Download an
+<a href="https://github.com/rgieseke/ta-markdown/archives/master">archived</a>
+version or clone the git repository into your <code>.textadept</code> directory:</p>
+
+<pre><code>cd ~/.textadept/modules
+git clone https://github.com/rgieseke/ta-markdown.git \
+    markdown
+</code></pre>
+
+<p>The <a href="https://github.com/rgieseke/ta-markdown">source</a> is on GitHub,
+released under the
+<a href="http://www.opensource.org/licenses/mit-license.php">MIT license</a>.</p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+<span class="k">local</span> M = {}
+
+</pre></div>
+</td>
+</tr><tr id="section-2">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-2">&#182;</a>
+  </div>
+  <h2>Settings</h2>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+</pre></div>
+</td>
+</tr><tr id="section-3">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-3">&#182;</a>
+  </div>
+  <p>Local variables.</p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">local</span> editing, run = textadept.editing
+</pre></div>
+</td>
+</tr><tr id="section-4">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-4">&#182;</a>
+  </div>
+  <p>Blockquotes.</p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>editing.comment_string.markdown = <span class="s">'&gt; '</span>
+</pre></div>
+</td>
+</tr><tr id="section-5">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-5">&#182;</a>
+  </div>
+  <p>Auto-matching chars.<br>
+Match <code>&lt;</code> for embedded HTML, don&rsquo;t match <code>'</code>.</p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>editing.char_matches.markdown = {
+  [40] = <span class="s">')'</span>, [91] = <span class="s">']'</span>, [123] = <span class="s">'}'</span>, [34] = <span class="s">'"'</span>, [60] = <span class="s">'&gt;'</span>
+}
+</pre></div>
+</td>
+</tr><tr id="section-6">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-6">&#182;</a>
+  </div>
+  <p>Sets default buffer properties for Markdown files.</p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>events.connect(events.LEXER_LOADED, <span class="k">function</span>(lang)
+  <span class="k">if</span> lang == <span class="s">'markdown'</span> <span class="k">then</span>
+    buffer.tab_width = 4
+  <span class="k">end</span>
+<span class="k">end</span>)
+
+</pre></div>
+</td>
+</tr><tr id="section-7">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-7">&#182;</a>
+  </div>
+  <h2>Commands</h2>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+</pre></div>
+</td>
+</tr><tr id="section-8">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-8">&#182;</a>
+  </div>
+  <p>Underlines the current line.<br>
+Parameter:<br>
+<em>char</em>: &ldquo;=&rdquo; or &ldquo;&ndash;&rdquo;.</p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">function</span> <span class="nf">M.underline</span>(char)
+  <span class="k">local</span> b = buffer
+  b:begin_undo_action()
+  b:line_end()
+  caret = b.current_pos
+  b:home()
+  start = b.current_pos
+  b:line_end()
+  b:new_line()
+  b:add_text(string.rep(char, caret - start))
+  b:new_line()
+  b:end_undo_action()
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr><tr id="section-9">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-9">&#182;</a>
+  </div>
+  <p>Sets the current line&rsquo;s header level.<br>
+Parameter:<br>
+<em>level</em>: 1 &ndash; 6</p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">function</span> <span class="nf">M.header</span>(level)
+  <span class="k">local</span> b = buffer
+  <span class="k">local</span> pos = b.current_pos
+  b:begin_undo_action()
+  editing.select_line()
+  sel = b:get_sel_text()
+  sel, count = sel:gsub(<span class="s">'#+'</span>, string.rep(<span class="s">'#'</span>, level))
+  <span class="k">if</span> count == 0 <span class="k">then</span>
+    b:home()
+    b:add_text(string.rep(<span class="s">'#'</span>, level)..<span class="s">' '</span>)
+    b:line_end()
+  <span class="k">else</span>
+    b:replace_sel(sel)
+    b:line_end()
+  <span class="k">end</span>
+  b:end_undo_action()
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr><tr id="section-10">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-10">&#182;</a>
+  </div>
+  <p>Remove header symbols.</p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">function</span> <span class="nf">M.remove_header</span>()
+  <span class="k">local</span> b = buffer
+  <span class="k">local</span> pos = b.current_pos
+  b:begin_undo_action()
+  editing.select_line()
+  sel = b:get_sel_text()
+  sel = sel:gsub(<span class="s">'#+ '</span>, <span class="s">''</span>)
+  b:replace_sel(sel)
+  b:line_end()
+  b:end_undo_action()
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr><tr id="section-11">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-11">&#182;</a>
+  </div>
+  <p>Display word and char count in status bar.</p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">function</span> <span class="nf">word_count</span>()
+  <span class="k">local</span> buffer = buffer
+  <span class="k">local</span> text, length = buffer:get_text(buffer.get_length)
+  <span class="k">if</span> #text > 0 <span class="k">then</span> text = text..<span class="s">" "</span> <span class="k">end</span>
+  text = string.gsub(text, <span class="s">"^&#37;s+"</span>, <span class="s">""</span>)
+  seps = string.gmatch(text, <span class="s">"&#37;s+"</span>)
+  <span class="k">local</span> count = 0
+  <span class="k">for</span> i <span class="k">in</span> seps <span class="k">do</span>
+    count = count + 1
+  <span class="k">end</span>
+  status = <span class="s">'Words: &#37;d - Chars: &#37;d'</span>
+  ui.statusbar_text = status:format(count, buffer.length)
+<span class="k">end</span>
+
+</pre></div>
+</td>
+</tr><tr id="section-12">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-12">&#182;</a>
+  </div>
+  <h2>Key Commands</h2>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+</pre></div>
+</td>
+</tr><tr id="section-13">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-13">&#182;</a>
+  </div>
+  <p>Markdown-specific key commands.</p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>keys.markdown = {
+  [keys.LANGUAGE_MODULE_PREFIX] = {
+</pre></div>
+</td>
+</tr><tr id="section-14">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-14">&#182;</a>
+  </div>
+  <p>Open this module for editing: <code>Alt/⌘-L</code> <code>M</code></p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>    m = { io.open_file,
+        (_USERHOME..<span class="s">'/modules/markdown/init.lua'</span>) },
+</pre></div>
+</td>
+</tr><tr id="section-15">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-15">&#182;</a>
+  </div>
+  <p> Show char and word count: <code>Alt/⌘-L</code> <code>I</code></p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>    i = { word_count },
+  },
+</pre></div>
+</td>
+</tr><tr id="section-16">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-16">&#182;</a>
+  </div>
+  <p>Underline current line: <code>Alt/⌘ ='</code></p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>  [OSX <span class="o">and</span> <span class="s">'m='</span> <span class="o">or</span> <span class="s">'a='</span>] = { M.underline, <span class="s">'='</span> },
+</pre></div>
+</td>
+</tr><tr id="section-17">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-17">&#182;</a>
+  </div>
+  <p>Underline current line: <code>Alt/⌘ -</code></p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>  [OSX <span class="o">and</span> <span class="s">'m-'</span> <span class="o">or</span> <span class="s">'a-'</span>] = { M.underline, <span class="s">'-'</span> },
+</pre></div>
+</td>
+</tr><tr id="section-18">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-18">&#182;</a>
+  </div>
+  <p>Change header level: <code>Alt/⌘-0 … 6</code></p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>  [OSX <span class="o">and</span> <span class="s">'m0'</span> <span class="o">or</span> <span class="s">'a0'</span>] = { M.remove_header },
+  [OSX <span class="o">and</span> <span class="s">'m1'</span> <span class="o">or</span> <span class="s">'a1'</span>] = { M.header, 1 },
+  [OSX <span class="o">and</span> <span class="s">'m2'</span> <span class="o">or</span> <span class="s">'a2'</span>] = { M.header, 2 },
+  [OSX <span class="o">and</span> <span class="s">'m3'</span> <span class="o">or</span> <span class="s">'a3'</span>] = { M.header, 3 },
+  [OSX <span class="o">and</span> <span class="s">'m4'</span> <span class="o">or</span> <span class="s">'a4'</span>] = { M.header, 4 },
+  [OSX <span class="o">and</span> <span class="s">'m5'</span> <span class="o">or</span> <span class="s">'a5'</span>] = { M.header, 5 },
+  [OSX <span class="o">and</span> <span class="s">'m6'</span> <span class="o">or</span> <span class="s">'a6'</span>] = { M.header, 6 },
+</pre></div>
+</td>
+</tr><tr id="section-19">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-19">&#182;</a>
+  </div>
+  <p>Enclose selected text or previous word:<br>
+<code>Alt/⌘ *</code>, <code>Alt/⌘ _</code>, <code>Ctrl Alt/⌘ `</code></p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>  [OSX <span class="o">and</span> <span class="s">'m*'</span> <span class="o">or</span> <span class="s">'a*'</span>] = { editing.enclose, <span class="s">"*"</span>, <span class="s">"*"</span> },
+  [OSX <span class="o">and</span> <span class="s">'m_'</span> <span class="o">or</span> <span class="s">'a_'</span>] = { editing.enclose, <span class="s">'_'</span>, <span class="s">'_'</span> },
+  [OSX <span class="o">and</span> <span class="s">'cm`'</span> <span class="o">or</span> <span class="s">'ca`'</span>] = { editing.enclose, <span class="s">'`'</span>, <span class="s">'`'</span> },
+}
+</pre></div>
+</td>
+</tr><tr id="section-20">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-20">&#182;</a>
+  </div>
+  <h2>Snippets.</h2>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+</pre></div>
+</td>
+</tr><tr id="section-21">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-21">&#182;</a>
+  </div>
+  <p>Markdown-specific snippets.</p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>snippets.markdown = {
+</pre></div>
+</td>
+</tr><tr id="section-22">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-22">&#182;</a>
+  </div>
+  <p>Headers.</p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>  [<span class="s">'1'</span>] = <span class="s">'# '</span>,
+  [<span class="s">'2'</span>] = <span class="s">'## '</span>,
+  [<span class="s">'3'</span>] = <span class="s">'### '</span>,
+  [<span class="s">'4'</span>] = <span class="s">'#### '</span>,
+  [<span class="s">'5'</span>] = <span class="s">'##### '</span>,
+  [<span class="s">'6'</span>] = <span class="s">'###### '</span>,
+</pre></div>
+</td>
+</tr><tr id="section-23">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-23">&#182;</a>
+  </div>
+  <p>Link.</p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>  l = <span class="s">'[&#37;1(Link)](&#37;2(http://example.net/))'</span>,
+</pre></div>
+</td>
+</tr><tr id="section-24">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-24">&#182;</a>
+  </div>
+  <p>Clickable link.</p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>  cl = <span class="s">'&lt;&#37;1(http://example.com/)&gt;'</span>,
+</pre></div>
+</td>
+</tr><tr id="section-25">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-25">&#182;</a>
+  </div>
+  <p> Reference-style link.</p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>  rl = <span class="s">'[&#37;1(example)][&#37;2(ref)]'</span>,
+  id = <span class="s">'[&#37;1(ref)]: &#37;2(http://example.com/)'</span>,
+</pre></div>
+</td>
+</tr><tr id="section-26">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-26">&#182;</a>
+  </div>
+  <p>Code.</p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>  c = <span class="s">'`&#37;0`'</span>,
+</pre></div>
+</td>
+</tr><tr id="section-27">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-27">&#182;</a>
+  </div>
+  <p>Image.</p>
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>  i = <span class="s">'![&#37;1(Alt text)](&#37;2(/path/to/img.jpg "Optional title"))'</span>,
+}
+
+<span class="k">return</span> M
+</pre></div>
+</td>
+</tr></tbody>
+    </table>
+  </div>
+</body>
+</html>

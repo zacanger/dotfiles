@@ -23,6 +23,7 @@ alias isit='dpkg -l | grep ii | grep '
 alias rdepends='apt-cache rdepends '
 alias show='apt-cache show '
 alias dupg='sudo apt-get update && sudo apt-get dist-upgrade'
+
 # disk usage
 alias disk='du -S | sort -n -r | less'
 
@@ -112,7 +113,10 @@ alias mytw='twidge lsarchive'
 alias fuck='eval $(thefuck $(fc -ln -1))'
 alias please='fuck'
 
-# misc shortcuts
+# this requires sox, and is for DADGAD. change to E2-E4 (etc) for standard.
+alias tuner='for n in D2 A2 D3 G3 A3 D4;do play -n synth 4 pluck $n repeat 2;done'
+
+# misc shortcuts, because i'm lazy
 alias fs='ranger'
 alias web='firefox'
 alias browser='chromium'
@@ -139,7 +143,6 @@ alias hackurls='w3m hackurls.com'
 alias rbs='rainbowstream'
 alias cn='connectivity'
 alias cuip='curl ifconfig\.me/ip'
-alias tuner='for n in D2 A2 D3 G3 A3 D4;do play -n synth 4 pluck $n repeat 2;done'
 alias localbin='zerobin && lt -p 8000'
 alias vi='nvim'
 alias vim='nvim'
@@ -153,7 +156,6 @@ alias dfm='dmenu-fm'
 alias lh='laenza.sh'
 alias co='xclip -selection clipboard'
 alias pa='xclip -o'
-alias v='nvim'
 alias ms='msee'
 alias cx='chmod +x'
 alias vn='viewnior'
@@ -167,13 +169,12 @@ alias mc='msee'
 alias mp='mplayer2'
 
 ## temporary aliases, for http while using mongo locally
-
-## returns just the http status code, on a newline. obvs append the url
+# returns just the http status code, on a newline. obvs append the url
 alias htst='curl -s -o /dev/null -w "%{http_code}\n"'
-## follow this one with the json and then the url
+# follow this one with the json and then the url
 alias cpost='curl -H "Content-Type: application/json" -X "POST" -d'
-## append the url
+# append the url
 alias cget='curl -H "Content-Type: application/json" -X "GET"'
-## mongo alias, for temporary school project purposes
+# mongo alias, for temporary school project purposes
 alias mdb='mongod --dbpath=data/'
 

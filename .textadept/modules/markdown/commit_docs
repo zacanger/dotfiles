@@ -1,0 +1,7 @@
+#!/bin/bash
+./update_docs
+git add docs
+git commit -m 'Auto-update docs.'
+doc_sha=$(git ls-tree -d HEAD docs | awk '{print $3}')
+new_commit=$(echo "Auto-update docs." | git commit-tree $doc_sha -p refs/heads/gh-pages)
+git update-ref refs/heads/gh-pages $new_commit

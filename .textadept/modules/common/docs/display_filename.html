@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>display_filename.lua</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="locco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    <div id="jump_to">
+  Jump To &hellip;
+  <div id="jump_wrapper">
+  <div id="jump_page">
+  <a class="source" href="bracematching.html">bracematching.lua</a>
+  <a class="source" href="display_filename.html">display_filename.lua</a>
+  <a class="source" href="enclose.html">enclose.lua</a>
+  <a class="source" href="filename.html">filename.lua</a>
+  <a class="source" href="findall.html">findall.lua</a>
+  <a class="source" href="highlight.html">highlight.lua</a>
+  <a class="source" href="index.html">init.lua</a>
+  <a class="source" href="lastbuffer.html">lastbuffer.lua</a>
+  <a class="source" href="multiedit.html">multiedit.lua</a>
+  <a class="source" href="project.html">project.lua</a>
+  <a class="source" href="save_strips_ws.html">save_strips_ws.lua</a>
+    </div>
+  </div>
+</div>
+
+    <table cellpadding="0" cellspacing="0">
+      <thead>
+        <tr>
+          <th class="docs">
+            <h1>
+              display_filename.lua
+            </h1>
+          </th>
+          <th class="code">
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+<tr id="section-1">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-1">&#182;</a>
+  </div>
+  
+<p>Shorten display filenames in buffer title and switch buffer dialog.
+On Windows</p>
+<pre><code>C:\Documents and Settings\username\Desktop\...
+</code></pre>
+<p>is replaced with</p>
+<pre><code>Desktop\...,
+</code></pre>
+<p>on Max OS X and Linux</p>
+<pre><code>/home/username/..
+</code></pre>
+<p>or</p>
+<pre><code>/Users/username/...
+</code></pre>
+<p>with</p>
+<pre><code>~/...
+</code></pre>
+
+<p>Modified from Textadept's `core.ui. module.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+</pre></div>
+</td>
+</tr><tr id="section-2">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-2">&#182;</a>
+  </div>
+  
+<h2>Fields</h2>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+<span class="k">local</span> pattern, replacement
+</pre></div>
+</td>
+</tr><tr id="section-3">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-3">&#182;</a>
+  </div>
+  
+<p>Read environment variable.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">if</span> WIN32 <span class="k">then</span>
+  pattern = os.getenv(<span class="s">'USERPROFILE'</span>)..<span class="s">'\\'</span>
+  replacement = <span class="s">''</span>
+<span class="k">else</span>
+  pattern = <span class="s">'^'</span>..os.getenv(<span class="s">'HOME'</span>)
+  replacement = <span class="s">'~'</span>
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr><tr id="section-4">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-4">&#182;</a>
+  </div>
+  
+<h2>Commands</h2>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+</pre></div>
+</td>
+</tr><tr id="section-5">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-5">&#182;</a>
+  </div>
+  
+<p>Sets the title of the Textadept window to the buffer's filename.
+Parameter:<br>
+<em>buffer</em>: The currently focused buffer.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">local</span> <span class="k">function</span> <span class="nf">set_title</span>(buffer)
+  <span class="k">local</span> buffer = buffer
+  <span class="k">local</span> filename = buffer.filename <span class="o">or</span> buffer._<span class="nt">type</span> <span class="o">or</span> _L[<span class="s">'Untitled'</span>]
+  <span class="k">local</span> dirty = buffer.dirty <span class="o">and</span> <span class="s">'*'</span> <span class="o">or</span> <span class="s">'-'</span>
+  ui.title = string.format(<span class="s">'&#37;s &#37;s Textadept (&#37;s)'</span>, filename:match(<span class="s">'[^/\\]+$'</span>),
+                            dirty, filename:gsub(pattern, replacement))
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr><tr id="section-6">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-6">&#182;</a>
+  </div>
+  
+<p>Connect to events that change the title.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>events.connect(<span class="s">'save_point_reached'</span>,
+  <span class="k">function</span>() <span class="c">-- changes Textadept title to show 'clean' buffer
+</span>    buffer.dirty = <span class="k">false</span>
+    set_title(buffer)
+  <span class="k">end</span>)
+
+events.connect(<span class="s">'save_point_left'</span>,
+  <span class="k">function</span>() <span class="c">-- changes Textadept title to show 'dirty' buffer
+</span>    buffer.dirty = <span class="k">true</span>
+    set_title(buffer)
+  <span class="k">end</span>)
+
+events.connect(<span class="s">'buffer_after_switch'</span>,
+  <span class="k">function</span>() <span class="c">-- updates titlebar and statusbar
+</span>    set_title(buffer)
+    events.emit(<span class="s">'update_ui'</span>)
+  <span class="k">end</span>)
+
+events.connect(<span class="s">'view_after_switch'</span>,
+  <span class="k">function</span>() <span class="c">-- updates titlebar and statusbar
+</span>    set_title(buffer)
+    events.emit(<span class="s">'update_ui'</span>)
+  <span class="k">end</span>)
+</pre></div>
+</td>
+</tr></tbody>
+    </table>
+  </div>
+</body>
+</html>

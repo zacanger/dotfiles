@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>highlight.lua</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="locco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    <div id="jump_to">
+  Jump To &hellip;
+  <div id="jump_wrapper">
+  <div id="jump_page">
+  <a class="source" href="bracematching.html">bracematching.lua</a>
+  <a class="source" href="display_filename.html">display_filename.lua</a>
+  <a class="source" href="enclose.html">enclose.lua</a>
+  <a class="source" href="filename.html">filename.lua</a>
+  <a class="source" href="findall.html">findall.lua</a>
+  <a class="source" href="highlight.html">highlight.lua</a>
+  <a class="source" href="index.html">init.lua</a>
+  <a class="source" href="lastbuffer.html">lastbuffer.lua</a>
+  <a class="source" href="multiedit.html">multiedit.lua</a>
+  <a class="source" href="project.html">project.lua</a>
+  <a class="source" href="save_strips_ws.html">save_strips_ws.lua</a>
+    </div>
+  </div>
+</div>
+
+    <table cellpadding="0" cellspacing="0">
+      <thead>
+        <tr>
+          <th class="docs">
+            <h1>
+              highlight.lua
+            </h1>
+          </th>
+          <th class="code">
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+<tr id="section-1">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-1">&#182;</a>
+  </div>
+  
+<p>Highlight the active buffer/view.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>events.connect(events.INITIALIZED, <span class="k">function</span>()
+  <span class="k">local</span> line_number_back =
+    buffer.style_back[_SCINTILLA.constants.STYLE_LINENUMBER]
+  <span class="k">local</span> current_line_back = buffer.caret_line_back
+
+  <span class="k">local</span> <span class="k">function</span> <span class="nf">active</span>()
+    <span class="k">local</span> buffer = buffer
+    buffer.style_back[33] = current_line_back
+  <span class="k">end</span>
+
+  <span class="k">local</span> <span class="k">function</span> <span class="nf">inactive</span>()
+    <span class="k">local</span> buffer = buffer
+    buffer.style_back[33] = line_number_back
+  <span class="k">end</span>
+
+  events.connect(events.VIEW_BEFORE_SWITCH, <span class="k">function</span>() inactive() <span class="k">end</span>)
+  events.connect(events.VIEW_AFTER_SWITCH, <span class="k">function</span>() active() <span class="k">end</span>)
+  events.connect(events.BUFFER_AFTER_SWITCH, <span class="k">function</span>() active() <span class="k">end</span>)
+  events.connect(events.BUFFER_NEW, <span class="k">function</span>() active() <span class="k">end</span>)
+  events.connect(events.FILE_OPENED, <span class="k">function</span>() active() <span class="k">end</span>)
+  events.connect(events.RESET_AFTER, <span class="k">function</span>() active() <span class="k">end</span>)
+<span class="k">end</span>)
+
+</pre></div>
+</td>
+</tr></tbody>
+    </table>
+  </div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>filename.lua</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="locco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    <div id="jump_to">
+  Jump To &hellip;
+  <div id="jump_wrapper">
+  <div id="jump_page">
+  <a class="source" href="bracematching.html">bracematching.lua</a>
+  <a class="source" href="display_filename.html">display_filename.lua</a>
+  <a class="source" href="enclose.html">enclose.lua</a>
+  <a class="source" href="filename.html">filename.lua</a>
+  <a class="source" href="findall.html">findall.lua</a>
+  <a class="source" href="highlight.html">highlight.lua</a>
+  <a class="source" href="index.html">init.lua</a>
+  <a class="source" href="lastbuffer.html">lastbuffer.lua</a>
+  <a class="source" href="multiedit.html">multiedit.lua</a>
+  <a class="source" href="project.html">project.lua</a>
+  <a class="source" href="save_strips_ws.html">save_strips_ws.lua</a>
+    </div>
+  </div>
+</div>
+
+    <table cellpadding="0" cellspacing="0">
+      <thead>
+        <tr>
+          <th class="docs">
+            <h1>
+              filename.lua
+            </h1>
+          </th>
+          <th class="code">
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+<tr id="section-1">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-1">&#182;</a>
+  </div>
+  
+<p>Inserts a filename with a (if possible) relative path
+from a file select dialog.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">local</span> M = {}
+</pre></div>
+</td>
+</tr><tr id="section-2">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-2">&#182;</a>
+  </div>
+  
+<h2>Commands</h2>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+</pre></div>
+</td>
+</tr><tr id="section-3">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-3">&#182;</a>
+  </div>
+  
+<p>Opens a file select dialog and inserts filename in the buffer.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">function</span> <span class="nf">M.insert_filename</span>()
+  <span class="k">local</span> current_dir = (buffer.filename <span class="o">or</span> <span class="s">''</span>):match(<span class="s">'.+[/\\]'</span>)
+  <span class="k">if</span> <span class="o">not</span> current_dir <span class="k">then</span>
+    current_dir = _HOME
+  <span class="k">end</span>
+  filename =
+      ui.dialog(<span class="s">'fileselect'</span>,
+                 <span class="s">'--title'</span>, <span class="s">"Insert filename"</span>,
+                 <span class="s">'--select-multiple'</span>,
+                 <span class="s">'--with-directory'</span>, current_dir)
+  <span class="k">if</span> filename <span class="k">then</span>
+    filename = filename:gsub(<span class="s">'\n'</span>, <span class="s">''</span>)
+    filename = filename:gsub(current_dir, <span class="s">''</span>)
+    <span class="k">if</span> buffer:get_sel_text() == <span class="s">''</span> <span class="k">then</span>
+      buffer:add_text(filename)
+    <span class="k">else</span>
+      buffer:replace_sel(filename)
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">return</span> M
+</pre></div>
+</td>
+</tr></tbody>
+    </table>
+  </div>
+</body>
+</html>

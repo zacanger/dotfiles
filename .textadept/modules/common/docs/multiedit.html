@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>multiedit.lua</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="locco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    <div id="jump_to">
+  Jump To &hellip;
+  <div id="jump_wrapper">
+  <div id="jump_page">
+  <a class="source" href="bracematching.html">bracematching.lua</a>
+  <a class="source" href="display_filename.html">display_filename.lua</a>
+  <a class="source" href="enclose.html">enclose.lua</a>
+  <a class="source" href="filename.html">filename.lua</a>
+  <a class="source" href="findall.html">findall.lua</a>
+  <a class="source" href="highlight.html">highlight.lua</a>
+  <a class="source" href="index.html">init.lua</a>
+  <a class="source" href="lastbuffer.html">lastbuffer.lua</a>
+  <a class="source" href="multiedit.html">multiedit.lua</a>
+  <a class="source" href="project.html">project.lua</a>
+  <a class="source" href="save_strips_ws.html">save_strips_ws.lua</a>
+    </div>
+  </div>
+</div>
+
+    <table cellpadding="0" cellspacing="0">
+      <thead>
+        <tr>
+          <th class="docs">
+            <h1>
+              multiedit.lua
+            </h1>
+          </th>
+          <th class="code">
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+<tr id="section-1">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-1">&#182;</a>
+  </div>
+  
+<p>Keyboard short cuts for adding multiple cursors.<br>
+Copyright (c) 2010 <a href="http://caladbolg.net/textadeptwiki/index.php?n=Main.Multiedit">Brian Schott (Sir Alaran)</a>.<br>
+License: <a href="http://www.opensource.org/licenses/mit-license.php">MIT</a>.</p>
+
+<p>The following buffer settings are required:</p>
+<pre><code>buffer.multiple_selection = true
+buffer.additional_selection_typing = true
+buffer.additional_carets_visible = true
+</code></pre>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">local</span> M = {}
+
+<span class="k">local</span> findall = <span class="nt">require</span> <span class="s">'common.findall'</span>
+</pre></div>
+</td>
+</tr><tr id="section-2">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-2">&#182;</a>
+  </div>
+  
+<h2>Setup</h2>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+<span class="k">local</span> positions = {}
+<span class="k">local</span> restore = <span class="k">false</span>
+</pre></div>
+</td>
+</tr><tr id="section-3">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-3">&#182;</a>
+  </div>
+  
+<h2>Commands</h2>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>
+</pre></div>
+</td>
+</tr><tr id="section-4">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-4">&#182;</a>
+  </div>
+  
+<p>Adds a single mark.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">function</span> <span class="nf">M.add_position</span>()
+  table.insert(positions, buffer.current_pos)
+  buffer:add_selection(buffer.current_pos, buffer.current_pos)
+  restore = <span class="k">true</span>
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr><tr id="section-5">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-5">&#182;</a>
+  </div>
+  
+<p>Resets the cursor positions according to the positions table. This function
+exists because Scintilla is grouchy and likes to kill the multi-selection.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">local</span> <span class="k">function</span> <span class="nf">set_cursor_positions</span>()
+  <span class="k">local</span> prev_pos = buffer.current_pos
+  <span class="k">for</span> key, pos <span class="k">in</span> <span class="nt">ipairs</span>(positions) <span class="k">do</span>
+    <span class="k">if</span> pos ~= prev_pos <span class="k">then</span>
+      <span class="k">if</span> key == 1 <span class="k">then</span>
+        buffer:clear_selections()
+        buffer:set_selection(pos, pos)
+      <span class="k">else</span>
+        buffer:add_selection(pos, pos, 0)
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+  <span class="k">if</span> buffer.current_pos ~= prev_pos <span class="k">then</span>
+    buffer:add_selection(prev_pos, prev_pos, 0)
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr><tr id="section-6">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-6">&#182;</a>
+  </div>
+  
+<p>Multi-select all occurences of the word at the cursor position. This acts as
+a very fast find-replace function. Use with caution, as this selects all
+occurences of the word at the cursor.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre><span class="k">function</span> <span class="nf">M.select_all</span>()
+  <span class="k">local</span> start_position = buffer.current_pos
+  <span class="k">local</span> occurences = findall.find_all_at_cursor()
+  <span class="k">local</span> main_sel = 0
+  <span class="k">if</span> #occurences &gt; 1 <span class="k">then</span>
+    <span class="k">for</span> i, j <span class="k">in</span> <span class="nt">ipairs</span>(occurences) <span class="k">do</span>
+      <span class="k">if</span> j[1] &gt; start_position <span class="o">or</span> j[2] &lt; start_position <span class="k">then</span>
+        buffer:add_selection(j[1], j[2])
+      <span class="k">else</span>
+        main_sel = i
+      <span class="k">end</span>
+    <span class="k">end</span>
+    buffer:add_selection(occurences[main_sel][1], occurences[main_sel][2])
+    <span class="k">while</span> buffer.selection_start &gt; start_position
+        <span class="o">or</span> buffer.selection_end &lt; start_position <span class="k">do</span>
+      buffer:rotate_selection()
+    <span class="k">end</span>
+  <span class="k">elseif</span> #occurences == 1 <span class="k">then</span>
+    buffer:set_selection(occurences[1][1], occurences[1][2])
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</td>
+</tr><tr id="section-7">
+<td class="docs">
+  <div class="pilwrap">
+    <a class="pilcrow" href="#section-7">&#182;</a>
+  </div>
+  
+<p>Cancel selections on <code>Esc</code> key press.</p>
+
+
+</td>
+<td class="code">
+  <div class="highlight"><pre>events.connect(<span class="s">'keypress'</span>,
+  <span class="k">function</span>(code, shift, control, alt)
+    <span class="k">if</span> code == 0xff1b <span class="k">then</span> <span class="c">-- Escape key
+</span>      <span class="k">local</span> prev_pos = buffer.current_pos
+      buffer:clear_selections()
+      buffer:set_selection(prev_pos, prev_pos)
+      positions = {}
+    <span class="k">elseif</span> restore == <span class="k">true</span> <span class="k">then</span>
+      set_cursor_positions()
+      <span class="k">if</span> code == 0xff08 <span class="o">or</span> code == 0xff9f <span class="o">or</span> code == 0xffff <span class="k">then</span>
+        restore = <span class="k">false</span>
+        positions = {}
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+)
+
+events.connect(<span class="s">'char_added'</span>,
+  <span class="k">function</span>()
+    restore = <span class="k">false</span>
+    positions = {}
+    <span class="k">return</span>
+  <span class="k">end</span>
+)
+
+<span class="k">return</span> M
+</pre></div>
+</td>
+</tr></tbody>
+    </table>
+  </div>
+</body>
+</html>
