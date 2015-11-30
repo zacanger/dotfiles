@@ -22,5 +22,4 @@ _build/
 /bin/x/**
 node_modules
 bower_components
-*.bak
 

@@ -1,0 +1,33 @@
+[core]
+	editor = nvim
+	excludesfile = /home/z/.gitignore_global
+[gui]
+	fontui = -family \"Fantasque Sans Mono\" -size -10 -weight normal -slant roman -underline 0 -overstrike 0
+	fontdiff = -family \"Fantasque Sans Mono\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+	editor = nvim
+[user]
+	email = zac@zacanger.com
+	name = zacanger
+[hub]
+	username = zacanger
+	oauthtoken =
+[cola]
+	fontdiff = Fantasque Sans Mono,10,-1,5,50,0,0,0,0,0
+[push]
+	default = matching
+[color]
+	ui = auto
+[alias]
+	branches = !legit branches
+	graft = !legit graft
+	harvest = !legit harvest
+	publish = !legit publish
+	unpublish = !legit unpublish
+	sprout = !legit sprout
+	sync = !legit sync
+	switch = !legit switch
+	resync = !legit resync
+	graph = log --graph --oneline --all --decorate
+	ls = !/path/to/git-ls
+[filter "ignoreline"]
+	clean = "sed '/#ignoreline$/'d"
