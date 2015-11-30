@@ -169,6 +169,7 @@ alias mc='msee'
 alias mp='mplayer2'
 alias fv='fervor -dark'
 alias j='z'
+alias cat='ccat'
 
 ## temporary aliases, for http while using mongo locally
 # returns just the http status code, on a newline. obvs append the url
