@@ -167,6 +167,8 @@ alias kafe='coffee -c'
 alias ta='textadept'
 alias mc='msee'
 alias mp='mplayer2'
+alias fv='fervor -dark'
+alias j='z'
 
 ## temporary aliases, for http while using mongo locally
 # returns just the http status code, on a newline. obvs append the url

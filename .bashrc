@@ -116,7 +116,6 @@ shopt -s dirspell
 
 #include
 
-. /usr/share/autojump/autojump.sh
 export CDPATH='.:/home/z/Dropbox/skool:/home/z/bin:/home/z/Dropbox/z:/usr/local/lib'
 export PATH=$PATH:/usr/local/share/npm/bin:~/bin:/opt:$(find $HOME/bin/ -type d | paste -s -d:)
 ### MOTD ###
@@ -132,9 +131,6 @@ if [ -d ~/.bash_functions ]; then
         . "$file"
     done
 fi
-
-# if [ -e /home/zacanger/.nix-profile/etc/profile.d/nix.sh ]; then . /home/zacanger/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-
 
 ## shline
 #   function _update_ps1() {
