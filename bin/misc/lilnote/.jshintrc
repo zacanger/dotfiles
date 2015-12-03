@@ -1,0 +1,34 @@
+{
+    "indent"        : 2
+  , "noempty"       : false
+  , "quotmark"      : "single"
+  , "strict"        : false
+  , "maxlen"        : 180
+  , "asi"           : true
+  , "boss"          : true
+  , "debug"         : true
+  , "eqnull"        : true
+  , "esnext"        : true
+  , "funcscope"     : true
+  , "lastsemic"     : true
+  , "laxcomma"      : true
+  , "loopfunc"      : true
+  , "multistr"      : true
+  , "scripturl"     : true
+  , "shadow"        : true
+  , "sub"           : true
+  , "supernew"      : true
+//  , "browserify"    : true
+//  , "jasmine"       : true
+//  , "jquery"        : true
+  , "node"          : true
+//  , "nonstandard"   : true
+//  , "phantom"       : true
+//  , "prototypejs"   : true
+//  , "qunit"         : true
+  , "shelljs"       : true
+//  , "typed"         : true
+//  , "worker"        : true
+//  , "yui"           : true
+//  , "globals"       : {}
+}

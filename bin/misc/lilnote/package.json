@@ -1,0 +1,18 @@
+{
+  "name": "lilnote",
+  "version": "1.0.0",
+  "description": "tiny lil notes",
+  "main": "index.js",
+  "dependencies": {
+    "lowdb": "^0.10.3",
+    "mkdirp": "^0.5.1",
+    "tmp-editor": "^0.1.0",
+    "user-home": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zacanger",
+  "license": "WTFPL"
+}
