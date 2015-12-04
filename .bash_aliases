@@ -128,7 +128,9 @@ alias k9='pkill -9'
 alias gui='startxfce4'
 alias shhh='xtrlock'
 alias gcl='git clone '
-alias hcl='hub clone '
+alias hc='hub clone'
+alias hl='hub clone'
+alias hcl='hub clone'
 alias cheatsheet='less ~/doc/cheatsheet.md'
 alias halp='lo -R ~/doc/'
 alias md='mkdir -p -v'
@@ -162,7 +164,6 @@ alias vn='viewnior'
 alias gv='gpicview'
 alias cl='clone'
 alias le='less'
-alias most='less'
 alias kafe='coffee -c'
 alias ta='textadept'
 alias mc='msee'
@@ -170,14 +171,9 @@ alias mp='mplayer2'
 alias fv='fervor -dark'
 alias j='z'
 alias cat='ccat'
+alias yt2mp3='youtube-dl --extract-audio --audio-format mp3'
+alias pb='pinboard'
 
-## temporary aliases, for http while using mongo locally
-# returns just the http status code, on a newline. obvs append the url
-alias htst='curl -s -o /dev/null -w "%{http_code}\n"'
-# follow this one with the json and then the url
-alias cpost='curl -H "Content-Type: application/json" -X "POST" -d'
-# append the url
-alias cget='curl -H "Content-Type: application/json" -X "GET"'
 # mongo alias, for temporary school project purposes
-alias mdb='mongod --dbpath=data/'
+alias mdb='mongod --dbpath=db/'
 
