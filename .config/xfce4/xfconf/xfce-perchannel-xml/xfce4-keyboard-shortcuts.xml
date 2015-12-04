@@ -58,6 +58,8 @@
       <property name="&lt;Super&gt;l" type="string" value="xfce4-terminal --fullscreen &amp;&amp; xtrlock"/>
       <property name="&lt;Alt&gt;&lt;Super&gt;Left" type="string" value="/home/z/bin/sh/mv-win"/>
       <property name="&lt;Alt&gt;&lt;Super&gt;Right" type="string" value="/home/z/bin/sh/mv-win"/>
+      <property name="&lt;Alt&gt;&lt;Super&gt;Up" type="string" value="/home/z/bin/sh/mv-win"/>
+      <property name="&lt;Alt&gt;&lt;Super&gt;Down" type="string" value="/home/z/bin/sh/mv-win"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
@@ -152,10 +154,10 @@
       <property name="&lt;Super&gt;Up" type="string" value="maximize_window_key"/>
       <property name="&lt;Super&gt;Left" type="string" value="resize_window_key"/>
       <property name="&lt;Super&gt;Right" type="string" value="move_window_key"/>
-      <property name="&lt;Primary&gt;&lt;Super&gt;Up" type="string" value="tile_up_left_key"/>
-      <property name="&lt;Primary&gt;&lt;Super&gt;Right" type="string" value="tile_up_right_key"/>
-      <property name="&lt;Primary&gt;&lt;Super&gt;Left" type="string" value="tile_down_left_key"/>
-      <property name="&lt;Primary&gt;&lt;Super&gt;Down" type="string" value="tile_down_right_key"/>
+      <property name="&lt;Shift&gt;&lt;Super&gt;Up" type="string" value="tile_up_left_key"/>
+      <property name="&lt;Shift&gt;&lt;Super&gt;Right" type="string" value="tile_up_right_key"/>
+      <property name="&lt;Shift&gt;&lt;Super&gt;Left" type="string" value="tile_down_left_key"/>
+      <property name="&lt;Shift&gt;&lt;Super&gt;Down" type="string" value="tile_down_right_key"/>
     </property>
   </property>
   <property name="providers" type="array">

@@ -1,0 +1,20 @@
+mode_in_use=2
+mode_default=3
+show_panel_entry=true
+panel_entry_size=75
+port=2628
+server=dict.org
+dict=* (use all)
+spell_bin=/usr/bin/enchant
+spell_dictionary=en_GB
+link_color=#9393E8
+phonetic_color=#38958E
+error_color=#E85151
+success_color=#92DA86
+geometry=-1;0;0;0;0;
+speedreader_font=Sans 32
+speedreader_wpm=400
+speedreader_grouping=1
+speedreader_mark_paragraphs=false
+web_url=http://www.dict.cc/?s={word}
+

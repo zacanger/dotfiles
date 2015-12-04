@@ -22,11 +22,11 @@
       <property name="Reflection" type="string" value="0"/>
       <property name="Primary" type="bool" value="true"/>
       <property name="Position" type="empty">
-        <property name="X" type="int" value="0"/>
-        <property name="Y" type="int" value="0"/>
+        <property name="X" type="int" value="1920"/>
+        <property name="Y" type="int" value="180"/>
       </property>
     </property>
-    <property name="VGA-0" type="string" value="2. Goldstar Company Ltd 22&quot;">
+    <property name="VGA-0" type="string" value="2. Acer 23&quot;">
       <property name="Active" type="bool" value="true"/>
       <property name="Resolution" type="string" value="1920x1080"/>
       <property name="RefreshRate" type="double" value="60.000000"/>
@@ -34,7 +34,7 @@
       <property name="Reflection" type="string" value="0"/>
       <property name="Primary" type="bool" value="false"/>
       <property name="Position" type="empty">
-        <property name="X" type="int" value="1600"/>
+        <property name="X" type="int" value="0"/>
         <property name="Y" type="int" value="0"/>
       </property>
     </property>

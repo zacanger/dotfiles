@@ -22,19 +22,7 @@ if !filereadable(neobundle_readme)
   let g:not_finsh_neobundle = "yes"
 
   " Run shell script if exist on custom select language
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+   
 endif
 
 " Required:
@@ -72,10 +60,6 @@ NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-session'
 
 "" Snippets
-if v:version >= 704
-  NeoBundle 'SirVer/ultisnips'
-endif
-
 NeoBundle 'honza/vim-snippets'
 
 "" Color
@@ -148,9 +132,9 @@ set fileencodings=utf-8
 set backspace=indent,eol,start
 
 "" Tabs. May be overriten by autocmd rules
-set tabstop=4
+set tabstop=2
 set softtabstop=0
-set shiftwidth=4
+set shiftwidth=2
 set expandtab
 
 "" Map leader to ,
@@ -176,7 +160,7 @@ set noswapfile
 
 set fileformats=unix,dos,mac
 set showcmd
-set shell=/bin/sh
+set shell=/bin/bash
 
 " session management
 let g:session_directory = "~/.nvim/session"
@@ -212,15 +196,11 @@ else
 
   if $COLORTERM == 'gnome-terminal'
     set term=gnome-256color
-  else
-    if $TERM == 'xterm'
-      set term=xterm-256color
-    endif
   endif
 endif
 
 if &term =~ '256color'
-  set t_ut=
+  set t_ut=256
 endif
 
 "" Disable the blinking cursor.
@@ -423,12 +403,6 @@ noremap <leader>b :CtrlPBuffer<CR>
 let g:ctrlp_map = '<leader>e'
 let g:ctrlp_open_new_file = 'r'
 
-" snippets
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
-let g:UltiSnipsEditSplit="vertical"
-
 " syntastic
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_error_symbol='✗'
@@ -527,16 +501,14 @@ let g:tagbar_autofocus = 1
 let g:javascript_enable_domhtmlcss = 1
 
 
-
-
-
-
-
-
-
 "" Include user's local vim config
 if filereadable(expand("~/.nvimrc.local"))
   source ~/.nvimrc.local
 endif
 
+"" syntastic js rules
+let g:syntastic_javascript_jshint_generic = 1
+let g:syntastic_javascript_checkers = ['jshint']
+
+:nnoremap <Leader>s :SemanticHighlightToggle<cr>
 

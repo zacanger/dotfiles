@@ -1,6 +1,6 @@
-size=20
+size=50
 label=$:
-history-length=25
+history-length=1000
 use-url=true
 use-email=true
 use-dir=true

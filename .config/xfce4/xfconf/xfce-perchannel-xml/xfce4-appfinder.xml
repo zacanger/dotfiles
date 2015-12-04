@@ -42,7 +42,7 @@
     <property name="window-height" type="int" value="854"/>
     <property name="window-width" type="int" value="1596"/>
     <property name="pane-position" type="int" value="180"/>
-    <property name="category" type="string" value="System"/>
+    <property name="category" type="string" value="All Applications"/>
   </property>
   <property name="item-icon-size" type="uint" value="0"/>
   <property name="category-icon-size" type="uint" value="0"/>

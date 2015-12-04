@@ -3,5 +3,8 @@
 <channel name="keyboard-layout" version="1.0">
   <property name="Default" type="empty">
     <property name="XkbDisable" type="bool" value="true"/>
+    <property name="XkbOptions" type="empty">
+      <property name="Group" type="string" value="grp:lctrl_lwin_rctrl_menu"/>
+    </property>
   </property>
 </channel>

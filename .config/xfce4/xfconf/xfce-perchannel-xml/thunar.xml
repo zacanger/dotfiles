@@ -6,11 +6,11 @@
   <property name="last-separator-position" type="int" value="170"/>
   <property name="last-show-hidden" type="bool" value="true"/>
   <property name="last-details-view-zoom-level" type="string" value="THUNAR_ZOOM_LEVEL_SMALLEST"/>
-  <property name="last-details-view-column-widths" type="string" value="50,151,50,50,292,50,50,81,263"/>
+  <property name="last-details-view-column-widths" type="string" value="50,231,50,50,257,50,50,81,214"/>
   <property name="last-window-maximized" type="bool" value="false"/>
-  <property name="last-sort-column" type="string" value="THUNAR_COLUMN_NAME"/>
+  <property name="last-sort-column" type="string" value="THUNAR_COLUMN_SIZE"/>
   <property name="last-sort-order" type="string" value="GTK_SORT_ASCENDING"/>
-  <property name="last-window-width" type="int" value="796"/>
+  <property name="last-window-width" type="int" value="956"/>
   <property name="last-window-height" type="int" value="852"/>
   <property name="misc-single-click" type="bool" value="false"/>
   <property name="misc-recursive-permissions" type="string" value="THUNAR_RECURSIVE_PERMISSIONS_NEVER"/>

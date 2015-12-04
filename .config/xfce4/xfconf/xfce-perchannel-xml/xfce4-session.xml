@@ -5,10 +5,10 @@
     <property name="Engine" type="string" value="simple"/>
     <property name="engines" type="empty">
       <property name="simple" type="empty">
-        <property name="Font" type="string" value="Liberation Mono 8"/>
-        <property name="BgColor" type="string" value="#6f6a60"/>
-        <property name="FgColor" type="string" value="#a7d8d5"/>
-        <property name="Image" type="string" value="/home/z/Pictures/frfer.png"/>
+        <property name="Font" type="string" value="Vesta 10"/>
+        <property name="BgColor" type="string" value="#0f0d0d"/>
+        <property name="FgColor" type="string" value="#809e9c"/>
+        <property name="Image" type="string" value="/home/z/Dropbox/Pictures/logo2.svg"/>
       </property>
       <property name="balou" type="empty">
         <property name="Theme" type="string" value="Default"/>

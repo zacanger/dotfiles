@@ -1,0 +1,14 @@
+Use_Label=false
+Show_Values=true
+Show_Bars=false
+Colorize_Values=true
+Color_In=#B6DB9A
+Color_Out=#D7B584
+Text=Net
+Network_Device=wlo1
+Max_In=4096
+Max_Out=4096
+Auto_Max=false
+Update_Interval=1000
+Values_As_Bits=false
+

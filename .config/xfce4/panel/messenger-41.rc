@@ -1,0 +1,9 @@
+[General]
+show_icon=true
+show_label=false
+label_width=120
+message_duration=5
+show_popup=true
+popup_duration=5
+save_history=true
+
