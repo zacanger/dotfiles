@@ -2,8 +2,6 @@
 
 import os
 
-# Open file
-fo = open(raw_input("File Name: "), "wb")
+fo = open(raw_input("note title: "), "wb")
 
-# Write the file
-fo.write(raw_input("Enter Contents: "))
+fo.write(raw_input("note contents: "))
