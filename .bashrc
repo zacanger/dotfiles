@@ -116,7 +116,7 @@ shopt -s dirspell
 
 #include
 
-export CDPATH='.:/home/z/Dropbox/skool:/home/z/bin:/home/z/Dropbox/z:/usr/local/lib'
+export CDPATH='.:/home/z/Dropbox/skool:/home/z/bin:/home/z/Dropbox/z:/usr/local/lib:/usr/local/lib/node_modules'
 export PATH=$PATH:/usr/local/share/npm/bin:~/bin:/opt:$(find $HOME/bin/ -type d | paste -s -d:)
 ### MOTD ###
 # Display MotD
