@@ -16,7 +16,7 @@
 [push]
 	default = matching
 [color]
-	ui = auto
+	ui = 1
 [alias]
 	branches = !legit branches
 	graft = !legit graft
@@ -27,7 +27,19 @@
 	sync = !legit sync
 	switch = !legit switch
 	resync = !legit resync
-	graph = log --graph --oneline --all --decorate
+	chart = log --graph --oneline --all --decorate
+	graph = log --all --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	ls = !/path/to/git-ls
+	cm = commit
+	ac = !git add -A && git commit
+	st = status -sb
+	web = git instaweb
 [filter "ignoreline"]
 	clean = "sed '/#ignoreline$/'d"
+[help]
+	autocorrect = 1
+[instaweb]
+	local = true
+	port = 7777
+	browser = chromium
+
