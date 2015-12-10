@@ -34,6 +34,8 @@
 	ac = !git add -A && git commit
 	st = status -sb
 	web = git instaweb
+	p = push
+	acp = !git add -A && git commit -am "foo" && git push
 [filter "ignoreline"]
 	clean = "sed '/#ignoreline$/'d"
 [help]
