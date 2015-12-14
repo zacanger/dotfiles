@@ -175,6 +175,8 @@ alias yt2mp3='youtube-dl --extract-audio --audio-format mp3'
 alias pb='pinboard'
 alias es='evilscan 127.0.0.1 --port=1024-14000'
 alias phps='php -S 127.0.0.1:5555'
+alias tpng='teenypng --apikey E5rJkw5V0aDutXwngFk2PZEEde940okM'
+alias feh='viewnior'
 
 # mongo alias, for temporary school project purposes
 alias mdb='mongod --dbpath=db/'
