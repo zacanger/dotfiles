@@ -1,0 +1,58 @@
+
+# IOCANERC
+# key bindings for iocane
+#
+# format:
+# <key> <command>
+#
+# <key> is an X11 keysym without the leading "XK_"
+# <command> is the iocane command to be executed
+# <key> and <command> must be separated by exactly one space
+
+
+# movement
+h move -8 0
+j move 0 8
+k move 0 -8
+l move 8 0
+
+Left move -16 0
+Down move 0 16
+Up move 0 -16
+Right move 16 0
+
+# keypad
+KP_Home move -32 -32
+KP_Up move 0 -32
+KP_Prior move 32 -32
+KP_Left move -32 0
+KP_Begin button 1
+KP_Right move 32 0
+KP_End move -32 32
+KP_Down move 0 32
+KP_Next move 32 32
+
+# buttons
+1 button 1
+2 button 2
+3 button 3
+4 button 4
+5 button 5
+6 button 6
+7 button 7
+Prior button 4
+Next button 5
+
+# cursors (see X Font Cursors for options)
+x cursor 0
+a cursor 68
+s cursor 130
+d cursor 64
+f cursor 142
+
+# misc
+o 0 0
+p powder
+q quit
+Escape quit
+

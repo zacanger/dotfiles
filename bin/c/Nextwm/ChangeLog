@@ -1,0 +1,511 @@
+10/7/15
+  Fix for remove_window mapping error
+  Fix for client_to_desktop mapping error
+
+8/7/15
+  Added keyboard shortcut to pop a window out from the
+   tiles
+  Added option in apps.conf to match window to be popped
+   on opening
+  Added option in the rc.conf to have useless gaps around
+   the bar
+
+7/7/15
+  Reworked change_desktop()
+  Fix for transient windows not being focused when clicked
+   on
+  Reworked how transient windows are handled
+  Fixed window visibilty in fullscreen mode
+
+5/7/15
+  Reworked maprequest()
+
+22/6/15
+  init_desks in update_config so room for bar not used
+   on not barmon
+
+18/6/15
+  Fix for bar not working on monitor 2
+  Default SHOW_BAR to 0 in rc
+
+17/6/15
+  Fix for transient child window not being placed on
+   desktop with parent if other desktop is focused
+  Fix for occasional crash 'cause don't xfree after return!
+
+30/5/15
+  Added useless gaps to the three tiling modes
+
+28/5/15
+  Don't take bar height of screen height if show_bar == 1
+
+23/5/15
+  Fix for bar not starting on the right monitor
+  Added option in rc file to set SHOW_BAR for each
+   desktop like DEFAULTMODE
+
+24/3/15
+  Fix for bar not toggling after monitor disconnect
+
+29/11/14
+  Allow one window on a desktop in stacking mode to
+   be resized horizontally
+
+12/11/14
+  Add ability to handle monitor connects/disconnects
+  Some minor bug fixes
+  Moved event functions to events.c 'cause who likes
+   scrolling through large files...
+
+20/10/14
+  Add option for application name(WM_NAME) to be used in
+   apps.conf
+  Add transient windows to applications that can be used
+   in apps.conf
+  Fix for spaces in application names used in apps.conf
+  More code tidying in buttonpress()
+
+13/3/14
+  Code tidy in buttonpress()
+
+4/3/14
+  Right click an unfocused desktop in the switcher to move
+   the focused window to that desktop
+
+1/3/14
+  Add option in rc.conf to select which desktop to start on
+
+22/2/14
+  Don't manage dock apps with '_NET_WM_WINDOW_TYPE_DOCK' set
+
+20/2/14
+  Add option BAR_SHORT to rc.conf to shorten the bar's 
+  length to have room for an external app
+
+31/1/14
+  Fix for kill_client() when window has save dialog
+
+29/1/14
+  Code tidy up in terminate() and readkeysapps.c
+
+29/1/14
+  Add new function "terminate" for keyboard shortcut to
+  close any open windows, exit the window manager and shutdown(1)
+  or reboot(2)
+
+5/12/13
+  Add minimum size for window when resizing with keyboard
+   in stacking mode
+
+31/10/13
+  Fix for windows not moving desktops with multiple monitors
+   in stacking mode
+
+22/10/13
+  Fix for focus not changing when transient window had focus
+   and current window was clicked on
+
+20/10/13
+  Fix for focus not changing with one open window and a
+   transient window
+
+15/10/13
+  Better window management with transient windows open
+    - can now cycle through all open windows with the keyboard
+
+6/10/13
+  Fix for failed start with Xinerama info not available
+
+28/9/13
+  Added transparency value for the bar and an option for
+   it in the config
+
+15/9/13
+  Make sure the right transient window has the input focus
+   when changing desktops.
+
+7/5/13
+  Added option to use apps' name for setting desktop to open on
+   and/or size e.g. urxvt -name "Ralph"
+
+22/4/13
+  Fix for TOO many destroy_notify events from mozilla products -
+   remove update_current() from remove_client().
+  Option to show the bar in rc.conf actually does something now...
+
+21/4/13
+  Fix for firefox menus disappearing when moving entries
+
+13/4/13
+  Fix for the window colours not updating when updating config.
+
+23/3/13
+  Added marker in desktop switcher for previous desktop
+
+22/3/13
+  Check number of windows before doing anything else in prev_win
+
+18/3/13
+  Updated Makefile
+
+11/3/13
+  Don't decrement nmaster when client is removed
+
+4/3/13
+  Check for a window manager already running
+  Option to set the initial number of extra windows in the master area for
+   each desktop in rc.conf
+
+2/3/12
+  Enable multimedia keys by default
+  Add NULL for using no modifier key
+  Don't change mode with windows open on update
+  Remove desktop showing/flicker in fullscreen mode when changing
+   desktops
+
+25/2/13
+  In fullscreen mode map new/next/prev window before unmapping current
+
+9/2/12
+  Remove input focus from current window when changing monitors
+  Add option to automatically switch from stacking mode when
+   opening a window with more than a set number of windows open
+
+5/2/13
+  Overlap master/stack borders in vertical & horizontal tiling modes
+  With multiple monitors when click to focus window on unfocused
+   screen warp cursor
+
+27/1/13
+  Fix for booting into horizontal mode failing to map windows
+   correctly
+
+16/1/13
+  Fix for multi monitor pointer warping when clicking on the bar
+  Fix for bar not updating in multi monitor mode when switching
+   mode on monitor without bar
+
+14/12/12
+  update_current() after destroynotify()
+
+6/12/12
+  Don't warp the pointer when clicking an unfocused
+   window on an unfocused monitor
+
+5/12/12
+  Fix for window mapping with multiple monitors
+
+4/12/12
+  Added option in rc.conf to center windows or not
+   in stacking mode # for gimp windows etc
+
+1/12/12
+  Fix for window size with toggle_bar()
+  Fix for fullscreen window unmapping when window
+   opens on a different desktop
+  Fix for window mapping when using update_config
+   and mode changes from fullscreen
+
+30/11/12
+  Added Control to keyboard shortcuts mods
+
+30/11/12
+  Fix for swapping master with no open windows crash
+
+27/11/18
+  Added back behaviour in grid mode with three or
+   four windows open i.e they all move with Alt+h/l/p/o
+
+18/11/12
+  Fix for bar not showing on 2nd monitor at startup
+
+14/11/12
+  Fix for bar toggling messing with window heights
+
+17/10/12
+  Fix for toggle_bar() with BAR_MONITOR
+  changed remove_window() to remove client
+
+16/10/12
+  Added option in rc.conf to select monitor bar is on
+
+11/10/12
+  Changed the DEFAULTMODE line in rc.conf
+    to set the default mode for each desktop
+
+10/10/12
+  Added multi monitor support
+
+24/9/12
+  Fix for existing window/s not being unmapped in
+    fullscreen mode when new window added
+  Bar is toggled on a per desktop basis
+
+22/9/12
+  Added AltSuper for Mod key combo
+
+21/9/12
+  In stacking mode have border on first opened window
+
+20/9/12
+  Allow moving transient window
+  Be a bit friendlier with transient windows
+  Add RESIZEMOVEKEy to rc.conf
+
+19/9/12
+  Added background colour changing for the bar
+
+21/8/12
+  pre increment/decrement not post
+  Added -ffast-math -fno-unit-at-a-time to Makefile
+
+15/8/12
+  Changed rc.conf to be colon seperated
+  can set the number of desktops in the rc.conf file, defaults to four
+  can set whether current window name in bar is left aligned
+
+14/8/12
+    Moved keyboard shortcuts and apps settings to files in
+      ~/.config/snapwm/key.conf and apps.conf.
+
+10/8/12
+  Can now add/remove windows to/from the master area
+    with keyboard shortcuts
+
+8/8/12
+  Fixed Kill client and quit
+  the order windows are focused in is remembered -
+      makes a difference in stacking mode !
+
+5/8/12
+  Change the grid mode for up to 5 rows and columns with the option to resize the
+  first column and the second window.
+
+6/7/12
+  Fix for transient window mapping order
+
+5/7/12
+  Remove transient windows that flash up on one desktop then show on another from the desktop
+
+2/7/12
+  Just map the desktop switcher and bar windows
+  Click on the bar to change to previous desktop
+
+28/6/12
+  Changed the desktop switcher to have buttons the width of the
+   desktop name instead of a uniform size
+
+25/6/12
+  Send mouse clicks through to window when focusing
+
+23/6/12
+  Use XFetchName for root window name in bar
+
+19/6/12
+  Defined the RC FILE as $HOME/.config/snapwm/rc.conf
+  Changed the config.h.def to be generic not as I use config.h
+
+6/6/12
+  Changed number of SHOWNUMOPEN from number+colon to a meter at the bottom of the switcher
+
+4/6/12
+  Added 'double buffer' for text in the bar
+
+30/5/12
+  Added support for multibyte fonts
+  When updating, don't change modes for desktops with open windows
+  Center text in desktop switcher with showopen=0
+
+27/4/12
+  Fixed click to focus
+
+22/4/12
+  Added check for stray ampersands in the external text
+  Seperated the font colours from the bar in the config.h and the rc files
+  Fix for window focus changing when a transient window pops up
+
+21/4/12
+  Seperated the bar and window colours in the config.h and rc files
+
+20/4/12
+  Added option in the config to choose which mod key is used when
+   moving/resizing in stacking mode
+  Fix for focus swapping between overlapping windows in stacking mode
+
+13/4/12
+  Added stacking mode
+
+7/4/12
+  Fix for transient windows going off the screen
+
+1/4/12
+  Added switching clicktofocus to the rc file
+  Added adjusting the displayed length of the current window's name in the bar
+    to the config and the rc file
+
+25/3/12
+  Fix for firefox menu disappearing after deleting an entry
+
+10/3/12
+  Added error checking for desktop names in the switcher
+  Added option for the default font in the config.h
+
+8/3/12
+  Added option in config.h and rc file to have new window opened at the
+   top or bottom of the stack when using attach aside
+
+7/3/12
+  Handles multiple transient windows properly now
+
+28/2/12
+  Removed remembering previous current window as not woking properly
+
+19/2/12
+  Desktop switcher can show number of open windows on unfocused desktops and in fullscreen mode
+  Option to show number of windows open in the desktop switcher in the config and rc file
+  Fix for windows not mapping when changing default mode from Fullscreen in the rc file
+  New window has mouse warped to it if FOLLOW_MOUSE is 0
+  prev_current is updated if mouse moves to new window
+
+12/2/12
+  Added number of open windows to focused desktop in fullscreen mode
+  Clicking on the current desktop in the switcher will focus the next window
+
+11/2/12
+  Fixed occasional flicker from focused windows' name in the bar
+  Fine tuned fullscreen mode
+
+7/2/12
+  When changing desktops move cursor to center of current window before mapping
+
+6/2/12
+  Fixed flicker in the external text
+  Fixed apps with tabs opening blank windows when opened on an unfocused desktop e.g. firefox
+
+5/2/12
+  Changed floating transient window behaviour to always be on top.
+  Fixed last window not being mapped sometimes in fullscreen mode
+
+4/2/12
+  Added borders to transient windows
+
+3/2/12
+  Fix for bar length and master size not correcting after rc file is reread
+  Added option in config.h.def to have the bar shown or not at startup but still toggleable
+
+31/1/12
+  Fix for bar text not updating when bar is covered and the uncovered
+
+19/1/12
+  Desktop switcher updates now when bar switched from top/bottom
+  Changing border width does not affect the bar
+
+16/1/12
+  In the rc file a line starting with a hash (#) is ignored
+  Added more options to the rc file
+  Fix for mode not displaying correctly at startup if now window is opened
+
+14/1/12
+  Added alpha value for unfocused windows to be semi transparent when cairo-compmgr is used
+  Alpha value can be set in the rc file
+
+9/1/12
+  Master area is reset if second last window is removed
+
+7/1/12
+  Fixed wm crash if not using status bar and resize of stack top window only if 3 or more windows
+  Fix for window sizes after the window at the top of the stack has been resized
+  Added limits on the area of the master window 
+  Fix for thunderbird write window( and others probably) just unmapping
+
+4/1/12
+  Statusbar text now has 5 colours
+
+29/12/11
+  Statusbar takes text from stdin (e.g. conky)
+
+29/12/11
+  Added the tiling mode shown in the status bar
+
+28/12/11
+  Fixed rereading the rc file killing the wm or messing with the keyboard shortcuts
+
+8/12/11
+  Fixes for fullscreen mode
+
+7/12/11
+  Fix for fonts not displaying properly
+
+6/12/11/
+  Desktop labels changeable from the rc file
+
+5/12/11
+  If a window is opened or closed on an unfocused desktop the desktop switcher will be updated
+
+4/12/11
+  Dessktops in the desktop switcher can be named from the config file
+
+1/12/11
+  Colours and font are now read from a rc file and can be update with a keyboard shortcut
+
+30/11/11
+  Added bar with desktop switcher and statusbar
+
+28/11/11
+  Replaced next/prev_desktop function with shorter rotate_desktop function
+  (thanks to c00kiemon5ter)
+
+28/11/11
+  Added last desktop function for switching back to the last opened desktop
+  (thanks to c00kimon5ter)
+
+26/11/11
+  Added option to click on a window to focus it
+  (thanks to richo4)
+
+21/11/11
+  Fix for transient windows not being managed
+
+15/11/11
+  Fix for when trying to swap master with only one window
+
+23/10/11
+  Fine tuned the popup window management so notification windows aren't managed either
+
+15/10/11
+  Added having applications start on specified desktop
+
+13/10/11
+  Added ability to use grow_window/shrink_window in grid mode with 3 or 4 windows
+
+13/10/11
+  Popup windows now aren't managed/added to the stack
+
+10/10/11
+  Reapplied setting master_size relevant to default mode
+
+8/10/11
+  For only one window or fullscreen mode there is no border
+
+8/10/11
+  Fixed fullscreen mplayer
+
+8/10/11
+  Removed useless gaps when in grid mode
+
+16/9/11
+  Added back the option to have the panel at the top
+  Fine tuned the grid tiling mode
+
+13/9/11
+  Added back horizontal tiling, follow mouse and follow window
+
+12/9/11
+  Returned to catwm tiling methods - with the ability to resize the window at the top of the stack
+
+9/9/11
+   Fine tuned the next/prev desktop and the destroy notify functions
+
+ 8/9/11
+    Have a proper destroy notify function now that removes destroyed windows from
+     the window manager stack for the desktop they were on.

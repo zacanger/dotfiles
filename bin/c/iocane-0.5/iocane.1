@@ -1,0 +1,121 @@
+'\" t
+.\" Manual page created with latex2man on Thu Sep 26 11:34:24 EDT 2013
+.\" NOTE: This file is generated, DO NOT EDIT.
+.de Vb
+.ft CW
+.nf
+..
+.de Ve
+.ft R
+
+.fi
+..
+.TH "IOCANE" "1" "26 September 2013" "simulate mouse events " "simulate mouse events "
+.SH NAME
+
+Iocane
+\- The colorless, oderless, tasteless poison that will eliminate your system\&'s rodent infestation 
+.PP
+.SH SYNOPSIS
+
+iocane
+[\fB\-h\fP]
+[\fB\-i\fP]
+[\fB\-s\fP]
+[\fB\-c\fP\fI command\-string\fP]
+[\fIfilename\fP]
+.PP
+.SH DESCRIPTION
+
+iocane
+simulates mouse events from the keyboard, or from commands in a script file. 
+.PP
+.SH OPTIONS
+
+.TP
+\fB\-h\fP
+ Print help and exit 
+.TP
+\fB\-i\fP
+ Run in interactive mode 
+.TP
+\fB\-s\fP
+ Run in stdin mode (default) 
+.TP
+\fB\-c\fP\fI command\-string\fP
+ Execute command\-string. Multiple commands can be placed on the command line with multiple \fB\-c\fP
+flags. If \fIcommand\-string\fP
+contains spaces they must be escaped or quoted. If any \fB\-c\fP
+commands are specified, iocane
+will not default to stdin mode and will instead exit after all \fIcommand\-string\fPs
+are executed. This can be overridden by explicitly specifying interactive or stdin mode on the command line. 
+.TP
+\fIfilename\fP
+ Specify an optional iocane
+script file from which to read commands. 
+.PP
+.SH CONFIGURATION
+
+In interactive mode, runtime configuration is read from the following files, in order, stopping at the first file found: 
+$XDG_CONFIG_HOME/iocane/config,
+$HOME/.iocanerc,
+/usr/share/iocane/iocanerc\&.
+.PP
+Each non\-empty, non\-comment line in a configuration file specifies a \fIkey\fP
+and a \fIcommand\-string\fP\&.
+Any X11 keysym can be used for \fIkey\fP\&.
+.PP
+.SH COMMANDS
+
+.PP
+The following \fIcommand\-string\fPs
+can be entered in the configuration file to be bound to a key, specified as an option to a \fB\-c\fP
+flag on the command line, sent to iocane\&'s
+stdin, or entered one per line in a script with a #!/bin/iocane shebang. Any command can also be specified by first letter. 
+.PP
+.TP
+\fBpowder\fP
+ Move the cursor off screen 
+.TP
+\fBmove\fP \fIx\fP \fIy\fP
+ Move the cursor by (\fIx\fP,\fIy\fP)
+pixels 
+.TP
+\fIx\fP \fIy\fP
+ Place the cursor at coordinates (\fIx\fP,\fIy\fP)
+.TP
+\fBbutton\fP \fIn\fP
+ Simulate a press of mouse button \fIn\fP
+.TP
+\fBcursor\fP \fIn\fP
+ Sets the cursor to the \fIn\fPth
+item in X Font Cursors 
+.TP
+\fBsleep\fP \fIs\fP \fIms\fP
+ Sleep for \fIs\fP
+seconds and \fIms\fP
+milliseconds 
+.TP
+\fBquit\fP | \fBexit\fP
+ Exit from interactive mode or end a script 
+.PP
+.SH AUTHOR
+
+Copyright (C)2013 Jesse McClure 
+.br
+License GPLv3: GNU GPL version 3 \fBhttp://gnu.org/licenses/gpl.html\fP
+.br
+This is free software: you are free to change and redistribute it. 
+.br
+There is NO WARRANTY, to the extent permitted by law. 
+.PP
+Submit bug reports via github: 
+.br
+\fBhttp://github/com/TrilbyWhite/Iocance.git\fP
+.PP
+I would like your feedback. If you enjoy Iocane
+see the bottom of the site below for detauls on submitting comments: 
+.br
+\fBhttp://mccluresk9.com/software.html\fP
+.PP
+.\" NOTE: This file is generated, DO NOT EDIT.

@@ -2,7 +2,7 @@
   "name": "lilnote",
   "version": "1.0.0",
   "description": "tiny lil notes",
-  "main": "index.js",
+  "main": "lilnote.js",
   "dependencies": {
     "lowdb": "^0.10.3",
     "mkdirp": "^0.5.1",

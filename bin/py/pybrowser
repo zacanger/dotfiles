@@ -8,7 +8,7 @@ class PyBrowser(QtGui.QWidget):
     def __init__(self):
         QtGui.QWidget.__init__(self)
         self.setWindowTitle('Simple Web Browser')
-        
+
         v_box = QtGui.QVBoxLayout(self)
         #Navigation Bar
         h_bar = QtGui.QHBoxLayout()
@@ -28,11 +28,11 @@ class PyBrowser(QtGui.QWidget):
         h_bar.addWidget(self.okUrl)
         #Page Frame
         self.web = QtWebKit.QWebView()
-        self.web.load(QtCore.QUrl('https://duckduckgo.com/?kae=t&kp=-1&kz=-1&kc=-1&kac=-1&k1=-1&kk=-1&kv=m&kak=-1&kal=-1&kt=Terminus&ks=m&k7=000000&kj=131313&ka=Terminus&k8=54a591&k9=56a24f&kaa=754784&kx=909d4d&ky=1f1e1e/'))
+        self.web.load(QtCore.QUrl('http://zacanger.com/search'))
         #Status Bar
         self.status = QtGui.QStatusBar()
         self.prog = QtGui.QProgressBar()
-        self.load = QtGui.QLabel('Loading...')
+        self.load = QtGui.QLabel('loading…')
         self.status.addWidget(self.load)
         self.status.addWidget(self.prog)
 
@@ -68,7 +68,7 @@ class PyBrowser(QtGui.QWidget):
         if pat.match(link) and not patHttp.match(link):
             link = 'http://' + link
         elif not pat.match(link):
-            link = 'https://duckduckgo.com/?q=' + link.replace(' ', '+')
+            link = 'https://www.google.com/search?q=' + link.replace(' ', '+')
         self.openUrl(link)
 
     def loadComplete(self):

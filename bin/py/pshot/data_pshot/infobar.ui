@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.16.1 -->
+<interface>
+  <requires lib="gtk+" version="3.10"/>
+  <object class="GtkInfoBar" id="infobar1">
+    <property name="visible">True</property>
+    <property name="app_paintable">True</property>
+    <property name="can_focus">False</property>
+    <child internal-child="action_area">
+      <object class="GtkButtonBox" id="infobar-action_area1">
+        <property name="can_focus">False</property>
+        <property name="spacing">6</property>
+        <property name="layout_style">end</property>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <object class="GtkSpinner" id="spinner1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="active">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">False</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+    <child internal-child="content_area">
+      <object class="GtkBox" id="infobar-content_area1">
+        <property name="can_focus">False</property>
+        <property name="spacing">16</property>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Uploading the image to imgurl, please wait a while</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">False</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+  </object>
+</interface>

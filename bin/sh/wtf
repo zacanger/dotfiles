@@ -10,7 +10,7 @@ usage() {
 	exit 1
 }
 
-acronyms=${ACRONYMDB:-`ls ~/bin/wtffls/acronyms*`}
+acronyms=${ACRONYMDB:-`ls ~/bin/misc/wtffls/acronyms*`}
 
 args=`getopt f: $*`
 if [ $? -ne 0 ]; then
