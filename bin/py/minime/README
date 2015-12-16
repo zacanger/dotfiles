@@ -1,0 +1,29 @@
+minime — a minimalist editor inspired by sam(1), acme(1) and emacs(1)
+
+
+minime manages a buffer of text that may be edited interactively or by external programs.
+
+the minime interface consists of two text buffers, the main buffer at the top and the mini buffer at the bottom. the main buffer is for editable text, the minibuffer is for commands that act upon the text in the main buffer. minime takes a single optional argument, which is interpreted as a file from which to populate the main buffer.
+
+basic text movement is possible through use of the arrow keys and the standard unix keyboard shortcuts “ctrl h” / “backspace”, “ctrl a” / ”home”, “ctrl e” / “end”. “ctrl left” and “ctrl right” move to the previous or next word; “ctrl up” and “ctrl down” move to the previous or next paragraph.
+
+text highlighting is possible using the shift key and movement keys. “shift left” and “shift right” grow or shrink the highlight by a single character; “shift up” and “shift down” grow or shrink the highlight by one line. “shift meta left” and “shift meta right” grow or shrink the selection by one word.
+
+you can switch focus between buffers by pressing the tab key. upon pressing the return key while the minibuffer has focus, the text in the minibuffer is evaluated as a command. focus is then returned to the main buffer.
+
+if a command is an integer n, the cursor is moved to the beginning of the n-th line. if a command starts with a “#” character, the cursor is moved to the position after the n-th character, where n is given by interpreting the following characters as an integer. if a command starts with a “<”, “>”, “|” or “!” character, the following characters specify a shell command which is then executed by minime.
+
+“<” inserts the standard output of the command into the main buffer.
+“>” sends the highlight to the standard input of the shell command.
+“|” sends the highlight to the standard input of the shell command and inserts the standard output of the command into the main buffer.
+“!” runs the shell command.
+
+example commands:
+
+ - “5” moves the cursor to line 5
+ - “#0” moves to the beginning of the file
+ - “<cat README” loads the file “README” from the current directory
+ - “>cat>README” writes the contents of the main buffer into the file “README”
+ - “|sort” sorts the selected lines using sort(1)
+ - “!xterm” starts a terminal emulator for X11
+

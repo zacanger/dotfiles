@@ -1,0 +1,10 @@
+ctrl g,|cat <README #help
+ctrl n,|true #clear
+meta w,>cat >/tmp/clipboard #copy
+ctrl w,|cat >/tmp/clipboard #cut
+ctrl y,<cat </tmp/clipboard #paste
+meta q,|fmt -w80 #justify
+meta l,|ls #list files
+ctrl o,|xargs cat #open
+meta o,>xargs xdg-open #xdg-open
+ctrl c,#exit

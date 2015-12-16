@@ -1,0 +1,321 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# © 2013  Nils Dagsson Moskopp (erlehmann)
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+
+# Dieses Programm hat das Ziel, die Medienkompetenz der Leser zu
+# steigern. Gelegentlich packe ich sogar einen handfesten Buffer
+# Overflow oder eine Format String Vulnerability zwischen die anderen
+# Codezeilen und schreibe das auch nicht dran.
+
+import re
+import string
+import subprocess
+import sys
+
+from hashlib import md5
+from urwid import AttrWrap, CompositeCanvas, Edit, ExitMainLoop, Filler, \
+    Frame, GridFlow, MainLoop, Text, widget
+from urwid.widget import apply_text_layout, move_next_char, move_prev_char
+
+def move_prev_word(text, start_offs, end_offs):
+    while(end_offs!=0):
+        if text[end_offs-1] in string.whitespace+string.punctuation: break
+        end_offs-=1
+    return end_offs
+
+def move_next_word(text, start_offs, end_offs):
+    while(start_offs!=len(text)):
+        if text[start_offs] in string.whitespace+string.punctuation: break
+        start_offs+=1
+    return start_offs
+
+def move_prev_paragraph(text, start_offs, end_offs):
+    while(end_offs!=0):
+        if text[end_offs-1:end_offs+1] == u'\n\n': break
+        end_offs-=1
+    return end_offs
+
+def move_next_paragraph(text, start_offs, end_offs):
+    while(start_offs!=len(text)):
+        if text[start_offs-1:start_offs+1] == u'\n\n': break
+        start_offs+=1
+    return start_offs
+
+class Buffer(Edit):
+    def __init__(self, *args, **kwargs):
+        self.cache = {}
+        super(Buffer, self).__init__(*args, **kwargs)
+
+    def get_highlight_text(self):
+        if self.highlight:
+            start, stop = self.highlight
+            return self.edit_text[start:stop]
+        return u''
+
+    def extend_selection_left(self, p, q):
+        self.set_edit_pos_keep_highlight(q)
+        if self.highlight:
+            start, stop = self.highlight
+            if q == start:
+                self.highlight = None
+            elif start < q < stop:
+                self.highlight = (start, stop-(p-q))
+            elif q < p == start:
+                self.highlight = (start-(p-q), stop)
+            elif q < start < p:
+                self.highlight = (q, start)
+        else:
+            self.highlight = (q, p)
+        self._invalidate()
+
+    def extend_selection_right(self, p, q):
+        self.set_edit_pos_keep_highlight(q)
+        if self.highlight:
+            start, stop = self.highlight
+            if q == stop:
+                self.highlight = None
+            elif start < q < stop:
+                self.highlight = (start+(q-p), stop)
+            elif p == stop < q:
+                self.highlight = (start, stop+(q-p))
+            elif p < stop < q:
+                self.highlight = (stop, q)
+        else:
+            self.highlight = (p, q)
+        self._invalidate()
+
+    def keypress(self, size, key):
+        p = self.edit_pos
+        if key == 'enter':
+            text = mainbuffer.get_text()[0]
+            q = text[:p].rfind('\n') + 1
+            line = text[q:p]
+            whitespace = line[0:-len(line.lstrip())]
+            self.insert_text('\n' + whitespace)
+            return True
+        # Unix Keyboard Shortcuts <http://unix-kb.cat-v.org/>
+        elif key == 'ctrl h': key = 'backspace'
+        elif key == 'ctrl a': key = 'home'
+        elif key == 'ctrl e': key = 'end'
+        elif key == 'shift left':
+            if p==0: return key
+            p = move_prev_char(self.edit_text,0,p)
+            self.extend_selection_left(p+1, p)
+        elif key == 'shift right':
+            if p >= len(self.edit_text): return key
+            p = move_next_char(self.edit_text,p,len(self.edit_text))
+            self.extend_selection_right(p-1, p)
+        elif key in ('shift up', 'shift down'):
+            (maxcol,) = size
+            x,y = self.get_cursor_coords((maxcol,))
+            pref_col = self.get_pref_col((maxcol,))
+            highlight = self.highlight
+            if key == 'shift up':
+                if not self.move_cursor_to_coords((maxcol,),pref_col,y-1):
+                    return key
+                self.highlight = highlight
+                self.extend_selection_left(p, self.edit_pos)
+            elif key == 'shift down':
+                if not self.move_cursor_to_coords((maxcol,),pref_col,y+1):
+                    return key
+                self.highlight = highlight
+                self.extend_selection_right(p, self.edit_pos)
+        elif key == 'ctrl left':
+            if p==0: return key
+            p = move_prev_word(self.edit_text,0,p-1)
+            self.set_edit_pos(p)
+        elif key == 'ctrl right':
+            if p>=len(self.edit_text): return key
+            p = move_next_word(self.edit_text,p+1,len(self.edit_text))
+            self.set_edit_pos(p)
+        elif key == 'shift meta left':
+            if p==0: return key
+            q = move_prev_word(self.edit_text,0,p-1)
+            self.extend_selection_left(p, q)
+        elif key == 'shift meta right':
+            if p>=len(self.edit_text): return key
+            q = move_next_word(self.edit_text,p+1,len(self.edit_text))
+            self.extend_selection_right(p, q)
+        elif key == 'ctrl up':
+            if p==0: return key
+            p = move_prev_paragraph(self.edit_text,0,p-1)
+            self.set_edit_pos(p)
+        elif key == 'ctrl down':
+            if p>=len(self.edit_text): return key
+            p = move_next_paragraph(self.edit_text,p+1,len(self.edit_text))
+            self.set_edit_pos(p)
+        if key in ('page up', 'page down'):
+            (maxcol,) = size
+            x,y = self.get_cursor_coords((maxcol,))
+            pref_col = self.get_pref_col((maxcol,))
+            if key == 'page up':
+                if not self.move_cursor_to_coords((maxcol,),pref_col,y-20):
+                    return key
+            elif key == 'page down':
+                if not self.move_cursor_to_coords((maxcol,),pref_col,y+20):
+                    return key
+
+        return super(Buffer, self).keypress(size, key)
+
+    def mouse_event(self, size, event, button, col, row, focus):
+        if 'mouse press' in event:
+            if button == 4:
+                self.keypress(size, event.replace('mouse press', 'up'))
+            if button == 5:
+                self.keypress(size, event.replace('mouse press', 'down'))
+        return super(Buffer, self).mouse_event(size, event, button, col, row, focus)
+
+    def render(self, size, focus=False):
+        """
+        Render buffer widget and return canvas. Always include cursor.
+        """
+        (maxcol,)=size
+        self._shift_view_to_cursor = True
+        text, attr = self.get_text()
+        if self.highlight:
+            start, stop = self.highlight
+            attr = [(None, start), ('reverse', stop-start)]
+        key = md5(text.encode('utf-8') + str(attr) + str(maxcol)).hexdigest()
+        if key in self.cache.keys():
+            canvas = self.cache[key]
+        else:
+            trans = self.get_line_translation(maxcol, (text, attr))
+            canvas = apply_text_layout(text, attr, trans, maxcol)
+            self.cache = {key: canvas}
+        canvas = CompositeCanvas(canvas)
+        canvas.cursor = self.get_cursor_coords((maxcol,))
+        return canvas
+
+    def set_edit_pos_keep_highlight(self, pos):
+        highlight = self.highlight
+        super(Buffer, self).set_edit_pos(pos)
+        self.highlight = highlight
+
+def handle_external_command(command, text=u'', output=False):
+    process = subprocess.Popen([command], stdin=subprocess.PIPE,
+                               stdout=subprocess.PIPE, shell=True)
+    if text != u'':
+        try:
+            process.stdin.write(text.encode('utf-8'))
+        except IOError:  # broken pipe
+            pass
+    process.stdin.close()
+    if output:
+        return process.stdout.read().decode('utf-8')
+
+def handle_command(command):
+    try:
+        prefix, argument = command[0], command[1:]
+    except IndexError:
+        return
+    try:  # jump to line
+        i = int(command)
+        text = mainbuffer.get_text()[0]
+        if i in (0,1):
+            p = 0
+        else:
+            p = len('\n'.join(text.split('\n')[0:i-1]))+1
+        mainbuffer.set_edit_pos(p)
+    except ValueError:  # not an integer
+        pass
+    if prefix == '#':
+        try:
+            p=int(argument)
+            mainbuffer.set_edit_pos(p)
+        except ValueError:
+            pass
+    elif command[0] == '/' and command[-1] == '/':
+        # set selection to substring that matches regular expression,
+        # found by looking towards end of buffer from cursor position
+        regex = command[1:-1]
+        start = mainbuffer.edit_pos+1
+        text = mainbuffer.get_text()[0][start:]
+        try:
+            match = re.search(regex, text, re.UNICODE|re.MULTILINE)
+        except:
+            match = None
+        if match:
+            mainbuffer.set_edit_pos(start+match.start())
+            mainbuffer.highlight = (start+match.start(), start+match.end())
+    elif prefix == '<':  # replace selection by stdout of command
+        inputtext = handle_external_command(argument, output=True)
+        start = mainbuffer.edit_pos
+        mainbuffer.insert_text(inputtext)
+        mainbuffer.highlight = (start, mainbuffer.edit_pos)
+    elif prefix == '>':  # send selection to stdin of command
+        outputtext = mainbuffer.get_highlight_text()
+        if outputtext == u'': outputtext = mainbuffer.get_text()[0]
+        handle_external_command(argument, outputtext)
+    elif prefix == '|':  # replace selection by stdout of command
+        inputtext = mainbuffer.get_highlight_text()
+        if inputtext == u'':
+            inputtext = mainbuffer.get_text()[0]
+            outputtext = handle_external_command(argument, inputtext, True)
+            mainbuffer.set_edit_text(outputtext)
+        else:
+            outputtext = handle_external_command(argument, inputtext, True)
+            start = mainbuffer.highlight[0]
+            mainbuffer.insert_text(outputtext)
+            mainbuffer.highlight = (start, mainbuffer.edit_pos)
+    elif prefix == '!':  # run command
+        handle_external_command(argument)
+    minibuffer.set_edit_text(argument)
+    minibuffer.set_edit_pos(0)
+    frame.set_focus('body')
+
+def handle_input(key):
+    focus = frame.get_focus()
+    if key in keybindings.keys():
+        minibuffertext = minibuffer.get_edit_text()
+        handle_command(keybindings[key])
+        minibuffer.set_edit_text(minibuffertext)
+    if key == 'enter':
+        if focus == 'footer':
+            command = minibuffer.get_text()[0]
+            handle_command(command)
+    if key == 'tab':
+        if focus == 'body':
+            frame.set_focus('footer')
+        elif focus == 'footer':
+            frame.set_focus('body')
+
+if __name__ == "__main__":
+    palette = [ ('reverse', 'black', 'white') ]
+    mainbuffer = Buffer(edit_text=u'', multiline=True, align='left')
+    mainfiller = Filler(mainbuffer, valign='top')
+    minibuffer = Edit(edit_text=u'', multiline=False, align='left')
+    mini_attr = AttrWrap(minibuffer, 'reverse')
+    frame = Frame(body=mainfiller, footer=mini_attr, focus_part='body')
+    keybindings, keywidgets, keywidth = {}, [], 0
+    try:
+        with open('minimerc') as configfile:
+            for line in configfile.readlines():
+                key, command = line.strip().split(',')
+                keybindings[key] = command
+                key = key.replace(u'ctrl ', u'C-').replace(u'meta ', u'M-')
+                keylabel = Text([('reverse', key), (' '),
+                                 (command.split('#')[-1])])
+                if len(keylabel.get_text()[0]) > keywidth:
+                    keywidth = len(keylabel.get_text()[0])
+                keywidgets.append(keylabel)
+        keygrid = GridFlow(keywidgets, keywidth, 1, 0, 'left')
+        chrome = Frame(body=frame, footer=keygrid, focus_part='body')
+    except IOError:
+        chrome = frame
+    loop = MainLoop(chrome, palette=palette,
+                          unhandled_input=handle_input)
+    if len(sys.argv) > 1:
+        with open(sys.argv[1]) as inputfile:
+            inputtext = inputfile.read().decode('utf-8')
+            mainbuffer.insert_text(inputtext)
+            mainbuffer.set_edit_pos(0)
+    try:
+        loop.run()
+    except KeyboardInterrupt:  # ctrl c
+        pass
