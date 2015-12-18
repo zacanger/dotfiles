@@ -1,0 +1,143 @@
+.TH RAD 1
+.SH NAME
+rad \- command-line calculator
+.SH SYNOPSIS
+.B rad
+.SH DESCRIPTION
+.PP
+Rad reads postfix arithmetic expressions from \fIstdin\fP and prints results to
+\fIstdout\fP. Input is read line by line. The top of the stack (usually the 
+result of an operation) is printed to output after each newline. Each input line
+is interpreted as a space-separated list of tokens. A token is either a number
+or an operator. Unrecognized tokens are interpreted as the number zero.
+.PP
+Numbers are normally specified in decimal base, but can also be given in octal,
+with prefix \fB0\fR, or in hexadecimal, with prefix \fB0x\fR (or \fB0X\fR). Some
+operations are only well-defined for integer numbers, which are specified
+without a radix point (\fB.\fR). Some operations accept complex numbers, which
+are specified with an imaginary part after a semicolon (e.g. \fB3;4\fR). Three
+numerical constants are defined: \fBpi\fR, \fBe\fR and \fBi\fR. Every number
+token is stored as is into the stack.
+.PP
+Operators read numbers from the stack and perform computations on them, putting
+the results back on the stack. For example, to perform subtraction, three input
+tokens are needed, in this order: the minuend number, the subtrahend number, and
+the minus sign (\fB-\fR). The minus sign is an operator that takes two numbers
+from the stack, subtracts the top number from the one below it, and puts the
+result back on the top of the stack.
+.SH OPERATORS
+.PP
+The signatures inside square brackets bellow specify how many numbers each
+operator takes from the stack and how many it puts back on it.
+.TP
+.B + - * /
+Basic arithmetic operations [a b -- c]
+.TP
+.B %
+Remainder of division (c = a-floor(a/b)*b) [a b -- c]
+.TP
+.B **
+Exponentiation [a b -- c]
+.TP
+.B sqrt
+Square root [a -- b]
+.TP
+.B ~
+Bitwise not (as in C) [a -- b]
+.TP
+.B | & ^ >> <<
+Bitwise operations (as in C) [a b -- c]
+.TP
+.B || && == != < <= > >=
+Logic operations (as in C) [a b -- c]
+.TP
+.B if
+If a is nonzero, return b, otherwise return c (d = a ? b : c) [a b c -- d]
+.TP
+.B min max
+Minimum and maximum of two numbers [a b -- c]
+.TP
+.B log exp
+Base \fBe\fR logarithm and exponentiation [a -- b]
+.TP
+.B floor ceil
+Floor and ceiling functions [a -- b]
+.TP
+.B real imag
+Real and imaginary part [a -- b]
+.TP
+.B conj
+Complex conjugate [a -- b]
+.TP
+.B abs
+Absolute value (a.k.a. modulus, magnitude) [a -- b]
+.TP
+.B arg
+Argument (a.k.a. phase) [a -- b]
+.TP
+.B proj
+Projection on Riemann sphere [a -- b]
+.TP
+.B deg rad
+Angle conversion, to and from degrees [a -- b]
+.TP
+.B cos sin tan acos asin atan
+Trigonometric functions and their inverse [a -- b]
+.TP
+.B atan2
+Arc tangent of a/b with quadrant correction (as in C) [a b -- c]
+.TP
+.B cosh sinh tanh acosh asinh atanh
+Hyperbolic functions and their inverse [a -- b]
+.TP
+.B gcd lcm
+Greatest common divisor and least common multiple [a b -- c]
+.TP
+.B egcd
+Extended GCD (ax + by = d) [a b -- x y d]
+.TP
+.B tot
+Euler's totient function (b = |{1<=k<=a \\ gcd(k,a)==1}|) [a -- b]
+.TP
+.B !
+Factorial function (b = product of positive integers <= a) [a -- b]
+.TP
+.B #
+Primorial function (b = product of primes <= a) [a -- b]
+.TP
+.B pn
+Nth prime number [n -- p]
+.TP
+.B isprime
+1 if n is prime, 0 otherwise [n -- b]
+.TP
+.B prev next
+Closest prime number below or above n [n -- p]
+.TP
+.B factor
+Values and count of factors of n [n -- f1 f2 f3 ... c]
+.SH STACK OPERATORS
+.TP
+.B drop
+Drop top item from the stack [a -- ].
+.TP
+.B dup
+Duplicate top item in the stack [a -- a a].
+.TP
+.B exch
+Swap two items on the top of the stack [a b -- b a].
+.TP
+.B clear
+Empty stack [a b c ... -- ]
+.TP
+.B :N
+Copy stack item indexed by N. Indexes are 0, 1, 2, ..., -3, -2, -1.
+.TP
+.B show
+Print stack contents.
+.SH NOTES
+.PP
+The operators \fB<\fR, \fB<=\fR, \fB>\fR, \fB>=\fR, \fBmin\fR and \fBmax\fR only
+compare the real part of their arguments, even if the imaginary part is nonzero.
+.PP
+Project homepage: <https://github.com/lecram/rad>.
