@@ -1,0 +1,47 @@
+[Window]
+wm_class=Tortosa
+wm_name=Tortosa
+wm_role=Tortosa
+width=1600
+height=860
+decorated=false
+background=#22222255
+
+[Tabs]
+show_border=false
+show_tabs=false
+tabs_position=bottom
+tab_name_max_len=20
+
+[Vte]
+font=Hasklig 10
+foreground=#dddddd
+background=#222222fa
+color0=#111111
+color8=#555555
+color1=#ff6565
+color9=#ff8d8d
+color2=#93d44f
+color10=#c8e7a8
+color3=#eab93d
+color11=#ffc123
+color4=#3465a4
+color12=#204a87
+color5=#ce5c00
+color13=#f57900
+color6=#89b6e2
+color14=#46a4ff
+color7=#cccccc
+color15=#ffffff
+cursor_color=#dedede
+cursor_blink=system
+# cursor_shape=ibeam
+cursor_shape=underline
+# cursor_shape=block
+scrollback_lines=-1
+bell_visible=false
+bell_audible=false
+
+[Css]
+# file=/home/z/.config/tortosa/tortosa.css
+
