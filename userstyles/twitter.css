@@ -3,20 +3,22 @@
 
 .tweet-text,
 .ProfileTweet-text {
-  font-family: Monospace !important;
-  font-size: 16px !important;
-  line-height: 1.5 !important;
-  color: #ddddcf !important;
-  margin-bottom: 0.25em !important;
+	font-family: Monospace !important;
+	font-size: 16px !important;
+	line-height: 1.5 !important;
+	color: #ddddcf !important;
+	margin-bottom: 0.25em !important;
 }
 /* Compose tweet field */
 
 .tweet-box {
-  font-size: 16px !important;
-  line-height: 20px !important;
+	font-size: 16px !important;
+	line-height: 20px !important;
 }
 /* Hide modules and promotions */
-
+.moments,
+.js-moments-tab,
+.Icon--lightning,
 .trends,
 .promptbird,
 .enhanced-media-thumbnails,
@@ -38,19 +40,19 @@
 .wtf-module,
 .recap-header,
 .dismissible-content {
-  display: none !important;
+	display: none !important;
 }
 /* Hide inline media */
 
 .cards-media-container,
 .card2 {
-  display: none !important;
+	display: none !important;
 }
 /* Show media in detail view */
 
 .permalink-tweet .cards-media-container,
 .permalink-tweet .card2 {
-  display: block !important;
+	display: block !important;
 }
 /* Remove (Some) Borders */
 
@@ -60,74 +62,74 @@
 .timeline-tweet-box,
 .tweet-box,
 .module {
-  border: none !important;
+	border: none !important;
 }
 .stream-item-activity-me {
-  border-bottom: none !important;
+	border-bottom: none !important;
 }
 .user-similarities-list {
-  border: 1px solid rgba(0, 0, 0, .1) !important;
-  overflow: hidden !important;
+	border: 1px solid rgba(0, 0, 0, .1) !important;
+	overflow: hidden !important;
 }
 /* Single Column Layout */
 
 .wrapper-settings .content-header {
-  display: block !important;
+	display: block !important;
 }
 .wrapper,
 .wrapper-narrow,
 .wrapper-permalink {
-  background: #252629 !important;
-  width: 90% !important;
-  max-width: 64em !important;
+	background: #252629 !important;
+	width: 90% !important;
+	max-width: 64em !important;
 }
 .dashboard,
 .content-main {
-  float: none !important;
-  width: 100% !important;
+	float: none !important;
+	width: 100% !important;
 }
 /* Subnavigation */
 
 .module ul li {
-  display: inline-block !important;
+	display: inline-block !important;
 }
 .module ul li .Icon--caretRight {
-  display: none !important;
+	display: none !important;
 }
 .list-link {
-  border: 0 !important;
+	border: 0 !important;
 }
 /* The light, it burns! */
 
 body,
 body.ProfilePage {
-  background-image: none !important;
-  background-color: #252629 !important;
+	background-image: none !important;
+	background-color: #252629 !important;
 }
 /* Compose Tweet Modal */
 
 .tweet-box {
-  width: 90% !important;
-  height: auto !important;
-  min-height: 80px !important;
-  padding: 8px 2.5% !important;
-  background: #252629 !important;
+	width: 90% !important;
+	height: auto !important;
+	min-height: 80px !important;
+	padding: 8px 2.5% !important;
+	background: #252629 !important;
 }
 .tweet-form.has-preview.has-thumbnail .tweet-box {
-  padding-bottom: 80px !important;
+	padding-bottom: 80px !important;
 }
 .tweet-form .thumbnail-container {
-  width: auto !important;
+	width: auto !important;
 }
 .modal {
-  width: 80% !important;
-  max-width: 56em !important;
-  left: 0 !important;
-  right: 0 !important;
-  margin: 0 auto !important;
+	width: 80% !important;
+	max-width: 56em !important;
+	left: 0 !important;
+	right: 0 !important;
+	margin: 0 auto !important;
 }
 a {
-  color: #58c9b5 !important;
+	color: #58c9b5 !important;
 }
 .icon,
 .bird-topbar-etched,
@@ -144,14 +146,14 @@ a {
 .Icon--cameraPlus,
 .Icon--camera,
 .icon-btn {
-  color: #58c9b5 !important;
+	color: #58c9b5 !important;
 }
 button#global-new-tweet-button,
 .AppContent,
 span,
 div {
-  background: #252629 !important;
+	background: #252629 !important;
 }
 .tweet-box-home-timeline {
-  color: #eee;
+	color: #eee;
 }
