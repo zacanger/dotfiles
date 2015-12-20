@@ -27,3 +27,7 @@ header, #mobile-menu, #tags-list, #signup-dropdown,
 .page-content-legend, .page-secondary, .yarpp-related,
 .page-secondary-two, #side-header, #site-footer
 { visibility: hidden; height: 0; width: 0; }
+
+/*
+("^https?:\\/\\/((chat|meta|ja|pt|ru)\\.)?stackoverflow\\.com.*"), domain("serverfault.com"), domain("superuser.com"), domain("stackapps.com"), domain("mathoverflow.net"), regexp("^https?:\\/\\/((?!(area51|gaming|rpg)).*\\.)?stackexchange.com.*")
+*/

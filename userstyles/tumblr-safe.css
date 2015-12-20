@@ -1,0 +1,22 @@
+body,
+div,
+p,
+span,
+code {
+	background: #111!important;
+	color: #ddd!important;
+	font-size: 1.2em!important;
+	font-family: "Hasklig", monospace!important;
+}
+img {
+	display: none!important;
+}
+a {
+	color: #a0dfe1!important;
+}
+
+/* 
+https?://[^/]+\\.tumblr\\.com/(?!archive).*
+https?:\/\/(www)?(.*)\.tumblr\.com\/(?!(archive)).*
+tumblr.com
+*/
