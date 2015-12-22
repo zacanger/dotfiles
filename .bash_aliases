@@ -178,6 +178,10 @@ alias tpng='teenypng --apikey E5rJkw5V0aDutXwngFk2PZEEde940okM'
 alias feh='viewnior'
 alias zh='zathura'
 alias atom='atom-beta'
+alias nis='npm install --save'
+alias nisd='npm install --save-dev'
+alias bi='bower install'
+alias nig='npm install -g'
 
 # mongo alias, for temporary school project purposes
 alias mdb='mongod --dbpath=db/'
