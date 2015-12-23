@@ -182,6 +182,7 @@ alias nis='npm install --save'
 alias nisd='npm install --save-dev'
 alias bi='bower install'
 alias nig='npm install -g'
+alias gg='git go'
 
 # mongo alias, for temporary school project purposes
 alias mdb='mongod --dbpath=db/'
