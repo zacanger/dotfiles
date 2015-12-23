@@ -557,3 +557,5 @@ endfunction
 command! -bar RangerChooser call RangeChooser()
 nnoremap <leader>r :<C-U>RangerChooser<CR>
 
+inoremap <Esc> <Esc>`^
+
