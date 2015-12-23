@@ -2,10 +2,10 @@
 wm_class=Tortosa
 wm_name=Tortosa
 wm_role=Tortosa
-width=1600
-height=860
+width=800
+height=400
 decorated=false
-background=#22222255
+background=#10101055
 
 [Tabs]
 show_border=false
