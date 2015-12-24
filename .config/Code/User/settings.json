@@ -74,7 +74,7 @@
       //  , "globals"       : {}
   },
   "files.insertFinalNewline": true,
-  "gist.oauth_token": "dcfcd0e539d55d7041149f0d45085a53728cfe92",
+  "gist.oauth_token": "",
   "esQuotes.defaultQuote": "'",
   "alex.enable": true,
   "findFiles.fileExcludeGlob": ["**/node_modules/**", "**/bower_components/**"],
