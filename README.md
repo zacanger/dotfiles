@@ -12,4 +12,5 @@
 
 ---------
 
+I should point out that I don't use Textadept often, I have the configs saved here for the next time I get really annoyed with Vim or LightTable. And I don't use VS Code _ever_, because it's actually still a piece of crap, but I saved that config file because it took ages to get Code to work halfway like a real editor, and I don't ever want to have to do it again. I'll give that shit another shit if they ever figure out basic functionality like code folding or tabs.
 
