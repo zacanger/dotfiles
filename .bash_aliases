@@ -183,6 +183,7 @@ alias bi='bower install'
 alias nig='npm install -g'
 alias gg='git go'
 alias a='la'
+alias undo='undo -i'
 
 # mongo alias, for temporary school project purposes
 alias mdb='mongod --dbpath=db/'
