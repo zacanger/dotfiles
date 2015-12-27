@@ -1,0 +1,3 @@
+/* useful on many many sites, especially jekyll- or ghost-style blogs/generated static sites */
+body, div, p, h1, h2, h3, h4, h5, h6, a, a:hover { color: #ddd!important; background: #111!important; }
+/* no, really, that's all. i just got annoyed at typing this into my-style or the tools several times a day. */
