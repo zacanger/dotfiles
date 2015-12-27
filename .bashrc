@@ -9,7 +9,7 @@ esac
 
 # lines w space & dups, ignores: bash(1) for more
 HISTCONTROL=ignoreboth
-HISTIGNORE='ls:history:la:ranger:mocp:h:c:clear:'
+HISTIGNORE='ls:history:la:ranger:mocp:h:c:clear:l:lo:lT:a'
 
 # history append, length, timestamp
 shopt -s histappend
