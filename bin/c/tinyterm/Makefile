@@ -26,4 +26,4 @@ clean:
 	$(RM) tinyterm tinyterm.o
 
 install: tinyterm
-	install -Dm755 tinyterm $(DESTDIR)/usr/bin/tinyterm
+	install -Dm755 tinyterm $(DESTDIR)/usr/local/bin/tinyterm

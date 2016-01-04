@@ -1,28 +1,7 @@
-/*
-* Ryan P.C. McQuen | Everett, WA | ryan.q@linux.com
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version, with the following exception:
-* the text of the GPL license may be omitted.
-*
-* This program is distributed in the hope that it will be useful, but
-* without any warranty; without even the implied warranty of
-* merchantability or fitness for a particular purpose. Compiling,
-* interpreting, executing or merely reading the text of the program
-* may result in lapses of consciousness and/or very being, up to and
-* including the end of all existence and the Universe as we know it.
-* See the GNU General Public License for more details.
-*
-* You may have received a copy of the GNU General Public License along
-* with this program (most likely, a file named COPYING).  If not, see
-* <http://www.gnu.org/licenses/>.
-*
-*/
+// Ryan P.C. McQuen | Everett, WA | ryan.q@linux.com
 
 /* Terminal emulation (value of $TERM) (default: xterm) */
-#define TINYTERM_TERMINFO               "xterm"
+#define TINYTERM_TERMINFO               "xterm-256color"
 
 //#define TINYTERM_SCROLLBAR_VISIBLE      // uncomment to show scrollbar
 
@@ -33,18 +12,18 @@
 #define TINYTERM_SEARCH_WRAP_AROUND     TRUE
 #define TINYTERM_AUDIBLE_BELL           FALSE
 #define TINYTERM_VISIBLE_BELL           FALSE
-#define TINYTERM_FONT                   "terminus 12"
-#define TINYTERM_X_WINDOW_SIZE          800
-#define TINYTERM_Y_WINDOW_SIZE          600
+#define TINYTERM_FONT                   "Hasklig 10"
+#define TINYTERM_X_WINDOW_SIZE          600
+#define TINYTERM_Y_WINDOW_SIZE          400
 
 /* One of VTE_ANTI_ALIAS_USE_DEFAULT, VTE_ANTI_ALIAS_FORCE_ENABLE, VTE_ANTI_ALIAS_FORCE_DISABLE */
 #define TINYTERM_ANTIALIAS      VTE_ANTI_ALIAS_FORCE_ENABLE
 
 /* One of VTE_CURSOR_SHAPE_BLOCK, VTE_CURSOR_SHAPE_IBEAM, VTE_CURSOR_SHAPE_UNDERLINE */
-#define TINYTERM_CURSOR_SHAPE   VTE_CURSOR_SHAPE_BLOCK
+#define TINYTERM_CURSOR_SHAPE   VTE_CURSOR_SHAPE_UNDERLINE
 
 /* One of VTE_CURSOR_BLINK_SYSTEM, VTE_CURSOR_BLINK_ON, VTE_CURSOR_BLINK_OFF */
-#define TINYTERM_CURSOR_BLINK   VTE_CURSOR_BLINK_OFF
+#define TINYTERM_CURSOR_BLINK   VTE_CURSOR_BLINK_ON
 
 /* Selection behavior for double-clicks */
 #define TINYTERM_WORD_CHARS "-A-Za-z0-9:./?%&#_=+@~"

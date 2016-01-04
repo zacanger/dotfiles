@@ -113,6 +113,10 @@ alias mytw='twidge lsarchive'
 alias fuck='eval $(thefuck $(fc -ln -1))'
 alias please='fuck'
 
+# this serves as a total replacement for the script from http://motd.sh/, with all of its
+# absurd extraneous install & config mess
+alias motd='curl -fsH "Accept: text/plain" "http://motd.sh/?v=0.01&weather=84601&degrees=f" && echo " "'
+
 # this requires sox, and is for DADGAD. change to E2-E4 (etc) for standard.
 alias tuner='for n in D2 A2 D3 G3 A3 D4;do play -n synth 4 pluck $n repeat 2;done'
 
@@ -178,14 +182,17 @@ alias feh='viewnior'
 alias zh='zathura'
 alias atom='atom-beta'
 alias nis='npm install --save'
-alias nisd='npm install --save-dev'
+alias nid='npm install --save-dev'
 alias bi='bower install'
 alias nig='npm install -g'
 alias gg='git go'
 alias a='la'
 alias undo='undo -i'
 alias vp='vtop'
+alias alarm='alarm --config'
 
 # mongo alias, for temporary school project purposes
 alias mdb='mongod --dbpath=db/'
 
+# temporary, testing, maybe, who knows
+alias ot='otter-browser'

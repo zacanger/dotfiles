@@ -188,6 +188,8 @@ echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
 export SLACK_TOKEN='xoxp-3318091984-8228669395-14582732308-0f9a575714'
 export SLACK_USERNAME='zacanger'
 
+export LOLCOMMITS_ANIMATE='2'
+
 . /usr/share/autojump/autojump.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
