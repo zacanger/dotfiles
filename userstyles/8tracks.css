@@ -1,0 +1,392 @@
+body,
+input {
+  font-family: "Merriweather", serif !important;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Merriweather", serif !important;
+  color: #ccc !important;
+  background: transparent !important;
+}
+.title_artist {
+  font-size: 22px !important;
+}
+#now_playing .title_artist {
+  font-size: 14px !important;
+}
+.user_about .propername {
+  font-size: 20px !important;
+}
+#mix_comments,
+.mix-stats,
+.seo_text,
+#iphone_promo_form,
+#eighttracks_message,
+#sidebar_ad_wrapper,
+.favicon_lastfm,
+#seo_text,
+.js-connected-sites,
+#zoom,
+#sidebar,
+.sidebar,
+#mix_interactions,
+.i-favorite,
+.mix_like,
+.quick_add,
+.quick_actions .pipe,
+#share_user,
+.amazon .pipe,
+.buy,
+.follow,
+.login,
+#signup_link,
+#auth_nav div,
+#sidebar_ad,
+#mix_interactions_bottom,
+#share_button,
+.facebook_like,
+.mobile_links,
+#image_controls,
+.mobile_apps,
+.bubble.social_suggestions,
+.sample,
+#sidebar_ad_wrapper,
+#google_ads_iframe_\2f 3322514\2fSuperheader_0__container__ {
+  display: none !important;
+}
+a,
+a:link,
+#tracks_count,
+.featherweight,
+.turquoise,
+.displaymode,
+#q,
+#playlist,
+.i-search:before,
+.user_about.profile.clear.favable.vcard,
+.track.now_playing.open,
+.description,
+.header.skip,
+p,
+.disc,
+.gallery,
+.answer,
+.placeholder {
+  color: #ddd !important;
+}
+a:hover,
+a.mix.suggestion.propername:hover,
+.turquoise:hover,
+a.follow:hover,
+a.active {
+  color: #ddd !important;
+  background-color: #2d2d2d !important;
+}
+.date,
+.length,
+#mix_description,
+.mix-stats,
+#logged_in_dropdown,
+#back_to_top,
+a.tag,
+.popup,
+.add_to_collections,
+.content,
+#new_collection_name,
+#new_collection_description,
+#create_collection_button,
+.explanation,
+.reason,
+.mixes,
+.result.mtag,
+.tag,
+.edit_user,
+label,
+.sidebar,
+#social_suggestions,
+.vcard,
+.black_tooltip,
+.interactbox,
+.turquoise_bt {
+  color: #ddd !important;
+  background: transparent !important;
+}
+#thin_header,
+#wrapper,
+#content,
+#belly_container,
+#search,
+#header_right,
+.grid_square,
+#mix_wrapper,
+#mix_interactions_bottom {
+  color: #101010 !important;
+  background: #101010 !important;
+}
+.displaymode,
+#footer,
+a.follow.active,
+#page_description,
+.select2-drop,
+.i-x {
+  background: #101010 !important;
+}
+a.fav.active,
+a.fav.active.just_clicked:hover,
+.feed-controllers .active .bullet {
+  color: #09C !important;
+  background: transparent !important;
+}
+#like_button.active {
+  color: #9f595a !important;
+}
+.mix_like.player_button.active {
+  color: #9f595a !important;
+}
+.mix_like {
+  background: transparent !important;
+}
+#mix_interactions:after,
+#mix_interactions:before {
+  border-left: #101010 !important;
+  background: #101010 !important;
+}
+.q,
+input.mediumText,
+textarea.mediumText,
+select#user_country {
+  color: #ddd !important;
+  background: #101010 !important;
+}
+a.follow {
+  background: #101010;
+  border-color: #ddd !important;
+}
+a.mix.suggestion.propername,
+a.mix_url,
+a.feed-filter.active {
+  background: transparent !important;
+}
+.track_metadata,
+.detail {
+  color: #746E6E !important;
+}
+#facebox {
+  color: #101010 !important;
+  border: #101010 !important;
+}
+.my_collection:hover,
+.mix:hover,
+.result.mtag.selected:hover,
+a.suggestion.propername:hover,
+.menu-item:hover,
+.inverted_counter {
+  background: #2D2D2D !important;
+}
+.likes_count:hover {
+  color: #2D2D2D !important;
+}
+.black_tooltip.black_tooltip_up.black_tooltip_solid {
+  color: #ddd !important;
+  background: #101010 !important;
+}
+.mix.with_reason,
+.white_button,
+.autocomplete {
+  color: #ddd !important;
+  background: #101010 !important;
+}
+.mixset_entries,
+#news_feed {
+  color: #999 !important;
+}
+#big_search {
+  border: #ddd !important;
+}
+#sort_select {
+  color: #ddd !important;
+  background: #101010 !important;
+}
+input.mediumText,
+textarea.mediumText {
+  border: 1px solid #ddd !important;
+}
+.q {
+  border: 1px solid #ddd !important;
+}
+textarea,
+.text.prompt:hover,
+.text.prompt:focus {
+  color: #ddd !important;
+}
+li.track {
+  list-style-type: decimal;
+  list-style-position: inside;
+}
+.unread_notifications.notifications_counter {
+  color: #101010;
+}
+::-webkit-scrollbar-thumb:vertical {
+  background-color: #999;
+  height: auto;
+}
+::-webkit-scrollbar-thumb:horizontal {
+  background-color: #999;
+  height: 7px;
+}
+::-webkit-scrollbar {
+  height: 7px;
+  width: 7px;
+  background-color: #101010;
+}
+.errors,
+body,
+.result-tags,
+.result-artist_tags {
+  background-color: #101010 !important;
+}
+body,
+.card,
+#new_collection_name,
+.item,
+#topnav_element {
+  background-color: #101010 !important;
+}
+#thin_header,
+#header_content,
+#explore_button,
+.search,
+.autocomplete,
+.result.tags,
+#sort_select,
+.turquoise_button,
+#logged_in_dropdown,
+.my_collection:hover,
+.fav_track,
+.reason,
+.avatar-icon,
+#browse {
+  background: #101010 !important;
+}
+.tag,
+.new_review,
+.mediumText,
+.content {
+  background: #101010 !important;
+}
+.autocomplete,
+.token-input,
+.track,
+#description_html,
+.detail,
+textarea,
+h2,
+#bio_container,
+.content {
+  color: #ddd !important;
+}
+.track_metadata,
+.by_artist,
+.unplayable_warning,
+.track:before {
+  color: #7c7c7c !important;
+}
+.token-label,
+.token {
+  background: #221f1f !important;
+}
+#mix_name,
+.mix-data {
+  color: #101010;
+}
+a,
+.turquoise.right {
+  color: #999 !important;
+}
+a:hover,
+.my_collection:hover {
+  color: #53bab3 !important;
+  background: transparent !important;
+}
+.background-blur-container {
+  background: #1a1a1a !important;
+}
+.fav.active {
+  color: #1fe1d4 !important;
+}
+a.follow {
+  border-color: #ddd;
+}
+a.menu-item:hover {
+  background: #101010 !important;
+}
+.content {
+  border: 2px solid #ddd;
+}
+.track:before {
+  font-size: 20px !important;
+}
+#loadingbar {
+  background: gray;
+}
+a.selected {
+  border-color: #ddd !important;
+}
+.big_menu:after {
+  border-bottom: none;
+}
+a.selected:after {
+  border-bottom: none !important;
+}
+.item.selected {
+  color: #ddd !important;
+}
+::-webkit-scrollbar-thumb:vertical {
+  background-color: #999;
+  height: auto;
+}
+::-webkit-scrollbar-thumb:horizontal {
+  background-color: #999;
+  height: 7px;
+}
+::-webkit-scrollbar {
+  height: 7px;
+  width: 7px;
+  background-color: #101010;
+}
+#footer {
+  z-index: -10 !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -2000px !important;
+}
+.bubble.arrow:before,
+.bubble.arrow:after {
+  transform: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+.seo_pagination {
+  height: 100px !important;
+}
+.split {
+  border: none !important;
+}
+.mix_art_wrapper {
+  position: relative !important;
+  margin: 0 auto !important;
+}
+#mix_name {
+  position: absolute !important;
+  top: -500px;
+}
+#mix_details {
+  height: auto !important;
+}
+#play_overlay {
+  bottom: 50px !important;
+}
