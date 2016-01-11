@@ -180,7 +180,6 @@ alias phps='php -S 127.0.0.1:5555'
 alias tpng='teenypng --apikey E5rJkw5V0aDutXwngFk2PZEEde940okM'
 alias feh='viewnior'
 alias zh='zathura'
-alias atom='atom-beta'
 alias nis='npm install --save'
 alias nid='npm install --save-dev'
 alias bi='bower install'
@@ -190,9 +189,12 @@ alias a='la'
 alias undo='undo -i'
 alias vp='vtop'
 alias alarm='alarm --config'
+alias npms='npm start'
 
 # mongo alias, for temporary school project purposes
-alias mdb='mongod --dbpath=db/'
+alias mdb='mongod --dbpath=db/ --fork --nojournal --syslog'
+alias kmdb='mdb --shutdown'
 
 # temporary, testing, maybe, who knows
 alias ot='otter-browser'
+

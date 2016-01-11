@@ -29,3 +29,5 @@ build.js
 x/**
 **/api.key
 **.key
+completer.hist
+
