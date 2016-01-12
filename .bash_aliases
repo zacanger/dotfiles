@@ -1,10 +1,14 @@
 # ~/.bash_aliases : sourced by ~/.bashrc
 
+# kill everything, goddammit
+alias killx='sudo pkill -9 Xorg'
+
 # managing .bashrc & .bash_aliases
 alias edrc='nvim ~/.bashrc'
 alias brc='nvim ~/.bashrc'
 alias edal='nvim ~/.bash_aliases'
 alias reload='source ~/.bashrc'
+alias fn='cd ~/.bash_functions'
 
 # development package managers
 alias npms='npm start'
@@ -13,9 +17,13 @@ alias npmupd='npm update -g'
 alias bupd='bower update'
 alias nis='npm install --save'
 alias nid='npm install --save-dev'
+alias ni='npm i'
 alias bi='bower install'
 alias nig='npm install -g'
 alias pipupd='pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
+alias what-gives='apt-cache show "$1" | grep "^Filename:" | sed -e "s:\(.*\)/\(.*\)/\(.*\)/\(.*\)/.*:\4:"'
+alias what-repo='apt-cache show "$1" | grep ^Filename: | head -n1 | col2 /'
+alias what-source='apt-cache show "$1" | grep "^Filename:" | sed -e "s:\(.*\)/\(.*\)/\(.*\)/\(.*\)/.*:\4:"'
 
 # apt/dpkg stuff
 alias upd='sudo apt-get update'
@@ -34,11 +42,6 @@ alias arm='sudo apt-get autoremove'
 
 # disk usage
 alias disk='du -S | sort -n -r | less'
-
-# search
-alias where="which"
-alias what="apropos"
-alias apr="apropos"
 
 # navigation
 alias ..="cd .."
@@ -76,15 +79,17 @@ alias shutdown='sudo /sbin/shutdown'
 alias bye='sudo /sbin/poweroff'
 
 # ls -ALL THE THINGS
-alias ls='ls -F --color=auto --group-directories-first'
+alias ls='ls -F --color=auto -g'
 alias la='ls -A'
-alias ll='ls -l'
+alias ll='ls -l --author'
 alias l='ls -CF'
 alias lo='ls -lghtr'
-alias lS='ls -lhS'
+alias lS='ls -osS'
 alias lT='ls -rtH'
 alias ld='ls -d */'
 alias k='ls -htr'
+alias lr='ls -aR'
+alias lc='ls -ltcr'
 
 # ag all the things! um, i mean...
 alias dir='dir --color=auto'
@@ -144,9 +149,10 @@ alias tuner='for n in C2 G2 C3 F3 G3 C4;do play -n synth 4 pluck $n repeat 2;don
 
 # misc shortcuts, because i'm lazy
 alias fs='ranger'
+alias makelist="make -rpn | sed -n -e '/^$/ { n ; /^[^ .#][^ ]*:/p ; }' | egrep --color '^[^ ]*:'"
 alias mu='mocp -y -T moc_theme'
 alias sfm='spacefm'
-alias dt='dvtm -m ^'
+alias dt="dvtm -m ^"
 alias les='less'
 alias k9='pkill -9'
 alias gui='startxfce4'
@@ -197,7 +203,7 @@ alias fv='fervor -dark'
 alias cat='ccat'
 alias yt2mp3='youtube-dl --extract-audio --audio-format mp3'
 alias pb='pinboard'
-alias es='evilscan 127.0.0.1 --port=1024-14000'
+alias es='evilscan 127.0.0.1 --port=1024-29000'
 alias phps='php -S 127.0.0.1:5555'
 alias tpng='teenypng --apikey E5rJkw5V0aDutXwngFk2PZEEde940okM'
 alias feh='viewnior'
@@ -207,4 +213,7 @@ alias a='la'
 alias undo='undo -i'
 alias vp='vtop'
 alias alarm='alarm --config'
+alias sl='slack-desktop'
+alias apr="apropos"
+alias mpad='mousepad'
 
