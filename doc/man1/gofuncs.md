@@ -5,10 +5,14 @@ like removing the `()`).
 
 ### Usage
 - `g`  — return to a saved directory
+  - `g home` returns to `home` (defaults to `_back`)
 - `ga` — list all saved directories
+  - `ga` — `ga` lists all directories saved in `~/.g/`; it can take a pattern (egrep)
+  - note, this pattern applies to both the saved name and the path it represents
 - `gt` — save cwd
+  - `gt` — `cd ~/`, `gt home` will save the current directory as `home` (defaults to `_back`)
 
-### Summary
+#### Details
 Store a path with `gt` (for _there_). This saves your `cwd` to `~/.g/`, in a file with the  
 name you've assigned to this shortcut. (This way, these shortcuts last between sessions  
 without needing to write to your `.bashrc` or somesuch.) You can get _back_ to that  
@@ -33,12 +37,6 @@ function ga(){ ( cd ~/.g ; grep '' * ) | awk '{ FS=":" ; printf("%-10s %s\n",$1,
 ```
 Also, `mkdir ~/.g` (so the little path files have a place to live).
 
-### Details
-- `g` — `g home` returns to `home` (defaults to `_back`)
-- `ga` — `ga` lists all directories saved in `~/.g/`; it can take a pattern (egrep)
-  - note, this pattern applies to both the saved name and the path it represents
-- `gt` — `cd ~/`, `gt home` will save the current directory as `home` (defaults to `_back`)
-
-### Credits
+#### Credits
 - Original author: Malcom Dew-Jones, (GNU copyleft)
 - Modified/redocumented/etc. by zacanger
