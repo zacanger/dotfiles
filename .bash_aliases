@@ -79,7 +79,7 @@ alias shutdown='sudo /sbin/shutdown'
 alias bye='sudo /sbin/poweroff'
 
 # ls -ALL THE THINGS
-alias ls='ls -F --color=auto -g'
+alias ls='ls -F --color=auto --group-directories-first'
 alias la='ls -A'
 alias ll='ls -l --author'
 alias l='ls -CF'

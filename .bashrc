@@ -1,34 +1,28 @@
-#
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+#############################################################################
+ ####  ~/.bashrc: run for non-login shells, sources most other configs  ####
+ ####           check /usr/share/doc/bash & /etc for examples           ####
+#############################################################################
 
 ## THESE THINGS ARE KINDA IMPORTANT AND STUFF I GUESS
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
-
 # check size, one line, etc
 shopt -s cmdhist
 shopt -s checkwinsize
-
 # "**" in pathname matches all files & 0 or more dirs/subdirs; also, ".foo"
 shopt -s globstar
 shopt -s dotglob
-
 # see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
 # color ls
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolours && eval "$(dircolors -b ~/.dircolours)" || eval "$(dircolors -b)"
 fi
-
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
 # history stuff
 HISTCONTROL=ignoreboth # ignore lines with spaces & dups
 HISTIGNORE='ls:l:la:lo:lS:lT:ll:a:k:ld:lr:lc:h:history:ranger:mocp:mu:c:clear'
@@ -37,7 +31,6 @@ HISTSIZE=$((1 << 12)) # length
 HISTFILESIZE=$((1 << 24)) # size
 HISTTIMEFORMAT='%F %T  ' # timestamp
 PROMPT_COMMAND='history -a' # record history NOW, not on exit
-
 # completions
 bind 'set completion-query-items 100' # ask if over N possible completions
 complete -d cd rmdir # on cd, just show dirs
@@ -54,11 +47,9 @@ complete -A shopt shopt # sh... opt...
 complete -A signal trap # signals
 complete -A variable declare export readonly typeset #variables
 complete -A function -A variable unset # more vars
-
 # autocorrect spelling on some things
 shopt -s cdspell
 shopt -s dirspell
-
 # dynamic title
 case $TERM in
 xterm*)
@@ -67,7 +58,6 @@ xterm*)
 *)
     ;;
 esac
-
 # include
 export CDPATH='.:/home/z/Dropbox/skool:/home/z/Dropbox/z/bin:/home/z/Dropbox/z:/usr/local/lib:/usr/local/lib/node_modules'
 export PATH=$PATH:/usr/local/share/npm/bin:/home/z/Dropbox/z/bin:/opt:$(find $HOME/bin/ -type d | paste -s -d:)
@@ -75,23 +65,19 @@ export EDITOR="nvim"
 export SLACK_TOKEN='xoxp-3318091984-8228669395-14582732308-0f9a575714'
 export SLACK_USERNAME='zacanger'
 export LOLCOMMITS_ANIMATE='2'
-
 # j, rbenv, and fzf
 . /usr/share/autojump/autojump.sh
 eval "$(rbenv init -)"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 # keep aliases and functions on their own
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-
 if [ -d ~/.bash_functions ]; then
     for file in ~/.bash_functions/*; do
         . "$file"
     done
 fi
-
 # and, finally... liquidprompt; load from interactive shell, don't from scripts/scp
 echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
 
@@ -99,20 +85,16 @@ echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
  ## FROM HERE DOWN, IT'S ALL JUST UNUSED BITS AND PIECES ##
  ##  alternate prompts, extras, other term titles, etc.  ##
 ############################################################
-
 ## the usual favourite prompt, when not using `liquidprompt`
 ## set variable identifying the chroot you work in (used in the prompt below)
 # if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
 #     debian_chroot=$(cat /etc/debian_chroot)
 # fi
-#
 ## (this is the prompt i was talking about.) fancy prompt (in color)
 # case "$TERM" in
 #     xterm-color) color_prompt=yes;;
 # esac
-#
 # force_color_prompt=yes
-#
 # if [ -n "$force_color_prompt" ]; then
 #     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
 #   # if it's NOT ecma-48 (iso/iec-6429), which is very rare
@@ -160,7 +142,7 @@ echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
 
 # vi mode
 # set -o vi
-# bind -m vi-insert \\C-l:clear-screen        # make Ctrl-L work the same as it does in emacs mode
+# bind -m vi-insert \\C-l:clear-screen  # make Ctrl-L work the same as it does in emacs mode
 
 # programmable completion; enable if NOT enabled in /etc/bash.bashrc;
 # /etc/profile needs to source that
