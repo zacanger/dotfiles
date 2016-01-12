@@ -72,7 +72,7 @@ esac
 export CDPATH='.:/home/z/Dropbox/skool:/home/z/Dropbox/z/bin:/home/z/Dropbox/z:/usr/local/lib:/usr/local/lib/node_modules'
 export PATH=$PATH:/usr/local/share/npm/bin:/home/z/Dropbox/z/bin:/opt:$(find $HOME/bin/ -type d | paste -s -d:)
 export EDITOR="nvim"
-export SLACK_TOKEN='xoxp-3318091984-8228669395-14582732308-0f9a575714' #ignoreline
+export SLACK_TOKEN='xoxp-3318091984-8228669395-14582732308-0f9a575714' # #ignoreline
 export SLACK_USERNAME='zacanger'
 export LOLCOMMITS_ANIMATE='2'
 
