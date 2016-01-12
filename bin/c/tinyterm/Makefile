@@ -14,16 +14,17 @@ pkgs = vte
 pkgs_CFLAGS = $(shell pkg-config --cflags $(pkgs))
 pkgs_LIBS = $(shell pkg-config --libs $(pkgs))
 
-CPPFLAGS += -DTINYTERM_VERSION=\"$(V)\"
+CPPFLAGS += -DTT_VERSION=\"$(V)\"
 CFLAGS := $(base_CFLAGS) $(pkgs_CFLAGS) $(CFLAGS)
 LDLIBS := $(base_LIBS) $(pkgs_LIBS)
 
-all: tinyterm
+all: tt
 
-tinyterm: tinyterm.c config.h
+tt: tt.c config.h
 
 clean:
-	$(RM) tinyterm tinyterm.o
+	$(RM) tt tt.o
 
-install: tinyterm
-	install -Dm755 tinyterm $(DESTDIR)/usr/local/bin/tinyterm
+install: tt
+	install -Dm755 tt $(DESTDIR)/usr/local/bin/tt
+
