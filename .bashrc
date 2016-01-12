@@ -170,6 +170,9 @@ complete -A signal trap
 complete -A variable declare export readonly typeset
 complete -A function -A variable unset
 
+# rbenv
+eval "$(rbenv init -)"
+
 # ask if more than x options
 bind 'set completion-query-items 200'
 
@@ -193,3 +196,4 @@ export LOLCOMMITS_ANIMATE='2'
 . /usr/share/autojump/autojump.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+

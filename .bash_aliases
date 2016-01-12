@@ -1,19 +1,26 @@
+# ~/.bash_aliases : sourced by ~/.bashrc
+
 # managing .bashrc & .bash_aliases
 alias edrc='nvim ~/.bashrc'
+alias brc='nvim ~/.bashrc'
 alias edal='nvim ~/.bash_aliases'
 alias reload='source ~/.bashrc'
 
-# package managers
+# development package managers
+alias npms='npm start'
 alias apmupd='apm update --no-confirm'
 alias npmupd='npm update -g'
 alias bupd='bower update'
+alias nis='npm install --save'
+alias nid='npm install --save-dev'
+alias bi='bower install'
+alias nig='npm install -g'
 alias pipupd='pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
 
 # apt/dpkg stuff
 alias upd='sudo apt-get update'
 alias upg='sudo apt-get update && sudo apt-get upgrade'
-alias purge='sudo apt-get purge'
-alias brc='nvim ~/.bashrc'
+alias prg='sudo apt-get purge'
 alias search='apt-cache search'
 alias policy='apt-cache policy'
 alias depends='apt-cache depends'
@@ -23,6 +30,7 @@ alias isit='dpkg -l | ag ii | ag'
 alias rdepends='apt-cache rdepends'
 alias show='apt-cache show'
 alias dupg='sudo apt-get update && sudo apt-get dist-upgrade'
+alias arm='sudo apt-get autoremove'
 
 # disk usage
 alias disk='du -S | sort -n -r | less'
@@ -89,6 +97,18 @@ alias egrep='egrep --color=auto'
 alias t='python2.7 ~/bin/py/t.py --task-dir ~/Dropbox/tpytasks --list tasks'
 alias tl='t | wc -l'
 
+# browsers are life. use them.
+alias ch='chromium'
+alias ff='firefox'
+alias ffs='firefox --safe-mode'
+alias ffm='firefox --ProfileManager'
+alias ffmps='firefox --ProfileManager --safe-mode'
+alias ot='otter-browser'
+alias qu='qutebrowser'
+alias lk='luakit'
+alias sm='seamonkey'
+alias icew='iceweasel'
+
 # browsers suck. destroy them.
 alias kk='kill-tabs'
 alias kch='pkill -15 chromium'
@@ -96,7 +116,7 @@ alias kice='pkill -15 iceweasel'
 alias kff='pkill -15 firefox'
 alias ksm='pkill -15 seamonkey'
 alias kqu='pkill -15 qutebrowser'
-alias klt='pkill -15 luakit'
+alias klk='pkill -15 luakit'
 
 # dropbox; basically may as well be ~/ at this point
 alias dbup='dropbox start'
@@ -113,17 +133,17 @@ alias mytw='twidge lsarchive'
 alias fuck='eval $(thefuck $(fc -ln -1))'
 alias please='fuck'
 
-# this serves as a total replacement for the script from http://motd.sh/, with all of its
-# absurd extraneous install & config mess
-alias motd='curl -fsH "Accept: text/plain" "http://motd.sh/?v=0.01&weather=84601&degrees=f" && echo " "'
+# this serves as a replacement for the script from http://motd.sh/
+# for your config, change the zip code, degrees (to c, if needed), stocks (to y, if needed),
+# and quotes (to '' if needed).
+alias motd='curl -fsH "Accept: text/plain"\
+"http://motd.sh/?v=0.01&weather=84601&degrees=f&stocks=&quotes=y" && echo " "'
 
-# this requires sox, and is for DADGAD. change to E2-E4 (etc) for standard.
-alias tuner='for n in D2 A2 D3 G3 A3 D4;do play -n synth 4 pluck $n repeat 2;done'
+# this requires sox, and is for CGCFGC. change to E2-E4 (etc) for standard.
+alias tuner='for n in C2 G2 C3 F3 G3 C4;do play -n synth 4 pluck $n repeat 2;done'
 
 # misc shortcuts, because i'm lazy
 alias fs='ranger'
-alias web='firefox'
-alias browser='chromium'
 alias mu='mocp -y -T moc_theme'
 alias sfm='spacefm'
 alias dt='dvtm -m ^'
@@ -161,6 +181,8 @@ alias dfm='dmenu-fm'
 alias lh='laenza.sh'
 alias co='xclip -selection clipboard'
 alias pa='xclip -o'
+alias mdb='mongod --dbpath=db/ --fork --nojournal --syslog'
+alias kmdb='mdb --shutdown'
 alias ms='msee'
 alias cx='chmod +x'
 alias vn='viewnior'
@@ -180,21 +202,9 @@ alias phps='php -S 127.0.0.1:5555'
 alias tpng='teenypng --apikey E5rJkw5V0aDutXwngFk2PZEEde940okM'
 alias feh='viewnior'
 alias zh='zathura'
-alias nis='npm install --save'
-alias nid='npm install --save-dev'
-alias bi='bower install'
-alias nig='npm install -g'
 alias gg='git go'
 alias a='la'
 alias undo='undo -i'
 alias vp='vtop'
 alias alarm='alarm --config'
-alias npms='npm start'
-
-# mongo alias, for temporary school project purposes
-alias mdb='mongod --dbpath=db/ --fork --nojournal --syslog'
-alias kmdb='mdb --shutdown'
-
-# temporary, testing, maybe, who knows
-alias ot='otter-browser'
 
