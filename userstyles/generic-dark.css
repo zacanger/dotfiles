@@ -1,3 +1,6 @@
-/* useful on many many sites, especially jekyll- or ghost-style blogs/generated static sites */
-body, div, p, h1, h2, h3, h4, h5, h6, a, a:hover { color: #ddd!important; background: #111!important; }
-/* no, really, that's all. i just got annoyed at typing this into my-style or the tools several times a day. */
+/* this is it. i throw these couple of lines all over the place, and it's stored here because i'm sick of needing to
+ * rewrite it in the 'my-style' extension (or in the tools, in firefox) on just about every other site i visit. */
+body,div,p,h1,h2,h3,h4,h5,h6{color: #f2f4cd!important; background: #101010!important;font-family:"Hasklig";}
+a{color:#8cf2c1!important;}
+a:hover{color:#a7d7e5!important;}
+
