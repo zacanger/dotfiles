@@ -1,114 +1,44 @@
-INTRODUCTION
+## G
+I like to get myself around quickly and easily. These functions are super useful for this.  
+They work in Bash (but are evidently compatible with other shells, with minor adjustments  
+like removing the `()`).
 
-Like many unix users, I have the need to easily move about the directory
-tree. 
+### Usage
+- `g`  — return to a saved directory
+- `ga` — list all saved directories
+- `gt` — save cwd
 
-The three shell functions shown here are the ones I find most useful. Unlike
-some other techniques, the paths you wish to save are remembered from one
-login session to the next.
+### Summary
+Store a path with `gt` (for _there_). This saves your `cwd` to `~/.g/`, in a file with the  
+name you've assigned to this shortcut. (This way, these shortcuts last between sessions  
+without needing to write to your `.bashrc` or somesuch.) You can get _back_ to that  
+directory at any point by using the `g` command. And to see all available `g`s, just do  
+a `ga` (for _all_).
 
-I have used these functions in ksh and bash.  The definitions shown below
-work as-is in bash.  On some systems you will need to remove the ()'s that
-follow the function names.
+### Installation
+If you don't already use a directory for your functions, you should think about it.  
+You could put something like this in your `.bashrc`:
+```shell
+if [-d ~/.bash_functions ]; then
+    for file in ~/.bash_functions/*; do
+        . "$file"
+    done
+fi
+```
+...but if you don't want to do that, you can always just put these directly in there.
+```shell
+function g(){ cd `cat ~/.g/${1-_back} || echo .` ; }  
+function gt(){ pwd > ~/.g/${1-_back} ; echo "g ${1} will return to `pwd`" ;  }  
+function ga(){ ( cd ~/.g ; grep '' * ) | awk '{ FS=":" ; printf("%-10s %s\n",$1,$2); }' | grep -i -E ${1-.\*} ; }
+```
+Also, `mkdir ~/.g` (so the little path files have a place to live).
 
+### Details
+- `g` — `g home` returns to `home` (defaults to `_back`)
+- `ga` — `ga` lists all directories saved in `~/.g/`; it can take a pattern (egrep)
+  - note, this pattern applies to both the saved name and the path it represents
+- `gt` — `cd ~/`, `gt home` will save the current directory as `home` (defaults to `_back`)
 
-OVERVIEW
-
-Locations (i.e. paths) are saved by the 'here' command. This writes the
-current directory name (literally 'here' at the time you type it) into a
-file in your ~/.going directory (which you 'mkdir' ahead of time).  You can
-return to the location later using the 'go' command (it 'goes' to a named
-location).  To list the available locations use the 'there' command (to see
-what locations are out 'there').  Since the locations are saved in files,
-they persist from one session to the next, unlike some other available
-techniques.  
-
-
-INSTALLATION
-
-	1) mkdir ~/.going
-	2) place the following 'bash' commands in a file such 
-	   as ~/.bashrc
-
---- CUT ---
- function go()   { cd `cat ~/.going/${1-_back} || echo .` ; }
- function here() { pwd > ~/.going/${1-_back} ; 
-                   echo "go ${1} will go to `pwd`" ;  } 
- function there() { ( cd ~/.going ; 
-                      grep '' * ) | 
-                      awk '{ FS=":" ; printf("%-10s %s\n",$1,$2); }' | 
-                      grep -i -E ${1-.\*} ; }
---- END ---
-
-
-NAME
-	here  - save the current directory for later
-	go    - go somewhere you have previously saved with 'here'
-	there - view the places you can 'go'
-
-SYNOPSIS
-	here  [name]	(default name = _back)
-	go    [name]	(default name = _back)
-	there [grep-E-expresssion]	default = .*
-
-DESCRIPTION
-	'here' assigns a name to a directory, and saves the
-	name for later use by 'go'. With no parametre the name
-	_back is used.
-
-	'go' returns you to a directory.  The parametre is the
-	name assigned earlier with the 'here' command.  With
-	no parametre the name _back is used.
-
-	'there' lists the assigned names and paths.  If
-	specified, a parametre filters the list.  Filter words
-	can be OR'd with the | character (which may have to be
-	escaped for the shell).
-
- 
-EXAMPLES
-	A typical session might look like the following
-	(output denoted by =>) 
-
-	# save my own bin location for later
-		$ cd ~/bin
-		$ here mybin
-		=> go mybin will go to /home/malcolm/bin
-
-	# later, to return to my own bin directory
-		$ go mybin
-
-	# later still, when I've forgotten where I can 'go'
-		$ there
-		=> mybin	/home/malcolm/bin
-		=> sbin		/usr/local/sbin
-		=> cgi		/var/lib/httpd/cgi-bin
-		  ...etc...
-
-	Some more 'there' examples
-		$ there bin	# name or path contains 'bin'
-		=> mybin	/home/malcolm/bin
-		=> sbin		/usr/local/sbin
-		=> cgi		/var/liv/httpd/cgi-bin
-	
-		$ there ^my	# name starts with 'my'
-		=> mybin	/home/malcolm/bin
-		=> mysrc	/home/malcolm/bin/src
-	
-		$there bin\|cgi	# look for 'bin' OR 'cgi'
-		=> mybin	/home/malcolm/bin
-		=> sbin		/usr/local/sbin
-		=> cgi		/var/lib/httpd/cgi-bin
-		=> modules	/var/lib/httpd/cgi-bin/perl/modules
-
-AUTHOR
-	Malcolm Dew-Jones. 73312.2317@compuserve.com
-
-COPYRIGHT
-	GNU Copyleft.  This software is provided AS-IS in the hopes
-	that it will be useful, and comes with no warranty of any sort.
-
-BUGS
-	The top row of the there output is not formatted as
-	nicely as the other rows.
-
+### Credits
+- Original author: Malcom Dew-Jones, (GNU copyleft)
+- Modified/redocumented/etc. by zacanger
