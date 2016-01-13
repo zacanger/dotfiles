@@ -218,5 +218,3 @@ alias mpad='mousepad'
 alias ad='atom -d'
 alias abd='atom-beta -d'
 alias xfds='xfce4-display-settings'
-alias tpng='teenypng --apikey E5rJkw5V0aDutXwngFk2PZEEde940okM' #ignoreline
-
