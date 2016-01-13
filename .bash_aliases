@@ -56,6 +56,7 @@ alias ,,,,,='.....'
 alias ,,,,,,='......'
 alias fonts="cd /usr/share/fonts"
 alias cs='cd $OLDPWD'
+alias ..a='cd .. && a'
 
 # safety
 # alias rm='rm -Iv --preserve-root'
