@@ -14,7 +14,7 @@
   "ecmascript": 6,
   "jsx": true
   },
-  "plugins": [ "react" ],
+//  "plugins": [ "react" ],
   "rules": {
     "strict": 0,
     "quotes": 0,
@@ -30,7 +30,7 @@
     "binaryLiterals": true,
     "blockBindings": true,
     "generators": true,
-    "experimentalObjectRestSpread: true
+    "experimentalObjectRestSpread": true
   },
   "rules": {
     "accessor-pairs": 2,

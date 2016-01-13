@@ -91,6 +91,7 @@ alias ld='ls -d */'
 alias lr='ls -aR'
 alias lc='ls -ltcr'
 alias lH='ls -hHsorA'
+alias lS='ls -Aoh'
 
 # ag all the things! um, i mean...
 alias dir='dir --color=auto'
