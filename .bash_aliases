@@ -220,4 +220,5 @@ alias apr="apropos"
 alias mpad='mousepad'
 alias ad='atom -d'
 alias abd='atom-beta -d'
+alias xfds='xfce4-display-settings'
 
