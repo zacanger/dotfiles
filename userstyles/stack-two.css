@@ -1,9 +1,17 @@
 /* i spend way too much time on the stack exchange network to actually want to deal with how it looks... */
-#sidebar, #footer-sites, #footer-menu, .footer-wrap, #footer, .categories, .bottom-notice, .post-form, #feed-link, #hlogo, #hmenus, #feed-link-text, .topbar, .topbar-wrapper, .everyonelovesstackoverflow, .js-add-link, .comments-link disabled-link {display:none;!important}
-.post-tag,.comment-user,.user-info,.post-signature,#tabs,.owner,.prettyprint,.prettyprinted{filter: invert(100%) !important;-webkit-filter: invert(100%) !important;}
-body,div,p,h1,h2,h3,h4,h5,h6{color: #f2f4cd!important; background: #101010!important;font-family:"Hasklig";}
+
+#sidebar,#footer-sites,#footer-menu,.footer-wrap,#footer,.categories,.bottom-notice,.post-form,#feed-link,#hlogo,#hmenus,#feed-link-text,.topbar,.topbar-wrapper,.everyonelovesstackoverflow,.js-add-link,.comments-link,.disabled-link{display:none!important;}
+
+.post-tag,.comment-user,.user-info,.post-signature,#tabs,.owner,.prettyprint,.prettyprinted{filter:invert(100%)!important;-webkit-filter:invert(100%)!important;}
+
+body,div,p,h1,h2,h3,h4,h5,h6{color:#f2f4cd!important;background:#101010!important;font-family:"Hasklig";}
+
 a{color:#8cf2c1!important;}
+
 a:hover{color:#a7d7e5!important;}
+
 .post-text p ol li code {background:#101010!important;color:#eee!important;}
+
 table tbody tr td.answercell div ol li code {background:#101010!important;color:#eee!important;}
+
 table tbody > tr td.answercell div p code{background:#101010!important;color:#ddd!important;}
