@@ -1,3 +1,5 @@
+# deb http://security.debian.org/ stretch/updates main contrib non-free
+# deb-src http://security.debian.org/ stretch/updates main contrib non-free
 # deb http://deb.vegans.it/ binary/
 # deb http://download.tuxfamily.org/glxdock/repository/debian/ CODENAME cairo-dock
 # deb http://download.tuxfamily.org/ccm/debian/ sid main

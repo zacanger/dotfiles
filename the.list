@@ -1,20 +1,23 @@
-## I know it's good practice to split all these into individual files in
-## `/etc/apt/sources.list.d/`, but I also know I never will. Some scripts
-## will go ahead and create their own file there... those get tacked on
-## to this file, and any cron jobs or what have you related to those
-## gets deleted.
-## There's also `unused.list`, which isn't *completely* unused...
-## it's just all the extra repos that I access once in a very rare
-## while, but don't need to actually check when I update packages.
-## Actual debian repos (sid and experimental, main non-free contrib)
-## are in `/etc/apt/sources.list`
+## These ought to be split into individual files in `/etc/apt/sources.list.d`,
+## but I don't care that much. Some installers/scripts will create their own
+## files in here. They get removed and tacked onto this list. If you have a
+## problem with those, check your cronjobs; some of them are recreated
+## periodically.
+## `unused.list` is all the repos I don't need to hit all the time.
+## Some of those end up in here every once in a while. I can't promise
+## everything on there is still valid, though I did check every single
+## one out, manually, in autumn 2015.
+## `/etc/apt/sources.list` contains the following commented section:
+# See sources.list.d/ for more repos
+# deb http://ftp.us.debian.org/debian/ sid main non-free contrib
+# deb-src http://ftp.us.debian.org/debian/ sid main non-free contrib
+# deb http://ftp.us.debian.org/debian experimental main non-free contrib
+# deb-src http://ftp.us.debian.org/debian experimental main non-free contrib
 
 # bbqtools-basic & bbq-tools; also check github
 deb http://linuxbbq.org/repos/apt/debian sid main
-
 # Debian Multimedia... switch with one of the others if it goes down
 deb http://mirrors.dotsrc.org/debian-multimedia/ sid main non-free
-
 # apt-build threw a bitch-fit so i put this here.
 deb [trusted=yes] file:/var/cache/apt-build/repository apt-build main
 
@@ -52,4 +55,10 @@ deb http://repository.solydxk.com solydxk main upstream import
 
 # sil tools and unicode typefaces
 deb http://packages.sil.org/ubuntu xenial main
+
+# spotify!
+deb http://repository.spotify.com testing non-free
+
+# rethinkdb
+deb http://download.rethinkdb.com/apt stretch main
 
