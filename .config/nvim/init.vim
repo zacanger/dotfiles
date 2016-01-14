@@ -22,7 +22,7 @@ if !filereadable(neobundle_readme)
   let g:not_finsh_neobundle = "yes"
 
   " Run shell script if exist on custom select language
-   
+
 endif
 
 " Required:
@@ -353,6 +353,8 @@ augroup vimrc-make-cmake
   autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
 augroup END
 
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS noci
+
 set autoread
 
 "*****************************************************************************
@@ -508,7 +510,7 @@ endif
 
 "" syntastic js rules
 let g:syntastic_javascript_jshint_generic = 1
-let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['relint']
 
 :nnoremap <Leader>s :SemanticHighlightToggle<cr>
 
@@ -558,4 +560,10 @@ command! -bar RangerChooser call RangeChooser()
 nnoremap <leader>r :<C-U>RangerChooser<CR>
 
 inoremap <Esc> <Esc>`^
+
+autocmd User Node
+  \ if &filetype == "javascript" |
+  \   nmap <buffer> <C-w>f <Plug>NodeVSplitGotoFile |
+  \   nmap <buffer> <C-w><C-f> <Plug>NodeVSplitGotoFile |
+  \ endif
 
