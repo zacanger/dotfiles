@@ -153,6 +153,7 @@ alias makelist="make -rpn | sed -n -e '/^$/ { n ; /^[^ .#][^ ]*:/p ; }' | egrep 
 alias mu='mocp -y -T moc_theme'
 alias sfm='spacefm'
 alias dt="dvtm -m ^"
+alias Cat='cat'
 alias les='less'
 alias k9='pkill -9'
 alias gui='startxfce4'
