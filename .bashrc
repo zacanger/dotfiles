@@ -64,6 +64,7 @@ export PATH=$PATH:/usr/local/share/npm/bin:/home/z/Dropbox/z/bin:/opt:$(find $HO
 export EDITOR='nvim'
 export SLACK_TOKEN='xoxp-3318091984-8228669395-18656956487-09aa605092' # ignoreline
 export SLACK_USERNAME='zacanger'
+export PAGER='nvim -R'
 export LOLCOMMITS_ANIMATE='2'
 # j, rbenv, and fzf
 . /usr/share/autojump/autojump.sh

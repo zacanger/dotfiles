@@ -147,6 +147,9 @@ alias motd='curl -fsH "Accept: text/plain"\
 alias tuner='for n in C2 G2 C3 F3 G3 C4;do play -n synth 4 pluck $n repeat 2;done'
 
 # misc shortcuts, because i'm lazy
+alias vir='nvim -R'
+alias vib='nvim -b'
+alias virb='nvim -R -b'
 alias disk='du -S | sort -n -r | less'
 alias fs='ranger'
 alias makelist="make -rpn | sed -n -e '/^$/ { n ; /^[^ .#][^ ]*:/p ; }' | egrep --color '^[^ ]*:'"
