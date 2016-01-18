@@ -33,21 +33,18 @@ usage() {
         echo "When displaying reminders with osd_cat, the font given in \$REMINDER_FONT will be used, defaulting to "'-*-fixed-bold-*-*-*-*-*-*-*-*-*-*-*'
         echo "Currently yours is:"
         echo "$REMINDER_FONT"
+        echo
         exit 1
 }
 
-
 depend osd_cat
-
 
 REMINDER_FILE=${REMINDER_FILE:-$HOME/.reminders}
 REMINDER_FONT=${REMINDER_FONT:-'-*-fixed-bold-*-*-*-*-*-*-*-*-*-*-*'}
 
-
 if [[ ! -e $REMINDER_FILE ]] ; then
     touch $REMINDER_FILE
 fi
-
 
 case $1 in
     show) ;&
@@ -73,3 +70,4 @@ case $1 in
         usage
         ;;
 esac
+
