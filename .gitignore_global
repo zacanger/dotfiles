@@ -30,4 +30,6 @@ x/**
 **/api.key
 **.key
 completer.hist
+*.pid
+*.lock
 
