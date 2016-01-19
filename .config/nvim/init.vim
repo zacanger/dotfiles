@@ -419,7 +419,8 @@ let g:syntastic_aggregate_errors = 1
 
 
 " Disable visualbell
-set visualbell t_vb=
+set noeb vb t_vb=
+" set visualbell t_vb=
 
 "" Copy/Paste/Cut
 if has('unnamedplus')

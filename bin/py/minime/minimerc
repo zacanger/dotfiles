@@ -8,3 +8,4 @@ meta l,|ls #list files
 ctrl o,|xargs cat #open
 meta o,>xargs xdg-open #xdg-open
 ctrl c,#exit
+
