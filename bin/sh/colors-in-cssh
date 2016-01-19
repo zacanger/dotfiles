@@ -1,6 +1,0 @@
-#! /usr/bin/env bash
-
-find . -name "*.css" -o -name "*.less" -exec grep -oe '\#[A-Fa-f0-9]\{1,6\}' {} \; | sort|uniq -c > hashfiles.txt
-cat hashfiles.txt | sort | uniq -c | sort | sed 's/(\d) /$1     /'
-
-
