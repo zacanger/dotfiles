@@ -162,3 +162,5 @@ echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
 
 # export PS="\[\e[1;33m\]\w\[\e[;0;1m\] ($( dirsize -Hb )) \$\[\e[;0m\]" # add this bit on to keep dirsize in prompt (see ~/bin/dirsize)
 
+export INTERNET_STATUS_LOG=~/inet.log
+
