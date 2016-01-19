@@ -30,4 +30,6 @@ x/**
 **/api.key
 **.key
 completer.hist
+.config/ranger/bookmarks
+.config/ranger/history
 
