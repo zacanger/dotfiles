@@ -140,8 +140,7 @@ alias please='fuck'
 # this serves as a replacement for the script from http://motd.sh/
 # for your config, change the zip code, degrees (to c, if needed), stocks (to y, if needed),
 # and quotes (to '' if needed).
-alias motd='curl -fsH "Accept: text/plain"\
-"http://motd.sh/?v=0.01&weather=84601&degrees=f&stocks=&quotes=y" && echo " "'
+alias motd='curl -fsH "Accept: text/plain" "http://motd.sh/?v=0.01&weather=84601&degrees=f&stocks=&quotes=y" && echo " "'
 
 # this requires sox, and is for CGCFGC. change to E2-E4 (etc) for standard.
 alias tuner='for n in C2 G2 C3 F3 G3 C4;do play -n synth 4 pluck $n repeat 2;done'

@@ -136,6 +136,9 @@ set tabstop=2
 set softtabstop=0
 set shiftwidth=2
 set expandtab
+set smartindent
+set smarttab
+set autoindent
 
 "" Map leader to ,
 let mapleader=','
