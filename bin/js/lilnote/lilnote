@@ -3,7 +3,6 @@
 // md ~/.lilnote
 // touch ~/.lilnote/db.json
 // npm i --save lowdb mkdirp tmp-editor user-home
-// see gh:deoxen-n2
 
 var tmpEditor    = require('tmp-editor')
   , low          = require('lowdb')
@@ -75,3 +74,4 @@ mkdirp(lilDir, function(error){
   }
   main()
 })
+
