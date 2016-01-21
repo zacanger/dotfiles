@@ -1,0 +1,63 @@
+.cm-s-zeemirror.CodeMirror {
+  background-color: #212121;
+    color:#bad2b0;
+    padding-left: 8px;
+}
+.cm-s-zeemirror .CodeMirror-sizer{padding-bottom: 0px;}
+.cm-s-zeemirror .CodeMirror-scroll{
+  margin-right: 0px;
+  border-color: #202020;
+  padding-bottom: 0px;
+}
+.cm-s-zeemirror .CodeMirror-vscrollbar{overflow-y: hidden;}
+
+.cm-s-zeemirror.CodeMirror .inline-widget{background: #303030;color: #cbcecd;}
+.cm-s-zeemirror.CodeMirror .inline-widget h1,
+.cm-s-zeemirror.CodeMirror .inline-widget h2,
+.cm-s-zeemirror.CodeMirror .inline-widget h3{
+	color: #cbcecd;
+}
+.cm-s-zeemirror.CodeMirror .inline-widget p,
+.cm-s-zeemirror.CodeMirror .inline-widget dt,
+.cm-s-zeemirror.CodeMirror .inline-widget li,
+.cm-s-zeemirror.CodeMirror .inline-widget code{
+	color: #ddd;
+}
+.cm-s-zeemirror.CodeMirror .CodeMirror-gutters {border-style: none;background: #393d54;}
+.cm-s-zeemirror.CodeMirror .CodeMirror-linenumbers {
+	background-color: #505e50;
+    background-image: linear-gradient(to bottom, #393939 33%, #686868 67%);
+    background-position: right;
+    background-size: 1px 3px;
+    background-repeat: repeat-y;
+}
+.cm-s-zeemirror.CodeMirror .CodeMirror-linenumber {color: #acbec5;padding-left: 5px;}
+.cm-s-zeemirror.CodeMirror .CodeMirror-activeline,
+.cm-s-zeemirror.CodeMirror.CodeMirror-focused .CodeMirror-activeline .CodeMirror-gutter-elt{
+	background-color: #666;
+}
+/*padding between line number & content*/
+.cm-s-zeemirror.CodeMirror pre{padding: 0 8px;}
+.cm-s-zeemirror.CodeMirror .CodeMirror-cursor {border-left: 2px solid #cec0b5;}
+.cm-s-zeemirror.CodeMirror .CodeMirror-selected {background: rgba(180,180,180,0.4);}
+.cm-s-zeemirror.CodeMirror .CodeMirror-matchingbracket {
+	border-bottom: 1px solid #a0dbdb;color: #ccc19b;
+}
+.cm-s-zeemirror.CodeMirror .CodeMirror-unmatchingbracket {
+  border-bottom: 1px solid #cb3233;color: #e3884a;
+}
+
+.cm-s-zeemirror.CodeMirror .cm-comment {color: #a3a37c;}
+.cm-s-zeemirror.CodeMirror .cm-property {color: #cdc4ea;}
+.cm-s-zeemirror.CodeMirror .cm-qualifier {color: #b3e5be;}
+.cm-s-zeemirror.CodeMirror .cm-tag {color: #90b9dd;}
+.cm-s-zeemirror.CodeMirror .cm-def {color: #b2d2d4;}
+.cm-s-zeemirror.CodeMirror .cm-number {color: #84adf2;}
+.cm-s-zeemirror.CodeMirror .cm-atom {color: #dbaae1;}
+.cm-s-zeemirror.CodeMirror .cm-keyword{color: #c1df7f;}
+.cm-s-zeemirror.CodeMirror .cm-string{color: #afdba5;}
+.cm-s-zeemirror.CodeMirror .cm-string-2{color: #97cfd6;}
+.cm-s-zeemirror.CodeMirror .cm-variable {color: #dfc27b;}
+.cm-s-zeemirror.CodeMirror .cm-variable-2 {color: #a9dce7;}
+.cm-s-zeemirror.CodeMirror .cm-attribute {color: #8af9c9;}
+
