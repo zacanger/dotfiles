@@ -29,4 +29,5 @@ things to know:
   * i don't use vs code, ever, but saved that config file from the one time that i gave in and tried it out. it's actually still a total piece of crap, as it happens, and its license is just _absurd_.
   * textadept configs might be kind of very messy, since i only comprehend about 30% of what i'm trying to write in lua
   * the nanorc and files will make your life _so much better_ (if you don't want to learn vi). seriously, especially for those who use graphical editors but also have virtual servers somewhere, just grab these bits and `export EDITOR='nano'`. you'll be delighted.
+* i have two directories hidden from git (`~/x/` and `~/bin/x/`); they're referenced in some other files, and hold executables that are either totally non-free, totally non-original, totally full of extra stuff i don't want in my path (because my path is defined in a very not-safe way…), or just totally too large to want to put under version control.
 
