@@ -4,6 +4,8 @@ there are further docs in with the scripts and the doc directory.
 
 these are very definitely my own personal configs, not really set up with others' uses in mind, but please feel free fork/grab/download/use away.
 
+this repo is kept in dropbox (yes, i know, nonfree services…) for super extra convenience. 90% of what's in here is symlinked into `/home/z`, so there may be references to this path scattered about.
+
 things to know:
 
 * i use debian sid
