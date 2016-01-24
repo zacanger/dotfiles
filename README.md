@@ -17,7 +17,7 @@ things to know:
   * the original scripts written in node, ruby, php, shell, and python are growing in number
     * especially the node ones
 * the lists are meant for fresh debian installs (on sid, ish)
-  * `the.list`  --  /etc/apt/sources.list.d/the.lis
+  * `the.list`  --  /etc/apt/sources.list.d/the.list
   * `unused.list`  --  unused sources.list entries
   * `dpkg.list`  --  actually `apt-get install -fy` list, but that's not so succinct
   * `npm.list`  --  `npm i -g` all these things
