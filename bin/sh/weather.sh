@@ -25,5 +25,6 @@ SEDSTR='
         # replace html escape with actual char
         s/&deg;/°/;'
 
-[ -z $1 ] && zip=21401 || zip=$1
+[ -z $1 ] && zip=84601 || zip=$1
 curl "http://thefuckingweather.com/?zipcode=$zip" -s  | sed "$SEDSTR"
+
