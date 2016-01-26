@@ -32,4 +32,5 @@ x/**
 completer.hist
 *.pid
 *.lock
-
+bundle
+.config/nvim/bundle/*
