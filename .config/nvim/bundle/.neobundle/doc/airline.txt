@@ -320,8 +320,12 @@ vcscommand   <http://www.vim.org/scripts/script.php?script_id=90>
   " default value leaves the name unmodifed
   let g:airline#extensions#branch#format = 0
 
-  " to only show the tail, e.g. a branch 'feature/foo' show 'foo'
+  " to only show the tail, e.g. a branch 'feature/foo' becomes 'foo', use
   let g:airline#extensions#branch#format = 1
+
+  " to truncate all path sections but the last one, e.g. a branch
+  " 'foo/bar/baz' becomes 'f/b/baz', use
+  let g:airline#extensions#branch#format = 2
 
   " if a string is provided, it should be the name of a function that
   " takes a string and returns the desired value
@@ -409,6 +413,8 @@ eclim <https://eclim.org>
   " the default value matches filetypes typically used for documentation
   " such as markdown and help files.
   let g:airline#extensions#wordcount#filetypes = ...
+  (default: markdown,rst,org,help,text)
+
 <
 -------------------------------------                   *airline-whitespace*
 * enable/disable detection of whitespace errors. >
@@ -487,14 +493,23 @@ exposed.
   nmap <leader>7 <Plug>AirlineSelectTab7
   nmap <leader>8 <Plug>AirlineSelectTab8
   nmap <leader>9 <Plug>AirlineSelectTab9
+  nmap <leader>- <Plug>AirlineSelectPrevTab
+  nmap <leader>+ <Plug>AirlineSelectNextTab
 
   Note: Mappings will be ignored within a NERDTree buffer.
+
+  Note: In buffer_idx_mode these mappings won't change the
+  current tab, but switch to the buffer visible in that tab.
+  Use |gt| for switching tabs.
+  In tabmode, those mappings will switch to the specified tab.
 
 * defines the name of a formatter for how buffer names are displayed. >
   let g:airline#extensions#tabline#formatter = 'default'
 
   " here is how you can define a 'foo' formatter:
-  function! airline#extensions#tabline#foo#format(bufnr, buffers)
+  " create a file in the dir autoload/airline/extensions/tabline/formatter/
+  " called foo.vim
+  function! airline#extensions#tabline#formatter#foo#format(bufnr, buffers)
     return fnamemodify(bufname(a:bufnr), ':t')
   endfunction
   let g:airline#extensions#tabline#formatter = 'foo'
@@ -551,6 +566,11 @@ exposed.
 
 * configure symbol used to represent close button
   let g:airline#extensions#tabline#close_symbol = 'X'
+
+* configure pattern to be ignored on BufAdd autocommand >
+  " fixes unneccessary redraw, when e.g. opening Gundo window
+  let airline#extensions#tabline#ignore_bufadd_pat =
+            \ '\c\vgundo|undotree|vimfiler|tagbar|nerd_tree'
 
 <
 Note: Enabling this extension will modify 'showtabline' and 'guioptions'.
@@ -648,6 +668,10 @@ greater than a minimum width. >
 <
 Parts can be configured to be visible conditionally. >
   call airline#parts#define_condition('foo', 'getcwd() =~ "work_dir"')
+<
+
+Now add part "foo" to section section airline_section_y: >
+  let g:airline_section_y = airline#section#create_right(['ffenc','foo'])
 <
 Note: Part definitions are combinative; e.g. the two examples above modify the
 same `foo` part.
@@ -874,7 +898,7 @@ Contributions and pull requests are welcome.
 ==============================================================================
 LICENSE                                                    *airline-license*
 
-MIT License.  Copyright © 2013-2015 Bailey Ling.
+MIT License.  Copyright © 2013-2016 Bailey Ling.
 
 
  vim:tw=78:ts=8:ft=help:norl:

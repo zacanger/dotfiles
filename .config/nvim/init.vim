@@ -11,7 +11,7 @@ endif
 
 let neobundle_readme=expand('~/.config/nvim/bundle/neobundle.vim/README.md')
 
-let g:vim_bootstrap_langs = "javascript,python,c,php,html,perl"
+let g:vim_bootstrap_langs = "javascript,python,html"
 let g:vim_bootstrap_editor = "nvim"				" nvim or vim
 
 if !filereadable(neobundle_readme)
@@ -63,8 +63,6 @@ NeoBundle 'xolox/vim-session'
 NeoBundle 'honza/vim-snippets'
 
 "" Color
-NeoBundle 'tomasr/molokai'
-
 if v:version >= 703
   NeoBundle 'Shougo/vimshell.vim'
 endif
@@ -73,43 +71,73 @@ if v:version >= 704
   NeoBundle 'FelikZ/ctrlp-py-matcher'
 endif
 
-"" Custom bundles
-
+NeoBundle "scrooloose/syntastic"
 NeoBundle 'vim-scripts/c.vim'
 
-
-"" Python Bundle
+"" Python
 NeoBundle "davidhalter/jedi-vim"
-NeoBundle "scrooloose/syntastic"
 NeoBundle "majutsushi/tagbar"
 NeoBundle "Yggdroot/indentLine"
-
-
-"" Javascript Bundle
-NeoBundle "scrooloose/syntastic"
-
 
 NeoBundle 'vim-perl/vim-perl'
 NeoBundle 'c9s/perlomni.vim'
 
-
-"" HTML Bundle
+"" HTML
 NeoBundle 'amirh/HTML-AutoCloseTag'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'gorodinskiy/vim-coloresque'
 NeoBundle 'tpope/vim-haml'
 NeoBundle 'mattn/emmet-vim'
 
-
-"" PHP Bundle
+"" PHP
 NeoBundle 'arnaud-lb/vim-php-namespace'
 
-
-
-"" Include user's extra bundle
-if filereadable(expand("~/.confog/nvimrc.local.bundles"))
-  source ~/.config/nvimrc.local.bundles
-endif
+"" Extra Bundles
+NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'mhinz/vim-startify'
+NeoBundle 'mhinz/vim-signify'
+NeoBundle 'kien/tabman.vim'
+NeoBundle 'kasldfh/verminal'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'sgur/vim-editorconfig'
+NeoBundle 'mattn/ctrlp-ghq'
+NeoBundle 'editorconfig/editorconfig-vim'
+NeoBundle 'junegunn/vim-easy-align'
+NeoBundle 'junegunn/fzf.vim'
+NeoBundle 'lambdatoast/elm.vim'
+NeoBundle 'chrisbra/SudoEdit.vim'
+NeoBundle 'junegunn/vim-oblique'
+NeoBundle 'mattn/gist-vim'
+NeoBundle 'spolu/dwm.vim'
+NeoBundle 'mhinz/vim-grepper'
+NeoBundle 'junegunn/vim-peekaboo'
+NeoBundle 'duff/vim-scratch'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'sanpii/seeks.vim'
+NeoBundle 'goldfeld/vim-seek'
+NeoBundle 'FredKSchott/CoVim'
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'kien/rainbow_parentheses.vim'
+NeoBundle 'junkblocker/unite-codesearch'
+NeoBundle 'tpope/vim-afterimage'
+NeoBundle 'unblevable/quick-scope'
+NeoBundle 'jaxbot/semantic-highlight.vim'
+NeoBundle 'dyng/CommentReader'
+NeoBundle 'dyng/YCommentReader'
+NeoBundle 'moll/vim-node'
+NeoBundle 'othree/html5.vim'
+NeoBundle 'othree/csscomplete.vim'
+NeoBundle 'othree/es.next.syntax.vim'
+NeoBundle 'othree/yajs.vim'
+NeoBundle 'vim-scripts/syntaxcomplete'
+NeoBundle 'othree/javascript-libraries-syntax.vim'
+NeoBundle 'mxw/vim-jsx'
+NeoBundle 'posva/vim-vue'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'junegunn/vim-pseudocl'
+NeoBundle 'junegunn/vim-emoji'
+NeoBundle 'mattn/emoji-vim'
+NeoBundle 'mhinz/vim-janah'
 
 call neobundle#end()
 
@@ -156,7 +184,6 @@ set smartcase
 set bomb
 set binary
 
-
 "" Directories for swp files
 set nobackup
 set noswapfile
@@ -180,7 +207,7 @@ set number
 
 let no_buffers_menu=1
 if !exists('g:not_finsh_neobundle')
-  colorscheme molokai
+  colorscheme janah
 endif
 
 set mousemodel=popup
@@ -234,7 +261,7 @@ if exists("*fugitive#statusline")
 endif
 
 " vim-airline
-let g:airline_theme = 'powerlineish'
+let g:airline_theme = 'jellybeans'
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -423,19 +450,14 @@ set noeb vb t_vb=
 " set visualbell t_vb=
 
 "" Copy/Paste/Cut
-if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus
-endif
+" if has('unnamedplus')
+"   set clipboard=unnamed,unnamedplus
+" endif
+set clipboard^=unnamed,unnamedplus
 
 noremap YY "+y<CR>
 noremap P "+gP<CR>
 noremap XX "+x<CR>
-
-if has('macunix')
-  " pbcopy for OSX copy/paste
-  vmap <C-x> :!pbcopy<CR>
-  vmap <C-c> :w !pbcopy<CR><CR>
-endif
 
 "" Buffer nav
 noremap <leader>z :bp<CR>
@@ -472,7 +494,6 @@ noremap ,o :!echo `git url`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<C-R>=lin
 nmap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
-
 " vim-python
 augroup vimrc-python
   autocmd!
@@ -503,24 +524,13 @@ let g:airline#extensions#tagbar#enabled = 1
 nmap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
-
 let g:javascript_enable_domhtmlcss = 1
-
-
-"" Include user's local vim config
-if filereadable(expand("~/.config/nvimrc.local"))
-  source ~/.nvimrc.local
-endif
 
 "" syntastic js rules
 let g:syntastic_javascript_jshint_generic = 1
 let g:syntastic_javascript_checkers = ['relint']
 
 :nnoremap <Leader>s :SemanticHighlightToggle<cr>
-
-
-
-
 
 " Compatible with ranger 1.4.2 through 1.7.*
 "
@@ -588,4 +598,10 @@ cnoremap sudow w !sudo tee & >/dev/null
 " theme nonsense
 autocmd ColorScheme janah highlight Normal ctermbg=235
 colorscheme janah
+
+" keeping rainbow parens on
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 

@@ -36,7 +36,6 @@ Interface		|neobundle-interface|
 Configuration Examples	|neobundle-examples|
 Migrating from Pathogen |neobundle-migrate-from-pathogen|
 Unite sources		|neobundle-unite-sources|
-Recipe			|neobundle-recipe|
 FAQ			|neobundle-faq|
 
 ==============================================================================
@@ -159,12 +158,10 @@ neobundle#begin([{base-path}])			*neobundle#begin()*
 		Note: You must execute |:NeoBundle| commands in
 		|neobundle#begin()| or |neobundle#append()| block.
 >
-	if has('vim_starting')
-	  if &compatible
-	    set nocompatible
-	  endif
-	  set runtimepath+={path to neobundle directory}
+	if &compatible
+	  set nocompatible
 	endif
+	set runtimepath^={path to neobundle directory}
 
 	call neobundle#begin(expand('~/.vim/bundle'))
 
@@ -188,6 +185,19 @@ neobundle#append()				*neobundle#append()*
 
 neobundle#end()					*neobundle#end()*
 		End neobundle bundles configuration block.
+
+neobundle#add({repository}[, {options}])		*neobundle#add()*
+		The function version of |:NeoBundle|.
+		Note: You must call it in |neobundle#begin()| or
+		|neobundle#append()| block.
+
+neobundle#add_meta({repository}[, {options}])		*neobundle#add_meta()*
+		Initialize a bundle from the metadata {name}.
+		Note: You must call it in |neobundle#begin()| or
+		|neobundle#append()| block. >
+
+		" It installs vimshell and vimproc
+		call neobundle#add_meta('vimshell')
 
 neobundle#source({bundle-names})		*neobundle#source()*
 		Same as |:NeoBundleSource|.
@@ -244,28 +254,28 @@ neobundle#load_toml({filename}, [{options}])
 		# TOML sample
 		[[plugins]]
 		# repository name is required.
-		repository = 'kana/vim-niceblock'
-		mappings = '<Plug>'
+		repo = 'kana/vim-niceblock'
+		on_map = '<Plug>'
 
 		[[plugins]]
-		repository = 'Shougo/neosnippet.vim'
+		repo = 'Shougo/neosnippet.vim'
 		depends = ['Shougo/neosnippet-snippets',
 		  'Shougo/context_filetype.vim']
-		insert = 1
-		filetypes = 'snippet'
-		unite_sources = [ 'neosnippet',
+		on_i = 1
+		on_ft = 'snippet'
+		on_unite = [ 'neosnippet',
 		  'neosnippet/user', 'neosnippet/runtime']
 
 		  [[plugins.depends]]
-		  repository = 'honza/vim-snippet'
+		  repo = 'honza/vim-snippet'
 		  name = 'honza-snippet'
 
 		[[plugins]]
-		repository = 'Shougo/neobundle.vim'
+		repo = 'Shougo/neobundle.vim'
 		fetch = 1
 
 		[[plugins]]
-		repository = 'Shougo/vimproc.vim'
+		repo = 'Shougo/vimproc.vim'
 
 		  [plugins.build]
 		  windows = 'tools\\update-dll-mingw'
@@ -373,13 +383,6 @@ neobundle#untap()				 *neobundle#untap()*
 
 neobundle#has_cache()			 *neobundle#has_cache()*
 		Checks if a cache file is available.
-		Note: It is deprecated.  You should use
-		|neobundle#load_cache()| instead of it.
-
-neobundle#has_fresh_cache()	 *neobundle#has_fresh_cache()*
-		Similar to |neobundle#has_cache|, but compares the
-		modification time of the cache file to your configuration file
-		({vimrc} or |$MYVIMRC|).
 		Note: It is deprecated.  You should use
 		|neobundle#load_cache()| instead of it.
 
@@ -556,16 +559,6 @@ COMMANDS 					*neobundle-commands*
 		available, it will execute |:NeoBundleUpdate| automatically.
 		Note: It is supported in git type only.
 
-						*:NeoBundleRecipe*
-:NeoBundleRecipe {recipe-name} [, {options}]
-		Registers a bundle from "recipes/{recipe-name}.vimrecipe" file
-		in 'runtimepath'.  This command is useful if you don't want to
-		set bundle options.
-		Note: You must install recipes (|neobundle-recipe|) before
-		executing it.
->
-		NeoBundleRecipe 'vimproc.vim'
-<
 						*:NeoBundleCount*
 :NeoBundleCount
 		Show bundles count.  You can know how many bundles you have.
@@ -801,15 +794,6 @@ OPTIONS 					*neobundle-options*
 >
 		NeoBundle 'https://github.com/Shougo/unite.vim.git',
 		   \ {'directory' : 'unite'}
-<
-						*neobundle-options-recipe*
-		recipe			(String)
-		Use default options from the "recipes/{recipe-name}.vimrecipe"
-		file in 'runtimepath'. (See |:NeoBundleRecipe|).
-
-		Example:
->
-		NeoBundle 'Shougo/unite.vim', {'recipe' : 'unite'}
 <
 						*neobundle-options-base*
 		base			(String)
@@ -1126,12 +1110,11 @@ OPTIONS 					*neobundle-options*
 			Example: >
 		NeoBundle 'Shougo/vimfiler.vim', {
 		      \ 'depends' : 'Shougo/unite.vim',
-		      \ 'on_cmd' : [
-		      \ {'name' : ['VimFiler', 'Edit', 'Write'],
-		      \  'complete' : 'customlist,vimfiler#complete'},
-		      \ 'Read', 'Source'],
-		      \ 'mappings' : '<Plug>',
-		      \ 'explorer' : 1,
+		      \ 'on_cmd' : ['VimFiler', 'VimFilerEdit',
+		      \             'VimFilerWrite','VimFilerRead',
+		      \             'VimFilerSource'],
+		      \ 'on_map' : '<Plug>',
+		      \ 'on_path' : '.*',
 		      \ }
 <
 						*neobundle-options-commands*
@@ -1177,8 +1160,6 @@ OPTIONS 					*neobundle-options*
 		Unite source name list.
 		Note: To use this feature, you must install latest
 		|unite.vim|.
-		Note: If bundle name starts "unite-", this option is
-		set automatically.
 
 					*neobundle-options-unite_sources*
 		It is deprecated key.
@@ -1411,9 +1392,6 @@ EXAMPLES					*neobundle-examples*
 	" Let neobundle manage neobundle
 	NeoBundleFetch 'Shougo/neobundle.vim'
 
-	" Use neobundle standard recipes.
-	NeoBundle 'Shougo/neobundle-vim-recipes', {'force' : 1}
-
 	" My Bundles here:
 	" Refer to |:NeoBundle-examples|.
 	" Note: You don't set neobundle setting in .gvimrc!
@@ -1537,10 +1515,13 @@ neobundle/search
 		source names.
 
 		Following source names are available:
-		"neobundle-vim-recipes":
-			Search plugins settings from the |neobundle-recipe|.
+		"vim_scripts_org":
+			Search plugins settings from "http://vim-scripts.org".
 		"github":
 			Search plugins settings from "https://github.org/".
+		"metadata":
+			Search plugins settings from converted metadata in
+			"https://bitbucket.org/vimcommunity/vim-pi/".
 
 				*neobundle-unite-source-neobundle-lazy*
 neobundle/lazy
@@ -1566,89 +1547,12 @@ neobundle/search			*unite-action-neobundle-search*
 			Note: The settings are saved in "extra_bundles.vim" in
 			|neobundle#begin()| directory.
 	start		Browse github plugin page.
-	open		Open the recipe file.
 
 	Note: If you use the install action, you cannot customize the bundle
 	settings.
 
 neobundle/lazy					*unite-action-neobundle-lazy*
 	source		Source plugin files (Default action)
-
-==============================================================================
-RECIPE						*neobundle-recipe*
-
-neobundle/search source loads recipes from "recipes/*.vimrecipe" files in
-'runtimepath'.
-
-The standard recipes are in "neobundle-vim-recipes".
-
-https://github.com/Shougo/neobundle-vim-recipes
-
-You can use the recipes with the following command in .vimrc.
-Note: You must use "force" option for "neobundle-vim-recipes".
->
-	NeoBundle 'Shougo/neobundle-vim-recipes', {'force' : 1}
-<
-
-The recipe files are in JSON format, like this:
-
->
-	# Vim recipe file for neobundle.
-	{
-	        'name' : 'neobundle',
-	        'path' : 'Shougo/neobundle',
-	        'description' : 'Ultimate Vim package manager',
-	        'author' : 'Shougo',
-	        'website' : 'https://github.com/Shougo/neobundle.vim'
-	}
-<
-		A recipe has the following keys. Most of keys are the same as
-		those used in the neobundle configuration
-		dictionary (|neobundle-options|).
-		"#" starts a comment string, but they must start at the
-		beginning of the line.
-
-		name			(String)	(Required)
-		Specify plugin name.
-
-		path			(String)	(Required)
-		The repository URI.
-		Note: You can abbreviate long complete path, such as
-		"Shougo/neobundle.vim" instead of
-		"https://github.com/Shougo/neobundle.vim.git"
-
-		description		(String)	(Optional)
-		Plugin description to show in neobundle/search.
-
-		author			(String)	(Optional)
-		The script author name to show in neobundle/search.
-
-		base			(String)	(Optional)
-		Directory base path.
-
-		type			(String)	(Optional)
-		Specify repository type.
-
-		script_type		(String)	(Optional)
-		Specify script type.
-
-		site			(String)	(Optional)
-		Repository site.
-
-		rtp			(String)	(Optional)
-		Runtime path. Some plugin repositories contain the
-		vim plugins in a subdirectory, whose name is usually
-		"vim".
-
-		depends		(List or String)	(Optional)
-		Dependency plugins list.
-
-		build			(Dictionary)	(Optional)
-		Build script. E.g. make
-
-		external_commands
-			(Dictionary or List or String)	(Optional)
-		Dependency external commands.
 
 ==============================================================================
 FAQ						*neobundle-faq*
@@ -1695,7 +1599,6 @@ Note: You must not call |neobundle#begin()| inside a "has('vim_starting')"
 block.
 >
 	if has('vim_starting')
-	  set runtimepath+={path to neobundle directory}
 	  " This is wrong neobundle#begin().
 	  "call neobundle#begin(expand('~/.vim/bundle'))
 	endif
