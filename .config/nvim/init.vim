@@ -585,3 +585,7 @@ endif
 
 cnoremap sudow w !sudo tee & >/dev/null
 
+" theme nonsense
+autocmd ColorScheme janah highlight Normal ctermbg=235
+colorscheme janah
+
