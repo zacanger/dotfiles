@@ -224,4 +224,5 @@ alias abd='atom-beta -d'
 alias xfds='xfce4-display-settings'
 alias words="shuf -n 1000 /usr/share/dict/words | sed s/\'s// | tr '[:upper:]' '[:lower:]' | sort"
 alias screencast='ffmpeg -f x11grab -s wxga -r 25 -i :0.0 -sameq ~/.tmp/screencast.mpg'
+alias stopwatch='time read -N 1'
 
