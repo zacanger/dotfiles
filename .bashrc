@@ -85,6 +85,8 @@ fi
 # and, finally... liquidprompt; load from interactive shell, don't from scripts/scp
 echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
 
+set -o vi
+
 ############################################################
  ## FROM HERE DOWN, IT'S ALL JUST UNUSED BITS AND PIECES ##
  ##  alternate prompts, extras, other term titles, etc.  ##
@@ -161,6 +163,4 @@ echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
 # export PS1="[$(t | wc -l | sed -e's/ *//')] $PS1"
 
 # export PS="\[\e[1;33m\]\w\[\e[;0;1m\] ($( dirsize -Hb )) \$\[\e[;0m\]" # add this bit on to keep dirsize in prompt (see ~/bin/dirsize)
-
-export INTERNET_STATUS_LOG=~/inet.log
 
