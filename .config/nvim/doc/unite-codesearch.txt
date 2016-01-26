@@ -1,0 +1,82 @@
+    *unite-codesearch.txt*  A Unite plugin for the Google Codesearch fork.
+                 Version 1.1.0 (for Vim version 7.0 or higher)
+
+                Author: Manpreet Singh < junkblocker@yahoo.com >
+                   Copyright (C) 2013-2015 by Manpreet Singh
+              License : This file is placed in the public domain.
+            No warranties express or implied. Use at your own risk.
+
+==============================================================================
+
+CONTENTS                            *unite-codesearch* *unite-codesearch-contents*
+
+  1. Contents......................................: |unite-codesearch-contents|
+  2. Introduction..................................: |unite-codesearch-intro|
+  3. Customizing...................................: |unite-codesearch-customizing|
+     3.1 g:unite_source_codesearch_command.........: |g:unite_source_codesearch_command|
+     3.2 g:unite_source_codesearch_ignore_case.....: |g:unite_source_codesearch_ignore_case|
+     3.3 g:unite_source_codesearch_max_candidates..: |g:unite_source_codesearch_max_candidates|
+     3.4 g:unite_source_codesearch_use_cwd.........: |g:unite_source_codesearch_use_cwd|
+
+==============================================================================
+
+Unite codesearch Introduction                           *unite-codesearch-intro*
+
+unite-codesearch is a Unite.vim plugin for Google Codesearch. You must use the
+https://github.com/junkblocker/codesearch fork which has features required by
+this plugin.
+
+Requirement:
+- unite.vim
+
+Latest version:
+https://github.com/junkblocker/unite-codesearch
+
+==============================================================================
+
+CUSTOMIZING                                       *unite-codesearch-customizing*
+
+*g:unite_source_codesearch_command* (Default: 'csearch')
+
+  Optional command to use in places of 'csearch'. You don't have to specify
+  this value unless your 'csearch' command is not on your PATH or if you want
+  to use a different command name or pass certain options.
+
+  Examples:
+      (On Windows) >
+        let g:unite_source_codesearch_command = 'c:/csearch.exe'
+<
+      (On *nix systems) >
+        let g:unite_source_codesearch_command = '/usr/local/bin/csearch'
+<
+
+*g:unite_source_codesearch_ignore_case* (Default: 0)
+
+  Controls whether search should be case sensitive or not. >
+
+    " Make search case insensitive
+    let g:unite_source_codesearch_ignore_case = 1
+<
+
+*g:unite_source_codesearch_max_candidates* (Default: 30)
+
+  Controls how many total results to return at one time. Increasing this
+  number may result in severe slowdown. >
+
+    let g:unite_source_codesearch_max_candidates = 20
+<
+  or using the Unite.vim customization syntax >
+
+    call unite#custom#source('codesearch', 'max_candidates', 20)
+<
+
+*g:unite_source_codesearch_use_cwd* (Default: 1)
+
+  Controls whether search results should be restricted to the current directory
+  or not. >
+
+    " Always search globally and not just in the current directory
+    let g:unite_source_codesearch_use_cwd = 0
+<
+==============================================================================
+vim: ft=help:ts=8:sts=8:sw=8:noexpandtab:tw=78:norl:
