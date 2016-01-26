@@ -583,3 +583,5 @@ endif
 " let &t_SR = "\<Esc>[4 q"
 " let &t_EI = "\<Esc>[2 q"
 
+cnoremap sudow w !sudo tee & >/dev/null
+
