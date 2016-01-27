@@ -93,6 +93,8 @@ NeoBundle 'mattn/emmet-vim'
 NeoBundle 'arnaud-lb/vim-php-namespace'
 
 "" Extra Bundles
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'tyru/open-browser-github.vim'
 NeoBundle 'mhinz/vim-startify'
 NeoBundle 'mhinz/vim-signify'
 NeoBundle 'kien/tabman.vim'
@@ -602,4 +604,10 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+let g:netrw_nogx = 1
+" nmap gx <Plug>(openbrowser-open)
+" vmap gx <Plug>(openbrowser-open)
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
 
