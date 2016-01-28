@@ -227,3 +227,5 @@ alias screencast='ffmpeg -f x11grab -s wxga -r 25 -i :0.0 -sameq ~/.tmp/screenca
 alias stopwatch='time read -N 1'
 alias bofhexcuse='telnet towel.blinkenlights.nl 666'
 alias wgetmir='wget --random-wait -r -e robots=off '
+alias vn.='viewnior .'
+
