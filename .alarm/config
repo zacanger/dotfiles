@@ -6,7 +6,7 @@ DAY=today
 
 [Alarm Time]
 # Constant alarm time.
-ALARM_TIME=05:30
+ALARM_TIME=07:45
 
 [Alarm Attempts]
 # Select number for attempts.
@@ -14,4 +14,4 @@ ATTEMPTS=5
 
 [Path]
 # Path statements sound files.
-SONG=~/.alarm/alarm.ogg
+SONG=/home/z/.alarm/alarm.ogg

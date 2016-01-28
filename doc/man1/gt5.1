@@ -1,0 +1,158 @@
+.TH gt5 1 "August 2007" "gt5 v1.4.0"
+.SH NAME
+gt5 \- a diff\-capable 'du\-browser'
+.SH SYNOPSIS
+.B gt5
+[ dir | file | dir file | file file2 ] [options]
+.SH DESCRIPTION
+.B gt5
+reads the output of
+.BR du ,
+compares it with a du\-log saved by the last run,
+converts it into HTML and opens the resulting file with a
+.BR textbrowser .
+
+If files are given on the commandline they are expected to be
+(optionally
+.IR gzip / bzip2 \-compressed)
+logfiles of
+.BR "du \-akx /some/dir" .
+It is up to you to take care that the given directories/files represent
+the same directory.
+.I gt5
+will show lots of new files if you don't. ;\-)
+.SH OPTIONS
+.IP "\-\-cut\-at float"
+Files and directories that are below
+.I float
+percent of their parents are not shown.  Default is
+.IR 0.1 ,
+gt5 will accept values between 0.01 and 30.
+.IP "\-\-diff\-dir directory"
+Use
+.I directory
+instead of
+.I ~/.gt5\-diffs/
+to read/store du\-logs.
+This switch is ignored if gt5 is only used with files.
+.IP \-\-discard
+Do not save the current state, in other words: be able to diff against the old
+state again.  This feature is disabled if gt5 is only used with files.
+.IP \-\-link\-files
+Also insert links to files to access them from within gt5.  This can be very
+handy if your browser is configured to handle the files MIME\-type correctly.
+This feature is disabled if gt5 is only used with files.
+.IP "\-\-max\-depth int"
+Do not show anything below a depth of
+.I int
+directories. Default is
+.IR 5
+(also see
+.B BUGS
+below).
+.IP "\-\-max\-lines int"
+Only consider the
+.I int
+biggest files and directories within the output of
+.IR du .
+.IP \-\-no\-diffs
+Use this if you are not interested in the history of the directories processed,
+for example in /tmp.
+.IP "\-\-save\-as file"
+DEPRECATED, use
+.B du \-akx
+or
+.B du \-ak
+(see
+.BR \-\-with\-mounts ),
+save the output to a file and run gt5 against one (ore two) of these files
+later.
+.IP \-\-save\-state
+Force saving current state, overwriting a previous
+.IR \-\-discard .
+(Some people seem to have gt5 aliased to
+.IR "'gt5 \-\-discard'" .)
+.IP \-\-with\-mounts
+By default gt5 calls
+.B du
+with
+.B \-akx
+to ignore mounted filesystems. Use this to inspect mounted partitions too, i.e. call
+.B du
+with
+.B \-ak
+.SH HELPERS
+If
+.I gawk
+or a
+.I textbrowser
+are missing and you want to install them into
+.IR "~/bin " "(or " "/usr/local/bin " "if you have write access there), " gt5
+comes with the following helpers:
+.IP \-\-get\-gawk
+Download, compile and install a copy of
+.IR gawk .
+.IP \-\-get\-links
+Download, compile and install a copy of
+.IR links .
+.IP \-\-get\-links2
+Download, compile and install a copy of
+.IR links2 .
+.IP \-\-get\-elinks
+Download, compile and install a copy of
+.IR elinks .
+.SH TEXTBROWSERS
+It is recommended to use
+.IR "links " "with " gt5 .
+Other textbrowsers are also possible but there are several
+good reasons why links is given priority over the others:
+.IP elinks:
+links is
+.I much
+faster on startup/exit
+.IP lynx:
+does not honor a documents
+.I coloring
+.IP netrik:
+no colors,
+.I unfavourable cursor navigation
+.IP retawq:
+no colors,
+.I can't
+handle <a name>\-tags
+.IP w3m:
+.I unfavourable
+handling of <a name>\-tag,
+.I unfavourable cursor navigation
+and no colors
+.PP
+Only
+.IR links / links2 ", " "elinks " "and " lynx
+are now considered usable (and also chosen in that order). See
+.BR ENVIRONMENT / GT5_BROWSER
+below.
+.SH FILES
+.I ~/.gt5.html
+.RS
+contains a copy of the last run
+.RE
+.I ~/.gt5\-diffs/
+.RS
+compressed du\-logs are stored here
+.SH ENVIRONMENT
+.IP GT5_BROWSER
+force using a (specific) textbrowser
+.IP GT5_CHARSET
+force using a (specific) charset for HTML header instead of using
+.I $LANG
+.SH BUGS
+Directories at depth
+.B max\-depth
+are not browsable and so look like files.
+.SH AUTHOR
+Thomas Sattler <gt5 at gmx dot net>
+.SH "SEE ALSO"
+.BR du (1),
+.BR links (1),
+.BR elinks (1),
+.BR lynx (1)
