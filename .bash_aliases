@@ -12,6 +12,7 @@ alias fn='cd ~/.bash_functions'
 
 # development package managers
 alias ni='npm i'
+alias ns='npm start'
 alias npms='npm start'
 alias nig='npm install -g'
 alias nid='npm install --save-dev'
