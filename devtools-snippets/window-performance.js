@@ -1,5 +1,9 @@
 // window-performance.js by Brian Grinstead; gh:bgrins/window-performance
 // include as a script, or just paste it in the console
+// to test, do something (in your page) like:
+// function compute(first, second){return first + second}
+// window.onload = function(){var j = 0;for(var i = 0; i < 10000000; i++){var k = i + j;j = i;}}
+// setInterval(function(){for(var i = 0; i < 10000; i++){var y = compute(i, i+1)}}, 10000);
 
 (function(){
   var OPEN_BY_DEFAULT = false
