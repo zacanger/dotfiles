@@ -15,3 +15,4 @@ ATTEMPTS=5
 [Path]
 # Path statements sound files.
 SONG=/home/z/.alarm/alarm.ogg
+
