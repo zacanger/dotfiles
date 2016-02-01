@@ -182,3 +182,9 @@ Remove sound from a video file:
 Convert an image to a PDF document (needs `imagemagick` installed):
 > convert _imagefile_ _docname_.pdf
 
+## Symlinks
+Sometimes you're not sure where files might be. Maybe they need to be in more than one place;  
+maybe it'd just be convenient if they were. That's what symlinks are for. (Same concept as  
+shortcuts on a Microsoft machine, except you can do a lot more stuff with UNIX's links.)  
+The command you need to know is `ln`. You'll almost definitely want the `-s` (symbolic)  
+flag. Example: `ln -s /home/z/Dropbox/skool/extras/examples /home/z`

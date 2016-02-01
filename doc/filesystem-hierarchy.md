@@ -1,3 +1,4 @@
+http://www.pathname.com/fhs/pub/fhs-2.3.html
 # Filesystem hierarchy
 
 ## Unix Filesystem Hierarchy Standard [(wiki)][fhs]
