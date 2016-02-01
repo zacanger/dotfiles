@@ -1,6 +1,5 @@
 /* emulation ($TERM) */
 #define TT_TERMINFO               "xterm-256color"
-
 //#define TT_SCROLLBAR_VISIBLE      // uncomment to show scrollbar
 #define TT_DYNAMIC_WINDOW_TITLE   // uncomment to enable window_title_cb
 //#define TT_URGENT_ON_BELL         // uncomment to enable window_urgency_hint_cb
@@ -9,7 +8,7 @@
 #define TT_SEARCH_WRAP_AROUND     TRUE
 #define TT_AUDIBLE_BELL           FALSE
 #define TT_VISIBLE_BELL           FALSE
-#define TT_FONT                   "Fira Code 10"
+#define TT_FONT                   "Hack 10"
 #define TT_X_WINDOW_SIZE          600
 #define TT_Y_WINDOW_SIZE          400
 
@@ -26,60 +25,32 @@
 #define TT_WORD_CHARS "-A-Za-z0-9:./?%&#_=+@~"
 
 /* colours */
-#define TT_COLOR_BACKGROUND   "#101010"
-#define TT_COLOR_FOREGROUND   "#cdcdcd"
+#define TT_COLOR_BACKGROUND   "#060606"
+#define TT_COLOR_FOREGROUND   "#d4e5de"
 /* black */
-#define TT_COLOR0     "101010"
-#define TT_COLOR8     "#4d4d4d"
+#define TT_COLOR0     "050505"
+#define TT_COLOR8     "#212529"
 /* red */
-#define TT_COLOR1     "#B22222"
-#define TT_COLOR9     "#ED2939"
+#define TT_COLOR1     "#c16c6c"
+#define TT_COLOR9     "#ab656a"
 /* green */
-#define TT_COLOR2     "#00a000"
-#define TT_COLOR10    "#32cd32"
+#define TT_COLOR2     "#6abf6a"
+#define TT_COLOR10    "#7cee7c"
 /* yellow */
-#define TT_COLOR3     "#cdcd00"
-#define TT_COLOR11    "#ffff00"
+#define TT_COLOR3     "#e1e16d"
+#define TT_COLOR11    "#e5e579"
 /* blue */
-#define TT_COLOR4     "#2346AE"
-#define TT_COLOR12    "#2b65ec"
+#define TT_COLOR4     "#8b99c1"
+#define TT_COLOR12    "#81c3f4"
 /* magenta */
-#define TT_COLOR5     "#AA00AA"
-#define TT_COLOR13    "#C154C1"
+#define TT_COLOR5     "#db63db"
+#define TT_COLOR13    "#d094d0"
 /* cyan */
-#define TT_COLOR6     "#58C6ED"
-#define TT_COLOR14    "#00DFFF"
+#define TT_COLOR6     "#85d8f0"
+#define TT_COLOR14    "#7af3f6"
 /* white */
-#define TT_COLOR7     "#e5e5e5"
-#define TT_COLOR15    "#dddddd"
-
-///* default colours; like urxvt */
-//#define TT_COLOR_BACKGROUND   "#000000"
-//#define TT_COLOR_FOREGROUND   "#bebebe"
-///* black */
-//#define TT_COLOR0      "#000000"
-//#define TT_COLOR8      "#4d4d4d"
-///* red */
-//#define TT_COLOR1      "#cd0000"
-//#define TT_COLOR9      "#ff0000"
-///* green */
-//#define TT_COLOR2      "#00cd00"
-//#define TT_COLOR10     "#00ff00"
-///* yellow */
-//#define TT_COLOR3      "#cdcd00"
-//#define TT_COLOR11     "#ffff00"
-///* blue */
-//#define TT_COLOR4      "#0000cd"
-//#define TT_COLOR12     "#2b65ec"
-///* magenta */
-//#define TT_COLOR5      "#cd00cd"
-//#define TT_COLOR13     "#ff00ff"
-///* cyan */
-//#define TT_COLOR6      "#00cdcd"
-//#define TT_COLOR14     "#00ffff"
-///* white */
-//#define TT_COLOR7      "#e5e5e5"
-//#define TT_COLOR15     "#ffffff"
+#define TT_COLOR7     "#eaecd6"
+#define TT_COLOR15    "#eaeaea"
 
 /* shortcuts */
 #define TT_MODIFIER       GDK_CONTROL_MASK | GDK_SHIFT_MASK
@@ -99,3 +70,4 @@
 #define URLPATH         "(?:/" SPECIAL_CHARS "*)?"
 
 const char * const url_regex = SCHEME USERINFO HOST PORT URLPATH "(?<!\\.)";
+

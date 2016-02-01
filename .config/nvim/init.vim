@@ -537,6 +537,7 @@ let g:syntastic_javascript_jshint_generic = 1
 let g:syntastic_javascript_checkers = ['relint']
 
 :nnoremap <Leader>s :SemanticHighlightToggle<cr>
+let g:semanticEnableFileTypes = ['javascript', 'css', 'vue', 'node', 'python', 'ruby', 'es6', 'jsx', 'react', 'jquery', 'angular', 'underscore', 'coffeescript', 'elm', 'clojure', 'clojurescript', 'json', 'c']
 
 " Compatible with ranger 1.4.2 through 1.7.*
 "

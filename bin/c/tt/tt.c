@@ -1,4 +1,4 @@
-/* Ryan P.C. McQuen | Everett, WA | ryan.q@linux.com */
+/* originally by ryan.q@linux.com | forked by gh:zacanger */
 
 #include <stdlib.h>
 #include <glib.h>
@@ -9,7 +9,7 @@
 #include "config.h"
 
 static gboolean url_select_mode = FALSE;
-static int child_pid = 0;   // needs to be global for signal_handler to work
+static int child_pid = 0; // needs to be global for signal_handler to work
 
 /* xdg-open, text is argument */
 static void
@@ -344,3 +344,4 @@ main (int argc, char* argv[])
 
     return EXIT_SUCCESS;
 }
+
