@@ -95,6 +95,7 @@ NeoBundle 'arnaud-lb/vim-php-namespace'
 "" Extra Bundles
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'tyru/open-browser-github.vim'
+NeoBundle 'ervandew/supertab'
 NeoBundle 'mhinz/vim-startify'
 NeoBundle 'mhinz/vim-signify'
 NeoBundle 'kien/tabman.vim'
@@ -615,4 +616,6 @@ let g:netrw_nogx = 1
 " vmap gx <Plug>(openbrowser-open)
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
+
+let g:SuperTabDefaultCompletionType = "<c-n>"
 
