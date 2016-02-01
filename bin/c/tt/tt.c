@@ -271,6 +271,7 @@ main (int argc, char* argv[])
     g_signal_connect(window, "delete-event", gtk_main_quit, NULL);
     gtk_window_set_wmclass(GTK_WINDOW (window), name ? name : "tt", "tt");
     gtk_window_set_title(GTK_WINDOW (window), title ? title : "tt");
+    gtk_window_set_decorated(GTK_WINDOW (window), FALSE); // uncomment to remove decorations
 
     /* window size (config.h) */
     gtk_window_set_default_size(GTK_WINDOW (window), TT_X_WINDOW_SIZE, TT_Y_WINDOW_SIZE);
