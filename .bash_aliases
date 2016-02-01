@@ -42,6 +42,7 @@ alias what-repo='apt-cache show "$1" | grep ^Filename: | head -n1 | col2 /'
 alias what-source='apt-cache show "$1" | grep "^Filename:" | sed -e "s:\(.*\)/\(.*\)/\(.*\)/\(.*\)/.*:\4:"'
 
 # navigation
+alias Cd='cd'
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -229,4 +230,5 @@ alias stopwatch='time read -N 1'
 alias bofhexcuse='telnet towel.blinkenlights.nl 666'
 alias wgetmir='wget --random-wait -r -e robots=off '
 alias vn.='viewnior .'
+alias glance='glance -p 9876 -v'
 
