@@ -1,7 +1,10 @@
-http://www.pathname.com/fhs/pub/fhs-2.3.html
 # Filesystem hierarchy
 
-## Unix Filesystem Hierarchy Standard [(wiki)][fhs]
+* <http://www.pathname.com/fhs/pub/fhs-2.3.html>
+* <http://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard>
+
+## Unix Filesystem Hierarchy Standard
+
 ```
 /              Root dir
 /bin           Binaries
@@ -39,6 +42,7 @@ http://www.pathname.com/fhs/pub/fhs-2.3.html
 ```
 
 ## Node Module Filesystem Hierarchy
+
 ```
 bin              -> executable
 docs             -> documentation
@@ -47,6 +51,7 @@ test             -> tests
 ```
 
 ## Project Filesystem Hierarchy
+
 ```
 bin              -> executable
 docs             -> documentation
@@ -56,15 +61,10 @@ sh               -> shell scripts
 test             -> integration tests
 ```
 
-## See also
-- [Filesystem Hierarchy Standard][fhs]
-
-[fhs]: http://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard
 
 ## Personal filesystem hierarchy
-Or how to structure your personal documents well. This is what I'm going for now,
-maybe some other programmers might find it useful as well! All my files are stored
-in `Google Drive(3)` and symlinked from `~/mnt/Google Drive` to `~/`.
+
+Or, how to structure your personal documents well. If you want. It's a way that works.
 
 ```
 etc/              other
@@ -85,3 +85,4 @@ usr/              personal files, sorted by topics
   accounts/       account info & restoration files
   img/            avatar pictures
 ```
+
