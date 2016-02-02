@@ -1,3 +1,5 @@
+# GIT
+
 * Remove a current tracking relationship: `git branch --unset-upstream`
 * Cryptographically sign all commits: `commit.gpgsign`
 * Revert a single file with uncommitted changes to HEAD: `git checkout <filename>`
