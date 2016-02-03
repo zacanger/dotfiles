@@ -231,4 +231,5 @@ alias bofhexcuse='telnet towel.blinkenlights.nl 666'
 alias wgetmir='wget --random-wait -r -e robots=off '
 alias vn.='viewnior .'
 alias glance='glance -p 9876 -v'
+alias pc='pin-cushion'
 
