@@ -3,6 +3,13 @@
 # kill everything, goddammit
 alias killx='sudo pkill -9 Xorg'
 
+# omg just go away
+alias reboot='sudo /sbin/reboot'
+alias poweroff='sudo /sbin/poweroff'
+alias halt='sudo /sbin/halt'
+alias shutdown='sudo /sbin/shutdown'
+alias bye='sudo /sbin/poweroff'
+
 # managing .bashrc & .bash_aliases
 alias edrc='nvim ~/.bashrc'
 alias brc='nvim ~/.bashrc'
@@ -55,7 +62,9 @@ alias ,,,,,='.....'
 alias ,,,,,,='......'
 alias fonts="cd /usr/share/fonts"
 alias cs='cd $OLDPWD'
-alias ..a='cd .. && a'
+alias ..a='.. && a'
+alias ...a='... && a'
+alias ....a='.... && a'
 
 # safety
 # alias rm='rm -Iv --preserve-root'
@@ -71,14 +80,7 @@ alias chgrp='chgrp --preserve-root'
 # alias shred='shred -n 100 -z -v -u'
 alias shred='echo NOPE, WE LIKE '
 
-# omg just go away
-alias reboot='sudo /sbin/reboot'
-alias poweroff='sudo /sbin/poweroff'
-alias halt='sudo /sbin/halt'
-alias shutdown='sudo /sbin/shutdown'
-alias bye='sudo /sbin/poweroff'
-
-# ls -ALL THE THINGS
+# ls things
 alias ls='ls -F --color=auto --group-directories-first'
 alias k='ls'
 alias l='ls -oshS'
@@ -92,18 +94,18 @@ alias lc='ls -ltcr'
 alias lH='ls -hHsorA'
 alias lS='ls -AosSh'
 
-# ag all the things! um, i mean...
+# ~~ag~~ _grep_ things
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-# https://bitbucket.org/sjl/t
+# https://bitbucket.org/sjl/t (task list)
 alias t='python2.7 ~/bin/py/t.py --task-dir ~/Dropbox/tpytasks --list tasks'
 alias tl='t | wc -l'
 
-# browsers are life. use them.
+# browsers rock.
 alias ch='chromium'
 alias ff='firefox'
 alias ffs='firefox --safe-mode'
@@ -115,7 +117,7 @@ alias lk='luakit'
 alias sm='seamonkey'
 alias icew='iceweasel'
 
-# browsers suck. destroy them.
+# browsers suck.
 alias kk='kill-tabs'
 alias kch='pkill -15 chromium'
 alias kice='pkill -15 iceweasel'
@@ -124,7 +126,7 @@ alias ksm='pkill -15 seamonkey'
 alias kqu='pkill -15 qutebrowser'
 alias klk='pkill -15 luakit'
 
-# dropbox; basically may as well be ~/ at this point
+# dropbox, aka ~/
 alias dbup='dropbox start'
 alias dbdn='dropbox stop'
 alias dbst='dropbox status'
@@ -135,7 +137,7 @@ alias tweet='twidge update'
 alias feed='twidge lsrecent'
 alias mytw='twidge lsarchive'
 
-# https://github.com/nvbn/thefuck
+# https://github.com/nvbn/thefuck (correct me, please)
 alias fuck='eval $(thefuck $(fc -ln -1))'
 alias please='fuck'
 
@@ -147,7 +149,7 @@ alias motd='curl -fsH "Accept: text/plain" "http://motd.sh/?v=0.01&weather=84601
 # this requires sox, and is for CGCFGC. change to E2-E4 (etc) for standard.
 alias tuner='for n in C2 G2 C3 F3 G3 C4;do play -n synth 4 pluck $n repeat 2;done'
 
-# misc shortcuts, because i'm lazy
+# all the rest
 alias vir='nvim -R'
 alias vib='nvim -b'
 alias virb='nvim -R -b'
