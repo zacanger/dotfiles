@@ -575,3 +575,6 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:grep_cmd_opts = '--line-numbers --noheading'
 set grepprg=ag
 
+" jsfmt
+let g:js_fmt_autosave = 1
+
