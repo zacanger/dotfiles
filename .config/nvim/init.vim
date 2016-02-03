@@ -571,3 +571,7 @@ vmap gx <Plug>(openbrowser-smart-search)
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
+" greplace
+let g:grep_cmd_opts = '--line-numbers --noheading'
+set grepprg=ag
+
