@@ -66,7 +66,7 @@ alias ..a='.. && a'
 alias ...a='... && a'
 alias ....a='.... && a'
 
-# safety
+# safety, etc.
 # alias rm='rm -Iv --preserve-root'
 # gh:sindresorhus/trash,empty-trash
 alias rm='trash'
@@ -79,6 +79,8 @@ alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
 # alias shred='shred -n 100 -z -v -u'
 alias shred='echo NOPE, WE LIKE '
+alias unl='unlink'
+alias rml='unlink'
 
 # ls things
 alias ls='ls -F --color=auto --group-directories-first'

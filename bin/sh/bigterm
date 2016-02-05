@@ -1,0 +1,3 @@
+#!/bin/bash
+
+urxvt -fn 'xft:DejaVu Sans Mono:pixelsize=15' -letsp -2

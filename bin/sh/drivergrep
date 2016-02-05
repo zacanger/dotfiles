@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Search the list of loaded driver LKMs for drivers of a particular category
+#
+# Usage: drivergrep <category>
+#
+# <category> must be the name of a subdirectory of the driver modules directory
+
+acc=
+for m in $(
+	ls "/lib/modules/$(uname -r)/kernel/drivers/$1" |
+	grep \.ko |
+	xargs -I {} basename {} .ko
+); do
+	acc+="$m\\\|"
+done
+acc=${acc%\\\|}
+
+lsmod |
+tail -n +2 |
+grep "^$acc" |
+sed 's/\s\+/\t/g' |
+cut -f1,2
