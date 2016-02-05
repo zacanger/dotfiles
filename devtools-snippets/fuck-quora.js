@@ -1,3 +1,4 @@
-var el = document.getElementByClassName("modal_signup_background", "new_web_signup_wall_design");
-el.parentNode.removeChild(el);
-
+document.getElementsByClassName('modal_signup_background')[0].remove()
+document.getElementsByClassName('dialog')[0].remove()
+document.getElementsByClassName('modal_signup_dialog')[0].remove()
+document.getElementsByClassName('dialog_wrapper')[0].remove()
