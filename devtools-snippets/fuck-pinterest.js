@@ -1,2 +1,3 @@
-var elmDeleted = document.getElementByClass("Nags", "InlineSignup", "UnauthBanner", "quarterScreenBanner");
-elmDeleted.parentNode.removeChild(elmDeleted);
+var el = document.getElementByClassName("Nags", "InlineSignup", "UnauthBanner", "quarterScreenBanner");
+el.parentNode.removeChild(el);
+
