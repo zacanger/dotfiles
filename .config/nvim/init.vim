@@ -578,3 +578,5 @@ set grepprg=ag
 " jsfmt
 " let g:js_fmt_autosave = 1
 
+let g:vimfiler_as_default_explorer = 1
+
