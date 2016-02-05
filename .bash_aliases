@@ -234,4 +234,6 @@ alias wgetmir='wget --random-wait -r -e robots=off '
 alias vn.='viewnior .'
 alias glance='glance -p 9876 -v'
 alias pc='pin-cushion'
+alias dif='diff'
+alias di='diff'
 

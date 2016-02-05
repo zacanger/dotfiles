@@ -1,5 +1,5 @@
-#!/bin/bash
-#
+#!/usr/bin/env bash
+
 # enable/disable touchpad
 # find your touchpad name:
 # egrep -i 'synap|alps|etps' /proc/bus/input/devices
@@ -8,13 +8,14 @@ A=`xinput list-props "$PAD" | sed -n -e 's/.*Device Enabled ([0-9][0-9]*):\t\(.*
 if [ $A -eq 1 ]; then
 xinput set-int-prop "$PAD" "Device Enabled" 8 0
 notify-send -t 5000 \
-'   touchpad 
+'   touchpad
 ░░▒▒▓▓██▓▓▒▒░░' \
 '   disabled'
 else
 xinput set-int-prop "$PAD" "Device Enabled" 8 1
 notify-send -t 5000 \
-'   touchpad 
+'   touchpad
 ░░▒▒▓▓██▓▓▒▒░░' \
 '   enabled'
 fi
+
