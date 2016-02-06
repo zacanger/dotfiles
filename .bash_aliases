@@ -19,6 +19,8 @@ alias fn='cd ~/.bash_functions'
 
 # development package managers
 alias ni='npm i'
+alias npmi='npm init -y && packy'
+alias newnpm='npmi'
 alias ns='npm start'
 alias npms='npm start'
 alias nig='npm install -g'
