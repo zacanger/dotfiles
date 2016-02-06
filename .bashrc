@@ -27,8 +27,8 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 HISTCONTROL=ignoreboth # ignore lines with spaces & dups
 HISTIGNORE='ls:l:la:lo:lS:lT:ll:a:k:ld:lr:cd:lc:h:history:ranger:mocp:mu:q:exit:c:ds:ds.:clear'
 shopt -s histappend # append
-HISTSIZE=$((1 << 12)) # length
-HISTFILESIZE=$((1 << 24)) # size
+HISTSIZE= # length
+HISTFILESIZE= # size
 HISTTIMEFORMAT='%F %T  ' # timestamp
 PROMPT_COMMAND='history -a' # record history NOW, not on exit
 # completions
