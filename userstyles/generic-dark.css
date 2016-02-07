@@ -1,5 +1,13 @@
-/* this is it. i throw these couple of lines all over the place, and it's stored here because i'm sick of needing to
- * rewrite it in the 'my-style' extension (or in the tools, in firefox) on just about every other site i visit. */
+/* i use this everywhere. threw it here because at some
+ * point i realised i was typing the same few lines
+ * many many times every day, on many many different
+ * sites. this can be thrown in the (excellent)
+ * 'my-style' extension on chromium, or just stuck in
+ * firefox's tools, or applied with stylish (or a
+ * stylish-alike)... whatever's convenient at the
+ * moment, really.
+ */
+
 body,div,p,h1,h2,h3,h4,h5,h6,tbody,thead,th,tr,td,
 blockquote,li,ul,strong,font,form,footer,header,
 select,button,article,section,nav,span,label,dd,option{
@@ -7,11 +15,17 @@ select,button,article,section,nav,span,label,dd,option{
   background: #101010!important;
   font-family:"Fantasque Sans Mono"!important;
 }
+
 a{color:#8cf2c1!important;}
+
 a:hover{color:#a7d7e5!important;}
+
 a:visited{color:#df8585!important;}
-textarea,code,pre,input{
+
+textarea,code,pre,input,code span{
   background:#212121!important;
   color:#cec8ea!important;
-  font-family: "Hack", monospace!important;
+  font-size:12px!important;
+  font-family:"Monoid",monospace!important;
 }
+
