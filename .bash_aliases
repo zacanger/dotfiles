@@ -62,6 +62,7 @@ alias git='git-feats'
 alias hc='hub clone'
 alias hl='hub clone'
 alias hcl='hub clone'
+alias gp='git push'
 
 # navigation
 alias Cd='cd'

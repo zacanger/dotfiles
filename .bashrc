@@ -65,6 +65,7 @@ export EDITOR='nvim'
 export SLACK_TOKEN='xoxp-3318091984-8228669395-18656956487-09aa605092' # ignoreline
 export SLACK_USERNAME='zacanger'
 export LOLCOMMITS_ANIMATE='2'
+export MANPATH=$MANPATH:/home/z/Dropbox/z/doc
 # j, rbenv, and fzf
 . /usr/share/autojump/autojump.sh
 eval "$(rbenv init -)"

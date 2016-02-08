@@ -1,23 +1,16 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Convert a markdown document to HTML and view it in ELinks
-# Uses a new temp file for the output each time
+# converts markdown to temp html file, opens it in browser (see lines 6 and 11)
 
-command -v pandoc >/dev/null 2>&1 || { echo "Pandoc is not installed. Please install it and try again"; exit 1; }
-command -v links >/dev/null 2>&1 || { echo "Links browser is not installed. Please install it and try again"; exit 1; }
+command -v pandoc >/dev/null 2>&1 || { echo "Please install Pandoc and try again."; exit 1; }
+command -v roaster.py >/dev/null 2>&1 || { echo "Configured browser is not installed. Please try a different one."; exit 1; }
 
 if [ -f "$1" ]; then
-
-    # Make it work under CYGWIN
-    if [ $(uname -o) == "Cygwin" ]; then
-        TEMPFILE="$(cygpath -aw "/tmp")/$$.html"
-    else
-        TEMPFILE=/tmp/$$.html
-    fi
-
-    pandoc -s "$1" -o "$TEMPFILE"
-    links "$TEMPFILE"
+  TEMPFILE=/tmp/$$.html
+  pandoc -s "$1" -o "$TEMPFILE"
+  roaster.py "$TEMPFILE"
 else
-    echo Sorry, no such file $1
-    echo Usage: mkdview filename
+  echo Sorry, $1 does not exist.
+  echo Usage: markdown-preview filename
 fi
+
