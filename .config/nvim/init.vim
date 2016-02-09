@@ -581,3 +581,6 @@ set grepprg=ag
 
 let g:vimfiler_as_default_explorer = 1
 
+" commit message thing
+autocmd Filetype gitcommit setlocal spell textwidth=80
+

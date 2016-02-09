@@ -255,4 +255,5 @@ alias nodi='nodei'
 alias rep='repl-it'
 alias reph='repl-here'
 alias rf='replface'
+alias random8chars='dd if=/dev/urandom count=1 2> /dev/null | uuencode -m - | sed -ne 2p | cut -c-8'
 
