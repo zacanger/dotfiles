@@ -1,5 +1,7 @@
 * filter=ignoreline
+
 * text=auto
+
 text eol=lf
 
 *.7z binary
