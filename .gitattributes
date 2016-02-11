@@ -94,6 +94,7 @@ AUTHORS text
 *.jspf text
 *.jsp text
 *.js text
+*.jsx text
 *.latte text
 *.less text
 LICENSE text
@@ -120,7 +121,6 @@ Procfile text
 .slugignore text
 *.sql text
 *.styl text
-*.svg text
 *.tab text
 *.textile text
 *.tld text
@@ -133,5 +133,5 @@ Procfile text
 *.yml text
 
 *.pdf diff=astextplain
-*.PDF	 diff=astextplain
+*.PDF	diff=astextplain
 
