@@ -1,5 +1,6 @@
-{ "esformatter": {
-  "allowShebang": true
+{
+  "esformatter": {
+    "allowShebang": true
   },{
   "indent" : {
     "ReturnStatement": ">=1",
@@ -46,10 +47,8 @@
     "VariableDeclaration.UnaryExpression": 1,
     "WhileStatement": 1
   },
-
   "lineBreak" : {
     "value" : "\n",
-
     "before" : {
       "AssignmentExpression" : -1,
       "AssignmentOperator": -1,
@@ -140,7 +139,6 @@
       "WhileStatementOpeningBrace" : 0,
       "WhileStatementClosingBrace" : -1
     },
-
     "after" : {
       "AssignmentExpression" : -1,
       "AssignmentOperator" : -1,
@@ -230,11 +228,9 @@
       "WhileStatementClosingBrace" : -1
     }
   },
-
   "whiteSpace" : {
     "value" : " ",
     "removeTrailing" : 1,
-
     "before" : {
       "AssignmentPattern" : 1,
       "ArrayExpressionOpening" : -1,
@@ -334,7 +330,6 @@
       "WhileStatementOpeningBrace" : -1,
       "WhileStatementClosingBrace" : -1
     },
-
     "after" : {
       "AssignmentPattern" : 1,
       "ArrayExpressionOpening" : -1,
@@ -428,7 +423,6 @@
       "WhileStatementClosingBrace" : -1
     }
   },
-
   "jsx": {
     "formatJSX": true,
     "attrsOnSameLineAsTag": false,
@@ -444,7 +438,6 @@
       "preserve_newlines": true
     }
   },
-
   "plugins": [
     "esformatter-quotes",
     "esformatter-literal-notation",
@@ -452,7 +445,6 @@
     "esformatter-spaced-lined-comment",
     "esformatter-jsx"
   ],
-
   "quotes": {
     "type": "single",
     "avoidEscape": true

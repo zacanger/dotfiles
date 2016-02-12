@@ -58,3 +58,4 @@ NeoBundle 'vim-scripts/syntaxcomplete'
 " NeoBundle 'suan/vim-instant-markdown'
 " NeoBundle 'vim-jp/vital.vim'
 
+NeoBundle 'millermedeiros/vim-esformatter'

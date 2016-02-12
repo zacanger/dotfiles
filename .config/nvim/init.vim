@@ -125,7 +125,7 @@ set smarttab
 set autoindent
 
 "" Map leader to ,
-let mapleader=','
+let mapleader='\<Space>'
 
 "" Enable hidden buffers
 set hidden
@@ -583,4 +583,18 @@ let g:vimfiler_as_default_explorer = 1
 
 " commit message thing
 autocmd Filetype gitcommit setlocal spell textwidth=80
+
+" esformatter!
+nnoremap <silent> <leader>es :Esformatter<CR>
+vnoremap <silent> <leader>es :Esformatter<CR>
+
+" clearing the damn screen between commands
+nnoremap :! :!clear;
+vnoremap :! :!clear;
+
+" man = doc = help
+nnoremap :man :help
+vnoremap :man :help
+nnoremap :doc :help
+vnoremap :doc :help
 
