@@ -1,10 +1,12 @@
-## [Vi Cheat Sheet](http://www.lagmonster.org/docs/vi2.html)
+# vi(m) cheat sheet
+
+[source](http://www.lagmonster.org/docs/vi2.html)
 
 1\. Before doing anything to a document, type the following command followed by a carriage return: :set showmode
 
 2\. VI is CaSe SEnsItiVe!!! So make sure Caps Lock is OFF.
 
-#### **Starting VI** 
+#### **Starting VI**
 
 | vi _filename_             | Edits _filename_                                                  |
 | ------------------------- | ----------------------------------------------------------------- |
@@ -139,7 +141,7 @@
 | [./=+] | The SET containing . (dot), / (slash), =, and + |
 | [-A-F] | The SET from Capital A to Capital F and the dash (dashes must be specified first) |
 | [0-9 A-Z] | The SET containing all capital letters and digits and a space |
-| [A-Z][a-zA-Z] | In the first position, the SET from Capital A to Capital Z  
+| [A-Z][a-zA-Z] | In the first position, the SET from Capital A to Capital Z
 In the second character position, the SET containing all letters |
 | [a-z]{m} | Look for _m_ occurances of the SET from lowercase a to lowercase z |
 | [a-z]{m,n} | Look for at least m occurances, but no more than n occurances of the SET from lowercase a to lowercase z |
@@ -150,12 +152,12 @@ Regular Expression Examples
 | /^[a-zA-Z]/ | Matches if the line starts with any letter |
 | /^[a-z].*/ | Matches if the first character of the line is a-z and there is at least one more of any character following it |
 | /2134$/ | Matches if line ends with 2134 |
-| /(21|35)/ | Matches is the line contains 21 or 35  
+| /(21|35)/ | Matches is the line contains 21 or 35
 Note the use of ( ) with the pipe symbol to specify the 'or' condition |
 | /[0-9]*/ | Matches if there are zero or more numbers in the line |
 | /^[^#]/ | Matches if the first character is not a # in the line |
-| Notes:  
-1\. Regular expressions are case sensitive  
+| Notes:
+1\. Regular expressions are case sensitive
 2\. Regular expressions are to be used where _pattern_ is specified |  |
 
 | :! cmd | Executes shell command cmd; you can add these special characters to indicate:% name of current file# name of last file edited |
@@ -211,6 +213,5 @@ Note: Options given are default. To change them, enter type :set option to turn 
 | :set warn | warn |  | Warns "no write since last change" |
 | :set window=n | window = n | Sets number of lines in a text window to n |  |
 | :set wm=n | wm = 0 | Sets automatic wraparound n spaces from right margin. |
-| :set ws | ws | Sets automatic wraparound n spaces from right margin. |  
-
+| :set ws | ws | Sets automatic wraparound n spaces from right margin. |
 
