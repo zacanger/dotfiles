@@ -1,7 +1,12 @@
-"*****************************************************************************
-"" NeoBundle core
-"*****************************************************************************
+" zacanger's init.vim
+" for nvim | neovim.io
+" using neobundle | gh:Shougo/neobundle.vim
 
+" this is not all that clean. if anyone wants to go ahead
+" and clean things up, please feel free. i'm still kinda
+" getting used to managing vim configs in a reasonable manner.
+
+" neobundle stuff
 if has('vim_starting')
   set nocompatible               " Be iMproved
 
@@ -32,9 +37,7 @@ call neobundle#begin(expand('~/.config/nvim/bundle/'))
 " Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-"*****************************************************************************
 "" NeoBundle install packages
-"*****************************************************************************
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'tpope/vim-commentary'
 NeoBundle 'tpope/vim-fugitive'
@@ -104,9 +107,9 @@ filetype plugin indent on
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 
-"*****************************************************************************
+
 "" Basic Setup
-"*****************************************************************************"
+
 "" Encoding
 set encoding=utf-8
 set fileencoding=utf-8
@@ -154,9 +157,9 @@ let g:session_autoload = "no"
 let g:session_autosave = "no"
 let g:session_command_aliases = 1
 
-"*****************************************************************************
+
 "" Visual Settings
-"*****************************************************************************
+
 syntax on
 set ruler
 set number
@@ -256,9 +259,10 @@ else
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.linenr = ''
 endif
-"*****************************************************************************
+
+
 "" Abbreviations
-"*****************************************************************************
+
 "" no one is really happy until you have this shortcuts
 cnoreabbrev W! w!
 cnoreabbrev Q! q!
@@ -301,9 +305,7 @@ else
   nnoremap <silent> <leader>sh :VimShellCreate<CR>
 endif
 
-"*****************************************************************************
 "" Functions
-"*****************************************************************************
 if !exists('*s:setupWrapping')
   function s:setupWrapping()
     set wrap
@@ -312,9 +314,9 @@ if !exists('*s:setupWrapping')
   endfunction
 endif
 
-"*****************************************************************************
+
 "" Autocmd Rules
-"*****************************************************************************
+
 "" The PC is fast enough, do syntax highlight syncing from start
 augroup vimrc-sync-fromstart
   autocmd!
@@ -344,9 +346,9 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS noci
 
 set autoread
 
-"*****************************************************************************
+
 "" Mappings
-"*****************************************************************************
+
 "" Split
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
@@ -445,6 +447,7 @@ vnoremap K :m '<-2<CR>gv=gv
 "" Open current line on GitHub
 noremap ,o :!echo `git url`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<C-R>=line('.')<CR> \| xargs open<CR><CR>
 
+
 "" Custom configs
 
 " Tagbar
@@ -490,6 +493,10 @@ let g:syntastic_javascript_checkers = ['relint']
 
 :nnoremap <Leader>s :SemanticHighlightToggle<cr>
 let g:semanticEnableFileTypes = ['javascript', 'css', 'vue', 'node', 'python', 'ruby', 'es6', 'jsx', 'react', 'jquery', 'angular', 'underscore', 'coffeescript', 'elm', 'clojure', 'clojurescript', 'json', 'c']
+
+
+"" tryna get ranger to work... still no luck with this.
+"" anyone know what's up?
 
 " Compatible with ranger 1.4.2 through 1.7.*
 "
@@ -540,6 +547,7 @@ autocmd User Node
   \   nmap <buffer> <C-w><C-f> <Plug>NodeVSplitGotoFile |
   \ endif
 
+
 " xfce4-terminal
 if has("autocmd")
   au InsertEnter * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_UNDERLINE/' ~/.config/xfce4/terminal/terminalrc"
@@ -551,6 +559,7 @@ endif
 " let &t_SI = "\<Esc>[6 q"
 " let &t_SR = "\<Esc>[4 q"
 " let &t_EI = "\<Esc>[2 q"
+
 
 cnoremap sudow w !sudo tee & >/dev/null
 
@@ -576,13 +585,13 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:grep_cmd_opts = '--line-numbers --noheading'
 set grepprg=ag
 
-" jsfmt
-" let g:js_fmt_autosave = 1
-
 let g:vimfiler_as_default_explorer = 1
 
 " commit message thing
 autocmd Filetype gitcommit setlocal spell textwidth=80
+
+" jsfmt
+" let g:js_fmt_autosave = 1
 
 " esformatter!
 nnoremap <silent> <leader>es :Esformatter<CR>
