@@ -28,7 +28,7 @@ echo "-h or --help prints this"
 exit 1
 }
 
-PrintDone(){ # ASCII teacup and libnotify message. 
+PrintDone(){ # ASCII teacup and libnotify message.
     echo ""
     echo "   {  {     "
     echo "    }  }    "
@@ -139,3 +139,4 @@ fi
 
 $player $tea_file &>/dev/null || \
 echo "We couldn't play your tea file." &>/dev/null
+

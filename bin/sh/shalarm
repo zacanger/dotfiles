@@ -10,7 +10,7 @@ while [ $trig = 0 ]; do
 		trig=1
 	else
 		sleep 5
-		
+
 	fi
 done
 exit

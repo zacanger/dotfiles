@@ -1,25 +1,20 @@
 /*
- * "waits for" the files specified as arguments to be modified
- * and then exits.
- *
- * This is useful in situations say, where you need modify some source
- * file and your application uses say, a minified compressed version
- * of concatenated sources.
- *
- * Here you can do something like
- *
- * #!/bin/bash
- * while [ 0 ]; do
- *  waitfor js/*js && tools/deploy.sh
+ * waits for files (args passed) to be modified, then exits
+ * example use case: modify source, app uses minified version
+ * of source files.
+ * example script to make this happen:
+ * #!/usr/bin/env bash
+ * while [ 0 ] ; do
+ *   waitfor js/* .js && tools/deploy.sh
  * done
- *
  */
+
 #include <stdlib.h>
 #include <sys/inotify.h>
 #include <sys/select.h>
 
 int main(int argc, char*argv[]) {
-  int 
+  int
     fd = 0,
     *g_wd = (int*)malloc(sizeof(int) * argc),
     *g_fd = (int*)malloc(sizeof(int) * argc);
@@ -32,7 +27,7 @@ int main(int argc, char*argv[]) {
   for(argc--, argv++; argc; argc--, argv++) {
 
     // Only add files to the watch that exist
-    g_wd[fd] = inotify_add_watch( 
+    g_wd[fd] = inotify_add_watch(
       g_fd[fd], *argv,
       IN_MOVE_SELF | IN_MODIFY | IN_CREATE | IN_DELETE_SELF
     );
@@ -60,3 +55,4 @@ int main(int argc, char*argv[]) {
 
   return (!fd);
 }
+

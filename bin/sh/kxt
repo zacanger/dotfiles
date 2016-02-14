@@ -1,6 +1,4 @@
-#!/bin/bash
-
-
+#!/usr/bin/env bash
 
 #######################################################
 # kxt is a switchable script for useful bash commands #
@@ -121,3 +119,4 @@ case "$1" in
     *)	    printf "\033[31;4mNo Matching Tools found\033[1;m\n"
 esac
 fi
+
