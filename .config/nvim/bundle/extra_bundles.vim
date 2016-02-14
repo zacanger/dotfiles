@@ -59,3 +59,7 @@ NeoBundle 'vim-scripts/syntaxcomplete'
 " NeoBundle 'vim-jp/vital.vim'
 
 NeoBundle 'millermedeiros/vim-esformatter'
+NeoBundle 'vim-scripts/ingo-library'
+NeoBundle 'vim-scripts/SyntaxRange'
+NeoBundle 'alfredodeza/posero.vim'
+NeoBundle 'wakatime/vim-wakatime'

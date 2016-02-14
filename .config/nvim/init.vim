@@ -598,3 +598,6 @@ vnoremap :man :help
 nnoremap :doc :help
 vnoremap :doc :help
 
+" posero (presentations n shiz)
+let g:posero_default_mappings = 1
+

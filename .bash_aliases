@@ -261,4 +261,5 @@ alias rf='replface'
 alias random8chars='dd if=/dev/urandom count=1 2> /dev/null | uuencode -m - | sed -ne 2p | cut -c-8'
 alias vl='v -l'
 alias fz='filezilla'
+alias dayofyear='date +%j'
 
