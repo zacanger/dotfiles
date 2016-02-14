@@ -64,3 +64,4 @@ done
 if [ -t 0 ]; then
     print_image "" 1 "$(cat | base64)"
 fi
+
