@@ -77,3 +77,4 @@ while read thresh page; do
 
     mv "$tmp" "$file"
 done < ~/.webdiff/pages
+

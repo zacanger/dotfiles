@@ -1,9 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-#
-# http://man.cx manpage extractor
-# requires: xmllint (libxml2)
-#
+# man.cx extractor. requires xmllint (from libxml2)
 
 BASEURL='http://man.cx'
 XMLLINT=('xmllint' '--html')
@@ -46,3 +43,4 @@ else
   printf "No mancx entry for %s\n" "$PAGE"
   exit 1
 fi
+

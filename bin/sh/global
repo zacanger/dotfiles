@@ -1,33 +1,17 @@
 #!/usr/bin/env bash
-# Usage: global provide <gem-name>
-#        global install <gem-name> [-v <version>]
-#        global uninstall <gem-name> [-v <version>]
-#
-# `global` is a specialized wrapper for the `gem` command that you can use to
-# install command-line tools in an isolated location in the way that is
-# independent of the current rbenv/RVM version.
-#
-# Put `global` somewhere in your PATH, and add this to your shell config
-# *after* the lines that configure rbenv/RVM:
-#
-#   export PATH=~/.gem/global/bin:"$PATH"
-#
 
-# I use `global provide` to install: travis heroku bcat t pomo cane cloudapp
-#
-# Also Jekyll:
-#   https://help.github.com/articles/using-jekyll-with-pages#troubleshooting
-#   global i maruku -v 0.6.0
-#   global i liquid -v 2.4.1
-#   global i redcarpet -v 2.1.1
-#   global i rdiscount -v 1.6.8
-#   global i jekyll -v 0.12
-#   global binstubs jekyll
+# specialized wrapper for `gem`, to install cli tools in isolated location
+# independent of rvm/rbenv version
+# put `global` in PATH. add `~/.gem/global/bin` to PATH, AFTER rbenv/RVM
+# config lines.
+# usage: `global provide` (gem name)
+# `global install` (gem name) (-v (version))
+# `global uninstall` ''           ''
 
 set -e
 
 export GEM_HOME="$HOME/.gem/global"
-export RBENV_VERSION=1.9.3-p327-perf  # configure your Ruby version of choice here
+export RBENV_VERSION=2.2.3p173 # configure your Ruby version of choice here
 export -n RUBY_GC_MALLOC_LIMIT
 export -n RUBY_FREE_MIN
 
@@ -90,3 +74,4 @@ elif [[ "provide" = ${cmd}* ]]; then
 fi
 
 GEM_PATH="$GEM_HOME" exec gem "$cmd" $flags "$@"
+

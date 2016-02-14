@@ -3,7 +3,7 @@
 while getopts ":f:s:" arg; do
   case "$arg" in
     f)
-      f="${OPTARG}" 
+      f="${OPTARG}"
       ;;
     s)
       s="${OPTARG}"
