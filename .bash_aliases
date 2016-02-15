@@ -294,4 +294,5 @@ alias :WQ='q'
 alias :wQ='q'
 alias Q!='q'
 alias ffind='ffind.py'
+alias names='names.sh'
 
