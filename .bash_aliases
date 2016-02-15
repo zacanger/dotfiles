@@ -281,4 +281,7 @@ alias dmenu-fm='dmenu-fm.sh'
 alias dmenu_wrapper='dmenu_wrapper.sh'
 alias explain='explain.sh'
 alias hr='hr.sh'
+alias replface='replface.js'
+alias 4444='4444.js'
+alias lilnote='lilnote.js'
 
