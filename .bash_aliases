@@ -284,4 +284,7 @@ alias hr='hr.sh'
 alias replface='replface.js'
 alias 4444='4444.js'
 alias lilnote='lilnote.js'
+alias :wq='q'
+alias ZZ='q'
+alias q!='q'
 
