@@ -1,3 +1,6 @@
+# Useful stuff for fixing boot
+# deb http://ppa.launchpad.net/yannubuntu/boot-repair/ubuntu precise main
+# deb-src http://ppa.launchpad.net/yannubuntu/boot-repair/ubuntu precise main
 # deb http://mirrors.dotsrc.org/debian-multimedia/ sid main non-free
 # deb http://security.debian.org/ stretch/updates main contrib non-free
 # deb-src http://security.debian.org/ stretch/updates main contrib non-free

@@ -16,8 +16,11 @@
 
 # bbqtools-basic & bbq-tools; also check github
 deb http://linuxbbq.org/repos/apt/debian sid main
+
 # Debian Multimedia... switch with one of the others if it goes down
-deb http://mirrors.dotsrc.org/debian-multimedia/ sid main non-free
+deb http://mirror.optus.net/deb-multimedia/ unstable main non-free
+deb-src http://mirror.optus.net/deb-multimedia/ unstable main non-free
+
 # apt-build threw a bitch-fit so i put this here.
 deb [trusted=yes] file:/var/cache/apt-build/repository apt-build main
 
@@ -25,13 +28,9 @@ deb [trusted=yes] file:/var/cache/apt-build/repository apt-build main
 deb https://pault.ag/debian wicked main
 deb-src https://pault.ag/debian wicked main
 
+# numix
 deb http://ppa.launchpad.net/numix/ppa/ubuntu devel main
 # deb-src http://ppa.launchpad.net/numix/ppa/ubuntu devel main
-
-# Useful stuff for fixing boot (note to self: keep this here for
-# the roommate).
-deb http://ppa.launchpad.net/yannubuntu/boot-repair/ubuntu precise main
-# deb-src http://ppa.launchpad.net/yannubuntu/boot-repair/ubuntu precise main
 
 # pgl
 deb http://moblock-deb.sourceforge.net/debian/ sid main
@@ -44,8 +43,10 @@ deb http://packages.dotdeb.org/ jessie all
 # might as well be ~/ at this point
 deb [arch=i386,amd64] http://linux.dropbox.com/debian sid main
 
-# slack, google hangouts plugin, google chrome... for school/work
-deb https://packagecloud.io/slacktechnologies/slack/debian buster main
+# slack, for work
+deb https://packagecloud.io/slacktechnologies/slack/debian jessie main
+
+# google hangouts plugin, and chrome, for work
 deb http://dl.google.com/linux/talkplugin/deb/ stable main
 deb http://dl.google.com/linux/chrome/deb/ stable main
 
@@ -61,4 +62,9 @@ deb http://repository.spotify.com testing non-free
 
 # rethinkdb
 deb http://download.rethinkdb.com/apt stretch main
+
+# mysql
+deb http://repo.mysql.com/apt/debian/ jessie mysql-apt-config
+deb http://repo.mysql.com/apt/debian/ jessie mysql-5.7
+deb-src http://repo.mysql.com/apt/debian/ jessie mysql-5.7
 
