@@ -53,6 +53,7 @@ alias what-source='apt-cache show "$1" | grep "^Filename:" | sed -e "s:\(.*\)/\(
 
 # git, etc.
 alias gcl='git clone'
+alias gst='git st'
 alias branches='git branches'
 alias publish='git publish'
 alias sprout='git sprout'
@@ -241,8 +242,9 @@ alias alarm='alarm --config'
 alias sl='slack-desktop'
 alias apr="apropos"
 alias mpad='mousepad'
-alias ad='atom -d'
-alias abd='atom-beta -d'
+alias atom='atom-beta -d'
+alias ab='atom'
+alias ad='atom'
 alias xfds='xfce4-display-settings'
 alias words="shuf -n 1000 /usr/share/dict/words | sed s/\'s// | tr '[:upper:]' '[:lower:]' | sort"
 alias screencast='ffmpeg -f x11grab -s wxga -r 25 -i :0.0 -sameq ~/.tmp/screencast.mpg'
@@ -291,4 +293,5 @@ alias :Wq='q'
 alias :WQ='q'
 alias :wQ='q'
 alias Q!='q'
+alias ffind='ffind.py'
 
