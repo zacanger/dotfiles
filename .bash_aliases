@@ -287,4 +287,8 @@ alias lilnote='lilnote.js'
 alias :wq='q'
 alias ZZ='q'
 alias q!='q'
+alias :Wq='q'
+alias :WQ='q'
+alias :wQ='q'
+alias Q!='q'
 
