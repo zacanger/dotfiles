@@ -63,3 +63,4 @@ NeoBundle 'wakatime/vim-wakatime'
 " NeoBundle 'suan/vim-instant-markdown'
 " NeoBundle 'vim-jp/vital.vim'
 
+NeoBundle 'xsnippet/vim-xsnippet'
