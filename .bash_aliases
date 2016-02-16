@@ -121,10 +121,6 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-# https://bitbucket.org/sjl/t (task list)
-alias t='python2.7 ~/bin/py/t.py --task-dir ~/Dropbox/tpytasks --list tasks'
-alias tl='t | wc -l'
-
 # browsers rock.
 alias ch='chromium'
 alias ff='firefox'
