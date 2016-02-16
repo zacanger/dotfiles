@@ -239,8 +239,9 @@ alias sl='slack-desktop'
 alias apr="apropos"
 alias mpad='mousepad'
 alias atom='atom-beta -d'
-alias ab='atom'
-alias ad='atom'
+alias ab='atom-beta -d'
+alias abd='atom-beta -d'
+alias ad='atom-beta -d'
 alias xfds='xfce4-display-settings'
 alias words="shuf -n 1000 /usr/share/dict/words | sed s/\'s// | tr '[:upper:]' '[:lower:]' | sort"
 alias screencast='ffmpeg -f x11grab -s wxga -r 25 -i :0.0 -sameq ~/.tmp/screencast.mpg'
@@ -291,4 +292,5 @@ alias :wQ='q'
 alias Q!='q'
 alias ffind='ffind.py'
 alias names='names.sh'
+alias :q='q'
 
