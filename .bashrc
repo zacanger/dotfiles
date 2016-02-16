@@ -25,7 +25,7 @@ fi
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 # history stuff
 HISTCONTROL=ignoreboth # ignore lines with spaces & dups
-HISTIGNORE='ls:l:la:lo:lS:lT:ll:a:k:ld:lr:cd:lc:h:history:ranger:mocp:mu:q:exit:c:ds:ds.:clear:erm:gg:ZZ:q!:\:wq:\:Wq'
+HISTIGNORE='ls:l:la:lo:lS:lT:ll:a:k:ld:lr:cd:lc:h:history:ranger:mocp:mu:q:exit:c:ds:ds.:clear:erm:gg:ZZ:q!:\:wq:\:Wq:..:'
 shopt -s histappend # append
 HISTSIZE= # length
 HISTFILESIZE= # size
