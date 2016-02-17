@@ -560,8 +560,9 @@ endif
 cnoremap sudow w !sudo tee & >/dev/null
 
 " theme nonsense
-autocmd ColorScheme janah highlight Normal ctermbg=235
-colorscheme janah
+" autocmd ColorScheme janah highlight Normal ctermbg=235
+" colorscheme janah
+colorscheme ego
 
 " keeping rainbow parens on
 au VimEnter * RainbowParenthesesToggle
@@ -615,4 +616,7 @@ let g:semanticGUIColors = [ '#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082
 " goddamned meta keys...
 vnoremap <leader>nl :%s///g
 nnoremap <leader>nl :%s///g
+
+" peepopen, quit on vim exit
+let g:peepopen_quit = 1
 

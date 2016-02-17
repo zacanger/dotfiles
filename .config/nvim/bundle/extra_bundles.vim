@@ -64,3 +64,7 @@ NeoBundle 'wakatime/vim-wakatime'
 " NeoBundle 'vim-jp/vital.vim'
 
 NeoBundle 'xsnippet/vim-xsnippet'
+NeoBundle 'shemerey/vim-peepopen'
+NeoBundle 'airblade/vim-rooter'
+NeoBundle 'airblade/vim-accent'
+NeoBundle 'geetarista/ego.vim'

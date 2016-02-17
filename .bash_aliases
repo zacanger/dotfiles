@@ -68,6 +68,7 @@ alias gp='git push'
 
 # navigation
 alias Cd='cd'
+alias CD='cd'
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -293,4 +294,5 @@ alias Q!='q'
 alias ffind='ffind.py'
 alias names='names.sh'
 alias :q='q'
+alias A='la'
 
