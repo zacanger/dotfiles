@@ -10,7 +10,7 @@
 #define TT_VISIBLE_BELL           FALSE
 #define TT_FONT                   "Hack 10"
 #define TT_X_WINDOW_SIZE          800
-#define TT_Y_WINDOW_SIZE          400
+#define TT_Y_WINDOW_SIZE          450
 
 /* VTE_ANTI_ALIAS_USE_DEFAULT, VTE_ANTI_ALIAS_FORCE_ENABLE, VTE_ANTI_ALIAS_FORCE_DISABLE */
 #define TT_ANTIALIAS      VTE_ANTI_ALIAS_FORCE_ENABLE
