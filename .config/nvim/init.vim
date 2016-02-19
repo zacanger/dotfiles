@@ -559,8 +559,7 @@ cnoremap sudow w !sudo tee & >/dev/null
 
 " theme nonsense
 " autocmd ColorScheme janah highlight Normal ctermbg=235
-" colorscheme janah
-colorscheme ego
+colorscheme janah
 
 " keeping rainbow parens on
 au VimEnter * RainbowParenthesesToggle
@@ -568,11 +567,11 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-let g:netrw_nogx = 1
+let g:netrw_nogx = 0
 " nmap gx <Plug>(openbrowser-open)
 " vmap gx <Plug>(openbrowser-open)
-nmap gx <Plug>(openbrowser-smart-search)
-vmap gx <Plug>(openbrowser-smart-search)
+nnoremap gx <Plug>(openbrowser-smart-search)
+vnoremap gx <Plug>(openbrowser-smart-search)
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
