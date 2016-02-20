@@ -1,7 +1,5 @@
 #!/bin/sh
 
-#TODO: usage instructions
-
 BAR_CHARS="${BAR_CHARS:->-<-[]}"
 SHOW_LEVEL="${SHOW_LEVEL:-yes}"
 BAR_WIDTH="${BAR_WIDTH:-10}"
@@ -46,3 +44,4 @@ echo -n "${c_end}"
 if [ "${SHOW_LEVEL}" = "yes" ] ; then
     echo -n "${charge}%"
 fi
+
