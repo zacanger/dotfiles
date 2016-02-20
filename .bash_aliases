@@ -166,6 +166,11 @@ alias motd='curl -fsH "Accept: text/plain" "http://motd.sh/?v=0.01&weather=84601
 # this requires sox, and is for CGCFGC. change to E2-E4 (etc) for standard.
 alias tuner='for n in C2 G2 C3 F3 G3 C4;do play -n synth 4 pluck $n repeat 2;done'
 
+# using gh:ruyadorno/ipt
+alias irm="ls | ipt -m | xargs rm -rf"
+alias irebase="git --no-pager log --oneline | ipt | cut -d ' ' -f 1 | xargs -o git rebase -i"
+alias icheckout="git --no-pager log --oneline | ipt | cut -d ' ' -f 1 | xargs git checkout"
+
 # all the rest
 alias vir='nvim -R'
 alias vib='nvim -b'

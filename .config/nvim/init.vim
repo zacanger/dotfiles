@@ -559,7 +559,7 @@ cnoremap sudow w !sudo tee & >/dev/null
 
 " theme nonsense
 " autocmd ColorScheme janah highlight Normal ctermbg=235
-colorscheme janah
+colorscheme ego
 
 " keeping rainbow parens on
 au VimEnter * RainbowParenthesesToggle
@@ -567,7 +567,7 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-let g:netrw_nogx = 0
+let g:netrw_nogx = 1
 " nmap gx <Plug>(openbrowser-open)
 " vmap gx <Plug>(openbrowser-open)
 nnoremap gx <Plug>(openbrowser-smart-search)
