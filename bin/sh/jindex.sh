@@ -1,9 +1,10 @@
-#!/bin/bash
-# FILE : bbindex
-# Function: Creates a visual index of all the .jpg images in the directory..
-# Note, Only creates index of .jpg does NOT include .JPG at this time.
-# Copyright (C) 2006-2009 Dave Crouse <crouse@usalug.net>
-# ------------------------------------------------------------------------ #
+#!/usr/bin/env bash
+
+# creates index of all .jpg images in `cwd`.
+# does not include .jpeg or .JPG or .JPEG files.
+# so, name your shit reasonably.
+# asshole.
+
 if [[ $1 = "--help" || $1 = "-h" || $1 = "help" ]]; then
         echo "          Function: Creates a visual index of all the .jpg images in the directory.";
         echo "          Usage: $0";
