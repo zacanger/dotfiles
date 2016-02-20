@@ -2,7 +2,7 @@ V=1
 VDEVEL=$(shell test -d .git && git describe 2>/dev/null)
 
 ifneq "$(VDEVEL)" ""
-V=$(VDEVEL)
+  V=$(VDEVEL)
 endif
 
 CC := $(CC) -std=c99
@@ -23,8 +23,8 @@ all: tt
 tt: tt.c config.h
 
 clean:
-	$(RM) tt tt.o
+  $(RM) tt tt.o
 
 install: tt
-	install -Dm755 tt $(DESTDIR)/usr/local/bin/tt
+  install -Dm755 tt $(DESTDIR)/usr/local/bin/tt
 
