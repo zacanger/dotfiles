@@ -2,7 +2,7 @@
 
 main() {
     sleep $@
-    mpv --really-quiet ~/alarm/alarm.ogg
+    mpv --really-quiet ~/.alarm/alarm.ogg
 }
 
 main $@ &
