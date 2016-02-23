@@ -567,11 +567,11 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-let g:netrw_nogx = 1
+" let g:netrw_nogx = 1
 " nmap gx <Plug>(openbrowser-open)
 " vmap gx <Plug>(openbrowser-open)
-nnoremap gx <Plug>(openbrowser-smart-search)
-vnoremap gx <Plug>(openbrowser-smart-search)
+" nnoremap gx <Plug>(openbrowser-smart-search)
+" vnoremap gx <Plug>(openbrowser-smart-search)
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
@@ -602,7 +602,7 @@ nnoremap :doc :help
 vnoremap :doc :help
 
 " posero (presentations n shiz)
-let g:posero_default_mappings = 1
+" let g:posero_default_mappings = 1
 
 " semantic highlighting stuff
 :nnoremap <Leader>s :SemanticHighlightToggle<cr>
@@ -611,9 +611,9 @@ let g:semanticGUIColors = [ '#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082
 
 
 " goddamned meta keys...
-vnoremap <leader>nl :%s///g
-nnoremap <leader>nl :%s///g
+" vnoremap <leader>nl :%s///g
+" nnoremap <leader>nl :%s///g
 
 " peepopen, quit on vim exit
-let g:peepopen_quit = 1
+" let g:peepopen_quit = 1
 
