@@ -606,7 +606,7 @@ let g:posero_default_mappings = 1
 
 " semantic highlighting stuff
 :nnoremap <Leader>s :SemanticHighlightToggle<cr>
-let g:semanticEnableFileTypes = ['javascript', 'css', 'vue', 'node', 'python', 'ruby', 'es6', 'jsx', 'react', 'jquery', 'angular', 'underscore', 'coffeescript', 'elm', 'clojure', 'clojurescript', 'json', 'c']
+" let g:semanticEnableFileTypes = ['javascript', 'css', 'vue', 'node', 'python', 'ruby', 'es6', 'jsx', 'react', 'jquery', 'angular', 'underscore', 'coffeescript', 'elm', 'clojure', 'clojurescript', 'json', 'c']
 let g:semanticGUIColors = [ '#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082', '#ffcc80', '#ffab91', '#e3d3ce', '#b0bec5', '#ffa726', '#ff8a65', '#f9bdbb', '#f9bdbb', '#f8bbd0', '#e1bee7', '#d1c4e9', '#ffe0b2', '#f9eddb', '#d0d9ff', '#b3e5fc', '#b2ebf2', '#b2dfdb', '#a3e9a4', '#dcedc8' , '#dff6c9', '#ffb74d' ]
 
 
