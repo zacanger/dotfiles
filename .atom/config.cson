@@ -1,0 +1,166 @@
+"*":
+  Termrk:
+    defaultHeight: 219
+    fontFamily: "Hasklig"
+    fontSize: "12px"
+  "atom-beautify":
+    _analyticsUserId: "4c0a1b55-dd34-453e-8444-a17a087144e2"
+  "atom-hyperlinks": {}
+  "autocomplete-plus":
+    autoActivationDelay: 30
+    maxVisibleSuggestions: 4
+    minimumWordLength: 2
+  autosave:
+    enabled: true
+  "browser-plus":
+    node: true
+  core:
+    audioBeep: false
+    closeEmptyWindows: false
+    destroyEmptyPanes: false
+    disabledPackages: [
+      "background-tips"
+      "language-property-list"
+      "language-toml"
+      "language-objective-c"
+      "language-sass"
+      "language-go"
+      "language-csharp"
+      "welcome"
+      "language-ruby-on-rails"
+      "linter-eslint"
+      "floobits"
+      "project-manager"
+      "project-viewer"
+      "pane-split-moves-tab"
+      "metrics"
+      "meteor-api"
+      "pharaoh"
+      "pharaoh"
+      "pharaoh"
+      "pharaoh"
+      "pharaoh"
+      "pharaoh"
+      "pharaoh"
+      "pharaoh"
+      "pharaoh"
+      "pharaoh"
+      "pharaoh"
+      "maximize-panes"
+      "pane-layout-plus"
+      "maximize-active-pane"
+    ]
+    themes: [
+      "dark-flat-ui"
+      "framerjs-syntax"
+    ]
+  "dark-flat-ui":
+    accentColor: "purple"
+  editor:
+    fontFamily: "Fira Code"
+    fontSize: 13
+    invisibles: {}
+    lineHeight: 1.3
+    preferredLineLength: 120
+    scrollPastEnd: true
+    showInvisibles: true
+    softWrap: true
+    tabLength: 2
+    tabType: "soft"
+  emmet: {}
+  "emmet-simplified": {}
+  everything:
+    commandsProviderTrigger: ""
+    googleProviderTrigger: ""
+  "exception-reporting":
+    userId: "e3ad2c46-68b7-14d0-ee2f-37eb8a81d8d0"
+  "file-icons":
+    forceShow: true
+  floobits: {}
+  "js-hyperclick": {}
+  jshint:
+    supportLintingJsx: true
+  "language-babel": {}
+  linter: {}
+  "linter-eslint":
+    eslintRulesDir: "/home/z/"
+    eslintrcPath: "/home/z/"
+    globalNodePath: "/usr/local"
+    useGlobalEslint: true
+  "linter-jsxhint": {}
+  "markdown-preview": {}
+  navigate: {}
+  "node-debugger":
+    nodePath: "/usr/local/bin/node"
+  "preview-plus":
+    htmlp: true
+  "project-manager": {}
+  react:
+    enabledForAllJavascriptFiles: true
+  semanticolor:
+    affectedSourceObjects: {}
+    colorDiversity: 32
+  swackets: {}
+  tabs: {}
+  term3:
+    fontFamily: "Hasklig"
+    fontSize: "12"
+  "useful-context-menu":
+    groupItems: true
+  "vim-mode-plus":
+    incrementalSearch: true
+    setCursorToStartOfChangeOnUndoRedo: true
+    useClipboardAsDefaultRegister: true
+    useSmartcaseForSearch: true
+  wakatime:
+    apikey: "dfecd779-149d-4be0-84de-260ba6499fc6"
+  welcome:
+    showOnStartup: false
+".babel.regexp.source":
+  editor:
+    preferredLineLength: 120
+".basic.html.text":
+  editor:
+    preferredLineLength: 120
+".coffee.jsx.source":
+  editor:
+    preferredLineLength: 120
+".coffee.source":
+  editor:
+    preferredLineLength: 160
+".css.source":
+  editor:
+    preferredLineLength: 120
+".diff.source":
+  editor:
+    preferredLineLength: 120
+".html.spacebars.text":
+  editor:
+    preferredLineLength: 120
+".hyperlink.text":
+  editor:
+    preferredLineLength: 120
+".ini.source":
+  editor:
+    preferredLineLength: 120
+".js.jsx.source":
+  editor:
+    preferredLineLength: 120
+".js.regexp.replacement.source":
+  editor:
+    preferredLineLength: 120
+".js.regexp.source":
+  editor:
+    preferredLineLength: 120
+".js.source":
+  editor:
+    preferredLineLength: 120
+".litcoffee.source":
+  editor:
+    preferredLineLength: 160
+".plist.source":
+  editor:
+    preferredLineLength: 120
+".plist.text.xml":
+  editor:
+    preferredLineLength: 120

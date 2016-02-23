@@ -1,0 +1,99 @@
+;;;;
+; npm userconfig file
+; this is a simple ini-formatted file
+; lines that start with semi-colons are comments.
+; read `npm help config` for help on the various options
+;;;;
+
+
+;;;;
+; all options with default values
+;;;;
+; access=null
+; always-auth=false
+; bin-links=true
+; browser=null
+; ca=null
+; cafile=undefined
+; cache=/home/z/.atom/.node-gyp/.npm
+; cache-lock-stale=60000
+; cache-lock-retries=10
+; cache-lock-wait=10000
+; cache-max=null
+; cache-min=10
+; cert=null
+; color=true
+; depth=null
+; description=true
+; dev=false
+; editor=nvim
+; engine-strict=false
+; force=false
+; fetch-retries=2
+; fetch-retry-factor=10
+; fetch-retry-mintimeout=10000
+; fetch-retry-maxtimeout=60000
+; git=git
+; git-tag-version=true
+; global=false
+; globalconfig=/usr/share/atom/resources/app/apm/etc/npmrc
+; group=1000
+; heading=npm
+; if-present=false
+; ignore-scripts=false
+; init-module=/home/z/.atom/.node-gyp/.npm-init.js
+; init-author-name=
+; init-author-email=
+; init-author-url=
+; init-version=1.0.0
+; init-license=ISC
+; json=false
+; key=null
+; link=false
+; local-address=undefined
+; loglevel=warn
+; long=false
+; message=%s
+; node-version=0.10.40
+; npat=false
+; onload-script=null
+; optional=true
+; parseable=false
+; prefix=/usr/share/atom/resources/app/apm
+; production=false
+; proprietary-attribs=true
+; proxy=null
+; https-proxy=null
+; user-agent=npm/{npm-version} node/{node-version} {platform} {arch}
+; rebuild-bundle=true
+; registry=https://registry.npmjs.org/
+; rollback=true
+; save=false
+; save-bundle=false
+; save-dev=false
+; save-exact=false
+; save-optional=false
+; save-prefix=^
+; scope=
+; searchopts=
+; searchexclude=null
+; searchsort=name
+; shell=/bin/bash
+; shrinkwrap=true
+; sign-git-tag=false
+; spin=true
+; strict-ssl=true
+; tag=latest
+; tag-version-prefix=v
+; tmp=/tmp
+; unicode=true
+; unsafe-perm=true
+; usage=false
+; user=0
+; userconfig=/home/z/.atom/.node-gyp/.npmrc
+; umask=18
+; version=false
+; versions=false
+; viewer=man
+; _exit=true
+; globalignorefile=/usr/share/atom/resources/app/apm/etc/npmignore

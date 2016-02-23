@@ -1,0 +1,350 @@
+'.text.git-commit':
+  'commit-message':
+    'prefix': 'comm'
+    'body': """
+      ${1:Subject < 50 chars}
+
+      ${2:Body in detail}
+    """
+
+'.text.html':
+  'html skeleton':
+    'prefix': 'htmlskel'
+    'body': """
+      <!doctype html>
+      <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <title>foo</title>
+        <link rel="stylesheet" type="text/css" href="./css.css">
+      </head>
+      <body>
+        <div>
+        </div>
+        <script type="text/javascript" src="./index.js"></script>
+      </body>
+      </html>
+    """
+
+'.source.css':
+  'css sans px':
+    'prefix': 'csssanspx'
+    'body': """
+      th {font-weight: 600;}
+      td,th {border-bottom: 1.08px solid #ccc;padding: 14.85px 18px;}
+      thead th {border-bottom-width: 2.16px;padding-bottom: 6.3px;}
+      table {display: block;max-width: 100%;overflow-x: auto;}
+
+      input,textarea,select,button {display: block;padding: 9.9px;}
+      label {display: block;margin-bottom: 14.76px;}
+      input[type="submit"],input[type="reset"],button{background: #f2f2f2;border-radius: 3.6px;color: #8c8c8c;cursor: pointer;display: inline;margin-bottom: 18px;margin-right: 7.2px;padding: 6.525px 23.4px;text-align: center;}
+      input[type="submit"]:hover,input[type="reset"]:hover,button:hover{background: #d9d9d9;color: #000;}
+      input[type="submit"][disabled],input[type="reset"][disabled],button[disabled]{background: #e6e6e6;color: #b3b3b3;}
+      input[type="submit"],button[type="submit"]{background: #367ac3;color: #fff;}
+      input[type="submit"]:hover,button[type="submit"]:hover{background: #255587;color: #bfbfbf;}
+      input[type="text"],input[type="password"],input[type="email"],input[type="url"],input[type="phone"],input[type="tel"],input[type="number"],input[type="datetime"],input[type="date"],input[type="month"],input[type="color"],input[type="time"],input[type="search"],input[type="range"],input[type="file"],input[type="datetime-local"],select,textarea {border: 1px solid #ccc;margin-bottom: 18px;padding: 5.4px 6.3px;}
+      input[type="checkbox"],input[type="radio"]{float: left;line-height: 36px;margin-right: 9px;margin-top: 8.1px;}
+
+      pre,code,kbd,samp,var,output {font-family: Menlo,Monaco,Consolas,"Courier New",monospace;font-size: 16.2px;}
+      pre{border-left: 1.8px solid #96bbe2;line-height: 25.2px;margin-top: 29.7px;overflow: auto;padding-left: 18px;}
+      pre code{background: none;border: 0;line-height: 29.7px;padding: 0;}
+      code{background: #ededed;border: 1.8px solid #ccc;border-radius: 3.6px;display: inline-block;line-height: 18px;padding: 3px 6px 2px;}
+
+      h1,h2,h3,h4,h5,h6 {color: #000;margin-bottom: 18px;}
+      h1{font-size: 36px;font-weight: 500;margin-top: 36px;}
+      h2{font-size: 25.2px;font-weight: 400;margin-top: 27px;}
+      h3{font-size: 21.6px;margin-top: 21.6px;}
+      h4{font-size: 18px;margin-top: 18px;}
+      h5{font-size: 14.4px;font-weight: 700;margin-top: 18px;text-transform: uppercase;}
+      h6{color: #ccc;font-size: 14.4px;font-weight: 700;margin-top: 18px;text-transform: uppercase;}
+
+      a{color: #367ac3;text-decoration: none;}
+      a:hover{text-decoration: underline;}
+      hr{border-bottom: 1px solid #ccc;}
+      small{font-size: 15.3px;}
+      em,i{font-style: italic;}
+      strong,b{font-weight: 600;}
+
+      *{border: 0;border-collapse: separate;border-spacing: 0;box-sizing: border-box;font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;font-size: 18px;font-stretch: normal;font-style: normal;font-weight: 300;line-height: 29.7px;margin: 0;outline: 0;padding: 0;text-align: left;vertical-align: baseline;}
+
+      html,body{height: 100%;  width: 100%;}
+      body{background: #f5f5f5;color: #1a1a1a;padding: 36px;}
+      p,ul,ol,dl,blockquote,hr,pre,table,form,fieldset,figure,address{margin-bottom: 29.7px;}
+      section{margin-left: auto;margin-right: auto;max-width: 100%;width: 900px;}
+      article{background: #fff;border: 1.8px solid #d9d9d9;border-radius: 7.2px;padding: 43.2px;}
+      header{margin-bottom: 36px;}
+      footer{margin-top: 36px;}
+
+      nav{text-align: center;}
+      nav ul{list-style: none;margin-left: 0;text-align: center;}
+      nav ul li{display: inline;margin-left: 9px;margin-right: 9px;}
+      nav ul li:first-child{margin-left: 0;}
+      nav ul li:last-child{margin-right: 0;}
+      ol,ul{margin-left: 29.7px;}
+      li ol,li ul{margin-bottom: 0;}
+
+      @media (max-width: 767px){
+        body{padding: 18px;}
+        article{border-radius: 0;margin: -18px;padding: 18px;}
+        textarea,input,select{max-width: 100%;}
+        fieldset{min-width: 0;}
+        section{width: auto;}
+        fieldset,x:-moz-any-link{display: table-cell;}
+      }
+    """
+
+'.source.css':
+   'basi.css':
+     'prefix': 'cssbasicsss'
+     'body': """
+        @charset  "utf-8";
+        .clearfix:before,.clearfix:after{content: " ";display: table;}
+        .clearfix:after{clear: both;}
+        @at-root{@-moz-viewportwidth: device-width;}
+        @-ms-viewport{width: device-width;}
+        @-o-viewport{width: device-width;}
+        @-webkit-viewport{width: device-width;}
+        @viewport{width: device-width;}
+
+        html{box-sizing: border-box;text-rendering: optimizeLegibility;-webkit-font-smoothing: antialiased;}
+        *,:before,:after{box-sizing: inherit;outline: 0 !important;}
+        input::-moz-focus-inner,button::-moz-focus-inner{display: none;}
+        input:-webkit-autofill{color: #fff !important;}
+        img{max-width: 100%;height: auto;vertical-align: middle;}
+        textarea{resize: vertical;}
+        button,input,textarea,select{-webkit-font-smoothing: inherit;}
+        iframe{border: 0;}
+        a,area,button,[role="button"],input,label,select,summary,textarea{-ms-touch-action: manipulation;touch-action: manipulation;}
+
+        @media print{
+          pre,blockquote{border: 1px solid #999 !important;page-break-inside: avoid !important;}
+          tr,img{page-break-inside: avoid !important;}
+          img{max-width: 100% !important;}
+          @page{margin: .5cm !important;}
+          p,h2,h3{orphans: 3 !important;widows: 3 !important;}
+          h2,h3{page-break-after: avoid !important;}
+          thead{display: table-header-group !important;}
+          *{background: transparent !important;color: #000 !important;text-shadow: none !important;-webkit-filter: none !important;filter: none !important;}
+          p a[href]:after{content: " (" attr(href) ")" !important;}
+          p abbr[title]:after{content: " (" attr(title) ")" !important;}
+          p a[href^="javascript:"]:after,p a[href^="#"]:after{content: "" !important;}
+          p a,p abbr{word-wrap: break-word !important;text-decoration: underline !important;}
+        }
+
+        .webkit-link-disable{-webkit-touch-callout: none;-webkit-tap-highlight-color: rgba(0,0,0,0);}
+        .unselectable{-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+        .vertical-align{position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);-webkit-transform-style: preserve-3d;transform-style: preserve-3d;}
+
+        [hidden]{display: none !important;}
+        [role="button"]{cursor: pointer;}
+     """
+
+'.source.css':
+  'boiler':
+    'prefix': 'cssboiler'
+    'body': """
+      /*
+       * This is my standard CSS, as best displayed at zacanger.com/blog
+       * Additions and modifications will be commented.
+       * Inspiration, cues, & some numbers from getskeleton.com
+       * and the work of mrmrs.io , jxnblk.com , and feint.me
+       * If it's original, it's DBAD; http://dbad-license.org
+       */
+
+      /* First, a wee reset... */
+      html,body{height:100%;width:100%;}
+      html,body,ul,ol,li,form,fieldset,legend{margin:0;padding:0;}
+      h1,h2,h3,h4,h5,h6,p{margin-top:0;}
+      fieldset,img{border:0;}
+      legend{color:#000;}
+      li{list-style:none;}
+      sup{vertical-align:text-top;}
+      sub{vertical-align:text-bottom;}
+      table{border-collapse:collapse;border-spacing:0;}
+      caption,th,td{text-align:left;vertical-align:top;font-weight:normal;}
+      input,textarea,select{font-size:110%;line-height:1.1;}
+      abbr,acronym{border-bottom:.1em dotted;cursor:help;}
+
+      /* Now, some actual styling... */
+
+      /* For hiding things, but not from screen readers */
+      .a11y-hidden{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;}
+
+      /* 1.5rem = 15px */
+      html{font-size: 62.5%;}
+      body{font-size:1.5em;line-height:1.6;font-weight:400;font-family:"Hasklig","Fantasque Sans Mono","Fira Mono","Hack","Inconsolata","Anonymous Pro",monospace;color:#303330;background:#E3E3DE;padding:4rem;max-width:60rem;margin-left:10rem;}
+
+      /* Typography */
+      h1,h2,h3,h4,h5,h6{margin-top:2rem;margin-bottom:1rem;font-weight:400;}
+      h1{font-size:4.0rem;line-height:1.2;letter-spacing:-.1rem;}
+      h2{font-size:3.6rem;line-height:1.25;letter-spacing:-.1rem;}
+      h3{font-size:3.2rem;line-height:1.3;letter-spacing:-.1rem;}
+      h4{font-size:2.4rem;line-height:1.35;letter-spacing:-.08rem;}
+      h5{font-size:1.8rem;line-height:1.5;letter-spacing:-.05rem;}
+      h6{font-size:1.6rem;line-height:1.6;letter-spacing:0;}
+
+      /* Larger than phablet */
+      @media (min-width: 550px){h1{font-size:4.0rem;}h2{font-size:3.6rem;}h3{font-size:2.2rem;}h4{font-size:2.4rem;}h5{font-size:1.8rem;}h6{font-size:1.6rem;}}
+
+      /* Links */
+      a{color:#71A397;}
+      a:hover{color: #89D470;}
+
+      /* Lists */
+      ul{list-style: circle inside;}
+      ul{padding-left: 1rem;margin-top: 0;}
+      ul ul{margin: 1.5rem 0 1.5rem 3rem;font-size: 80%;}
+      li{margin-bottom: 1rem;}
+
+      /* Spacing */
+      p{margin-top: 1rem;}
+      p,ul{margin-bottom: 2.5rem;}
+      img{float: left;margin: 0 1rem 1rem 0;}
+      hr{margin-top: 1rem;margin-bottom: 1rem;border-width: 0;border-top: 1px solid #EDC5E8;}
+
+      /* Here down: project-specific styles */
+
+    """
+
+'.source.js':
+  'interpolation':
+    'prefix': 'jsinterpolation'
+    'body': """
+      function interpolate(){
+        var args = [].slice.call(arguments)
+        var initial = args.shift()
+        function replacer(text, replacement){
+          return text.replace('%s', replacement)
+        }
+        return args.reduce(replacer, initial)
+      }
+    """
+
+'.source.js':
+  'express-boiler':
+   'prefix': 'jsexpressboiler'
+   'body': """
+      var express = require('express')
+        , bodyparser = require('body-parser')
+        , session = require('express-session')
+        , app = express()
+        , port = 9999
+
+      var logger = function(req, res, next){
+        console.log('\n\n')
+        console.log('\nHEADERS\n', req.headers)
+        console.log('\nBODY\n', req.body)
+        console.log('\nSESSION\n', req.session)
+        next()
+      }
+
+      app.use(bodyparser.json())
+      app.use(session({
+        secret: 'barFOO',
+        saveUninitialized: true,
+        resave: true
+      }))
+
+      app.post('/cart', function(req, res, next){
+        if (!req.session.cart){
+          req.session.cart = []
+        }
+        req.session.cart.push(req.body)
+        next()
+      }, logger, function(req, res, next){
+        res.status(200).json(req.session.cart)
+      })
+
+      app.get('/cart', function(req, res, next){
+        res.status(200).json(req.session.cart)
+      })
+
+      app.listen(port, function(){
+        console.log('doin it on ' + port)
+      })
+   """
+
+'.source.js':
+  'no more console log':
+     'prefix': 'js-no-console-log'
+     'body': """
+        var debug = true,
+          _log = function(){
+            debug && window.console && console.log.apply(console, arguments)
+          }
+
+        function whatever(){
+          _log('yup, that worked')
+        }
+     """
+
+'.source.js':
+  'webpack boiler':
+    'prefix': 'js-webpack-config'
+    'body': """
+      module.exports = {
+        context: __dirname + "/app",
+        entry: {
+          javascript: "./app.js",
+          html: "./index.html"
+        },
+        output: {
+          filename: "app.js",
+          path: __dirname + "/dist"
+        },
+        module: {
+          loaders: [
+            {
+              test: /\.js$/,
+              exclude: /node_modules/,
+              loaders: ["react-hot", "babel-loader"]
+            },
+            {
+              test: /\.html$/,
+              loader: "file?name=[name].[ext]"
+            }
+          ]
+        }
+      }
+    """
+
+'.source.js':
+  'gulpfile':
+    'prefix': 'jsgulpfile'
+    'body': """
+      var gulp    = require('gulp')
+        , connect = require('gulp-connect')
+        , stylus  = require('gulp-stylus')
+        , watch   = require('gulp-watch')
+
+      gulp.task('webserver', function(){
+        connect.server({
+          livereload: true
+        , root: ['.', '.tmp']
+        })
+      })
+
+      gulp.task('livereload', function(){
+        gulp.src(['.tmp/css/*.css', '.tmp/js/*.js'])
+          .pipe(watch())
+          .pipe(connect.reload())
+      })
+
+      gulp.task('stylus', function(){
+        gulp.src('styl/css.styl')
+          .pipe(stylus())
+          .pipe(gulp.dest('.tmp/css'))
+      })
+
+      gulp.task('watch', function(){
+        gulp.watch('styl/*.styl', ['stylus'])
+      })
+
+      connect.server({
+          port: 9999
+        , host: 'gulp.dev'
+      })
+
+      gulp.task('default', ['stylus', 'webserver', 'livereload', 'watch'])
+
+    """

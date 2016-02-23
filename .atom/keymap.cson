@@ -1,0 +1,18 @@
+'atom-text-editor':
+  'ctrl-space': 'command-palette:toggle'
+
+'atom-workspace atom-text-editor:not([mini])':
+  'ctrl-=': 'editor:fold-current-row'
+  'ctrl-+': 'editor:unfold-current-row'
+  'ctrl--': 'editor:fold-current-row'
+  'ctrl-_': 'editor:unfold-current-row'
+
+'atom-text-editor:not([mini])':
+  'alt-l': 'custom:jump-over-symbol'
+
+'atom-workspace':
+  'alt-r': 'custom:make-active-editor-readonly'
+  'ctrl-l': 'link:open'
+
+'atom-text-editor.vim-mode-plus:not(.insert-mode)':
+    ':': 'ex-mode:open'
