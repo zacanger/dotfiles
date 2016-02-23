@@ -29,10 +29,6 @@
       "welcome"
       "language-ruby-on-rails"
       "linter-eslint"
-      "floobits"
-      "project-manager"
-      "project-viewer"
-      "pane-split-moves-tab"
       "metrics"
       "meteor-api"
       "pharaoh"
@@ -46,9 +42,8 @@
       "pharaoh"
       "pharaoh"
       "pharaoh"
-      "maximize-panes"
-      "pane-layout-plus"
-      "maximize-active-pane"
+      "semanticolor"
+      "swackets"
     ]
     themes: [
       "dark-flat-ui"
