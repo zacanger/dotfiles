@@ -65,6 +65,8 @@ alias hc='hub clone'
 alias hl='hub clone'
 alias hcl='hub clone'
 alias gp='git push'
+alias com='commemoji'
+alias ae='git add -A && commemoji'
 
 # navigation
 alias Cd='cd'
