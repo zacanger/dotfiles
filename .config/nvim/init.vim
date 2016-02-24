@@ -97,7 +97,6 @@ NeoBundle 'arnaud-lb/vim-php-namespace'
 
 "" Extra Bundles
 
-
 call neobundle#end()
 
 " Required:
@@ -261,9 +260,7 @@ else
 endif
 
 
-"" Abbreviations
-
-"" no one is really happy until you have this shortcuts
+" Abbreviations
 cnoreabbrev W! w!
 cnoreabbrev Q! q!
 cnoreabbrev Qall! qall!
@@ -276,7 +273,7 @@ cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qall qall
 
-"" NERDTree configuration
+" NERDTree
 let g:NERDTreeChDirMode=2
 let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
 let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
@@ -491,7 +488,7 @@ let g:syntastic_javascript_checkers = ['relint']
 
 "" tryna get ranger to work... still no luck with this.
 "" anyone know what's up?
-
+"
 " Compatible with ranger 1.4.2 through 1.7.*
 "
 " Add ranger as a file chooser in vim
@@ -500,38 +497,38 @@ let g:syntastic_javascript_checkers = ['relint']
 " ":RangerChooser" or the keybinding "<leader>r".  Once you select one or more
 " files, press enter and ranger will quit again and vim will open the selected
 " files.
-
-function! RangeChooser()
-    let temp = tempname()
+"
+" function! RangeChooser()
+"     let temp = tempname()
     " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
     " with ranger 1.4.2 through 1.5.0 instead.
     "exec 'silent !ranger --choosefile=' . shellescape(temp)
-    if has("gui_running")
-        exec 'silent !xterm -e ranger --choosefiles=' . shellescape(temp)
-    else
-        exec 'silent !ranger --choosefiles=' . shellescape(temp)
-    endif
-    if !filereadable(temp)
-        redraw!
+"     if has("gui_running")
+"         exec 'silent !xterm -e ranger --choosefiles=' . shellescape(temp)
+"     else
+"         exec 'silent !ranger --choosefiles=' . shellescape(temp)
+"     endif
+"     if !filereadable(temp)
+"         redraw!
         " Nothing to read.
-        return
-    endif
-    let names = readfile(temp)
-    if empty(names)
-        redraw!
+"         return
+"     endif
+"     let names = readfile(temp)
+"     if empty(names)
+"         redraw!
         " Nothing to open.
-        return
-    endif
+"         return
+"     endif
     " Edit the first item.
-    exec 'edit ' . fnameescape(names[0])
+"     exec 'edit ' . fnameescape(names[0])
     " Add any remaning items to the arg list/buffer list.
-    for name in names[1:]
-        exec 'argadd ' . fnameescape(name)
-    endfor
-    redraw!
-endfunction
-command! -bar RangerChooser call RangeChooser()
-nnoremap <leader>r :<C-U>RangerChooser<CR>
+"     for name in names[1:]
+"         exec 'argadd ' . fnameescape(name)
+"     endfor
+"     redraw!
+" endfunction
+" command! -bar RangerChooser call RangeChooser()
+" nnoremap <leader>r :<C-U>RangerChooser<CR>
 
 inoremap <Esc> <Esc>`^
 
@@ -553,7 +550,6 @@ endif
 " let &t_SI = "\<Esc>[6 q"
 " let &t_SR = "\<Esc>[4 q"
 " let &t_EI = "\<Esc>[2 q"
-
 
 cnoremap sudow w !sudo tee & >/dev/null
 
@@ -584,14 +580,14 @@ let g:vimfiler_as_default_explorer = 1
 " commit message thing
 autocmd Filetype gitcommit setlocal spell textwidth=80
 
-" jsfmt
+" jsfmt on save
 " let g:js_fmt_autosave = 1
 
 " esformatter!
-nnoremap <silent> <leader>es :Esformatter<CR>
-vnoremap <silent> <leader>es :Esformatter<CR>
+" nnoremap <silent> <leader>es :Esformatter<CR>
+" vnoremap <silent> <leader>es :Esformatter<CR>
 
-" clearing the damn screen between commands
+" clear screen between shell commands
 nnoremap :! :!clear;
 vnoremap :! :!clear;
 
@@ -611,8 +607,8 @@ let g:semanticGUIColors = [ '#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082
 
 
 " goddamned meta keys...
-" vnoremap <leader>nl :%s///g
-" nnoremap <leader>nl :%s///g
+vnoremap <leader>nl :%s///g
+nnoremap <leader>nl :%s///g
 
 " peepopen, quit on vim exit
 " let g:peepopen_quit = 1
