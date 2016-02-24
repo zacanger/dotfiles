@@ -301,4 +301,5 @@ alias names='names.sh'
 alias :q='q'
 alias A='la'
 alias aag='a | ag'
+alias lv='luvi'
 
