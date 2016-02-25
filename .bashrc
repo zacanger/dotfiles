@@ -68,7 +68,7 @@ export LOLCOMMITS_ANIMATE='2'
 export MANPATH=$MANPATH:/home/z/Dropbox/z/doc
 # j, rbenv, and fzf
 . /usr/share/autojump/autojump.sh
-eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # keep aliases and functions on their own
 if [ -f ~/.bash_aliases ]; then
