@@ -1,6 +1,6 @@
 " ~/Dropbox/z/.config/nvim/session/default.vim:
 " Vim session script.
-" Created by session.vim 2.13.1 on 24 February 2016 at 19:34:57.
+" Created by session.vim 2.13.1 on 24 February 2016 at 20:19:11.
 " Open this file in Vim and run :source % to restore your session.
 
 if exists('g:syntax_on') != 1 | syntax on | endif
@@ -42,7 +42,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 26) / 53)
+let s:l = 1 - ((0 * winheight(0) + 13) / 26)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
