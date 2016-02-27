@@ -304,4 +304,5 @@ alias :q='q'
 alias A='la'
 alias aag='a | ag'
 alias lv='luvi'
+alias timestamp='date -d "$date" +%s'
 
