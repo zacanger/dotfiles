@@ -8,9 +8,9 @@ class Window():
            filewin = Toplevel(root) #, takefocus=True
            button = Button(filewin, text="Do nothing button")
            button.pack()
-        
+
 class Editor:
-    file_name = "" 
+    file_name = ""
     def __init__(self, master):
         self.file_opt = options = {}
 
@@ -29,7 +29,7 @@ class Editor:
         options['mustexist'] = False
         options['parent'] = root
         options['title'] = 'Title'
-        
+
         global text_box
         text_box = Text(root)
         text_box.pack(expand = 1, fill= BOTH)
@@ -53,7 +53,7 @@ class Editor:
         filemenu.add_command(label="Exit", command=self.quit_project, accelerator="Command+Q")
         menubar.add_cascade(label="File", menu=filemenu)
 
-                             
+
         editmenu = Menu(menubar, tearoff=0)
         editmenu.add_command(label="Undo", command=donothing)
         editmenu.add_separator()
@@ -64,7 +64,7 @@ class Editor:
         editmenu.add_command(label="Select All", command=donothing)
         menubar.add_cascade(label="Edit", menu=editmenu)
 
-                             
+
         helpmenu = Menu(menubar, tearoff=0)
         helpmenu.add_command(label="Help Index", command=find_focus)
         helpmenu.add_command(label="About...", command=donothing)
@@ -76,7 +76,7 @@ class Editor:
         root.bind_all("<Command-s>", self.save_file)
         root.bind_all("<Command-Shift-s>", self.save_as_file)
         root.bind_all("<Command-q>", self.quit_project)
-        
+
     def open_file(self, event=''):
         open_file = tkFileDialog.askopenfile(mode='r', **self.file_opt)
         text_box.delete(1.0, END)
@@ -91,7 +91,7 @@ class Editor:
             save_file = open(self.file_name, 'w')
             save_file.write(text_box.get(1.0, END))
             self.file_name = save_file.name
-    
+
     def save_as_file(self, event=''):
         save_file = tkFileDialog.asksaveasfile(mode='w', **self.file_opt)
         save_file.write(text_box.get(1.0, END))
@@ -119,13 +119,8 @@ if __name__=='__main__':
     app = Editor(root)
     root.mainloop()
 
- # root = Tkinter.Tk()
-#  TkFileDialogExample(root).pack()
-#  root.mainloop()               
+# root = Tkinter.Tk()
+# TkFileDialogExample(root).pack()
+# root.mainloop()
 
-#Bibliography:
-#http://docs.python.org/2/library/tkinter.html
-#http://www.tutorialspoint.com/python/tk_menu.htm
-#http://effbot.org/tkinterbook/menu.htm
-#http://zetcode.com/gui/tkinter/menustoolbars/
-#http://tkinter.unpythonic.net/wiki/tkFileDialog
+

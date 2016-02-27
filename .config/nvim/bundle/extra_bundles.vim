@@ -69,3 +69,4 @@ NeoBundle 'vim-scripts/SyntaxRange'
 NeoBundle 'vim-scripts/syntaxcomplete'
 NeoBundle 'wakatime/vim-wakatime'
 
+NeoBundle 'wincent/terminus'

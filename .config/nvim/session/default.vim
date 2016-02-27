@@ -1,6 +1,6 @@
 " ~/Dropbox/z/.config/nvim/session/default.vim:
 " Vim session script.
-" Created by session.vim 2.13.1 on 24 February 2016 at 20:19:11.
+" Created by session.vim 2.13.1 on 26 February 2016 at 11:50:10.
 " Open this file in Vim and run :source % to restore your session.
 
 if exists('g:syntax_on') != 1 | syntax on | endif
