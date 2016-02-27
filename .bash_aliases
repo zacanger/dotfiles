@@ -305,4 +305,7 @@ alias A='la'
 alias aag='a | ag'
 alias lv='luvi'
 alias timestamp='date -d "$date" +%s'
+alias all='compgen -c | sort -u'
+alias kn='killall node'
+
 
