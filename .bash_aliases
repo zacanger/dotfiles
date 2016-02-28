@@ -308,4 +308,3 @@ alias timestamp='date -d "$date" +%s'
 alias all='compgen -c | sort -u'
 alias kn='killall node'
 
-
