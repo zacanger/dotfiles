@@ -1,18 +1,15 @@
 #!/bin/bash
 #
-#
 # Bash Maze ver 1.0
 # This game was based on the maze generator from
 # Joe Wingbermuehle at  https://raw.github.com/joewing/maze/master/maze.sh
 # I've added movement and collision to create the game.
-# 
 #
 # References:
 # https://raw.github.com/joewing/maze/master/maze.sh
 # http://lendscripts.blogspot.com.br/2012/10/licao-3-programacao-de-jogos-em.html
 #
 # Written by Fernando Bolonhezi Giannasi - jun/2013
-
 
 # Validade bash version
 if [ $(echo $BASH_VERSION | awk -F"." '{ if ( ($1 >= 4) ) {print "0"} else {print "1"}}') -ne "0" ]; then
@@ -235,7 +232,7 @@ while [ $INPUT != "q" ];do
     echo You WON!!!!!
     echo "Score: $counter moves"
     tput sgr0
-    echo 
+    echo
     setterm -cursor on
     exit 0
   fi
@@ -251,3 +248,4 @@ done
 clear
 
 # End of script
+
