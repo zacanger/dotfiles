@@ -1,6 +1,6 @@
 "*":
   Termrk:
-    defaultHeight: 229
+    defaultHeight: 555
     fontFamily: "Hasklig"
     fontSize: "12px"
   "atom-beautify":
@@ -95,6 +95,8 @@
   semanticolor:
     affectedSourceObjects: {}
     colorDiversity: 32
+  "seti-icons":
+    iconsPlus: true
   swackets: {}
   tabs: {}
   term3:
