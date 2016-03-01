@@ -163,3 +163,16 @@ echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
 
 # export PS="\[\e[1;33m\]\w\[\e[;0;1m\] ($( dirsize -Hb )) \$\[\e[;0m\]" # add this bit on to keep dirsize in prompt (see ~/bin/dirsize)
 
+# maybe puts a clock in the prompt?
+# PS1='\[\u@\h \T \w]\$'
+# or this way?
+# export PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:[\t]:\w\$ "
+
+# should give nice prompt with date and time
+# if [ "$color_prompt" = yes ]; then
+#     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\$'
+# else
+#    # PS1='${debian_chroot:+($debian_chroot)}[*\u@Ubuntu*]:\w\$ '
+#     PS1='${debian_chroot:+($debian_chroot)}[*\u@Ubuntu*]\t:\w\$ '
+# fi
+
