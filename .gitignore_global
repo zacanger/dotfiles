@@ -36,4 +36,5 @@ x/**
 *.lock
 bundle
 .config/nvim/bundle/*
+.config/nvim/session/*
 
