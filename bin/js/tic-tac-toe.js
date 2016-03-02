@@ -12,7 +12,6 @@ input.setRawMode(1)
 input.resume()
 input.setEncoding('utf8')
 
-
 function draw(){
   output.write('\033c' + block[0] + '|' + block[1] + '|' + block[2] + '\n' +
     block[3] + '|' + block[4] + '|' + block[5] + '\n' + block[6] + '|' +
