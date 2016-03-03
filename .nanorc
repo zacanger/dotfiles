@@ -1,7 +1,7 @@
 ## get one line moar!
 set morespace
 
-set tabsize 4
+set tabsize 2
 set boldtext
 
 ## walk don't run
@@ -21,12 +21,12 @@ set autoindent
 set quickblank
 ## wrap long lines softly with this song
 set softwrap
-## pressing home key jumps to line beginning 
+## pressing home key jumps to line beginning
 set smarthome
 ## Mouse support in X or with GDM
 set mouse
 ## Don't want to follow Symlinks
-set nofollow
+# set nofollow
 ## Line numbers
 set const
 ## Convert typed tabs to spaces.
@@ -56,7 +56,7 @@ set suspend
 # include "/usr/share/nano/awk.nanorc"
 # include "/usr/share/nano/xml.nanorc"
 # include "/usr/share/nano/php.nanorc"
- include "/usr/share/nano/debian.nanorc"
+include "/usr/share/nano/debian.nanorc"
 
 ## Includes from gh:scopatz/nanorc
 include ~/.nano/apacheconf.nanorc

@@ -70,3 +70,4 @@ NeoBundle 'vim-scripts/syntaxcomplete'
 NeoBundle 'wakatime/vim-wakatime'
 
 NeoBundle 'wincent/terminus'
+NeoBundle 'jistr/vim-nerdtree-tabs'
