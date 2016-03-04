@@ -181,11 +181,13 @@ alias ad='atom-beta -d'
 alias abd='atom-beta -d'
 alias apmupd='apm update --no-confirm'
 alias v='v.sh'
+alias ex='nvim'
 alias vi='nvim'
 alias vib='nvim -b'
 alias vim='nvim'
 alias vir='nvim -R'
 alias virb='nvim -R -b'
+alias view='vim -R'
 alias vl='v -l'
 
 # all the rest
