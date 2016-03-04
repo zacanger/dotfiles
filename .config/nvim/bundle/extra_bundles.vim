@@ -71,3 +71,4 @@ NeoBundle 'wakatime/vim-wakatime'
 
 NeoBundle 'wincent/terminus'
 NeoBundle 'jistr/vim-nerdtree-tabs'
+NeoBundle 'kana/vim-wwwsearch'
