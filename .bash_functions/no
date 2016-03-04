@@ -1,0 +1,7 @@
+no(){
+  while true
+  do
+    echo no
+  done
+}
+
