@@ -9,20 +9,29 @@ case $- in
     *i*) ;;
       *) return;;
 esac
+
+# don't kill bg jobs on exit
+shopt -u huponexit
+
 # check size, one line, etc
 shopt -s cmdhist
 shopt -s checkwinsize
+
 # "**" in pathname matches all files & 0 or more dirs/subdirs; also, ".foo"
 shopt -s globstar
 shopt -s dotglob
+
 # see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
 # color ls
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolours && eval "$(dircolors -b ~/.dircolours)" || eval "$(dircolors -b)"
 fi
+
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
 # history stuff
 HISTCONTROL=ignoreboth # ignore lines with spaces & dups
 HISTIGNORE='ls:l:la:lo:lS:lT:ll:a:k:ld:lr:cd:lc:h:history:ranger:mocp:mu:q:exit:c:ds:ds.:clear:erm:gg:ZZ:q!:\:wq:\:Wq:..:.:'
@@ -31,6 +40,7 @@ HISTSIZE= # length
 HISTFILESIZE= # size
 HISTTIMEFORMAT='%F %T  ' # timestamp
 PROMPT_COMMAND='history -a' # record history NOW, not on exit
+
 # completions
 bind 'set completion-query-items 100' # ask if over N possible completions
 complete -d cd rmdir # on cd, just show dirs
@@ -47,9 +57,11 @@ complete -A shopt shopt # sh... opt...
 complete -A signal trap # signals
 complete -A variable declare export readonly typeset #variables
 complete -A function -A variable unset # more vars
+
 # autocorrect spelling on some things
 shopt -s cdspell
 shopt -s dirspell
+
 # dynamic title
 case $TERM in
 xterm*)
@@ -58,6 +70,7 @@ xterm*)
 *)
     ;;
 esac
+
 # include
 export CDPATH='.:/home/z/Dropbox/skool:/home/z/Dropbox/z/bin:/home/z/Dropbox/z:/usr/local/lib:/usr/local/lib/node_modules'
 export PATH=$PATH:/usr/local/share/npm/bin:/home/z/Dropbox/z/bin:/opt:~/.gem/global/bin:$(find $HOME/bin/ -type d | paste -s -d:)
@@ -66,10 +79,13 @@ export SLACK_TOKEN='xoxp-3318091984-8228669395-18656956487-09aa605092' # ignorel
 export SLACK_USERNAME='zacanger'
 export LOLCOMMITS_ANIMATE='2'
 export MANPATH=$MANPATH:/home/z/Dropbox/z/doc
+
 # j, rbenv, and fzf
 . /usr/share/autojump/autojump.sh
+
 # eval "$(rbenv init -)"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 # keep aliases and functions on their own
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -79,10 +95,12 @@ if [ -d ~/.bash_functions ]; then
         . "$file"
     done
 fi
+
 # same for npm completion
 if [ -f ~/.npm-completion ]; then
     . ~/.npm-completion
 fi
+
 # and, finally... liquidprompt; load from interactive shell, don't from scripts/scp
 echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
 
