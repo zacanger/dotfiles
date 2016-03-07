@@ -23,7 +23,6 @@
       "language-property-list"
       "language-toml"
       "language-objective-c"
-      "language-sass"
       "language-go"
       "language-csharp"
       "welcome"
@@ -87,8 +86,7 @@
   navigate: {}
   "node-debugger":
     nodePath: "/usr/local/bin/node"
-  "preview-plus":
-    htmlp: true
+  "preview-plus": {}
   "project-manager": {}
   react:
     enabledForAllJavascriptFiles: true
