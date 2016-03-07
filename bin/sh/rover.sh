@@ -1,7 +1,8 @@
 #!/bin/sh
 
-# based on ranger
-# . ./rover [/path/to/rover]
+# Based on ranger launcher.
+#
+# Usage: ". ./rover.sh [/path/to/rover]"
 
 tempfile="$(mktemp 2> /dev/null || printf "/tmp/rover-cwd.%s" $$)"
 if [ $# -gt 0 ]; then
@@ -18,4 +19,3 @@ if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
 fi
 rm -f -- "$tempfile"
 return $returnvalue
-
