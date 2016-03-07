@@ -1,1 +1,255 @@
-pip_tex
+#!/usr/bin/perl -w
+# Copyright 2002 Ed Avis, see the file COPYING.
+# Included with the package 'pip'.
+#
+
+=head1 NAME
+
+pip_tex, pip_latex - wrapper for tex and latex to use them as filters
+
+=head1 SYNOPSIS
+
+C<pip_tex [-v (0|1|2)] [-l]>
+
+C<pip_latex [-v (0|1|2)] [-l]>
+
+=head1 DESCRIPTION
+
+pip_tex and pip_latex read TeX or LaTeX source (respectively) from
+standard input and write DVI to standard output.  They do this by
+running tex or latex and processing the output files and messages.
+
+The wrappers try to distinguish between TeX error messages and mere
+chatter.  There are three ways to deal with errors:
+
+=over
+
+=item C<-v 0>
+
+The default: only error lines (if any) are printed to standard error.
+
+=item C<-v 1>
+
+If any errors are found, all of TeXE<39>s output is printed.  An
+'error' is a message from TeX marked with '!', not warnings such as
+overfull hboxes.
+
+=item C<-v 2>
+
+Get the full TeX verbosity every time.
+
+=back
+
+The flag C<-l> means that instead of printing TeXE<39>s ordinary
+output, the logfile will be printed to stderr.  So for example C<-v 1 -l>
+means that if any errors are found, the logfile will be printed.
+
+=head1 BUGS
+
+The output from TeX is not very parsable so there may be mistakes.
+This program does not catch warning messages which arenE<39>t marked
+with '!'.
+
+This wrapper changes to a new directory before running TeX.  This
+means that loading external files in your TeX document will not
+work unless they are given an absolute pathname, or installed in
+one of the places TeX searches by default.
+
+If the document produces no output pages, TeX does not write a DVI
+file and this program will give a warning and output the empty file.
+This is because a DVI file must contain one or more pages.
+
+=head1 AUTHOR
+
+Ed Avis, ed@membled.com.
+
+=cut
+
+use strict;
+use File::Temp qw(tempdir);
+
+my $VERSION = '1.2';
+
+my $TEX = ($0 =~ /pip_tex$/i) ? 'tex' : 'latex';
+my $TEXPUT='texput';
+my $DVI = '.dvi';
+my $LOG = '.log';
+my $DEV_NULL = '/dev/null';
+my $BUFSIZE = 100000;
+
+# Prototypes
+sub print_fh( $$ );
+sub is_tex_error( $ );
+
+sub usage() {
+    print STDERR <<END
+usage: $0 [-v (0|1|2)] [-l]
+-v 1 means print all TeX output if errors found,
+-v 2 means print all TeX output anyway.
+-l means use the logfile instead of TeX output.
+
+Report bugs to <ed\@membled.com>.
+END
+  ;
+}
+
+foreach (@ARGV) {
+    if (index('--help', $_) == 0) {
+	usage();
+	exit(0);
+    }
+    elsif (index('--version', $_) == 0) {
+	print STDERR <<END
+pip_tex, part of pip version $VERSION
+Written by Ed Avis.
+
+Copyright (C) 2002 Ed Avis.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+END
+  ;
+	exit(0);
+    }
+    elsif (/^--/) {
+	print STDERR "unknown option $_\n";
+	usage();
+	exit(1);
+    }
+}
+use Getopt::Std;
+use vars qw[$opt_v $opt_l];
+if (not getopts('v:l')
+    or @ARGV
+    or (defined $opt_v and $opt_v !~ /^[012]$/)) {
+    usage();
+    exit(1);
+}
+$opt_v = 0 if not defined $opt_v;
+
+my $dir = tempdir();
+chdir $dir or die "cannot chdir to $dir: $!";
+
+# FIXME: should look at exit status from $TEX.  Could use my_system()
+# from the unarc distribution?
+#
+open (TEXOUT, "$TEX 2>&1 |")
+  or die "cannot run $TEX: $!";
+
+if ($opt_v == 0 and not $opt_l) {
+    # Look for errors and print them
+    while (<TEXOUT>) {
+	print STDERR if is_tex_error($_);
+    }
+}
+elsif ($opt_v == 0 and $opt_l) {
+    die '-l makes no sense without -v1 or -v2';
+}
+elsif ($opt_v == 1 and not $opt_l) {
+    # Look for errors, if any then print the entire output
+    my $backlog = '';
+    while (<TEXOUT>) {
+	if (is_tex_error($_)) {
+	    # Found an error - print the entire output
+	    print STDERR $backlog;
+	    print STDERR;
+	    print_fh(\*TEXOUT, \*STDERR);
+	    last;
+	}
+	else {
+	    $backlog .= $_;
+	}
+    }
+}
+elsif ($opt_v == 1 and $opt_l) {
+    # Look for errors, if any then print the logfile
+    while (<TEXOUT>) {
+	if (is_tex_error($_)) {
+	    open (LOG, "$TEXPUT$LOG")
+	      or die "cannot open $TEXPUT$LOG in $dir: $!";
+	    print_fh(\*LOG, \*STDERR);
+	    last;
+	}
+    }
+}
+elsif ($opt_v == 2 and not $opt_l) {
+    # Show all of tex's stdout
+    print_fh(\*TEXOUT, \*STDERR);
+}
+elsif ($opt_v == 2 and $opt_l) {
+    # Read all of tex's output so it finishes
+    read(TEXOUT, $_, $BUFSIZE)
+      until eof TEXOUT;
+
+    # Show the logfile
+    open (LOG, "$TEXPUT$LOG")
+      or die "cannot open $TEXPUT$LOG in $dir: $!";
+    print_fh(\*LOG, \*STDERR);
+}
+else { die }
+
+# Print DVI to stdout, if there is one
+if (open (DVI, "$TEXPUT$DVI")) {
+    print_fh(\*DVI, \*STDOUT);
+}
+else {
+    warn "cannot open $TEXPUT$DVI in $dir: $!, producing no output";
+}
+
+# Clean up.  For some reason tex sometimes creates files named '.dvi'
+# etc.
+#
+foreach my $ext ($LOG, $DVI, '.aux', '.idx', '.toc') {
+    local $_ = $ext;
+    (not -f) or unlink or die "cannot unlink $_ from $dir: $!";
+    $_ = "$TEXPUT$_";
+    (not -f) or unlink or die "cannot unlink $_ from $dir: $!";
+}
+
+foreach (<*>, <.*>) {
+    next if $_ eq '.' or $_ eq '..';
+    warn "found unexpected output file $_ in $dir";
+    unlink or die "cannot unlink $_ from $dir: $!";
+}
+
+chdir '..' or die "cannot chdir to .. from $dir: $!";
+rmdir $dir or die "cannot rmdir $dir: $!";
+
+
+# print_fh()
+#
+# Read all the characters left in a filehandle and print them to
+# another filehandle.
+#
+# Parameters:
+#   filehandle to read from (ref to filehandle glob)
+#   filehandle to write to
+#
+# For example,
+#   print_fh(\*IN, \*OUT)
+#
+# This is equivalent to while (<IN>) { print OUT }, but faster.
+#
+sub print_fh($$) {
+    die 'usage: print_fh(input fh, output fh)' if @_ != 2;
+    my ($in, $out) = @_;
+    local $_;
+    until (eof $in) {
+	read($in, $_, $BUFSIZE)
+	  or die 'error reading from filehandle, or undetected eof';
+	print $out $_;
+    }
+}
+
+
+# is_tex_error()
+#
+# An attempt to guess whether a line of TeX output or logfile is an
+# error message.  But this is almost impossible, so we catch only
+# serious errors, those beginning with '!', '*!', '**!', etc.
+#
+sub is_tex_error($) {
+    die 'usage: is_tex_error(line of output from tex)' if @_ != 1;
+    local $_ = shift;
+    /^\**!/;
+}
+
