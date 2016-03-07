@@ -1,4 +1,4 @@
-# Copyright 2014-2015 Mitchell mitchell.att.foicica.com. See LICENSE.
+# Copyright 2014-2016 Mitchell mitchell.att.foicica.com. See LICENSE.
 
 ifeq (win32, $(findstring win32, $(MAKECMDGOALS)))
   CROSS = i686-w64-mingw32-
