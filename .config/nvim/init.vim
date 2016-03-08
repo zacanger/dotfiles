@@ -613,3 +613,6 @@ nnoremap <leader>nl :%s///g
 " peepopen, quit on vim exit
 " let g:peepopen_quit = 1
 
+nnoremap j gj
+nnoremap k gk
+
