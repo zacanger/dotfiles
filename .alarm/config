@@ -6,7 +6,7 @@ DAY=today
 
 [Alarm Time]
 # Constant alarm time.
-ALARM_TIME=07:45
+ALARM_TIME=07:57
 
 [Alarm Attempts]
 # Select number for attempts.
