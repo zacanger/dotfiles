@@ -5,7 +5,19 @@ var net  = require('net')
   , port = 5100
 
 var face = function(){
-  var m = ['^__^', '-__-', '>.<', '^.^', '@_@', '8_8', '%.%', '^_-', '^.-', ';)', 'xD']
+  var m = [
+    '^__^'
+  , '-__-'
+  , '>.<'
+  , '^.^'
+  , '@_@'
+  , '8_8'
+  , '%.%'
+  , '^_-'
+  , '^.-'
+  , ';)'
+  , 'xD'
+  ]
   return m[Math.floor(Math.random()*m.length)]
 }
 
