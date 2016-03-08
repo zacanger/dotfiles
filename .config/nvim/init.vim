@@ -152,7 +152,7 @@ set shell=/bin/bash
 
 " session management
 let g:session_directory = "~/.config/nvim/session"
-let g:session_autoload = "yes"
+let g:session_autoload = "no"
 let g:session_autosave = "yes"
 let g:session_command_aliases = 1
 
@@ -615,4 +615,19 @@ nnoremap <leader>nl :%s///g
 
 nnoremap j gj
 nnoremap k gk
+
+" buftabs
+let g:buftabs_enabled = 1
+let g:buftabs_in_statusline = 1
+let g:buftabs_in_cmdline = 0
+let g:buftabs_only_basename = 1
+let g:buftabs_active_highlight_group = "Visual"
+let g:buftabs_inactive_highlight_group = ""
+let g:buftabs_statusline_highlight_group = ""
+let g:buftabs_marker_start = "["
+let g:buftabs_marker_end = "]"
+let g:buftabs_separator = "-"
+let g:buftabs_marker_modified = "!"
+nnoremap <C-left> :bprev<CR>
+nnoremap <C-right> :bnext<CR>
 
