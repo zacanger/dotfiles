@@ -1,4 +1,4 @@
-.Dd March 12, 2015
+.Dd February 25, 2016
 .Dt NOICE 1
 .Os
 .Sh NAME
@@ -37,26 +37,34 @@ Move to next entry.
 Scroll up half a page.
 .It Ic [Pgdown] or C-d
 Scroll down half a page.
+.It Ic [Home], ^ or C-a
+Move to the first entry.
+.It Ic [End], $ or C-e
+Move to the last entry.
 .It Ic l, [Right], [Return] or C-m
 Open file or enter directory.
-.It Ic h, [Left] or [Backspace]
+.It Ic h, C-h, [Left] or [Backspace]
 Back up one directory level.
 .It Ic / or &
 Change filter (see below for more information).
-.It Ic ?
-Enter filter-as-you-type mode.
 .It Ic c
 Change into the given directory.
+.It Ic ~
+Change to the HOME directory.
+.It Ic \&.
+Toggle hide .dot files.
 .It Ic t
 Toggle sort by time modified.
-.It Ic l
+.It Ic C-l
 Force a redraw.
-.It Ic !
-Spawn an sh shell in current directory.
+.It Ic \&!
+Spawn a shell in current directory.
 .It Ic z
 Run the system top utility.
 .It Ic e
 Open selected entry with the vi editor.
+.It Ic p
+Open selected entry with the less pager.
 .It Ic q
 Quit.
 .El
@@ -76,7 +84,7 @@ is found the program
 .Xr less 1
 is invoked.  This is useful for editing text files
 as one can use the 'v' command in
-.Xr less 1 to edit the file in $EDITOR.
+.Xr less 1 to edit the file using the EDITOR environment variable.
 .Pp
 See the examples section below for more information.
 .Sh FILTERS
@@ -93,12 +101,15 @@ If
 .Nm
 is invoked as root the default filter will also match hidden
 files.
+.Sh ENVIRONMENT
+The SHELL, EDITOR and PAGER environment variables take precedence
+when dealing with the !, e and p commands respectively.
 .Sh EXAMPLES
 The following example shows one possible configuration for
 file associations which is also the default:
 .Bd -literal
 struct assoc assocs[] = {
-	{ "\\.(avi|mp4|mkv|mp3|ogg|flac)$", "mplayer" },
+	{ "\\.(avi|mp4|mkv|mp3|ogg|flac|mov)$", "mplayer" },
 	{ "\\.(png|jpg|gif)$", "feh" },
 	{ "\\.(html|svg)$", "firefox" },
 	{ "\\.pdf$", "mupdf" },
@@ -108,8 +119,6 @@ struct assoc assocs[] = {
 .Ed
 .Sh KNOWN ISSUES
 If you are using urxvt you might have to set backspacekey to DEC.
-.Pp
 .Sh AUTHORS
-.Nm
-was developed by Lazaros Koromilas <lostd@2f30.org> with
-contributions by Dimitris Papastamos <sin@2f30.org>.
+.An Lazaros Koromilas Aq Mt lostd@2f30.org ,
+.An Dimitris Papastamos Aq Mt sin@2f30.org .
