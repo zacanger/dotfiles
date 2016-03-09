@@ -47,7 +47,7 @@
     ]
     themes: [
       "dark-flat-ui"
-      "framerjs-syntax"
+      "outlander-syntax"
     ]
   "dark-flat-ui":
     accentColor: "purple"
