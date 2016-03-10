@@ -77,6 +77,7 @@ export PATH=$PATH:/usr/local/share/npm/bin:/home/z/Dropbox/z/bin:/opt:~/.gem/glo
 export EDITOR='nvim'
 export SLACK_TOKEN='xoxp-3318091984-8228669395-18656956487-09aa605092' # ignoreline
 export SLACK_USERNAME='zacanger'
+export CLOUDCONVERT_API_KEY='lXpU1frFuBKCob5POjJVlXHnobef_iXERtaJwhBihyWr7tl2PYATxnbs7IiJvuAlFD_kZ_X24t_KA2FdKgn0dA' # ignoreline
 export LOLCOMMITS_ANIMATE='2'
 export MANPATH=$MANPATH:/home/z/Dropbox/z/doc
 

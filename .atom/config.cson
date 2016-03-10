@@ -87,6 +87,7 @@
   navigate: {}
   "node-debugger":
     nodePath: "/usr/local/bin/node"
+  "pdf-view": {}
   "preview-plus": {}
   "project-manager": {}
   react:
