@@ -1,0 +1,48 @@
+.TH human 1 2014-09-03 "v3.0" "Human manual"
+.SH NAME
+human \- output a number in human-readable format
+.SH SYNOPSIS
+.B human
+.RI [ \-hbkmgt ] <number>
+.SH DESCRIPTION
+.PP
+.B human
+takes the number given as an argument, and output it in a human readable format.
+.TP
+.B \-h
+Displays a help text
+.TP
+.B \-b, -k, -m, -g, -t
+Force output in, respectively, Bytes, KiB, MiB, GiB or TiB.
+.SH ENVIRONMENT
+.B SCALE
+The special variable SCALE will allow you to choose how many numbers you want after the decimal point.
+.SH EXAMPLES
+.TP
+\(buOutput a number in its best factorization form:
+.EX
+\fBhuman \fR12345
+\fR12K
+.EE
+.TP
+\(buOutput a number with \fI3\fR numbers after the decimal point:
+.EX
+\fRSCALE=\-3 \fBhuman \fR12345
+\fR12.056K
+.EE
+.TP
+\(buOutput a number in MiB, no matter what.
+.EX
+\fBhuman \fR-m 1234567890
+1177M
+.EE
+.TP
+\(buConvert a number from Mib to bytes
+.EX
+\fBhuman \fR-b 128M
+134217728
+.EE
+.SH REPORTING BUGS
+If you encounter any bugs, feel free to report them at \fIwilly@mailoo.org\fR
+.SH AUTHORS / CONTRIBUTORS
+Willy Goiffon is the main author.

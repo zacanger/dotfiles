@@ -1,0 +1,28 @@
+╻ ╻╻ ╻┏┳┓┏━┓┏┓╻
+┣━┫┃ ┃┃┃┃┣━┫┃┗┫
+╹ ╹┗━┛╹ ╹╹ ╹╹ ╹
+             -- by z3bra
+========================
+
+Human is a small program which translate numbers into a human readable format.
+By default, it tries to detect the best factorisation, but you can force its
+output.
+
+You can adjust the number of decimals by with the `SCALE` environment variable.
+
+    # convert 123456 to the best human factorisation
+    human 123456
+    121K
+
+    # output 2 decimals
+    SCALE=2 human 123456
+    120.56K
+
+    SCALE=3 human -m 123456
+    0.118M
+
+    # convert from a different factorization level
+    SCALE=6 human -g 123M
+    0.120117G
+
+Well, that's it (and that's enough !)
