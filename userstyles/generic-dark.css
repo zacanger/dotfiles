@@ -11,9 +11,9 @@
 body,div,p,h1,h2,h3,h4,h5,h6,tbody,thead,th,tr,td,
 blockquote,li,ul,strong,font,form,footer,header,
 select,button,article,section,nav,span,label,dd,option{
-  color: #f2f4cd!important;
-  background: #101010!important;
-  font-family:"Fantasque Sans Mono"!important;
+  color: #e1d3bc!important;
+  background: #0a0a0a!important;
+  font-family:"Merriweather"!important;
 }
 
 a{color:#8cf2c1!important;}
@@ -28,4 +28,3 @@ textarea,code,pre,input,code span{
   font-size:12px!important;
   font-family:"Monoid",monospace!important;
 }
-
