@@ -27,7 +27,6 @@
       "language-csharp"
       "welcome"
       "language-ruby-on-rails"
-      "linter-eslint"
       "metrics"
       "meteor-api"
       "pharaoh"
@@ -44,6 +43,7 @@
       "semanticolor"
       "swackets"
       "standard-angularjs-snippets"
+      "jshint"
     ]
     themes: [
       "dark-flat-ui"
