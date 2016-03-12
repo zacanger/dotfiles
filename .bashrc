@@ -99,7 +99,12 @@ fi
 
 # same for npm completion
 if [ -f ~/.npm-completion ]; then
-    . ~/.npm-completion
+  . ~/.npm-completion
+fi
+
+# and git completion
+if [ -f ~/.git-completion ]; then
+  . ~/.git-completion
 fi
 
 # and, finally... liquidprompt; load from interactive shell, don't from scripts/scp

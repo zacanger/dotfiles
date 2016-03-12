@@ -74,3 +74,4 @@ NeoBundle 'wakatime/vim-wakatime'
 NeoBundle 'wincent/terminus'
 NeoBundle 'xsnippet/vim-xsnippet'
 
+NeoBundle 'mklabs/vim-cowsay'

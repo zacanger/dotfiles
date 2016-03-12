@@ -67,6 +67,7 @@ alias hcl='hub clone'
 alias gp='git push'
 alias com='commemoji'
 alias ae='git add -A && commemoji'
+alias githist='git log -S'
 
 # navigation
 alias Cd='cd'
