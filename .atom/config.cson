@@ -43,7 +43,7 @@
       "semanticolor"
       "swackets"
       "standard-angularjs-snippets"
-      "jshint"
+      "linter-eslint"
     ]
     themes: [
       "dark-flat-ui"
@@ -74,7 +74,9 @@
   floobits: {}
   "js-hyperclick": {}
   jshint:
+    onlyConfig: true
     supportLintingJsx: true
+    validateOnlyOnSave: true
   "language-babel": {}
   linter: {}
   "linter-eslint":

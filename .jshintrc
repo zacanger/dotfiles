@@ -1,34 +1,44 @@
 {
-    "indent"        : 2
-  , "noempty"       : false
-  , "quotmark"      : "single"
-  , "strict"        : false
-  , "maxlen"        : 180
-  , "asi"           : true
-  , "boss"          : true
-  , "debug"         : true
-  , "eqnull"        : true
-  , "esnext"        : true
-  , "funcscope"     : true
-  , "lastsemic"     : true
-  , "laxcomma"      : true
-  , "loopfunc"      : true
-  , "multistr"      : true
-  , "scripturl"     : true
-  , "shadow"        : true
-  , "sub"           : true
-  , "supernew"      : true
-//  , "browserify"    : true
-//  , "jasmine"       : true
-//  , "jquery"        : true
-  , "node"          : true
-//  , "nonstandard"   : true
-//  , "phantom"       : true
-//  , "prototypejs"   : true
-//  , "qunit"         : true
-  , "shelljs"       : true
-//  , "typed"         : true
-//  , "worker"        : true
-//  , "yui"           : true
-//  , "globals"       : {}
+  "asi"           : true
+, "boss"          : true
+, "browserify"    : true
+, "debug"         : true
+, "eqnull"        : true
+, "esversion":    : 6
+, "freeze"        : true
+, "funcscope"     : true
+, "futurehostile" : true
+, "indent"        : 2
+, "jasmine"       : true
+, "jquery"        : true
+, "lastsemic"     : true
+, "latedef"       : true
+, "laxcomma"      : true
+, "loopfunc"      : true
+, "maxlen"        : 180
+, "multistr"      : true
+, "noarg"         : true
+, "node"          : true
+, "noempty"       : false
+, "nonbsp"        : true
+, "nonew"         : true
+, "nonstandard"   : true
+, "phantom"       : true
+, "prototypejs"   : true
+, "qunit"         : true
+, "quotmark"      : "single"
+, "scripturl"     : true
+, "shadow"        : true
+, "singleGroups"  : true
+, "strict"        : true
+, "sub"           : true
+, "supernew"      : true
+, "undef"         : true
+, "unused"        : true
+, "globals"       : {}
+, "shelljs"       : true
+, "typed"         : true
+, "worker"        : true
+, "yui"           : true
 }
+
