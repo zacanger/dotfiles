@@ -46,8 +46,8 @@
       "linter-eslint"
     ]
     themes: [
-      "dark-flat-ui"
-      "outlander-syntax"
+      "outlander-ui"
+      "framerjs-syntax"
     ]
   "dark-flat-ui":
     accentColor: "purple"

@@ -80,6 +80,7 @@ export SLACK_USERNAME='zacanger'
 export CLOUDCONVERT_API_KEY='lXpU1frFuBKCob5POjJVlXHnobef_iXERtaJwhBihyWr7tl2PYATxnbs7IiJvuAlFD_kZ_X24t_KA2FdKgn0dA' # ignoreline
 export LOLCOMMITS_ANIMATE='2'
 export MANPATH=$MANPATH:/home/z/Dropbox/z/doc
+export NODE_ENV=development
 
 # j, rbenv, and fzf
 . /usr/share/autojump/autojump.sh
