@@ -12,6 +12,7 @@
 while true
 do
   sleep 300
+  clear
   dropbox filestatus
 done
 
