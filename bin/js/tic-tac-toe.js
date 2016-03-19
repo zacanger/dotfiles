@@ -2,11 +2,11 @@
 
 var player  = 'X'
   , aPlayer = 'O'
-  , count = 0
-  , proc = process
-  , input = proc.stdin
-  , output = proc.stdout
-  , block = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  , count   = 0
+  , proc    = process
+  , input   = proc.stdin
+  , output  = proc.stdout
+  , block   = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 input.setRawMode(1)
 input.resume()
@@ -63,4 +63,3 @@ input.on('data', function(key){
   }
 })
 draw()
-
