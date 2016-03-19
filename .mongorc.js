@@ -3,7 +3,7 @@
  * Mongo-Hacker
  * MongoDB Shell Enhancements for Hackers
  *
- * Tyler J. Brock - 2013 - 2015
+ * Tyler J. Brock - 2013 - 2016
  *
  * http://tylerbrock.github.com/mongo-hacker
  *
@@ -17,12 +17,18 @@ mongo_hacker_config = {
   sort_keys:      false,            // sort the keys in documents when displayed
   uuid_type:      'default',        // 'java', 'c#', 'python' or 'default'
   banner_message: 'Mongo-Hacker ',  // banner message
-  version:        '0.0.9',          // current mongo-hacker version
+  version:        '0.0.13',         // current mongo-hacker version
   show_banner:     true,            // show mongo-hacker version banner on startup
   windows_warning: true,            // show warning banner for windows
   force_color:     false,           // force color highlighting for Windows users
+  count_deltas:    false,           // "count documents" shows deltas with previous counts
   column_separator:  '→',           // separator used when printing padded/aligned columns
   value_separator:   '/',           // separator used when merging padded/aligned values
+  dbref: {
+    extended_info: true,            // enable more informations on DBRef
+    plain:         false,           // print DBRef as plain JSON object
+    db_if_differs: false            // include $db only if is different than current one
+  },
 
   // Shell Color Settings
   // Colors available: red, green, yellow, blue, magenta, cyan
@@ -117,6 +123,411 @@ function colorize( string, color, nocolor ) {
 
     return applyColorCode( string, params, nocolor );
 };
+
+function colorizeAll( strings, color, nocolor ) {
+    return strings.map(function(string) {
+        return colorize( string, color, nocolor );
+    });
+};
+__indent = Array(mongo_hacker_config.indent + 1).join(' ');
+__colorize = (_isWindows() && !mongo_hacker_config['force_color']) ? false : true;
+
+ObjectId.prototype.toString = function() {
+    return this.str;
+};
+
+ObjectId.prototype.tojson = function(indent, nolint) {
+    return tojson(this);
+};
+
+var dateToJson = Date.prototype.tojson;
+
+Date.prototype.tojson = function(indent, nolint, nocolor) {
+  var isoDateString = dateToJson.call(this);
+  var dateString = isoDateString.substring(8, isoDateString.length-1);
+
+  var isodate = colorize(dateString, mongo_hacker_config.colors.date, nocolor);
+  return 'ISODate(' + isodate + ')';
+};
+
+Array.tojson = function( a , indent , nolint, nocolor ){
+    var lineEnding = nolint ? " " : "\n";
+
+    if (!indent)
+        indent = "";
+
+    if ( nolint )
+        indent = "";
+
+    if (a.length === 0) {
+        return "[ ]";
+    }
+
+    var s = "[" + lineEnding;
+    indent += __indent;
+    for ( var i=0; i<a.length; i++){
+        s += indent + tojson( a[i], indent , nolint, nocolor );
+        if ( i < a.length - 1 ){
+            s += "," + lineEnding;
+        }
+    }
+    if ( a.length === 0 ) {
+        s += indent;
+    }
+
+    indent = indent.substring(__indent.length);
+    s += lineEnding+indent+"]";
+    return s;
+};
+
+function surround(name, inside) {
+    return [name, '(', inside, ')'].join('');
+}
+
+Number.prototype.commify = function() {
+    // http://stackoverflow.com/questions/2901102
+    return this.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+NumberLong.prototype.tojson = function(indent, nolint, nocolor) {
+    var color = mongo_hacker_config.colors.number;
+    var output = colorize('"' + this.toString().match(/-?\d+/)[0] + '"', color, nocolor);
+    return surround('NumberLong', output);
+};
+
+NumberInt.prototype.tojson = function(indent, nolint, nocolor) {
+    var color = mongo_hacker_config.colors.number;
+    var output = colorize('"' + this.toString().match(/-?\d+/)[0] + '"', color, nocolor);
+    return surround('NumberInt', output);
+};
+
+BinData.prototype.tojson = function(indent , nolint, nocolor) {
+    var uuidType = mongo_hacker_config.uuid_type;
+    var uuidColor = mongo_hacker_config.colors.uuid;
+    var binDataColor = mongo_hacker_config.colors.binData;
+
+    if (this.subtype() === 3) {
+        var output = colorize('"' + uuidToString(this) + '"', uuidColor, nocolor) + ', '
+        output += colorize('"' + uuidType + '"', uuidColor)
+        return surround('UUID', output);
+    } else if (this.subtype() === 4) {
+        var output = colorize('"' + uuidToString(this, "default") + '"', uuidColor, nocolor) + ')'
+        return surround('UUID', output);
+    } else {
+        var output = colorize(this.subtype(), {color: 'red'}) + ', '
+        output += colorize('"' + this.base64() + '"', binDataColor, nocolor)
+        return surround('BinData', output);
+    }
+};
+
+DBQuery.prototype.shellPrint = function(){
+    try {
+        var start = new Date().getTime();
+        var n = 0;
+        while ( this.hasNext() && n < DBQuery.shellBatchSize ){
+            var s = this._prettyShell ? tojson( this.next() ) : tojson( this.next() , "" , true );
+            print( s );
+            n++;
+        }
+
+        var output = [];
+
+        if (typeof _verboseShell !== 'undefined' && _verboseShell) {
+            var time = new Date().getTime() - start;
+            var slowms = getSlowms();
+            var fetched = "Fetched " + n + " record(s) in ";
+            if (time > slowms) {
+                fetched += colorize(time + "ms", { color: "red", bright: true });
+            } else {
+                fetched += colorize(time + "ms", { color: "green", bright: true });
+            }
+            output.push(fetched);
+        }
+
+        var paranoia = mongo_hacker_config.index_paranoia;
+
+        if (typeof paranoia !== 'undefined' && paranoia) {
+            var explain = this.clone();
+            explain._ensureSpecial();
+            explain._query.$explain = true;
+            explain._limit = Math.abs(n) * -1;
+            var result = explain.next();
+
+            if (current_version < 3) {
+                var type = result.cursor;
+
+                if (type !== undefined) {
+                    var index_use = "Index[";
+                    if (type == "BasicCursor") {
+                        index_use += colorize( "none", { color: "red", bright: true });
+                    } else {
+                        index_use += colorize( result.cursor.substring(12), { color: "green", bright: true });
+                    }
+                    index_use += "]";
+                    output.push(index_use);
+                }
+            } else {
+                var winningPlan = result.queryPlanner.winningPlan;
+                var winningInputStage = winningPlan.inputStage.inputStage;
+
+                if (winningPlan !== undefined) {
+                    var index_use = "Index[";
+                    if (winningPlan.inputStage.stage === "COLLSCAN" || (winningInputStage !== undefined && winningInputStage.stage !== "IXSCAN")) {
+                        index_use += colorize( "none", { color: "red", bright: true });
+                    } else {
+                        var fullScan = false;
+                        for (index in winningInputStage.keyPattern) {
+                            if (winningInputStage.indexBounds[index][0] == "[MinKey, MaxKey]") {
+                                fullScan = true;
+                            }
+                        }
+
+                        if (fullScan) {
+                            index_use += colorize( winningInputStage.indexName + " (full scan)", { color: "yellow", bright: true });
+                        } else {
+                            index_use += colorize( winningInputStage.indexName, { color: "green", bright: true });
+                        }
+                    }
+                    index_use += "]";
+                    output.push(index_use);
+                }
+            }
+        }
+
+        if ( this.hasNext() ) {
+            ___it___  = this;
+            output.push("More[" + colorize("true", { color: "green", bright: true }) + "]");
+        }
+        print(output.join(" -- "));
+    }
+    catch ( e ){
+        print( e );
+    }
+};
+
+function isInArray(array, value) {
+    return array.indexOf(value) > -1;
+}
+
+tojsonObject = function( x, indent, nolint, nocolor, sort_keys ) {
+    var lineEnding = nolint ? " " : "\n";
+    var tabSpace = nolint ? "" : __indent;
+    var sortKeys = (null == sort_keys) ? mongo_hacker_config.sort_keys : sort_keys;
+
+    assert.eq( ( typeof x ) , "object" , "tojsonObject needs object, not [" + ( typeof x ) + "]" );
+
+    if (!indent)
+        indent = "";
+
+    if ( typeof( x.tojson ) == "function" && x.tojson != tojson ) {
+        return x.tojson( indent, nolint, nocolor );
+    }
+
+    if ( x.constructor && typeof( x.constructor.tojson ) == "function" && x.constructor.tojson != tojson ) {
+        return x.constructor.tojson( x, indent , nolint, nocolor );
+    }
+
+    if ( x.toString() == "[object MaxKey]" )
+        return "{ $maxKey : 1 }";
+    if ( x.toString() == "[object MinKey]" )
+        return "{ $minKey : 1 }";
+
+    var s = "{" + lineEnding;
+
+    // push one level of indent
+    indent += tabSpace;
+
+    var total = 0;
+    for ( var k in x ) total++;
+    if ( total === 0 ) {
+        s += indent + lineEnding;
+    }
+
+    var keys = x;
+    if ( typeof( x._simpleKeys ) == "function" )
+        keys = x._simpleKeys();
+    var num = 1;
+
+    var keylist=[];
+
+    for(var key in keys)
+        keylist.push(key);
+
+    if ( sortKeys ) {
+        // Disable sorting if this object looks like an index spec
+        if ( (isInArray(keylist, "v") && isInArray(keylist, "key") && isInArray(keylist, "name") && isInArray(keylist, "ns")) ) {
+            sortKeys = false;
+        } else {
+            keylist.sort();
+        }
+    }
+
+    for ( var i=0; i<keylist.length; i++) {
+        var key=keylist[i];
+
+        var val = x[key];
+        if ( val == DB.prototype || val == DBCollection.prototype )
+            continue;
+
+        var color = mongo_hacker_config.colors.key;
+        s += indent + colorize("\"" + key + "\"", color, nocolor) + ": " + tojson( val, indent , nolint, nocolor, sortKeys );
+        if (num != total) {
+            s += ",";
+            num++;
+        }
+        s += lineEnding;
+    }
+
+    // pop one level of indent
+    indent = indent.substring(__indent.length);
+    return s + indent + "}";
+};
+
+tojson = function( x, indent , nolint, nocolor, sort_keys ) {
+
+    var sortKeys = (null == sort_keys) ? mongo_hacker_config.sort_keys : sort_keys;
+
+    if (null == tojson.caller) {
+        // Unknonwn caller context, so assume this is from C++ code
+        nocolor = true;
+    }
+
+    if ( x === null )
+        return colorize("null", mongo_hacker_config.colors['null'], nocolor);
+
+    if ( x === undefined )
+        return colorize("undefined", mongo_hacker_config.colors['undefined'], nocolor);
+
+    if ( x.isObjectId ) {
+        var color = mongo_hacker_config.colors['objectid'];
+        return surround('ObjectId', colorize('"' + x.str + '"', color, nocolor));
+    }
+
+    if (!indent)
+        indent = "";
+
+    var s;
+    switch ( typeof x ) {
+    case "string": {
+        s = "\"";
+        for ( var i=0; i<x.length; i++ ){
+            switch (x[i]){
+                case '"': s += '\\"'; break;
+                case '\\': s += '\\\\'; break;
+                case '\b': s += '\\b'; break;
+                case '\f': s += '\\f'; break;
+                case '\n': s += '\\n'; break;
+                case '\r': s += '\\r'; break;
+                case '\t': s += '\\t'; break;
+
+                default: {
+                    var code = x.charCodeAt(i);
+                    if (code < 0x20){
+                        s += (code < 0x10 ? '\\u000' : '\\u00') + code.toString(16);
+                    } else {
+                        s += x[i];
+                    }
+                }
+            }
+        }
+        s += "\"";
+        return colorize(s, mongo_hacker_config.colors.string, nocolor);
+    }
+    case "number":
+        return colorize(x, mongo_hacker_config.colors.number, nocolor);
+    case "boolean":
+        return colorize("" + x, mongo_hacker_config.colors['boolean'], nocolor);
+    case "object": {
+        s = tojsonObject( x, indent , nolint, nocolor, sortKeys );
+        if ( ( nolint === null || nolint === true ) && s.length < 80 && ( indent === null || indent.length === 0 ) ){
+            s = s.replace( /[\s\r\n ]+/gm , " " );
+        }
+        return s;
+    }
+    case "function":
+        return colorize(x.toString(), mongo_hacker_config.colors['function'], nocolor);
+    default:
+        throw "tojson can't handle type " + ( typeof x );
+    }
+
+};
+
+
+DBQuery.prototype._validate = function( o ){
+    var firstKey = null;
+    for (var k in o) { firstKey = k; break; }
+
+    if (firstKey !== null && firstKey[0] == '$') {
+        // for mods we only validate partially, for example keys may have dots
+        this._validateObject( o );
+    } else {
+        // we're basically inserting a brand new object, do full validation
+        this._validateForStorage( o );
+    }
+};
+
+DBQuery.prototype._validateObject = function( o ){
+    if (typeof(o) != "object")
+        throw "attempted to save a " + typeof(o) + " value.  document expected.";
+
+    if ( o._ensureSpecial && o._checkModify )
+        throw "can't save a DBQuery object";
+};
+
+DBQuery.prototype._validateForStorage = function( o ){
+    this._validateObject( o );
+    for ( var k in o ){
+        if ( k.indexOf( "." ) >= 0 ) {
+            throw "can't have . in field names [" + k + "]" ;
+        }
+
+        if ( k.indexOf( "$" ) === 0 && ! DBCollection._allowedFields[k] ) {
+            throw "field names cannot start with $ [" + k + "]";
+        }
+
+        if ( o[k] !== null && typeof( o[k] ) === "object" ) {
+            this._validateForStorage( o[k] );
+        }
+    }
+};
+
+DBQuery.prototype._checkMulti = function(){
+  if(this._limit > 0 || this._skip > 0){
+    var ids = this.clone().select({_id: 1}).map(function(o){return o._id;});
+    this._query['_id'] = {'$in': ids};
+    return true;
+  } else {
+    return false;
+  }
+};
+
+DBQuery.prototype.ugly = function(){
+    this._prettyShell = false;
+    return this;
+}
+
+DB.prototype.shutdownServer = function(opts) {
+    if( "admin" != this._name ){
+        return "shutdown command only works with the admin database; try 'use admin'";
+    }
+
+    cmd = {"shutdown" : 1};
+    opts = opts || {};
+    for (var o in opts) {
+        cmd[o] = opts[o];
+    }
+
+    try {
+        var res = this.runCommand(cmd);
+        if( res )
+            throw "shutdownServer failed: " + res.errmsg;
+        throw "shutdownServer failed";
+    }
+    catch ( e ){
+        assert( e.message.indexOf( "error doing query: failed" ) >= 0 , "unexpected error: " + tojson( e ) );
+        print( "server should be down..." );
+    }
+}
 //----------------------------------------------------------------------------
 // Aggregation API Extensions
 //----------------------------------------------------------------------------
@@ -430,159 +841,6 @@ function uuidToString(uuid, uuidType) {
     return hex.substr(0, 8) + '-' + hex.substr(8, 4) + '-' + hex.substr(12, 4)
         + '-' + hex.substr(16, 4) + '-' + hex.substr(20, 12);
 }
-// Better show dbs
-shellHelper.show = function (what) {
-    assert(typeof what == "string");
-
-    var args = what.split( /\s+/ );
-    what = args[0]
-    args = args.splice(1)
-
-    if (what == "profile") {
-        if (db.system.profile.count() == 0) {
-            print("db.system.profile is empty");
-            print("Use db.setProfilingLevel(2) will enable profiling");
-            print("Use db.system.profile.find() to show raw profile entries");
-        }
-        else {
-            print();
-            db.system.profile.find({ millis: { $gt: 0} }).sort({ $natural: -1 }).limit(5).forEach(
-                function (x) {
-                    print("" + x.op + "\t" + x.ns + " " + x.millis + "ms " + String(x.ts).substring(0, 24));
-                    var l = "";
-                    for ( var z in x ){
-                        if ( z == "op" || z == "ns" || z == "millis" || z == "ts" )
-                            continue;
-
-                        var val = x[z];
-                        var mytype = typeof(val);
-
-                        if ( mytype == "string" ||
-                             mytype == "number" )
-                            l += z + ":" + val + " ";
-                        else if ( mytype == "object" )
-                            l += z + ":" + tojson(val ) + " ";
-                        else if ( mytype == "boolean" )
-                            l += z + " ";
-                        else
-                            l += z + ":" + val + " ";
-
-                    }
-                    print( l );
-                    print("\n");
-                }
-            )
-        }
-        return "";
-    }
-
-    if (what == "users") {
-        db.getUsers().forEach(printjson);
-        return "";
-    }
-
-    if (what == "roles") {
-        db.getRoles({showBuiltinRoles: true}).forEach(printjson);
-        return "";
-    }
-
-    if (what == "collections" || what == "tables") {
-        var collectionNames = db.getCollectionNames();
-        var collectionSizes = collectionNames.map(function (name) {
-            var stats = db.getCollection(name).stats();
-            var size = (stats.size / 1024 / 1024).toFixed(3);
-            return (size + "MB");
-        });
-        var collectionStorageSizes = collectionNames.map(function (name) {
-            var stats = db.getCollection(name).stats();
-            var storageSize = (stats.storageSize / 1024 / 1024).toFixed(3);
-            return (storageSize + "MB");
-        });
-        printPaddedColumns(collectionNames, mergePaddedValues(collectionSizes, collectionStorageSizes), mongo_hacker_config['colors']['collectionNames']);
-        return "";
-    }
-
-    if (what == "dbs" || what == "databases") {
-        var databaseNames = db.getMongo().getDBs().databases.map(function(db) {
-            return db.name;
-        });
-        var databaseSizes = db.getMongo().getDBs().databases.map(function(db) {
-            var sizeInGigaBytes = (db.sizeOnDisk / 1024 / 1024 / 1024).toFixed(3);
-            return (db.sizeOnDisk > 1) ? (sizeInGigaBytes + "GB") : "(empty)";
-        });
-        printPaddedColumns(databaseNames, databaseSizes, mongo_hacker_config['colors']['databaseNames']);
-        return "";
-    }
-
-    if (what == "log" ) {
-        var n = "global";
-        if ( args.length > 0 )
-            n = args[0]
-
-        var res = db.adminCommand( { getLog : n } );
-        if ( ! res.ok ) {
-            print("Error while trying to show " + n + " log: " + res.errmsg);
-            return "";
-        }
-        for ( var i=0; i<res.log.length; i++){
-            print( res.log[i] )
-        }
-        return ""
-    }
-
-    if (what == "logs" ) {
-        var res = db.adminCommand( { getLog : "*" } )
-        if ( ! res.ok ) {
-            print("Error while trying to show logs: " + res.errmsg);
-            return "";
-        }
-        for ( var i=0; i<res.names.length; i++){
-            print( res.names[i] )
-        }
-        return ""
-    }
-
-    if (what == "startupWarnings" ) {
-        var dbDeclared, ex;
-        try {
-            // !!db essentially casts db to a boolean
-            // Will throw a reference exception if db hasn't been declared.
-            dbDeclared = !!db;
-        } catch (ex) {
-            dbDeclared = false;
-        }
-        if (dbDeclared) {
-            var res = db.adminCommand( { getLog : "startupWarnings" } );
-            if ( res.ok ) {
-                if (res.log.length == 0) {
-                    return "";
-                }
-                print( "Server has startup warnings: " );
-                for ( var i=0; i<res.log.length; i++){
-                    print( res.log[i] )
-                }
-                return "";
-            } else if (res.errmsg == "no such cmd: getLog" ) {
-                // Don't print if the command is not available
-                return "";
-            } else if (res.code == 13 /*unauthorized*/ ||
-                       res.errmsg == "unauthorized" ||
-                       res.errmsg == "need to login") {
-                // Don't print if startupWarnings command failed due to auth
-                return "";
-            } else {
-                print("Error while trying to show server startup warnings: " + res.errmsg);
-                return "";
-            }
-        } else {
-            print("Cannot show startupWarnings, \"db\" is not set");
-            return "";
-        }
-    }
-
-    throw "don't know how to show [" + what + "]";
-
-}
 //----------------------------------------------------------------------------
 // findAndModify Helper
 //----------------------------------------------------------------------------
@@ -654,7 +912,35 @@ function listDbs(){
   return db.adminCommand("listDatabases").databases.map(function(d){return d.name});
 }
 
-this.__proto__.constructor.autocomplete = listDbs;function runMatch(cmd, args, regexp) {
+this.__proto__.constructor.autocomplete = listDbs;DBRef.prototype.__toString = DBRef.prototype.toString;
+DBRef.prototype.toString = function () {
+  var org = this.__toString();
+  var config = mongo_hacker_config.dbref;
+  if (!config.extended_info) {
+    return org;
+  }
+  var additional = {};
+  var o = this;
+  for (var p in o) {
+    if (typeof o[p] === 'function') {
+      continue;
+    }
+    if (!config.plain && (p === '$ref' || p === '$id')) {
+      continue;
+    }
+    if (config.db_if_differs && p === '$db' && o[p] === db.getName()) {
+      continue;
+    }
+    additional[p] = o[p];
+  }
+  if (config.plain) {
+    return tojsonObject(additional, undefined, true);
+  }
+  return Object.keys(additional).length
+    ? (org.slice(0, -1) + ", " + tojsonObject(additional, undefined, true) + ")")
+    : org;
+};
+function runMatch(cmd, args, regexp) {
     clearRawMongoProgramOutput();
     if (args) {
         run(cmd, args);
@@ -693,46 +979,30 @@ function maxLength(listOfNames) {
     }, 0);
 };
 
-function mergePaddedValues(leftHandValues, rightHandValues) {
-    assert(leftHandValues.length == rightHandValues.length);
+function printPaddedColumns() {
+    var columnWidths = Array.prototype.map.call(
+      arguments,
+      function(column) {
+        return maxLength(column);
+      }
+    );
 
-    maxLeftHandValueLength = maxLength(leftHandValues);
-    maxRightHandValueLength = maxLength(rightHandValues);
-
-    valueSeparator = mongo_hacker_config['value_separator'];
-
-    var combinedValues = []
-
-    for (i = 0; i < leftHandValues.length; i++) {
-        combinedValues[i] = (
-            leftHandValues[i].pad(maxLeftHandValueLength)
-            + " " + valueSeparator + " "
-            + rightHandValues[i].pad(maxRightHandValueLength)
-        );
+    for (i = 0; i < arguments[0].length; i++) {
+        row = "";
+        for (j = 0; j < arguments.length; j++) {
+            row += arguments[j][i].toString().pad(columnWidths[j], (j == 0));
+            if (j < (arguments.length - 1)) {
+                separator = ((j == 0) ?
+                    mongo_hacker_config['column_separator'] :
+                    mongo_hacker_config['value_separator']
+                );
+                row += " " + separator + " ";
+            }
+        }
+        print(row);
     }
 
-    return combinedValues;
-}
-
-function printPaddedColumns(keys, values, color) {
-    assert(keys.length == values.length);
-
-    maxKeyLength   = maxLength(keys);
-    maxValueLength = maxLength(values);
-
-    columnSeparator = mongo_hacker_config['column_separator'];
-
-    if (typeof color === 'undefined') {
-        color = { color: 'green', bright: true }
-    }
-
-    for (i = 0; i < keys.length; i++) {
-        print(
-            colorize(keys[i].pad(maxKeyLength, true), color)
-            + " " + columnSeparator + " "
-            + values[i].pad(maxValueLength)
-        );
-    }
+    return null;
 };
 shellHelper.find = function (query) {
     assert(typeof query == "string");
@@ -758,376 +1028,161 @@ shellHelper.find = function (query) {
     }
 };
 
-__indent = Array(mongo_hacker_config.indent + 1).join(' ');
-__colorize = (_isWindows() && !mongo_hacker_config['force_color']) ? false : true;
+// Better show dbs
+shellHelper.show = function (what) {
+    assert(typeof what == "string");
 
-ObjectId.prototype.toString = function() {
-    return this.str;
-};
+    var args = what.split( /\s+/ );
+    what = args[0]
+    args = args.splice(1)
 
-ObjectId.prototype.tojson = function(indent, nolint) {
-    return tojson(this);
-};
-
-var dateToJson = Date.prototype.tojson;
-
-Date.prototype.tojson = function(indent, nolint, nocolor) {
-  var isoDateString = dateToJson.call(this);
-  var dateString = isoDateString.substring(8, isoDateString.length-1);
-
-  var isodate = colorize(dateString, mongo_hacker_config.colors.date, nocolor);
-  return 'ISODate(' + isodate + ')';
-};
-
-Array.tojson = function( a , indent , nolint, nocolor ){
-    var lineEnding = nolint ? " " : "\n";
-
-    if (!indent)
-        indent = "";
-
-    if ( nolint )
-        indent = "";
-
-    if (a.length === 0) {
-        return "[ ]";
-    }
-
-    var s = "[" + lineEnding;
-    indent += __indent;
-    for ( var i=0; i<a.length; i++){
-        s += indent + tojson( a[i], indent , nolint, nocolor );
-        if ( i < a.length - 1 ){
-            s += "," + lineEnding;
+    if (what == "profile") {
+        if (db.system.profile.count() == 0) {
+            print("db.system.profile is empty");
+            print("Use db.setProfilingLevel(2) will enable profiling");
+            print("Use db.system.profile.find() to show raw profile entries");
         }
-    }
-    if ( a.length === 0 ) {
-        s += indent;
-    }
+        else {
+            print();
+            db.system.profile.find({ millis: { $gt: 0} }).sort({ $natural: -1 }).limit(5).forEach(
+                function (x) {
+                    print("" + x.op + "\t" + x.ns + " " + x.millis + "ms " + String(x.ts).substring(0, 24));
+                    var l = "";
+                    for ( var z in x ){
+                        if ( z == "op" || z == "ns" || z == "millis" || z == "ts" )
+                            continue;
 
-    indent = indent.substring(__indent.length);
-    s += lineEnding+indent+"]";
-    return s;
-};
+                        var val = x[z];
+                        var mytype = typeof(val);
 
-function surround(name, inside) {
-    return [name, '(', inside, ')'].join('');
-}
+                        if ( mytype == "string" ||
+                             mytype == "number" )
+                            l += z + ":" + val + " ";
+                        else if ( mytype == "object" )
+                            l += z + ":" + tojson(val ) + " ";
+                        else if ( mytype == "boolean" )
+                            l += z + " ";
+                        else
+                            l += z + ":" + val + " ";
 
-Number.prototype.commify = function() {
-    // http://stackoverflow.com/questions/2901102
-    return this.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-};
-
-NumberLong.prototype.tojson = function(indent, nolint, nocolor) {
-    var color = mongo_hacker_config.colors.number;
-    var output = colorize('"' + this.toString().match(/-?\d+/)[0] + '"', color, nocolor);
-    return surround('NumberLong', output);
-};
-
-NumberInt.prototype.tojson = function(indent, nolint, nocolor) {
-    var color = mongo_hacker_config.colors.number;
-    var output = colorize('"' + this.toString().match(/-?\d+/)[0] + '"', color, nocolor);
-    return surround('NumberInt', output);
-};
-
-BinData.prototype.tojson = function(indent , nolint, nocolor) {
-    var uuidType = mongo_hacker_config.uuid_type;
-    var uuidColor = mongo_hacker_config.colors.uuid;
-    var binDataColor = mongo_hacker_config.colors.binData;
-
-    if (this.subtype() === 3) {
-        var output = colorize('"' + uuidToString(this) + '"', uuidColor, nocolor) + ', '
-        output += colorize('"' + uuidType + '"', uuidColor)
-        return surround('UUID', output);
-    } else if (this.subtype() === 4) {
-        var output = colorize('"' + uuidToString(this, "default") + '"', uuidColor, nocolor) + ')'
-        return surround('UUID', output);
-    } else {
-        var output = colorize(this.subtype(), {color: 'red'}) + ', '
-        output += colorize('"' + this.base64() + '"', binDataColor, nocolor)
-        return surround('BinData', output);
-    }
-};
-
-DBQuery.prototype.shellPrint = function(){
-    try {
-        var start = new Date().getTime();
-        var n = 0;
-        while ( this.hasNext() && n < DBQuery.shellBatchSize ){
-            var s = this._prettyShell ? tojson( this.next() ) : tojson( this.next() , "" , true );
-            print( s );
-            n++;
-        }
-
-        var output = [];
-
-        if (typeof _verboseShell !== 'undefined' && _verboseShell) {
-            var time = new Date().getTime() - start;
-            var slowms = getSlowms();
-            var fetched = "Fetched " + n + " record(s) in ";
-            if (time > slowms) {
-                fetched += colorize(time + "ms", { color: "red", bright: true });
-            } else {
-                fetched += colorize(time + "ms", { color: "green", bright: true });
-            }
-            output.push(fetched);
-        }
-
-        var paranoia = mongo_hacker_config.index_paranoia;
-
-        if (typeof paranoia !== 'undefined' && paranoia) {
-            var explain = this.clone();
-            explain._ensureSpecial();
-            explain._query.$explain = true;
-            explain._limit = Math.abs(n) * -1;
-            var result = explain.next();
-            var type = result.cursor;
-
-            if (type !== undefined) {
-                var index_use = "Index[";
-                if (type == "BasicCursor") {
-                    index_use += colorize( "none", { color: "red", bright: true });
-                } else {
-                    index_use += colorize( result.cursor.substring(12), { color: "green", bright: true });
-                }
-                index_use += "]";
-                output.push(index_use);
-            }
-        }
-
-        if ( this.hasNext() ) {
-            ___it___  = this;
-            output.push("More[" + colorize("true", { color: "green", bright: true }) + "]");
-        }
-        print(output.join(" -- "));
-    }
-    catch ( e ){
-        print( e );
-    }
-};
-
-function isInArray(array, value) {
-    return array.indexOf(value) > -1;
-}
-
-tojsonObject = function( x, indent, nolint, nocolor, sort_keys ) {
-    var lineEnding = nolint ? " " : "\n";
-    var tabSpace = nolint ? "" : __indent;
-    var sortKeys = (null == sort_keys) ? mongo_hacker_config.sort_keys : sort_keys;
-
-    assert.eq( ( typeof x ) , "object" , "tojsonObject needs object, not [" + ( typeof x ) + "]" );
-
-    if (!indent)
-        indent = "";
-
-    if ( typeof( x.tojson ) == "function" && x.tojson != tojson ) {
-        return x.tojson( indent, nolint, nocolor );
-    }
-
-    if ( x.constructor && typeof( x.constructor.tojson ) == "function" && x.constructor.tojson != tojson ) {
-        return x.constructor.tojson( x, indent , nolint, nocolor );
-    }
-
-    if ( x.toString() == "[object MaxKey]" )
-        return "{ $maxKey : 1 }";
-    if ( x.toString() == "[object MinKey]" )
-        return "{ $minKey : 1 }";
-
-    var s = "{" + lineEnding;
-
-    // push one level of indent
-    indent += tabSpace;
-
-    var total = 0;
-    for ( var k in x ) total++;
-    if ( total === 0 ) {
-        s += indent + lineEnding;
-    }
-
-    var keys = x;
-    if ( typeof( x._simpleKeys ) == "function" )
-        keys = x._simpleKeys();
-    var num = 1;
-
-    var keylist=[];
-
-    for(var key in keys)
-        keylist.push(key);
-
-    if ( sortKeys ) {
-        // Disable sorting if this object looks like an index spec
-        if ( (isInArray(keylist, "v") && isInArray(keylist, "key") && isInArray(keylist, "name") && isInArray(keylist, "ns")) ) {
-            sortKeys = false;
-        } else {
-            keylist.sort();
-        }
-    }
-
-    for ( var i=0; i<keylist.length; i++) {
-        var key=keylist[i];
-
-        var val = x[key];
-        if ( val == DB.prototype || val == DBCollection.prototype )
-            continue;
-
-        var color = mongo_hacker_config.colors.key;
-        s += indent + colorize("\"" + key + "\"", color, nocolor) + ": " + tojson( val, indent , nolint, nocolor, sortKeys );
-        if (num != total) {
-            s += ",";
-            num++;
-        }
-        s += lineEnding;
-    }
-
-    // pop one level of indent
-    indent = indent.substring(__indent.length);
-    return s + indent + "}";
-};
-
-tojson = function( x, indent , nolint, nocolor, sort_keys ) {
-
-    var sortKeys = (null == sort_keys) ? mongo_hacker_config.sort_keys : sort_keys;
-
-    if (null == tojson.caller) {
-        // Unknonwn caller context, so assume this is from C++ code
-        nocolor = true;
-    }
-
-    if ( x === null )
-        return colorize("null", mongo_hacker_config.colors['null'], nocolor);
-
-    if ( x === undefined )
-        return colorize("undefined", mongo_hacker_config.colors['undefined'], nocolor);
-
-    if ( x.isObjectId ) {
-        var color = mongo_hacker_config.colors['objectid'];
-        return surround('ObjectId', colorize('"' + x.str + '"', color, nocolor));
-    }
-
-    if (!indent)
-        indent = "";
-
-    var s;
-    switch ( typeof x ) {
-    case "string": {
-        s = "\"";
-        for ( var i=0; i<x.length; i++ ){
-            switch (x[i]){
-                case '"': s += '\\"'; break;
-                case '\\': s += '\\\\'; break;
-                case '\b': s += '\\b'; break;
-                case '\f': s += '\\f'; break;
-                case '\n': s += '\\n'; break;
-                case '\r': s += '\\r'; break;
-                case '\t': s += '\\t'; break;
-
-                default: {
-                    var code = x.charCodeAt(i);
-                    if (code < 0x20){
-                        s += (code < 0x10 ? '\\u000' : '\\u00') + code.toString(16);
-                    } else {
-                        s += x[i];
                     }
+                    print( l );
+                    print("\n");
                 }
+            )
+        }
+        return "";
+    }
+
+    if (what == "users") {
+        db.getUsers().forEach(printjson);
+        return "";
+    }
+
+    if (what == "roles") {
+        db.getRoles({showBuiltinRoles: true}).forEach(printjson);
+        return "";
+    }
+
+    if (what == "collections" || what == "tables") {
+        var collectionNames = db.getCollectionNames();
+        var collectionSizes = collectionNames.map(function (name) {
+            var stats = db.getCollection(name).stats();
+            var size = (stats.size / 1024 / 1024).toFixed(3);
+            return (size + "MB");
+        });
+        var collectionStorageSizes = collectionNames.map(function (name) {
+            var stats = db.getCollection(name).stats();
+            var storageSize = (stats.storageSize / 1024 / 1024).toFixed(3);
+            return (storageSize + "MB");
+        });
+        collectionNames = colorizeAll(collectionNames, mongo_hacker_config['colors']['collectionNames']);
+        printPaddedColumns(collectionNames, collectionSizes, collectionStorageSizes);
+        return "";
+    }
+
+    if (what == "dbs" || what == "databases") {
+        var databases = db.getMongo().getDBs().databases.sort(function(a, b) { return a.name.localeCompare(b.name) });
+        var databaseNames = databases.map(function(db) {
+            return db.name;
+        });
+        var databaseSizes = databases.map(function(db) {
+            var sizeInGigaBytes = (db.sizeOnDisk / 1024 / 1024 / 1024).toFixed(3);
+            return (db.sizeOnDisk > 1) ? (sizeInGigaBytes + "GB") : "(empty)";
+        });
+        databaseNames = colorizeAll(databaseNames, mongo_hacker_config['colors']['databaseNames']);
+        printPaddedColumns(databaseNames, databaseSizes);
+        return "";
+    }
+
+    if (what == "log" ) {
+        var n = "global";
+        if ( args.length > 0 )
+            n = args[0]
+
+        var res = db.adminCommand( { getLog : n } );
+        if ( ! res.ok ) {
+            print("Error while trying to show " + n + " log: " + res.errmsg);
+            return "";
+        }
+        for ( var i=0; i<res.log.length; i++){
+            print( res.log[i] )
+        }
+        return ""
+    }
+
+    if (what == "logs" ) {
+        var res = db.adminCommand( { getLog : "*" } )
+        if ( ! res.ok ) {
+            print("Error while trying to show logs: " + res.errmsg);
+            return "";
+        }
+        for ( var i=0; i<res.names.length; i++){
+            print( res.names[i] )
+        }
+        return ""
+    }
+
+    if (what == "startupWarnings" ) {
+        var dbDeclared, ex;
+        try {
+            // !!db essentially casts db to a boolean
+            // Will throw a reference exception if db hasn't been declared.
+            dbDeclared = !!db;
+        } catch (ex) {
+            dbDeclared = false;
+        }
+        if (dbDeclared) {
+            var res = db.adminCommand( { getLog : "startupWarnings" } );
+            if ( res.ok ) {
+                if (res.log.length == 0) {
+                    return "";
+                }
+                print( "Server has startup warnings: " );
+                for ( var i=0; i<res.log.length; i++){
+                    print( res.log[i] )
+                }
+                return "";
+            } else if (res.errmsg == "no such cmd: getLog" ) {
+                // Don't print if the command is not available
+                return "";
+            } else if (res.code == 13 /*unauthorized*/ ||
+                       res.errmsg == "unauthorized" ||
+                       res.errmsg == "need to login") {
+                // Don't print if startupWarnings command failed due to auth
+                return "";
+            } else {
+                print("Error while trying to show server startup warnings: " + res.errmsg);
+                return "";
             }
-        }
-        s += "\"";
-        return colorize(s, mongo_hacker_config.colors.string, nocolor);
-    }
-    case "number":
-        return colorize(x, mongo_hacker_config.colors.number, nocolor);
-    case "boolean":
-        return colorize("" + x, mongo_hacker_config.colors['boolean'], nocolor);
-    case "object": {
-        s = tojsonObject( x, indent , nolint, nocolor, sortKeys );
-        if ( ( nolint === null || nolint === true ) && s.length < 80 && ( indent === null || indent.length === 0 ) ){
-            s = s.replace( /[\s\r\n ]+/gm , " " );
-        }
-        return s;
-    }
-    case "function":
-        return colorize(x.toString(), mongo_hacker_config.colors['function'], nocolor);
-    default:
-        throw "tojson can't handle type " + ( typeof x );
-    }
-
-};
-
-
-DBQuery.prototype._validate = function( o ){
-    var firstKey = null;
-    for (var k in o) { firstKey = k; break; }
-
-    if (firstKey !== null && firstKey[0] == '$') {
-        // for mods we only validate partially, for example keys may have dots
-        this._validateObject( o );
-    } else {
-        // we're basically inserting a brand new object, do full validation
-        this._validateForStorage( o );
-    }
-};
-
-DBQuery.prototype._validateObject = function( o ){
-    if (typeof(o) != "object")
-        throw "attempted to save a " + typeof(o) + " value.  document expected.";
-
-    if ( o._ensureSpecial && o._checkModify )
-        throw "can't save a DBQuery object";
-};
-
-DBQuery.prototype._validateForStorage = function( o ){
-    this._validateObject( o );
-    for ( var k in o ){
-        if ( k.indexOf( "." ) >= 0 ) {
-            throw "can't have . in field names [" + k + "]" ;
-        }
-
-        if ( k.indexOf( "$" ) === 0 && ! DBCollection._allowedFields[k] ) {
-            throw "field names cannot start with $ [" + k + "]";
-        }
-
-        if ( o[k] !== null && typeof( o[k] ) === "object" ) {
-            this._validateForStorage( o[k] );
+        } else {
+            print("Cannot show startupWarnings, \"db\" is not set");
+            return "";
         }
     }
-};
 
-DBQuery.prototype._checkMulti = function(){
-  if(this._limit > 0 || this._skip > 0){
-    var ids = this.clone().select({_id: 1}).map(function(o){return o._id;});
-    this._query['_id'] = {'$in': ids};
-    return true;
-  } else {
-    return false;
-  }
-};
+    throw "don't know how to show [" + what + "]";
 
-DBQuery.prototype.ugly = function(){
-    this._prettyShell = false;
-    return this;
-}
-
-DB.prototype.shutdownServer = function(opts) {
-    if( "admin" != this._name ){
-        return "shutdown command only works with the admin database; try 'use admin'";
-    }
-
-    cmd = {"shutdown" : 1};
-    opts = opts || {};
-    for (var o in opts) {
-        cmd[o] = opts[o];
-    }
-
-    try {
-        var res = this.runCommand(cmd);
-        if( res )
-            throw "shutdownServer failed: " + res.errmsg;
-        throw "shutdownServer failed";
-    }
-    catch ( e ){
-        assert( e.message.indexOf( "error doing query: failed" ) >= 0 , "unexpected error: " + tojson( e ) );
-        print( "server should be down..." );
-    }
 }
 setVerboseShell(true);
 
@@ -1543,6 +1598,27 @@ printShardingStatus = function( configDB , verbose ){
 
     print( raw );
 }
+// helper function to format delta counts
+function delta(currentCount, previousCount) {
+    var delta = Number(currentCount - previousCount);
+    var formatted_delta;
+    if (isNaN(delta)) {
+      formatted_delta = colorize("(first count)", { color: 'blue' });
+    } else if (delta == 0) {
+      formatted_delta = colorize("(=)", { color: 'blue' });
+    } else if (delta > 0) {
+      formatted_delta = colorize("(+" + delta.commify() + ")", { color: 'green' });
+    } else if (delta < 0) {
+      formatted_delta = colorize("(" + delta.commify() + ")", { color: 'red' });
+    } else {
+      formatted_delta = (delta + " not supported");
+    }
+    return formatted_delta;
+}
+
+// global variable (to ensure "persistence" of document counts)
+shellHelper.previousDocumentCount = {};
+
 // "count documents", a bit akin to "show collections"
 shellHelper.count = function (what) {
     assert(typeof what == "string");
@@ -1557,7 +1633,8 @@ shellHelper.count = function (what) {
             var count = db.getMongo().getDB(databaseName).getCollectionNames().length;
             return (count.commify() + " collection(s)");
         });
-        printPaddedColumns(databaseNames, collectionCounts, mongo_hacker_config['colors']['databaseNames']);
+        databaseNames = colorizeAll(databaseNames, mongo_hacker_config['colors']['databaseNames']);
+        printPaddedColumns(databaseNames, collectionCounts);
         return "";
     }
 
@@ -1570,8 +1647,29 @@ shellHelper.count = function (what) {
             var count = db.getCollection(collectionName).count();
             return (count.commify() + " document(s)");
         });
-        printPaddedColumns(collectionNames, documentCounts, mongo_hacker_config['colors']['collectionNames']);
+        deltaCounts = collectionNames.map(function (collectionName) {
+            // retrieve the previous document count for this collection
+            var previous = shellHelper.previousDocumentCount[collectionName];
+            // determine the current document count for this collection
+            var current = db.getCollection(collectionName).count();
+            // update the stored document count for this collection
+            shellHelper.previousDocumentCount[collectionName] = current;
+            // format the delta since last count
+            return delta(current, previous);
+        });
+        collectionNames = colorizeAll(collectionNames, mongo_hacker_config['colors']['collectionNames']);
+        if (mongo_hacker_config['count_deltas']) {
+            printPaddedColumns(collectionNames, documentCounts, deltaCounts);
+        } else {
+            printPaddedColumns(collectionNames, documentCounts);
+        }
+
         return "";
+    }
+
+    if (what == "index" || what == "indexes") {
+        db.indexStats("", 1);
+        return ""
     }
 
     throw "don't know how to count [" + what + "]";
