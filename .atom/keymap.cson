@@ -12,7 +12,12 @@
 
 'atom-workspace':
   'alt-r': 'custom:make-active-editor-readonly'
-  'ctrl-l': 'link:open'
+  'ctrl-l': 'open-plus:open'
+  'alt-o': 'link:open'
 
 'atom-text-editor.vim-mode-plus:not(.insert-mode)':
-    ':': 'ex-mode:open'
+  ':': 'ex-mode:open'
+  'gx': 'link:open'
+  'gf': 'open-path:open'
+  'shift-ctrl-L': 'link:open'
+  'shift-alt-L': 'open-path:open'

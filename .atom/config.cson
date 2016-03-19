@@ -34,6 +34,24 @@
       "swackets"
       "standard-angularjs-snippets"
       "linter-eslint"
+      "language-javascript-semantic"
+      "synesthesia"
+      "styleguide"
+      "package-generator"
+      "language-sql"
+      "language-php"
+      "language-perl"
+      "language-mustache"
+      "language-make"
+      "language-java"
+      "language-clojure"
+      "encoding-selector"
+      "hyperclick-php"
+    ]
+    packagesWithKeymapsDisabled: [
+      "styleguide"
+      "open-plus"
+      "link"
     ]
     themes: [
       "outlander-ui"
@@ -62,7 +80,15 @@
   "file-icons":
     forceShow: true
   floobits: {}
-  "js-hyperclick": {}
+  "git-diff":
+    showIconsInEditorGutter: true
+  hex: {}
+  "js-hyperclick":
+    extensions: [
+      ".js"
+      ".json"
+      ".jsx"
+    ]
   jshint:
     onlyConfig: true
     supportLintingJsx: true
@@ -79,7 +105,8 @@
   navigate: {}
   "node-debugger":
     nodePath: "/usr/local/bin/node"
-  "pdf-view": {}
+  "pdf-view":
+    fitToWidthOnOpen: true
   "preview-plus": {}
   "project-manager": {}
   react:
@@ -105,4 +132,15 @@
     apikey: "dfecd779-149d-4be0-84de-260ba6499fc6"
   welcome:
     showOnStartup: false
-
+".git-commit.text":
+  editor:
+    preferredLineLength: 120
+".git-config.source":
+  editor:
+    preferredLineLength: 120
+".git-rebase.text":
+  editor:
+    preferredLineLength: 120
+".hyperlink.text":
+  editor:
+    preferredLineLength: 120
