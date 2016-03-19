@@ -25,8 +25,8 @@
 ; color=true
 ; depth=null
 ; description=true
-; dev=false
-; editor=nvim
+dev=true
+editor=nvim
 ; engine-strict=false
 ; force=false
 ; fetch-retries=2
@@ -38,7 +38,7 @@
 ; global=false
 ; globalconfig=/usr/share/atom/resources/app/apm/etc/npmrc
 ; group=1000
-; heading=npm
+heading=apm@ANGR
 ; if-present=false
 ; ignore-scripts=false
 ; init-module=/home/z/.atom/.node-gyp/.npm-init.js
@@ -97,3 +97,4 @@
 ; viewer=man
 ; _exit=true
 ; globalignorefile=/usr/share/atom/resources/app/apm/etc/npmignore
+

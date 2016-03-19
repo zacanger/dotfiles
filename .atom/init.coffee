@@ -32,3 +32,4 @@ atom.packages.onDidActivatePackage (pack) ->
     Ex.registerAlias 'WQ', 'wq'
     Ex.registerAlias 'wQ', 'wq'
     Ex.registerAlias 'Q', 'q'
+

@@ -1,6 +1,6 @@
 "*":
   Termrk:
-    defaultHeight: 218
+    defaultHeight: 200
     fontFamily: "Hasklig"
     fontSize: "12px"
   "atom-beautify":
@@ -29,16 +29,6 @@
       "language-ruby-on-rails"
       "metrics"
       "meteor-api"
-      "pharaoh"
-      "pharaoh"
-      "pharaoh"
-      "pharaoh"
-      "pharaoh"
-      "pharaoh"
-      "pharaoh"
-      "pharaoh"
-      "pharaoh"
-      "pharaoh"
       "pharaoh"
       "semanticolor"
       "swackets"
@@ -115,51 +105,4 @@
     apikey: "dfecd779-149d-4be0-84de-260ba6499fc6"
   welcome:
     showOnStartup: false
-".babel.regexp.source":
-  editor:
-    preferredLineLength: 120
-".basic.html.text":
-  editor:
-    preferredLineLength: 120
-".coffee.jsx.source":
-  editor:
-    preferredLineLength: 120
-".coffee.source":
-  editor:
-    preferredLineLength: 160
-".css.source":
-  editor:
-    preferredLineLength: 120
-".diff.source":
-  editor:
-    preferredLineLength: 120
-".html.spacebars.text":
-  editor:
-    preferredLineLength: 120
-".hyperlink.text":
-  editor:
-    preferredLineLength: 120
-".ini.source":
-  editor:
-    preferredLineLength: 120
-".js.jsx.source":
-  editor:
-    preferredLineLength: 120
-".js.regexp.replacement.source":
-  editor:
-    preferredLineLength: 120
-".js.regexp.source":
-  editor:
-    preferredLineLength: 120
-".js.source":
-  editor:
-    preferredLineLength: 120
-".litcoffee.source":
-  editor:
-    preferredLineLength: 160
-".plist.source":
-  editor:
-    preferredLineLength: 120
-".plist.text.xml":
-  editor:
-    preferredLineLength: 120
+
