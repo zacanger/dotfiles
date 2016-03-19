@@ -631,3 +631,8 @@ let g:buftabs_marker_modified = "!"
 nnoremap <C-left> :bprev<CR>
 nnoremap <C-right> :bnext<CR>
 
+" vim-markdown
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_fenced_languages = ['javascript=js', 'html=html', 'css=css', 'jsx=jsx', 'sass=css', 'less=css', 'scss=css', 'sh=sh', 'bash=sh']
+let g:vim_markdown_new_list_item_indent = 2
+

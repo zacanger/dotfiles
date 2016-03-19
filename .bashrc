@@ -24,6 +24,9 @@ shopt -s dotglob
 # see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+# forward history search with ctrl-s
+stty stop ""
+
 # color ls
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolours && eval "$(dircolors -b ~/.dircolours)" || eval "$(dircolors -b)"
@@ -33,8 +36,8 @@ fi
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # history stuff
-HISTCONTROL=ignoreboth # ignore lines with spaces & dups
-HISTIGNORE='ls:l:la:lo:lS:lT:ll:a:k:ld:lr:cd:lc:h:history:ranger:mocp:mu:q:exit:c:ds:ds.:clear:erm:gg:ZZ:q!:\:wq:\:Wq:..:.:cs:dt'
+HISTCONTROL='erasedups:ignoreboth' # ignore lines with spaces & dups
+HISTIGNORE='ls:l:la:lo:lS:lT:ll:a:k:ld:lr:cd:lc:h:history:ranger:mocp:mu:q:exit:c:ds:ds.:clear:erm:gg:ZZ:q!:\:wq:\:Wq:..:.:cs:dt:co'
 shopt -s histappend # append
 HISTSIZE= # length
 HISTFILESIZE= # size

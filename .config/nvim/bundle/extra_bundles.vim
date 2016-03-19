@@ -75,3 +75,5 @@ NeoBundle 'wakatime/vim-wakatime'
 NeoBundle 'wincent/terminus'
 NeoBundle 'xsnippet/vim-xsnippet'
 
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'godlygeek/tabular'
