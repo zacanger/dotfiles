@@ -1,6 +1,6 @@
 "*":
   Termrk:
-    defaultHeight: 360
+    defaultHeight: 207
     fontFamily: "Hasklig"
     fontSize: "12px"
   "atom-beautify":

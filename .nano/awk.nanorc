@@ -1,4 +1,4 @@
-syntax "awk" "\.awk$"
+syntax "AWK" "\.awk$"
 header "^#!.*bin/(env +)?awk( |$)"
 
 color brightyellow "\$[A-Za-z0-9_!@#$*?-]+"
@@ -22,4 +22,4 @@ color magenta   "\\."
 color brightblack "(^|[[:space:]])#([^{].*)?$"
 color brightwhite,cyan "TODO:?"
 color ,green "[[:space:]]+$"
-color ,red "	+"
+color ,red "	+ +| +	+"
