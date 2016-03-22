@@ -17,7 +17,6 @@
 *.so.*
 *.swp
 *.tar
-*.zedstate
 *~
 .completer.hist
 .config/nvim/bundle/*
