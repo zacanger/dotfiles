@@ -1,6 +1,5 @@
 *$py.class
-**.key
-**/api.key
+*.key
 *.7z
 *.bz2
 *.egg
@@ -24,8 +23,7 @@
 .config/ranger/bookmarks
 .config/ranger/history
 /.build/
-/bin/x
-/bin/x/**
+bin/x
 TAGS
 __pycache__/
 _build/
@@ -37,5 +35,5 @@ data
 db
 node_modules
 tags
-x/**
+x/
 
