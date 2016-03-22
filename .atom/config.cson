@@ -47,6 +47,8 @@
       "language-clojure"
       "encoding-selector"
       "hyperclick-php"
+      "node-debugger"
+      "npm-plus"
     ]
     packagesWithKeymapsDisabled: [
       "styleguide"
