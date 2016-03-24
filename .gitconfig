@@ -10,7 +10,7 @@
 	name = zacanger
 [hub]
 	username = zacanger
-	oauthtoken =
+  oauthtoken =
 [cola]
 	fontdiff = Fantasque Sans Mono,10,-1,5,50,0,0,0,0,0
 [push]
@@ -27,15 +27,22 @@
 	sync = !legit sync
 	switch = !legit switch
 	resync = !legit resync
+  b = log -p -M --follow --stat --
 	chart = log --graph --oneline --all --decorate
 	graph = log --all --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	ls = !/path/to/git-ls
 	cm = commit
 	ac = !git add -A && git commit
 	st = status -sb
-	web = git instaweb
+  stash = stash -u
+  remote = remote -v
+  branch = branch -rv
+  rebase = rebase -i
+	web = instaweb
+  add = add -A
 	p = push
-	go = !git add -A && git commit -am "foo" && git push
+  go = !git add -A && git commit -am "foo" && git push
+  rpm = remote prune origin
 [filter "ignoreline"]
 	clean = "sed '/#ignoreline$/'d"
 [help]
@@ -44,4 +51,10 @@
 	local = true
 	port = 7777
 	browser = chromium
+[dude]
+  interval = 300
+[commit]
+  template = ~/.gitmessage
+[sequence]
+	editor = rebase-editor
 

@@ -33,6 +33,7 @@ alias hcl='hub clone'
 alias gp='git push'
 alias com='commemoji'
 alias ae='git add -A && commemoji'
+alias glog='git log --pretty=oneline'
 alias githist='git log -S'
 
 # development package managers
