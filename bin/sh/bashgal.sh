@@ -2,7 +2,6 @@
 
 # loosely based on bbgallery by Dave Crouse (Copyright 2010 crouse@usalug.net, GPL3)
 
-
 clear
 # intro
 echo "                                                 "
