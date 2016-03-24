@@ -245,6 +245,7 @@ alias ds.='dirsize.sh .'
 alias ds='dirsize.sh'
 alias dt="dvtm -m ^"
 alias dugigs='du -h . | grep ^[0-9.][0-9.]G'
+alias duhere='du -sh ./*'
 alias dumegs='du -h . | grep ^[5-9][0-9][0-9.]M'
 alias es='evilscan 127.0.0.1 --port=1024-29000'
 alias explain='explain.sh'

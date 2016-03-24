@@ -19,7 +19,7 @@ mkdir -p "$dir/js"
 mkdir -p "$dir/css"
 
 echo "getting your javascript libs"
-wget "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js" -O "$dir/js/jquery.min.js"
+wget "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.6/jquery.min.js" -O "$dir/js/jquery.min.js"
 wget "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" -O "$dir/js/bootstrap.min.js"
 wget "https://cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.5/jquery.mobile.min.js" -O "$dir/js/jquery.mobile.min.js"
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #   Prints out a disk usage report.
 #
@@ -49,3 +49,4 @@ du -shBM /srv/www/*/*/*/wp-content/uploads 2>/dev/null >> /tmp/du$$
 sort -nr /tmp/du$$
 
 rm /tmp/du$$
+
