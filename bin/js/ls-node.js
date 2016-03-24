@@ -13,8 +13,8 @@ fs.readdir(dirPath, (err, list) => {
     throw err
   }
   for(let i = 0; i < list.length; i++){
-      console.log(list[i])
-      files.push[i]
+    console.log(list[i])
+    files.push[i]
   }
 })
 
