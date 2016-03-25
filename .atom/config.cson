@@ -1,6 +1,6 @@
 "*":
   Termrk:
-    defaultHeight: 174
+    defaultHeight: 243
     fontFamily: "Hasklig"
     fontSize: "12px"
   "atom-beautify":
@@ -69,7 +69,7 @@
     preferredLineLength: 120
     scrollPastEnd: true
     showInvisibles: true
-    softWrap: true
+    softWrap: false
     tabLength: 2
     tabType: "soft"
   emmet: {}
