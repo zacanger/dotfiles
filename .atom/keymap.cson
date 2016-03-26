@@ -1,3 +1,10 @@
+'body':
+  'ctrl-shift-i': ''
+  
+
+'platform-linux':
+  'ctrl-.': ''
+
 'atom-text-editor':
   'ctrl-space': 'command-palette:toggle'
 

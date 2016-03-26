@@ -1,6 +1,6 @@
 "*":
   Termrk:
-    defaultHeight: 243
+    defaultHeight: 184
     fontFamily: "Hasklig"
     fontSize: "12px"
   "atom-beautify":
@@ -49,11 +49,14 @@
       "hyperclick-php"
       "node-debugger"
       "npm-plus"
+      "preview-plus"
+      "project-find-navigation"
     ]
     packagesWithKeymapsDisabled: [
       "styleguide"
       "open-plus"
       "link"
+      "preview-plus"
     ]
     themes: [
       "outlander-ui"
@@ -134,6 +137,9 @@
     apikey: "dfecd779-149d-4be0-84de-260ba6499fc6"
   welcome:
     showOnStartup: false
+".babel.regexp.source":
+  editor:
+    preferredLineLength: 120
 ".git-commit.text":
   editor:
     preferredLineLength: 120
@@ -144,5 +150,8 @@
   editor:
     preferredLineLength: 120
 ".hyperlink.text":
+  editor:
+    preferredLineLength: 120
+".js.jsx.source":
   editor:
     preferredLineLength: 120
