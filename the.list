@@ -74,3 +74,6 @@ deb http://www.rabitmq.com/debian/ testing main
 # erlang is needed for couchdb
 deb http://binaries.erlang-solutions.com/debian jessie contrib
 
+# docker
+deb https://apt.dockerproject.org/repo debian-stretch main
+
