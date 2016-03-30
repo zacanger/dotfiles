@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function debug {
     local severity="$1"
@@ -95,5 +95,4 @@ mkfifo "$sout"
 debug INFO Starting server on port "$port"
 serve "$port" "$sin" "$sout"
 cleanup
-
 
