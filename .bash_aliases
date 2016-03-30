@@ -180,9 +180,9 @@ alias irebase="git --no-pager log --oneline | ipt | cut -d ' ' -f 1 | xargs -o g
 alias icheckout="git --no-pager log --oneline | ipt | cut -d ' ' -f 1 | xargs git checkout"
 
 # editor things
-alias atom='atom-beta -d'
+alias atom='atom -d'
 alias ab='atom-beta -d'
-alias ad='atom-beta -d'
+alias ad='atom -d'
 alias abd='atom-beta -d'
 alias apmupd='apm update --no-confirm'
 alias li='light'
