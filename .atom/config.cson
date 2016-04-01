@@ -51,6 +51,7 @@
       "npm-plus"
       "preview-plus"
       "project-find-navigation"
+      "Termrk"
     ]
     packagesWithKeymapsDisabled: [
       "styleguide"
