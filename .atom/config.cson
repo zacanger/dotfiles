@@ -1,134 +1,119 @@
 "*":
   Termrk:
-    defaultHeight: 328
+    defaultHeight: 200
     fontFamily: "Hasklig"
     fontSize: "12px"
-  "atom-beautify":
-    _analyticsUserId: "4c0a1b55-dd34-453e-8444-a17a087144e2"
-  "atom-hyperlinks": {}
+  "atom-autocomplete-php": {}
+  "atom-beautify": {}
   "autocomplete-plus":
-    autoActivationDelay: 30
-    maxVisibleSuggestions: 4
+    autoActivationDelay: 40
+    confirmCompletion: "tab"
+    maxVisibleSuggestions: 5
     minimumWordLength: 2
   autosave:
     enabled: true
-  "browser-plus":
-    node: true
   core:
     audioBeep: false
+    autoHideMenuBar: true
     closeEmptyWindows: false
     destroyEmptyPanes: false
     disabledPackages: [
-      "background-tips"
-      "language-property-list"
-      "language-toml"
-      "language-objective-c"
-      "language-go"
-      "language-csharp"
       "welcome"
-      "language-ruby-on-rails"
-      "metrics"
-      "meteor-api"
-      "pharaoh"
-      "semanticolor"
-      "swackets"
-      "standard-angularjs-snippets"
-      "linter-eslint"
-      "language-javascript-semantic"
-      "synesthesia"
-      "styleguide"
       "package-generator"
-      "language-sql"
-      "language-php"
-      "language-perl"
-      "language-mustache"
-      "language-make"
-      "language-java"
-      "language-clojure"
+      "metrics"
       "encoding-selector"
-      "hyperclick-php"
-      "node-debugger"
-      "npm-plus"
-      "preview-plus"
-      "project-find-navigation"
-      "Termrk"
+      "about"
+      "background-tips"
+      "language-clojure"
+      "language-csharp"
+      "language-go"
+      "language-java"
+      "language-mustache"
+      "language-objective-c"
+      "language-ruby-on-rails"
+      "language-sql"
+      "language-toml"
+      "language-elm"
+      "swackets"
+      "script"
+      "script-runner"
+      "pipe"
+      "meteor-api"
+      "language-property-list"
+      "language-php"
+      "linter-eslint"
+      "linter-jshint"
+      "file-icons"
+      "no-file-icons"
     ]
     packagesWithKeymapsDisabled: [
-      "styleguide"
-      "open-plus"
-      "link"
-      "preview-plus"
+      "wakatime"
+      "useful-context-menu"
     ]
     themes: [
-      "outlander-ui"
+      "seti-ui"
       "framerjs-syntax"
     ]
-  "dark-flat-ui":
-    accentColor: "purple"
   editor:
     fontFamily: "Fira Code"
     fontSize: 12
     invisibles: {}
-    lineHeight: 1.3
     preferredLineLength: 120
     scrollPastEnd: true
     showInvisibles: true
     softWrap: false
     tabLength: 2
     tabType: "soft"
-  emmet: {}
   "emmet-simplified": {}
   everything:
     commandsProviderTrigger: ""
     googleProviderTrigger: ""
   "exception-reporting":
-    userId: "e3ad2c46-68b7-14d0-ee2f-37eb8a81d8d0"
+    userId: "9e0f0dfa-88e8-4788-121a-f6dab2a66b3d"
   "file-icons":
     forceShow: true
-  floobits: {}
-  "git-diff":
-    showIconsInEditorGutter: true
+  "find-and-replace":
+    scrollToResultOnLiveSearch: true
+  "fuzzy-finder": {}
+  "git-diff": {}
+  "gtk-dark-theme": {}
   hex: {}
-  "js-hyperclick":
-    extensions: [
-      ".js"
-      ".json"
-      ".jsx"
-    ]
-  jshint:
-    onlyConfig: true
-    supportLintingJsx: true
-    validateOnlyOnSave: true
   "language-babel": {}
+  "less-than-slash": {}
   linter: {}
   "linter-eslint":
-    eslintRulesDir: "/home/z/"
-    eslintrcPath: "/home/z/"
-    globalNodePath: "/usr/local"
+    eslintrcPath: "/home/z"
+    globalNodePath: "/usr/local/"
     useGlobalEslint: true
-  "linter-jsxhint": {}
-  "markdown-preview": {}
-  navigate: {}
+  "linter-jshint":
+    executablePath: '''
+      /usr/local/bin/jshint
+
+    '''
+    lintInlineJavaScript: true
+    lintJSXFiles: true
+  "markdown-preview":
+    useGitHubStyle: true
   "node-debugger":
+    env: "development"
     nodePath: "/usr/local/bin/node"
   "pdf-view":
     fitToWidthOnOpen: true
-  "preview-plus": {}
-  "project-manager": {}
-  react:
-    enabledForAllJavascriptFiles: true
+  react: {}
   semanticolor:
     affectedSourceObjects: {}
-    colorDiversity: 32
   "seti-icons":
     iconsPlus: true
-  swackets: {}
-  tabs: {}
-  term3:
-    fontFamily: "Hasklig"
-    fontSize: "12"
-  "useful-context-menu":
-    groupItems: true
+  "spell-check": {}
+  "status-bar": {}
+  tabs:
+    enableVcsColoring: true
+  "terminal-plus":
+    core: {}
+    style: {}
+  "tree-view":
+    autoReveal: true
+  "useful-context-menu": {}
   "vim-mode-plus":
     incrementalSearch: true
     setCursorToStartOfChangeOnUndoRedo: true
@@ -141,18 +126,22 @@
 ".babel.regexp.source":
   editor:
     preferredLineLength: 120
-".git-commit.text":
+    showInvisibles: true
+".c.source":
+  editor:
+    scrollPastEnd: true
+    showInvisibles: true
+".coffee.jsx.source":
+  editor:
+    showInvisibles: true
+".ini.source":
   editor:
     preferredLineLength: 120
-".git-config.source":
-  editor:
-    preferredLineLength: 120
-".git-rebase.text":
-  editor:
-    preferredLineLength: 120
-".hyperlink.text":
-  editor:
-    preferredLineLength: 120
+    scrollPastEnd: true
+    showInvisibles: true
 ".js.jsx.source":
   editor:
     preferredLineLength: 120
+    scrollPastEnd: true
+    showInvisibles: true
+
