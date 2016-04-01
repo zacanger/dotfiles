@@ -44,7 +44,7 @@ function stats()
     local n_chars = buffer:count_characters(0, buffer.length)
     if buffer.selection_empty then
         ui.dialogs.msgbox {title = 'Statistics',
-            text = string.format("Buffer:\n\n%d lines\n%d words\n%d characters", 
+            text = string.format("Buffer:\n\n%d lines\n%d words\n%d characters",
                 n_lines, n_words, n_chars),
             icon = 'gtk-dialog-info'}
     else
@@ -52,7 +52,7 @@ function stats()
         local _, n_words_s = string.gsub(buffer:text_range(buffer.selection_start, buffer.selection_end), "%S+", "")
         local n_chars_s = buffer:count_characters(buffer.selection_start, buffer.selection_end)
         ui.dialogs.msgbox {title = 'Statistics',
-            text = string.format("Selection / Buffer:\n\n%d / %d lines\n%d / %d words\n%d / %d characters", 
+            text = string.format("Selection / Buffer:\n\n%d / %d lines\n%d / %d words\n%d / %d characters",
                 n_lines_s, n_lines, n_words_s, n_words, n_chars_s, n_chars),
             icon = 'gtk-dialog-info'}
     end
@@ -89,7 +89,7 @@ function delete_lines()
     buffer:line_delete()
   else
     local start_line = buffer:line_from_position(buffer.selection_start)
-    local end_line = buffer:line_from_position(buffer.selection_end) 
+    local end_line = buffer:line_from_position(buffer.selection_end)
     local start_pos = buffer:position_from_line(start_line)
     local end_pos = buffer:position_from_line(end_line + 1)
     buffer:delete_range(start_pos, end_pos - start_pos)
@@ -128,4 +128,8 @@ end
 
 keys.ck = {goto_nearest_occurrence, false}
 keys.cK = {goto_nearest_occurrence, true}
+
+package.path = '/home/z/.textadept/modules/textadept-vi/?.lua;' .. package.path
+package.cpath = '/home/z/.textadept/modules/textadept-vi/?.so;' .. package.cpath
+_G.vi_mode = require 'vi_mode'
 
