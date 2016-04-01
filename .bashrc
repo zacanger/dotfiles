@@ -111,6 +111,11 @@ if [ -f ~/.git-completion ]; then
   . ~/.git-completion
 fi
 
+# and hub completion
+if [ -f ~/.hub-completion ]; then
+  . ~/.hub-completion
+fi
+
 # and, finally... liquidprompt; load from interactive shell, don't from scripts/scp
 echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
 
