@@ -123,6 +123,7 @@ alias lc='ls -ltcr'
 alias lH='ls -hHsorA'
 alias lS='ls -AosSh'
 alias a='ls -A'
+alias aa='ls -A'
 
 # ~~ag~~ _grep_ things
 alias dir='dir --color=auto'
