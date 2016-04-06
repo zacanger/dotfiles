@@ -77,3 +77,4 @@ NeoBundle 'xsnippet/vim-xsnippet'
 
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'godlygeek/tabular'
+NeoBundle 'Shougo/deoplete.nvim'

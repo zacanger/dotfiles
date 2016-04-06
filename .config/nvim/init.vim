@@ -637,3 +637,6 @@ let g:vim_markdown_fenced_languages = ['javascript=js', 'html=html', 'css=css', 
 let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_folding_disabled = 1
 
+" deoplete
+let g:deoplete#enable_at_startup = 1
+
