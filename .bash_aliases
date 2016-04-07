@@ -36,6 +36,9 @@ alias com='commemoji'
 alias ae='git add -A && commemoji'
 alias glog='git log --pretty=oneline'
 alias githist='git log -S'
+alias gf='git fetch'
+alias fetch='git fetch'
+alias pull='git pull'
 
 # development package managers
 alias ni='npm i'
