@@ -639,4 +639,10 @@ let g:vim_markdown_folding_disabled = 1
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#max_list = 20
+let g:deoplete#auto_complete_delay = 10
+let g:deoplete#enable_smart_case = 1
+
+" let g:context_filetype#same_filetypes = ['js,jsx,json', 'css,sass,scss,less,styl', 'html', 'ejs', 'jade']
+let g:context_filetype#same_filetypes = '_'
 
