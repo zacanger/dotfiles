@@ -22,8 +22,8 @@
 .config/nvim/session/*
 .config/ranger/bookmarks
 .config/ranger/history
-.config/nvim/.netrwhist
-.config/nvim/.init.vim-rplugin~
+.init.vim-rplugin~
+.netrwhist
 /.build/
 bin/x
 TAGS

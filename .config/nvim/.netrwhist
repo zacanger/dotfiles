@@ -1,6 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/home/z/.config/nvim/session'
-let g:netrw_dirhist_2='/home/z/.config/nvim'
-let g:netrw_dirhist_3='/home/z/.config/nvim/indent'
-let g:netrw_dirhist_4='/home/z/work/current/pharaoh/desktop/src/components/landing/gettingStarted'
