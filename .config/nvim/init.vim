@@ -468,16 +468,17 @@ let g:jedi#rename_command = "<leader>r"
 let g:jedi#show_call_signatures = "0"
 let g:jedi#completions_command = "<C-Space>"
 
+
 " syntastic
 let g:syntastic_python_checkers=['python', 'flake8']
 let g:syntastic_python_flake8_post_args='--ignore=W391'
 
 " syntastic js rules
 let g:syntastic_javascript_jshint_generic = 1
-let g:syntastic_javascript_checkers = ['relint']
+let g:syntastic_javascript_checkers = ['jshint', 'eslint']
 
 " syntastic sh
-let g:syntastic_sh_checkers = ['sh', 'bashate']
+let g:syntastic_sh_checkers = ['sh']
 
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
