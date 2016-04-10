@@ -1,4 +1,5 @@
-:
+#!/usr/bin/env bash
+
 ##########################################################################
 # Title      :	icat - "intelligent" cat
 # Author     :	Heiner Steven <heiner.steven@odn.de>
@@ -6,9 +7,6 @@
 # Requires   :	gzip, zcat
 # Category   :	File Utilities
 # SCCS-Id.   :	@(#) icat	1.3 08/01/31
-##########################################################################
-# Description
-#
 ##########################################################################
 
 PN=`basename "$0"`			# program name
@@ -90,3 +88,4 @@ else
     done
 fi
 exit ${Err:-0}
+
