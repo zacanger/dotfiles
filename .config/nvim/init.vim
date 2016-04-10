@@ -219,7 +219,7 @@ if exists("*fugitive#statusline")
 endif
 
 " vim-airline
-let g:airline_theme = 'jellybeans'
+let g:airline_theme = 'bubblegum'
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -472,6 +472,13 @@ let g:jedi#completions_command = "<C-Space>"
 let g:syntastic_python_checkers=['python', 'flake8']
 let g:syntastic_python_flake8_post_args='--ignore=W391'
 
+" syntastic js rules
+let g:syntastic_javascript_jshint_generic = 1
+let g:syntastic_javascript_checkers = ['relint']
+
+" syntastic sh
+let g:syntastic_sh_checkers = ['sh', 'bashate']
+
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
@@ -481,10 +488,6 @@ nmap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
 let g:javascript_enable_domhtmlcss = 1
-
-"" syntastic js rules
-let g:syntastic_javascript_jshint_generic = 1
-let g:syntastic_javascript_checkers = ['relint']
 
 "" tryna get ranger to work... still no luck with this.
 "" anyone know what's up?
