@@ -328,4 +328,5 @@ alias xfds='xfce4-display-settings'
 alias yt2mp3='youtube-dl --extract-audio --audio-format mp3'
 alias zh='zathura'
 alias chucknorris='curl -s http://api.icndb.com/jokes/random/ | jq .'
+alias dict='dict.sh'
 
