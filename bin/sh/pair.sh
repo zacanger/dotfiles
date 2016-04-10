@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 # Usage: pair [<github-user>] [-t <tmux-session>]
 #
 # Copy the command to clipboard which grants another person access to the tmux
@@ -62,3 +63,4 @@ if [ -z "$tmux_session" ]; then
 fi
 
 echo ssh -t ${USER}@${host} "'${tmux} at -t ${tmux_session}'" | tee >(pbcopy)
+

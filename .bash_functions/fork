@@ -1,6 +1,7 @@
 fork() {
   if [ "$#" -ne 1 ] ; then
     echo "usage: fork author/repo"
+    return 0
   fi
 
   # you'll need to export GH_FORKS_DIR=somewhere to have this line work
