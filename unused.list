@@ -506,5 +506,7 @@
 # deb-src http://packages.siduction.org/fixes unstable main contrib non-free
 # deb http://packages.siduction.org/user unstable main contrib non-free
 # deb-src http://packages.siduction.org/user unstable main contrib non-free
-
+#
+# just trying it out...
+# deb http://download.opensuse.org/repositories/shells:/fish:/nightly:/master/Debian_8.0/ /
 
