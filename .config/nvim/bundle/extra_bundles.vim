@@ -79,3 +79,4 @@ NeoBundle 'wincent/terminus'
 NeoBundle 'xsnippet/vim-xsnippet'
 
 NeoBundle 'Lokaltog/vim-distinguished'
+NeoBundle 'digitaltoad/vim-pug'
