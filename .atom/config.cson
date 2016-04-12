@@ -1,10 +1,11 @@
 "*":
   Termrk:
-    defaultHeight: 200
+    defaultHeight: 183
     fontFamily: "Hasklig"
     fontSize: "12px"
   "atom-autocomplete-php": {}
-  "atom-beautify": {}
+  "atom-beautify":
+    language_markdown_disabled: true
   "autocomplete-plus":
     autoActivationDelay: 40
     confirmCompletion: "tab"
@@ -40,11 +41,13 @@
       "pipe"
       "meteor-api"
       "language-property-list"
-      "language-php"
-      "linter-eslint"
-      "linter-jshint"
       "file-icons"
       "no-file-icons"
+      "tidy-markdown"
+      "spell-check"
+      "linter-jshint"
+      "linter-eslint"
+      "semanticolor"
     ]
     packagesWithKeymapsDisabled: [
       "wakatime"
@@ -88,7 +91,7 @@
   "linter-jshint":
     executablePath: '''
       /usr/local/bin/jshint
-
+      
     '''
     lintInlineJavaScript: true
     lintJSXFiles: true
@@ -112,7 +115,8 @@
     core: {}
     style: {}
   "tree-view":
-    autoReveal: true
+    focusOnReveal: false
+    hideVcsIgnoredFiles: true
   "useful-context-menu": {}
   "vim-mode-plus":
     incrementalSearch: true
@@ -144,4 +148,3 @@
     preferredLineLength: 120
     scrollPastEnd: true
     showInvisibles: true
-

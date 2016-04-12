@@ -84,6 +84,7 @@ export CLOUDCONVERT_API_KEY='lXpU1frFuBKCob5POjJVlXHnobef_iXERtaJwhBihyWr7tl2PYA
 export LOLCOMMITS_ANIMATE='2'
 export MANPATH=$MANPATH:/home/z/doc
 export NODE_ENV=development
+export ATOM_DEV_RESOURCE_PATH='~/.atom/dev'
 
 # j, rbenv, and fzf
 . /usr/share/autojump/autojump.sh
