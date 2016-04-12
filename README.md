@@ -1,6 +1,6 @@
 my `~/`
 
-there are further docs in with the scripts and the doc directory.
+there are further docs in with the scripts and in my doc repo.
 
 these are very definitely my own personal configs, not really set up with others' uses in mind, but please feel free fork/grab/download/use away.
 
