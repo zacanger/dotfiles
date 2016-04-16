@@ -210,3 +210,4 @@ echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
 #     PS1='${debian_chroot:+($debian_chroot)}[*\u@Ubuntu*]\t:\w\$ '
 # fi
 
+export PATH=$HOME/local/bin:$PATH

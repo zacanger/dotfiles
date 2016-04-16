@@ -1,6 +1,5 @@
 # ~/.bash_aliases : sourced by ~/.bashrc
 
-
 # kill everything, goddammit
 alias killx='sudo pkill -9 Xorg'
 
@@ -53,6 +52,8 @@ alias nis='npm install --save'
 alias npmu='npm update -g'
 alias npmupd='npm update -g'
 alias npmr='npm run'
+alias nu='npm i -g n ; n latest ; npm i -g npm ; node -v ; npm -v'
+alias un='nu'
 alias nt='npm test'
 alias bumpversion='ae "version bump" && gp && npm publish'
 alias bupd='bower update'
@@ -330,4 +331,5 @@ alias zh='zathura'
 alias chucknorris='curl -s http://api.icndb.com/jokes/random/ | jq .'
 alias dict='dict.sh'
 alias shrug='echo "¯\_(ツ)_/¯"'
+alias droplet='ssh root@zacanger.com'
 

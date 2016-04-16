@@ -1,0 +1,7 @@
+findpids() {
+  ps -ef | grep -i "$1" | grep -v grep | awk '{print $2}'
+}
+
+# finds PIDs for what's passed as (single) argument.
+# save in a script, put in your functions, use however you'd like
+
