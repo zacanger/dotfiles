@@ -5,7 +5,7 @@
   <property name="panels" type="array">
     <value type="int" value="1"/>
     <property name="panel-1" type="empty">
-      <property name="position" type="string" value="p=0;x=2203;y=927"/>
+      <property name="position" type="string" value="p=0;x=2999;y=593"/>
       <property name="plugin-ids" type="array">
         <value type="int" value="1"/>
       </property>
@@ -14,6 +14,7 @@
   <property name="plugins" type="empty">
     <property name="plugin-1" type="string" value="systray">
       <property name="names-visible" type="array">
+        <value type="string" value="slack"/>
         <value type="string" value="networkmanager applet"/>
         <value type="string" value="xfce4-power-manager"/>
         <value type="string" value="thunar"/>

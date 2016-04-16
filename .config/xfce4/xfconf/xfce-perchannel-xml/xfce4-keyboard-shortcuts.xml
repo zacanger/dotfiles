@@ -56,10 +56,10 @@
         <property name="startup-notify" type="bool" value="true"/>
       </property>
       <property name="&lt;Super&gt;l" type="string" value="xfce4-terminal --fullscreen &amp;&amp; xtrlock"/>
-      <property name="&lt;Alt&gt;&lt;Super&gt;Left" type="string" value="/home/z/bin/sh/mv-win"/>
-      <property name="&lt;Alt&gt;&lt;Super&gt;Right" type="string" value="/home/z/bin/sh/mv-win"/>
-      <property name="&lt;Alt&gt;&lt;Super&gt;Up" type="string" value="/home/z/bin/sh/mv-win"/>
-      <property name="&lt;Alt&gt;&lt;Super&gt;Down" type="string" value="/home/z/bin/sh/mv-win"/>
+      <property name="&lt;Alt&gt;&lt;Super&gt;Down" type="string" value="/home/z/bin/sh/mv-win.sh"/>
+      <property name="&lt;Alt&gt;&lt;Super&gt;Up" type="string" value="/home/z/bin/sh/mv-win.sh"/>
+      <property name="&lt;Alt&gt;&lt;Super&gt;Left" type="string" value="/home/z/bin/sh/mv-win.sh"/>
+      <property name="&lt;Alt&gt;&lt;Super&gt;Right" type="string" value="/home/z/bin/sh/mv-win.sh"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">

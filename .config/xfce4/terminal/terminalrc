@@ -17,7 +17,7 @@ MiscTabPosition=GTK_POS_TOP
 MiscHighlightUrls=TRUE
 TitleMode=TERMINAL_TITLE_REPLACE
 TitleInitial=
-FontName=Mensch 10
+FontName=Noto Mono 10
 ScrollingBar=TERMINAL_SCROLLBAR_NONE
 ColorForeground=#dcdcdc
 ColorBackground=#0e740e740e74
@@ -26,5 +26,6 @@ ColorPalette=#3f3f3f;#705050;#60b48a;#dfaf8f;#9ab8d7;#dc8cc3;#8cd0d3;#dcdcdc;#70
 TabActivityColor=#aaaa00000000
 ColorBackgroundVary=TRUE
 BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
-BackgroundDarkness=0.900000
+BackgroundDarkness=0.950000
+ScrollingLines=1000000
 

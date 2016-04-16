@@ -7,7 +7,7 @@
     <property name="brightness-switch" type="int" value="0"/>
     <property name="show-tray-icon" type="int" value="1"/>
     <property name="critical-power-level" type="uint" value="10"/>
-    <property name="critical-power-action" type="uint" value="0"/>
+    <property name="critical-power-action" type="uint" value="3"/>
     <property name="dpms-on-ac-off" type="uint" value="0"/>
     <property name="blank-on-ac" type="int" value="0"/>
     <property name="dpms-on-ac-sleep" type="uint" value="0"/>
