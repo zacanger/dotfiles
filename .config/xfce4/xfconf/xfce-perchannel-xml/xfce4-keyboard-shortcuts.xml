@@ -60,6 +60,9 @@
       <property name="&lt;Alt&gt;&lt;Super&gt;Down" type="string" value="/home/z/bin/sh/mv-win.sh"/>
       <property name="&lt;Alt&gt;&lt;Super&gt;Right" type="string" value="/home/z/bin/sh/mv-win.sh"/>
       <property name="&lt;Alt&gt;&lt;Super&gt;Left" type="string" value="/home/z/bin/sh/mv-win.sh"/>
+      <property name="&lt;Super&gt;a" type="string" value="atom">
+        <property name="startup-notify" type="bool" value="true"/>
+      </property>
     </property>
   </property>
   <property name="xfwm4" type="empty">
