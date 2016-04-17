@@ -76,11 +76,11 @@ esac
 
 # include
 export CDPATH='.:/home/z/Dropbox/work:/home/z/Dropbox/z/bin:/home/z/Dropbox/z:/usr/local/lib:/usr/local/lib/node_modules'
-export PATH=$PATH:~/.gem/global/bin:~/.cabal/bin:$(find $HOME/bin/ -type d | paste -s -d:)
+export PATH=~/.gem/global/bin:~/.cabal/bin:$(find $HOME/bin/ -type d | paste -s -d:):$PATH
 export EDITOR='nvim'
 export SLACK_USERNAME='zacanger'
 export LOLCOMMITS_ANIMATE='2'
-export MANPATH=$MANPATH:~/doc
+export MANPATH=~/doc:$MANPATH
 export NODE_ENV=development
 export ATOM_DEV_RESOURCE_PATH='~/.atom/dev'
 
