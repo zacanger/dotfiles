@@ -615,6 +615,8 @@ let g:semanticGUIColors = [ '#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082
 " goddamned meta keys...
 vnoremap <leader>nl :%s///g
 nnoremap <leader>nl :%s///g
+" :%s/\r$/g
+" :%s/\r$//g
 
 " peepopen, quit on vim exit
 " let g:peepopen_quit = 1

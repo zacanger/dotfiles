@@ -27,7 +27,7 @@
             <value type="uint" value="65535"/>
           </property>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/home/z/Dropbox/Pictures/walls/abstract-1600-1080.jpg"/>
+          <property name="last-image" type="string" value="/home/z/Dropbox/Pictures/walls/wall1600x1200bw.png"/>
           <property name="backdrop-cycle-enable" type="bool" value="true"/>
           <property name="backdrop-cycle-period" type="int" value="2"/>
           <property name="backdrop-cycle-timer" type="uint" value="1"/>
@@ -571,48 +571,6 @@
             <value type="uint" value="46848"/>
             <value type="uint" value="65535"/>
           </property>
-        </property>
-      </property>
-      <property name="monitor1" type="empty">
-        <property name="workspace0" type="empty">
-          <property name="color-style" type="int" value="0"/>
-          <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/xfce/xfce-teal.jpg"/>
-        </property>
-        <property name="workspace1" type="empty">
-          <property name="color-style" type="int" value="0"/>
-          <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/xfce/xfce-teal.jpg"/>
-        </property>
-        <property name="workspace2" type="empty">
-          <property name="color-style" type="int" value="0"/>
-          <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/xfce/xfce-teal.jpg"/>
-        </property>
-        <property name="workspace3" type="empty">
-          <property name="color-style" type="int" value="0"/>
-          <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/xfce/xfce-teal.jpg"/>
-        </property>
-        <property name="workspace4" type="empty">
-          <property name="color-style" type="int" value="0"/>
-          <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/xfce/xfce-teal.jpg"/>
-        </property>
-        <property name="workspace5" type="empty">
-          <property name="color-style" type="int" value="0"/>
-          <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/xfce/xfce-teal.jpg"/>
-        </property>
-        <property name="workspace6" type="empty">
-          <property name="color-style" type="int" value="0"/>
-          <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/xfce/xfce-teal.jpg"/>
-        </property>
-        <property name="workspace7" type="empty">
-          <property name="color-style" type="int" value="0"/>
-          <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/backgrounds/xfce/xfce-teal.jpg"/>
         </property>
       </property>
     </property>
