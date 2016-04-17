@@ -15,7 +15,9 @@ alias edrc='nvim ~/.bashrc'
 alias brc='nvim ~/.bashrc'
 alias edal='nvim ~/.bash_aliases'
 alias reload='source ~/.bashrc'
+alias rl='reload'
 alias fn='cd ~/.bash_functions'
+alias fns='ls ~/.bash_functions/'
 
 # git &co.
 # alias gf='git-feats'
@@ -167,8 +169,8 @@ alias dbls='dropbox filestatus ~/Dropbox/*'
 
 # twatter
 alias tweet='twidge update'
-alias feed='twidge lsrecent'
-alias mytw='twidge lsarchive'
+alias feed='twidge lsrecent -w `tput cols`'
+alias mytw='twidge lsarchive -w `tput cols`'
 
 # https://github.com/nvbn/thefuck (correct me, please)
 alias fuck='eval $(thefuck $(fc -ln -1))'
@@ -333,5 +335,6 @@ alias zh='zathura'
 alias chucknorris='curl -s http://api.icndb.com/jokes/random/ | jq .'
 alias dict='dict.sh'
 alias shrug='echo "¯\_(ツ)_/¯"'
+# alias droplet='ssh root@162.243.49.187'
 alias droplet='ssh root@zacanger.com'
 

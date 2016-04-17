@@ -37,7 +37,7 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 
 # history stuff
 HISTCONTROL='erasedups:ignoreboth' # ignore lines with spaces & dups
-HISTIGNORE='ls:l:la:lo:lS:lT:ll:a:k:ld:lr:cd:lc:h:history:ranger:mocp:mu:q:exit:c:ds:ds.:clear:erm:gg:ZZ:q!:\:wq:\:Wq:..:.:cs:dt:co:ni:ns:vi'
+HISTIGNORE='ls:l:la:lo:lS:lT:ll:a:k:ld:lr:cd:lc:h:history:ranger:mocp:mu:q:exit:c:ds:ds.:clear:erm:w:gg:ZZ:q!:\:wq:\:Wq:..:.:cs:dt:co:ni:ns:vi:reload'
 shopt -s histappend # append
 HISTSIZE= # length
 HISTFILESIZE= # size
@@ -75,18 +75,17 @@ xterm*)
 esac
 
 # include
-export CDPATH='.:/home/z/Dropbox/skool:/home/z/Dropbox/z/bin:/home/z/Dropbox/z:/usr/local/lib:/usr/local/lib/node_modules'
-export PATH=$PATH:/usr/local/share/npm/bin:/home/z/Dropbox/z/bin:/opt:~/.gem/global/bin:$(find $HOME/bin/ -type d | paste -s -d:)
+export CDPATH='.:/home/z/Dropbox/work:/home/z/Dropbox/z/bin:/home/z/Dropbox/z:/usr/local/lib:/usr/local/lib/node_modules'
+export PATH=$PATH:~/.gem/global/bin:~/.cabal/bin:$(find $HOME/bin/ -type d | paste -s -d:)
 export EDITOR='nvim'
 export SLACK_USERNAME='zacanger'
 export LOLCOMMITS_ANIMATE='2'
-export MANPATH=$MANPATH:/home/z/doc
+export MANPATH=$MANPATH:~/doc
 export NODE_ENV=development
 export ATOM_DEV_RESOURCE_PATH='~/.atom/dev'
 
 # j, rbenv, and fzf
 . /usr/share/autojump/autojump.sh
-
 # eval "$(rbenv init -)"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
@@ -94,23 +93,24 @@ export ATOM_DEV_RESOURCE_PATH='~/.atom/dev'
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
 if [ -d ~/.bash_functions ]; then
     for file in ~/.bash_functions/*; do
         . "$file"
     done
 fi
 
-# same for npm completion
+# npm completion
 if [ -f ~/.npm-completion ]; then
   . ~/.npm-completion
 fi
 
-# and git completion
+# git completion
 if [ -f ~/.git-completion ]; then
   . ~/.git-completion
 fi
 
-# and hub completion
+# hub completion
 if [ -f ~/.hub-completion ]; then
   . ~/.hub-completion
 fi
