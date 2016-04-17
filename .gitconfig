@@ -1,6 +1,6 @@
 [core]
 	editor = nvim
-	excludesfile = /home/z/.gitignore_global
+	excludesfile = /home/z/Dropbox/z/.gitignore_global
 [gui]
 	fontui = -family \"Fantasque Sans Mono\" -size -10 -weight normal -slant roman -underline 0 -overstrike 0
 	fontdiff = -family \"Fantasque Sans Mono\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0

@@ -30,7 +30,7 @@
 , "scripturl"     : true
 , "shadow"        : true
 , "singleGroups"  : true
-, "strict"        : true
+// , "strict"        : true
 , "sub"           : true
 , "supernew"      : true
 , "undef"         : true

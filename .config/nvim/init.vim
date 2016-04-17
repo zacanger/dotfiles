@@ -393,16 +393,6 @@ noremap <leader>b :CtrlPBuffer<CR>
 let g:ctrlp_map = '<leader>e'
 let g:ctrlp_open_new_file = 'r'
 
-" syntastic
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_style_error_symbol = '✗'
-let g:syntastic_style_warning_symbol = '⚠'
-let g:syntastic_auto_loc_list=1
-let g:syntastic_aggregate_errors = 1
-
-
 " Disable visualbell
 set noeb vb t_vb=
 " set visualbell t_vb=
@@ -470,17 +460,24 @@ let g:jedi#rename_command = "<leader>r"
 let g:jedi#show_call_signatures = "0"
 let g:jedi#completions_command = "<C-Space>"
 
-
 " syntastic
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_style_error_symbol = '✗'
+let g:syntastic_style_warning_symbol = '⚠'
+let g:syntastic_auto_loc_list=1
+let g:syntastic_aggregate_errors = 1
+" py
 let g:syntastic_python_checkers=['python', 'flake8']
 let g:syntastic_python_flake8_post_args='--ignore=W391'
-
-" syntastic js rules
+" js
 let g:syntastic_javascript_jshint_generic = 1
 let g:syntastic_javascript_checkers = ['jshint']
-
-" syntastic sh
+" sh
 let g:syntastic_sh_checkers = ['sh']
+" hs
+let g:syntastic_haskell_checkers = ['hlint']
 
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
