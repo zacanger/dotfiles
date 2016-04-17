@@ -47,7 +47,7 @@
       "spell-check"
       "linter-jshint"
       "linter-eslint"
-      "semanticolor"
+      "language-javascript-semantic"
     ]
     packagesWithKeymapsDisabled: [
       "wakatime"

@@ -6,7 +6,7 @@
   <property name="last-separator-position" type="int" value="170"/>
   <property name="last-show-hidden" type="bool" value="true"/>
   <property name="last-details-view-zoom-level" type="string" value="THUNAR_ZOOM_LEVEL_SMALLEST"/>
-  <property name="last-details-view-column-widths" type="string" value="50,231,50,50,257,50,50,81,214"/>
+  <property name="last-details-view-column-widths" type="string" value="50,427,50,50,166,50,50,74,116"/>
   <property name="last-window-maximized" type="bool" value="false"/>
   <property name="last-sort-column" type="string" value="THUNAR_COLUMN_SIZE"/>
   <property name="last-sort-order" type="string" value="GTK_SORT_ASCENDING"/>

@@ -49,7 +49,6 @@
         <property name="startup-notify" type="bool" value="true"/>
       </property>
       <property name="&lt;Super&gt;l" type="string" value="xfce4-terminal --fullscreen &amp;&amp; xtrlock"/>
-      <property name="&lt;Alt&gt;space" type="string" value="x-terminal-emulator"/>
       <property name="&lt;Alt&gt;Return" type="string" value="tt">
         <property name="startup-notify" type="bool" value="true"/>
       </property>

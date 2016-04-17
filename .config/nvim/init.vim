@@ -477,7 +477,7 @@ let g:syntastic_python_flake8_post_args='--ignore=W391'
 
 " syntastic js rules
 let g:syntastic_javascript_jshint_generic = 1
-let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['jshint']
 
 " syntastic sh
 let g:syntastic_sh_checkers = ['sh']
