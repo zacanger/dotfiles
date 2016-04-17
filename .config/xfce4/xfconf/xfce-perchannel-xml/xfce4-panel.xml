@@ -49,9 +49,6 @@
     <property name="panel-2" type="empty">
       <property name="position" type="string" value="p=6;x=1766;y=15"/>
       <property name="plugin-ids" type="array">
-        <value type="int" value="29"/>
-        <value type="int" value="35"/>
-        <value type="int" value="8"/>
         <value type="int" value="14"/>
         <value type="int" value="13"/>
         <value type="int" value="30"/>
@@ -62,16 +59,12 @@
         <value type="int" value="18"/>
         <value type="int" value="21"/>
         <value type="int" value="44"/>
-        <value type="int" value="19"/>
         <value type="int" value="25"/>
         <value type="int" value="48"/>
         <value type="int" value="26"/>
         <value type="int" value="28"/>
-        <value type="int" value="49"/>
-        <value type="int" value="34"/>
-        <value type="int" value="37"/>
       </property>
-      <property name="size" type="uint" value="30"/>
+      <property name="size" type="uint" value="20"/>
       <property name="length" type="uint" value="100"/>
       <property name="nrows" type="uint" value="1"/>
       <property name="background-alpha" type="uint" value="70"/>
@@ -213,20 +206,7 @@
     <property name="plugin-14" type="string" value="xfce4-verve-plugin"/>
     <property name="plugin-18" type="string" value="weather"/>
     <property name="plugin-31" type="string" value="linelight"/>
-    <property name="plugin-35" type="string" value="applicationsmenu">
-      <property name="show-menu-icons" type="bool" value="true"/>
-      <property name="show-tooltips" type="bool" value="true"/>
-      <property name="show-button-title" type="bool" value="false"/>
-      <property name="custom-menu" type="bool" value="false"/>
-    </property>
-    <property name="plugin-8" type="string" value="separator">
-      <property name="style" type="uint" value="1"/>
-    </property>
     <property name="plugin-13" type="string" value="separator">
-      <property name="style" type="uint" value="1"/>
-    </property>
-    <property name="plugin-19" type="string" value="separator">
-      <property name="expand" type="bool" value="true"/>
       <property name="style" type="uint" value="1"/>
     </property>
     <property name="plugin-25" type="string" value="places">
@@ -248,10 +228,6 @@
     <property name="plugin-48" type="string" value="separator">
       <property name="style" type="uint" value="1"/>
     </property>
-    <property name="plugin-49" type="string" value="separator">
-      <property name="style" type="uint" value="1"/>
-      <property name="expand" type="bool" value="false"/>
-    </property>
     <property name="plugin-50" type="string" value="smartbookmark"/>
     <property name="plugin-21" type="string" value="separator">
       <property name="style" type="uint" value="1"/>
@@ -259,19 +235,10 @@
     <property name="plugin-26" type="string" value="separator">
       <property name="style" type="uint" value="1"/>
     </property>
-    <property name="plugin-29" type="string" value="separator">
-      <property name="style" type="uint" value="1"/>
-    </property>
     <property name="plugin-30" type="string" value="separator">
       <property name="style" type="uint" value="1"/>
     </property>
     <property name="plugin-33" type="string" value="separator">
-      <property name="style" type="uint" value="1"/>
-    </property>
-    <property name="plugin-34" type="string" value="separator">
-      <property name="style" type="uint" value="1"/>
-    </property>
-    <property name="plugin-37" type="string" value="separator">
       <property name="style" type="uint" value="1"/>
     </property>
   </property>
