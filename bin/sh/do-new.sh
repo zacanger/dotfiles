@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+# warnings
+echo "Don't use this yet. It's not ready."
+sleep 4
+echo "Seriously. Hit CTRL-C now."
+sleep 4
+echo "This is your last chance. Cancel this script."
+echo "Some things will probably just not finish. Something might not work."
+sleep 4
+echo "You're still here? Okay...."
+# i warned you
+
 echo "Ready?"
 
 
