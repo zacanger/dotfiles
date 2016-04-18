@@ -26,9 +26,6 @@
         <value type="int" value="5"/>
         <value type="int" value="40"/>
         <value type="int" value="24"/>
-        <value type="int" value="9"/>
-        <value type="int" value="22"/>
-        <value type="int" value="12"/>
         <value type="int" value="17"/>
         <value type="int" value="7"/>
       </property>
@@ -128,20 +125,10 @@
       <property name="show-frame" type="bool" value="true"/>
     </property>
     <property name="plugin-7" type="string" value="whiskermenu"/>
-    <property name="plugin-9" type="string" value="launcher">
-      <property name="items" type="array">
-        <value type="string" value="14409701551.desktop"/>
-      </property>
-    </property>
     <property name="plugin-1" type="string" value="thunar-tpa"/>
     <property name="plugin-10" type="string" value="launcher">
       <property name="items" type="array">
         <value type="string" value="14411694191.desktop"/>
-      </property>
-    </property>
-    <property name="plugin-12" type="string" value="launcher">
-      <property name="items" type="array">
-        <value type="string" value="14412047033.desktop"/>
       </property>
     </property>
     <property name="plugin-16" type="string" value="separator">
@@ -167,11 +154,6 @@
       <property name="command" type="string" value="xfce4-mixer"/>
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
     </property>
-    <property name="plugin-22" type="string" value="launcher">
-      <property name="items" type="array">
-        <value type="string" value="14439813825.desktop"/>
-      </property>
-    </property>
     <property name="plugin-23" type="string" value="launcher">
       <property name="items" type="array">
         <value type="string" value="14439815096.desktop"/>
@@ -184,7 +166,7 @@
     </property>
     <property name="clipman" type="empty">
       <property name="tweaks" type="empty">
-        <property name="never-confirm-history-clear" type="bool" value="false"/>
+        <property name="never-confirm-history-clear" type="bool" value="true"/>
         <property name="paste-on-activate" type="uint" value="2"/>
         <property name="reverse-menu-order" type="bool" value="false"/>
         <property name="popup-at-pointer" type="bool" value="true"/>
