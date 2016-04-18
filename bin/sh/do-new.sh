@@ -148,7 +148,7 @@ npm cache clean-g
 echo "Removing the demo app."
 sleep 2
 cd /opt
-rm mean
+rm -rf mean
 
 
 # python
