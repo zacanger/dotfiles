@@ -478,6 +478,8 @@ let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_sh_checkers = ['sh']
 " hs
 let g:syntastic_haskell_checkers = ['hlint']
+" html
+let g:syntastic_html_checkers = ['w3']
 
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
