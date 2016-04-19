@@ -27,7 +27,7 @@
             <value type="uint" value="65535"/>
           </property>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/home/z/Dropbox/Pictures/walls/asdfasdf.png"/>
+          <property name="last-image" type="string" value="/home/z/Dropbox/Pictures/walls/man-earth-1920-1080.png"/>
           <property name="backdrop-cycle-enable" type="bool" value="true"/>
           <property name="backdrop-cycle-period" type="int" value="2"/>
           <property name="backdrop-cycle-timer" type="uint" value="1"/>

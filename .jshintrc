@@ -12,7 +12,6 @@
 , "jasmine"       : true
 , "jquery"        : true
 , "lastsemic"     : true
-, "latedef"       : true
 , "laxcomma"      : true
 , "loopfunc"      : true
 , "maxlen"        : 180
