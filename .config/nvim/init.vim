@@ -127,7 +127,7 @@ set smarttab
 set autoindent
 
 "" Map leader to ,
-let mapleader='\<Space>'
+let mapleader="\<Space>"
 
 "" Enable hidden buffers
 set hidden
@@ -652,4 +652,33 @@ let g:deoplete#enable_smart_case = 1
 
 " let g:context_filetype#same_filetypes = ['js,jsx,json', 'css,sass,scss,less,styl', 'html', 'ejs', 'jade']
 let g:context_filetype#same_filetypes = '_'
+
+" vim-gitgutter
+let g:gitgutter_max_signs = 200
+
+" another two attempts at working with ranger....
+" function RangerExplorer()
+"     exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
+"     if filereadable('/tmp/vim_ranger_current_file')
+"         exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
+"         call system('rm /tmp/vim_ranger_current_file')
+"     endif
+"     redraw!
+" endfun
+" map <Leader>x :call RangerExplorer()<CR>
+
+" function! s:ChooseFile(dir_path)
+"     let tmp_file = tempname()
+"     let path = s:AbsolutePath(a:dir_path)
+"
+"     silent exec join(['!ranger', path, '--choosefile=' . tmp_file], ' ')
+"     redraw!
+"
+"     let result = 0
+"     if filereadable(tmp_file)
+"         silent let result = system('cat '. tmp_file)
+"     endif
+"     silent call system('rm -rf ' . tmp_file)
+"     return result
+" endfunction
 
