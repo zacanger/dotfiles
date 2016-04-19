@@ -42,7 +42,8 @@ shopt -s histappend # append
 HISTSIZE= # length
 HISTFILESIZE= # size
 HISTTIMEFORMAT='%F %T  ' # timestamp
-PROMPT_COMMAND='history -a' # record history NOW, not on exit
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ;} history -a"
+# PROMPT_COMMAND='history -a' # record history NOW, not on exit
 
 # completions
 bind 'set completion-query-items 100' # ask if over N possible completions
@@ -85,7 +86,7 @@ export NODE_ENV=development
 export ATOM_DEV_RESOURCE_PATH='~/.atom/dev'
 
 # j, rbenv, and fzf
-. /usr/share/autojump/autojump.sh
+. /usr/share/autojump/autojump.bash
 # eval "$(rbenv init -)"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
@@ -118,7 +119,7 @@ fi
 # and, finally... liquidprompt; load from interactive shell, don't from scripts/scp
 echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
 
-eval "$(thefuck --alias)"
+# eval "$(thefuck --alias)"
 
 ############################################################
  ## FROM HERE DOWN, IT'S ALL JUST UNUSED BITS AND PIECES ##

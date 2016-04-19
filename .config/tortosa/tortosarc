@@ -5,7 +5,7 @@ wm_role=Tortosa
 width=800
 height=400
 decorated=false
-background=#10101055
+background=#05050555
 
 [Tabs]
 show_border=false
@@ -16,7 +16,7 @@ tab_name_max_len=20
 [Vte]
 font=Hasklig 10
 foreground=#dddddd
-background=#222222fa
+background=#090909fa
 color0=#111111
 color8=#555555
 color1=#ff6565
