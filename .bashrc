@@ -37,7 +37,7 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 
 # history stuff
 HISTCONTROL='erasedups:ignoreboth' # ignore lines with spaces & dups
-HISTIGNORE='ls:l:la:lo:lS:lT:ll:a:k:ld:lr:cd:lc:h:history:ranger:mocp:mu:q:exit:c:ds:ds.:clear:erm:w:gg:ZZ:q!:\:wq:\:Wq:..:.:cs:dt:co:ni:ns:vi:reload'
+HISTIGNORE='ls:l:la:lo:lS:lT:ll:a:k:ld:lr:cd:lc:h:history:ranger:mocp:mu:q:exit:c:ds:ds.:clear:erm:w:gg:ZZ:q!:\:wq:\:Wq:..:.:cs:dt:co:ni:ns:vi:reload:gst:edrc:edal'
 shopt -s histappend # append
 HISTSIZE= # length
 HISTFILESIZE= # size
@@ -117,6 +117,8 @@ fi
 
 # and, finally... liquidprompt; load from interactive shell, don't from scripts/scp
 echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
+
+eval "$(thefuck --alias)"
 
 ############################################################
  ## FROM HERE DOWN, IT'S ALL JUST UNUSED BITS AND PIECES ##

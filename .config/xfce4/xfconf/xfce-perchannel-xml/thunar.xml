@@ -6,9 +6,9 @@
   <property name="last-separator-position" type="int" value="170"/>
   <property name="last-show-hidden" type="bool" value="false"/>
   <property name="last-details-view-zoom-level" type="string" value="THUNAR_ZOOM_LEVEL_SMALLEST"/>
-  <property name="last-details-view-column-widths" type="string" value="50,151,50,50,306,50,50,81,445"/>
-  <property name="last-window-maximized" type="bool" value="false"/>
-  <property name="last-sort-column" type="string" value="THUNAR_COLUMN_SIZE"/>
+  <property name="last-details-view-column-widths" type="string" value="50,943,50,50,257,50,50,81,466"/>
+  <property name="last-window-maximized" type="bool" value="true"/>
+  <property name="last-sort-column" type="string" value="THUNAR_COLUMN_NAME"/>
   <property name="last-sort-order" type="string" value="GTK_SORT_ASCENDING"/>
   <property name="last-window-width" type="int" value="798"/>
   <property name="last-window-height" type="int" value="831"/>
@@ -16,10 +16,17 @@
   <property name="misc-recursive-permissions" type="string" value="THUNAR_RECURSIVE_PERMISSIONS_NEVER"/>
   <property name="last-side-pane" type="string" value="ThunarShortcutsPane"/>
   <property name="default-view" type="string" value="ThunarDetailsView"/>
-  <property name="misc-date-style" type="string" value="THUNAR_DATE_STYLE_ISO"/>
+  <property name="misc-date-style" type="string" value="THUNAR_DATE_STYLE_LONG"/>
   <property name="shortcuts-icon-size" type="string" value="THUNAR_ICON_SIZE_SMALLEST"/>
   <property name="misc-middle-click-in-tab" type="bool" value="true"/>
   <property name="hidden-bookmarks" type="array">
     <value type="string" value="network:///"/>
   </property>
+  <property name="shortcuts-icon-emblems" type="bool" value="true"/>
+  <property name="tree-icon-size" type="string" value="THUNAR_ICON_SIZE_SMALLEST"/>
+  <property name="tree-icon-emblems" type="bool" value="true"/>
+  <property name="last-location-bar" type="string" value="ThunarLocationEntry"/>
+  <property name="misc-file-size-binary" type="bool" value="false"/>
+  <property name="misc-text-beside-icons" type="bool" value="false"/>
+  <property name="last-details-view-fixed-columns" type="bool" value="false"/>
 </channel>

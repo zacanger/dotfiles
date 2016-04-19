@@ -8,7 +8,7 @@
     <property name="DoubleClickDistance" type="empty"/>
     <property name="DndDragThreshold" type="empty"/>
     <property name="CursorBlink" type="empty"/>
-    <property name="CursorBlinkTime" type="empty"/>
+    <property name="CursorBlinkTime" type="int" value="1000"/>
     <property name="SoundThemeName" type="empty"/>
     <property name="EnableEventSounds" type="bool" value="false"/>
     <property name="EnableInputFeedbackSounds" type="bool" value="false"/>
@@ -26,7 +26,7 @@
     <property name="FontName" type="string" value="Hasklig Medium 9"/>
     <property name="IconSizes" type="empty"/>
     <property name="KeyThemeName" type="empty"/>
-    <property name="ToolbarStyle" type="empty"/>
+    <property name="ToolbarStyle" type="string" value="icons"/>
     <property name="ToolbarIconSize" type="empty"/>
     <property name="MenuImages" type="empty"/>
     <property name="ButtonImages" type="empty"/>

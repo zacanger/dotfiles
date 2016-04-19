@@ -173,7 +173,7 @@
       </property>
       <property name="settings" type="empty">
         <property name="max-texts-in-history" type="uint" value="50"/>
-        <property name="enable-actions" type="bool" value="true"/>
+        <property name="enable-actions" type="bool" value="false"/>
       </property>
     </property>
     <property name="plugin-40" type="string" value="launcher">
