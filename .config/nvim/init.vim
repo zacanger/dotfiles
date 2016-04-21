@@ -654,7 +654,7 @@ let g:deoplete#enable_smart_case = 1
 let g:context_filetype#same_filetypes = '_'
 
 " vim-gitgutter
-let g:gitgutter_max_signs = 200
+" let g:gitgutter_max_signs = 200
 
 " another two attempts at working with ranger....
 " function RangerExplorer()
