@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# needs xinput
 # enable/disable touchpad
 # find your touchpad name:
 # egrep -i 'synap|alps|etps' /proc/bus/input/devices
