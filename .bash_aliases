@@ -224,7 +224,6 @@ alias Q!='q'
 alias Q='q'
 alias ZZ='q'
 alias aag='a | ag'
-alias alarm='alarm --config'
 alias all='compgen -c | sort -u'
 alias apr="apropos"
 alias bbp='./bb.sh post'
