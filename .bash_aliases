@@ -337,4 +337,5 @@ alias shrug='echo "¯\_(ツ)_/¯"'
 # alias droplet='ssh root@162.243.49.187'
 alias droplet='ssh root@zacanger.com'
 alias clock='zclock -24 -green'
+alias plaidchat='plaidchat --close-to-tray --minimize-to-tray'
 
