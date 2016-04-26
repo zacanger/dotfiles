@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 
-'use strict'
-
 const
   http   = require('http')
 , path   = require('path')
 , fs     = require('fs')
 , port   = process.env.PORT || 4444
-, server = http.createServer((req, res) => {
+
+http.createServer((req, res) => {
 
   let filePath = '.' + req.url
   if (filePath == './') {
@@ -56,9 +55,7 @@ const
     }
   })
 
-})
-
-server.listen(port, () => {
-  console.log('server listening on', port)
+}).listen(port, () => {
+  console.log(`listening on ${port}`)
 })
 

@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-var net  = require('net')
-  , repl = require('repl')
-  , port = 5100
-
-var face = function(){
-  var m = [
+const
+  net  = require('net')
+, repl = require('repl')
+, port = 5100
+, face = function(){
+  let m = [
     '^__^'
   , '-__-'
   , '>.<'
@@ -21,14 +21,14 @@ var face = function(){
   return m[Math.floor(Math.random()*m.length)]
 }
 
-net.createServer(function(socket){
-  var remote = repl.start(face()+' |> ', socket)
+net.createServer(socket => {
+  let remote = repl.start(face()+' |> ', socket)
   remote.context.face  = face
   remote.context.bonus = 'UNLOCKED'
 }).listen(port)
 
-console.log('remote repl available on ' + port)
+console.log(`remote repl available on ${port}`)
 
-var local = repl.start(face()+' |> ')
+let local = repl.start(face()+' |> ')
 local.context.face = face
 

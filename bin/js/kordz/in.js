@@ -5,8 +5,8 @@ if (typeof require === 'function' && typeof exports === 'object') {
 }
 
 kordz.input = {
-  getChord: function (chord) {
-    var a, o;
+  getChord (chord) {
+    let a, o;
     if (chord.indexOf(',') > 0) {
       if (chord.indexOf(':') > 0) {
         chord = chord.replace(/:/g, '":"').replace(/,/g, '","')
@@ -31,3 +31,4 @@ kordz.input = {
 if (typeof exports === 'object') {
   exports.input = kordz.input
 }
+

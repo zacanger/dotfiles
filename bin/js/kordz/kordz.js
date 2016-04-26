@@ -31,3 +31,4 @@ function quitme(m){
   console.log(cmd + '1:0,2:1,3:2,4:2,5:0,6:x')
   process.exit(1)
 }
+

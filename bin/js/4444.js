@@ -6,23 +6,24 @@
 // want options? reloading? anything like that? this is totally not
 // the right server for you.
 
-var http  = require('http')
-  , fs    = require('fs')
-  , path  = require('path')
-  , index = path.resolve(__dirname, './index.html')
-  , port  = 4444
+const
+  http  = require('http')
+, fs    = require('fs')
+, path  = require('path')
+, index = path.resolve(__dirname, './index.html')
+, port  = 4444
 
-http.createServer(function(req, res){
-  var stream = fs.createReadStream(index)
-  stream.on('open', function(){
-    res.writeHead(200, {'Content-Type': 'text/html'})
+http.createServer((req, res) => {
+  let stream = fs.createReadStream(index)
+  stream.on('open', () => {
+    res.writeHead(200, {'Content-Type' : 'text/html'})
   })
-  stream.on('error', function(){
+  stream.on('error', () => {
     res.writeHead(400)
     res.end()
   })
   stream.pipe(res)
 }).listen(port)
 
-console.log('check over at ' + port)
+console.log(`check over at ${port}`)
 

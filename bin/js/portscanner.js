@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-'use strict'
-
 const
   net   = require('net')
 , host  = process.argv[2] || 'localhost'
@@ -11,24 +9,24 @@ const
 // resources, but not _too_ quickly, so we don't miss open sockets.
 let start = 1
 
-
 while (start <= end) {
   let port = start
   ;(port => {
-    console.log('now on ' + port)
+    console.log(`now on ${port}`)
     let s = new net.Socket()
 
     s.setTimeout(timeout, () => {s.destroy()})
     s.connect(port, host, () => {
-      console.log('open! ' + port)
+      console.log(`${port} is open!`)
     })
-    s.on('data', (data) => {
+    s.on('data', data => {
       console.log(port, data)
       s.destroy()
     })
-    s.on('error', (e) => {
+    s.on('error', e => {
       s.destroy()
     })
   })(port)
   start++
 }
+
