@@ -11,10 +11,9 @@
 #define TO_MB(m) ((m * (unsigned long long)si.mem_unit) / MEGABYTE)
 
 /* set delay for refresh, and switch if refresh is desired */
-static const int delay = 5; /* in seconds */
-static const char refresh = 1; /* if refreshing term is desired */
-/* set conversion constants */
-const double MEGABYTE = 1024 * 1024;
+static const int delay = 5; // in seconds
+static const char refresh = 1; // if refreshing term is desired
+const double MEGABYTE = 1024 * 1024; // conversion constants
 void getnprint ();
 void hold ();
 

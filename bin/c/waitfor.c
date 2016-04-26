@@ -24,7 +24,7 @@ int main(int argc, char*argv[]) {
 
   g_fd[fd] = inotify_init();
 
-  for(argc--, argv++; argc; argc--, argv++) {
+  for (argc--, argv++; argc; argc--, argv++) {
 
     // Only add files to the watch that exist
     g_wd[fd] = inotify_add_watch(
@@ -40,7 +40,7 @@ int main(int argc, char*argv[]) {
     }
   }
 
-  if(fd) {
+  if (fd) {
     select(g_fd[fd - 1] + 1, &rfds, NULL, NULL, NULL);
 
     do {

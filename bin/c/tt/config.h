@@ -1,4 +1,4 @@
-/* emulation ($TERM) */
+// emulation ($TERM)
 #define TT_TERMINFO               "xterm-256color"
 //#define TT_SCROLLBAR_VISIBLE      // uncomment to show scrollbar
 #define TT_DYNAMIC_WINDOW_TITLE   // uncomment to enable window_title_cb
