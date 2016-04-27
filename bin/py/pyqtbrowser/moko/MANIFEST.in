@@ -1,3 +1,0 @@
-include AUTHORS COPYING README
-recursive-include src *.py
-recursive-include data *.xpm
