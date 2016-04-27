@@ -1,7 +1,0 @@
-no(){
-  while true
-  do
-    echo n
-  done
-}
-

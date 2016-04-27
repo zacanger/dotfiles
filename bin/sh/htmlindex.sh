@@ -5,6 +5,7 @@
 
 echo "<!doctype html>" >> index.html
 echo "<html lang=\"en\">" >> index.html
+echo "<body>" >> index.html
 
 for name in * ; do
   case "$name" in
@@ -13,15 +14,13 @@ for name in * ; do
     ;;
   esac
   my_name=$(ls|grep $name) ;\
-  echo "<a href=\""$name"\">" $my_name "</a> <br>" >> ./index.html; \
+  echo "<br><a href=\""$name"\">"$my_name"</a>" >> index.html; \
 done;
 
-echo "<br><br>HIYA" >> ./index.html
-echo "<br>HURR'S A SCRAPT" >> ./index.html
-echo "<br><br>  change the ls -something command into whatever to customize." >> ./index.html
+echo "<br>change the ls -something command into whatever to customize." >> ./index.html
 
-echo "<p> " >>index.html
+echo "<p>" >> index.html
+echo "</body>" >> index.html
 
-echo "<br><a href=http://link.url><img src=pitcha.img border=0 ></a><br>" >> ./index.html
-echo "</html>" >> ./index.html
+echo "</html>" >> index.html
 

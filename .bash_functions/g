@@ -1,2 +1,0 @@
-function g(){ cd `cat ~/.g/${1-_back} || echo .` ; }
-

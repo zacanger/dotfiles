@@ -1,1 +1,0 @@
-calc(){ awk "BEGIN{ print $* }" ;}

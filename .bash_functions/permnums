@@ -1,9 +1,0 @@
-# usage: pernums file-to-check
-# just tells you the permissions in number form
-# (like 755, or 644, or whatever).
-# to do: make it work with globbing.
-
-permnums() {
-  stat -c %a "$1"
-}
-
