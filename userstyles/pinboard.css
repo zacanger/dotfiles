@@ -1,28 +1,18 @@
-#content,
-body,
-html,
-div,
-.description {
-	background: #212121;
-	color: #ddd;
-	font-size: 16px;
-	font-family: "Fantasque Sans Mono";
-	line-height: .8;
+#content, body, html, div, .description {
+  background: #101010;
+  color: #ddd;
+  font-size: 16px;
+  font-family: "Fantasque Sans Mono";
+  line-height: .8;
 }
-a {
-	color: #cec;
-}
-a:hover {
-	color: #d1d;
-}
-a:visited {
-	color: #eee;
-}
-.star,
-#banner {
-	display: none;
-}
-.private {
-	background: transparent;
-	border: 2px dotted;
-}
+
+a { color: #cec; }
+
+a:hover { color: #d1d; }
+
+a:visited { color: #eee; }
+
+.star, #banner { display: none; }
+
+.private { background: transparent; border: 2px dotted; }
+

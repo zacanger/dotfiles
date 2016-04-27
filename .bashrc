@@ -3,7 +3,6 @@
  ####           check /usr/share/doc/bash & /etc for examples           ####
 #############################################################################
 
-## THESE THINGS ARE KINDA IMPORTANT AND STUFF I GUESS
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -29,38 +28,37 @@ stty stop ""
 
 # color ls
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolours && eval "$(dircolors -b ~/.dircolours)" || eval "$(dircolors -b)"
+  test -r ~/.dircolours && eval "$(dircolors -b ~/.dircolours)" || eval "$(dircolors -b)"
 fi
 
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # history stuff
+shopt -s histappend # append
 HISTCONTROL='erasedups:ignoreboth' # ignore lines with spaces & dups
 HISTIGNORE='ls:l:la:lo:lS:lT:ll:a:k:ld:lr:cd:lc:h:history:ranger:mocp:mu:q:exit:c:ds:ds.:clear:erm:w:gg:ZZ:q!:\:wq:\:Wq:..:.:cs:dt:co:ni:ns:vi:reload:gst:edrc:edal:fs'
-shopt -s histappend # append
 HISTSIZE= # length
 HISTFILESIZE= # size
 HISTTIMEFORMAT='%F %T  ' # timestamp
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ;} history -a"
-# PROMPT_COMMAND='history -a' # record history NOW, not on exit
 
 # completions
-bind 'set completion-query-items 100' # ask if over N possible completions
-complete -d cd rmdir # on cd, just show dirs
-complete -A builtin builtin # bash builtins
-complete -A setopt set # bash options
-complete -A command command complete coproc exec hash type # commands
-complete -A directory cd pushd mkdir rmdir #dirs
-complete -A function function # bash functions
-complete -A helptopic help # halp
-complete -A job disown fg jobs # jobspecs
-complete -A stopped bg # maor jobs
-complete -A binding bind # readline
-complete -A shopt shopt # sh... opt...
-complete -A signal trap # signals
-complete -A variable declare export readonly typeset #variables
-complete -A function -A variable unset # more vars
+bind 'set completion-query-items 100'                       # ask if over N possible completions
+complete -d cd rmdir                                        # on cd, just show dirs
+complete -A builtin builtin                                 # bash builtins
+complete -A setopt set                                      # bash options
+complete -A command command complete coproc exec hash type  # commands
+complete -A directory cd pushd mkdir rmdir                  # dirs
+complete -A function function                               # bash functions
+complete -A helptopic help                                  # halp
+complete -A job disown fg jobs                              # jobspecs
+complete -A stopped bg                                      # maor jobs
+complete -A binding bind                                    # readline
+complete -A shopt shopt                                     # sh... opt...
+complete -A signal trap                                     # signals
+complete -A variable declare export readonly typeset        # variables
+complete -A function -A variable unset                      # more vars
 
 # autocorrect spelling on some things
 shopt -s cdspell
@@ -69,14 +67,14 @@ shopt -s dirspell
 # dynamic title
 case $TERM in
 xterm*)
-    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
-    ;;
+  PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+  ;;
 *)
-    ;;
+  ;;
 esac
 
 # include
-export CDPATH='.:/home/z/Dropbox/work:/home/z/Dropbox/z/bin:/home/z/Dropbox/z:/usr/local/lib:/usr/local/lib/node_modules'
+export CDPATH='.:/home/z/Dropbox/work:/home/z/Dropbox/work/repos:/home/z/Dropbox/z/bin:/home/z/Dropbox/z:/usr/local/lib:/usr/local/lib/node_modules'
 export PATH=~/.gem/global/bin:~/.cabal/bin:$(find $HOME/bin/ -type d | paste -s -d:):$PATH
 export EDITOR='nvim'
 export SLACK_USERNAME='zacanger'
@@ -92,13 +90,13 @@ export ATOM_DEV_RESOURCE_PATH='~/.atom/dev'
 
 # keep aliases and functions on their own
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+  . ~/.bash_aliases
 fi
 
 if [ -d ~/.bash_functions ]; then
-    for file in ~/.bash_functions/*; do
-        . "$file"
-    done
+  for file in ~/.bash_functions/*; do
+    . "$file"
+  done
 fi
 
 # npm completion
