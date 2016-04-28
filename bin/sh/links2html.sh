@@ -1,6 +1,6 @@
-:
+#!/usr/bin/env bash
+
 # mkurl - convert text containing URLs to HTML
-# Heiner Steven (heiner.steven@odn.de), 11/96
 
 nawk '
     BEGIN { inlist = 0; URLfound = 0 }
