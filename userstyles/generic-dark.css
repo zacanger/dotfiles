@@ -1,30 +1,23 @@
-/* i use this everywhere. threw it here because at some
- * point i realised i was typing the same few lines
- * many many times every day, on many many different
- * sites. this can be thrown in the (excellent)
- * 'my-style' extension on chromium, or just stuck in
- * firefox's tools, or applied with stylish (or a
- * stylish-alike)... whatever's convenient at the
- * moment, really.
- */
-
-body,div,p,h1,h2,h3,h4,h5,h6,tbody,thead,th,tr,td,
-blockquote,li,ul,strong,font,form,footer,header,
-select,button,article,section,nav,span,label,dd,option{
+body, div, p, h1, h2, h3, h4, h5, h6,
+tbody, thead, th, tr, td, blockquote,
+li, ul, strong, font, form, footer, header,
+select, button, article, section, nav,
+span, label, dd, option {
   color: #e1d3bc!important;
   background: #0a0a0a!important;
   font-family:"Merriweather"!important;
 }
 
-a{color:#8cf2c1!important;}
+a { color: #8cf2c1!important; }
 
-a:hover{color:#a7d7e5!important;}
+a:hover { color: #a7d7e5!important; }
 
-a:visited{color:#df8585!important;}
+a:visited { color: #df8585!important; }
 
-textarea,code,pre,input,code span{
-  background:#212121!important;
-  color:#cec8ea!important;
-  font-size:12px!important;
-  font-family:"Monoid",monospace!important;
+textarea, code, pre, input, code span {
+  background: #212121!important;
+  color: #cec8ea!important;
+  font-size: 12px!important;
+  font-family: "Monoid", monospace!important;
 }
+

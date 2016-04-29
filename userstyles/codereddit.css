@@ -1,18 +1,19 @@
 html, body {
   background-color: #101010!important;
-  color:#bad2b0!important;
-  margin-top:0!important;
-  padding-top:0!important;
-  padding-left:1.2em!important;
+  color: #bad2b0!important;
+  margin-top: 0!important;
+  padding-top: 0!important;
+  padding-left: 1.2em!important;
 }
-.sh_comment {color: #a3a37c!important;}
-.sh_type {color: #cdc4ea!important;}
-.sh_preproc {color: #b3e5be!important;}
-.sh_number {color: #84adf2!important;}
-.sh_function {color: #c1df7f!important;}
-::-webkit-scrollbar {display:none!important;}
-a{color:#dfc27b!important;}
-.sh_variable{color:#a9dce7!important;}
-.sh_cbracket{color:#e3884a!important;}
-.sh_symbol{color:#afdba5!important;}
-.sh_sourceCode{color:#97cfd6!important;}
+.sh_comment { color: #a3a37c!important; }
+.sh_type { color: #cdc4ea!important; }
+.sh_preproc { color: #b3e5be!important; }
+.sh_number { color: #84adf2!important; }
+.sh_function { color: #c1df7f!important; }
+::-webkit-scrollbar { display:none!important; }
+a { color: #dfc27b!important; }
+.sh_variable { color: #a9dce7!important; }
+.sh_cbracket { color: #e3884a!important; }
+.sh_symbol { color: #afdba5!important; }
+.sh_sourceCode { color: #97cfd6!important; }
+

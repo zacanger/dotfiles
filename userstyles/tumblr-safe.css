@@ -1,21 +1,22 @@
+/*
+https?://[^/]+\\.tumblr\\.com/(?!archive).*
+https?:\/\/(www)?(.*)\.tumblr\.com\/(?!(archive)).*
+tumblr.com
+ */
+
 body, div, p, span, code {
   background: #101010!important;
   color: #dcdcdc!important;
 }
 
 .photoset, .post_media, .is_photo, .is_photoset, .photoset_photo,
-.photoset_row, .post_media_photo, .stretchy_kids, .yamplus-unit-container, 
+.photoset_row, .post_media_photo, .stretchy_kids, .yamplus-unit-container,
 .sponsored_post, .remnant-unit-container, .remnant-ad, .takeover-container,
-.sponsored-day-media-section, .video-ad, .mb_tracked, img {
+.sponsored-day-media-section, .video-ad, .mb_tracked,
+img {
   display: none!important;
   visibility: hidden!important;
 }
 
-a { color: #a0dfe1!important;}
+a { color: #a0dfe1!important; }
 
-
-/* 
-https?://[^/]+\\.tumblr\\.com/(?!archive).*
-https?:\/\/(www)?(.*)\.tumblr\.com\/(?!(archive)).*
-tumblr.com
-*/

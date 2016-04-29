@@ -1,9 +1,13 @@
+/*
+("^https?:\\/\\/((chat|meta|ja|pt|ru)\\.)?stackoverflow\\.com.*"), domain("serverfault.com"), domain("superuser.com"), domain("stackapps.com"), domain("mathoverflow.net"), regexp("^https?:\\/\\/((?!(area51|gaming|rpg)).*\\.)?stackexchange.com.*")
+ */
+
 .single, .site-wrapper, .single-post,
 .single-format-standard {
-width: 100%;
-max-width: 1600px;
-display: flex;
-justify-content: center;
+  width: 100%;
+  max-width: 1600px;
+  display: flex;
+  justify-content: center;
 }
 
 .page-content-primary { height: 100%; }
@@ -13,21 +17,16 @@ justify-content: center;
 .page-main, .page-content-primary,
 p, div, .title, .alert, a,
 .single-article {
-background: #222;
-color: #ede;
-font-family: "Hack", "Hasklig", "Fantasque Sans Mono",
-"Fira Code", "Inconsolata", "Courier New", monospace;
+  background: #222;
+  color: #ede;
+  font-family: "Hack", monospace;
 }
 
 .ad0, .odd, .bsap_adhere, .clearfix, .ad-side, .sidebar-popular,
 .sidebar-social, .page-sidebar-inside, #footer-content,
-.content-ad, .share-stat, .share-stat-action, footer,
-header, #mobile-menu, #tags-list, #signup-dropdown,
-#login-dropdown,.page-topper, .page-hero, .page-sidebar,
-.page-content-legend, .page-secondary, .yarpp-related,
-.page-secondary-two, #side-header, #site-footer
-{ visibility: hidden; height: 0; width: 0; }
+.content-ad, .share-stat, .share-stat-action, footer, header,
+#mobile-menu, #tags-list, #signup-dropdown, #login-dropdown,
+.page-topper, .page-hero, .page-sidebar, .page-content-legend,
+.page-secondary, .yarpp-related, .page-secondary-two,
+#side-header, #site-footer { visibility: hidden; height: 0; width: 0; }
 
-/*
-("^https?:\\/\\/((chat|meta|ja|pt|ru)\\.)?stackoverflow\\.com.*"), domain("serverfault.com"), domain("superuser.com"), domain("stackapps.com"), domain("mathoverflow.net"), regexp("^https?:\\/\\/((?!(area51|gaming|rpg)).*\\.)?stackexchange.com.*")
-*/
