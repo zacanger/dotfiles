@@ -6,5 +6,5 @@ function palindrome(str){
   return str == str.split('').reverse().join('')
 }
 
-console.log(`id ${str} a palindrome? that's ${palindrome(str)}`)
+console.log(`is ${str} a palindrome? that's ${palindrome(str)}`)
 

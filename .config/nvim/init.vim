@@ -574,6 +574,8 @@ au Syntax * RainbowParenthesesLoadBraces
 " nnoremap gx <Plug>(openbrowser-smart-search)
 " vnoremap gx <Plug>(openbrowser-smart-search)
 
+let g:netrw_gx="<cWORD>"
+
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " greplace

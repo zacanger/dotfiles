@@ -1,20 +1,16 @@
 #! /usr/bin/env node
 
-// this is very sraightforward, but in case it's somehow unclear...
 // all this does is serve up an index.html file in cwd
-// that's it.
-// want options? reloading? anything like that? this is totally not
-// the right server for you.
 
 const
   http  = require('http')
 , fs    = require('fs')
 , path  = require('path')
 , index = path.resolve(__dirname, './index.html')
-, port  = 4444
+, port  = process.argv[2] || 4444
 
 http.createServer((req, res) => {
-  let stream = fs.createReadStream(index)
+  const stream = fs.createReadStream(index)
   stream.on('open', () => {
     res.writeHead(200, {'Content-Type' : 'text/html'})
   })

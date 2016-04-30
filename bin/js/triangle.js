@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 
-const txt = '#######'
-for (let i = txt.length; i >= 0; i--) {
-  console.log(txt.slice(i))
+const num = process.argv[2] || 8
+
+let str = ''
+
+for (let i = num; i >= 1; i--) {
+  str += '#'
+  console.log(str)
 }
 
