@@ -77,3 +77,14 @@ deb http://binaries.erlang-solutions.com/debian jessie contrib
 # docker
 deb https://apt.dockerproject.org/repo debian-stretch main
 
+# hs
+deb http://download.fpcomplete.com/debian jessie main
+
+# golang
+deb http://ppa.launchpad.net/ubuntu-lxc/lxd-stable/ubuntu yakkety main
+# deb-src http://ppa.launchpad.net/ubuntu-lxc/lxd-stable/ubuntu yakkety main
+
+# sqlitebrowser
+deb http://ppa.launchpad.net/linuxgndu/sqlitebrowser-testing/ubuntu yakkety main
+# deb-src http://ppa.launchpad.net/linuxgndu/sqlitebrowser-testing/ubuntu yakkety main
+
