@@ -339,3 +339,5 @@ alias droplet='ssh root@zacanger.com'
 alias clock='zclock -24 -green'
 alias plaidchat='plaidchat --close-to-tray --minimize-to-tray'
 
+alias alarm='zalarm.sh 09:00 mpv ~/.alarm/lim-kim-paper-bird.mp3'
+
