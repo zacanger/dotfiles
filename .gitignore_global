@@ -18,14 +18,7 @@
 *.tar
 *~
 .completer.hist
-.config/nvim/bundle/*
-.config/nvim/session/*
-.config/ranger/bookmarks
-.config/ranger/history
-.init.vim-rplugin~
-.netrwhist
 /.build/
-bin/x
 TAGS
 __pycache__/
 _build/
@@ -33,7 +26,6 @@ bower_components
 build.js
 bundle
 bundle.js
-data
 db
 node_modules
 tags
