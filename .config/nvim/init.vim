@@ -473,7 +473,7 @@ let g:syntastic_python_checkers=['python', 'flake8']
 let g:syntastic_python_flake8_post_args='--ignore=W391'
 " js
 let g:syntastic_javascript_jshint_generic = 1
-let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['eslint']
 " sh
 let g:syntastic_sh_checkers = ['sh']
 " hs
