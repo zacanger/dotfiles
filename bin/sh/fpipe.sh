@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Pipe text to a program which does not read from stdin (using a tempfile
-# argument)
+# pipe text to program that doesn't read from stdin (using tempfile)
 
 tmpfile=`mktemp`
 cat >$tmpfile
 $@ $tmpfile
 rm $tmpfile
+
