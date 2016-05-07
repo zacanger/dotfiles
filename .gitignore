@@ -1,10 +1,10 @@
 *$py.class
-*.key
 *.7z
 *.bz2
 *.egg
 *.elf
 *.gz
+*.key
 *.ko
 *.lock
 *.log
@@ -17,6 +17,7 @@
 *.swp
 *.tar
 *~
+.alarm.mp3
 .completer.hist
 .config/nvim/bundle/*
 .config/nvim/session/*
@@ -24,11 +25,13 @@
 .config/ranger/history
 .init.vim-rplugin~
 .netrwhist
+.vimsession~
 /.build/
-bin/x
 TAGS
+Thunar
 __pycache__/
 _build/
+bin/x
 bower_components
 build.js
 bundle
@@ -39,6 +42,4 @@ node_modules
 tags
 x/
 xfce4
-Thunar
-.alarm.mp3
 
