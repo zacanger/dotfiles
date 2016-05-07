@@ -8,7 +8,7 @@ echo okay! alarm happening at $(date --date="$date")
 
 sleep $(( $(date --date="$date" +%s) - $(date +%s) ))
 
-echo WAKE THE FUCK UP
+echo wake up
 
 while true; do
   /usr/bin/mpv /home/z/Dropbox/z/.alarm.mp3
