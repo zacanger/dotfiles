@@ -15,15 +15,13 @@
   line-height: 20px !important;
 }
 
-/* Hide modules and promotions */
+/* Hide modules, inline media, and promotions */
 .moments, .js-moments-tab, .Icon--lightning, .trends, .promptbird, .enhanced-media-thumbnails,
 .content-header, .promoted-tweet, .Footer, .site-footer, .search-icon, .search-input,
 .DashboardProfileCard, .WhoToFollow, .MomentsPage-sidebar, .MomentsPage-sidebar--left, .Grid-cell,
 .u-lg-size1of4, .u-size1of3, .MomentCategories, .module, .wtf-module, .recap-header,
-.dismissible-content { display: none!important; }
-
-/* Hide inline media */
-.cards-media-container, .card2 { display: none!important; }
+.dismissible-content, .topbar-tweet-btn, .moments, .cards-media-container,
+.card2 { display: none!important; }
 
 /* Show media in detail view */
 .permalink-tweet .cards-media-container,
@@ -32,9 +30,11 @@
 /* Remove (Some) Borders */
 .stream-item, .stream-loading, .stream-end, .timeline-tweet-box, .tweet-box,
 .module { border: none!important; }
+
 .stream-item-activity-me {
   border-bottom: none!important;
 }
+
 .user-similarities-list {
   border: 1px solid rgba(0, 0, 0, .1)!important;
   overflow: hidden!important;
@@ -42,19 +42,23 @@
 
 /* Single Column Layout */
 .wrapper-settings .content-header { display: block!important; }
+
 .wrapper, .wrapper-narrow, .wrapper-permalink {
   background: #252629!important;
   width: 90%!important;
   max-width: 64em!important;
 }
-.dashboard, .content-main {
+
+.dashboard, .content-main, .QuickPromoteDialog, .quick-promote-iframe {
   float: none!important;
   width: 100%!important;
 }
 
 /* Subnavigation */
 .module ul li { display: inline-block!important; }
+
 .module ul li .Icon--caretRight { display: none!important; }
+
 .list-link { border: 0!important; }
 
 /* The light, it burns! */
@@ -71,8 +75,11 @@ body, body.ProfilePage {
   padding: 8px 2.5%!important;
   background: #252629!important;
 }
+
 .tweet-form.has-preview.has-thumbnail .tweet-box { padding-bottom: 80px!important; }
+
 .tweet-form .thumbnail-container { width: auto!important; }
+
 .modal {
   width: 80%!important;
   max-width: 56em!important;
@@ -80,10 +87,16 @@ body, body.ProfilePage {
   right: 0!important;
   margin: 0 auto!important;
 }
+
 a { color: #58c9b5!important; }
+
 .icon, .bird-topbar-etched, .Icon, .Icon--bird, .bird-topbar-etched, .twitter-button, .image-selector,
 .photo-selector, .tweet-camera, .add-photo-label, .add-photo-icon, .btn, .Icon--cameraPlus, .Icon--camera,
 .icon-btn { color: #58c9b5!important; }
+
 button#global-new-tweet-button, .AppContent, span,
+
 div { background: #252629!important; }
+
 .tweet-box-home-timeline { color: #eee; }
+
