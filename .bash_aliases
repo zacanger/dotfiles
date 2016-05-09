@@ -339,4 +339,6 @@ alias shrug='echo "¯\_(ツ)_/¯"'
 alias droplet='ssh root@zacanger.com'
 alias clock='zclock -24 -green'
 alias plaidchat='plaidchat --close-to-tray --minimize-to-tray'
+alias ris='ristretto'
+alias ris.='ristretto .'
 

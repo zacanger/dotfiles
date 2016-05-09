@@ -8,11 +8,11 @@
 ## everything on there is still valid, though I did check every single
 ## one out, manually, in autumn 2015.
 ## `/etc/apt/sources.list` contains the following commented section:
-# See sources.list.d/ for more repos
-# deb http://ftp.us.debian.org/debian/ sid main non-free contrib
-# deb-src http://ftp.us.debian.org/debian/ sid main non-free contrib
-# deb http://ftp.us.debian.org/debian experimental main non-free contrib
-# deb-src http://ftp.us.debian.org/debian experimental main non-free contrib
+## See sources.list.d/ for more repos
+# deb http://httpredir.debian.org/debian sid main contrib non-free
+# deb-src http://httpredir.debian.org/debian sid main contrib non-free
+# deb http://httpredir.debian.org/debian expermiental contrib non-free
+# deb-src http://httpredir.debian.org/debian experimental main contrib non-free
 
 # bbqtools-basic & bbq-tools; also check github
 deb http://linuxbbq.org/repos/apt/debian sid main
