@@ -58,3 +58,5 @@
 [sequence]
 	editor = rebase-editor
 
+[http]
+	postBuffer = 524288000

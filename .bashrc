@@ -82,6 +82,7 @@ export LOLCOMMITS_ANIMATE='2'
 export MANPATH=~/doc:$MANPATH
 export NODE_ENV=development
 export ATOM_DEV_RESOURCE_PATH='~/.atom/dev'
+export GITHUB_USER='zacanger'
 
 # j, rbenv, and fzf
 . /usr/share/autojump/autojump.bash

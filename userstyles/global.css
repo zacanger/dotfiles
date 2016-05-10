@@ -62,7 +62,7 @@ body a:visited, body a:visited *:not(img) {
   color: #df8585!important;
 }
 
-body input, body textarea, code, pre, input, textarea, code span {
+code, pre, input, textarea, code span, pre span {
   background: #101010!important;
   border-color: #EDCECE!important;
   color: #cec8ea!important;
