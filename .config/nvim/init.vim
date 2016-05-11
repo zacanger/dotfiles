@@ -684,3 +684,5 @@ let g:context_filetype#same_filetypes = '_'
 "     return result
 " endfunction
 
+let g:wakatime_PythonBinary = '/usr/bin/python3.5'
+

@@ -9,7 +9,8 @@
 
 .fbJewel {
   margin-left: -17px !important;
-  margin-top: 10px !important; }
+  margin-top: 10px !important;
+}
 
 .fbJewel #FBPBUTT {
   font-size: 12px !important;
@@ -20,7 +21,8 @@
   text-shadow: rgba(0, 0, 0, 0.49804) 0px -1px 0px;
   padding: 6px 11px 6px;
   margin-right: 0px;
-  border-radius: 2px; }
+  border-radius: 2px;
+}
 
 .fbJewel #FBPBUTT:hover { background-color: rgba(0, 0, 0, 0.1); }
 
@@ -32,24 +34,28 @@
   left: -1px;
   position: absolute;
   top: 5px;
-  width: 1px; }
+  width: 1px;
+}
 
 ._3zm-:hover a, ._3zm- a:focus, ._3zm- a._2myk { background: transparent; }
 
 ._3zm- a:hover { background-color: rgba(0, 0, 0, 0.1) !important; }
 
 html ._5vb_._5vb_.hasLeftCol .hasRightCol div#contentArea, .fbTimelineTwoColumn {
-  width: auto !important; }
+  width: auto !important;
+}
 
 #globalContainer { width: auto !important; }
 
 #globalContainer, #mainContainer #contentCol, #mainContainer #contentArea {
   max-width: 1000px !important;
-  min-width: 784px !important; }
+  min-width: 784px !important;
+}
 
 ._4k20 {
   width: 100% !important;
-  text-align: center; }
+  text-align: center;
+}
 
 .uiScaledImageContainer { margin: 0 auto; }
 
@@ -59,32 +65,39 @@ html ._5vb_._5vb_.hasLeftCol .hasRightCol div#contentArea, .fbTimelineTwoColumn 
 
 .userContentWrapper .mtm {
   width: 470px;
-  margin: 10px auto 0 auto; }
+  margin: 10px auto 0 auto;
+}
 
 @media screen and (min-width: 1400px) {
   #mainContainer #contentCol {
     margin: 0 0 0 192px !important;
-    max-width: 1280px; }
+    max-width: 1280px;
+  }
 
   .timelineLayout #mainContainer #contentCol { margin: 0 auto !important; }
 
   #mainContainer #contentArea { max-width: 1280px !important; }
 
-  #leftCol { padding-left: 0 !important; } }
+  #leftCol { padding-left: 0 !important; }
+}
 
 #headerArea { width: 100% !important }
 
 @media screen and (max-width: 1700px) {
-  .coverWrap { min-height: 275px !important; } }
+  .coverWrap { min-height: 275px !important; }
+}
 
 @media screen and (max-width: 1050px) {
-  .coverWrap { min-height: 250px !important; } }
+  .coverWrap { min-height: 250px !important; }
+}
 
 @media screen and (min-width: 1700px) {
-  .coverWrap { min-height: 320px !important; } }
+  .coverWrap { min-height: 320px !important; }
+}
 
 @media screen and (min-width: 2155px) {
-  .coverWrap { min-height: 400px !important; } }
+  .coverWrap { min-height: 400px !important; }
+}
 
 @media screen and (min-width: 2155px) {
   #mainContainer #contentCol { max-width: 2560px !important; }
@@ -92,50 +105,60 @@ html ._5vb_._5vb_.hasLeftCol .hasRightCol div#contentArea, .fbTimelineTwoColumn 
   ._5pcb > div {
     width: calc(50% - 42px) !important;
     padding-right: 42px;
-    float: left; }
+    float: left;
+  }
 
   .groupJumpLayout ._5pcb > div {
     width: 100% !important;
     padding: 0 !important;
-    float: none !important; }
+    float: none !important;
+  }
 
-  .async_saving ._5usc, #more_pager_pagelet_5670f212047cd9a07517991 {
-    display: none !important; } }
+  .async_saving ._5usc, #more_pager_pagelet_5670f212047cd9a07517991 { display: none !important; }
+}
 
 @media screen and (min-width: 2155px) {
   body #mainContainer, body #streamPagelet, body #mainContainer #contentArea,
   body #mainContainer #contentCol, body #content, body #globalContainer {
     width: 100% !important;
-    max-width: 1550px !important; } }
+  max-width: 1550px !important; }
+}
 
 @media screen and (min-width: 2220px) {
   body #mainContainer, body #streamPagelet, body #mainContainer #contentArea,
   body #mainContainer #contentCol, body #content, body #globalContainer {
-    max-width: 1600px !important; } }
+  max-width: 1600px !important; }
+}
 
 @media screen and (min-width: 2400px) {
   body #mainContainer, body #streamPagelet, body #mainContainer #contentArea,
   body #mainContainer #contentCol, body #content, body #globalContainer {
-    max-width: 1780px !important; } }
+  max-width: 1780px !important; }
+}
 
 @media screen and (min-width: 2560px) {
   body #mainContainer, body #streamPagelet, body #mainContainer #contentArea,
   body #mainContainer #contentCol, body #content, body #globalContainer {
-    max-width: 1940px !important; } }
+  max-width: 1940px !important; }
+}
 
 @media screen and (min-width: 2155px) {
   html body #mainContainer #contentArea {
     width: 1550px !important;
-    max-width: 2000px !important; } }
+  max-width: 2000px !important; }
+}
 
 @media screen and (min-width: 2220px) {
-  html body #mainContainer #contentArea { width: 1600px !important; } }
+  html body #mainContainer #contentArea { width: 1600px !important; }
+}
 
 @media screen and (min-width: 2400px) {
-  html body #mainContainer #contentArea { width: 1780px !important; } }
+  html body #mainContainer #contentArea { width: 1780px !important; }
+}
 
 @media screen and (min-width: 2560px) {
-  html body #mainContainer #contentArea { width: 1940px !important; } }
+  html body #mainContainer #contentArea { width: 1940px !important; }
+}
 
 .fbTimelineCapsule ._5nb8 { width: calc(100% - 338px); }
 
@@ -151,7 +174,8 @@ html ._5vb_._5vb_.hasLeftCol .hasRightCol div#contentArea, .fbTimelineTwoColumn 
   left: 0;
   font-size: 20px;
   text-align: center;
-  display: block; }
+  display: block;
+}
 
 #FBPNewsAlert {
   position: fixed !important;
@@ -162,7 +186,8 @@ html ._5vb_._5vb_.hasLeftCol .hasRightCol div#contentArea, .fbTimelineTwoColumn 
   top: auto !important;
   font-size: 20px !important;
   text-align: center !important;
-  display: none !important; }
+  display: none !important;
+}
 
 #FBPNewsAlert a#FBPDismissNewsAlert { font-size: 32px; }
 
@@ -170,13 +195,15 @@ html ._5vb_._5vb_.hasLeftCol .hasRightCol div#contentArea, .fbTimelineTwoColumn 
 
 .pop_content .dialog_content {
   background: transparent;
-  border: none; }
+  border: none;
+}
 
 .generic_dialog_modal, .generic_dialog_fixed_overflow { background: transparent; }
 
 ._3qx ._3ixn, .stageWrapper .stage {
   border-radius: 10px 0 0 10px;
-  background-color: rgba(0, 0, 0, 0.2) !important; }
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
 
 .stageWrapper img { border-radius: 10px; }
 
@@ -190,15 +217,16 @@ html ._5vb_._5vb_.hasLeftCol .hasRightCol div#contentArea, .fbTimelineTwoColumn 
 
 ._dcs, ._dcs ._5v3q ._4-eo { box-shadow: none !important; }
 
-._dcs .__c_:after, ._dcs ._6l-:after, ._dcs .scaledImageFitWidth {
-  border-color: transparent !important }
+._dcs .__c_:after, ._dcs ._6l-:after, ._dcs .scaledImageFitWidth { border-color: transparent !important }
 
 div._4-u2.mvm._495i {
   width: 175px !important;
   top: -31px;
-  margin-left: 8px; }
+  margin-left: 8px;
+}
 
 ._5r69 {
   width: 469px;
-  margin: 0 auto; }
+  margin: 0 auto;
+}
 
