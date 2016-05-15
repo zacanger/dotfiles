@@ -2,10 +2,10 @@
   "name": "foo",
   "version": "0.1.0",
   "description": "bar quux baz",
-  "main": "",
+  "main": "index.js",
   "scripts": {
     "test": "",
-    "start": ""
+    "start": "node index"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,8 @@
     "email": "zac@zacanger.com",
     "url": "http://zacanger.com"
   },
+  "homepage": "https://github.com/zacanger/foo#readme",
+  "bugs": "https://github.com/zacanger/foo/issues",
   "license": "WTFPL",
   "dependencies": {
   },

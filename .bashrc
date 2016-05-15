@@ -23,6 +23,8 @@ shopt -s dotglob
 # see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+LESSOPEN="| src-hilite-lesspipe.sh %s"
+
 # forward history search with ctrl-s
 stty stop ""
 

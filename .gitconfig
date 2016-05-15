@@ -41,7 +41,6 @@
 	web = instaweb
   add = add -A
 	p = push
-  go = !git add -A && git commit -am "foo" && git push
   rpm = remote prune origin
 [filter "ignoreline"]
 	clean = "sed '/#ignoreline$/'d"
@@ -60,3 +59,6 @@
 
 [http]
 	postBuffer = 524288000
+[init]
+	templatedir = /home/z/.git-templates
+
