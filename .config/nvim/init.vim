@@ -58,6 +58,11 @@ NeoBundle 'Shougo/vimproc.vim', {
       \    },
       \ }
 
+"" NVIM colour -- of MY terminals, this only works with tortosa
+" if has("nvim")
+  " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" endif
+
 "" Vim-Session
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-session'

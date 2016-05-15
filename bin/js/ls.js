@@ -3,7 +3,7 @@
 const
   fs       = require('fs')
 , path     = require('path')
-, dirPath  = process.argv[2]
+, dirPath  = process.argv[2] || '.'
 , files    = []
 
 fs.readdir(dirPath, (err, list) => {
