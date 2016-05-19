@@ -691,3 +691,7 @@ let g:context_filetype#same_filetypes = '_'
 
 let g:wakatime_PythonBinary = '/usr/bin/python3.5'
 
+let g:jsx_ext_required = 0
+
+let g:neomake_javascript_enabled_makers = ['eslint']
+

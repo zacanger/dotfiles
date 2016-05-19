@@ -1,9 +1,9 @@
 # ~/.bash_aliases : sourced by ~/.bashrc
 
-# kill everything, goddammit
+# kill everything
 alias killx='sudo pkill -9 Xorg'
 
-# omg just go away
+# bye
 alias reboot='sudo /sbin/reboot'
 alias poweroff='sudo /sbin/poweroff'
 alias halt='sudo /sbin/halt'
@@ -20,7 +20,6 @@ alias fn='cd ~/.bash_functions'
 alias fns='ls ~/.bash_functions/'
 
 # git &co.
-# alias gf='git-feats'
 alias gcl='git clone'
 alias grv='git remote -v'
 alias gst='git st'
@@ -33,8 +32,6 @@ alias hc='hub clone'
 alias hl='hub clone'
 alias hcl='hub clone'
 alias gp='git push'
-alias com='commemoji'
-alias ae='git add -A && commemoji'
 alias glog='git log --pretty=oneline'
 alias githist='git log -S'
 alias gf='git fetch'
@@ -43,8 +40,6 @@ alias pull='git pull'
 
 # development package managers
 alias ni='npm i'
-alias npmi='npm init -y && packy'
-alias newnpm='npmi'
 alias ns='npm start'
 alias ninit='cp ~/.package.json ./package.json'
 alias npms='npm start'
@@ -53,10 +48,9 @@ alias nid='npm install --save-dev'
 alias nis='npm install --save'
 alias npmu='npm update -g'
 alias npmupd='npm update -g'
-alias npmr='npm run'
+alias nr='npm run'
 alias npmc='npm cache clean ; npm cache clean -g'
-alias nu='npm i -g n ; n latest ; npm i -g npm ; node -v ; npm -v'
-alias un='npmc ; nu '
+alias nu='npm c ; npm i -g n ; n latest ; npm i -g npm ; node -v ; npm -v'
 alias nt='npm test'
 alias bumpversion='ae "version bump" && gp && npm publish'
 alias bupd='bower update'
@@ -133,48 +127,39 @@ alias a='ls -A'
 alias aa='ls -A'
 alias f='k -1'
 
-# ~~ag~~ _grep_ things
+# grep things
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-# browsers rock.
+# starting browsers
 alias ch='chromium'
 alias ff='firefox'
 alias ffs='firefox --safe-mode'
 alias ffm='firefox --ProfileManager'
-alias ffmps='firefox --ProfileManager --safe-mode'
-alias ot='otter-browser'
+alias ffms='firefox --ProfileManager --safe-mode'
 alias qu='qutebrowser'
-alias lk='luakit'
 alias sm='seamonkey'
-alias ice='iceweasel'
 
-# browsers suck.
+# killing browsers
 alias kk='kill-tabs'
 alias kch='pkill -15 chromium'
-alias kice='pkill -15 iceweasel'
 alias kff='pkill -15 firefox'
 alias ksm='pkill -15 seamonkey'
 alias kqu='pkill -15 qutebrowser'
-alias klk='pkill -15 luakit'
 
-# dropbox, aka ~/
+# dropbox
 alias dbup='dropbox start'
 alias dbdn='dropbox stop'
 alias dbst='dropbox status'
 alias dbls='dropbox filestatus ~/Dropbox/*'
 
-# twatter
+# twitter
 alias tweet='twidge update'
 alias feed='twidge lsrecent -w `tput cols`'
 alias mytw='twidge lsarchive -w `tput cols`'
-
-# https://github.com/nvbn/thefuck (correct me, please)
-alias fuck='eval $(thefuck $(fc -ln -1))'
-alias please='fuck'
 
 # this serves as a replacement for the script from http://motd.sh/
 # for your config, change the zip code, degrees (to c, if needed), stocks (to y, if needed),
@@ -190,11 +175,8 @@ alias irebase="git --no-pager log --oneline | ipt | cut -d ' ' -f 1 | xargs -o g
 alias icheckout="git --no-pager log --oneline | ipt | cut -d ' ' -f 1 | xargs git checkout"
 
 # editor things
-# alias atom='atom -d'
-# alias ab='atom-beta -d'
 alias ad='atom -d'
-# alias abd='atom-beta -d'
-# alias apmupd='apm update --no-confirm'
+alias apmupd='apm update --no-confirm'
 alias li='light'
 alias ta='textadept'
 alias v='v.sh'
@@ -230,6 +212,7 @@ alias all='compgen -c | sort -u'
 alias apr="apropos"
 alias bbp='./bb.sh post'
 alias bofhexcuse='telnet towel.blinkenlights.nl 666'
+alias starwars='telnet towel.blinkenlights.nl'
 alias bs='bs.sh'
 alias c2f='ctof.sh'
 alias c='clear'
@@ -270,7 +253,6 @@ alias fs='ranger'
 alias fz='filezilla'
 alias glance='glance -p 9876 -v'
 alias gui='startxfce4'
-alias gv='gpicview'
 alias h='history'
 alias hackkurlist='wget -O - hackurls.com/ascii | less'
 alias hackurls='w3m hackurls.com'
@@ -299,7 +281,7 @@ alias ms='msee'
 alias mu='mocp -y -T moc_theme'
 alias names='names.sh'
 alias nodi='nodei'
-alias nr='repl.history'
+alias nodr='repl.history'
 alias pa='xclip -o'
 alias pb='pinboard'
 alias phps='php -S 127.0.0.1:5555'
@@ -335,11 +317,11 @@ alias zh='zathura'
 alias chucknorris='curl -s http://api.icndb.com/jokes/random/ | jq .'
 alias dict='dict.sh'
 alias shrug='echo "¯\_(ツ)_/¯"'
-# alias droplet='ssh root@162.243.49.187'
 alias droplet='ssh root@zacanger.com'
 alias clock='zclock -24 -green'
 alias plaidchat='plaidchat --close-to-tray --minimize-to-tray'
 alias ris='ristretto'
 alias ris.='ristretto .'
 alias rickroll='curl -L http://bit.ly/10hA8iC'
+alias bn='babel-node'
 

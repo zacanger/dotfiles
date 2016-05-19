@@ -92,3 +92,7 @@ NeoBundle 'wincent/terminus'
 NeoBundle 'xsnippet/vim-xsnippet'
 
 NeoBundle 'ElmCast/elm-vim'
+NeoBundle 'jaxbot/browserlink.vim'
+NeoBundle 'raichoo/purescript-vim'
+NeoBundle 'frigoeu/psc-ide-vim'
+NeoBundle 'neomake/neomake'
