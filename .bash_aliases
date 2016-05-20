@@ -324,4 +324,6 @@ alias ris='ristretto'
 alias ris.='ristretto .'
 alias rickroll='curl -L http://bit.ly/10hA8iC'
 alias bn='babel-node'
+alias ae='acp'
+alias shittyusername='curl http://www.shittyusernames.com/api/get-username ; echo'
 

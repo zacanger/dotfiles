@@ -1,31 +1,28 @@
 {
   "name": "foo",
-  "version": "0.1.0",
   "description": "bar quux baz",
-  "main": "index.js",
-  "scripts": {
-    "test": "",
-    "start": "node index"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/zacanger/foo.git"
-  },
-  "keywords": [
-    "",
-    ""
-  ],
+  "version": "0.1.0",
   "author": {
     "name": "Zac Anger",
     "email": "zac@zacanger.com",
     "url": "http://zacanger.com"
   },
-  "homepage": "https://github.com/zacanger/foo#readme",
-  "bugs": "https://github.com/zacanger/foo/issues",
   "license": "WTFPL",
-  "dependencies": {
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": ""
   },
-  "devDependencies": {
-  }
+  "homepage": "https://github.com/zacanger/foo#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zacanger/foo.git"
+  },
+  "bugs": "https://github.com/zacanger/foo/issues",
+  "keywords": [
+    "",
+    ""
+  ],
+  "dependencies": {},
+  "devDependencies": {}
 }
-
