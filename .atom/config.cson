@@ -1,6 +1,6 @@
 "*":
   Termrk:
-    defaultHeight: 183
+    defaultHeight: 185
     fontFamily: "Hasklig"
     fontSize: "12px"
   "atom-autocomplete-php": {}
@@ -46,8 +46,10 @@
       "tidy-markdown"
       "spell-check"
       "linter-jshint"
-      "linter-eslint"
       "language-javascript-semantic"
+      "jshint"
+      "language-javascript-jsx"
+      "linter-eslint"
     ]
     packagesWithKeymapsDisabled: [
       "wakatime"
@@ -127,6 +129,9 @@
     apikey: "dfecd779-149d-4be0-84de-260ba6499fc6"
   welcome:
     showOnStartup: false
+".attribute-values.js.jsx.source":
+  editor:
+    preferredLineLength: 120
 ".babel.regexp.source":
   editor:
     preferredLineLength: 120
@@ -143,8 +148,14 @@
     preferredLineLength: 120
     scrollPastEnd: true
     showInvisibles: true
+".js.jsx.react.source":
+  editor:
+    preferredLineLength: 120
 ".js.jsx.source":
   editor:
     preferredLineLength: 120
     scrollPastEnd: true
     showInvisibles: true
+".js.source.subtlegradient":
+  editor:
+    preferredLineLength: 120

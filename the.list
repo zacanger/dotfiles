@@ -9,6 +9,7 @@
 ## one out, manually, in autumn 2015.
 ## `/etc/apt/sources.list` contains the following commented section:
 ## See sources.list.d/ for more repos
+## ftp://ftp.spline.de/pub/aptosid/debian/
 # deb http://httpredir.debian.org/debian sid main contrib non-free
 # deb-src http://httpredir.debian.org/debian sid main contrib non-free
 # deb http://httpredir.debian.org/debian expermiental contrib non-free
