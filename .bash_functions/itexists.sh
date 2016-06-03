@@ -1,5 +1,5 @@
 # usage : if itexists foo ; then (do things)
-ifexists() {
+itexists() {
   command -v "$1" &> /dev/null ;
 }
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-# loosely based on bbgallery by Dave Crouse (Copyright 2010 crouse@usalug.net, GPL3)
+# gh:zacanger || wtfpl
+# loosely based on bbgallery by dave crouse
 
 clear
 # intro
