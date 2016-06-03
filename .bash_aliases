@@ -79,6 +79,7 @@ alias what-source='apt-cache show "$1" | grep "^Filename:" | sed -e "s:\(.*\)/\(
 # navigation
 alias Cd='cd'
 alias CD='cd'
+alias cd..='cd ..'
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
