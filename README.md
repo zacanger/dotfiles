@@ -23,8 +23,7 @@ things to know:
   * `unused.list`  --  unused sources.list entries
   * `dpkg.list`  --  actually `apt-get install -fy` list, but that's not so succinct
   * `npm.list`  --  `npm i -g` all these things
-  * `pip2.list`  --  lol what's a ven
-  * `pip3.list`  --  or ~~pip3.4~~ pip3.5, or pip3.seventeen, or python6-easy_pip.tools... whatever works
+  * `pip.list`  --  i try to use 3 as much as possible but some of these might actually be 2
 * i mostly use vim, though i really enjoy lighttable.
   * i don't use vs code, ever, but saved that config file from the one time that i gave in and tried it out. it's actually still a total piece of crap, as it happens, and its license is just _absurd_.
   * textadept configs might be kind of very messy, since i only comprehend about 30% of what i'm trying to write in lua
