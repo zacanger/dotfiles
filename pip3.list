@@ -387,3 +387,5 @@ zerobin (0.5)
 zerodoc (0.2.3)
 zope.hookable (4.0.4)
 zope.interface (4.1.3)
+docker-squash
+
