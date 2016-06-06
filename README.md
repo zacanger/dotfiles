@@ -1,32 +1,32 @@
-my `~/`
+my `$HOME`
 
-there are further docs in with the scripts and in my doc repo.
+Check my doc repo for documentation, and also in the `bin` dir.
 
-these are very definitely my own personal configs, not really set up with others' uses in mind, but please feel free fork/grab/download/use away.
+These aren't really set up specifically with other people in mind, but
+please feel free to use anything you like. Just keep in mind that some
+stuff might not work exactly the way you expect.
 
-this repo is kept in dropbox (yes, i know, nonfree services…) for super extra convenience. 90% of what's in here is symlinked into `/home/z`, so there may be references to this path scattered about.
+I keep this repo in Dropbox and symlink most things to `/home/z`, so there
+may be some references to that path scattered around. I'm making an effort
+to clean that up and just use `$HOME` instead.
 
-things to know:
+Things to know:
 
-* i use debian sid
-* on three laptops of _vastly_ varying age and specs
-* bash
-* python 3 when possible
-* i've switched to neovim, so while most vim configs will be compatible, that's just something to keep in mind
-* i don't actually know perl, not really
-* the scripts here are slowly being weeded out, and many longer, more complex ones are being replaced
-  * it used to be that almost all of them were found/copied (and they should all have proper attribution, i believe)
-  * the original scripts written in node, ruby, php, shell, and python are growing in number
-    * especially the node ones
-* the lists are meant for fresh debian installs (on sid, ish)
+* This is shared between four Debian Sid laptops and one (work) Mac.
+* Bash 4, Python3 when possible, Node latest, Neovim.
+* I don't know Perl.
+* There's an older archive branch and an old old repo of old old configs.
+* I'm trying to weed out everything under `bin` because there's a crapton
+  there that I've probably only used once or twice.
+* The files called `*.list` are to keep track of what I need on a fresh PC.
   * `the.list`  --  /etc/apt/sources.list.d/the.list
   * `unused.list`  --  unused sources.list entries
   * `dpkg.list`  --  actually `apt-get install -fy` list, but that's not so succinct
   * `npm.list`  --  `npm i -g` all these things
   * `pip.list`  --  i try to use 3 as much as possible but some of these might actually be 2
-* i mostly use vim, though i really enjoy lighttable.
-  * i don't use vs code, ever, but saved that config file from the one time that i gave in and tried it out. it's actually still a total piece of crap, as it happens, and its license is just _absurd_.
-  * textadept configs might be kind of very messy, since i only comprehend about 30% of what i'm trying to write in lua
-  * the nanorc and files will make your life _so much better_ (if you don't want to learn vi). seriously, especially for those who use graphical editors but also have virtual servers somewhere, just grab these bits and `export EDITOR='nano'`. you'll be delighted.
-* i have two directories hidden from git (`~/x/` and `~/bin/x/`); they're referenced in some other files, and hold executables that are either totally non-free, totally non-original, totally full of extra stuff i don't want in my path (because my path is defined in a very not-safe way…), or just totally too large to want to put under version control.
+* I have two directories hidden from git (`~/x/` and `~/bin/x/`);
+  they're referenced in some other files, and hold executables that are either totally
+  non-free, totally non-original, totally full of extra stuff i don't want in my path
+  (because my path is defined in a very not-safe way…), or just totally too large to want
+  to put under version control.
 

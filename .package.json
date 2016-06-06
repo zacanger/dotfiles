@@ -1,6 +1,6 @@
 {
-  "name": "foo",
-  "description": "bar quux baz",
+  "name": "",
+  "description": "",
   "version": "0.1.0",
   "author": {
     "name": "Zac Anger",
@@ -13,12 +13,12 @@
     "start": "node index",
     "test": ""
   },
-  "homepage": "https://github.com/zacanger/foo#readme",
+  "homepage": "https://github.com/zacanger/#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zacanger/foo.git"
+    "url": "https://github.com/zacanger/.git"
   },
-  "bugs": "https://github.com/zacanger/foo/issues",
+  "bugs": "https://github.com/zacanger//issues",
   "keywords": [
     "",
     ""
@@ -26,3 +26,4 @@
   "dependencies": {},
   "devDependencies": {}
 }
+
