@@ -30,7 +30,7 @@ stty stop ""
 
 # color ls
 if [ -x /usr/bin/dircolors ]; then
-  test -r ~/.dircolours && eval "$(dircolors -b ~/.dircolours)" || eval "$(dircolors -b)"
+  test -r $HOME/.dircolours && eval "$(dircolors -b $HOME/.dircolours)" || eval "$(dircolors -b)"
 fi
 
 # colored GCC warnings and errors
@@ -76,45 +76,45 @@ xterm*)
 esac
 
 # include
-export CDPATH='.:/home/z/Dropbox/work:/home/z/Dropbox/work/repos:/home/z/Dropbox/z/bin:/home/z/Dropbox/z:/usr/local/lib:/usr/local/lib/node_modules'
-export PATH=~/.gem/global/bin:~/.cabal/bin:$(find $HOME/bin/ -type d | paste -s -d:):$PATH
+export CDPATH=.:$HOME/Dropbox/work:$HOME/Dropbox/work/repos:$HOME/Dropbox/z/bin:$HOME/Dropbox/z:/usr/local/lib:/usr/local/lib/node_modules
+export PATH=$HOME/.gem/global/bin:$HOME/.cabal/bin:$(find $HOME/bin/ -type d | paste -s -d:):$PATH
 export EDITOR='nvim'
 export SLACK_USERNAME='zacanger'
 export LOLCOMMITS_ANIMATE='2'
-export MANPATH=~/doc:$MANPATH
+export MANPATH=$HOME/doc:$MANPATH
 export NODE_ENV=development
-export ATOM_DEV_RESOURCE_PATH='~/.atom/dev'
+export ATOM_DEV_RESOURCE_PATH='$HOME/.atom/dev'
 export GITHUB_USER='zacanger'
 
 # j, rbenv, and fzf
 . /usr/share/autojump/autojump.bash
 # eval "$(rbenv init -)"
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f $HOME/.fzf.bash ] && source $HOME/.fzf.bash
 
 # keep aliases and functions on their own
-if [ -f ~/.bash_aliases ]; then
-  . ~/.bash_aliases
+if [ -f $HOME/.bash_aliases ]; then
+  . $HOME/.bash_aliases
 fi
 
-if [ -d ~/.bash_functions ]; then
-  for file in ~/.bash_functions/*; do
+if [ -d $HOME/.bash_functions ]; then
+  for file in $HOME/.bash_functions/*; do
     . "$file"
   done
 fi
 
 # npm completion
-if [ -f ~/.npm-completion ]; then
-  . ~/.npm-completion
+if [ -f $HOME/.npm-completion ]; then
+  . $HOME/.npm-completion
 fi
 
 # git completion
-if [ -f ~/.git-completion ]; then
-  . ~/.git-completion
+if [ -f $HOME/.git-completion ]; then
+  . $HOME/.git-completion
 fi
 
 # hub completion
-if [ -f ~/.hub-completion ]; then
-  . ~/.hub-completion
+if [ -f $HOME/.hub-completion ]; then
+  . $HOME/.hub-completion
 fi
 
 # and, finally... liquidprompt; load from interactive shell, don't from scripts/scp
