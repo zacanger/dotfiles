@@ -3,7 +3,7 @@
 r() {
   local i max
   max=$1; shift;
-  for ((i=1; i <= max ; i++)); do  # --> C-like syntax
+  for ((i=1; i <= max ; i++)); do
     eval "$@";
   done
 }
