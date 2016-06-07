@@ -330,4 +330,5 @@ alias ae='acp'
 alias shittyusername='curl http://www.shittyusernames.com/api/get-username ; echo'
 alias todo='nvim ~/Dropbox/.todo.json'
 alias cmps='compas clean && compass compile && compass watch'
+alias dockerlast='docker ps -lq'
 

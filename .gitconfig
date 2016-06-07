@@ -42,6 +42,8 @@
   add = add -A
 	p = push
   rpm = remote prune origin
+  alias = config --get-regexp 'alias.*'
+  search = "grep _Iin"
 [filter "ignoreline"]
 	clean = "sed '/#ignoreline$/'d"
 [help]
