@@ -176,6 +176,17 @@ alias irm="ls | ipt -m | xargs rm -rf"
 alias irebase="git --no-pager log --oneline | ipt | cut -d ' ' -f 1 | xargs -o git rebase -i"
 alias icheckout="git --no-pager log --oneline | ipt | cut -d ' ' -f 1 | xargs git checkout"
 
+# docker
+alias dockerlast='docker ps -lq'
+alias dockerkillall='docker kill $(docker ps -a -q)'
+alias dockerremovecontainers='docker rm $(docker ps -a -q)'
+alias dockerremoveimages='docker rmi $(docker images -q -f dangling=true)'
+alias dockergetip='[ -n "$1" ] && docker inspect --format "{{ .NetworkSettings.IPAddress }}" $1'
+alias dockergetid='[ -n "$1" ] && docker inspect --format "{{ .ID }}" $1'
+alias dockergetimage='[ -n "$1" ] && docker inspect --format "{{ .Image }}" $1'
+alias dockergetstate='[ -n "$1" ] && docker inspect --format "{{ .State.Running }}" $1'
+alias dockergetport='[ -n "$1" ] && docker inspect --format "{{ .NetworkSettings.Ports }}" $1'
+
 # editor things
 alias ad='atom -d'
 alias apmupd='apm update --no-confirm'
@@ -329,6 +340,5 @@ alias bn='babel-node'
 alias ae='acp'
 alias shittyusername='curl http://www.shittyusernames.com/api/get-username ; echo'
 alias todo='nvim ~/Dropbox/.todo.json'
-alias cmps='compas clean && compass compile && compass watch'
-alias dockerlast='docker ps -lq'
+alias cmps='compass clean && compass compile && compass watch'
 
