@@ -9,16 +9,16 @@ const
 
 console.log(from, '===>', to)
 
-readFrom.on('data', (chunk) => {
+readFrom.on('data', chunk => {
   writeTo.write(chunk)
 })
 readFrom.on('end', () => {
   writeTo.end()
 })
-readFrom.on('error', (err) => {
+readFrom.on('error', err => {
   console.log('error!', err)
 })
-writeTo.on('error', (err) => {
+writeTo.on('error', err => {
   console.log('error!', err)
 })
 

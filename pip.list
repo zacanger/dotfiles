@@ -70,6 +70,7 @@ clize
 cmigemo
 code2html
 colorama
+container-transform
 coverage
 cpumon.py
 cssmin

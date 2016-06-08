@@ -2,9 +2,7 @@
 
 const str = process.argv[2]
 
-function palindrome(str){
-  return str == str.split('').reverse().join('')
-}
+const pal = str => str == str.split('').reverse().join('')
 
-console.log(`is ${str} a palindrome? that's ${palindrome(str)}`)
+console.log(`is ${str} a palindrome? that's ${pal(str)}`)
 
