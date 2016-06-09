@@ -263,8 +263,8 @@ git-commander
 git-fork
 git-issues
 git-it
-git-stats-importer
 git-stats
+git-stats-importer
 git-today
 gitdown
 github-changelog
@@ -387,6 +387,7 @@ learn-generators
 learning-graphql
 learnyoucouchdb
 lebab
+leeted
 leeted
 lerna
 levelmeup
@@ -595,6 +596,7 @@ pulp
 purescript
 purescript-psa
 purify-css
+pwaify
 qrcode-terminal
 quik
 quote-cli
