@@ -1,19 +1,18 @@
-function JSONstringify(json) {
+function JSONstringify (json) {
   if (typeof json != 'string') {
     json = JSON.stringify(json, undefined, '\t')
   }
 
-  var
-    arr      = []
-  , _string  = 'color:green'
-  , _number  = 'color:darkorange'
-  , _boolean = 'color:blue'
-  , _null    = 'color:magenta'
-  , _key     = 'color:red'
+  var arr = [],
+    _string = 'color:green',
+    _number = 'color:darkorange',
+    _boolean = 'color:blue',
+    _null = 'color:magenta',
+    _key = 'color:red'
 
   json = json.replace(
     /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
-    function(match) {
+    function (match) {
       var style = _number
       if (/^"/.test(match)) {
         if (/:$/.test(match)) {
@@ -34,5 +33,4 @@ function JSONstringify(json) {
   arr.unshift(json)
   console.log.apply(console, arr)
 }
-void(0)
-
+void (0)

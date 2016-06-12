@@ -1,4 +1,4 @@
-document.onkeyup = function(evt) {
+document.onkeyup = function (evt) {
   if (evt.keyCode != 8) {
     return
   }
@@ -14,4 +14,3 @@ document.onkeyup = function(evt) {
   evt.preventDefault()
   window.history.back()
 }
-

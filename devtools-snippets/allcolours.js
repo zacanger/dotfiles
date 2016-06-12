@@ -61,9 +61,7 @@
   function rgbToHex (rgbArray) {
     var r = rgbArray[0],
 
-
       g = rgbArray[1],
-
 
       b = rgbArray[2]
     return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b)
@@ -91,7 +89,6 @@
   function colorStyle (color) {
     return 'background:' + color + ';color:' + color + ';border:1px solid #333;'
   }
-
 
   console.group('Total colors used in elements on the page: ' + window.location.href + ' are ' + allColorsSorted.length)
   allColorsSorted.forEach(function (c) {
