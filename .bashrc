@@ -85,6 +85,9 @@ export MANPATH=$HOME/doc:$MANPATH
 export NODE_ENV=development
 export ATOM_DEV_RESOURCE_PATH='$HOME/.atom/dev'
 export GITHUB_USER='zacanger'
+export JOBS=max
+
+ulimit -n 10240
 
 # j, rbenv, and fzf
 . /usr/share/autojump/autojump.bash

@@ -57,7 +57,7 @@ alias bumpversion='ae "version bump" && gp && npm publish'
 alias bupd='bower update'
 alias bi='bower install'
 alias pipupd='pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
-alias brewupd='brew update && brwe upgrade --all && brew cleanup && brew prune'
+alias brewupd='brew update && brew upgrade --all && brew cleanup && brew prune && brew doctor'
 
 # apt/dpkg stuff
 alias upd='sudo apt-get update'
@@ -343,4 +343,5 @@ alias ae='acp'
 alias shittyusername='curl http://www.shittyusernames.com/api/get-username ; echo'
 alias todo='nvim ~/Dropbox/.todo.json'
 alias cmps='compass clean && compass compile && compass watch'
+alias news='curl http://nycurl.sytes.net/'
 
