@@ -344,4 +344,5 @@ alias shittyusername='curl http://www.shittyusernames.com/api/get-username ; ech
 alias todo='nvim ~/Dropbox/.todo.json'
 alias cmps='compass clean && compass compile && compass watch'
 alias news='curl http://nycurl.sytes.net/'
+alias getjane='hc git@github.com:jane/jane-com.git com'
 
