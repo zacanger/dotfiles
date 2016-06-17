@@ -19,7 +19,7 @@ alias rl='reload'
 alias fn='cd ~/.bash_functions'
 alias fns='ls ~/.bash_functions/'
 
-# git &co.
+# git &co. ; see gitconfig for more
 alias gd='git diff'
 alias gcl='git clone'
 alias grv='git remote -v'
@@ -38,6 +38,7 @@ alias githist='git log -S'
 alias gf='git fetch'
 alias fetch='git fetch'
 alias pull='git pull'
+alias rpm='git rpm'
 
 # development package managers
 alias ni='npm i'
