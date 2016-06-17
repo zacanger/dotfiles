@@ -1,0 +1,102 @@
+@-moz-document url("chrome://browser/content/browser.xul") {
+  .devtools-horizontal-splitter { background: #282828 !important; }
+}
+
+@-moz-document url("chrome://devtools/content/framework/toolbox.xul") {
+  .default-icon { display: none !important; }
+  #toolbox-tab-options { padding: 0 !important; }
+  .devtools-tab { font: message-box !important; color: #666 !important; background: transparent; border-radius: 0 !important; width: 150px !important; border: 0 !important;}
+  .devtools-tab:hover { background: #222 !important; color: #aaa !important; border: none !important}
+  .devtools-tab[selected="true"] { color: #ccc !important; background: #333 !important; border-radius: 0 !important; border: 0 !important; box-shadow: none !important;}
+  .devtools-tab[selected="true"]:hover { background: #444 !important}
+  .devtools-tabbar { background: #181818 !important;}
+}
+
+@-moz-document url("chrome://devtools/content/webconsole.xul") {
+  #output-wrapper { position: relative; overflow: scroll !important; font-size: 16px !important;  font-family: monospace !important; background: #181818 !important; color: #ccc !important;}
+  #output-container { position: absolute; overflow: scroll !important; width: 100%}
+  .location { float: right !important; color: #fa5 !important }
+  .timestamp { color: #666 !important }
+  .method { color: #fa5 !important }
+  .url { color: #5af !important; }
+  .repeats { float: right !important; margin: 0 10px !important;  font-weight: bold}
+  .repeats:before { content: "x" }
+  .status { color: #f5a !important; }
+  .message.filtered-by-type:hover { background: #181818; box-shadow: inset 0 0 0 1px #666 }
+}
+
+@-moz-document url("chrome://devtools/content/inspector/inspector.xul") {
+  .breadcrumbs-widget-item { max-width: 300px !important; }
+  .scrollbutton-down, .scrollbutton-up { list-style-image: none !important; width: 1em}
+}
+
+@-moz-document url("chrome://devtools/content/markupview/markup-view.xhtml") {
+  body { font-size: 16px !important;  font-family: monospace !important; background: #181818 !important; }
+  .editable, .codebox { color: #ccc !important; }
+  .tag { color: #f5a !important; }
+  .attr-name { color: #5af !important; }
+  .attr-value { color: #fa5 !important; }
+  .editable:focus { outline: none !important;}
+  .attreditor:hover { border-bottom: 1px dotted #ccc !important; }
+  .theme-selected { background: #000 !important; border: 1px solid #333 !important }
+  ::-moz-selection { background: #ccc !important; color: #000; }
+}
+
+@-moz-document url("chrome://devtools/content/styleinspector/cssruleview.xhtml") {
+  html { font-size: 16px !important; font-family: monospace !important; background: #181818 !important; }
+  * { border: none !important; margin: 0 !important; }
+  .ruleview-rule-source-label { font-size: 12px !important; font-family: monospace !important; color: #5fa !important }
+  .ruleview-propertyname:hover, .ruleview-propertyvalue:hover {border-bottom: 1px dotted #ccc !important; }
+  .ruleview-propertyname { color: #5af !important; }
+  .ruleview-propertyvalue { color: #fa5 !important; white-space: pre-wrap !important; }
+  .ruleview-selector-matched { color: #f5a !important; }
+  .ruleview-selector-unmatched { color: #a62 !important; }
+  .ruleview-overridden { color: #ccc !important; }
+  .ruleview-rule-source { font-family: sans-serif !important; color: #a84 !important; }
+  .ruleview-rule-inheritance { font-family: sans-serif !important; color: #ccc !important; background: #222 !important; }
+  .ruleview-property { border-left-color: transparent !important; }
+  .ruleview-rule[uneditable="true"] { background: #080808 !important }
+  .ruleview-propertyvaluecontainer { white-space: pre-wrap !important; }
+  ::-moz-selection { background: #ccc !important; color: #000 !important; }
+}
+
+@-moz-document url("chrome://devtools/content/styleinspector/computedview.xhtml") {
+  body { font-size: 16px !important; font-family: monospace !important; color: #ccc; background: #181818 !important; }
+  .rule-text { color : #f5a !important; }
+  .other-property-value { color : #f9e !important; }
+  .theme-bg-darker { background: rgba(48,48,48,.5) !important; }
+  .property-name { color: #5af !important; }
+  .property-value { color: #fa5 !important; }
+  ::-moz-selection { background: #ccc !important; color: #000 !important; }
+}
+
+@-moz-document url("chrome://devtools/content/fontinspector/font-inspector.xhtml") {
+  * { font-size: 16px !important; background: transparent !important; color: #ccc !important; }
+  body { color: #ccc; background: #181818 !important; }
+  .font-preview { background: #aaa !important; }
+  .font-preview:hover { background: #ccc !important; }
+  .font-info { color: #fa5 !important; }
+  .font-name { color: #5af !important; }
+  #showall { background: #000 !important; }
+  ::-moz-selection { background: #ccc !important; color: #000 !important; }
+}
+
+@-moz-document url("chrome://devtools/content/layoutview/view.xhtml") {
+  body { background: #181818 !important; }
+  * { font-size: 16px !important; font-family: monospace !important; color: #ccc !important;}
+  #margins { outline: 1px dotted #ccc !important; }
+  #borders { box-shadow: 0 0 12px #888 !important; border: 2px solid #ccc !important; }
+  #content { outline: 1px dotted #ccc !important; background: #000 !important }
+  .border span { background: #222 !important; outline: 1px solid #888 !important;}
+  .border span, .padding span, .margin span { color: #ccc !important; }
+}
+
+@-moz-document url("chrome://devtools/content/netmonitor/netmonitor.xul") {
+  body { background: #181818 !important; }
+  * { font-size: 16px !important; font-family: monospace !important; color: #ccc !important;}
+  #requests-menu-footer { background: #222 !important; }
+  #requests-menu-status-button { width: auto !important; }
+  .plain.requests-menu-timings-division { }
+  .box-inherit.button-box { text-align: center !important; }
+}
+
