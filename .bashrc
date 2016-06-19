@@ -89,7 +89,6 @@ export JOBS=max
 
 ulimit -n 10240
 
-# j, rbenv, and fzf
 . /usr/share/autojump/autojump.bash
 # eval "$(rbenv init -)"
 [ -f $HOME/.fzf.bash ] && source $HOME/.fzf.bash
