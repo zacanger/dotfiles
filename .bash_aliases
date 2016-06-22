@@ -21,6 +21,7 @@ alias fns='ls ~/.bash_functions/'
 
 # git &co. ; see gitconfig for more
 alias gd='git diff'
+alias dg='gd'
 alias gcl='git clone'
 alias grv='git remote -v'
 alias gst='git st'
@@ -349,5 +350,6 @@ alias cmps='compass clean && compass compile && compass watch'
 alias news='curl http://nycurl.sytes.net/'
 alias getjane='hc git@github.com:jane/jane-com.git com'
 alias whihc='which'
-alias ebhealth='while true ; do eb health -v && sleep 15 ; done'
+alias ebhealth='while true ; do eb health -v && sleep 60 ; done'
+alias ebst='while true ; do eb status -v && sleep 60 && clear ; done'
 
