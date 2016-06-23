@@ -1,6 +1,6 @@
-/* Twitter really sucks. */
+/* twitter really sucks. */
 
-/* Tweet text styles */
+/* tweet text styles */
 .tweet-text, .ProfileTweet-text {
   font-family: monospace !important;
   font-size: 16px !important;
@@ -9,13 +9,15 @@
   margin-bottom: 0.25em !important;
 }
 
-/* Compose tweet field */
+/* compose tweet field */
 .tweet-box {
   font-size: 16px !important;
   line-height: 20px !important;
+  font-family: monospace !important;
+  color: #ddd !important;
 }
 
-/* Hide modules, inline media, and promotions */
+/* hide modules, inline media, and promotions */
 .moments, .js-moments-tab, .Icon--lightning, .trends, .promptbird, .enhanced-media-thumbnails,
 .content-header, .promoted-tweet, .Footer, .site-footer, .search-icon, .search-input,
 .DashboardProfileCard, .WhoToFollow, .MomentsPage-sidebar, .MomentsPage-sidebar--left, .Grid-cell,
@@ -23,24 +25,22 @@
 .dismissible-content, .topbar-tweet-btn, .moments, .cards-media-container,
 .card2 { display: none!important; }
 
-/* Show media in detail view */
+/* show media in detail view */
 .permalink-tweet .cards-media-container,
 .permalink-tweet .card2 { display: block!important; }
 
-/* Remove (Some) Borders */
+/* remove (some) borders */
 .stream-item, .stream-loading, .stream-end, .timeline-tweet-box, .tweet-box,
 .module { border: none!important; }
 
-.stream-item-activity-me {
-  border-bottom: none!important;
-}
+.stream-item-activity-me { border-bottom: none!important; }
 
 .user-similarities-list {
   border: 1px solid rgba(0, 0, 0, .1)!important;
   overflow: hidden!important;
 }
 
-/* Single Column Layout */
+/* single column */
 .wrapper-settings .content-header { display: block!important; }
 
 .wrapper, .wrapper-narrow, .wrapper-permalink {
@@ -54,20 +54,20 @@
   width: 100%!important;
 }
 
-/* Subnavigation */
+/* subnavigation */
 .module ul li { display: inline-block!important; }
 
 .module ul li .Icon--caretRight { display: none!important; }
 
 .list-link { border: 0!important; }
 
-/* The light, it burns! */
+/* the light, it burns! */
 body, body.ProfilePage {
   background-image: none!important;
   background-color: #252629!important;
 }
 
-/* Compose Tweet Modal */
+/* compose tweet modal */
 .tweet-box {
   width: 90%!important;
   height: auto!important;
@@ -88,11 +88,9 @@ body, body.ProfilePage {
   margin: 0 auto!important;
 }
 
-a { color: #58c9b5!important; }
-
-.icon, .bird-topbar-etched, .Icon, .Icon--bird, .bird-topbar-etched, .twitter-button, .image-selector,
+a, .icon, .bird-topbar-etched, .Icon, .Icon--bird, .bird-topbar-etched, .twitter-button, .image-selector,
 .photo-selector, .tweet-camera, .add-photo-label, .add-photo-icon, .btn, .Icon--cameraPlus, .Icon--camera,
-.icon-btn { color: #58c9b5!important; }
+.icon-btn, .twitter-atreply, .pretty-link, .js-nav, a s, a b { color: #58c9b5!important; }
 
 button#global-new-tweet-button, .AppContent, span,
 
