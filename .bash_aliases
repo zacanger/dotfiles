@@ -353,4 +353,5 @@ alias whihc='which'
 alias ebhealth='eb health --verbose --refresh'
 alias ebst='while true ; do eb status -v && sleep 60 && clear ; done'
 alias ebev='eb events -f'
+alias ghci='ghci -v0'
 
