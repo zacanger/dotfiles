@@ -350,7 +350,7 @@ alias cmps='compass clean && compass compile && compass watch'
 alias news='curl http://nycurl.sytes.net/'
 alias getjane='hc git@github.com:jane/jane-com.git com ; cd com ; ni ; bi'
 alias whihc='which'
-alias ebhealth='while true ; do eb health -v && sleep 60 ; done'
+alias ebhealth='eb health --verbose --refresh'
 alias ebst='while true ; do eb status -v && sleep 60 && clear ; done'
 alias ebev='eb events -f'
 
