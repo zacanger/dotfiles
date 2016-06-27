@@ -344,7 +344,7 @@ augroup vimrc-make-cmake
   autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
 augroup END
 
-au BufRead,BufNewFile *.md setlocal textwidth=120
+au BufRead,BufNewFile *.md setlocal textwidth=80
 
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS noci
 
