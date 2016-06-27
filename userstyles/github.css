@@ -1,3 +1,8 @@
+.Box-body a, .Box-body, .Box-body-row, .Box-body-row--highlight.navigation-focus {
+  background: #333 !important;
+  color: silver !important;
+}
+
 .orghead {
   background-color: #303330!important;
   border: none!important;
