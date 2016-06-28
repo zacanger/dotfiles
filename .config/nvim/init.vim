@@ -63,14 +63,14 @@ NeoBundle 'Shougo/vimproc.vim', {
   " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " endif
 
-"" Vim-Session
+" Vim-Session
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-session'
 
-"" Snippets
+" Snippets
 NeoBundle 'honza/vim-snippets'
 
-"" Color
+" Color
 if v:version >= 703
   NeoBundle 'Shougo/vimshell.vim'
 endif
@@ -82,26 +82,26 @@ endif
 NeoBundle "scrooloose/syntastic"
 NeoBundle 'vim-scripts/c.vim'
 
-"" Python
+" Python
 NeoBundle "davidhalter/jedi-vim"
 NeoBundle "majutsushi/tagbar"
 NeoBundle "Yggdroot/indentLine"
 
+" Perl
 NeoBundle 'vim-perl/vim-perl'
 NeoBundle 'c9s/perlomni.vim'
 
-"" HTML
+" HTML
 NeoBundle 'amirh/HTML-AutoCloseTag'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'gorodinskiy/vim-coloresque'
 NeoBundle 'tpope/vim-haml'
 NeoBundle 'mattn/emmet-vim'
 
-"" PHP
+" PHP
 NeoBundle 'arnaud-lb/vim-php-namespace'
 
-"" Extra Bundles
-
+" Extra Bundles
 call neobundle#end()
 
 " Required:
@@ -114,15 +114,15 @@ NeoBundleCheck
 
 "" Basic Setup
 
-"" Encoding
+" Encoding
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
 
-"" Fix backspace indent
+" Fix backspace indent
 set backspace=indent,eol,start
 
-"" Tabs. May be overriten by autocmd rules
+" Tabs. May be overriten by autocmd rules
 set tabstop=2
 set softtabstop=0
 set shiftwidth=2
@@ -131,23 +131,23 @@ set smartindent
 set smarttab
 set autoindent
 
-"" Map leader to ,
+" Map leader to ,
 let mapleader="\<Space>"
 
-"" Enable hidden buffers
+" Enable hidden buffers
 set hidden
 
-"" Searching
+" Searching
 set hlsearch
 set incsearch
 set ignorecase
 set smartcase
 
-"" Encoding
+" Encoding
 set bomb
 set binary
 
-"" Directories for swp files
+" Directories for swp files
 set nobackup
 set noswapfile
 
@@ -196,20 +196,20 @@ if &term =~ '256color'
   set t_ut=256
 endif
 
-"" Disable the blinking cursor.
+" Disable the blinking cursor.
 set gcr=a:blinkon0
 set scrolloff=3
 
-"" Map cursor for insert mode
+" Map cursor for insert mode
 if &term =~ "xterm\\|rxvt"
   let &t_SI .= "\<Esc>[5 q"
   let &t_EI .= "\<Esc>[0 q"
 endif
 
-"" Status bar
+" Status bar
 set laststatus=2
 
-"" Use modeline overrides
+" Use modeline overrides
 set modeline
 set modelines=10
 
@@ -319,25 +319,25 @@ endif
 
 "" Autocmd Rules
 
-"" The PC is fast enough, do syntax highlight syncing from start
+" The PC is fast enough, do syntax highlight syncing from start
 augroup vimrc-sync-fromstart
   autocmd!
   autocmd BufEnter * :syntax sync fromstart
 augroup END
 
-"" Remember cursor position
+" Remember cursor position
 augroup vimrc-remember-cursor-position
   autocmd!
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
-"" txt
+" txt
 augroup vimrc-wrapping
   autocmd!
   autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
 augroup END
 
-"" make/cmake
+" make/cmake
 augroup vimrc-make-cmake
   autocmd!
   autocmd FileType make setlocal noexpandtab
@@ -353,11 +353,11 @@ set autoread
 
 "" Mappings
 
-"" Split
+" Split
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
 
-"" Git
+" Git
 noremap <Leader>ga :Gwrite<CR>
 noremap <Leader>gc :Gcommit<CR>
 noremap <Leader>gsh :Gpush<CR>
@@ -373,21 +373,21 @@ nnoremap <leader>ss :SaveSession
 nnoremap <leader>sd :DeleteSession<CR>
 nnoremap <leader>sc :CloseSession<CR>
 
-"" Tabs
+" Tabs
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
 nnoremap <silent> <S-t> :tabnew<CR>
 
-"" Set working directory
+" Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
 
-"" Opens an edit command with the path of the currently edited file filled in
+" Opens an edit command with the path of the currently edited file filled in
 noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
-"" Opens a tab edit command with the path of the currently edited file filled
+" Opens a tab edit command with the path of the currently edited file filled
 noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
-"" ctrlp.vim
+" ctrlp.vim
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
@@ -400,7 +400,6 @@ let g:ctrlp_open_new_file = 'r'
 
 " Disable visualbell
 set noeb vb t_vb=
-" set visualbell t_vb=
 
 "" Copy/Paste/Cut
 " if has('unnamedplus')
@@ -412,31 +411,31 @@ noremap YY "+y<CR>
 noremap P "+gP<CR>
 noremap XX "+x<CR>
 
-"" Buffer nav
+" Buffer nav
 noremap <leader>z :bp<CR>
 noremap <leader>x :bn<CR>
 
-"" Close buffer
+" Close buffer
 noremap <leader>c :bd<CR>
 
-"" Clean search (highlight)
+" Clean search (highlight)
 nnoremap <silent> <leader><space> :noh<cr>
 
-"" Switching windows
+" Switching windows
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
 
-"" Vmap for maintain Visual Mode after shifting > and <
+" Vmap for maintain Visual Mode after shifting > and <
 vmap < <gv
 vmap > >gv
 
-"" Move visual block
+" Move visual block
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-"" Open current line on GitHub
+" Open current line on GitHub
 noremap ,o :!echo `git url`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<C-R>=line('.')<CR> \| xargs open<CR><CR>
 
 
@@ -614,9 +613,9 @@ vnoremap :doc :help
 " let g:posero_default_mappings = 1
 
 " semantic highlighting stuff
-:nnoremap <Leader>s :SemanticHighlightToggle<cr>
+" :nnoremap <Leader>s :SemanticHighlightToggle<cr>
 " let g:semanticEnableFileTypes = ['javascript', 'css', 'vue', 'node', 'python', 'ruby', 'es6', 'jsx', 'react', 'jquery', 'angular', 'underscore', 'coffeescript', 'elm', 'clojure', 'clojurescript', 'json', 'c']
-let g:semanticGUIColors = [ '#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082', '#ffcc80', '#ffab91', '#e3d3ce', '#b0bec5', '#ffa726', '#ff8a65', '#f9bdbb', '#f9bdbb', '#f8bbd0', '#e1bee7', '#d1c4e9', '#ffe0b2', '#f9eddb', '#d0d9ff', '#b3e5fc', '#b2ebf2', '#b2dfdb', '#a3e9a4', '#dcedc8' , '#dff6c9', '#ffb74d' ]
+" let g:semanticGUIColors = [ '#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082', '#ffcc80', '#ffab91', '#e3d3ce', '#b0bec5', '#ffa726', '#ff8a65', '#f9bdbb', '#f9bdbb', '#f8bbd0', '#e1bee7', '#d1c4e9', '#ffe0b2', '#f9eddb', '#d0d9ff', '#b3e5fc', '#b2ebf2', '#b2dfdb', '#a3e9a4', '#dcedc8' , '#dff6c9', '#ffb74d' ]
 
 
 " goddamned meta keys...
@@ -662,37 +661,10 @@ let g:deoplete#enable_smart_case = 1
 let g:context_filetype#same_filetypes = '_'
 
 " vim-gitgutter
-" let g:gitgutter_max_signs = 200
-
-" another two attempts at working with ranger....
-" function RangerExplorer()
-"     exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
-"     if filereadable('/tmp/vim_ranger_current_file')
-"         exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
-"         call system('rm /tmp/vim_ranger_current_file')
-"     endif
-"     redraw!
-" endfun
-" map <Leader>x :call RangerExplorer()<CR>
-
-" function! s:ChooseFile(dir_path)
-"     let tmp_file = tempname()
-"     let path = s:AbsolutePath(a:dir_path)
-"
-"     silent exec join(['!ranger', path, '--choosefile=' . tmp_file], ' ')
-"     redraw!
-"
-"     let result = 0
-"     if filereadable(tmp_file)
-"         silent let result = system('cat '. tmp_file)
-"     endif
-"     silent call system('rm -rf ' . tmp_file)
-"     return result
-" endfunction
+let g:gitgutter_max_signs = 700
 
 let g:wakatime_PythonBinary = '/usr/bin/python3.5'
 
 let g:jsx_ext_required = 0
-
 let g:neomake_javascript_enabled_makers = ['eslint']
 
