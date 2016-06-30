@@ -1,1 +1,0 @@
-curl http://ipecho.net/extra | html2txt
