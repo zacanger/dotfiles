@@ -573,12 +573,6 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-" let g:netrw_nogx = 1
-" nmap gx <Plug>(openbrowser-open)
-" vmap gx <Plug>(openbrowser-open)
-" nnoremap gx <Plug>(openbrowser-smart-search)
-" vnoremap gx <Plug>(openbrowser-smart-search)
-
 let g:netrw_gx="<cWORD>"
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -592,13 +586,6 @@ let g:vimfiler_as_default_explorer = 1
 " commit message thing
 autocmd Filetype gitcommit setlocal spell textwidth=80
 
-" jsfmt on save
-" let g:js_fmt_autosave = 1
-
-" esformatter!
-" nnoremap <silent> <leader>es :Esformatter<CR>
-" vnoremap <silent> <leader>es :Esformatter<CR>
-
 " clear screen between shell commands
 nnoremap :! :!clear;
 vnoremap :! :!clear;
@@ -609,23 +596,16 @@ vnoremap :man :help
 nnoremap :doc :help
 vnoremap :doc :help
 
-" posero (presentations n shiz)
-" let g:posero_default_mappings = 1
-
 " semantic highlighting stuff
 " :nnoremap <Leader>s :SemanticHighlightToggle<cr>
 " let g:semanticEnableFileTypes = ['javascript', 'css', 'vue', 'node', 'python', 'ruby', 'es6', 'jsx', 'react', 'jquery', 'angular', 'underscore', 'coffeescript', 'elm', 'clojure', 'clojurescript', 'json', 'c']
 " let g:semanticGUIColors = [ '#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082', '#ffcc80', '#ffab91', '#e3d3ce', '#b0bec5', '#ffa726', '#ff8a65', '#f9bdbb', '#f9bdbb', '#f8bbd0', '#e1bee7', '#d1c4e9', '#ffe0b2', '#f9eddb', '#d0d9ff', '#b3e5fc', '#b2ebf2', '#b2dfdb', '#a3e9a4', '#dcedc8' , '#dff6c9', '#ffb74d' ]
-
 
 " goddamned meta keys...
 vnoremap <leader>nl :%s///g
 nnoremap <leader>nl :%s///g
 " :%s/\r$/g
 " :%s/\r$//g
-
-" peepopen, quit on vim exit
-" let g:peepopen_quit = 1
 
 nnoremap j gj
 nnoremap k gk
@@ -647,7 +627,7 @@ nnoremap <C-right> :bnext<CR>
 
 " vim-markdown
 let g:vim_markdown_conceal = 0
-let g:vim_markdown_fenced_languages = ['javascript=js', 'html=html', 'css=css', 'jsx=jsx', 'sass=css', 'less=css', 'scss=css', 'sh=sh', 'bash=sh']
+let g:vim_markdown_fenced_languages = ['javascript=JavaScript', 'js=JavaScript', 'html=HTML', 'css=CSS', 'jsx=JSX', 'sass=CSS', 'less=CSS', 'scss=CSS', 'sh=Shell', 'bash=Shell']
 let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_folding_disabled = 1
 
@@ -667,4 +647,3 @@ let g:wakatime_PythonBinary = '/usr/bin/python3.5'
 
 let g:jsx_ext_required = 0
 let g:neomake_javascript_enabled_makers = ['eslint']
-
