@@ -627,7 +627,7 @@ nnoremap <C-right> :bnext<CR>
 
 " vim-markdown
 let g:vim_markdown_conceal = 0
-let g:vim_markdown_fenced_languages = ['javascript=JavaScript', 'js=JavaScript', 'html=HTML', 'css=CSS', 'jsx=JSX', 'sass=CSS', 'less=CSS', 'scss=CSS', 'sh=Shell', 'bash=Shell']
+let g:vim_markdown_fenced_languages = ['javascript=JavaScript', 'js=JavaScript', 'html=HTML', 'css=CSS', 'jsx=JSX', 'sass=CSS', 'less=CSS', 'scss=CSS', 'sh=Shell', 'bash=Shell', 'console=Shell']
 let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_folding_disabled = 1
 

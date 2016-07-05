@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from Tkinter import *
 import tkFileDialog
 import os, sys# inspect,
