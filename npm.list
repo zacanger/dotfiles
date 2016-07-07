@@ -59,6 +59,7 @@ bug-clinic
 bugger
 bulk
 bundle-collapser
+bundle-dependencies
 bunyan
 buttle
 bytewiser
@@ -88,6 +89,7 @@ cli-debugger
 cli-foreachfile
 cli-gh-cal
 cli-github
+cli-js
 clingwrap
 clinton
 cloudcmd
@@ -191,9 +193,14 @@ esdown
 esformatter
 eshost-cli
 eslint
+eslint-config-standard
+eslint-config-standard-react
 eslint-plugin-babel
+eslint-plugin-promise
 eslint-plugin-react
+eslint-plugin-standard
 eslint-rules-mapper
+eslint-watch
 eslint_d
 eslintme
 evilscan
@@ -328,6 +335,7 @@ ignore-github-users
 image-cli
 imagemin-cli
 imba
+imdone
 impresser
 init-package-json
 initialize
@@ -753,6 +761,7 @@ tidy-markdown
 tiny-lr-it
 tinypic
 tinyreq
+tinyreq-cli
 tiptip
 tldr
 tmi
@@ -837,3 +846,4 @@ yslow
 zacanger
 zalgo
 zikcenter
+node-readme
