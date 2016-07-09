@@ -43,6 +43,9 @@ alias pull='git pull'
 alias rpm='git rpm'
 alias gitlog="git log --color --graph --pretty=format:'%Cgreen[%Creset%h%Cgreen]%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gittoday="git log --color --graph --pretty=format:'%Cgreen[%Creset%h%Cgreen]%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --since=yesterday"
+alias gco='git checkout'
+alias checkout='git checkout'
+alias gdm='git diff master'
 
 # development package managers
 alias ni='npm i'
@@ -55,6 +58,7 @@ alias nis='npm install --save'
 alias npmc='npm cache clean ; npm cache clean -g'
 alias npmu='npm update -g ; npmc'
 alias nr='npm run'
+alias nrs='npm run -s'
 alias nu='npmc ; npm i -g n ; n latest ; npm i -g npm@latest ; node -v ; npm -v'
 alias npmupd='nu ; npmu'
 alias nt='npm test'
@@ -202,9 +206,14 @@ alias dockerp='docker ps'
 alias dockerpa='docker ps -a'
 
 # aws
+alias ebl='eb list'
+alias ebls='eb list'
 alias ebhealth='eb health --verbose --refresh'
+alias ebh='eb health --verbose --refresh'
 alias ebst='while true ; do eb status -v && sleep 60 && clear ; done'
+alias ebs='while true ; do eb status -v && sleep 60 && clear ; done'
 alias ebev='eb events -f'
+alias ebe='eb events -f'
 
 # nvim
 alias v='v.sh'
@@ -219,7 +228,6 @@ alias vl='v -l'
 alias vivi='nvim ~/.config/nvim/init.vim'
 
 # all the rest
-alias 4444='4444.js'
 alias q='exit'
 alias q!='q'
 alias :WQ='q'
@@ -358,4 +366,4 @@ alias getjane='hc git@github.com:jane/jane-com.git com ; cd com ; ni ; bi'
 alias whihc='which'
 alias ghci='ghci.sh'
 alias am='alsamixer'
-
+alias httpcodes="cat $HOME/Dropbox/work/repos/doc/http-status-codes.json | jq ."

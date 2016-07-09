@@ -15,4 +15,3 @@ fs.readdir(dirPath, (err, list) => {
     files.push[i]
   }
 })
-

@@ -13,4 +13,3 @@ else {
     fs.createReadStream(args[i]).pipe(process.stdout)
   }
 }
-

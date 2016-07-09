@@ -3,9 +3,9 @@
 const
   net  = require('net')
 , repl = require('repl')
-, port = 5100
-, face = function(){
-  let m = [
+, port = process.argv[2] || 5100
+, face = () => {
+  const m = [
     '^__^'
   , '-__-'
   , '>.<'
@@ -18,7 +18,7 @@ const
   , ';)'
   , 'xD'
   ]
-  return m[Math.floor(Math.random()*m.length)]
+  return m[~~(Math.random() * m.length)]
 }
 
 net.createServer(socket => {
@@ -31,4 +31,3 @@ console.log(`remote repl available on ${port}`)
 
 let local = repl.start(face()+' |> ')
 local.context.face = face
-

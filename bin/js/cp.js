@@ -21,4 +21,3 @@ readFrom.on('error', err => {
 writeTo.on('error', err => {
   console.log('error!', err)
 })
-

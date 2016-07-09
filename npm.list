@@ -18,10 +18,12 @@ async-you
 atom-nico
 auxilio-backend
 ava
+b-l-a-h
 babel
 babel-cli
 babel-core
 babel-eslint
+babel-it
 babel-repl
 babel-tap
 babelator
@@ -144,6 +146,7 @@ did-you-mean
 digup
 dimsum
 disc
+dist-it
 divshot-cli
 dixit-cli
 dmn
@@ -271,11 +274,13 @@ ghcal
 gifify
 gistjs
 gistmailer
+git+https://github.com/shaunlebron/npm-cljs.git
 git-bc
 git-branch-diff
 git-branch-diff-gui
 git-commander
 git-fork
+git-hours
 git-issues
 git-it
 git-stats
@@ -499,6 +504,7 @@ name-your-contributors
 namy
 nd
 ndm
+ndu
 neon-cli
 neta
 network-config
@@ -523,6 +529,7 @@ node-localip
 node-nightly
 node-nightly-version
 node-notifier
+node-readme
 node-repl
 node-static
 node.history
@@ -648,6 +655,7 @@ react-native-ignite
 react-stdio
 react-tools
 reactdown
+reactify
 reactotron
 readarepo
 readman
@@ -693,6 +701,7 @@ sfile
 shelljs
 shilefare
 shinju
+ship-release
 shonkwrap
 shrinkpack
 shrinkwarp
@@ -714,6 +723,7 @@ smokestack
 smoosh
 snazzy
 sort-alphabetic
+space-hogs
 speed-test
 spm
 sqwish
@@ -770,6 +780,7 @@ tmpshare
 tooling
 torrent
 tower-of-babel
+transcoder
 trash-cli
 trek-cli
 trelew
@@ -796,6 +807,7 @@ unpm
 updatr
 updtr
 upgrade-ready
+url-to-image
 vantage
 versiony-cli
 vhs
@@ -819,7 +831,6 @@ web-server-cli
 webfind
 webjs
 webpack
-webpack-cli
 webpack-dev-server
 websocket
 webtop
@@ -846,4 +857,4 @@ yslow
 zacanger
 zalgo
 zikcenter
-node-readme
+webpack-build

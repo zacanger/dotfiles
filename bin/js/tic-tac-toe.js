@@ -7,7 +7,7 @@ const
 , block   = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 let
-  count = 0
+  count   = 0
 , player  = 'X'
 , aPlayer = 'O'
 
@@ -67,4 +67,3 @@ input.on('data', key => {
 })
 
 draw()
-

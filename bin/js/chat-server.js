@@ -5,7 +5,7 @@
 
 const
   net     = require('net')
-, sockets = [] //
+, sockets = []
 , port    = process.argv[2] || 6789
 
 net.Server(socket => {
@@ -36,4 +36,3 @@ net.Server(socket => {
     }
   })
 }).listen(port)
-
