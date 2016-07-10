@@ -135,6 +135,7 @@ komandr
 launchpadlib
 legit
 lfm
+libsass
 libwapiti
 lithoxyl
 livereload
@@ -213,6 +214,7 @@ rainbowstream
 range
 ranger
 rdfli
+react
 redterm
 rfc3987
 rpl
@@ -253,4 +255,3 @@ xpybutil
 you-get
 zerobin
 zerodoc
-react

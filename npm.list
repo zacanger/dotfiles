@@ -416,6 +416,7 @@ lerna
 levelmeup
 licenjs
 license-checker
+licensecheck
 licenseify
 lilnote
 lite-server
@@ -683,6 +684,7 @@ runfile
 rwb
 rwdperf
 safe-shrinkwrap
+safestart
 sails
 schemeless
 scope-chains-closures
@@ -831,6 +833,7 @@ web-server-cli
 webfind
 webjs
 webpack
+webpack-build
 webpack-dev-server
 websocket
 webtop
@@ -857,4 +860,3 @@ yslow
 zacanger
 zalgo
 zikcenter
-webpack-build
