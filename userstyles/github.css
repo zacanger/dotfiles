@@ -21,6 +21,7 @@ body {
   background-clip: border-box !important;
   background-color: #303330 !important;
   background-origin: padding-box !important;
+  font-family: "Cardo", "Merriweather", serif;
 }
 pre,
 code,

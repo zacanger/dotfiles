@@ -94,6 +94,8 @@ cli-github
 cli-js
 clingwrap
 clinton
+cljs
+cloc
 cloudcmd
 cloudconvert-cli
 cloverfield
@@ -292,6 +294,7 @@ github-changes
 github-emojify
 github-get
 github-man
+github-metrics
 github-stats
 github-upstream-url
 github-upstreamer
@@ -521,6 +524,7 @@ node-deb
 node-deb-pkg
 node-debug
 node-debug-school
+node-distribute
 node-gyp
 node-gyp-install
 node-inspector
@@ -529,6 +533,8 @@ node-libs-browser
 node-localip
 node-nightly
 node-nightly-version
+node-notebook
+node-noteboook
 node-notifier
 node-readme
 node-repl
@@ -576,6 +582,7 @@ npm-shrinkwrap-install
 npm-start
 npm-top-md
 npm-user-packages-cli
+npm-what
 npm-whatis
 npm-which
 npm_lazy
@@ -623,6 +630,7 @@ planetproto
 pliers
 pm2
 pmx
+pollinate
 polyjuice
 postcss-cli
 posthtml-cli
@@ -637,6 +645,7 @@ psy
 public-ip-cli
 pug-cli
 pulp
+punchcard-cli
 purescript
 purescript-psa
 purify-css

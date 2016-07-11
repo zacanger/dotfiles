@@ -2,6 +2,7 @@
 
 # kill everything
 alias killx='sudo pkill -9 Xorg'
+alias ka='killall'
 
 # bye
 alias reboot='sudo /sbin/reboot'
@@ -48,6 +49,7 @@ alias checkout='git checkout'
 alias gdm='git diff master'
 
 # development package managers
+alias fp='fixpack'
 alias ni='npm i'
 alias ns='npm start'
 alias ninit='cp ~/.package.json ./package.json'
