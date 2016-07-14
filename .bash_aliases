@@ -47,6 +47,7 @@ alias gittoday="git log --color --graph --pretty=format:'%Cgreen[%Creset%h%Cgree
 alias gco='git checkout'
 alias checkout='git checkout'
 alias gdm='git diff master'
+alias gw='ghwd.sh'
 
 # development package managers
 alias fp='fixpack'
@@ -369,3 +370,4 @@ alias whihc='which'
 alias ghci='ghci.sh'
 alias am='alsamixer'
 alias httpcodes="cat $HOME/Dropbox/work/repos/doc/http-status-codes.json | jq ."
+alias nn='node-nightly'
