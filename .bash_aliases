@@ -48,11 +48,13 @@ alias gco='git checkout'
 alias checkout='git checkout'
 alias gdm='git diff master'
 alias gw='ghwd.sh'
+alias gdd='git diff --dirstat'
 
 # development package managers
 alias fp='fixpack'
 alias ni='npm i'
 alias ns='npm start'
+alias nss='npm start -s'
 alias ninit='cp ~/.package.json ./package.json'
 alias npms='npm start'
 alias nig='npm install -g'
