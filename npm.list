@@ -8,6 +8,7 @@ always
 amok
 animal-namer
 animals
+ansi-diff-stream
 ansimd
 aristotle
 art-of-node
@@ -101,6 +102,7 @@ cloudconvert-cli
 cloverfield
 coffee-script
 coffeelint
+color-support
 colors
 commander
 commemoji
@@ -122,6 +124,7 @@ craigslist-scout
 crawljs
 crconsole
 create-project
+create-react-app
 create-repo
 crmux
 cross-spawn
@@ -131,6 +134,7 @@ css-b64-images
 css-triggers
 cssbeautify
 cssbrush
+csscomb
 cssnano-cli
 csso
 david
@@ -140,6 +144,7 @@ debian-package-installed
 debian-packaging
 debian-server
 debian-tempfile
+decheck
 decking
 detect-indent-cli
 dev-time-cli
@@ -154,6 +159,7 @@ dixit-cli
 dmn
 do-i-have-internet
 dockerfilelint
+dockunit
 doctor-mark
 documented
 dog-names
@@ -179,6 +185,7 @@ electron-packager
 electron-packager-interactive
 electron-prebuilt
 electron-rebuild
+elk-cli
 elm
 emoj
 emojer-cli
@@ -215,6 +222,7 @@ f-min
 fast-cli
 fast-http-cli
 faucet
+felt
 file-walker-server
 filerepl
 filetree.js
@@ -302,6 +310,7 @@ github-url-from-git
 gitlet
 gitm
 glassy
+gluestick
 goingnative
 gotowork
 gpm
@@ -313,6 +322,7 @@ grunt-init
 gulp
 gulp-cli
 gulp-debian
+gulpt
 guvnor
 hackmyresume
 harp-static
@@ -326,6 +336,7 @@ hipsum
 hipsum-cli
 hjson
 hogan.js
+hostile
 hotdamn
 hotel
 how2
@@ -344,6 +355,7 @@ image-cli
 imagemin-cli
 imba
 imdone
+import-js
 impresser
 init-package-json
 initialize
@@ -406,6 +418,7 @@ kill-tabs
 kiss
 kiss-cli
 kityminder-editor
+kobrascript
 koko
 kotatsu
 kp
@@ -480,6 +493,7 @@ memescraper
 mermaid
 mern-cli
 metafetch
+micro
 micro-list
 midas
 mime
@@ -598,6 +612,7 @@ nw
 nw-builder
 nwb
 nwjs
+nws
 nyancat-telnet
 nyaovim
 nyc
@@ -650,6 +665,7 @@ purescript
 purescript-psa
 purify-css
 purifycss
+pushstate
 pushstate-server
 pwaify
 qrcode-terminal
@@ -673,6 +689,7 @@ readme
 reapp
 rebase-editor
 recess
+redis-commander
 regarde
 regenerator
 regex-adventure
@@ -717,6 +734,7 @@ ship-release
 shonkwrap
 shrinkpack
 shrinkwarp
+shrinkydink
 shx
 simple
 sinon
@@ -849,6 +867,7 @@ websocket
 webtop
 which
 why-is-node-running
+wifi-triangulate
 wiredep
 wombat
 wopr

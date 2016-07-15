@@ -1,10 +1,18 @@
+
 *$py.class
 *.7z
+*.aux
 *.bz2
+*.chi
+*.chs.h
 *.dat
+*.dyn_hi
+*.dyn_o
 *.egg
 *.elf
 *.gz
+*.hi
+*.hp
 *.key
 *.ko
 *.lock
@@ -14,6 +22,7 @@
 *.out
 *.pak
 *.pid
+*.prof
 *.py[cod]
 *.seed
 *.so
@@ -39,6 +48,7 @@
 .bower-cache
 .bower-registry
 .bower-tmp
+.cabal-sandbox/
 .completer.hist
 .config/nvim/bundle/*
 .config/nvim/session/*
@@ -46,6 +56,8 @@
 .config/ranger/history
 .fseventsd
 .grunt
+.hpc
+.hsenv
 .idea
 .init.vim-rplugin~
 .lock-wscript
@@ -54,6 +66,7 @@
 .pulp-cache
 .sass-cache
 .vimsession~
+.virtualenv
 .vscode
 /.build/
 Icon
@@ -70,9 +83,12 @@ build.js
 build/Release
 bundle
 bundle.js
+cabal-dev
+cabal.sandbox.config
 coverage
 data
 db
+dist
 lib-cov
 logs
 node_modules
@@ -84,4 +100,3 @@ src/.webpack.js
 tags
 x/
 xfce4
-

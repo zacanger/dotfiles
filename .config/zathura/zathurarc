@@ -15,4 +15,3 @@ map [fullscreen] f follow
 map [fullscreen] <Tab> toggle_index
 map [fullscreen] j scroll down
 map [fullscreen] k scroll up
-

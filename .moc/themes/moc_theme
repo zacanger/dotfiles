@@ -34,4 +34,3 @@ entry_title		= magenta	default
 error			= magenta   default	bold
 message			= cyan		default	bold
 plist_time		= blue		default
-

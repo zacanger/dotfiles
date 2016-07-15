@@ -1,31 +1,10 @@
-/* trump.css */
-
-#usa {
-  border-bottom: 16m solid gray;
-}
-
-.muslims {
-  display: none!important;
-}
-
-.women {
-  font-size: xx-small;
-}
-
-.migrants--undocumented {
-  position: relative;
-  bottom: -2000km;
-}
-
-.press {
-  speak: none;
-}
-
-.policies {
-  perspective: none;
-}
-
-#usa:after {
-  content: "absolutely ruined";
-}
-
+/* trump.css -- originally by bradfrost, enhanced by zacanger */
+body { color: orange; text-transform: uppercase; }
+#usa { border-bottom: 16m solid gray; }
+.muslims { display: none!important; }
+.women { font-size: xx-small; }
+.migrants--undocumented { position: relative; bottom: -2000km; }
+.press { speak: none; }
+.policies { perspective: none; position: absolute; }
+.hands { transform: scale(0.5); }
+#usa:after { content: "absolutely ruined"; }

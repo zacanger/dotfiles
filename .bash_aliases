@@ -49,6 +49,9 @@ alias checkout='git checkout'
 alias gdm='git diff master'
 alias gw='ghwd.sh'
 alias gdd='git diff --dirstat'
+alias gl='glog'
+alias gg='gitlog'
+alias gtd='gittoday'
 
 # development package managers
 alias fp='fixpack'
@@ -207,8 +210,15 @@ alias dockergetstate='[ -n "$1" ] && docker inspect --format "{{ .State.Running 
 alias dockergetport='[ -n "$1" ] && docker inspect --format "{{ .NetworkSettings.Ports }}" $1'
 alias dockeri='docker images'
 alias dockeria='docker images -a'
-alias dockerp='docker ps'
-alias dockerpa='docker ps -a'
+alias dps='docker ps'
+alias dpsa='docker ps -a'
+alias dcu='docker-compose up'
+alias dcud='docker-compose up -d'
+alias dcs='docker-compose stop'
+alias dcdn='docker-compose down'
+alias dcps='docker-compose ps'
+alias dcb='docker-compose build'
+alias dip="docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
 
 # aws
 alias ebl='eb list'
@@ -292,6 +302,7 @@ alias feh='viewnior'
 alias ffind='ffind.py'
 alias fontlist='fc-list | cut -d : -f 2 | sort -u | uniq'
 alias fs='ranger'
+alias Fs='ranger'
 alias gui='startxfce4'
 alias h='history'
 alias hackkurlist='wget -O - hackurls.com/ascii | less'
@@ -373,3 +384,5 @@ alias ghci='ghci.sh'
 alias am='alsamixer'
 alias httpcodes="cat $HOME/Dropbox/work/repos/doc/http-status-codes.json | jq ."
 alias nn='node-nightly'
+alias checkip='curl http://checkip.amazonaws.com/'
+alias epochday="echo epoch day $(( $( date +%s) /86400 ))"

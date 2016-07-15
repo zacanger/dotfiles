@@ -87,4 +87,3 @@ case "$mimetype" in
 esac
 
 exit 1
-

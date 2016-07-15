@@ -1,0 +1,38 @@
+#!/bin/sh
+if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+  exit 0
+fi
+
+branch=$(git branch | sed -n '/^\*/{s/\* //p;q}')
+changes=$(
+  (git status --porcelain | while IFS= read -r line; do
+    line=$(printf "%s" "$line" | awk '{print substr($0, 0, 2)}')
+    if [ "$line" = 'MM' ]; then
+      printf 'A\n'
+      printf 'M\n'
+    elif [ "$line" = 'M ' ]; then
+      printf 'A\n'
+    else
+      printf '%s\n' "$line"
+    fi
+  done) | sort | tr -d ' ' | uniq -c | sed -z 's/[\n ]*//g')
+
+if [ -n "$branch" ]; then
+  ahead=$(git rev-list --count "origin/$branch..HEAD")
+  behind=$(git rev-list --count "HEAD..origin/$branch")
+  stashed=$(git stash list | wc -l)
+fi
+
+printf '%s' "$branch"
+if [ -n "$changes" ]; then
+  printf '(%s)' "$changes"
+fi
+if [ -n "$ahead" ] && [ "$ahead" -gt 0 ]; then
+  printf '↑%d' "$ahead"
+fi
+if [ -n "$behind" ] && [ "$behind" -gt 0 ]; then
+  printf '↓%d' "$behind"
+fi
+if [ -n "$stashed" ] && [ "$stashed" -gt 0 ]; then
+  printf '☰%d' "$stashed"
+fi

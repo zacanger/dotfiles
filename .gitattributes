@@ -134,4 +134,3 @@ Procfile text
 
 *.pdf diff=astextplain
 *.PDF diff=astextplain
-

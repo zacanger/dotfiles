@@ -647,3 +647,13 @@ let g:wakatime_PythonBinary = '/usr/bin/python3.5'
 
 let g:jsx_ext_required = 0
 let g:neomake_javascript_enabled_makers = ['eslint']
+
+function! SortLines() range
+  execute a:firstline . "," . a:lastline . 's/^\(.*\)$/\=strdisplaywidth( submatch(0) ) . " " . submatch(0)/'
+  execute a:firstline . "," . a:lastline . 'sort n'
+  execute a:firstline . "," . a:lastline . 's/^\d\+\s//'
+endfunction
+
+" this sorts all lines, or maybe the second one, i don't know
+" :%s/.*/\=printf("%03d", len(submatch(0)))."|".submatch(0)/ | sor n | %s/..../
+" :%s/.*/\=printf("%03d", len(submatch(0)))."|".submatch(0)/ | sor n |
