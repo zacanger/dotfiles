@@ -387,3 +387,5 @@ alias httpcodes="cat $HOME/Dropbox/work/repos/doc/http-status-codes.json | jq ."
 alias nn='node-nightly'
 alias checkip='curl http://checkip.amazonaws.com/'
 alias epochday="echo epoch day $(( $( date +%s) /86400 ))"
+alias pyc='python -c'
+alias ne='node -e'
