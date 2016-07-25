@@ -52,6 +52,7 @@ alias gdd='git diff --dirstat'
 alias gl='glog'
 alias gg='gitlog'
 alias gtd='gittoday'
+alias gs='gst'
 
 # development package managers
 alias fp='fixpack'
