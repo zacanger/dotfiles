@@ -1,10 +1,47 @@
 @import url(https://fonts.googleapis.com/css?family=Cardo:400,700);
 @import url(https://fonts.googleapis.com/css?family=Cousine);
 
-html, body, div, p, h1, h2, h3, h4, h5, h6, ul, ol, li, aside, cite, i, table, tbody, th, tr, td, span,
-#siteSub, #bodyContent, .mw-body-content, #jump-to-nav, .mw-jump, #mw-content-text, .mw-content-ltr,
-#catlinks, .catlinks, .section, .sidebar, .container, .content, #top, #firstHeading, #siteNotice,
-.mw-body, #content, div#content {
+html,
+body,
+div,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+li,
+aside,
+cite,
+i,
+table,
+tbody,
+th,
+tr,
+td,
+span,
+#siteSub,
+#bodyContent,
+.mw-body-content,
+#jump-to-nav,
+.mw-jump,
+#mw-content-text,
+.mw-content-ltr,
+#catlinks,
+.catlinks,
+.section,
+.sidebar,
+.container,
+.content,
+#top,
+#firstHeading,
+#siteNotice,
+.mw-body,
+#content,
+div#content {
   background: #020100!important;
   color: #dee3c8!important;
 }
@@ -24,20 +61,28 @@ a { color: #d05c5c!important; }
 
 a.new { color: #c14b4b; }
 
-a:visited, a:hover, a.new:visited, a.new:hover { color: #d0ab5c!important; }
+a:visited,
+a:hover,
+a.new:visited,
+a.new:hover { color: #d0ab5c!important; }
 
 ul { list-style: disc; }
 
-#mw-navigation, #mw-page-base, #mw-head-base, #footer { display: none; }
+#mw-navigation,
+#mw-page-base,
+#mw-head-base,
+#footer { display: none; }
 
 .mw-body {
   max-width: 860px;
   margin: 1em auto;
 }
 
-#content, div#content { border: none; }
+#content,
+div#content { border: none; }
 
-#firstHeading, #siteSub {
+#firstHeading,
+#siteSub {
   text-align: center;
   display: block;
 }
@@ -58,8 +103,15 @@ ul { list-style: disc; }
 
 .mw-body { padding: 2em 0; }
 
-.mw-body h1, .mw-body h2, .mw-body h3, .mw-body h4, .mw-body h5, .mw-body h6,
-div#content h1, div#content h2, div#content #firstHeading {
+.mw-body h1,
+.mw-body h2,
+.mw-body h3,
+.mw-body h4,
+.mw-body h5,
+.mw-body h6,
+div#content h1,
+div#content h2,
+div#content #firstHeading {
   font-family: inherit;
   line-height: 1.5em;
   margin-bottom: 0.5em;
@@ -99,14 +151,18 @@ span.texhtml {
   display: block;
 }
 
-.mw-body #toc h2, .mw-body .toc h2 {
+.mw-body #toc h2,
+.mw-body .toc h2 {
   font-family: inherit;
   font-size: 1.4em;
 }
 
 #toc h2, .toc h2 { display: block; }
 
-#toc #toctitle, .toc #toctitle, #toc .toctitle, .toc .toctitle { text-align: left; }
+#toc #toctitle,
+.toc #toctitle,
+#toc .toctitle,
+.toc .toctitle { text-align: left; }
 
 .toctoggle { display: none; }
 
@@ -125,4 +181,3 @@ pre, code {
 }
 
 sup { text-indent: 0; }
-

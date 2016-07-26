@@ -1,4 +1,14 @@
-html, body, div, .article, .content, p,
-.well, .padded, .row, .col,
-.colored-box.light-blue { color: #ddd; background: #111; }
-
+html,
+body,
+div,
+.article,
+.content,
+p,
+.well,
+.padded,
+.row,
+.col,
+.colored-box.light-blue {
+  color: #ddd;
+  background: #111;
+}

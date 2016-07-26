@@ -1,10 +1,40 @@
 @import url(https://fonts.googleapis.com/css?family=Cardo:400,700);
 @import url(https://fonts.googleapis.com/css?family=Cousine);
 
-window, html, body, div, body>div, h1, h2, h3, h4, h5, h6,
-tbody, thead, th, tr, td, blockquote, p, li, ul,
-strong, font, form, footer, header, select, button,
-article, section, nav, span, label, dd, option {
+window,
+html,
+body,
+div,
+body>div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+tbody,
+thead,
+th,
+tr,
+td,
+blockquote,
+p,
+li,
+ul,
+strong,
+font,
+form,
+footer,
+header,
+select,
+button,
+article,
+section,
+nav,
+span,
+label,
+dd,
+option {
   color: #dee3c8!important;
   background: #0a0a0a!important;
   font-family: "Cardo"!important;
@@ -50,19 +80,31 @@ body * {
   color: rgba(255, 255, 255, 1)!important;
 }
 
-body a, body a:link, body a *:not(img), body a:link *:not(img) {
+body a,
+body a:link,
+body a *:not(img),
+body a:link *:not(img) {
   color: #8cf2c1!important;
 }
 
-body a:hover, body a:active, body a:hover *:not(img), body a:active *:not(img) body {
+body a:hover,
+body a:active,
+body a:hover *:not(img),
+body a:active *:not(img) body {
   color: #a7d7e5!important;
 }
 
-body a:visited, body a:visited *:not(img) {
+body a:visited,
+body a:visited *:not(img) {
   color: #df8585!important;
 }
 
-code, pre, input, textarea, code span, pre span {
+code,
+pre,
+input,
+textarea,
+code span,
+pre span {
   background: #101010!important;
   border-color: #EDCECE!important;
   color: #cec8ea!important;
@@ -71,6 +113,7 @@ code, pre, input, textarea, code span, pre span {
 }
 
 /* the below is chromium-new-tab-specific */
-.mv-thumb, .mv-tile, #mv-tiles { visibility: hidden!important; }
+.mv-thumb,
+.mv-tile,
+#mv-tiles { visibility: hidden!important; }
 /* img { display: none!important; } */
-
