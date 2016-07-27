@@ -4,4 +4,3 @@
 pc() {
   pin-cushion "$1" --format=json "$@" | jq .
 }
-

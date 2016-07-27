@@ -7,4 +7,3 @@ cpu() {
   cpu="$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))"
   echo -e "${cpu}%"
 }
-

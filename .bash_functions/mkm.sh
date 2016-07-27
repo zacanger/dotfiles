@@ -7,4 +7,3 @@ mkm() {
     cd $dirname
   fi
 }
-

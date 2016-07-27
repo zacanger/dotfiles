@@ -223,4 +223,3 @@ fi
 }
 
 complete -F _path path
-

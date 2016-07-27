@@ -5,4 +5,3 @@
 permnums() {
   stat -c %a "$1"
 }
-

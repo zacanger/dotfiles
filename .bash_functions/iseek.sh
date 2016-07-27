@@ -4,4 +4,3 @@ iseek() {
   cd $(ls -a -d */ .. | ipt)
   iseek
 }
-

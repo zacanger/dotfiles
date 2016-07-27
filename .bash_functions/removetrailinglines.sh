@@ -3,4 +3,3 @@ removetrailinglines() {
   chmod --reference $1 $1.sed-tmp
   mv $1.sed-tmp $1
 }
-

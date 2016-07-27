@@ -12,4 +12,3 @@ ed() {
     command ed "$@"
   fi
 }
-

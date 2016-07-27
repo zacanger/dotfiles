@@ -22,4 +22,3 @@ s() {
   fi
 }
 complete -C 's --complete "$COMP_LINE"' s
-

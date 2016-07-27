@@ -20,4 +20,3 @@ environment_version(){
 environment_cname(){
   echo "$(eb_describe)" | jq -r .Environments[0].CNAME
 }
-

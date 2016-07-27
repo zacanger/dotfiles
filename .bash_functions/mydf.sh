@@ -1,5 +1,4 @@
 # pretty-print df
-
 mydf() {
   for fs ; do
 
@@ -23,4 +22,3 @@ mydf() {
     echo -e $out
   done
 }
-

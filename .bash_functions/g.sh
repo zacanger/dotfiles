@@ -4,4 +4,3 @@
 g() {
   cd `cat $HOME/.g/${1-_back} || echo .`
 }
-

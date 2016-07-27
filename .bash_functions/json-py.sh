@@ -7,4 +7,3 @@ jsonpy() {
     python -mjson.tool <<< "$*" | pygmentize -l javascript
   fi
 }
-

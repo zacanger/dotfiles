@@ -1,4 +1,3 @@
 calc() {
   awk "BEGIN{ print $* }" ;
 }
-

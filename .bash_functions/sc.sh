@@ -6,4 +6,3 @@ sc() {
   cd $cur_dir
   echo "get to work!"
 }
-

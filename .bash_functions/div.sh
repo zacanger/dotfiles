@@ -6,4 +6,3 @@ div() {
   done
   echo "${LINE}"
 }
-

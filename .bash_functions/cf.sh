@@ -28,4 +28,3 @@ cf() {
   )
 }
 complete -A directory cf
-

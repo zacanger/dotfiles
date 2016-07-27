@@ -4,4 +4,3 @@ echogrey() {
 	echo -n "$@"
 	echo -e "\e[0m"
 }
-

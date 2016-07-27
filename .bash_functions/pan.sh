@@ -5,4 +5,3 @@ pan() {
     printf '%s\0' "$@"
   fi
 }
-

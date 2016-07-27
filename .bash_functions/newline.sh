@@ -10,4 +10,3 @@ newline() {
     stty -onocr -ocrnl &&
     printf '\r'
 }
-

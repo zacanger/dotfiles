@@ -92,4 +92,3 @@ _bd() {
 }
 
 complete -F _bd bd
-

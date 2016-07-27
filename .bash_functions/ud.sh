@@ -38,4 +38,3 @@ _ud() {
   fi
 }
 complete -F _ud ud
-

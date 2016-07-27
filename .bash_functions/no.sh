@@ -6,4 +6,3 @@ no() {
     echo n
   done
 }
-

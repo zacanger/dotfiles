@@ -8,4 +8,3 @@ vol() {
     echo -e "${level}"
   fi
 }
-

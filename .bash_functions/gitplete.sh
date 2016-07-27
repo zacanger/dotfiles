@@ -33,4 +33,3 @@ _git() {
 }
 
 complete -F _git -o default git
-
