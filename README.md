@@ -39,4 +39,3 @@ Things to know:
   non-free, totally non-original, totally full of extra stuff i don't want in my path
   (because my path is defined in a very not-safe way…), or just totally too large to want
   to put under version control.
-
