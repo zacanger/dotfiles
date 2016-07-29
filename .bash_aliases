@@ -204,7 +204,7 @@ alias irebase="git --no-pager log --oneline | ipt | cut -d ' ' -f 1 | xargs -o g
 alias icheckout="git --no-pager log --oneline | ipt | cut -d ' ' -f 1 | xargs git checkout"
 
 # docker
-alias dockercleanup='docker rm `docker ps -aq` && docker rmi `docker images -aq`'
+alias dockercleanup='docker rm `docker ps -aq` & docker rmi `docker images -aq`'
 alias dockerlast='docker ps -lq'
 alias dockerkillall='docker kill $(docker ps -a -q)'
 alias dockerremovecontainers='docker rm $(docker ps -a -q)'

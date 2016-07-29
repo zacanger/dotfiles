@@ -233,6 +233,7 @@ findup
 firebase-import
 firebase-tools
 firetxt
+fix-dropbox-node_modules-symlinks
 fixmyjs
 fixpack
 fkill-cli
