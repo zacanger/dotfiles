@@ -2,7 +2,7 @@
 #
 # Author: Tasos Latsas
 #
-# Recursively set permissions for files and folders 
+# Recursively set permissions for files and folders
 # in a given path or in the working directory
 # Especialy usefull when copying files from ntfs filesystems :P
 #
@@ -15,7 +15,7 @@ Fix all permissions for files and directories in given path.
 
 Default permissions:
   Files:       644
-  Directories: 755 
+  Directories: 755
 
 Default path:
   Working directory
@@ -101,4 +101,3 @@ echo "Setting folder permissions to ${_dmode} ..."
 $_find $_path -type d -print0 | $_xargs -0 $_verbose $_chmod $_dmode
 
 exit 0
-

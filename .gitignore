@@ -54,6 +54,7 @@
 .config/nvim/session/*
 .config/ranger/bookmarks
 .config/ranger/history
+.config/ranger/tagged
 .fseventsd
 .grunt
 .hpc

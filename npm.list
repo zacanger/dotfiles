@@ -166,6 +166,7 @@ documented
 dog-names
 dogefy
 dogescript
+doiuse
 donejs
 doublestandard
 download-cli
@@ -265,6 +266,7 @@ geopkg
 gesso
 get-code-reviewers
 get-committers
+get-contrast
 get-github-issue-creators
 get-github-user
 get-issue-commenters
@@ -425,7 +427,6 @@ koko
 kotatsu
 kp
 kramed
-learn-generators
 learning-graphql
 learnyoucouchdb
 lebab
@@ -447,7 +448,6 @@ loadtest
 localtunnel
 lockdown
 lodash-cli
-lololodash
 lolwut
 look-up-cli
 lovely
@@ -859,6 +859,7 @@ watchify
 watchman
 watchy
 weatherman
+weatherme
 web-audio-school
 web-server-cli
 webfind
