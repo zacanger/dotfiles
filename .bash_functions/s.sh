@@ -13,11 +13,9 @@ s() {
     '
   else
     while [ $1 ]; do
-      #echo "s/$1/$2/"
       cd="$(echo $cd | sed "s/$1/$2/")"
       shift; shift
     done
-    #echo $cd
     cd $cd
   fi
 }

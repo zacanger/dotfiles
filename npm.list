@@ -55,6 +55,7 @@ browser-pipe
 browser-run
 browserify
 browserify-adventure
+bubleup
 buddy-cli
 budo
 budo-chrome
@@ -625,6 +626,7 @@ open-github-notifications
 opener
 opn-cli
 organize
+p-s
 pack
 package-cleanup
 package-json-to-readme
@@ -691,6 +693,7 @@ readme
 reapp
 rebase-editor
 recess
+recli
 redis-commander
 regarde
 regenerator
@@ -723,6 +726,7 @@ scrapegh
 scrapingnode
 scratchy
 scream-js
+selenium-standalone
 selenium-standalone@latest
 semify
 semver
@@ -867,6 +871,7 @@ webjs
 webpack
 webpack-build
 webpack-dev-server
+webpack-validator
 websocket
 webtop
 which

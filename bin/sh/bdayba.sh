@@ -2,6 +2,10 @@
 
 NAME=$1
 
+if [ "x$NAME" == x ] ; then
+  NAME=you
+fi
+
 read -d '' SONG <<LYRICS
 Happy birthday to you!
 Happy birthday to you!

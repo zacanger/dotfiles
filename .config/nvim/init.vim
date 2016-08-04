@@ -657,3 +657,6 @@ endfunction
 " this sorts all lines, or maybe the second one, i don't know
 " :%s/.*/\=printf("%03d", len(submatch(0)))."|".submatch(0)/ | sor n | %s/..../
 " :%s/.*/\=printf("%03d", len(submatch(0)))."|".submatch(0)/ | sor n |
+
+" because of docker + mac + webpack (or whatever)...
+let g:backupcopy = 'yes'
