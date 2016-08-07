@@ -1,9 +1,0 @@
-#define in main() {
-#define your printf("Summer's glory here\n");
-#define summer printf("long frollicking ");
-#define reverie printf("days ");
-#define soon printf("short nights \n");
-#define will printf("fireflies ");
-#define I printf("drift by\n");
-
-
