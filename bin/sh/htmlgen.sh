@@ -13,7 +13,7 @@ echo "
 </head>\n
 <body>\n
 	<div id=\"root\"></div>\n
-  <script type=\"text/javascript\" src=\"./js.js\"></script>\n
+  <script type=\"text/javascript\" src=\"./bundle.js\"></script>\n
 </body>\n
 </html>\n
 " > index.html
