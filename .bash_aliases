@@ -55,6 +55,7 @@ alias gtd='gittoday'
 alias gs='gst'
 alias gitodo='git grep -EiI "FIXME|TODO"'
 alias push='git push'
+alias gds='git diff --stat'
 
 # development package managers
 alias fp='fixpack'

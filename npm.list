@@ -148,6 +148,8 @@ debian-server
 debian-tempfile
 decheck
 decking
+depcheck
+dependency-check
 detect-indent-cli
 dev-time-cli
 devtool
@@ -502,6 +504,7 @@ midas
 mime
 mincer
 mindmaps
+mixedindentlint
 mocha
 module-init
 mongo-hacker
@@ -647,6 +650,7 @@ placecage
 plaidchat
 planetproto
 pliers
+plop
 pm2
 pmx
 pollinate
