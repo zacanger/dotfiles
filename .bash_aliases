@@ -400,3 +400,4 @@ alias epochday="echo epoch day $(( $( date +%s) /86400 ))"
 alias pyc='python -c'
 alias ne='node -e'
 alias ndoe='node'
+alias startjane='npm i && npmdp && dcb && nss'

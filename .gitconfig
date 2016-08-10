@@ -47,7 +47,7 @@
 [filter "ignoreline"]
 	clean = "sed '/#ignoreline$/'d"
 [help]
-	autocorrect = 1
+	autocorrect = 10
 [instaweb]
 	local = true
 	port = 7777
@@ -58,7 +58,6 @@
   template = ~/.gitmessage
 [sequence]
 	editor = rebase-editor
-
 [http]
 	postBuffer = 524288000
 [init]
