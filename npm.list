@@ -82,6 +82,7 @@ cat-names
 cdnjs-importer
 cf-package
 chalk-cli
+changed-log
 chatc-cli
 chest
 chrome-benchmarker
@@ -171,6 +172,7 @@ dogefy
 dogescript
 doiuse
 donejs
+dont-break
 doublestandard
 download-cli
 dox
@@ -196,6 +198,7 @@ emoj
 emojer-cli
 emoji-cli
 emojipacks
+emojiscript
 empty-trash
 empty-trash-cli
 ender
@@ -535,6 +538,8 @@ network-config
 neutrino
 newman
 nexe
+next-update
+next-updater
 nff
 nide
 nlf
@@ -710,7 +715,10 @@ repl-it
 repl.history
 replace
 replica
+require-from-twitter
 requirejs
+review
+review-host
 rm-modules
 rollup
 rtail
@@ -831,6 +839,7 @@ tslide
 tty.js
 ttystudio
 tumblr-theme-parser
+twpm
 typed-css-modules
 typescript
 typescript-tools
