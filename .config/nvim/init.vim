@@ -39,7 +39,6 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 "" NeoBundle install packages
 NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'tpope/vim-commentary'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'bling/vim-airline'

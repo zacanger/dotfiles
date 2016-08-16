@@ -28,7 +28,6 @@ babel-it
 babel-repl
 babel-tap
 babelator
-bacon-love
 bahn
 bam
 bash-quotes
@@ -325,6 +324,7 @@ goingnative
 gotowork
 gpm
 grasp
+gravitons
 grulp
 grunt
 grunt-cli
@@ -357,8 +357,8 @@ html-to-text
 htmlmd-2
 http-proxy-cli
 http-requester
-http-server
 httpipe
+hyperchart
 ied
 ignore-github-users
 image-cli
@@ -397,14 +397,11 @@ jimp
 jimp-cli
 jison
 joe
-joel-test
 jpm
 js-beautify
 jscodeshift
 jscs
 jsfmt
-jshint
-jshint-i
 jsinspect
 jsmd
 jsome
@@ -445,7 +442,6 @@ licensecheck
 licenseify
 lilnote
 lite-server
-live-server
 livedown
 livemark-cli
 livescript
@@ -460,7 +456,6 @@ lovely
 lute
 luvi
 makeconf
-makemehapi
 man-n
 mancy
 manpm
@@ -742,8 +737,6 @@ selenium-standalone
 selenium-standalone@latest
 semify
 semver
-serve
-serve-static
 sfile
 shelljs
 shilefare
@@ -795,7 +788,6 @@ strip-json-comments-cli
 styl
 stylestats
 stylus
-suckless
 superheroes
 superstatic
 supervillains
@@ -883,6 +875,7 @@ webfind
 webjs
 webpack
 webpack-build
+webpack-bundle-size-analyzer
 webpack-dev-server
 webpack-validator
 websocket
