@@ -119,6 +119,13 @@ if [ -f $HOME/.hub-completion ]; then
   . $HOME/.hub-completion
 fi
 
+# brew shit
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+fi
+
+# complete -C aws_completer aws
+
 # and, finally... liquidprompt; load from interactive shell, don't from scripts/scp
 echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
 

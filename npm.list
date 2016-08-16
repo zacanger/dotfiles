@@ -15,7 +15,6 @@ art-of-node
 asar
 asciimo
 asset
-async-you
 atom-nico
 auxilio-backend
 ava
@@ -38,7 +37,6 @@ bcat
 beautify-with-words
 beefy
 big-tree-cli
-biohacker
 blah
 blessed
 blessed-contrib
@@ -53,19 +51,16 @@ browser-pack
 browser-pipe
 browser-run
 browserify
-browserify-adventure
 bubleup
 buddy-cli
 budo
 budo-chrome
-bug-clinic
 bugger
 bulk
 bundle-collapser
 bundle-dependencies
 bunyan
 buttle
-bytewiser
 cabin
 cake
 caniuse-cmd
@@ -118,7 +113,6 @@ console-io
 cool-ascii-faces
 copyfiles
 cordova
-count-to-6
 coverify
 cowsay
 cpy-cli
@@ -205,7 +199,6 @@ envify
 epicenter
 es-usage-rate
 es2099
-es5-workshop
 esbeautifier
 esbox
 esdown
@@ -223,8 +216,6 @@ eslint-watch
 eslint_d
 eslintme
 evilscan
-express
-expressworks
 f-min
 fast-cli
 fast-http-cli
@@ -236,8 +227,6 @@ filetree.js
 find-up
 find-up-cli
 findup
-firebase-import
-firebase-tools
 firetxt
 fix-dropbox-node_modules-symlinks
 fixmyjs
@@ -245,17 +234,12 @@ fixpack
 fkill-cli
 flexible
 flute
-fly
-fly-jade
 foaas-client
 follow-me
 fontello-cli
-footballbot-workshop
 forever
 fpm
 fuck-you
-functino
-functional-javascript-workshop
 fuse
 fx-ports
 fxconsole
@@ -320,7 +304,6 @@ gitlet
 gitm
 glassy
 gluestick
-goingnative
 gotowork
 gpm
 grasp
@@ -379,7 +362,6 @@ instant-markdown-d
 instant-server
 instantgallery
 internal-ip
-introtowebgl
 ionic
 ipify
 ipt
@@ -420,7 +402,6 @@ jumpy
 jxnblk-api
 kanpai
 karma-cli
-kick-off-koa
 kill-tabs
 kiss
 kiss-cli
@@ -430,12 +411,9 @@ koko
 kotatsu
 kp
 kramed
-learning-graphql
-learnyoucouchdb
 lebab
 leeted
 lerna
-levelmeup
 licenjs
 license-checker
 licensecheck
@@ -506,7 +484,6 @@ mixedindentlint
 mocha
 module-init
 mongo-hacker
-mongoose-adventure
 monitor-dashboard
 mosca
 mqtt
@@ -543,7 +520,6 @@ nobin-debian-installer
 node-deb
 node-deb-pkg
 node-debug
-node-debug-school
 node-distribute
 node-gyp
 node-gyp-install
@@ -561,7 +537,6 @@ node-repl
 node-static
 node.history
 nodeb
-nodebot-workshop
 nodebug
 nodei
 nodemon
@@ -624,11 +599,11 @@ nyaovim
 nyc
 octo-release
 ooahh
-oobootcamp
 open-github-notifications
 opener
 opn-cli
 organize
+outdated
 p-s
 pack
 package-cleanup
@@ -648,7 +623,6 @@ pino
 pjs
 placecage
 plaidchat
-planetproto
 pliers
 plop
 pm2
@@ -660,7 +634,6 @@ posthtml-cli
 preen
 prepush
 prettyjson
-promise-it-wont-hurt
 prompt
 pscid
 psi
@@ -701,7 +674,6 @@ recli
 redis-commander
 regarde
 regenerator
-regex-adventure
 remark
 remark-html
 repeating
@@ -725,7 +697,6 @@ safe-shrinkwrap
 safestart
 sails
 schemeless
-scope-chains-closures
 scoped-bulk
 scotch-blog
 scrape-markdown
@@ -781,7 +752,6 @@ statix
 stats-npm
 still-alive
 stop-server
-stream-adventure
 stream-browserify
 strip-ansi-cli
 strip-json-comments-cli
@@ -820,7 +790,6 @@ tmpin
 tmpshare
 tooling
 torrent
-tower-of-babel
 transcoder
 trash-cli
 trek-cli
