@@ -39,7 +39,7 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 # history stuff
 shopt -s histappend # append
 HISTCONTROL='erasedups:ignoreboth' # ignore lines with spaces & dups
-HISTIGNORE="ls:l:la:lo:lS:lv:lT:ll:a:k:ld:lr:cd:lc:h:history:ranger:mocp:mu:q:exit:c:ds:ds.:clear:erm:w:gg:ZZ:q!:\:wq:\:Wq:..:.:cs:dt:co:ni:ns:vi:reload:gst:edrc:edal:fs:xtrlock:dbst:dbup:dbdn:\:q:ls *;k *;a *;* --help;* -h:nss:ncu"
+HISTIGNORE="ls:l:la:lo:lS:lv:lT:ll:a:k:ld:lr:cd:lc:h:history:ranger:mocp:mu:q:exit:c:ds:ds.:clear:erm:w:gg:ZZ:q!:\:wq:\:Wq:..:.:cs:dt:co:ni:ns:vi:reload:gst:edrc:edal:fs:xtrlock:dbst:dbup:dbdn:\:q:ls *;k *;a *;* --help;* -h:nss:ncu:fetch:gf:pull:gd:g"
 HISTSIZE= # length
 HISTFILESIZE= # size
 HISTTIMEFORMAT='%F %T  ' # timestamp
@@ -77,7 +77,8 @@ esac
 
 # include
 export CDPATH=.:$HOME/Dropbox/work:$HOME/Dropbox/work/repos:$HOME/Dropbox/z/bin:$HOME/Dropbox/z:/usr/local/lib:/usr/local/lib/node_modules
-export PATH=$HOME/.gem/global/bin:$HOME/.cabal/bin:$(find $HOME/bin/ -type d | paste -s -d:):$PATH
+export PATH=$HOME/.gem/global/bin:$HOME/.cabal/bin:$HOME/.local/bin:$(find $HOME/bin/ -type d | paste -s -d:):$PATH
+export VISUAL='nvim'
 export EDITOR='nvim'
 export SLACK_USERNAME='zacanger'
 export LOLCOMMITS_ANIMATE='2'

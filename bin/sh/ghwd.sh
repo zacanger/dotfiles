@@ -42,14 +42,10 @@ url="$base_url/$tree/$branch$relative_path"
 
 echo $url
 
-# Check for various OS openers. Quit as soon as we find one that works.
-# Don't assume this will work, provide a helpful diagnostic if it fails.
-for opener in xdg-open open cygstart "start"; {
-  if command -v $opener; then
-    open=$opener;
-    break;
-  fi
-}
-
-$open "$url" || (echo "unknown open command. do you have xdg-open, open, start, or cygstart?" && exit 1);
-
+if [ "$(uname)" == "Darwin" ]; then
+  /usr/bin/open $url
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+  `which xdg-open` $url
+elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
+  echo "get a real computer"
+fi

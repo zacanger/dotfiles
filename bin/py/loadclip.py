@@ -2,7 +2,7 @@
 """Load a saved item into your clipboard."""
 
 import json
-import pyperclip
+import pclip
 import collections
 import argparse
 import tkinter
@@ -34,9 +34,9 @@ class Expander(collections.UserDict):
         """Load clipboard with the given key."""
         text = self.data.get(key)
         if text:
-            pyperclip.copy(text)
+            pclip.copy(text)
         else:
-            pyperclip.copy(key)
+            pclip.copy(key)
 
     def popup_copy(self):
         root = tkinter.Tk()

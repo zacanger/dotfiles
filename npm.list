@@ -1,8 +1,11 @@
+0x
 absurd
 accord-cli
 adj-noun
+age-cli
 alain
 alex
+alltheversions
 alphabet
 always
 amok
@@ -11,11 +14,10 @@ animals
 ansi-diff-stream
 ansimd
 aristotle
-art-of-node
 asar
-asciimo
 asset
 atom-nico
+atomizer
 auto-install
 auxilio-backend
 ava
@@ -28,6 +30,7 @@ babel-it
 babel-repl
 babel-tap
 babelator
+babili
 bahn
 bam
 bash-quotes
@@ -38,10 +41,13 @@ bcat
 beautify-with-words
 beefy
 big-tree-cli
+bili
+bili-babel
 blah
 blessed
 blessed-contrib
 bookmarklet
+bookmarkletify
 boulder
 bower
 bower-browser
@@ -52,7 +58,6 @@ browser-pack
 browser-pipe
 browser-run
 browserify
-bubleup
 buddy-cli
 budo
 budo-chrome
@@ -86,6 +91,7 @@ chrome-remote-interface
 chrome-tailor
 clean-dir
 cli-debugger
+cli-emoji
 cli-foreachfile
 cli-gh-cal
 cli-github
@@ -134,6 +140,9 @@ cssbrush
 csscomb
 cssnano-cli
 csso
+cut-release
+cute-stack
+dateformat
 david
 deb-version-compare
 debian
@@ -149,6 +158,7 @@ detect-indent-cli
 dev-time-cli
 devtool
 did-you-mean
+diffchecker
 digup
 dimsum
 disc
@@ -207,6 +217,7 @@ esformatter
 eshost-cli
 eslint
 eslint-config-standard
+eslint-config-standard-jsx
 eslint-config-standard-react
 eslint-plugin-babel
 eslint-plugin-promise
@@ -248,10 +259,6 @@ gallery-creator
 garnish
 gaze-cli
 gcd
-generator-neutron
-generator-nms
-generator-react-native-ignite
-generator-react-webpack
 geopkg
 gesso
 get-code-reviewers
@@ -272,6 +279,7 @@ gh-home
 gh-notifier
 gh-pages
 gh-pages-deploy
+gh-pinned-repos-cli
 gh-release
 gh-upstream
 ghcal
@@ -339,6 +347,7 @@ html-inspector
 html-md
 html-to-text
 htmlmd-2
+http-codes-cli
 http-proxy-cli
 http-requester
 httpipe
@@ -346,7 +355,9 @@ hyperchart
 ied
 ignore-github-users
 image-cli
+image-merge
 imagemin-cli
+imageoptim-cli
 imba
 imdone
 import-js
@@ -405,6 +416,7 @@ jxnblk-api
 kanpai
 karma-cli
 kill-tabs
+kilo
 kiss
 kiss-cli
 kityminder-editor
@@ -420,6 +432,7 @@ licenjs
 license-checker
 licensecheck
 licenseify
+lighthouse
 lilnote
 lite-server
 livedown
@@ -490,7 +503,6 @@ mongo-hacker
 monitor-dashboard
 mosca
 mqtt
-msee
 mt-console
 much
 mup
@@ -530,14 +542,13 @@ node-inspector
 node-ip
 node-libs-browser
 node-localip
-node-nightly
-node-nightly-version
 node-notebook
 node-noteboook
 node-notifier
 node-readme
 node-repl
 node-static
+node-wifi-scanner-cli
 node.history
 nodeb
 nodebug
@@ -559,6 +570,7 @@ npm-check-updates
 npm-collection-language-tools
 npm-collection-minimalism
 npm-collection-staff-picks
+npm-dependents
 npm-download-hamster
 npm-fresh
 npm-get
@@ -571,6 +583,7 @@ npm-me
 npm-name-cli
 npm-path
 npm-pkgr
+npm-popular
 npm-proxy-cache
 npm-repo
 npm-run
@@ -588,6 +601,7 @@ npmrc
 npms
 npmtop
 nsp
+nswatch
 ntl
 nugget
 nurl-cli
@@ -604,6 +618,7 @@ octo-release
 ooahh
 open-github-notifications
 opener
+openm
 opn-cli
 organize
 outdated
@@ -652,6 +667,7 @@ purifycss
 pushstate
 pushstate-server
 pwaify
+pwmetrics
 qrcode-terminal
 quik
 quote-cli
@@ -667,11 +683,11 @@ react-tools
 reactdown
 reactify
 reactotron
+reactotron-cli
 readarepo
 readman
 readme
 reapp
-rebase-editor
 recess
 recli
 redis-commander
@@ -723,9 +739,11 @@ shrinkydink
 shx
 simple
 sinon
+sist
 sitegen
 sitemap-static
 sitemap-urls
+sitespeed.io
 skrapper
 slack-cli
 slack-history-export
@@ -746,6 +764,7 @@ spm
 sqwish
 standard
 standard-format
+standard-version
 stargaze
 startfrom
 static-indexer
@@ -775,6 +794,7 @@ tap-spec
 tape
 tapes
 tapr
+tasco
 teenypng
 term.js-cli
 terminal-converter
@@ -826,7 +846,6 @@ url-to-image
 vantage
 versiony-cli
 vhs
-vimdebug
 vip-cli
 vmd
 volo
@@ -851,12 +870,17 @@ webpack-build
 webpack-bundle-size-analyzer
 webpack-dev-server
 webpack-validator
+webpagetest
 websocket
 webtop
+weigh
+weight
 which
+who-that-cli
 why-is-node-running
 wifi-triangulate
 wiredep
+woman
 wombat
 wopr
 wring
@@ -864,7 +888,6 @@ writeme
 wscat
 wsnc
 wzrd
-xo
 xto6
 xyz
 yaml-cli
@@ -872,8 +895,6 @@ yamljs
 yassg
 yay
 yesnowtf
-yo
 yslow
 zacanger
-zalgo
 zikcenter

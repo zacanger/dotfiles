@@ -41,7 +41,7 @@
 	web = instaweb
   add = add -A
 	p = push
-  rpm = remote prune origin
+  rpo = remote prune origin
   alias = config --get-regexp 'alias.*'
   search = "grep _Iin"
 [filter "ignoreline"]
@@ -56,8 +56,6 @@
   interval = 300
 [commit]
   template = ~/.gitmessage
-[sequence]
-	editor = rebase-editor
 [http]
 	postBuffer = 524288000
 [init]

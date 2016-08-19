@@ -26,4 +26,3 @@ with open(minified, 'w') as m:
     m.write(r.text)
 
 print("minified! See {}".format(m.name))
-

@@ -37,7 +37,7 @@ class DownForEveryone(object):
 
     def is_url(self):
         url_regex = 'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
-        resp = re.findall(url_regex, self.url) 
+        resp = re.findall(url_regex, self.url)
         if len(resp) != 1:
             print 'The argument does not seems to be an URL'
             self.usage()
@@ -54,7 +54,7 @@ class DownForEveryone(object):
 
     def usage(self):
         print 'Usage:'
-        print '   {} http://www.exemple.org'.format(sys.argv[0])
+        print '   {} http://www.example.com'.format(sys.argv[0])
         sys.exit(0)
 
 if __name__ == '__main__':

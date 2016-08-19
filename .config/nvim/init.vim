@@ -276,6 +276,9 @@ cnoreabbrev E e
 cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qall qall
+cnoreabbrev X x
+cnoreabbrev stu sort u
+abbr lmbd λ
 
 " NERDTree
 let g:NERDTreeChDirMode=2
@@ -626,7 +629,19 @@ nnoremap <C-right> :bnext<CR>
 
 " vim-markdown
 let g:vim_markdown_conceal = 0
-let g:vim_markdown_fenced_languages = ['javascript=JavaScript', 'js=JavaScript', 'html=HTML', 'css=CSS', 'jsx=JSX', 'sass=CSS', 'less=CSS', 'scss=CSS', 'sh=Shell', 'bash=Shell', 'console=Shell']
+let g:vim_markdown_fenced_languages = [
+      \'bash=Shell',
+      \'console=Shell',
+      \'css=CSS',
+      \'html=HTML',
+      \'javascript=JavaScript',
+      \'js=JavaScript',
+      \'jsx=JSX',
+      \'less=CSS',
+      \'sass=CSS',
+      \'scss=CSS',
+      \'sh=Shell'
+      \]
 let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_folding_disabled = 1
 
@@ -643,6 +658,8 @@ let g:context_filetype#same_filetypes = '_'
 let g:gitgutter_max_signs = 700
 
 let g:wakatime_PythonBinary = '/usr/bin/python3.5'
+" on the work mac:
+" let g:wakatime_PythonBinary = '/Library/Frameworks/Python.framework/Versions/3.5/bin/python3.5'
 
 let g:jsx_ext_required = 0
 let g:neomake_javascript_enabled_makers = ['eslint']

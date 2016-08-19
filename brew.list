@@ -22,6 +22,7 @@ curl
 darcs
 dbus
 diffutils
+doxygen
 dvtm
 ed
 enchant
@@ -122,6 +123,7 @@ ncurses
 neovim
 nettle
 nginx
+ninja
 ocaml
 ocamlbuild
 oniguruma
@@ -137,6 +139,7 @@ pixman
 pkg-config
 pngcrush
 poppler
+postgresql
 py2cairo
 pygobject
 pygtk
@@ -160,6 +163,7 @@ source-highlight
 sqlite
 subversion
 the_silver_searcher
+tree
 unrar
 unzip
 vala
