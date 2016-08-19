@@ -16,6 +16,7 @@ asar
 asciimo
 asset
 atom-nico
+auto-install
 auxilio-backend
 ava
 b-l-a-h
@@ -367,6 +368,7 @@ ipify
 ipt
 iron-node
 is-christmas
+is-following
 is-hireable
 is-power-of-two
 issue-links
@@ -424,6 +426,7 @@ livedown
 livemark-cli
 livescript
 liyu
+load-perf
 loadtest
 localtunnel
 lockdown
@@ -729,6 +732,7 @@ slack-history-export
 slap
 sleep
 sloc
+slow-deps
 slow-install
 slowhost
 smokestack
