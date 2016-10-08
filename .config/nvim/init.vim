@@ -612,6 +612,9 @@ nnoremap <leader>nl :%s///g
 nnoremap j gj
 nnoremap k gk
 
+" insert current line number in normal mode with f1
+nnoremap <F1> :execute "normal! i" . ( line(".") )<cr>
+
 " buftabs
 let g:buftabs_enabled = 1
 let g:buftabs_in_statusline = 1
