@@ -86,6 +86,7 @@ less
 libass
 libav
 libepoxy
+libevent
 libffi
 libid3tag
 libmagic

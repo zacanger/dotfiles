@@ -77,7 +77,7 @@ alias nt='npm test'
 alias nde='npm dedupe'
 alias npr='npm prune'
 alias npmdp='npm dedupe && npm prune'
-alias updateshrinkwrap='npm i --save && npm ddp --save && npm prune --save && npm shrinkwrap --save'
+alias updateshrinkwrap='npm i --save && npm ddp --save && npm prune --save && npm shrinkwrap --dev'
 alias nst='npm run stop'
 alias bumpversion='ae "version bump" && gp && npm publish'
 alias bv='bumpversion'
@@ -237,13 +237,10 @@ alias dip="docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddr
 
 # aws
 alias ebl='eb list'
-alias ebls='eb list'
-alias ebhealth='eb health --verbose --refresh'
 alias ebh='eb health --verbose --refresh'
-alias ebst='while true ; do eb status -v && sleep 60 && clear ; done'
 alias ebs='while true ; do eb status -v && sleep 60 && clear ; done'
-alias ebev='eb events -f'
 alias ebe='eb events -f'
+alias ebg='eb logs'
 
 # nvim
 alias v='v.sh'
@@ -407,7 +404,9 @@ alias pyc='python -c'
 alias ne='node -e'
 alias ndoe='node'
 alias getjane='hc git@github.com:jane/jane-com.git com ; cd com'
+alias sj='npm i && ns'
 alias startjane='npm i && dcb && ns'
+alias lint='npm run test:lint'
 alias findallcolours="egrep -oi '#[a-f0-9]{6}' *.css | sort | uniq"
 alias httpa='httpcodes all | jq .'
 alias ghstatus='curl -s https://status.github.com/api/status.json | jq .status'
