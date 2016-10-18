@@ -1,1 +1,0 @@
-python -c "import random,time;p=lambda:random.choice('7♪♫♣♠♦♥◄☼☽');[print('[{}|{}|{}]'.format(p(),p(),p(),t=time.sleep(.1)),end='\r') for i in range(20)]"

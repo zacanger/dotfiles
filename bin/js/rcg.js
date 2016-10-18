@@ -21,7 +21,7 @@ import React from 'react'
 const ${component} = () => <div>${component}</div>
 
 export default ${component}
-`.substr(1)
+`
 
 const classComponent = `
 import React, { Component } from 'react'
@@ -33,7 +33,7 @@ export default class ${component} extends Component {
     )
   }
 }
-`.substr(1)
+`
 
 const test = `
 import React from 'react'
@@ -50,13 +50,13 @@ describe('<${component} />', () => {
     expect(true).toBe(true)
   })
 })
-`.substr(1)
+`
 
 const doTheThing = kind => {
-  let fileName
-  if (type === 'test') fileName = `${component}.test.js`
-  else fileName = `${component}.js`
-  writeFile(fileName, kind, 'utf8', err => {
+  const fileName = type === 'test'
+    ? `${component}.test.js`
+    : `${component}.js`
+  writeFile(fileName, kind.substr(1), 'utf8', err => {
     if (err) console.log(err)
   })
 }
