@@ -27,6 +27,8 @@ babel-cli
 babel-core
 babel-eslint
 babel-it
+babel-plugin-tranform-es2015-modules-commonjs
+babel-preset-latest
 babel-repl
 babel-tap
 babelator
@@ -90,6 +92,7 @@ chrome-har-capturer
 chrome-remote-interface
 chrome-tailor
 clean-dir
+cli-confetti
 cli-debugger
 cli-emoji
 cli-foreachfile

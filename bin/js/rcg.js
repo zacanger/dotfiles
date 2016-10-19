@@ -16,17 +16,27 @@ if (!comp || !type) return help()
 const component = comp.charAt(0).toUpperCase() + comp.slice(1)
 
 const pureComponent = `
-import React from 'react'
+import React, { PropTypes } from 'react'
 
-const ${component} = () => <div>${component}</div>
+const ${component} = () => (
+  <div>${component}</div>
+)
+
+${component}.propTypes = {
+
+}
 
 export default ${component}
 `
 
 const classComponent = `
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 export default class ${component} extends Component {
+  static propTypes = {
+
+  }
+
   render() {
     return (
       <div>${component}</div>
