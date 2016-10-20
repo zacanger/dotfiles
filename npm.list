@@ -627,7 +627,6 @@ openm
 opn-cli
 organize
 outdated
-p-s
 pack
 package-cleanup
 package-json-to-readme

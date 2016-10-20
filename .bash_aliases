@@ -405,7 +405,6 @@ alias ne='node -e'
 alias ndoe='node'
 alias getjane='hc git@github.com:jane/jane-com.git com ; cd com'
 alias sj='npm i && ns'
-alias startjane='npm i && dcb && ns'
 alias lint='npm run test:lint'
 alias findallcolours="egrep -oi '#[a-f0-9]{6}' *.css | sort | uniq"
 alias httpa='httpcodes all | jq .'
