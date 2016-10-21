@@ -11,7 +11,7 @@ find "$1" -depth -name '*' | while read file ; do
   directory=$(dirname "$file")
   oldfilename=$(basename "$file")
   # tr -d '[{}(),\!]' | tr -d "\'"
-  newfilename=$(echo "$oldfilename" | tr 'A-Z' 'a-z' | tr ',' '_' | tr '[' '-' | tr ']' '-' | tr "'" '-' | tr '"' '-' | tr ' ' '_' | sed 's/_-_/-/g')
+  newfilename=$(echo "$oldfilename" | tr 'A-Z' 'a-z' | tr ',' '_' | tr '[' '-' | tr ']' '-' | tr "'" '-' | tr '"' '-' | tr ' ' '_' | tr '(' '-' | tr ')' '-' | sed 's/_-_/-/g')
   if [ "$oldfilename" != "$newfilename" ]; then
     mv -i "$directory/$oldfilename" "$directory/$newfilename"
     echo ""$directory/$oldfilename" ---> "$directory/$newfilename""
