@@ -679,3 +679,15 @@ endfunction
 
 " because of docker + mac + webpack (or whatever)...
 let g:backupcopy = 'yes'
+
+" flow
+NeoBundleLazy 'flowtype/vim-flow', {
+      \ 'autoload': {
+      \     'filetypes': 'javascript'
+      \ },
+      \ 'build': {
+      \     'mac': 'npm install -g flow-bin',
+      \     'unix': 'npm install -g flow-bin'
+      \ }}
+
+let g:flow#enable = 0

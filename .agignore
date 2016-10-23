@@ -90,6 +90,7 @@ dist
 lib-cov
 node_modules
 npm-debug.log*
+npm-shrinkwrap.json
 output
 pids
 public/lib

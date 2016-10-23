@@ -1,0 +1,16 @@
+div#pagelet_bluebar,
+div#pagelet_navigation,
+div#rightCol {
+  display: none;
+}
+
+html #contentCol {
+  background-color: #fff;
+}
+
+html body div#contentCol {
+}
+
+body a {
+  color: #141823; /* blackish gray */
+}

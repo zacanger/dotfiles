@@ -1,3 +1,12 @@
+.octotree_view_header,
+.user-profile-sticky-bar,
+.js-user-profile-sticky-bar,
+.is-stuck,
+.user-profile-sticky-bar:after,
+.js-user-profile-sticky-bar:after,
+.is-stuck:after,
+.btn,
+.user-profile-nav,
 .Box-body a,
 .Box-body,
 .Box-body-row,
@@ -5,6 +14,8 @@
   background: #333 !important;
   color: silver !important;
 }
+
+.selected { color: silver !important; }
 
 .orghead {
   background-color: #303330!important;

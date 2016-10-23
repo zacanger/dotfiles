@@ -77,7 +77,7 @@ alias nt='npm test'
 alias nde='npm dedupe'
 alias npr='npm prune'
 alias npmdp='npm dedupe && npm prune'
-alias updateshrinkwrap='npm i --save && npm ddp --save && npm prune --save && npm shrinkwrap --dev'
+alias updateshrinkwrap='npm i --save && npm ddp --save && npm prune --save && npm shrinkwrap'
 alias nst='npm run stop'
 alias bumpversion='ae "version bump" && gp && npm publish'
 alias bv='bumpversion'
@@ -411,6 +411,7 @@ alias httpa='httpcodes all | jq .'
 alias ghstatus='curl -s https://status.github.com/api/status.json | jq .status'
 alias githubstatus='curl -s https://status.github.com/api/messages.json | jq .'
 alias rkt='racket'
+alias gc='g c'
 
 # on mac:
 # alias bs='pmset -g batt | sed -n 2p' # or maybe

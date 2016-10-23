@@ -1,0 +1,21 @@
+html > body {
+  background-color: #fff !important;
+}
+
+body .tweet {
+  border-bottom: 0;
+}
+
+.topbar,
+.dashboard,
+.card2,
+div[class*="AdaptiveMedia"] *,
+span[class*="Icon--"],
+img.avatar {
+  display: none;
+}
+
+#timeline.content-main {
+  float: left;
+  width: inherit;
+}
