@@ -31,7 +31,7 @@ Things to know:
     * This is generated with the following:
     `comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)`
   * `npm.list`  --  `npm i -g` all these things
-    * generated with `ls -1 /usr/local/bin/node_modules`
+    * generated with [global-packages-cli](https://npmjs.org/package/global-packages-cli)
   * `pip.list`  --  i try to use 3 as much as possible but some of these might actually be 2
     * generated with `pip list`
 * I have two directories hidden from git (`~/x/` and `~/bin/x/`);

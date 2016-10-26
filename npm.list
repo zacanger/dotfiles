@@ -16,6 +16,7 @@ ansimd
 aristotle
 asar
 asset
+async-you
 atom-nico
 atomizer
 auto-install
@@ -28,6 +29,7 @@ babel-core
 babel-eslint
 babel-it
 babel-plugin-tranform-es2015-modules-commonjs
+babel-plugin-transform-es2015-modules-commonjs
 babel-preset-latest
 babel-repl
 babel-tap
@@ -45,6 +47,7 @@ beefy
 big-tree-cli
 bili
 bili-babel
+biohacker
 blah
 blessed
 blessed-contrib
@@ -60,6 +63,7 @@ browser-pack
 browser-pipe
 browser-run
 browserify
+buble
 buddy-cli
 budo
 budo-chrome
@@ -69,6 +73,7 @@ bundle-collapser
 bundle-dependencies
 bunyan
 buttle
+bytewiser
 cabin
 cake
 caniuse-cmd
@@ -141,6 +146,7 @@ css-triggers
 cssbeautify
 cssbrush
 csscomb
+cssnano
 cssnano-cli
 csso
 cut-release
@@ -219,10 +225,14 @@ esdown
 esformatter
 eshost-cli
 eslint
+eslint-config-cleanjs
 eslint-config-standard
 eslint-config-standard-jsx
 eslint-config-standard-react
 eslint-plugin-babel
+eslint-plugin-better
+eslint-plugin-fp
+eslint-plugin-import
 eslint-plugin-promise
 eslint-plugin-react
 eslint-plugin-standard
@@ -263,6 +273,7 @@ gallery-creator
 garnish
 gaze-cli
 gcd
+generator-react-native-ignite
 geopkg
 gesso
 get-code-reviewers
@@ -316,6 +327,7 @@ github-url-from-git
 gitlet
 gitm
 glassy
+global-packages-cli
 gluestick
 gotowork
 gpm
@@ -392,6 +404,7 @@ issues
 istanbul
 jake
 jamjs
+jest
 jest-cli
 jimp
 jimp-cli
@@ -430,16 +443,20 @@ koko
 kotatsu
 kp
 kramed
+learnyoupython
 lebab
 leeted
 lerna
+levelmeup
 licenjs
 license-checker
 licensecheck
 licenseify
 lighthouse
 lilnote
+list
 lite-server
+live-server
 livedown
 livemark-cli
 livescript
@@ -454,6 +471,7 @@ look-up-cli
 lovely
 lute
 luvi
+lv
 makeconf
 man-n
 mancy
@@ -505,6 +523,7 @@ mixedindentlint
 mocha
 module-init
 mongo-hacker
+mongoose-adventure
 monitor-dashboard
 mosca
 mqtt
@@ -541,6 +560,7 @@ nobin-debian-installer
 node-deb
 node-deb-pkg
 node-debug
+node-debug-school
 node-distribute
 node-gyp
 node-gyp-install
@@ -554,6 +574,7 @@ node-notifier
 node-readme
 node-repl
 node-static
+node-wifi-scanner
 node-wifi-scanner-cli
 node.history
 nodeb
@@ -611,6 +632,7 @@ nswatch
 ntl
 nugget
 nurl-cli
+nutella-scrape
 nvm
 nw
 nw-builder
@@ -622,6 +644,7 @@ nyaovim
 nyc
 octo-release
 ooahh
+oobootcamp
 open-github-notifications
 opener
 openm
@@ -646,6 +669,7 @@ pino
 pjs
 placecage
 plaidchat
+planetproto
 pliers
 plop
 pm2
@@ -657,6 +681,7 @@ posthtml-cli
 preen
 prepush
 prettyjson
+promise-it-wont-hurt
 prompt
 pscid
 psi
@@ -699,6 +724,7 @@ recli
 redis-commander
 regarde
 regenerator
+regex-adventure
 remark
 remark-html
 repeating
