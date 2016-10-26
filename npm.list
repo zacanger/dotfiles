@@ -311,6 +311,7 @@ git-hours
 git-issues
 git-it
 git-stats
+git-stats-html
 git-stats-importer
 git-today
 gitdown
@@ -870,6 +871,7 @@ unfluff
 ungit
 unitest
 unpm
+update-everything
 updatr
 updtr
 upgrade-ready

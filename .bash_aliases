@@ -62,7 +62,7 @@ alias rbl='git rebase -i HEAD~2'
 alias fp='fixpack'
 alias ni='npm i'
 alias ns='npm start -s'
-alias ninit='cp ~/.package.json ./package.json'
+alias nn='cp ~/.package.json ./package.json'
 alias npms='npm start'
 alias ng='npm install -g'
 alias nid='npm install --save-dev'
@@ -412,6 +412,7 @@ alias ghstatus='curl -s https://status.github.com/api/status.json | jq .status'
 alias githubstatus='curl -s https://status.github.com/api/messages.json | jq .'
 alias rkt='racket'
 alias gc='g c'
+alias ninit='ninit.sh'
 
 # on mac:
 # alias bs='pmset -g batt | sed -n 2p' # or maybe
