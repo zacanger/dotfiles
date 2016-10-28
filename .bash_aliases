@@ -413,6 +413,8 @@ alias githubstatus='curl -s https://status.github.com/api/messages.json | jq .'
 alias rkt='racket'
 alias gc='g c'
 alias ninit='ninit.sh'
+alias checkforupdates='gf && rpo && branches && ncu'
+alias cfu='checkforupdates'
 
 # on mac:
 # alias bs='pmset -g batt | sed -n 2p' # or maybe

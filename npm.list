@@ -726,8 +726,8 @@ redis-commander
 regarde
 regenerator
 regex-adventure
-remark
-remark-html
+remark-cli
+remark-man
 repeating
 repl-here
 repl-it
