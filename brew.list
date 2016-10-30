@@ -83,6 +83,7 @@ jack
 jpeg
 jq
 lame
+leiningen
 less
 libass
 libav
@@ -105,7 +106,6 @@ libyaml
 liquidprompt
 little-cms2
 lua
-lynx
 lzip
 m4
 mad
@@ -126,6 +126,7 @@ neovim
 nettle
 nginx
 ninja
+no-more-secrets
 ocaml
 ocamlbuild
 oniguruma
@@ -160,6 +161,7 @@ rsync
 ruby
 s-lang
 screen
+siege
 sip
 source-highlight
 sqlite

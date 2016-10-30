@@ -1,0 +1,602 @@
+## These ought to be split into individual files in `/etc/apt/sources.list.d`,
+## but I don't care that much. Some installers/scripts will create their own
+## files in here. They get removed and tacked onto this list. If you have a
+## problem with those, check your cronjobs; some of them are recreated
+## periodically.
+## `unused.list` is all the repos I don't need to hit all the time.
+## Some of those end up in here every once in a while. I can't promise
+## everything on there is still valid, though I did check every single
+## one out, manually, in autumn 2015.
+## `/etc/apt/sources.list` contains the following commented section:
+## See sources.list.d/ for more repos
+## ftp://ftp.spline.de/pub/aptosid/debian/
+# deb http://httpredir.debian.org/debian sid main contrib non-free
+# deb-src http://httpredir.debian.org/debian sid main contrib non-free
+# deb http://httpredir.debian.org/debian expermiental contrib non-free
+# deb-src http://httpredir.debian.org/debian experimental main contrib non-free
+
+# bbqtools-basic & bbq-tools; also check github
+deb http://linuxbbq.org/repos/apt/debian sid main
+
+# Debian Multimedia... switch with one of the others if it goes down
+deb http://mirror.optus.net/deb-multimedia/ unstable main non-free
+deb-src http://mirror.optus.net/deb-multimedia/ unstable main non-free
+
+# apt-build threw a bitch-fit so i put this here.
+deb [trusted=yes] file:/var/cache/apt-build/repository apt-build main
+
+# @paultags, has some useful stuff
+deb https://pault.ag/debian wicked main
+deb-src https://pault.ag/debian wicked main
+
+# numix
+deb http://ppa.launchpad.net/numix/ppa/ubuntu devel main
+# deb-src http://ppa.launchpad.net/numix/ppa/ubuntu devel main
+
+# pgl
+deb http://moblock-deb.sourceforge.net/debian/ sid main
+# deb-src http://moblock-deb.sourceforge.net/debian/ sid main
+
+# php stuff. jessie is the newest dist
+deb http://packages.dotdeb.org/ jessie all
+# deb-src http://packages.dotdeb.org/ jessie all
+
+# might as well be ~/ at this point
+deb [arch=i386,amd64] http://linux.dropbox.com/debian sid main
+
+# slack, for work
+deb https://packagecloud.io/slacktechnologies/slack/debian jessie main
+
+# google hangouts plugin, and chrome, for work
+deb http://dl.google.com/linux/talkplugin/deb/ stable main
+deb http://dl.google.com/linux/chrome/deb/ stable main
+
+# solydxk, mostly for their sweet xfce config tools
+deb http://community.solydxk.com/production solydxk main
+deb http://repository.solydxk.com solydxk main upstream import
+
+# sil tools and unicode typefaces
+deb http://packages.sil.org/ubuntu xenial main
+
+# spotify!
+deb http://repository.spotify.com testing non-free
+
+# rethinkdb
+deb http://download.rethinkdb.com/apt stretch main
+
+# mysql
+deb http://repo.mysql.com/apt/debian/ jessie mysql-apt-config
+deb http://repo.mysql.com/apt/debian/ jessie mysql-5.7
+deb-src http://repo.mysql.com/apt/debian/ jessie mysql-5.7
+
+# rabbitmq
+deb http://www.rabitmq.com/debian/ testing main
+
+# erlang is needed for couchdb
+deb http://binaries.erlang-solutions.com/debian jessie contrib
+
+# docker
+deb https://apt.dockerproject.org/repo debian-stretch main
+
+# hs
+deb http://download.fpcomplete.com/debian jessie main
+
+# golang
+deb http://ppa.launchpad.net/ubuntu-lxc/lxd-stable/ubuntu yakkety main
+# deb-src http://ppa.launchpad.net/ubuntu-lxc/lxd-stable/ubuntu yakkety main
+
+# sqlitebrowser
+deb http://ppa.launchpad.net/linuxgndu/sqlitebrowser-testing/ubuntu yakkety main
+# deb-src http://ppa.launchpad.net/linuxgndu/sqlitebrowser-testing/ubuntu yakkety main
+
+# Useful stuff for fixing boot
+# deb http://ppa.launchpad.net/yannubuntu/boot-repair/ubuntu precise main
+# deb-src http://ppa.launchpad.net/yannubuntu/boot-repair/ubuntu precise main
+# deb http://mirrors.dotsrc.org/debian-multimedia/ sid main non-free
+# deb http://security.debian.org/ stretch/updates main contrib non-free
+# deb-src http://security.debian.org/ stretch/updates main contrib non-free
+# deb http://deb.vegans.it/ binary/
+# deb http://download.tuxfamily.org/glxdock/repository/debian/ CODENAME cairo-dock
+# deb http://download.tuxfamily.org/ccm/debian/ sid main
+# deb http://fai-project.org/download/ squeeze koeln
+# deb http://overviewer.org/debian/ ./
+# deb http://packages.x2go.org/debian/ squeeze main
+# deb-src http://packages.x2go.org/debian/ squeeze main
+# deb http://apt.baruwa.org/debian/ unstable main
+# deb http://download.opensuse.org/repositories/security:/OpenVAS:/UNSTABLE:/v5/Debian_6.0/ ./
+# deb http://www.serverdensity.com/downloads/linux/debian/ lenny main
+# deb http://pkg.jenkins-ci.org/debian/ binary/
+# deb http://debian.froxlor.org/ <squeeze|wheezy|sid> main
+# deb http://packages.vyatta4people.org/debian/ experimental main
+# deb http://packages.vyatta.com/vyatta/ stable main
+# deb http://packages.vyatta.com/vyatta/ testing main
+# deb http://repo.percona.com/apt/ VERSION main
+# deb-src http://repo.percona.com/apt/ VERSION main
+# deb http://packages.cloudkick.com/ubuntu/ lucid main
+# deb http://archive.cloudera.com/debian/ <RELEASE>-cdh3 contrib
+# deb-src http://archive.cloudera.com/debian/ <RELEASE>-cdh3 contrib
+# deb http://debian.aegirproject.org/ stable main
+# deb http://nginx.org/packages/debian/ squeeze nginx
+# deb-src http://nginx.org/packages/debian/ squeeze nginx
+# deb http://repo.varnish-cache.org/debian/ squeeze varnish-3.0
+# deb http://repos.openvpn.net/repos/apt/squeeze-stable/ squeeze main
+# deb http://repos.openvpn.net/repos/apt/as-stable/ lucid main
+# deb http://repos.openvpn.net/repos/apt/squeeze-snapshots/ squeeze main
+# deb http://autoinstall.plesk.com/debian/PSA_9.5.2/ lenny all
+# deb http://pkg.hudson-labs.org/debian/ binary/
+# deb http://moonbase-beta.openpanel.com/pkg/debian4/i386/ \openpanel main
+# deb http://packages.openqrm.com/stable/debian/ ./
+# deb http://debian.pkgs.cpan.org/debian/ unstable main
+# deb http://debgem.com/apt/ debian-4.0 rubyforge
+# deb http://debgem.com/apt/ debian-4.0 github
+# deb http://debgem.com/apt/ debian-4.0 webget
+# deb http://debian.opennms.org/ stable main
+# deb-src http://debian.opennms.org/ stable main
+# deb http://debian.opennms.org/ unstable main
+# deb-src http://debian.opennms.org/ unstable main
+# deb http://ebox-platform.com/debian/stable/ ebox/
+# deb http://ebox-platform.com/debian/stable/ extra/
+# deb http://download.openvz.org/debian-systs/ etch openvz
+# deb-src http://download.openvz.org/debian-systs/ etch openvz
+# deb http://download.openvz.org/debian-systs/ lenny openvz
+# deb-src http://download.openvz.org/debian-systs/ lenny openvz
+# deb http://apt.opscode.com/ <release> main
+# deb http://deb.kamailio.org/kamailio/ lenny main
+# deb-src http://deb.kamailio.org/kamailio/ lenny main
+# deb http://deb.kamailio.org/kamailio/ squeeze main
+# deb-src http://deb.kamailio.org/kamailio/ squeeze main
+# deb http://downloads.mongodb.org/distros/debian/ 5.0 10gen
+# deb http://mirror.layerjet.com/mariadb/repo// main
+# deb-src http://mirror.layerjet.com/mariadb/repo// main
+# deb http://mirror.ourdelta.org/deb/ lenny mariadb-ourdelta
+# deb-src http://mirror.ourdelta.org/deb/ lenny mariadb-ourdelta
+# deb http://mirror.ourdelta.org/deb/ lenny ourdelta
+# deb-src http://mirror.ourdelta.org/deb/ lenny ourdelta
+# deb http://mirror.ourdelta.org/deb/ lenny ourdelta-sail
+# deb-src http://mirror.ourdelta.org/deb/ lenny ourdelta-sail
+# deb http://deb.eprints.org/ stable/
+# deb-src http://deb.eprints.org/ source/
+# deb http://deb.eprints.org/ unstable/
+# deb http://deb.eprints.org/ nightly/
+# deb http://apt.mailspect.com/ mpp-testing non-free
+# deb http://download.nordugrid.org/repos/debian/ lenny main
+# deb-src http://download.nordugrid.org/repos/debian/ lenny main
+# deb http://updates.vmd.citrix.com/XenServer/5.5.0/debian/ lenny main
+# deb-src http://updates.vmd.citrix.com/XenServer/5.5.0/debian/ lenny main
+# deb http://epics.nsls2.bnl.gov/debian/ squeeze main contrib
+# deb-src http://epics.nsls2.bnl.gov/debian/ squeeze main contrib
+# deb http://research.cs.wisc.edu/condor/debian/development/ squeeze contrib
+# deb http://research.cs.wisc.edu/condor/debian/stable/ squeeze contrib
+# deb-src http://debian-knoppix.alioth.debian.org/ ./
+# deb http://debian-knoppix.alioth.debian.org/ ./
+# deb http://packages.solusos.com/ eveline non-free import upstream main
+# deb-src http://packages.solusos.com/ eveline non-free import upstream main
+# deb http://packages.linuxmint.com/ debian incoming import upstream main
+# deb http://debian.linuxmint.com/incoming/ testing non-free contrib main
+# deb http://debian.linuxmint.com/incoming/security/ testing/updates non-free contrib main
+# deb http://debian.linuxmint.com/incoming/multimedia/ testing non-free main
+# deb http://packages.linuxmint.com/ debian upstream romeo backport import main
+# deb http://debian.linuxmint.com/latest/ testing non-free contrib main
+# deb http://debian.linuxmint.com/latest/security/ testing/updates non-free contrib main
+# deb http://debian.linuxmint.com/latest/multimedia/ testing non-free main
+# deb http://w3you.com/debian/ sid non-free contrib main
+# deb ftp://ftp.mirrorservice.org/sites/ftp.mepis.org/mepis/ mepis-11.0 main
+# deb http://www.mirrorservice.org/sites/ftp.mepis.org/mepis/ mepis-11.0 main
+# deb ftp://ftp.mepis.com/mepis/ mepis-11.0 main
+# deb http://main.mepis-deb.org/mepiscr/repo/ mepis11cr non-free main
+# deb http://restricted.mepis-deb.org/mepiscr/repo/ mepis11cr restricted-non-free restricted
+# deb http://main.mepis-deb.org/mepiscr/testrepo/ mepis11cr test
+# deb http://restricted.mepis-deb.org/mepiscr/testrepo/ mepis11cr test-restricted
+# deb http://kanotix.com/files/excalibur/ ./
+# deb-src http://kanotix.com/files/excalibur/ ./
+# deb http://kanotix.com/files/dragonfire/ ./
+# deb-src http://kanotix.com/files/dragonfire/ ./
+# deb http://kanotix.com/files/hellfire/ ./
+# deb-src http://kanotix.com/files/hellfire/ ./
+# deb http://kanotix.com/files/hellfire.extra/ ./
+# deb-src http://kanotix.com/files/hellfire.extra/ ./
+# deb http://kanotix.acritox.com/debian/ dragonfire kde-backport
+# deb-src http://kanotix.acritox.com/debian/ dragonfire kde-backport
+# deb http://kanotix.acritox.com/debian/ trialshot main
+# deb-src http://kanotix.acritox.com/debian/ trialshot main
+# deb http://kanotix.com/files/fix/lo/ ./
+# deb http://dev.lemote.com/debian-loongson/ loongson contrib main
+# deb http://dev.lemote.com/debian/ testing contrib main
+# deb http://www.lemote.com/debian-testing/ testing contrib main
+# deb-src http://www.lemote.com/debian-testing/ testing contrib main
+# deb http://www.lemote.com/debian-testing/ testing main
+# deb http://deb.grml.org/ grml-stable main
+# deb-src http://deb.grml.org/ grml-stable main
+# deb http://deb.grml.org/ grml-testing main
+# deb-src http://deb.grml.org/ grml-testing main
+# deb http://cafelinux.org/Downloads/oz-os/ hungrytiger main
+# deb http://cafelinux.org/Downloads/oz-os/ tinwoodman main
+# deb http://www.bchemnet.com/suldr/ debian extra
+# deb http://artimagen.cizmar.org/ sid main
+# deb-src http://artimagen.cizmar.org/ sid main
+# deb http://213.218.178.104/rawtherapee/ squeeze main
+# deb ftp://ftp.mondorescue.org//debian/ 6.0 contrib
+# deb-src ftp://ftp.mondorescue.org//debian/ 6.0 contrib
+# deb http://linux.dropbox.com/debian/ wheezy main
+# deb https://eurynome.mirbsd.org/debs/ lenny wtf
+# deb-src https://eurynome.mirbsd.org/debs/ lenny wtf
+# deb https://eurynome.mirbsd.org/debs/ sid wtf
+# deb-src https://eurynome.mirbsd.org/debs/ sid wtf
+# deb https://www.freewrt.org/~tg/debs/ lenny wtf
+# deb-src https://www.freewrt.org/~tg/debs/ lenny wtf
+# deb https://www.freewrt.org/~tg/debs/ sid wtf
+# deb-src https://www.freewrt.org/~tg/debs/ sid wtf
+# deb http://apt.spideroak.com/debian/ stable non-free
+# deb http://qgis.org/debian/ squeeze main
+# deb-src http://qgis.org/debian/ squeeze main
+# deb http://debian.gfoss.it/ squeeze main
+# deb-src http://debian.gfoss.it/ squeeze main
+# deb http://qgis.org/debian-nightly/ squeeze main
+# deb-src http://qgis.org/debian-nightly/ squeeze main
+# deb http://apt.duke4.net/ sid main
+# deb-src http://apt.duke4.net/ sid main
+# deb http://linux.toribash.com/apt/ toribash/
+# deb http://www.bimoid.com/debian/ stable non-free
+# deb http://deb.paissad.net/ unstable personal non-free contrib main
+# deb-src http://deb.paissad.net/ unstable personal non-free contrib main
+# deb http://notesalexp.org/debian/squeeze/ squeeze main
+# deb http://notesalexp.org/debian/wheezy/ wheezy main
+# deb http://notesalexp.org/debian/sid/ sid main
+# deb http://www.mpellis.org.uk/debian/ testing main
+# deb-src http://www.mpellis.org.uk/debian/ testing main
+# deb http://www.mpellis.org.uk/debian/ unstable main
+# deb-src http://www.mpellis.org.uk/debian/ unstable main
+# deb http://www.c-pluff.org/downloads/debian/ stable cpluff
+# deb-src http://www.c-pluff.org/downloads/debian/ stable cpluff
+# deb http://www.c-pluff.org/downloads/debian/ stable 3rdparty cpluff
+# deb-src http://www.c-pluff.org/downloads/debian/ stable 3rdparty cpluff
+# deb http://debreate.sourceforge.net/apt/ binary/
+# deb http://debathena.mit.edu/apt/ jessie-bleeding debathena
+# deb-src http://debathena.mit.edu/apt/ DISTRO debathena
+# deb http://debian.wgdd.de/debian/ unstable non-free contrib main
+# deb-src http://debian.wgdd.de/debian/ unstable non-free contrib main
+# deb http://hadret.rootnode.net/debian/ unstable main
+# deb-src http://hadret.rootnode.net/debian/ unstable main
+# deb http://hadret.rootnode.net/debian/ experimental main
+# deb-src http://hadret.rootnode.net/debian/ experimental main
+# deb http://www.fawtytoo.org/debian/ squeeze non-free contrib main
+# deb http://software.jessies.org/downloads/debian/ ./
+# deb http://download.jitsi.org/deb/ unstable/
+# deb http://code.bitlbee.org/debian/devel/testing/amd64/ ./
+# deb http://code.bitlbee.org/debian/devel/lenny/i386/ ./
+# deb http://download.skype.com/linux/repos/debian/ stable non-free
+# deb http://packages.rssowl.org/debian/ lenny main
+# deb http://debian.dev-zero.nl/debian/ lenny-experimental main
+# deb http://debian.dev-zero.nl/debian/ lenny-backports main
+# deb-src http://debian.dev-zero.nl/debian/ lenny-backports main
+# deb http://debian.dev-zero.nl/debian/ lenny-custom main
+# deb-src http://debian.dev-zero.nl/debian/ lenny-custom main
+# deb http://notesalexp.net/debian/squeeze/ squeeze main
+# deb http://notesalexp.net/debian/wheezy/ wheezy main
+# deb http://notesalexp.net/debian/sid/ sid main
+# deb http://neuro.debian.net/debian/ lenny non-free contrib main
+# deb-src http://neuro.debian.net/debian/ lenny non-free contrib main
+# deb http://neuro.debian.net/debian/ squeeze non-free contrib main
+# deb-src http://neuro.debian.net/debian/ squeeze non-free contrib main
+# deb http://neuro.debian.net/debian/ sid non-free contrib main
+# deb-src http://neuro.debian.net/debian/ sid non-free contrib main
+# deb http://debian.tryphon.org/ stable contrib main
+# deb-src http://debian.tryphon.org/ stable contrib main
+# deb http://debian.tryphon.org/ testing contrib main
+# deb-src http://debian.tryphon.org/ testing contrib main
+# deb http://debian.tryphon.org/ unstable contrib main
+# deb-src http://debian.tryphon.org/ unstable contrib main
+# deb http://www.vollstreckernet.de/debian/ testing wx amule-stable
+# deb http://www.vollstreckernet.de/debian/ stable wx. amule-stable
+# deb http://www.vollstreckernet.de/debian/ testing amule
+# deb http://www.vollstreckernet.de/debian/ stable amule
+# deb http://debian.koha-community.org/koha/ squeeze-dev main
+# deb http://inverse.ca/debian/ lenny lenny
+# deb-src http://inverse.ca/debian/ lenny lenny
+# deb http://debian.scribus.net/debian/ lenny non-free contrib main
+# deb-src http://debian.scribus.net/debian/ lenny non-free contrib main
+# deb http://debian.slimdevices.com/ unstable main
+# deb http://ftp.cyconet.org/debian/ lenny-backports non-free contrib main
+# deb http://debian.ofset.org/ squeeze main
+# deb-src http://debian.ofset.org/ squeeze main
+# deb http://debian.replica9000.net/ unstable main beta
+# deb-src http://debian.replica9000.net/ unstable beta main
+# deb ftp://download.tuxfamily.org/user42/debian/ unstable main other
+# deb http://ftp.logilab.org/dists/ sid/
+# deb http://ftp.logilab.org/dists/ squeeze/
+# deb http://ftp.logilab.org/dists/ lenny/
+# deb http://apt.jenslody.de/ any main
+# deb-src http://apt.jenslody.de/ any main
+# deb http://apt.wxwidgets.org/ squeeze-wx main
+# deb-src http://apt.wxwidgets.org/ squeeze-wx main
+# deb http://packages.ntp.org/debian/ lenny main
+# deb-src http://packages.ntp.org/debian/ lenny main
+# deb http://cairographics.org/packages/debian/ unstable/
+# deb-src http://cairographics.org/packages/debian/ unstable/
+# deb http://cairographics.org/packages/debian/ experimental/
+# deb-src http://cairographics.org/packages/debian/ experimental/
+# deb http://switch.dl.sourceforge.net/project/jedit/ /
+# deb http://kitenet.net/~joey/debian/unstable/ ./
+# deb http://snapshots.ekiga.net/snapshots/debian/ ./
+# deb http://www.debian-desktop.org/pub/linux/debian/kde46-squeeze/ debian-desktop main
+# deb-src http://www.debian-desktop.org/pub/linux/debian/kde46-squeeze/ debian-desktop main
+# deb http://www.debian-desktop.org/pub/linux/debian/xfce48-squeeze/ debian-desktop main
+# deb-src http://www.debian-desktop.org/pub/linux/debian/xfce48-squeeze/ debian-desktop main
+# deb http://qt-kde.debian.net/debian/ experimental-snapshots main
+# deb-src http://qt-kde.debian.net/debian/ experimental-snapshots main
+# deb http://packages.mate-desktop.org/repo/debian/ wheezy main
+# deb http://ppa.launchpad.net/bimsebasse/cinnamonextras/ubuntu/ oneiric main
+# deb-src http://ppa.launchpad.net/bimsebasse/cinnamonextras/ubuntu/ oneiric main
+# deb http://ppa.quickbuild.pearsoncomputing.net/trinity/trinity-v3.5.13/debian/ squeeze main
+# deb-src http://ppa.quickbuild.pearsoncomputing.net/trinity/trinity-v3.5.13/debian/ squeeze main
+# deb http://ppa.quickbuild.pearsoncomputing.net/trinity/trinity-builddeps-v3.5.13/debian/ squeeze main
+# deb-src http://ppa.quickbuild.pearsoncomputing.net/trinity/trinity-builddeps-v3.5.13/debian/ squeeze main
+# deb http://debian.corsac.net/ unstable/
+# deb http://debian.corsac.net/ UNRELEASED/
+# deb-src http://debian.corsac.net/ unstable/
+# deb-src http://debian.corsac.net/ UNRELEASED/
+# deb ftp://ftp.berlios.de/pub/rox4debian/ binary/
+# deb http://build.i3wm.org/debian/sid/ sid main
+# deb http://packages.enlightenment.org/debian/ lenny extras main
+# deb http://packages.enlightenment.org/debian/ squeeze extras main
+# deb http://packages.enlightenment.org/debian/ sid extras main
+# deb http://www.prodeia.de/mms/sid/ binary/
+# deb-src http://www.prodeia.de/mms/ source/
+# deb http://tovid.sourceforge.net/download/debian/ BRANCH contrib
+# deb-src http://tovid.sourceforge.net/download/debian/ BRANCH contrib
+# deb http://freevo.sourceforge.net/debian/ unstable main
+# deb http://deb.paissad.net/ unstable non-free contrib main
+# deb-src http://deb.paissad.net/ unstable non-free contrib main
+# deb http://plex.originet.eu/ stable main
+# deb http://deb.tails.boum.org/ unstable main contrib non-free
+# deb http://deb.tails.boum.org/ experimental main contrib non-free
+# deb http://deb.tails.boum.org/ devel main contrib non-free
+# deb http://deb.torproject.org/torproject.org/ <DISTRIBUTION> main
+# deb http://deb.torproject.org/torproject.org/ sid main
+# deb http://deb.torproject.org/torproject.org/ experimental-<DISTRIBUTION> main
+# deb http://moblock-deb.sourceforge.net/debian/ squeeze main
+# deb-src http://moblock-deb.sourceforge.net/debian/ squeeze main
+# deb http://apt.debianchile.org/frostwire/ version main
+# deb-src http://apt.debianchile.org/frostwire/ version main
+# deb http://www.tsurukawa.org/debian/ ./
+# deb http://www.nanolx.org/apt/ speedwave main
+# deb-src http://www.nanolx.org/apt/ speedwave main
+# deb-src http://www.ailab.si/orange/debian/ lenny main
+# deb http://people.linux.org.tw/~andrew/debian/lxde/ ./
+# deb http://packages.enlightenment.org/debian sid main extras
+# deb http://liquorix.net/debian sid future main
+# deb http://antix.daveserver.info/testing testing main
+# deb-src http://antix.daveserver.info/testing testing main
+# deb ftp://mepis.mirrorcatalogs.com/mepis/packages/mepis/ mepis-11.0 main
+# deb http://main.mepis-deb.org/mepiscr/mx-test/ mx-14 testm
+# deb http://main.mepis-deb.org/mepiscr/repo/ mepis11cr main non-free
+# deb http://restricted.mepis-deb.org/mepiscr/repo/ mepis11cr restricted restricted-non-free
+# Debian HCL; Debian GNU/Linux device driver check & report - http://kmuto.jp/debian/hcl/
+# The Debian Administrator's Handbook - http://debian-handbook.info
+# mentors.debian.net Helps you get your packages into Debian http://mentors.debian.net
+# Basics of the Debian package management system - http://www.debian.org/doc/FAQ/ch-pkg_basics.html
+# Debian package management : http://www.debian.org/doc/manuals/debian-reference/ch02.en.html
+# Debian package management  tools http://www.debian.org/doc/manuals/debian-faq/ch-pkgtools.en.html
+# Newbiedoc : http://sourceforge.net/apps/mediawiki/newbiedoc/index.php?title=Debian_newbie_help_documentation
+# Aptitude user's manual - http://algebraicthunk.net/~dburrows/projects/aptitude/doc/en/
+# Apt - Debian Wiki - http://wiki.debian.org/Apt
+# The APT, Dpkg Quick Reference  http://www.cyberciti.biz/ref/apt-dpkg-ref.html
+# Secure APT - http://wiki.debian.org/SecureApt
+# Aptitude - Debian Wiki - http://wiki.debian.org/Aptitude
+# SourcesList - Debian Wiki - http://wiki.debian.org/SourcesList
+# AptPreferences - Debian Wiki : http://wiki.debian.org/AptPreferences
+# Apt-Pinning for Beginners : http://jaqque.sbih.org/kplug/apt-pinning.html
+# Search Debian -- Packages - http://www.debian.org/distrib/packages
+# apt-get.org: Unofficial APT repositories - http://www.apt-get.org/
+# Debian-Database.ORG - Unofficial Debian Repositories Collected - http://www.debian-database.org/?s=repos
+# UnofficialRepositories - Debian Wiki - http://wiki.debian.org/UnofficialRepositories
+# Debian infographic : https://claudiocomputing.files.wordpress.com/2012/01/infographic_debian-en-v1-01.png
+# smxi - unofficial Debian maintenance script http://smxi.org/site/install.htm
+# Exoodles multimedia installer script http://tinyurl.com/2vjj3lp
+# Howto: Set up and Maintain a Mixed Testing/Unstable System : http://forums.debian.net/viewtopic.php?f=16&t=15612&p=76067
+# Howto get newer package versions for Debian Stable -  https://www.linuxquestions.org/questions/blog/craigevil-176422/howto-get-newer-package-versions-for-debian-stable-34611/
+# Grokking Debian GNU/Linux - : http://www.linuxquestions.org/questions/blog/craigevil-176422/grokking-debian-gnu-linux-3073/
+# Easy Linux for the Elderly http://www.eldy.eu/
+# WARNING only works with the old sun-java6-jre
+# Brochure http://eldy.eu/brochure_web.pdf
+# apt-get install eldy
+# Glx-Dock / Cairo-Dock - From the repository - http://www.glx-dock.org/ww_page.php?p=From%20the%20repository&lang=en3-Debian
+# apt-get install cairo-compmgr cairo-compmgr-plugins
+# Debian FAI - Fully Automatic Installation - http://fai-project.org/download/
+# Minecraft Overviewer - http://overviewer.org/
+# Overviewer.org APT Repository - http://overviewer.org/debian/info/
+# X2Go - everywhere@home : http://www.x2go.org/doku.php/start
+# OpenVAS - Open Vulnerability Assessment System - http://www.openvas.org/
+# OpenVAS - Install OpenVAS Packages - http://www.openvas.org/install-packages.htmlopenvas_debian_obs
+# Server monitoring - Server Density - https://www.serverdensity.com/
+# Froxlor - http://redmine.froxlor.org/projects/froxlor/wiki/Installation_via_APT_(Debian)
+# Repo! | Vyatta4People.Org - http://www.vyatta4people.org/repo/
+# Vyatta.org | The Open Source Networking Community - http://www.vyatta.org/index.php
+# Understanding the Vyatta Package Repositories | Vyatta.org - http://www.vyatta.org/getting-started/package-repository
+# Percona Server 5.5 apt Repository https://www.percona.com/doc/percona-server/5.5/installation/apt_repo.html
+# CDH3 Installation - Cloudera Support - https://ccp.cloudera.com/display/CDHDOC/CDH3+Installation
+# CDH3 Installation - https://ccp.cloudera.com/display/CDHDOC/CDH3+InstallationCDH3Installation-AddingaDebianRepository
+# Aegir hosting system  - http://community.aegirproject.org/
+# Automatic install on Debian  http://community.aegirproject.org/installing/debian
+# Secure APT:
+# Nginx - http://wiki.nginx.org/Main
+# Install - http://wiki.nginx.org/InstallOfficial_Debian.2FUbuntu_packages
+# Varnish Community - https://www.varnish-cache.org/
+# Installation on Debian | Varnish Community - https://www.varnish-cache.org/installation/debian
+# OpenVPN Community - https://community.openvpn.net/openvpn/wiki/OpenvpnSoftwareRepos
+# Parallels  Plesk http://kb.parallels.com/en/3489
+# Also see How to install Plesk control panel on Debian - http://www.eukhost.com/forums/f15/how-install-plesk-control-panel-debian-7711/
+# Hudson CI http://hudson-ci.org/
+# Debian Repository for Hudson http://pkg.hudson-labs.org/debian/
+# Also see Hudson Debian packages http://hudson-ci.org/debian/
+# Secure APT - wget -q -O - http://pkg.hudson-labs.org/debian/hudson-labs.org.key | sudo apt-key add -
+# OpenPanel.com | Download - http://www.openpanel.com/download_control/
+# Replace the i386 with amd64 if you are running a 64 bits distro
+# apt-get install openpanel
+# QRM keeps your data center up and running - http://www.openqrm.com/
+# Updated Package-Repository-URLs | openQRM - http://www.openqrm.com/?q=node/167
+# The Comprehensive Perl Archive Network -  http://www.cpan.org/
+# debian.pkgs.cpan.org -- debified CPAN packages
+# note these packages are not signed
+# DebGem (beta), Ruby packages for Debian - http://debgem.com/
+# Usage & FAQ :: DebGem (beta), Ruby packages for Debian - http://debgem.com/usage
+# Rubygems from Webget.com  http://www.webget.com/
+# OSCAR http://svn.oscar.openclustergroup.org/trac/oscar/wiki/repoTesting
+# On x86_64 systems:# deb http://bison.csm.ornl.gov/repos/unstable/debian-5-x86_64/ lenny/
+# On x86 systems:# deb http://bison.csm.ornl.gov/repos/unstable/debian-5-i386/ lenny /
+# e-box http://www.ebox-platform.com/
+# OPenVZ http://debian.systs.org/debian/
+# New APT Repository for Chef 0.9 - Blog - Opscode - http://www.opscode.com/blog/2010/07/01/new-apt-repository-for-chef-0-9/
+# http://www.kamailio.org/dokuwiki/doku.php/packages:debs
+# Ignite Realtime: Openfire Server - http://www.igniterealtime.org/projects/openfire/index.jsp
+# Either use the .deb at http://www.igniterealtime.org/downloads/download-landing.jsp?file=openfire/openfire_3.7.1_all.deb
+# Build Your Own Openfire Chat Server on Debian Linux https://www.classhelper.org/articles/debian-openfire-chat-server/openfire-server-install-p1.shtml
+# http://downloads.askmonty.org/mariadb/repositories/
+# http://mirrorbrain.org/docs/installation/debian/
+# http://download.opensuse.org/repositories/Apache:/MirrorBrain/Debian_5.0/ /
+# Mailspect Email Defense, Mailspect Email Archive and Mailspect Manager
+# Mailspect apt Repository for Debian Linux -
+# http://wiki.mailspect.com/index.php/Mailspect_apt_Repository_for_Ubuntu_and_Debian_Linux
+# NorduGrid Downloads - Repository Information http://download.nordugrid.org/repos.html
+# Geany Debian/Ubuntu Nightly Builds  http://nightly.geany.org/debian/
+# emacs-snapshot Debian packages - http://emacs.naquadah.org/
+# Printer Driver Packages | The Linux Foundation
+# http://www.linuxfoundation.org/collaborate/workgroups/openprinting/databasedriverpackages
+# The Samsung Unified Linux Driver Repository : http://www.bchemnet.com/suldr/
+# Remastersys - http://www.geekconnection.org/remastersys/
+# MeeGo - https://www.meego.com/
+# Index of /MeeGo/sdk/host/repos/debian/5.0 - http://repo.meego.com/MeeGo/sdk/host/repos/debian/5.0/
+# deb http://repo.meego.com/MeeGo/sdk/host/repos/debian/5.0/
+# ARTIMAGEN - http://artimagen.sourceforge.net/
+# deb http://sidux.com/debian/ sid main contrib non-free firmware fix.main fix.contrib fix.non-free
+# deb-src http://sidux.com/debian/ sid main contrib non-free firmware fix.main fix.contrib fix.non-free
+# xadras sidux repo -siduxcc, autostart,sidux-kio,klamp,
+# kding,kirocker,kio-sysinfo
+# http://xadras.wordpress.com/downloads/
+# Secure APT install xadras-keyring
+# deb http://sidux.wuertz.org sid main
+# deb-src http://sidux.wuertz.org sid main
+# deb-src http://www.prodeia.de/mms source/
+# Tovid http://tovid.wikia.com/wiki/Installing_tovid/Debian
+# deb http://tovid.sourceforge.net/download/debian unstable contrib
+# deb-src http://tovid.sourceforge.net/download/debian unstable contrib
+# Freevo
+# http://doc.freevo.org/FreevoAptDebian
+# deb http://freevo.sourceforge.net/debian unstable main
+# deb http://sidux.net/etorix/i386 ./ [or /amd64 for 64-bit]
+# deb ftp://ftp.berlios.de/pub/rox4debian binary/
+# http://xsm.alphagemini.org/E17/repository/index.html
+# deb http://debian.alphagemini.org/ unstable main
+# Enlightenment binary packages - http://packages.enlightenment.org/debian/
+# deb http://packages.enlightenment.org/debian lenny main extras
+# deb http://packages.enlightenment.org/debian squeeze main extras
+# swiftfox http://www.getswiftfox.com/index.htm
+# deb http://getswiftfox.com/builds/debian unstable non-free
+# deb http://apt.debianchile.org/frostwire version main/p/twitim/
+# deb http://apt.wxwidgets.org/ etch-wx main
+# WINE http://www.winehq.org/download/deblenny
+# Add this for Lenny:# deb http://www.lamaresh.net/apt lenny main
+# Add this line for Squeeze:# deb http://www.lamaresh.net/apt squeeze main
+# Add this line for Sid:# deb http://www.lamaresh.net/apt sid main
+# moblock, mobloquer http://moblock-deb.sourceforge.net
+# deb http://moblock-deb.sourceforge.net/debian sid main
+# deb-src http://moblock-deb.sourceforge.net/debian sid main
+# deb http://mirror.noreply.org/pub/tor sid main
+# deb-src http://mirror.noreply.org/pub/tor sid main
+# deb http://mirror.noreply.org/pub/tor experimental-0.2.1.x-sid main
+# deb-src http://mirror.noreply.org/pub/tor experimental-0.2.1.x-sid main
+# Second Life apt-get install omvviewer
+# http://www.byteme.org.uk/secondlife-amd64/apt-get-a-secondlife.html
+# deb http://apt.byteme.org.uk/apt/ unstable main
+# deb-src http://apt.byteme.org.uk/apt/ unstable main
+# deb http://apt.byteme.org.uk experimental main
+# deb-src http://apt.byteme.org.uk experimental main
+# Boxee http://www.boxee.tv/download/?ver=ubuntu
+# for Intrepid:# deb http://apt.boxee.tv intrepid main
+# for Jaunty:# deb http://apt.boxee.tv jaunty main
+# deb http://mepis.mirrorcatalogs.com/packages/mepis/ mepis-11.0 main
+# deb http://debian.meebey.net/pkg-mono/ ./
+# deb http://debian.meebey.net/experimental/mono/ /
+# deb-src http://mentors.debian.net/debian/ unstable
+# deb http://debian.cr0.org/repo/ kernel-security/
+# deb http://debian.pengutronix.de/debian/ sid non-free contrib main
+# deb http://suwako.nomanga.net/debian/ sid contrib main
+# deb-src http://suwako.nomanga.net/debian/ sid main
+# deb http://www.getgnash.org/debs/debian/ lenny main
+# deb http://www.getgnash.org/debs/debian/ squeeze main
+# deb http://www.getgnash.org/debs/debian/ sid main
+# deb http://www.duinsoft.nl/pkg/ debs all
+# deb http://apt.ludomatic.fr/ lenny non-free
+# deb-src http://apt.ludomatic.fr/ lenny non-free
+#
+# Ajenti
+# deb http://repo.ajenti.org/debian main main
+#
+# Google Chrome
+# deb http://dl.google.com/linux/deb/ stable non-free main
+#
+# nginx
+# http://nginx.org/packages/debian/ squeeze nginx
+# deb http://deb.grml.org/ grml-stable main
+# deb-src http://deb.grml.org/ grml-stable main
+# deb http://archive.finnix.org/finnix unstable main neale
+#
+# OLD NODE
+# deb https://deb.nodesource.com/node_0.12 sid main
+# deb-src https://deb.nodesource.com/node_0.12 sid main
+# codecs & other media stuff; nothing newer than 2005, it seems
+# deb http://www.rarewares.org/debian/packages/unstable/ ./
+# deb http://www.rarewares.org/debian/packages/experimental/ ./
+# old sms over internet packages
+# deb http://repo.palatinus.cz/unstable/ /
+# useful admin & live stuff
+# like finnix, most of this is better off left untouched unless actually needed
+# deb http://deb.grml.org/ grml-testing main
+# deb-src http://deb.grml.org/ grml-testing main
+#
+# OLD KALI STUFF, can probably be deleted?
+# deb http://http.kali.org/ /kali main contrib non-free
+# deb http://http.kali.org/ /unstable main contrib non-free
+# deb http://http.kali.org/kali kali-dev main contrib non-free
+# deb http://http.kali.org/kali kali-dev main/debian-installer
+# deb-src http://http.kali.org/kali kali-dev main contrib non-free
+# deb http://http.kali.org/kali kali main contrib non-free
+# deb http://http.kali.org/kali kali main/debian-installer
+# deb-src http://http.kali.org/kali kali main contrib non-free
+# deb http://security.kali.org/kali-security kali/updates main contrib non-free
+# deb-src http://security.kali.org/kali-security kali/updates main contrib non-free
+# deb http://repo.kali.org/kali kali-bleeding-edge main
+#
+# deb http://sourceforge.net/projects/whonixdevelopermetafiles/files/internal/ testers main
+# deb http://packages.psycast.de/devuan/ sid main
+# deb http://packages.devuan.org/devuan/ sid main contrib non-free
+#
+# Semplice Linux; pretty but nothing handy here yet
+# deb http://archive.semplice-linux.org/semplice/archive unstable main non-free
+# deb-src http://archive.semplice-linux.org/semplice/archive unstable main contrib non-free
+#
+# deb-src http://packages.devuan.org/devuan/ sid main contrib non-free
+# deb http://packages.devuan.org/merged/ sid main contrib non-free
+# deb-src http://packages.devuan.org/merged/ sid main contrib non-free
+#
+# deb http://repo.aptly.info/ nightly main
+#
+# From other Debian rolls; sometimes useful
+# deb http://mozilla.debian.net/ experimental iceweasel-aurora
+# deb http://debs.slavino.sk/ testing main non-free
+# deb-src http://debs.slavino.sk/ testing main non-free
+# deb http://sparkylinux.org/repo testing main
+#
+# I really like Siduction, but at this point the only package I've actually been getting
+# from them is Ceni, and seeing as I build most stuff from source these days anyway...
+# deb http://packages.siduction.org/base unstable main contrib non-free
+# deb-src http://packages.siduction.org/base unstable main contrib non-free
+# deb http://packages.siduction.org/extra unstable main contrib non-free
+# deb-src http://packages.siduction.org/extra unstable main contrib non-free
+# deb http://packages.siduction.org/fixes unstable main contrib non-free
+# deb-src http://packages.siduction.org/fixes unstable main contrib non-free
+# deb http://packages.siduction.org/user unstable main contrib non-free
+# deb-src http://packages.siduction.org/user unstable main contrib non-free
+#
+# just trying it out...
+# deb http://download.opensuse.org/repositories/shells:/fish:/nightly:/master/Debian_8.0/ /

@@ -58,5 +58,3 @@
   template = ~/.gitmessage
 [http]
 	postBuffer = 524288000
-[init]
-	templatedir = /home/z/.git-templates

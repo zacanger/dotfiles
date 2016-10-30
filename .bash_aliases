@@ -57,6 +57,7 @@ alias gitodo='git grep -EiI "FIXME|TODO"'
 alias push='git push'
 alias gds='git diff --stat'
 alias rbl='git rebase -i HEAD~2'
+alias prb='pull && rpo && branches'
 
 # development package managers
 alias fp='fixpack'
@@ -86,7 +87,6 @@ alias bi='bower install'
 alias pipupd='pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
 alias brewupd='brew update && brew upgrade --all && brew cleanup && brew prune && brew doctor'
 alias vev='virtualenv -p /usr/bin/python3 venv'
-alias pip='pip3.6'
 
 # apt/dpkg stuff
 alias upd='sudo apt-get update'
@@ -107,6 +107,7 @@ alias what-repo='apt-cache show "$1" | grep ^Filename: | head -n1 | col2 /'
 alias what-source='apt-cache show "$1" | grep "^Filename:" | sed -e "s:\(.*\)/\(.*\)/\(.*\)/\(.*\)/.*:\4:"'
 
 # navigation
+alias d='cd'
 alias Cd='cd'
 alias CD='cd'
 alias cd..='cd ..'
@@ -172,6 +173,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 # starting browsers
+alias chromium='google-chrome-unstable' # until i figure out why extensions don't sync to chromium
 alias ch='chromium'
 alias ff='firefox'
 alias ffs='firefox --safe-mode'
@@ -195,7 +197,8 @@ alias dbls='dropbox filestatus ~/Dropbox/*'
 alias dbfs='dropbox filestatus'
 
 # twitter
-alias tweet='twidge update'
+# alias tweet='twidge update'
+alias tweet='tweet.py'
 alias feed='twidge lsrecent -w `tput cols`'
 alias mytw='twidge lsarchive -w `tput cols`'
 
@@ -269,7 +272,7 @@ alias :q='q'
 alias :wQ='q'
 alias :wq='q'
 alias A='la'
-alias ag='ag --path-to-agignore ~/.agignore'
+# alias ag='ag --path-to-agignore ~/.agignore'
 alias cat='ccat'
 alias Cat='cat'
 alias cta='cat'
@@ -360,7 +363,7 @@ alias rf='replface'
 alias screencast='ffmpeg -f x11grab -s wxga -r 25 -i :0.0 -sameq ~/.tmp/screencast.mpg'
 alias sd.='dirsize.sh .'
 alias sd='dirsize.sh'
-alias sf='standard-format -w'
+alias sf='standard --fix'
 alias sfm='spacefm'
 alias sl='slack'
 alias slh='slackhist'
@@ -404,7 +407,7 @@ alias pyc='python -c'
 alias ne='node -e'
 alias ndoe='node'
 alias getjane='hc git@github.com:jane/jane-com.git com ; cd com'
-alias sj='npm i && ns'
+alias sj='ni && dcb && ns'
 alias lint='npm run test:lint'
 alias findallcolours="egrep -oi '#[a-f0-9]{6}' *.css | sort | uniq"
 alias httpa='httpcodes all | jq .'
@@ -415,6 +418,16 @@ alias gc='g c'
 alias ninit='ninit.sh'
 alias checkforupdates='gf && rpo && branches && ncu'
 alias cfu='checkforupdates'
+alias ytdl='youtube-dl'
+alias alltlds="curl -s http://data.iana.org/TLD/tlds-alpha-by-domain.txt | grep -v XN | sed -e 1d -e 's/\(.*\)/\L\1/'"
+alias cerm='c ; erm'
+alias ur='unrar x -kb'
+alias aerm='a ; erm'
+alias wl='wc -l'
+alias fx='find . -type d -name x'
+alias rainy="mplayer $HOME/Dropbox/z/x/rainy.ogg"
+alias transfersh='sh -c '\'' curl --upload-file "${1}" https://transfer.sh/$(basename "${1}")'\'' -'
+alias gv='g v'
 
 # on mac:
 # alias bs='pmset -g batt | sed -n 2p' # or maybe

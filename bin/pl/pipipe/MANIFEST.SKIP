@@ -1,7 +1,0 @@
-(^|/)\.\#
-(^|/)CVS(/|$)
-(^|/)do_not_dist(/|$)
-^MANIFEST\.SKIP$
-^mkdist$
-^#.*#$
-\.orig$

@@ -25,17 +25,20 @@ Things to know:
 * I'm trying to weed out everything under `bin` because there's a crapton
   there that I've probably only used once or twice.
 * The files called `*.list` are to keep track of what I need on a fresh PC.
-  * `the.list`  --  /etc/apt/sources.list.d/the.list
-  * `unused.list`  --  unused sources.list entries
-  * `dpkg.list`  --  actually `apt-get install -fy` list, but that's not so succinct
+  * `sources.more.list`  --  /etc/apt/sources.list.d/sources.more.list
+  * `apt.list`  --  actually `apt-get install -fy` list, but that's not so succinct
     * This is generated with the following:
     `comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)`
   * `npm.list`  --  `npm i -g` all these things
     * generated with [global-packages-cli](https://npmjs.org/package/global-packages-cli)
-  * `pip.list`  --  i try to use 3 as much as possible but some of these might actually be 2
+  * `pip.list`  -- split, some 3, some 2
     * generated with `pip list`
 * I have two directories hidden from git (`~/x/` and `~/bin/x/`);
   they're referenced in some other files, and hold executables that are either totally
   non-free, totally non-original, totally full of extra stuff i don't want in my path
   (because my path is defined in a very not-safe way…), or just totally too large to want
   to put under version control.
+
+## MISC THINGS
+
+* `xfce4-session-settings`: `xflux -z [zip code]` on startup

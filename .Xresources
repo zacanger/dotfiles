@@ -1,5 +1,8 @@
 *font:             -*-fantasque-sans-mono-*-*-*-10-*-*-*-*-*-*-*
 *boldFont:         -*-fantasque-sans-mono-*-*-*-10-*-*-*-*-*-*-*
+XTerm*faceName: Fantasque Sans Mono
+XTerm*faceSize: 10
+
 
 *background:       #121212
 *foreground:       #EDEDED

@@ -63,6 +63,11 @@
 .init.vim-rplugin~
 .lock-wscript
 .netrwhist
+.opam/compilers
+.opam/log
+.opam/packages
+.opam/repo
+.opam/system
 .psci*
 .pulp-cache
 .sass-cache

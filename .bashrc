@@ -77,7 +77,7 @@ esac
 
 # include
 export CDPATH=.:$HOME/Dropbox/work:$HOME/Dropbox/work/repos:$HOME/Dropbox/z/bin:$HOME/Dropbox/z:/usr/local/lib:/usr/local/lib/node_modules
-export PATH=$HOME/.gem/global/bin:$HOME/.cabal/bin:$HOME/.local/bin:$(find $HOME/bin/ -type d | paste -s -d:):$PATH
+export PATH=$(npm bin):$HOME/.gem/global/bin:$HOME/.cabal/bin:$HOME/.local/bin:$(find $HOME/bin/ -type d | paste -s -d:):$PATH
 export VISUAL='nvim'
 export EDITOR='nvim'
 export SLACK_USERNAME='zacanger'
@@ -90,9 +90,23 @@ export JOBS=max
 
 ulimit -n 10240
 
-eval $(opam config env)
+XDG_CONFIG_HOME=/home/z/.config
+if hash setxkbmap 2>/dev/null ; then
+  /usr/bin/setxkbmap -option "caps:swapescape"
+fi
 
-. /usr/share/autojump/autojump.bash
+# escape codes
+ESC_SEQ="\x1b["
+COL_RESET=$ESC_SEQ"39;49;00m"
+COL_RED=$ESC_SEQ"31;01m"
+COL_GREEN=$ESC_SEQ"32;01m"
+COL_YELLOW=$ESC_SEQ"33;01m"
+COL_BLUE=$ESC_SEQ"34;01m"
+COL_MAGENTA=$ESC_SEQ"35;01m"
+COL_CYAN=$ESC_SEQ"36;01m"
+
+# eval $(opam config env)
+
 # eval "$(rbenv init -)"
 [ -f $HOME/.fzf.bash ] && source $HOME/.fzf.bash
 
@@ -123,9 +137,9 @@ if [ -f $HOME/.hub-completion ]; then
 fi
 
 # brew shit
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
-fi
+# if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  # . $(brew --prefix)/etc/bash_completion
+# fi
 
 # complete -C aws_completer aws
 

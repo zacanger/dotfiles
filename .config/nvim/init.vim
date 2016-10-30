@@ -169,7 +169,7 @@ set number
 
 let no_buffers_menu=1
 if !exists('g:not_finsh_neobundle')
-  colorscheme janah
+  colorscheme angr
 endif
 
 set mousemodel=popup
@@ -278,7 +278,9 @@ cnoreabbrev Q q
 cnoreabbrev Qall qall
 cnoreabbrev X x
 cnoreabbrev stu sort u
+cnoreabbrev Set set
 abbr lmbd λ
+abbr midfing 🖕
 
 " NERDTree
 let g:NERDTreeChDirMode=2
@@ -564,10 +566,7 @@ autocmd User Node
 
 cnoremap sudow w !sudo tee & >/dev/null
 
-" theme nonsense
-" autocmd ColorScheme janah highlight Normal ctermbg=235
-set background=dark
-colorscheme ego
+colo angr
 
 " keeping rainbow parens on
 au VimEnter * RainbowParenthesesToggle
@@ -664,7 +663,7 @@ let g:wakatime_PythonBinary = '/usr/bin/python3.5'
 " on the work mac:
 " let g:wakatime_PythonBinary = '/Library/Frameworks/Python.framework/Versions/3.5/bin/python3.5'
 
-let g:jsx_ext_required = 0
+" let g:jsx_ext_required = 0
 let g:neomake_javascript_enabled_makers = ['eslint']
 
 function! SortLines() range
@@ -691,3 +690,5 @@ NeoBundleLazy 'flowtype/vim-flow', {
       \ }}
 
 let g:flow#enable = 0
+
+let g:csstoinline_wrap_pixels = 1
