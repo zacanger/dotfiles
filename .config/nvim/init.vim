@@ -692,3 +692,16 @@ NeoBundleLazy 'flowtype/vim-flow', {
 let g:flow#enable = 0
 
 let g:csstoinline_wrap_pixels = 1
+
+if !exists('g:loaded_matchit')
+  runtime macros/matchit.vim
+endif
+
+" better ctrl-l
+nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
+
+" edit macros
+nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
+
+" source init.vim on save
+autocmd BufWritePost $MYVIMRC source $MYVIMRC

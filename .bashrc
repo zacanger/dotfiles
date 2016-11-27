@@ -136,6 +136,9 @@ if [ -f $HOME/.hub-completion ]; then
   . $HOME/.hub-completion
 fi
 
+# put a clock in the top right corner of the terminal
+# while sleep 1;do tput sc;tput cup 0 $(($(tput cols)-11));echo -e "\e[31m`date +%T`\e[39m";tput rc;done &
+
 # brew shit
 # if [ -f $(brew --prefix)/etc/bash_completion ]; then
   # . $(brew --prefix)/etc/bash_completion
