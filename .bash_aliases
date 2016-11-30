@@ -58,6 +58,7 @@ alias push='git push'
 alias gds='git diff --stat'
 alias rbl='git rebase -i HEAD~2'
 alias prb='pull && rpo && branches'
+alias aca='ac a'
 
 # development package managers
 alias fp='fixpack'
