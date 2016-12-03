@@ -74,6 +74,7 @@ jq
 keyboard-configuration
 lame
 less
+libasound2-dev
 liquidprompt
 lolcat
 lsof

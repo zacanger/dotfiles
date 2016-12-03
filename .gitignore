@@ -1,4 +1,3 @@
-
 *$py.class
 *.7z
 *.aux
@@ -95,6 +94,7 @@ coverage
 data
 db
 dist
+ghci_history
 lib-cov
 logs
 node_modules
