@@ -278,6 +278,7 @@ cnoreabbrev Q q
 cnoreabbrev Qall qall
 cnoreabbrev X x
 cnoreabbrev stu sort u
+cnoreabbrev Stu sort u
 cnoreabbrev Set set
 abbr lmbd λ
 abbr midfing 🖕
