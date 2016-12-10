@@ -79,11 +79,13 @@ echo "# $DN
 
 --------
 
-Installation:
+## Installation:
 
-Usage:
+## Usage:
 
-License: WTFPL" > README.md
+## License:
+
+WTFPL" > README.md
 
 if [ "$1" == "-g" ] ; then
   echo $WITHG > package.json

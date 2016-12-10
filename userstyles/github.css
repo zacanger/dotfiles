@@ -8,6 +8,8 @@
 .is-stuck:after,
 .btn,
 .mb-2,
+.mb-1,
+.link-gray-dark,
 .user-profile-nav,
 .Box-body a,
 .Box-body,
@@ -16,6 +18,7 @@
   background: #333 !important;
   color: silver !important;
 }
+
 
 .selected { color: silver !important; }
 

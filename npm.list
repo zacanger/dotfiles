@@ -38,6 +38,7 @@ csso
 depcheck
 dependency-check
 devtool
+dirty-markup-cli
 doiuse
 editorconfig
 electron
