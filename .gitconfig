@@ -45,6 +45,7 @@
   rpo = remote prune origin
   alias = config --get-regexp 'alias.*'
   search = "grep _Iin"
+  pf = push --force-with-lease
 [filter "ignoreline"]
   clean = "sed '/#ignoreline$/'d"
 [help]

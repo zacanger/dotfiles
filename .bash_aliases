@@ -21,6 +21,7 @@ alias fn='cd ~/.bash_functions'
 alias fns='ls ~/.bash_functions/'
 
 # git &co. ; see gitconfig for more
+alias it='git'
 alias gd='git diff'
 alias dg='gd'
 alias gcl='git clone'
@@ -36,6 +37,7 @@ alias hc='hub clone'
 alias hl='hub clone'
 alias hcl='hub clone'
 alias gp='git push'
+alias gpf='git pf'
 alias glog='git log --pretty=oneline'
 alias githist='git log -S'
 alias gf='git fetch'
@@ -431,6 +433,7 @@ alias fx='find . -type d -name x'
 alias rainy="mplayer $HOME/Dropbox/z/x/rainy.ogg"
 alias transfersh='sh -c '\'' curl --upload-file "${1}" https://transfer.sh/$(basename "${1}")'\'' -'
 alias gv='g v'
+alias acd='a ; cd'
 
 # on mac:
 # alias bs='pmset -g batt | sed -n 2p' # or maybe

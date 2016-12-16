@@ -1,3 +1,4 @@
+alert-node
 alltheversions
 angrplayr
 auto-install
@@ -85,8 +86,10 @@ gulp
 gulp-cli
 hey-you
 hipper
+html2txt
 http-codes-cli
 hyperchart
+image-size
 imagemin-cli
 imageoptim-cli
 inspectr
@@ -111,6 +114,7 @@ lolwut
 luvi
 mancy
 marked
+mime-types-cli
 mocha
 mongoose-adventure
 n
