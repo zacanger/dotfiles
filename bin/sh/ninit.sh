@@ -89,8 +89,10 @@ WTFPL" > README.md
 
 if [ "$1" == "-g" ] ; then
   echo $WITHG > package.json
+  cp $ND/global.js index.js
 else
   echo $WITHOUTG > package.json
+  cp $ND/module.js index.js
 fi
 
 fixpack

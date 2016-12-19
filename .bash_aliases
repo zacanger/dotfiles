@@ -64,6 +64,7 @@ alias aca='ac a'
 alias gmv='git mv'
 
 # development package managers
+alias np='npm publish'
 alias fp='fixpack'
 alias ni='npm i'
 alias ns='npm start -s'
