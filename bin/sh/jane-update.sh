@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 JANEDIR=$HOME/jane
-for D in $(ls -1 "$JANEDIR") ; do
+for D in $(\ls -1 "$JANEDIR") ; do
   cd $D
   git stash
   git checkout master
