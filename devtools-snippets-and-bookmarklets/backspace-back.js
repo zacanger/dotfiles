@@ -1,16 +1,11 @@
-document.onkeyup = function (evt) {
-  if (evt.keyCode != 8) {
-    return
-  }
-  if (evt.target.nodeName == 'INPUT') {
-    return
-  }
-  if (evt.target.nodeName == 'TEXTAREA') {
-    return
-  }
-  if (evt.target.isContentEditable) {
-    return
-  }
+document.onkeydown = function (evt) {
+  if (evt.key !== 'Backspace') return
+  if (evt.target.nodeName === 'INPUT') return
+  if (evt.target.nodeName === 'TEXTAREA') return
+  if (evt.target.nodeName === 'EMBED') return
+  if (evt.target.nodeName === 'OBJECT') return
+  if (evt.target.isContentEditable) return
   evt.preventDefault()
-  window.history.back()
+  if (evt.shiftKey) window.history.forward()
+  else window.history.back()
 }
