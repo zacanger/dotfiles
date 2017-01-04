@@ -105,7 +105,7 @@ COL_BLUE=$ESC_SEQ"34;01m"
 COL_MAGENTA=$ESC_SEQ"35;01m"
 COL_CYAN=$ESC_SEQ"36;01m"
 
-# eval $(opam config env)
+eval $(opam config env)
 
 # eval "$(rbenv init -)"
 [ -f $HOME/.fzf.bash ] && source $HOME/.fzf.bash

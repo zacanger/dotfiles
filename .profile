@@ -10,3 +10,6 @@ if [ -n "$BASH_VERSION" ]; then
     . "$HOME/.bashrc"
   fi
 fi
+
+# OPAM configuration
+. /home/z/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
