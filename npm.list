@@ -68,7 +68,6 @@ eslint-plugin-import
 eslint-plugin-promise
 eslint-plugin-react
 eslint-plugin-standard
-eslint-rules-mapper
 eslint-watch
 evalmd
 evilscan

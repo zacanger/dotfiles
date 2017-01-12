@@ -6,4 +6,3 @@ do
   clear
   dropbox status
 done
-
