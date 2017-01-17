@@ -55,6 +55,7 @@
 .config/ranger/history
 .config/ranger/tagged
 .fseventsd
+.ghc/x86_64-linux-8.0.1
 .grunt
 .hpc
 .hsenv
