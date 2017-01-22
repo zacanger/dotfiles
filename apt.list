@@ -77,6 +77,8 @@ less
 libasound2-dev
 libglib2.0-0
 libglib2.0-dev
+libgtk2.0-0
+libgtk2.0-dev
 liquidprompt
 lolcat
 lsof
