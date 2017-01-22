@@ -75,6 +75,8 @@ keyboard-configuration
 lame
 less
 libasound2-dev
+libglib2.0-0
+libglib2.0-dev
 liquidprompt
 lolcat
 lsof
@@ -140,9 +142,7 @@ python3-pygments
 python3-pyqt5
 python3-pyqt5.qsci
 python3-pyqt5.qtmultimedia
-python3-pyqt5.qtmultimedia
 python3-pyqt5.qtopengl
-python3-pyqt5.qtpositioning
 python3-pyqt5.qtpositioning
 python3-pyqt5.qtquick
 python3-pyqt5.qtsensors
