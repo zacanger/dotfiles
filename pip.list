@@ -5,6 +5,7 @@ mps
 mps-youtube
 nltk
 nose
+pipenv
 qutebrowser
 rainbowstream
 redterm
