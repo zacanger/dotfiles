@@ -23,6 +23,7 @@ curl
 darcs
 dbus
 diffutils
+dos2unix
 doxygen
 dvtm
 ed
