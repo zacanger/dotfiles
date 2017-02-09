@@ -85,7 +85,7 @@ echo "# $DN
 
 ## License:
 
-WTFPL" > README.md
+[WTFPL](./LICENSE.md)" > README.md
 
 if [ "$1" == "-g" ] ; then
   echo $WITHG > package.json
