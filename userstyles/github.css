@@ -23,7 +23,6 @@
   color: silver !important;
 }
 
-
 .selected { color: silver !important; }
 
 .orghead {
@@ -36,7 +35,7 @@
 .tab-size[data-tab-size='8'],
 .inline-review-comment,
 .gist table.lines {
-	tab-size: 4 !important;
+  tab-size: 4 !important;
 }
 
 body {
