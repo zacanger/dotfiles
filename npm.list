@@ -56,6 +56,7 @@ emoji-cli
 emojipacks
 emojiscript
 empty-trash-cli
+es-feature-detect
 eslint
 eslint-config-cleanjs
 eslint-config-standard
