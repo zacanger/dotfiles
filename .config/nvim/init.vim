@@ -84,7 +84,6 @@ NeoBundle 'vim-scripts/c.vim'
 " Python
 NeoBundle "davidhalter/jedi-vim"
 NeoBundle "majutsushi/tagbar"
-NeoBundle "Yggdroot/indentLine"
 
 " Perl
 NeoBundle 'vim-perl/vim-perl'
@@ -718,3 +717,6 @@ nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v
 
 " source init.vim on save
 " autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
+" show tabs
+set list lcs=tab:\|\
