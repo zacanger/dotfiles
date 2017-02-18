@@ -63,6 +63,7 @@ gstreamer1.0-plugins-good
 gstreamer1.0-plugins-ugly
 gtk-chtheme
 gzip
+haskell-stack
 highlight
 hostname
 htop
@@ -232,4 +233,3 @@ xsel
 xtrlock
 yad
 zenity
-haskell-stack
