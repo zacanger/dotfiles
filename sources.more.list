@@ -18,6 +18,13 @@
 # bbqtools-basic & bbq-tools; also check github
 deb http://linuxbbq.org/repos/apt/debian sid main
 
+# brave browser -- their repo is fucked so jessie i guess
+deb [arch=amd64] https://s3-us-west-2.amazonaws.com/brave-apt jessie main
+
+# lein, for clojure stuff
+deb http://ppa.launchpad.net/mikegedelman/leiningen-git-stable/ubuntu zesty main
+# deb-src http://ppa.launchpad.net/mikegedelman/leiningen-git-stable/ubuntu zesty main
+
 # Debian Multimedia... switch with one of the others if it goes down
 deb http://mirror.optus.net/deb-multimedia/ unstable main non-free
 deb-src http://mirror.optus.net/deb-multimedia/ unstable main non-free
