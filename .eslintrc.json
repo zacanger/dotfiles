@@ -6,10 +6,12 @@
   "plugins": [ "babel" ],
   "parser": "babel-eslint",
   "rules": {
-    "comma-style": [1, "first"],
-    "no-multi-spaces": [0],
-    "one-var": [0],
+    "arrow-parens": ["warn", "always"]
     "block-spacing": [0],
-    "key-spacing": [0]
+    "comma-style": [1, "first"],
+    "key-spacing": [0],
+    "no-multi-spaces": [0],
+    "object-curly-spacing": [1, "always"],
+    "one-var": [0]
   }
 }
