@@ -92,6 +92,9 @@ alias bv='bumpversion'
 alias pipupd='pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
 alias brewupd='brew update && brew upgrade && brew cleanup && brew prune && brew doctor'
 alias vev='virtualenv -p /usr/bin/python3 venv'
+alias yu='yarn upgrade-interactive'
+alias ys='yarn start'
+alias yb='yarn run build'
 
 # apt/dpkg stuff
 alias upd='sudo apt-get update'

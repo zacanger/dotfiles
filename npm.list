@@ -78,6 +78,7 @@ fast-http-cli
 fix-dropbox-node_modules-symlinks
 fixpack
 flow-bin
+flow-typed
 forever
 gh-pinned-repos-cli
 git+https://github.com/shaunlebron/npm-cljs.git
