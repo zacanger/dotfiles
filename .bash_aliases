@@ -440,6 +440,7 @@ alias rainy="mplayer $HOME/Dropbox/z/x/rainy.ogg"
 alias transfersh='sh -c '\'' curl --upload-file "${1}" https://transfer.sh/$(basename "${1}")'\'' -'
 alias gv='g v'
 alias acd='a ; cd'
+alias tw='send-tweet'
 
 # on mac:
 # alias bs='pmset -g batt | sed -n 2p' # or maybe

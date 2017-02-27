@@ -88,6 +88,8 @@ export ATOM_DEV_RESOURCE_PATH='$HOME/.atom/dev'
 export GITHUB_USER='zacanger'
 export JOBS=max
 
+# send-tweet keys
+
 ulimit -n 10240
 
 XDG_CONFIG_HOME=/home/z/.config
