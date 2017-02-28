@@ -95,6 +95,7 @@ alias vev='virtualenv -p /usr/bin/python3 venv'
 alias yu='yarn upgrade-interactive'
 alias ys='yarn start'
 alias yb='yarn run build'
+alias yc='yarn run clean'
 
 # apt/dpkg stuff
 alias upd='sudo apt-get update'
@@ -435,7 +436,7 @@ alias cerm='c ; erm'
 alias aerm='a ; erm'
 alias ermq='erm ; q'
 alias wl='wc -l'
-alias fx='find . -type d -name x'
+alias fx='find . -maxdepth 2 -type d -name x'
 alias rainy="mplayer $HOME/Dropbox/z/x/rainy.ogg"
 alias transfersh='sh -c '\'' curl --upload-file "${1}" https://transfer.sh/$(basename "${1}")'\'' -'
 alias gv='g v'
