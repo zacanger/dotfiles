@@ -96,6 +96,7 @@ alias yu='yarn upgrade-interactive'
 alias ys='yarn start'
 alias yb='yarn run build'
 alias yc='yarn run clean'
+alias yr='yarn run'
 
 # apt/dpkg stuff
 alias upd='sudo apt-get update'
@@ -442,6 +443,7 @@ alias transfersh='sh -c '\'' curl --upload-file "${1}" https://transfer.sh/$(bas
 alias gv='g v'
 alias acd='a ; cd'
 alias tw='send-tweet'
+alias jv='jq .version < package.json'
 
 # on mac:
 # alias bs='pmset -g batt | sed -n 2p' # or maybe
