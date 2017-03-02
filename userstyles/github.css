@@ -23,7 +23,8 @@
   color: silver !important;
 }
 
-.selected, a { color: silver !important; }
+a { color: #4375C0 !important; }
+.selected { color: silver !important; }
 
 .orghead {
   background-color: #303330!important;
