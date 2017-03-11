@@ -26,6 +26,11 @@
 a { color: #4375C0 !important; }
 .selected { color: silver !important; }
 
+.octotree_views {
+  color: silver !important;
+  background: #1d1d1d !important;
+}
+
 .orghead {
   background-color: #303330!important;
   border: none!important;
