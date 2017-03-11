@@ -671,10 +671,6 @@ let g:context_filetype#same_filetypes = '_'
 " vim-gitgutter
 let g:gitgutter_max_signs = 700
 
-let g:wakatime_PythonBinary = '/usr/bin/python3.5'
-" on the work mac:
-" let g:wakatime_PythonBinary = '/Library/Frameworks/Python.framework/Versions/3.5/bin/python3.5'
-
 " let g:jsx_ext_required = 0
 let g:neomake_javascript_enabled_makers = ['eslint']
 
