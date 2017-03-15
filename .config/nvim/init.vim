@@ -622,8 +622,6 @@ nnoremap <leader>nl :%s///g
 
 nnoremap j gj
 nnoremap k gk
-nnoremap gj j
-nnoremap jk k
 
 " insert current line number in normal mode with f1
 nnoremap <F1> :execute "normal! i" . ( line(".") )<cr>
