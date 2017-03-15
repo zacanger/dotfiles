@@ -622,6 +622,8 @@ nnoremap <leader>nl :%s///g
 
 nnoremap j gj
 nnoremap k gk
+nnoremap gj j
+nnoremap jk k
 
 " insert current line number in normal mode with f1
 nnoremap <F1> :execute "normal! i" . ( line(".") )<cr>
@@ -720,3 +722,10 @@ set list lcs=tab:\|\
 " typescript
 let g:tsuquyomi_disable_quickfix = 1
 let g:syntastic_typescript_checkers = ['tsuquyomi']
+
+" break line on words
+set linebreak
+
+" fix where new splits show up
+set splitbelow
+set splitright
