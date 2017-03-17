@@ -14,7 +14,6 @@ XMLHttpRequest.prototype.send = (function (orig) {
     if (typeof history.onpushstate == 'function') {
       history.onpushstate({ state: state })
     }
-    // when requests created are complete:
     return pushState.apply(history, arguments)
   }
 })(window.history)
