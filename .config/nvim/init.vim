@@ -297,7 +297,7 @@ set wildignore+=*.ico,*.ICO,backup/**,*.sql,*.dump,*.tmp,*.min.js,Gemfile.lock
 set wildignore+=*.png,*.PNG,*.JPG,*.jpg,*.JPEG,*.jpeg,*.GIF,*.gif,*.pdf,*.PDF
 set wildignore+=vendor/**,coverage/**,tmp/**,rdoc/**,*.BACKUP.*,*.BASE.*,*.LOCAL.*,*.REMOTE.*,.sass-cache/**
 
-nnoremap <silent> <F2> :NERDTreeFind<CR>
+" nnoremap <silent> <F2> :NERDTreeFind<CR>
 noremap <F3> :NERDTreeToggle<CR>
 
 " grep.vim
@@ -625,6 +625,7 @@ nnoremap k gk
 
 " insert current line number in normal mode with f1
 nnoremap <F1> :execute "normal! i" . ( line(".") )<cr>
+nnoremap <F2> :execute "normal! i console.log(" . ( line(".") ) . ")"<cr>
 
 " buftabs
 let g:buftabs_enabled = 1
