@@ -1,9 +1,6 @@
 #!/bin/bash
 
-[ "$1" = "" ] && printf "${yell}Usage : $0 /path/to/dir \n ${reset}" && exit
-printf ${green}
+D=$1
+[ "$1" = "" ] && D=`pwd`
 du -hs --apparent-size $1
-printf ${reset}
-
 exit 0
-
