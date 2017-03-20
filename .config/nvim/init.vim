@@ -279,6 +279,7 @@ cnoreabbrev X x
 cnoreabbrev stu sort u
 cnoreabbrev Stu sort u
 cnoreabbrev Set set
+cnoreabbrev Bd bd
 abbr lmbd λ
 abbr midfing 🖕
 
