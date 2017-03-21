@@ -2,5 +2,5 @@
 # also see `g()`, `ga()`
 
 ga() {
-  ( cd ~/.g ; grep '' * ) | awk '{ FS=":" ; printf("%-10s %s\n",$1,$2); }' | grep -i -E ${1-.\*}
+  ( cd ~/.g ; grep '' * ) | awk 'BEGIN { FS=":" } { printf("%-10s %s\n",$1,$2) }' | grep -i -E ${1-.\*}
 }
