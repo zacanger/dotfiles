@@ -445,6 +445,7 @@ alias acd='a ; cd'
 alias tw='send-tweet'
 alias jv='jq .version < package.json'
 alias checkjane='curl -s https://jane.com/-/diag | jq .status'
+alias findlonglines="grep '.\{120\}' -r"
 
 # on mac:
 # alias bs='pmset -g batt | sed -n 2p' # or maybe

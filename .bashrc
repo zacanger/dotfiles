@@ -39,7 +39,7 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 # history stuff
 shopt -s histappend # append
 HISTCONTROL='erasedups:ignoreboth' # ignore lines with spaces & dups
-HISTIGNORE="ls:l:la:lo:lS:lv:lT:ll:a:k:ld:lr:cd:lc:h:history:ranger:mocp:mu:q:exit:c:ds:ds.:clear:erm:w:gg:ZZ:q!:\:wq:\:Wq:..:.:cs:dt:co:ni:ns:vi:reload:gst:edrc:edal:fs:xtrlock:dbst:dbup:dbdn:\:q:ls*;k *;a *;* --help;* -h:nss:ncu:fetch:gf:pull:gd:g:v:nu"
+HISTIGNORE="ls:l:la:lo:lS:lv:lT:ll:a:k:ld:lr:cd:lc:h:history:ranger:mocp:mu:q:exit:c:ds:ds.:clear:erm:w:gg:ZZ:q!:\:wq:\:Wq:..:.:cs:dt:co:ni:ns:vi:reload:gst:edrc:edal:fs:xtrlock:dbst:dbup:dbdn:\:q:ls*;k *;a *;* --help;* -h:nss:ncu:fetch:gf:pull:gd:g:v:nu:cerm"
 HISTSIZE= # length
 HISTFILESIZE= # size
 HISTTIMEFORMAT='%F %T  ' # timestamp
@@ -125,6 +125,8 @@ purp='\033[1;35m'   # bold purple
 cyan='\033[1;36m'   # bold light blue
 white='\033[1;37m'  # bold white
 reset='\033[0m'     # return the prompt to orig
+
+tabs -2
 
 eval $(opam config env)
 

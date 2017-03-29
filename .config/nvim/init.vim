@@ -729,3 +729,6 @@ set linebreak
 " fix where new splits show up
 set splitbelow
 set splitright
+
+" relative dirs
+set autochdir
