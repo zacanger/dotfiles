@@ -45,6 +45,16 @@ yellow() {
 # debug "Trying to find config file"
 debug() { [ "$DEBUG" ] && echo ">>> $*"; }
 
+# if we need a password
+getpassword() {
+  until [ "$password" = "$rpassword" -a -n "$password" ]; do
+    read -s -p "Enter a password for user '$1' : " password; echo >&2
+    read -s -p "Reenter password for user '$1' : " rpassword; echo >&2
+  done
+  echo "$password"
+}
+pw=`getpassword "${1:-blah}"`
+# echo "password is '$pw'"
 
 help() {
     cat << EOF
