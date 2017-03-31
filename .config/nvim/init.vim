@@ -281,6 +281,7 @@ cnoreabbrev Stu sort u
 cnoreabbrev Set set
 cnoreabbrev Bd bd
 abbr lmbd λ
+abbr frll ∀
 abbr midfing 🖕
 
 " NERDTree
