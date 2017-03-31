@@ -1,3 +1,5 @@
+# vim: ft=sh
+
 # ~/.bash_aliases : sourced by ~/.bashrc
 
 # kill everything

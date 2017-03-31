@@ -1,3 +1,5 @@
+# vim: ft=sh
+
 #############################################################################
  ####  ~/.bashrc: run for non-login shells, sources most other configs  ####
  ####           check /usr/share/doc/bash & /etc for examples           ####
