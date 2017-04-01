@@ -42,6 +42,12 @@ dpkg
 dropbox
 dsniff
 dvtm
+eslint-config-standard
+eslint-plugin-babel
+eslint-plugin-flowtype
+eslint-plugin-flowtype-errors
+eslint-plugin-promise
+eslint-plugin-standard
 file
 findutils
 firefox
