@@ -25,7 +25,8 @@ shopt -s dotglob
 # see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-LESSOPEN="| src-hilite-lesspipe.sh %s"
+export LESSOPEN="| $(which highlight) %s --out-format xterm256 --line-numbers --quiet --force --style solarized-light"
+export LESS=" -R"
 
 # forward history search with ctrl-s
 stty stop ""
