@@ -218,6 +218,7 @@ wicd-daemon
 wicd-gtk
 wireless-tools
 wmctrl
+wrk
 xclip
 xdotool
 xfce4

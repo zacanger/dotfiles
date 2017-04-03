@@ -622,8 +622,10 @@ nnoremap <leader>nl :%s///g
 " :%s/\r$/g
 " :%s/\r$//g
 
-nnoremap j gj
-nnoremap k gk
+" nnoremap j gj
+" nnoremap k gk
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
 " insert current line number in normal mode with f1
 nnoremap <F1> :execute "normal! i" . ( line(".") )<cr>
@@ -733,3 +735,10 @@ set splitright
 
 " relative dirs
 set autochdir
+
+" just trying this out...
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
+
+let g:paredit_mode=0
+let g:paredit_leader="\<Space>"
