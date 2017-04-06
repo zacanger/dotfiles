@@ -742,3 +742,5 @@ autocmd InsertLeave * :set relativenumber
 
 let g:paredit_mode=0
 let g:paredit_leader="\<Space>"
+
+let g:parinfer_mode="off"
