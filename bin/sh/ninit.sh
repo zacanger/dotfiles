@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-ND=$HOME/.ninit # ninit dir
-DN="${PWD##*/}"
+ND=$HOME/.ninit # ninit dir -- set this to whereever you keep these files
+DN="${PWD##*/}" # current directory (like basename `pwd`)
 
+# make these files in wherever you specified $ND
 cp $ND/.editorconfig .editorconfig
 cp $ND/.gitignore .gitignore
 cp $ND/.gitattributes .gitattributes
@@ -95,7 +96,7 @@ else
   cp $ND/module.js index.js
 fi
 
-fixpack
+fixpack # `npm i -g fixpack, and make a ~/.fixpackrc`
 git init
 git add -A
-git commit -am 'first'
+git commit -m 'Boom!'
