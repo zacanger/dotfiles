@@ -447,6 +447,7 @@ alias jv='jq .version < package.json'
 alias checkjane='curl -s https://jane.com/-/diag | jq .status'
 alias findlonglines="grep '.\{120\}' -r"
 alias xl='xtrlock'
+alias no='yes n'
 
 # on mac:
 # alias bs='pmset -g batt | sed -n 2p' # or maybe
