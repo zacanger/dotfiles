@@ -159,6 +159,7 @@ r
 ranger
 readline
 redis
+rlwrap
 rsync
 ruby
 s-lang
