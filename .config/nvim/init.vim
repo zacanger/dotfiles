@@ -744,3 +744,6 @@ let g:paredit_mode=0
 let g:paredit_leader="\<Space>"
 
 let g:parinfer_mode="off"
+
+" use <F8> to go to next conflict marker
+map <silent> <F8> /^\(<\{7\}\\|>\{7\}\\|=\{7\}\\|\|\{7\}\)\( \\|$\)<cr>
