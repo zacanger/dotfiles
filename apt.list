@@ -94,6 +94,7 @@ libvte-dev
 liquidprompt
 lolcat
 lsof
+ltrace
 lua-nvim
 lua-nvim-dev
 man-db
