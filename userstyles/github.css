@@ -25,6 +25,7 @@
 }
 
 a { color: #4375C0 !important; }
+.State.State--purple { color: silver !important; }
 .selected { color: silver !important; }
 
 .octotree_views {
