@@ -100,6 +100,8 @@ alias ys='yarn start'
 alias yb='yarn run build'
 alias yc='yarn run clean'
 alias yr='yarn run'
+alias lf='lein figwheel dev'
+alias lfd='lein figwheel dev'
 
 # apt/dpkg stuff
 alias upd='sudo apt-get update'

@@ -79,6 +79,7 @@ fast-http-cli
 fix-dropbox-node_modules-symlinks
 fixpack
 flow-bin
+flow-coverage-report
 flow-inspect
 flow-typed
 forever
