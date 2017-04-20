@@ -79,7 +79,7 @@ xterm*)
 esac
 
 # include
-export CDPATH=.:$HOME/Dropbox/work:$HOME/Dropbox/work/repos:$HOME/Dropbox/z/bin:$HOME/Dropbox/z:/usr/local/lib:/usr/local/lib/node_modules
+export CDPATH=.:$HOME/Dropbox:$HOME/Dropbox/work:$HOME/Dropbox/work/repos:$HOME/Dropbox/z/bin:$HOME/Dropbox/z:/usr/local/lib:/usr/local/lib/node_modules
 export PATH=$(npm bin):$HOME/.gem/global/bin:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.psvm/bin:$(find $HOME/bin/ -type d | paste -s -d:):$PATH
 export VISUAL='nvim'
 export EDITOR='nvim'
