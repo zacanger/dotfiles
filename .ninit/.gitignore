@@ -4,6 +4,7 @@
 *.bz2
 *.chi
 *.chs.h
+*.class
 *.dat
 *.dyn_hi
 *.dyn_o
@@ -13,6 +14,7 @@
 *.gz
 *.hi
 *.hp
+*.jar
 *.key
 *.ko
 *.lock
@@ -35,6 +37,7 @@
 .AppleDouble
 .DS_Store
 .DocumentRevisions-V100
+.HTF/
 .LSOverride
 .Spotlight-V100
 .TemporaryItems
@@ -53,8 +56,13 @@
 .hpc
 .hsenv
 .idea
+.lein-deps-sum
+.lein-failures
+.lein-plugins/
+.lein-repl-history
 .lock-wscript
 .netrwhist
+.nrepl-port
 .psci*
 .pulp-cache
 .sass-cache
@@ -63,6 +71,10 @@
 .virtualenv
 .vscode
 /.build/
+/checkouts/
+/classes/
+/lib/
+/target/
 Icon
 Network Trash Folder
 Temporary Items
@@ -75,6 +87,7 @@ build/Release
 bundle
 bundle.js
 cabal-dev
+cabal.project.local
 cabal.sandbox.config
 coverage
 data
@@ -87,6 +100,8 @@ node_modules
 npm-debug.log*
 output
 pids
+pom.xml
+pom.xml.asc
 public/lib
 src/.webpack.js
 x/

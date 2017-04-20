@@ -4,6 +4,7 @@
 *.bz2
 *.chi
 *.chs.h
+*.class
 *.dat
 *.dyn_hi
 *.dyn_o
@@ -13,6 +14,7 @@
 *.gz
 *.hi
 *.hp
+*.jar
 *.key
 *.ko
 *.lock
@@ -36,6 +38,7 @@
 .AppleDouble
 .DS_Store
 .DocumentRevisions-V100
+.HTF/
 .LSOverride
 .Spotlight-V100
 .TemporaryItems
@@ -62,8 +65,13 @@
 .hsenv
 .idea
 .init.vim-rplugin~
+.lein-deps-sum
+.lein-failures
+.lein-plugins/
+.lein-repl-history
 .lock-wscript
 .netrwhist
+.nrepl-port
 .opam/compilers
 .opam/log
 .opam/packages
@@ -77,6 +85,10 @@
 .virtualenv
 .vscode
 /.build/
+/checkouts/
+/classes/
+/lib/
+/target/
 Icon
 Network Trash Folder
 TAGS
@@ -92,6 +104,7 @@ build/Release
 bundle
 bundle.js
 cabal-dev
+cabal.project.local
 cabal.sandbox.config
 coverage
 data
@@ -105,6 +118,8 @@ node_modules
 npm-debug.log*
 output
 pids
+pom.xml
+pom.xml.asc
 public/lib
 src/.webpack.js
 tags
