@@ -9,6 +9,7 @@
 *.dyn_o
 *.egg
 *.elf
+*.eventlog
 *.gz
 *.hi
 *.hp
@@ -71,6 +72,7 @@
 .psci*
 .pulp-cache
 .sass-cache
+.stack-work/
 .vimsession~
 .virtualenv
 .vscode
@@ -95,6 +97,7 @@ coverage
 data
 db
 dist
+dist-*
 ghci_history
 lib-cov
 logs
