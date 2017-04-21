@@ -759,7 +759,3 @@ function! UnMinify()
     " %s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /ge
     normal ggVG=`j
 endfunction
-
-" use neoghc instead of haskell-vim
-let g:haskellmode_completion_ghc = 0
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
