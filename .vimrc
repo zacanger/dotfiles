@@ -13,3 +13,5 @@ set tabstop=2
 set nobackup
 set nowritebackup
 set noswapfile
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
