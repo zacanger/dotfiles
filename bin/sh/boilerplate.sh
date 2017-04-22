@@ -22,6 +22,31 @@ main() {
   echo hello
 }
 
+# try, catch, throw, error-handling in a useful kind of way
+
+try() {
+  [[ $- = *e* ]]; SAVED_OPT_E=$?
+  set +e
+}
+
+throw() {
+  exit $1
+}
+
+catch() {
+  export ex_code=$?
+  (( $SAVED_OPT_E )) && set +e
+  return $ex_code
+}
+
+throw_errors() {
+  set -e
+}
+
+ignore_errors() {
+  set +e
+}
+
 NORMAL=$(tput sgr0)
 GREEN=$(tput setaf 2; tput bold)
 YELLOW=$(tput setaf 3)
