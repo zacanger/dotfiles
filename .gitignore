@@ -70,6 +70,10 @@
 .lein-plugins/
 .lein-repl-history
 .lock-wscript
+.moc/cache
+.moc/equalizer
+.moc/last_directory
+.moc/softmixer
 .netrwhist
 .nrepl-port
 .opam/compilers
