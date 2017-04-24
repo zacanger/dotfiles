@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 # http://lindi.iki.fi/lindi/xcutselprin
 
 function show_container {

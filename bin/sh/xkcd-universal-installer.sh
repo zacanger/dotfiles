@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # usage: ./installer.sh 1 pkgname
 # first arg is package manager

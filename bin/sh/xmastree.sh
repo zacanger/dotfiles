@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 trap "tput reset; tput cnorm; exit" 2
 clear
 tput civis

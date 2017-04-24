@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Check your public routable IP address using ipinfo.io service
 # The script first checks if the service can be accessed using the host command
