@@ -2,10 +2,6 @@
 " for nvim | neovim.io
 " using neobundle | gh:Shougo/neobundle.vim
 
-" this is not all that clean. if anyone wants to go ahead
-" and clean things up, please feel free. i'm still kinda
-" getting used to managing vim configs in a reasonable manner.
-
 " neobundle stuff
 if has('vim_starting')
   set nocompatible               " Be iMproved
@@ -57,11 +53,6 @@ NeoBundle 'Shougo/vimproc.vim', {
       \    },
       \ }
 
-"" NVIM colour -- of MY terminals, this only works with tortosa
-" if has("nvim")
-  " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-" endif
-
 " Vim-Session
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-session'
@@ -108,7 +99,6 @@ filetype plugin indent on
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
 NeoBundleCheck
-
 
 "" Basic Setup
 
@@ -415,10 +405,7 @@ let g:ctrlp_open_new_file = 'r'
 " Disable visualbell
 set noeb vb t_vb=
 
-"" Copy/Paste/Cut
-" if has('unnamedplus')
-"   set clipboard=unnamed,unnamedplus
-" endif
+"" system clipboard
 set clipboard^=unnamed,unnamedplus
 
 noremap YY "+y<CR>
@@ -509,50 +496,6 @@ let g:tagbar_autofocus = 1
 
 let g:javascript_enable_domhtmlcss = 1
 
-"" tryna get ranger to work... still no luck with this.
-"" anyone know what's up?
-"
-" Compatible with ranger 1.4.2 through 1.7.*
-"
-" Add ranger as a file chooser in vim
-"
-" If you add this code to the .vimrc, ranger can be started using the command
-" ":RangerChooser" or the keybinding "<leader>r".  Once you select one or more
-" files, press enter and ranger will quit again and vim will open the selected
-" files.
-"
-" function! RangeChooser()
-"     let temp = tempname()
-    " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
-    " with ranger 1.4.2 through 1.5.0 instead.
-    "exec 'silent !ranger --choosefile=' . shellescape(temp)
-"     if has("gui_running")
-"         exec 'silent !xterm -e ranger --choosefiles=' . shellescape(temp)
-"     else
-"         exec 'silent !ranger --choosefiles=' . shellescape(temp)
-"     endif
-"     if !filereadable(temp)
-"         redraw!
-        " Nothing to read.
-"         return
-"     endif
-"     let names = readfile(temp)
-"     if empty(names)
-"         redraw!
-        " Nothing to open.
-"         return
-"     endif
-    " Edit the first item.
-"     exec 'edit ' . fnameescape(names[0])
-    " Add any remaning items to the arg list/buffer list.
-"     for name in names[1:]
-"         exec 'argadd ' . fnameescape(name)
-"     endfor
-"     redraw!
-" endfunction
-" command! -bar RangerChooser call RangeChooser()
-" nnoremap <leader>r :<C-U>RangerChooser<CR>
-
 inoremap <Esc> <Esc>`^
 
 autocmd User Node
@@ -561,18 +504,6 @@ autocmd User Node
   \   nmap <buffer> <C-w><C-f> <Plug>NodeVSplitGotoFile |
   \ endif
 
-
-" xfce4-terminal
-" if has("autocmd")
-  " au InsertEnter * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_UNDERLINE/' ~/.config/xfce4/terminal/terminalrc"
-  " au InsertLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"
-  " au VimLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/xfce4/terminal/terminalrc"
-" endif
-
-" general vte-compat terms
-" let &t_SI = "\<Esc>[6 q"
-" let &t_SR = "\<Esc>[4 q"
-" let &t_EI = "\<Esc>[2 q"
 
 cnoremap sudow w !sudo tee & >/dev/null
 
@@ -611,19 +542,10 @@ vnoremap :doc :help
 nnoremap :yal :%y+
 vnoremap :yal :%y+
 
-" semantic highlighting stuff
-" :nnoremap <Leader>s :SemanticHighlightToggle<cr>
-" let g:semanticEnableFileTypes = ['javascript', 'css', 'vue', 'node', 'python', 'ruby', 'es6', 'jsx', 'react', 'jquery', 'angular', 'underscore', 'coffeescript', 'elm', 'clojure', 'clojurescript', 'json', 'c']
-" let g:semanticGUIColors = [ '#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082', '#ffcc80', '#ffab91', '#e3d3ce', '#b0bec5', '#ffa726', '#ff8a65', '#f9bdbb', '#f9bdbb', '#f8bbd0', '#e1bee7', '#d1c4e9', '#ffe0b2', '#f9eddb', '#d0d9ff', '#b3e5fc', '#b2ebf2', '#b2dfdb', '#a3e9a4', '#dcedc8' , '#dff6c9', '#ffb74d' ]
-
-" goddamned meta keys...
+" fucking windows
 vnoremap <leader>nl :%s///g
 nnoremap <leader>nl :%s///g
-" :%s/\r$/g
-" :%s/\r$//g
 
-" nnoremap j gj
-" nnoremap k gk
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
@@ -685,10 +607,6 @@ function! SortLines() range
   execute a:firstline . "," . a:lastline . 's/^\d\+\s//'
 endfunction
 
-" this sorts all lines, or maybe the second one, i don't know
-" :%s/.*/\=printf("%03d", len(submatch(0)))."|".submatch(0)/ | sor n | %s/..../
-" :%s/.*/\=printf("%03d", len(submatch(0)))."|".submatch(0)/ | sor n |
-
 " because of docker + mac + webpack (or whatever)...
 let g:backupcopy = 'yes'
 
@@ -715,9 +633,6 @@ nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
 " edit macros
 nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
-
-" source init.vim on save
-" autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 " show tabs
 set list lcs=tab:\|\
@@ -748,7 +663,6 @@ let g:parinfer_mode="off"
 " use <F8> to go to next conflict marker
 map <silent> <F8> /^\(<\{7\}\\|>\{7\}\\|=\{7\}\\|\|\{7\}\)\( \\|$\)<cr>
 
-" Simple re-format for minified Javascript
 " command! UnMinify call UnMinify()
 function! UnMinify()
     normal mj
@@ -759,3 +673,6 @@ function! UnMinify()
     " %s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /ge
     normal ggVG=`j
 endfunction
+
+" close nerdtree on file open
+let NERDTreeQuitOnOpen=1
