@@ -168,7 +168,7 @@ set number
 
 let no_buffers_menu=1
 if !exists('g:not_finsh_neobundle')
-  colorscheme angr
+  colorscheme default
 endif
 
 set mousemodel=popup
