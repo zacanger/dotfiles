@@ -1,6 +1,9 @@
 #!/bin/sh
-until [ `curl -s seller.jane.com/-/diag | jq .status` != '"OK"' ]
+
+until [ `curl -s -o /dev/null -w "%{http_code}" https://seller.jane.com/-/diag` != '200' ]
 do
   sleep 60
 done
-zenity --error --text "SELLER IS DOWN"
+
+# npm i -g alert-node
+alert 'SELLER IS DOWN'
