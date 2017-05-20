@@ -1,1 +1,0 @@
-python -c "import math as m;a,v=m.radians(float(input())),float(input());[print('{:03}:'.format(x)+' '*m.floor(0.5+x*m.tan(a)-x*x/(v*m.cos(a)))+'o') for x in range(102)]"
