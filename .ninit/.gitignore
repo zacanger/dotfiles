@@ -61,6 +61,7 @@
 .lein-plugins/
 .lein-repl-history
 .lock-wscript
+.merlin
 .netrwhist
 .nrepl-port
 .psci*
