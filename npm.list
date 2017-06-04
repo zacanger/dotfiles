@@ -136,6 +136,7 @@ nodemon
 npm-check-updates
 npm-run-all
 npm@next
+npx
 nw
 nw-builder
 nyc

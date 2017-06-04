@@ -137,3 +137,4 @@ Procfile text
 
 npm-shrinkwrap.json -diff
 yarn.lock -diff
+package-lock.json -diff
