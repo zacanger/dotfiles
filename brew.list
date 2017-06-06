@@ -11,6 +11,7 @@ bdw-gc
 berkeley-db
 binutils
 boost
+boot-clj
 cairo
 camlp4
 ccat
