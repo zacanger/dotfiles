@@ -137,6 +137,7 @@ npm-check-updates
 npm-run-all
 npm@next
 npx
+nrm
 nw
 nw-builder
 nyc
@@ -216,3 +217,4 @@ yslow
 zacanger
 zeedown
 zikcenter
+dist-upgrade
