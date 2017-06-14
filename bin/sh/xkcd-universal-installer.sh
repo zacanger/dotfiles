@@ -26,6 +26,8 @@ if [ $# -ne 2 ]; then
   echo "12 git clone"
   echo "13 make"
   echo "14 curl"
+  echo "15 bower"
+  echo "16 yarn"
   exit 1
 fi
 
@@ -47,6 +49,8 @@ if [ "$1" == "" ]; then
   echo "12 git clone"
   echo "13 make"
   echo "14 curl"
+  echo "15 bower install"
+  echo "16 yarn add"
   echo
   echo "What type do you wish to use?"
   read ITYPE
@@ -96,6 +100,12 @@ case $ITYPE in
     ;;
   15)
     CMD="curl $2 | bash"
+    ;;
+  15)
+    CMD="bower install $2"
+    ;;
+  15)
+    CMD="yarn add $2"
     ;;
   *)
     echo "Not a valid choice luser"
