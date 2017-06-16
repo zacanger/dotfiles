@@ -1,41 +1,43 @@
 {
-  "sortToTop" : [
-    "name"
-  , "description"
-  , "version"
-  , "author"
-  , "contributors"
-  , "license"
-  , "main"
-  , "preferGlobal"
-  , "bin"
-  , "scripts"
-  , "homepage"
-  , "repository"
-  , "bugs"
-  , "keywords"
-  , "dependencies"
-  , "devDependencies"
+  "sortToTop": [
+    "name",
+    "description",
+    "version",
+    "author",
+    "contributors",
+    "license",
+    "main",
+    "preferGlobal",
+    "bin",
+    "scripts",
+    "homepage",
+    "repository",
+    "bugs",
+    "keywords",
+    "dependencies",
+    "devDependencies"
+  ],
+  "required": [
+    "name",
+    "version",
+    "author"
+  ],
+  "warn": [
+    "description",
+    "repository",
+    "keywords",
+    "main",
+    "bugs",
+    "homepage",
+    "license"
+  ],
+  "sortedSubItems": [
+    "scripts",
+    "keywords",
+    "dependencies",
+    "devDependencies"
+  ],
+  "files": [
+    "package.json"
   ]
-, "required" : [
-    "name"
-  , "version"
-  , "author"
-  ]
-, "warn" : [
-    "description"
-  , "repository"
-  , "keywords"
-  , "main"
-  , "bugs"
-  , "homepage"
-  , "license"
-  ]
-, "sortedSubItems" : [
-    "scripts"
-  , "keywords"
-  , "dependencies"
-  , "devDependencies"
-  ]
-, "files" : ["package.json"]
 }
