@@ -13,7 +13,7 @@ endif
 let neobundle_readme=expand('~/.config/nvim/bundle/neobundle.vim/README.md')
 
 let g:vim_bootstrap_langs = "javascript,python,html"
-let g:vim_bootstrap_editor = "nvim"				" nvim or vim
+let g:vim_bootstrap_editor = "nvim" " nvim or vim
 
 if !filereadable(neobundle_readme)
   echo "Installing NeoBundle..."
@@ -61,10 +61,6 @@ NeoBundle 'xolox/vim-session'
 NeoBundle 'honza/vim-snippets'
 
 " Color
-if v:version >= 703
-  NeoBundle 'Shougo/vimshell.vim'
-endif
-
 if v:version >= 704
   NeoBundle 'FelikZ/ctrlp-py-matcher'
 endif
@@ -298,15 +294,9 @@ let Grep_Default_Options = '-IR'
 let Grep_Skip_Files = '*.log *.db'
 let Grep_Skip_Dirs = '.git node_modules'
 
-" vimshell.vim
-let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
-let g:vimshell_prompt =  '$ '
-
 " terminal emulation
 if g:vim_bootstrap_editor == 'nvim'
   nnoremap <silent> <leader>sh :terminal<CR>
-else
-  nnoremap <silent> <leader>sh :VimShellCreate<CR>
 endif
 
 "" Functions
