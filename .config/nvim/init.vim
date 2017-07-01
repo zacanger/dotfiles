@@ -611,6 +611,7 @@ NeoBundleLazy 'flowtype/vim-flow', {
       \ }}
 
 let g:flow#enable = 0
+" let g:javascript_plugin_flow = 1
 
 let g:csstoinline_wrap_pixels = 1
 

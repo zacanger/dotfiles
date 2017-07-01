@@ -1,4 +1,5 @@
-const { writeFileSync } = require('fs')
+#!/usr/bin/env node
+
 const generateHangul = () => {
   let string = ''
   for (let s = '가'.charCodeAt(0); s <= '힣'.charCodeAt(0); s++) {
@@ -6,4 +7,5 @@ const generateHangul = () => {
   }
   return string
 }
-writeFileSync('hangul.md', generateHangul(), 'utf8')
+
+process.stdout.write(generateHangul())
