@@ -19,6 +19,7 @@ bili-babel
 bookmarkletify
 bower
 browserify
+calculate-tip
 caniuse-cmd
 captureme
 cdnjs-importer
@@ -40,6 +41,7 @@ depcheck
 dependency-check
 devtool
 dirty-markup-cli
+dist-upgrade
 doiuse
 editorconfig
 electron
@@ -216,4 +218,3 @@ yslow
 zacanger
 zeedown
 zikcenter
-dist-upgrade
