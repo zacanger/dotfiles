@@ -138,7 +138,6 @@ nodemon
 npm-check-updates
 npm-run-all
 npm@next
-npx
 nrm
 nw
 nw-builder
