@@ -4,6 +4,7 @@ apt-forktracer
 apt-listchanges
 apt-transport-https
 apt-utils
+arp-scan
 atool
 base-files
 base-passwd
