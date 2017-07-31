@@ -60,7 +60,6 @@ WITHG="{
   \"engines\": {
     \"node\": \">=6.0.0\"
   },
-  \"preferGlobal\": true,
   \"bin\": \"./index.js\",
   \"homepage\": \"https://github.com/zacanger/$DN#readme\",
   \"repository\": {
