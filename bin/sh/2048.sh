@@ -223,6 +223,11 @@ function key_react {
       j) apply_push down;;
       l) apply_push right;;
       h) apply_push left;;
+
+      w) apply_push up;;
+      s) apply_push down;;
+      d) apply_push right;;
+      a) apply_push left;;
     esac
   }
 }
@@ -358,5 +363,3 @@ while true; do
    let moves==0 && end_game 0 #lose the game
   }
 done
-
-
