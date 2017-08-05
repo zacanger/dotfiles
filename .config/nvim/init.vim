@@ -560,6 +560,9 @@ noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <F1> :execute "normal! i" . ( line(".") )<cr>
 nnoremap <F2> :execute "normal! i console.log(" . ( line(".") ) . ")"<cr>
 
+" keep Y consistent
+nnoremap Y y$
+
 " buftabs
 let g:buftabs_enabled = 1
 let g:buftabs_in_statusline = 1
