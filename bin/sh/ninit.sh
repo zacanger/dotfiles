@@ -8,6 +8,7 @@ cp $ND/.editorconfig .editorconfig
 cp $ND/.gitignore .gitignore
 cp $ND/.gitattributes .gitattributes
 cp $ND/.eslintrc.json .eslintrc.json
+cp $ND/.tern-project .tern-project
 cp $ND/LICENSE.md LICENSE.md
 
 WITHOUTG="{
@@ -79,11 +80,11 @@ echo "# $DN
 
 --------
 
-## Installation:
+## Installation
 
-## Usage:
+## Usage
 
-## License:
+## License
 
 [WTFPL](./LICENSE.md)" > README.md
 

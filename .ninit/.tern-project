@@ -1,0 +1,13 @@
+{
+  "ecmaVersion": 7,
+  "libs": [],
+  "dontLoad": [
+    "node_modules/**"
+  ],
+  "plugins": {
+    "node": {},
+    "es_modules": {},
+    "angular": {},
+    "webpack": {}
+  }
+}
