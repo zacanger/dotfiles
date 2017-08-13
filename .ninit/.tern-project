@@ -7,7 +7,6 @@
   "plugins": {
     "node": {},
     "es_modules": {},
-    "angular": {},
     "webpack": {}
   }
 }
