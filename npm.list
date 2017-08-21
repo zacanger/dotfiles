@@ -74,6 +74,7 @@ git+https://github.com/shaunlebron/npm-cljs.git
 git-also
 git-standup
 global-packages-cli
+gtop
 hey-you
 html2txt
 http-codes-cli
