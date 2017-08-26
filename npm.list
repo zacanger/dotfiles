@@ -102,6 +102,7 @@ marked
 mime-types-cli
 mocha
 n
+neovim
 next-update
 node-gyp
 node-gyp-install
