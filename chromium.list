@@ -1,82 +1,46 @@
-AJAX Debugger
-Apollo Client Developer Tools
-Auxilio
-Awesome Autocomplete for GitHub
-Backspace Back
-Backtick
-Bookmark Checker
-BrowserStack Local
-BuiltWith Technology Profiler
-CSTAR for Google Chrome™
-Chrome Apps & Extensions Developer Tool
-Chrome Dev Editor
-Chrome Remote Desktop
-Chrome extension source viewer
-Clutter Free - Prevent duplicate tabs
-ColorPick Eyedropper
-Complain On Twitter for GitHub
-Contributors on Github
-Debug Utils
-DevTools Author
-EditThisCookie
-Emulated Device Lab
-Folder To Directory
-Git Draw
-GitHub AST Viewer
-GitHub Code Folding
-GitHub Old Header
-GitHub Participation Graph
-Github Search
-Gmail Hacks
-Goodbye, t.co! - bypass t.co links
-Google Docs
-Google Docs Offline
-Google Hangouts
-Google Keep - notes and lists
-Google Sheets
-Google Slides
-GoogleGIFs
-GraphQL Network
-HTML5 Storage Manager All in One
-ImageQuilts
-JSON Viewer
-LastPass: Free Password Manager
-Merge Windows
-My Style
-Network Requests Monitor
-NinjaKit
-OctoLinker
-Octotree
-PageSpeed Insights (with PNaCl)
-PageXray
-PerfectPixel by WellDoneCode
-Pesticide for Chrome
-Pinboard Plus
-Positionable!
-Privacy Badger
-React Developer Tools
-React Perf
-Redux DevTools
-Refined GitHub
-RemoteDev
-Save to Google Drive
-Shodan
-Show me the React!
-Simple Black Scrollbar
-Sourcegraph for GitHub
-Stylish - Custom themes for any website
-Time CRP
-Unshorten.It!
-Vimium
-Wappalyzer
-Web Developer
-Web Scraper
-XSS Rays
-YSlow
-dlr
-fi
-github.expandinizr
-gleeBox
-kimono
-tachyons-x-ray
-uBlock Origin
+Apollo Client Developer Tools 2.0.3
+Awesome Autocomplete for GitHub 1.3.4
+Backspace Back 0.26
+BuiltWith Technology Profiler 2.6
+Chrome Apps & Extensions Developer Tool 0.1.18
+Chrome Dev Editor 0.23.3550
+Chrome extension source viewer 1.6
+Clutter Free - Prevent duplicate tabs 2017.619.4.16 release
+Contributors on Github 0.0.7
+Debug Utils 0.6
+DevTools Author 0.6.6
+dlr 1.0
+EditThisCookie 1.4.1
+Folder To Directory 0.0.2
+GitHub Code Folding 0.1.1
+GitHub Old Header 2.4.0
+GitHub Participation Graph 0.1
+Github Search 0.1
+github.expandinizr 1.8.0
+gleeBox 2.3.1
+GraphQL Network 1.3
+HTML5 Storage Manager All in One 1.7.1
+JSON Viewer 0.17.0
+LastPass: Free Password Manager 4.1.63
+Merge Windows 1.0.2
+My Style 0.3
+OctoLinker 4.12.0
+Octotree 2.3.0
+PerfectPixel by WellDoneCode 1.87.1
+Pesticide for Chrome 1.1
+Pinboard Plus 2.11.4
+Privacy Badger 2017.7.24
+React Developer Tools 2.5.0
+React Perf 1.1.0
+Redux DevTools 2.15.1
+Refined GitHub 17.8.29.1352
+Simple Black Scrollbar 1.0
+tachyons-x-ray 1.2.1
+Time CRP 0.0.3
+uBlock Origin 1.13.8
+Vimium 1.59
+Wappalyzer 5.1.1
+Web Developer 0.5
+Web Scraper 0.2.0.16
+XSS Rays 1.1.6
+YSlow 3.1.2
