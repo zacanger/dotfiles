@@ -418,7 +418,6 @@ alias cmps='compass clean && compass compile && compass watch'
 alias news='curl http://nycurl.sytes.net/'
 alias reacterrorcodes='curl https://raw.githubusercontent.com/facebook/react/master/scripts/error-codes/codes.json | jq .'
 alias whihc='which'
-alias ghci='ghci.sh'
 alias am='alsamixer'
 alias checkip='curl http://checkip.amazonaws.com/'
 alias epochday="echo epoch day $(( $( date +%s) /86400 ))"
