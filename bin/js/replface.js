@@ -1,27 +1,24 @@
 #!/usr/bin/env node
 
-const
-  net  = require('net')
-, repl = require('repl')
-, port = process.argv[2] || 5100
-, face = () => {
-  const m = [
-    '^__^'
-  , '-__-'
-  , '>.<'
-  , '^.^'
-  , '@_@'
-  , '8_8'
-  , '%.%'
-  , '^_-'
-  , '^.-'
-  , ';)'
-  , 'xD'
-  ]
-  return m[~~(Math.random() * m.length)]
-}
+const net = require('net')
+const repl = require('repl')
+const port = process.argv[2] || 5100
+const m = [
+  '^__^',
+  '-__-',
+  '>.<',
+  '^.^',
+  '@_@',
+  '8_8',
+  '%.%',
+  '^_-',
+  '^.-',
+  ';)',
+  'xD'
+]
+const face = () => m[~~(Math.random() * m.length)]
 
-net.createServer(socket => {
+net.createServer((socket) => {
   let remote = repl.start(face()+' |> ', socket)
   remote.context.face  = face
   remote.context.bonus = 'UNLOCKED'
@@ -29,5 +26,5 @@ net.createServer(socket => {
 
 console.log(`remote repl available on ${port}`)
 
-let local = repl.start(face()+' |> ')
+const local = repl.start(face()+' |> ')
 local.context.face = face
