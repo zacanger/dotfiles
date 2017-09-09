@@ -57,49 +57,49 @@ div.aio > span.nU.n1,          /* Inbox, Drafts *when they have messages* */
 ol.gbtc > li:last-child,       /* top-level header settings button */
 span.hk.J-J5-Ji:nth-child(2),  /* expand all button */
 noop_end_selector {
-display: inline !important;
+  display: inline !important;
 }
 
 /* Top level container and search box (first selector), labels and
-* message/conversation view containers (second selector). This removes the
-* minimum widths and makes them adjust to the * browser's width.
-*/
+ * message/conversation view containers (second selector). This removes the
+ * minimum widths and makes them adjust to the * browser's width.
+ */
 div.lKgBkb,  /* labels container */
 div.ajl,  /* labels container */
 body > div > div.nH,      /* outer container and search box */
 body > div > div.nH > div.nH > div.nH > div.no > div.nH.nn,  /* content container */
 div.nH.NUxIad.bsvFKf      /* contact content container */
 {
-width: auto !important;
-height: auto !important;
+  width: auto !important;
+  height: auto !important;
 }
 
 /* shrink top header div */
 div#gb {
-height: 10px !important;
+  height: 10px !important;
 }
 
 /* content container. only needed for chrome. */
 body > div > div.nH > div.nH > div.nH > div.no > div.nH.nn {
-display: block !important;
-float: none !important;
+  display: block !important;
+  float: none !important;
 }
 
 /* show labels horizontally (inline) */
 div.n3 * {
-display: inline !important;
+  display: inline !important;
 }
 
 /* colored drop-down menus right of labels. can't hide with display: none
-* because they're inside the div.n3 above. */
+ * because they're inside the div.n3 above. */
 div.aig {
-opacity: 0;
+  opacity: 0;
 }
 
 /* put search box behind Move to and Labels pop-up menus (they're z-index 7) */
 div.gb_Wa {
-z-index: auto !important;
-margin-left: 5% !important;
+  z-index: auto !important;
+  margin-left: 5% !important;
 }
 
 /* hide borders */
@@ -107,5 +107,5 @@ div.w-asV, /* top header and search box header */
 div.ain,   /* left of labels with unread messages */
 td.xY      /* between each thread in list view */
 {
-border: none !important;
+  border: none !important;
 }
