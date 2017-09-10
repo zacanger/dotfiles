@@ -85,12 +85,14 @@ keyboard-configuration
 lame
 less
 libasound2-dev
+libedit-dev
 libgif-dev
 libglib2.0-0
 libglib2.0-dev
 libgtk2.0-0
 libgtk2.0-dev
 libjpeg-dev
+libreadline-dev
 libvte-dev
 liquidprompt
 lolcat
