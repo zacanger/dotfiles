@@ -7,15 +7,11 @@ nltk
 nose
 pipenv
 qutebrowser
-rainbowstream
-redterm
-tweepy
 virtualenv
 
 # pip 2
 PyYAML
 bzr
-cliquery
 locustio
 mercurial
 requests
