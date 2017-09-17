@@ -35,9 +35,8 @@ Things to know:
     * generated with `pip list`
 * I have two directories hidden from git (`~/x/` and `~/bin/x/`);
   they're referenced in some other files, and hold executables that are either totally
-  non-free, totally non-original, totally full of extra stuff i don't want in my path
-  (because my path is defined in a very not-safe way…), or just totally too large to want
-  to put under version control.
+  non-free, totally non-original, totally full of extra stuff i don't want in my path,
+  or just totally too large to want to put under version control.
 
 ## MISC THINGS
 
