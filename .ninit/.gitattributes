@@ -136,3 +136,4 @@ Procfile text
 *.PDF diff=astextplain
 
 package-lock.json -diff
+flow-typed/**/* -diff
