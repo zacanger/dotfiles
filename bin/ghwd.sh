@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-# ISC, gh:zeke/ghwd
-# don't need this NPM installed, so i'm just throwing it in my ~/bin/sh
-# opens github/bitbucket/gitlab page that matches cwd/branch
-
 # Figure out github repo base URL
 base_url=$(git config --get remote.origin.url)
 base_url=${base_url%\.git} # remove .git from end of string
@@ -20,7 +16,7 @@ base_url=${base_url//git@bitbucket.org:/https:\/\/bitbucket\.org\/}
 # Fix git@gitlab.com: URLs
 base_url=${base_url//git@gitlab\.com:/https:\/\/gitlab\.com\/}
 
-# Validate that this directory is a git directory
+# Validate that this folder is a git folder
 git branch 2>/dev/null 1>&2
 if [ $? -ne 0 ]; then
   echo Not a git repo!
@@ -42,17 +38,22 @@ fi
 git_where=$(command git name-rev --name-only --no-undefined --always HEAD) 2>/dev/null
 
 # Remove cruft from branchname
-branch=${git_where#refs\/heads\/}
+branch="${git_where#refs\/heads\/}"
+branch="${branch#tags\/}"
+branch="${branch%^0}"
 
 [[ $base_url == *bitbucket* ]] && tree="src" || tree="tree"
 url="$base_url/$tree/$branch$relative_path"
 
-echo $url
+echo "$url"
 
-if [ "$(uname)" == "Darwin" ]; then
-  /usr/bin/open $url
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-  `which xdg-open` $url
-elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
-  echo "get a real computer"
-fi
+# Check for various OS openers. Quit as soon as we find one that works.
+# Don't assume this will work, provide a helpful diagnostic if it fails.
+for opener in xdg-open open cygstart "start"; {
+  if command -v $opener; then
+    open=$opener;
+    break;
+  fi
+}
+
+$open "$url" || (echo "Unrecognized OS: Expected to find one of the following launch commands: xdg-open, open, cygstart, start" && exit 1);
