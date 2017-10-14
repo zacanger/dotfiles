@@ -213,12 +213,6 @@ alias dbst='dropbox status'
 alias dbls='dropbox filestatus ~/Dropbox/*'
 alias dbfs='dropbox filestatus'
 
-# twitter
-# alias tweet='twidge update'
-alias tweet='tweet.py'
-alias feed='twidge lsrecent -w `tput cols`'
-alias mytw='twidge lsarchive -w `tput cols`'
-
 # this serves as a replacement for the script from http://motd.sh/
 # for your config, change the zip code, degrees (to c, if needed), stocks (to y, if needed),
 # and quotes (to '' if needed).
@@ -446,7 +440,6 @@ alias wl='wc -l'
 alias fx='find . -maxdepth 2 -type d -name x'
 alias rainy="mplayer $HOME/Dropbox/z/x/rainy.ogg"
 alias transfersh='sh -c '\'' curl --upload-file "${1}" https://transfer.sh/$(basename "${1}")'\'' -'
-alias gv='g v'
 alias acd='a ; cd'
 alias tw='send-tweet'
 alias checkjane='curl -s https://jane.com/-/diag | jq .status'
