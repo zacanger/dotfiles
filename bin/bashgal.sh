@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# gh:zacanger || wtfpl
-# loosely based on bbgallery by dave crouse
-
 clear
 # intro
 echo "                                                 "
@@ -74,9 +71,9 @@ echo "<head>" >> index.html
 echo "<title>${galleryname}</title>" >> index.html
 echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">" >> index.html
 echo "<meta http-equiv=\"Content-Style-Type\" content=\"text/css\">" >> index.html
-echo "   <script language=\"javascript\">" >> index.html
-echo "     function galleryPic(PicURL) {" >> index.html
-echo "       window.open(\"show.html?\"+PicURL, \"\", " >> index.html
+echo "   <script type=\"text/javascript\">" >> index.html
+echo "     function galleryPic(picUrl) {" >> index.html
+echo "       window.open(\"show.html?\"+picUrl, \"\", " >> index.html
 echo "     \"resizable=1,HEIGHT=200,WIDTH=200\")" >> index.html
 echo "     }" >> index.html
 echo "   </script> " >> index.html
@@ -131,12 +128,12 @@ echo "  <title>${galleryname}</title>" >> show.html
 echo "  <script type=\"text/javascript\">" >> show.html
 echo "   var arrTemp=self.location.href.split(\"?\")" >> show.html
 echo "   var picUrl = (arrTemp.length>0)?arrTemp[1]:\"\"" >> show.html
-echo "   var NS = (navigator.appName==\"Netscape\")?true:false" >> show.html
+echo "   var NS = navigator.appName===\"Netscape\"" >> show.html
 echo "     function resizePic() {" >> show.html
-echo "       iWidth = (NS)?window.innerWidth:document.body.clientWidth" >> show.html
-echo "       iHeight = (NS)?window.innerHeight:document.body.clientHeight" >> show.html
-echo "       iWidth = document.images[0].width - iWidth" >> show.html
-echo "       iHeight = document.images[0].height - iHeight" >> show.html
+echo "       var iWidth = NS?window.innerWidth:document.body.clientWidth" >> show.html
+echo "       var iHeight = NS?window.innerHeight:document.body.clientHeight" >> show.html
+echo "       var iWidth = document.images[0].width - iWidth" >> show.html
+echo "       var iHeight = document.images[0].height - iHeight" >> show.html
 echo "       window.resizeBy(iWidth, iHeight)" >> show.html
 echo "       self.focus()" >> show.html
 echo "     }" >> show.html
@@ -170,4 +167,3 @@ for opener in xdg-open open cygstart "start"; {
 $open index.html
 
 exit 0
-
