@@ -386,7 +386,6 @@ alias vn.='viewnior .'
 alias vn='viewnior'
 alias vp='vtop'
 alias wfn='wait-for-net.sh'
-alias wgetmir='wget --random-wait -r -e robots=off '
 alias words="shuf -n 1000 /usr/share/dict/words | sed s/\'s// | tr '[:upper:]' '[:lower:]' | sort"
 alias wtf='wtf.sh'
 alias xfds='xfce4-display-settings'

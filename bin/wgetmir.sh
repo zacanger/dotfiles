@@ -7,10 +7,12 @@ command -v wget >/dev/null 2>&1 || { echo "wget not found. Please install it and
 if test -z $1; then { echo "Please provide URL to be mirrored"; exit 1; }; fi
 
 wget    --recursive \
-        --no-clobber \
-        --page-requisites \
-        --html-extension \
-        --convert-links \
-        --restrict-file-names=windows \
-        --no-parent \
-        --user-agent="Mozilla/5.0 (compatible; Googlebot/2.1; +http://www. google.com/bot.html)" $1
+  --no-clobber \
+  --random-wait \
+  --page-requisites \
+  --html-extension \
+  --convert-links \
+  --restrict-file-names=windows \
+  --no-parent \
+  --user-agent="Mozilla/5.0 (compatible; Googlebot/2.1; +http://www. google.com/bot.html)" \
+  -e robots=off $1
