@@ -3,6 +3,7 @@
 const http = require('http')
 const https = require('https')
 const arg = process.argv[2]
+const path = '/'
 
 if (!arg) {
   console.log('Usage: check-up.js example.com')
@@ -25,18 +26,11 @@ if (arg.includes('http://')) {
   host = arg
 }
 
-const opts = {
-  host,
-  port,
-  path : '/'
-}
+const opts = { host, port, path }
 
 protocol.get(opts, (res) => {
-  if (res.statusCode.toString().charAt(0) !== '5') {
-    console.log(`${host} is up, status code ${res.statusCode}`)
-  } else {
-    console.log(`${host} is down, status code ${res.statusCode}`)
-  }
+  const s = res.statusCode.toString().charAt(0) !== '5' ? 'up' : 'down'
+  console.log(`${host} is ${s}, status code ${res.statusCode}`)
 }).on('error', (err) => {
-  console.log(`Error: ${err.message}`)
+  console.warn(`Error: ${err.message}`)
 })
