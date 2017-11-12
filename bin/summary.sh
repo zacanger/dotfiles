@@ -1,18 +1,12 @@
 #!/usr/bin/env bash
 
-#
 # Setup.
-#
 
 VERSION="0.0.1"
-PLATFORMS=("node go")
-FRAMEWORKS=("meteor rails express sinatra")
-PKGMANAGERS=("npm brew mrt bower apm duo component gem")
-DATABASES=("postgres")
-
-#
-# Display usage information.
-#
+PLATFORMS=("node go ruby python")
+FRAMEWORKS=("rails express sinatra")
+PKGMANAGERS=("npm brew bower gem apt pip")
+DATABASES=("postgres mongo")
 
 display_help() {
   cat <<-EOF
@@ -31,27 +25,15 @@ EOF
   exit 0
 }
 
-#
-# Display summary version.
-#
-
 display_summary_version() {
   echo $VERSION && exit 0
 }
-
-#
-# Check.
-#
 
 check () {
   if [[ -e `which $i` ]]; then
     printf "$i\n"
   fi
 }
-
-#
-# Display platforms.
-#
 
 display_platforms() {
   printf "\033[35mPlatforms\033[0m\n"
@@ -61,10 +43,6 @@ display_platforms() {
   echo
 }
 
-#
-# Display frameworks.
-#
-
 display_frameworks() {
   printf "\033[36mFrameworks\033[0m\n"
   for i in $FRAMEWORKS; do
@@ -72,10 +50,6 @@ display_frameworks() {
   done
   echo
 }
-
-#
-# Display package managers.
-#
 
 display_pkgmanagers() {
   printf "\033[32mPackage Managers\033[0m\n"
@@ -85,10 +59,6 @@ display_pkgmanagers() {
   echo
 }
 
-#
-# Display databases.
-#
-
 display_databases() {
   printf "\033[33mDatabases\033[0m\n"
   for i in $DATABASES; do
@@ -96,10 +66,6 @@ display_databases() {
   done
   echo
 }
-
-#
-# Display summary.
-#
 
 display_summary() {
   echo
@@ -109,10 +75,7 @@ display_summary() {
   display_databases
 }
 
-#
 # Handle arguments.
-#
-
 if test $# -eq 0; then
   display_summary
 else
