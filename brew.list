@@ -26,7 +26,6 @@ dbus
 diffutils
 dos2unix
 doxygen
-dvtm
 ed
 enchant
 faac
@@ -48,7 +47,6 @@ ghc
 giflib
 gifsicle
 girara
-gist
 git
 glib
 glib-networking
@@ -114,8 +112,6 @@ m4
 mad
 make
 mercurial
-micro
-moc
 mongodb
 most
 mpfr
