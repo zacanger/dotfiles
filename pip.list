@@ -6,7 +6,6 @@ mps-youtube
 nltk
 nose
 pipenv
-qutebrowser
 virtualenv
 
 # pip 2

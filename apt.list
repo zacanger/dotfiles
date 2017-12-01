@@ -86,6 +86,7 @@ lame
 less
 libasound2-dev
 libedit-dev
+libgc-dev
 libgif-dev
 libglib2.0-0
 libglib2.0-dev
@@ -179,6 +180,7 @@ python3.5-dev
 qbittorrent
 qt5-default
 qtbase5-dev
+qutebrowser
 racket
 racket-doc
 ranger
