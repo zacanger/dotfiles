@@ -446,6 +446,7 @@ alias findlonglines="grep '.\{120\}' -r"
 alias xl='xtrlock'
 alias no='yes n'
 alias xfl='xflux -z 84047'
+alias th='thunar .'
 
 # on mac:
 # alias bs='pmset -g batt | sed -n 2p' # or maybe
