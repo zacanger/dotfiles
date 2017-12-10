@@ -3,7 +3,6 @@
 XTerm*faceName: Fantasque Sans Mono
 XTerm*faceSize: 10
 
-
 *background:       #121212
 *foreground:       #EDEDED
 *scrollBar:        false

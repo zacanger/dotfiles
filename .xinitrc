@@ -1,17 +1,16 @@
 #!/bin/sh
+
 xrdb -merge ~/.Xresources
 xsetroot -cursor_name left_ptr &
-xbindkeys
-#exec karmen
-#exec sithwm
 thunar --daemon &
+/usr/bin/setxkbmap -option "caps:swapescape"
 while true
 do
-	VOL=$(amixer get Master | tail -1 | sed 's/.*\[\([0-9]*%\)\].*/\1/')
-	LOCALTIME=$(date +%Z\=%Y-%m-%dT%H:%M)
-	OTHERTIME=$(TZ=Europe/London date +%Z\=%H:%M)
-	TEMP="$(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000))C"	
-	xsetroot -name "dwm <|> vol $VOL <|> temp $TEMP <|> time $LOCALTIME"
-	sleep 20s
+  vol=$(amixer get Master | tail -1 | sed 's/.*\[\([0-9]*%\)\].*/\1/')
+  local_time=$(date +%Z\=%Y-%m-%dT%H:%M)
+  other_time=$(TZ=Asia/Seoul date +%Z\=%H:%M)
+  temp="$(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000))C"
+  xsetroot -name "dwm <|> vol $vol <|> temp $temp <|> time $local_time"
+  sleep 20s
 done &
-exec ck-launch-session dbus-launch dwm
+exec dbus-launch dwm
