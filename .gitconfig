@@ -9,6 +9,7 @@
 [user]
   email = zac@zacanger.com
   name = zacanger
+  signingkey = 0E301CABD9D72DB5
 [hub]
   username = zacanger
   oauthtoken =
@@ -58,5 +59,6 @@
   interval = 300
 [commit]
   template = ~/.gitmessage
+  gpgsign = true
 [http]
   postBuffer = 524288000
