@@ -10,6 +10,7 @@ cp $ND/.gitattributes .gitattributes
 cp $ND/.eslintrc.json .eslintrc.json
 cp $ND/.tern-project .tern-project
 cp $ND/LICENSE.md LICENSE.md
+cp $ND/.npmrc .npmrc
 
 WITHOUTG="{
   \"name\": \"$DN\",
@@ -20,7 +21,7 @@ WITHOUTG="{
     \"email\": \"zac@zacanger.com\",
     \"url\": \"http://zacanger.com\"
   },
-  \"license\": \"WTFPL\",
+  \"license\": \"MIT\",
   \"main\": \"index.js\",
   \"scripts\": {
     \"start\": \"node index\",
@@ -52,7 +53,7 @@ WITHG="{
     \"email\": \"zac@zacanger.com\",
     \"url\": \"http://zacanger.com\"
   },
-  \"license\": \"WTFPL\",
+  \"license\": \"MIT\",
   \"main\": \"index.js\",
   \"scripts\": {
     \"start\": \"node index\",
@@ -86,7 +87,7 @@ echo "# $DN
 
 ## License
 
-[WTFPL](./LICENSE.md)" > README.md
+[MIT](./LICENSE.md)" > README.md
 
 if [ "$1" == "-g" ] ; then
   echo $WITHG > package.json
