@@ -29,7 +29,6 @@ alias dg='gd'
 alias gcl='git clone'
 alias grv='git remote -v'
 alias gst='git st'
-alias st='git st'
 alias branches='git branches'
 alias publish='git publish'
 alias sprout='git sprout'
@@ -447,6 +446,7 @@ alias xl='xtrlock'
 alias no='yes n'
 alias xfl='xflux -z 84047'
 alias th='thunar .'
+alias st='stterm'
 
 # on mac:
 # alias bs='pmset -g batt | sed -n 2p' # or maybe
