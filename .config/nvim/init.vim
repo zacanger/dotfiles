@@ -10,16 +10,9 @@ endif
 let g:vim_bootstrap_langs = "javascript,python,html"
 let g:vim_bootstrap_editor = "nvim" " nvim or vim
 
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-fugitive'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'bling/vim-airline'
-Plug 'airblade/vim-gitgutter'
-Plug 'sheerun/vim-polyglot'
-Plug 'vim-scripts/grep.vim'
-Plug 'vim-scripts/CSApprox'
-Plug 'bronson/vim-trailing-whitespace'
-Plug 'jiangmiao/auto-pairs'
+" todo: get rid of this
+Plug 'scrooloose/syntastic'
+
 Plug 'Shougo/vimproc.vim', {
       \ 'build' : {
       \     'windows' : 'tools\\update-dll-mingw',
@@ -33,22 +26,7 @@ Plug 'flowtype/vim-flow', {
         \     'filetypes': 'javascript'
         \ }}
 
-" Vim-Session
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
-
-" Snippets
-Plug 'honza/vim-snippets'
-
-" Color
-if v:version >= 704
-  Plug 'FelikZ/ctrlp-py-matcher'
-endif
-
-" misc
-" todo: get rid of this
-Plug 'scrooloose/syntastic'
-
+Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'FooSoft/vim-argwrap'
 Plug 'KabbAmine/lazyList.vim'
 Plug 'KabbAmine/vCoolor.vim'
@@ -62,9 +40,13 @@ Plug 'Shougo/unite-outline'
 Plug 'Shougo/unite.vim'
 Plug 'ahri/vim-sesspit'
 Plug 'airblade/vim-accent'
+Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'bitc/vim-hdevtools'
+Plug 'bling/vim-airline'
+Plug 'bronson/vim-trailing-whitespace'
 Plug 'clausreinke/typescript-tools.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'ervandew/supertab'
 Plug 'fleischie/vim-styled-components'
@@ -77,9 +59,11 @@ Plug 'gorodinskiy/vim-coloresque'
 Plug 'gregsexton/MatchTag'
 Plug 'gregsexton/gitv'
 Plug 'hail2u/vim-css3-syntax'
+Plug 'honza/vim-snippets'
 Plug 'isomoar/vim-css-to-inline'
 Plug 'jbgutierrez/vim-babel'
 Plug 'jeetsukumaran/vim-buffergator'
+Plug 'jiangmiao/auto-pairs'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'jparise/vim-graphql'
 Plug 'junegunn/vim-easy-align'
@@ -106,27 +90,29 @@ Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'othree/yajs.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'plasticboy/vim-markdown'
-Plug 'posva/vim-vue'
 Plug 'raichoo/purescript-vim'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'reasonml/vim-reason-loader'
-Plug 'reedes/vim-pencil'
 Plug 'retorillo/istanbul.vim'
 Plug 'rking/ag.vim'
 Plug 'rstacruz/vim-xtract'
 Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
 Plug 'sgur/vim-editorconfig'
+Plug 'sheerun/vim-polyglot'
 Plug 'skwp/greplace.vim'
 Plug 'snoe/nvim-parinfer.js'
-Plug 'spolu/dwm.vim'
 Plug 'ternjs/tern_for_vim'
 Plug 'tpope/vim-afterimage'
 Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-jp/vital.vim'
+Plug 'vim-scripts/CSApprox'
 Plug 'vim-scripts/SyntaxRange'
 Plug 'vim-scripts/c.vim'
+Plug 'vim-scripts/grep.vim'
 Plug 'vim-scripts/ingo-library'
 Plug 'vim-scripts/paredit.vim'
 Plug 'vim-scripts/syntaxcomplete'
@@ -134,6 +120,8 @@ Plug 'vim-utils/vim-husk'
 Plug 'vim-utils/vim-man'
 Plug 'vim-utils/vim-troll-stopper'
 Plug 'vivien/vim-linux-coding-style'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
 Plug 'xsnippet/vim-xsnippet'
 Plug 'zacanger/angr.vim'
 
