@@ -21,9 +21,7 @@ if !filereadable(neobundle_readme)
   silent !mkdir -p ~/.config/nvim/bundle
   silent !git clone https://github.com/Shougo/neobundle.vim ~/.config/nvim/bundle/neobundle.vim/
   let g:not_finsh_neobundle = "yes"
-
   " Run shell script if exist on custom select language
-
 endif
 
 " Required:
@@ -67,24 +65,8 @@ endif
 
 NeoBundle "scrooloose/syntastic"
 NeoBundle 'vim-scripts/c.vim'
-
-" Python
-NeoBundle "davidhalter/jedi-vim"
-NeoBundle "majutsushi/tagbar"
-
-" Perl
-NeoBundle 'vim-perl/vim-perl'
-NeoBundle 'c9s/perlomni.vim'
-
-" HTML
-NeoBundle 'amirh/HTML-AutoCloseTag'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'gorodinskiy/vim-coloresque'
-NeoBundle 'tpope/vim-haml'
-NeoBundle 'mattn/emmet-vim'
-
-" PHP
-NeoBundle 'arnaud-lb/vim-php-namespace'
 
 " Extra Bundles
 call neobundle#end()
@@ -163,18 +145,7 @@ set cursorline
 set guioptions=egmrti
 set gfn=Monospace\ 10
 
-if has("gui_running")
-  if has("gui_mac") || has("gui_macvim")
-    set guifont=Menlo:h12
-    set transparency=7
-  endif
-else
-  let g:CSApprox_loaded = 1
-
-  if $COLORTERM == 'gnome-terminal'
-    set term=gnome-256color
-  endif
-endif
+let g:CSApprox_loaded = 1
 
 if &term =~ '256color'
   set t_ut=256
@@ -202,10 +173,6 @@ set titleold="Terminal"
 set titlestring=%F
 
 set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
-
-if exists("*fugitive#statusline")
-  set statusline+=%{fugitive#statusline()}
-endif
 
 " vim-airline
 let g:airline_theme = 'angr'
@@ -293,11 +260,6 @@ nnoremap <silent> <leader>f :Rgrep<CR>
 let Grep_Default_Options = '-IR'
 let Grep_Skip_Files = '*.log *.db'
 let Grep_Skip_Dirs = '.git node_modules'
-
-" terminal emulation
-if g:vim_bootstrap_editor == 'nvim'
-  nnoremap <silent> <leader>sh :terminal<CR>
-endif
 
 if has("nvim")
   " Make escape work in the Neovim terminal.
@@ -449,10 +411,6 @@ noremap ,o :!echo `git url`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<C-R>=lin
 
 "" Custom configs
 
-" Tagbar
-nmap <silent> <F4> :TagbarToggle<CR>
-let g:tagbar_autofocus = 1
-
 " vim-python
 augroup vimrc-python
   autocmd!
@@ -460,17 +418,6 @@ augroup vimrc-python
       \ formatoptions+=croq softtabstop=4 smartindent
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
-
-" jedi-vim
-let g:jedi#auto_initialization = 0
-let g:jedi#popup_on_dot = 0
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = "<leader>d"
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#show_call_signatures = "0"
-let g:jedi#completions_command = "<C-Space>"
 
 " syntastic
 let g:syntastic_always_populate_loc_list=1
@@ -495,11 +442,6 @@ let g:syntastic_disabled_checkers = ['html']
 
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
-let g:airline#extensions#tagbar#enabled = 1
-
-" Tagbar
-nmap <silent> <F4> :TagbarToggle<CR>
-let g:tagbar_autofocus = 1
 
 let g:javascript_enable_domhtmlcss = 1
 
@@ -510,7 +452,6 @@ autocmd User Node
   \   nmap <buffer> <C-w>f <Plug>NodeVSplitGotoFile |
   \   nmap <buffer> <C-w><C-f> <Plug>NodeVSplitGotoFile |
   \ endif
-
 
 cnoremap sudow w !sudo tee & >/dev/null
 
@@ -596,13 +537,6 @@ let g:vim_markdown_fenced_languages = [
 let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_folding_disabled = 1
 
-" deoplete
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#max_list = 20
-" let g:deoplete#auto_complete_delay = 10
-" let g:deoplete#enable_smart_case = 1
-
-" let g:context_filetype#same_filetypes = ['js,jsx,json', 'css,sass,scss,less,styl', 'html', 'ejs', 'jade']
 let g:context_filetype#same_filetypes = '_'
 
 " vim-gitgutter
