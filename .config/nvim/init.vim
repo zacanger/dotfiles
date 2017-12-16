@@ -1,48 +1,26 @@
 " zacanger's init.vim
 " for nvim | neovim.io
-" using neobundle | gh:Shougo/neobundle.vim
 
-" neobundle stuff
+call plug#begin('~/.local/share/nvim/plugged')
+
 if has('vim_starting')
-  set nocompatible               " Be iMproved
-
-  " Required:
-  set runtimepath+=~/.config/nvim/bundle/neobundle.vim/
+  set nocompatible " Be iMproved
 endif
-
-let neobundle_readme=expand('~/.config/nvim/bundle/neobundle.vim/README.md')
 
 let g:vim_bootstrap_langs = "javascript,python,html"
 let g:vim_bootstrap_editor = "nvim" " nvim or vim
 
-if !filereadable(neobundle_readme)
-  echo "Installing NeoBundle..."
-  echo ""
-  silent !mkdir -p ~/.config/nvim/bundle
-  silent !git clone https://github.com/Shougo/neobundle.vim ~/.config/nvim/bundle/neobundle.vim/
-  let g:not_finsh_neobundle = "yes"
-  " Run shell script if exist on custom select language
-endif
-
-" Required:
-call neobundle#begin(expand('~/.config/nvim/bundle/'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-"" NeoBundle install packages
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'sheerun/vim-polyglot'
-NeoBundle 'vim-scripts/grep.vim'
-NeoBundle 'vim-scripts/CSApprox'
-NeoBundle 'bronson/vim-trailing-whitespace'
-NeoBundle 'jiangmiao/auto-pairs'
-NeoBundle 'Shougo/vimproc.vim', {
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-fugitive'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'bling/vim-airline'
+Plug 'airblade/vim-gitgutter'
+Plug 'sheerun/vim-polyglot'
+Plug 'vim-scripts/grep.vim'
+Plug 'vim-scripts/CSApprox'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'jiangmiao/auto-pairs'
+Plug 'Shougo/vimproc.vim', {
       \ 'build' : {
       \     'windows' : 'tools\\update-dll-mingw',
       \     'cygwin' : 'make -f make_cygwin.mak',
@@ -50,33 +28,119 @@ NeoBundle 'Shougo/vimproc.vim', {
       \     'unix' : 'make -f make_unix.mak',
       \    },
       \ }
+Plug 'flowtype/vim-flow', {
+        \ 'autoload': {
+        \     'filetypes': 'javascript'
+        \ }}
 
 " Vim-Session
-NeoBundle 'xolox/vim-misc'
-NeoBundle 'xolox/vim-session'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
 
 " Snippets
-NeoBundle 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 
 " Color
 if v:version >= 704
-  NeoBundle 'FelikZ/ctrlp-py-matcher'
+  Plug 'FelikZ/ctrlp-py-matcher'
 endif
 
-NeoBundle "scrooloose/syntastic"
-NeoBundle 'vim-scripts/c.vim'
-NeoBundle 'hail2u/vim-css3-syntax'
-NeoBundle 'gorodinskiy/vim-coloresque'
+" misc
+" todo: get rid of this
+Plug 'scrooloose/syntastic'
 
-" Extra Bundles
-call neobundle#end()
+Plug 'FooSoft/vim-argwrap'
+Plug 'KabbAmine/lazyList.vim'
+Plug 'KabbAmine/vCoolor.vim'
+Plug 'Lokaltog/vim-distinguished'
+Plug 'Quramy/tsuquyomi'
+Plug 'Quramy/vison'
+Plug 'Shougo/context_filetype.vim'
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/neopairs.vim'
+Plug 'Shougo/unite-outline'
+Plug 'Shougo/unite.vim'
+Plug 'ahri/vim-sesspit'
+Plug 'airblade/vim-accent'
+Plug 'airblade/vim-rooter'
+Plug 'bitc/vim-hdevtools'
+Plug 'clausreinke/typescript-tools.vim'
+Plug 'digitaltoad/vim-pug'
+Plug 'ervandew/supertab'
+Plug 'fleischie/vim-styled-components'
+Plug 'flowtype/vim-flow'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'frigoeu/psc-ide-vim'
+Plug 'godlygeek/tabular'
+Plug 'goldfeld/vim-seek'
+Plug 'gorodinskiy/vim-coloresque'
+Plug 'gregsexton/MatchTag'
+Plug 'gregsexton/gitv'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'isomoar/vim-css-to-inline'
+Plug 'jbgutierrez/vim-babel'
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'jparise/vim-graphql'
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-emoji'
+Plug 'junegunn/vim-peekaboo'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'kien/tabman.vim'
+Plug 'krisajenkins/vim-pipe'
+Plug 'leafgarland/typescript-vim'
+Plug 'mattn/emoji-vim'
+Plug 'mhinz/vim-grepper'
+Plug 'mhinz/vim-signify'
+Plug 'mhinz/vim-startify'
+Plug 'mklabs/vim-cowsay'
+Plug 'moll/vim-node'
+Plug 'mxw/vim-jsx'
+Plug 'neomake/neomake'
+Plug 'neovim/node-host'
+Plug 'neovimhaskell/haskell-vim'
+Plug 'othree/csscomplete.vim'
+Plug 'othree/es.next.syntax.vim'
+Plug 'othree/html5.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'othree/yajs.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'plasticboy/vim-markdown'
+Plug 'posva/vim-vue'
+Plug 'raichoo/purescript-vim'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'reasonml/vim-reason-loader'
+Plug 'reedes/vim-pencil'
+Plug 'retorillo/istanbul.vim'
+Plug 'rking/ag.vim'
+Plug 'rstacruz/vim-xtract'
+Plug 'scrooloose/nerdcommenter'
+Plug 'sgur/vim-editorconfig'
+Plug 'skwp/greplace.vim'
+Plug 'snoe/nvim-parinfer.js'
+Plug 'spolu/dwm.vim'
+Plug 'ternjs/tern_for_vim'
+Plug 'tpope/vim-afterimage'
+Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-jp/vital.vim'
+Plug 'vim-scripts/SyntaxRange'
+Plug 'vim-scripts/c.vim'
+Plug 'vim-scripts/ingo-library'
+Plug 'vim-scripts/paredit.vim'
+Plug 'vim-scripts/syntaxcomplete'
+Plug 'vim-utils/vim-husk'
+Plug 'vim-utils/vim-man'
+Plug 'vim-utils/vim-troll-stopper'
+Plug 'vivien/vim-linux-coding-style'
+Plug 'xsnippet/vim-xsnippet'
+Plug 'zacanger/angr.vim'
+
+call plug#end()
 
 " Required:
 filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
 
 "" Basic Setup
 
@@ -135,9 +199,6 @@ set ruler
 set number
 
 let no_buffers_menu=1
-if !exists('g:not_finsh_neobundle')
-  colorscheme default
-endif
 
 set mousemodel=popup
 set t_Co=256
@@ -555,15 +616,6 @@ endfunction
 let g:backupcopy = 'yes'
 
 " flow
-NeoBundleLazy 'flowtype/vim-flow', {
-      \ 'autoload': {
-      \     'filetypes': 'javascript'
-      \ },
-      \ 'build': {
-      \     'mac': 'npm install -g flow-bin',
-      \     'unix': 'npm install -g flow-bin'
-      \ }}
-
 let g:flow#enable = 0
 " let g:javascript_plugin_flow = 1
 
