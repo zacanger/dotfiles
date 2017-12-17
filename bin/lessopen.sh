@@ -10,44 +10,44 @@ if test -d "$1" ; then
 else
     case "$1" in
     *.HTM|*.html|*.htm|*.html.gz|*.html.bz2|*.htm.gz|*.cgi)
-	lynx -force_html -dump -with_backspaces "$1" >$OUT 2>$NUL
-	;;
+  lynx -force_html -dump -with_backspaces "$1" >$OUT 2>$NUL
+  ;;
     *.ms.gz)
-	zcat "$1" | tbl |nroff -ms >$OUT 2>$NUL
-	;;
+  zcat "$1" | tbl |nroff -ms >$OUT 2>$NUL
+  ;;
     *.ms)
-	tbl "$1" |nroff -ms >$OUT 2>$NUL
-	;;
+  tbl "$1" |nroff -ms >$OUT 2>$NUL
+  ;;
     *.[1-9].gz|*.[1-9][a-z].gz|*.man.gz)
-	zcat "$1" | tbl |nroff -man >$OUT 2>$NUL
-	;;
+  zcat "$1" | tbl |nroff -man >$OUT 2>$NUL
+  ;;
     *.[1-9]|*.[1-9][a-z]|*.man)
-	tbl "$1" |nroff -man >$OUT 2>$NUL
-	;;
+  tbl "$1" |nroff -man >$OUT 2>$NUL
+  ;;
     *.tar)
-	tar tvf "$1" >$OUT 2>$NUL
-	;;
+  tar tvf "$1" >$OUT 2>$NUL
+  ;;
     *.tgz|*.tar.gz|*.tar.Z|*.tbz|*.tar.bz2)
-	unarchive -l "$1" >$OUT 2>$NUL
-	;;
+  unarchive -l "$1" >$OUT 2>$NUL
+  ;;
     *.gz|*.Z)
-	zcat "$1" >$OUT 2>$NUL
-	;;
+  zcat "$1" >$OUT 2>$NUL
+  ;;
     *.zip|*.jar)
-	unzip -l "$1" >$OUT 2>$NUL
-	;;
+  unzip -l "$1" >$OUT 2>$NUL
+  ;;
     *.bz2)
-	bzip2 -dc "$1" >$OUT 2>$NUL
-	;;
+  bzip2 -dc "$1" >$OUT 2>$NUL
+  ;;
     *.a)
-	ar tv "$1" >$OUT 2>$NUL
-	;;
+  ar tv "$1" >$OUT 2>$NUL
+  ;;
     *.o)
-	nm "$1" >$OUT 2>$NUL
-	;;
+  nm "$1" >$OUT 2>$NUL
+  ;;
     *.rpm)
-	rpm -q -i -p "$1" >$OUT 2>$NUL
-	;;
+  rpm -q -i -p "$1" >$OUT 2>$NUL
+  ;;
     esac
 fi
 

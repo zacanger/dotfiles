@@ -19,7 +19,6 @@ exit(1);
 while ($new_sock = $sock->accept()) {
 while (<$new_sock>) {
 chop;chop;
-#		print "$_\n";
 if ($_ eq '') { last; }
 }
 print $new_sock "HTTP/1.1 200 OK$crlf";

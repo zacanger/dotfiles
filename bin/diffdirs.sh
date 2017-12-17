@@ -7,20 +7,20 @@
 # source directory!
 
 if [ -z "$1" -o -z "$2" ] ; then
-	echo "Usage: $0 [original source dir] [changed source dir]"
-	exit 1;
+  echo "Usage: $0 [original source dir] [changed source dir]"
+  exit 1;
 else
-	s=$1
-	d=$2
+  s=$1
+  d=$2
 fi
 
 find $s -type f | while read sfile ; do
-	sfilename=`basename $sfile | sed 's/\.in$//'`
-	dfile=`find $d -iname "$sfilename"`
-	if [ -z "$dfile" ] ; then
-		echo "Only in $s: $sfilename"
-	else
-		echo "diff -uw $sfile $dfile"
-		diff -uw $sfile $dfile
-	fi
+  sfilename=`basename $sfile | sed 's/\.in$//'`
+  dfile=`find $d -iname "$sfilename"`
+  if [ -z "$dfile" ] ; then
+    echo "Only in $s: $sfilename"
+  else
+    echo "diff -uw $sfile $dfile"
+    diff -uw $sfile $dfile
+  fi
 done

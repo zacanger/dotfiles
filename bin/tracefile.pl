@@ -231,43 +231,43 @@ my $pid = $opt::pid ? "-p $opt::pid" : "";
 open(IN, "-|", "strace -ff $pid -e trace=file @cmd 2>&1") || die;
 while(<IN>) {
     if(/chdir."(([^\\"]|\\[\\"nt])*)".\s*=\s*0/) {
-	$dir = $1;
+  $dir = $1;
     }
 
     # [pid 30817] stat("transpose/100000files.tar.gz", {st_mode=S_IFREG|0644, st_size=140853248, ...}) = 0
     if(s/^[^\"]+"(([^\\"]|\\[\\"nt])*)".*/$1/) {
-	# Matches the strace structure for a file
-	my $file = shell_unquote($1);
-	# Relative to $dir
-	$file =~ s:^([^/]):$dir/$1:;
-	my $print = 0;
-	if($opt::all
-	   or
-	   ($opt::exists and -e $file)
-	   or
-	   ($opt::dir and -d $file)
-	   or
-	   ($opt::nonexists and not -e $file)) {
-	    $print = 1;
-	}
-	if($opt::unique and $seen{$file}++) {
-	    $print = 0;
-	}
-	$print and print $file,"\n";
+  # Matches the strace structure for a file
+  my $file = shell_unquote($1);
+  # Relative to $dir
+  $file =~ s:^([^/]):$dir/$1:;
+  my $print = 0;
+  if($opt::all
+     or
+     ($opt::exists and -e $file)
+     or
+     ($opt::dir and -d $file)
+     or
+     ($opt::nonexists and not -e $file)) {
+      $print = 1;
+  }
+  if($opt::unique and $seen{$file}++) {
+      $print = 0;
+  }
+  $print and print $file,"\n";
     }
 }
 
 sub options_hash {
     # Returns a hash of the GetOptions config
     return
-	("debug|D" => \$opt::debug,
-	 "dir|d" => \$opt::dir,
-	 "uniq|unique|u" => \$opt::unique,
+  ("debug|D" => \$opt::debug,
+   "dir|d" => \$opt::dir,
+   "uniq|unique|u" => \$opt::unique,
          "exists|exist|e" => \$opt::exists,
          "nonexists|nonexist|non-exists|non-exist|n" => \$opt::nonexists,
          "all|a" => \$opt::all,
-	 "pid|p=i" => \$opt::pid,
-	);
+   "pid|p=i" => \$opt::pid,
+  );
 }
 
 sub get_options_from_array {
@@ -282,13 +282,13 @@ sub get_options_from_array {
     my @save_argv;
     my $this_is_ARGV = (\@::ARGV == $array_ref);
     if(not $this_is_ARGV) {
-	@save_argv = @::ARGV;
-	@::ARGV = @{$array_ref};
+  @save_argv = @::ARGV;
+  @::ARGV = @{$array_ref};
     }
     my @retval = GetOptions(options_hash());
     if(not $this_is_ARGV) {
-	@{$array_ref} = @::ARGV;
-	@::ARGV = @save_argv;
+  @{$array_ref} = @::ARGV;
+  @::ARGV = @save_argv;
     }
     return @retval;
 }
@@ -329,12 +329,12 @@ sub die_usage {
 sub usage {
     # Returns: N/A
     print join
-	("\n",
-	 "Usage:",
-	 "$Global::progname [-u] [-a] [-n] [-e] command [arguments]",
-	 "",
-	 "See 'man $Global::progname' for details",
-	 "");
+  ("\n",
+   "Usage:",
+   "$Global::progname [-u] [-a] [-n] [-e] command [arguments]",
+   "",
+   "See 'man $Global::progname' for details",
+   "");
 }
 
 sub warning {

@@ -3,7 +3,7 @@
 # simple screen information script
 # similar to archey and screenfetch without annoying ASCII graphics
 
-# this script is provided with NO GUARANTEE and NO SUPPORT 
+# this script is provided with NO GUARANTEE and NO SUPPORT
 # if it breaks or does not do what you want, FIX IT YOURSELF
 
 # wm array -- add any that need to be recognized
@@ -16,7 +16,7 @@ ylw="\e[33m"
 cyn="\e[36m"
 blu="\e[34m"
 prp="\e[35m"
-rst="\e[0m"    
+rst="\e[0m"
 
 TMP=$(mktemp)    # make temp file
 
@@ -47,7 +47,7 @@ print-cpu() {
         cpu=$(grep -m1 -i 'Processor' /proc/cpuinfo)
     else
         cpu=$(grep -m1 -i 'model name' /proc/cpuinfo)
-    fi    
+    fi
     color-echo 'CPU' "${cpu#*: }" # everything after colon is processor name
 }
 
@@ -96,7 +96,7 @@ print-colors() {
     for f in $(seq 0 7); do
         echo -en "\033[m\033[$(($f+30))m ${NAMES[$f]} " # normal colors
     done
-    echo	
+    echo
     for f in $(seq 0 7); do
         echo -en "\033[m\033[1;$(($f+30))m ${NAMES[$f]} " # bold colors
     done

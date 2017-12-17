@@ -12,13 +12,13 @@ str="${1:-x...·.....}";
 num_columns="$(tput cols)";
 curr_column=1;
 while [ $curr_column -le $num_columns ]; do
-	char="${str:$(((curr_column - 1) % ${#str})):1}";
-	if [ "$char" = 'x' ]; then
-		echo -n "$curr_column";
-		let curr_column+=${#curr_column};
-	else
-		echo -n "$char";
-		let curr_column++;
-	fi;
+  char="${str:$(((curr_column - 1) % ${#str})):1}";
+  if [ "$char" = 'x' ]; then
+    echo -n "$curr_column";
+    let curr_column+=${#curr_column};
+  else
+    echo -n "$char";
+    let curr_column++;
+  fi;
 done;
 echo;

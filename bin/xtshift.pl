@@ -16,13 +16,13 @@ my $args = "@ARGV" || "080808 202020 -r -f4";
 # Basic color map, feel free to edit:
 
 my @cols = qw(000000 cc6666
-	      33cc66 cc9933
-	      3366cc cc33cc
-	      33cccc cccccc
-	      666666 ff6666
-	      66ff66 ffff66
-	      6699ff ff66ff
-	      33ffff ffffff);
+        33cc66 cc9933
+        3366cc cc33cc
+        33cccc cccccc
+        666666 ff6666
+        66ff66 ffff66
+        6699ff ff66ff
+        33ffff ffffff);
 
 
 # Full reset
@@ -38,16 +38,16 @@ print "\033]50;#$1\007" if $args =~ s/-f(\d)//;
 my @ofs = map hex, $args =~ /([0-9a-f]{2})/gi;
 if(@ofs>3) {
     $ofs[$_] = $ofs[$_] + rand($ofs[$_+3]-$ofs[$_])
-	for 0..2;
+  for 0..2;
 }
 
 for my $i(0..15) {
     my $c = $cols[$i];
     my $Z;
     $c =~ s{..}{
-	my $a = hex $&;
-	my $b = $ofs[$Z++];
-	sprintf("%02x", $a + $b - ($a*$b)/255);
+  my $a = hex $&;
+  my $b = $ofs[$Z++];
+  sprintf("%02x", $a + $b - ($a*$b)/255);
     }ge;
     printf "\033[%d;3%dm(%d)", $i/8, $i&7, $i if $args =~ /show/;
     print "\033]4;$i;#$c\007";

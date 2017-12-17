@@ -24,26 +24,25 @@ for FILE in "$@"; do echo "$FILE" >> $TARGETS; done
 
 # Start the $EDITOR so we can edit our file names.
 if $EDITOR $TARGETS; then
-	FILENO=0
-	COUNT="`wc -l $TARGETS | sed -nre 's/^[ \t]*([0-9]+).*$/\1/p'`"
+  FILENO=0
+  COUNT="`wc -l $TARGETS | sed -nre 's/^[ \t]*([0-9]+).*$/\1/p'`"
 
-	# Exit with error message if number of arguments and line count of
-	# targets file differ.
-	if [ "$COUNT" -ne "$#" ]; then
-		rm $TARGETS
+  # Exit with error message if number of arguments and line count of
+  # targets file differ.
+  if [ "$COUNT" -ne "$#" ]; then
+    rm $TARGETS
         die 'Numbers of files mismatch.'
-	fi
+  fi
 
-	# Read targets file line by line and rename the source
-	# files from ARGV appropriately.
-	while read TARGET; do
-		SOURCE="${ARGV[$FILENO]}"
-		if [ "$SOURCE" != "$TARGET" ]; then
-			mv -f -- "$SOURCE" "$TARGET"
-		fi
-		FILENO=$[$FILENO+1]
-	done < $TARGETS
+  # Read targets file line by line and rename the source
+  # files from ARGV appropriately.
+  while read TARGET; do
+    SOURCE="${ARGV[$FILENO]}"
+    if [ "$SOURCE" != "$TARGET" ]; then
+      mv -f -- "$SOURCE" "$TARGET"
+    fi
+    FILENO=$[$FILENO+1]
+  done < $TARGETS
 fi
 
 rm $TARGETS
-

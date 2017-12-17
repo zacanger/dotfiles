@@ -38,5 +38,5 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 EOF
 
 echo -e "$(xsltproc xslt.xsl word/document.xml)" |
-	sed '1d' | tr -cd '\000-\177'
+  sed '1d' | tr -cd '\000-\177'
 rm -rf $DIR

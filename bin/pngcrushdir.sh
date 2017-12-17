@@ -8,7 +8,7 @@ if test -z $1; then { echo "No directory specified."; echo "Usage: pngcrushdir [
 
 for png in `find $1 -name "*.png"`;
 do
-	echo "crushing $png"	
-	pngcrush -brute "$png" temp.png
-	mv -f temp.png $png
+  echo "crushing $png"
+  pngcrush -brute "$png" temp.png
+  mv -f temp.png $png
 done;
