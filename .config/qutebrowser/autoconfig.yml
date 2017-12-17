@@ -9,10 +9,13 @@ global:
     w: session-save
     wq: quit --save
   backend: webengine
+  bindings.commands:
+    command:
+      <down>: completion-item-focus next
+      <up>: completion-item-focus prev
   content.default_encoding: utf-8
   content.headers.accept_language: en-GB,en
-  content.headers.user_agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML,
-    like Gecko) Chrome/48.0.2564.8 Safari/537.36
+  content.headers.user_agent: null
   content.javascript.can_open_tabs_automatically: true
   content.plugins: true
   downloads.location.directory: /home/z/Downloads
@@ -29,5 +32,6 @@ global:
   tabs.tabs_are_windows: false
   tabs.title.format: '{index}: {title}'
   tabs.width.bar: 150
-  url.default_page: http://pancaketheorem.com/stuff/techsupport/
+  url.default_page: about:blank
+  url.start_pages: http://pancaketheorem.com/stuff/techsupport/
   window.title_format: '{perc}{title}'

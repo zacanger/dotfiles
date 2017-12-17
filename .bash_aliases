@@ -192,17 +192,13 @@ alias egrep='egrep --color=auto'
 alias chromium='google-chrome-unstable' # until i figure out why extensions don't sync to chromium
 alias ch='chromium'
 alias ff='firefox'
-alias ffs='firefox --safe-mode'
-alias ffm='firefox --ProfileManager'
-alias ffms='firefox --ProfileManager --safe-mode'
-alias qu='qutebrowser'
+alias qu='qutebrowser --enable-webengine-inspector'
 alias sm='seamonkey'
 
 # killing browsers
 alias kk='kill-tabs'
 alias kch='pkill -15 chromium'
 alias kff='pkill -15 firefox'
-alias ksm='pkill -15 seamonkey'
 alias kqu='pkill -15 qutebrowser'
 
 # dropbox
