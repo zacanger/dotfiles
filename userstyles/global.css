@@ -1,6 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Cardo:400,700);
-@import url(https://fonts.googleapis.com/css?family=Cousine);
-
 window,
 html,
 body,
@@ -37,7 +34,7 @@ dd,
 option {
   color: #dee3c8!important;
   background: #0a0a0a!important;
-  font-family: "Cardo"!important;
+  font-family: "Merriweather","Cardo",serif!important;
   font-size: 16px!important;
   border-color: #2E2533!important;
   text-shadow: none!important;
@@ -109,11 +106,5 @@ pre span {
   border-color: #EDCECE!important;
   color: #cec8ea!important;
   font-size: 14px!important;
-  font-family: "Cousine", monospace!important;
+  font-family: "Hasklig","Fira Code",monospace!important;
 }
-
-/* the below is chromium-new-tab-specific */
-.mv-thumb,
-.mv-tile,
-#mv-tiles { visibility: hidden!important; }
-/* img { display: none!important; } */
