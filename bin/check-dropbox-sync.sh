@@ -2,7 +2,7 @@
 
 while true
 do
-  sleep 30
+  sleep 10
   clear
   dropbox status
 done
