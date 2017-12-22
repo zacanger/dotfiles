@@ -10,9 +10,6 @@ endif
 let g:vim_bootstrap_langs = "javascript,python,html"
 let g:vim_bootstrap_editor = "nvim" " nvim or vim
 
-" todo: get rid of this
-Plug 'scrooloose/syntastic'
-
 Plug 'Shougo/vimproc.vim', {
       \ 'build' : {
       \     'windows' : 'tools\\update-dll-mingw',
@@ -79,7 +76,6 @@ Plug 'mhinz/vim-startify'
 Plug 'mklabs/vim-cowsay'
 Plug 'moll/vim-node'
 Plug 'mxw/vim-jsx'
-Plug 'neomake/neomake'
 Plug 'neovim/node-host'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'othree/csscomplete.vim'
@@ -121,6 +117,7 @@ Plug 'vim-utils/vim-husk'
 Plug 'vim-utils/vim-man'
 Plug 'vim-utils/vim-troll-stopper'
 Plug 'vivien/vim-linux-coding-style'
+Plug 'w0rp/ale'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 Plug 'xsnippet/vim-xsnippet'
@@ -226,7 +223,8 @@ set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
 
 " vim-airline
 let g:airline_theme = 'angr'
-let g:airline#extensions#syntastic#enabled = 1
+" let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 
@@ -470,25 +468,25 @@ augroup vimrc-python
 augroup END
 
 " syntastic
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_style_error_symbol = '✗'
-let g:syntastic_style_warning_symbol = '⚠'
-let g:syntastic_auto_loc_list=1
-let g:syntastic_aggregate_errors = 1
+" let g:syntastic_always_populate_loc_list=1
+" let g:syntastic_error_symbol='✗'
+" let g:syntastic_warning_symbol='⚠'
+" let g:syntastic_style_error_symbol = '✗'
+" let g:syntastic_style_warning_symbol = '⚠'
+" let g:syntastic_auto_loc_list=1
+" let g:syntastic_aggregate_errors = 1
 " py
-let g:syntastic_python_checkers=['python', 'flake8']
-let g:syntastic_python_flake8_post_args='--ignore=W391'
+" let g:syntastic_python_checkers=['python', 'flake8']
+" let g:syntastic_python_flake8_post_args='--ignore=W391'
 " js
-let g:syntastic_javascript_jshint_generic = 1
-let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_jshint_generic = 1
+" let g:syntastic_javascript_checkers = ['eslint']
 " sh
-let g:syntastic_sh_checkers = ['sh']
+" let g:syntastic_sh_checkers = ['sh']
 " hs
-let g:syntastic_haskell_checkers = ['hlint']
+" let g:syntastic_haskell_checkers = ['hlint']
 
-let g:syntastic_disabled_checkers = ['html']
+" let g:syntastic_disabled_checkers = ['html']
 
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
@@ -593,7 +591,6 @@ let g:context_filetype#same_filetypes = '_'
 let g:gitgutter_max_signs = 700
 
 " let g:jsx_ext_required = 0
-let g:neomake_javascript_enabled_makers = ['eslint']
 
 function! SortLines() range
   execute a:firstline . "," . a:lastline . 's/^\(.*\)$/\=strdisplaywidth( submatch(0) ) . " " . submatch(0)/'
@@ -632,7 +629,7 @@ set list lcs=tab:\|\
 
 " typescript
 let g:tsuquyomi_disable_quickfix = 1
-let g:syntastic_typescript_checkers = ['tsuquyomi']
+" let g:syntastic_typescript_checkers = ['tsuquyomi']
 
 " break line on words
 set linebreak
