@@ -37,21 +37,17 @@ Plug 'airblade/vim-rooter'
 Plug 'bitc/vim-hdevtools'
 Plug 'bling/vim-airline'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'clausreinke/typescript-tools.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'ervandew/supertab'
 Plug 'fleischie/vim-styled-components'
 Plug 'flowtype/vim-flow'
-Plug 'francoiscabrol/ranger.vim'
 Plug 'frigoeu/psc-ide-vim'
 Plug 'goldfeld/vim-seek'
 Plug 'gorodinskiy/vim-coloresque'
-Plug 'gregsexton/MatchTag'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'honza/vim-snippets'
 Plug 'isomoar/vim-css-to-inline'
-Plug 'jbgutierrez/vim-babel'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jparise/vim-graphql'
@@ -608,7 +604,7 @@ set splitright
 " relative dirs
 set autochdir
 
-" just trying this out...
+" use relative numbers in most modes
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
 
