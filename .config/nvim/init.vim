@@ -27,7 +27,6 @@ Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'FooSoft/vim-argwrap'
 Plug 'KabbAmine/lazyList.vim'
 Plug 'KabbAmine/vCoolor.vim'
-Plug 'Quramy/tsuquyomi'
 Plug 'Quramy/vison'
 Plug 'Shougo/context_filetype.vim'
 Plug 'Shougo/deoplete.nvim'
@@ -223,7 +222,6 @@ set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
 
 " vim-airline
 let g:airline_theme = 'angr'
-" let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -457,7 +455,7 @@ vnoremap K :m '<-2<CR>gv=gv
 noremap ,o :!echo `git url`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<C-R>=line('.')<CR> \| xargs open<CR><CR>
 
 
-"" Custom configs
+"" Misc config
 
 " vim-python
 augroup vimrc-python
@@ -467,26 +465,11 @@ augroup vimrc-python
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
 
-" syntastic
-" let g:syntastic_always_populate_loc_list=1
-" let g:syntastic_error_symbol='✗'
-" let g:syntastic_warning_symbol='⚠'
-" let g:syntastic_style_error_symbol = '✗'
-" let g:syntastic_style_warning_symbol = '⚠'
-" let g:syntastic_auto_loc_list=1
-" let g:syntastic_aggregate_errors = 1
-" py
-" let g:syntastic_python_checkers=['python', 'flake8']
-" let g:syntastic_python_flake8_post_args='--ignore=W391'
-" js
-" let g:syntastic_javascript_jshint_generic = 1
-" let g:syntastic_javascript_checkers = ['eslint']
-" sh
-" let g:syntastic_sh_checkers = ['sh']
-" hs
-" let g:syntastic_haskell_checkers = ['hlint']
-
-" let g:syntastic_disabled_checkers = ['html']
+" ale
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+let g:ale_linters = {'jsx': ['stylelint', 'eslint']}
+let g:ale_linter_aliases = {'jsx': 'css'}
 
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
@@ -626,10 +609,6 @@ nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v
 
 " show tabs
 set list lcs=tab:\|\
-
-" typescript
-let g:tsuquyomi_disable_quickfix = 1
-" let g:syntastic_typescript_checkers = ['tsuquyomi']
 
 " break line on words
 set linebreak
