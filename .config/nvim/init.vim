@@ -94,6 +94,7 @@ Plug 'w0rp/ale'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 Plug 'zacanger/angr.vim'
+Plug 'plasticboy/vim-markdown'
 
 call plug#end()
 
