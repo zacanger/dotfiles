@@ -23,16 +23,12 @@ Plug 'flowtype/vim-flow', {
         \     'filetypes': 'javascript'
         \ }}
 
-" TODO: still need these?
-Plug 'Shougo/deoplete.nvim'
-Plug 'Shougo/context_filetype.vim'
-Plug 'Shougo/unite-outline'
-Plug 'Shougo/unite.vim'
-
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'FooSoft/vim-argwrap'
 Plug 'KabbAmine/lazyList.vim'
 Plug 'KabbAmine/vCoolor.vim'
+Plug 'Shougo/unite-outline'
+Plug 'Shougo/unite.vim'
 Plug 'airblade/vim-accent'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
@@ -65,6 +61,7 @@ Plug 'moll/vim-node'
 Plug 'mxw/vim-jsx'
 Plug 'neovim/node-host'
 Plug 'othree/csscomplete.vim'
+Plug 'plasticboy/vim-markdown'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'reasonml/vim-reason-loader'
 Plug 'retorillo/istanbul.vim'
@@ -94,7 +91,6 @@ Plug 'w0rp/ale'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 Plug 'zacanger/angr.vim'
-Plug 'plasticboy/vim-markdown'
 
 call plug#end()
 
@@ -541,8 +537,6 @@ let g:vim_markdown_fenced_languages = [
       \]
 let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_folding_disabled = 1
-
-let g:context_filetype#same_filetypes = '_'
 
 " vim-gitgutter
 let g:gitgutter_max_signs = 700
