@@ -1,5 +1,5 @@
 #!/bin/sh
-#
+
 # http://makandracards.com/makandra/12447-how-to-move-a-window-to-the-next-monitor-on-xfce-xubuntu
 # Move the current window to the next monitor.
 # Only works on a horizontal monitor setup.

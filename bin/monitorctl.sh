@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 case $1 in
     off) xrandr --output VGA1 --off ;;

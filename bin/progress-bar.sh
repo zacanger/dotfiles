@@ -1,9 +1,4 @@
-#!/bin/bash
-
-#
-# a useless progress bar, windows style. doesn't tell you anything except that
-# this particular process hasn't (yet) crashed.
-#
+#!/usr/bin/env bash
 
 declare bc1='-'            # "filled" progress
 declare bc2='-'            # "unfilled" progress
@@ -33,4 +28,3 @@ while true; do
     printbar $i
   done
 done
-

@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 RAINS=("|" "│" "┃" "┆" "┇" "┊" "┋" "╽" "╿")
 COLORS=("\e[37m" "\e[37;1m")
 # More from 256 color mode
@@ -8,7 +9,6 @@ done
 NRAINS=${#RAINS[@]}
 NCOLORS=${#COLORS[@]}
 NUM_RAIN_METADATA=5
-
 
 sigwinch() {
   TERM_WIDTH=$(tput cols)

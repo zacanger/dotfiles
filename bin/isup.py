@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Copyright © 2011 Nicolas Paris <nicolas.caen@gmail.com>
 # This program is free software: you can redistribute it and/or modify

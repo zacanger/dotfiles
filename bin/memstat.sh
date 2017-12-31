@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 hw_mem=0
 free_mem=0
 human=1024

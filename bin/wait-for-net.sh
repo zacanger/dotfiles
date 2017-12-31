@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 set -e
 
@@ -7,4 +7,3 @@ until [ -n "$(ping -c 2 8.8.8.8 | grep received)" ]; do
   echo
 done
 echo "finally!"
-

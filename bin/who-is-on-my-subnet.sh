@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # A quick script to see who (DNS names) are on the same subnet.
 # Assumes eth0 and /24.

@@ -1,4 +1,4 @@
-#/bin/bash
+#!/usr/bin/env bash
 
 [[ -z $1 ]] && echo -e "USAGE:\tcatdocx <file.docx>" && exit
 DIR="$(mktemp -d)"

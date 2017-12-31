@@ -1,5 +1,5 @@
-#!/bin/bash -e
-#
+#!/usr/bin/env bash -e
+
 # Behaviour:
 #   Userscript for qutebrowser which views the current web page in mpv using
 #   sensible mpv-flags. While viewing the page in MPV, all <video>, <embed>,

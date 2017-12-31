@@ -1,4 +1,5 @@
-#! /bin/bash
+#!/usr/bin/env bash
+
 if test -e /sys/class/power_supply/BAT0/capacity; then
   cat /sys/class/power_supply/BAT0/capacity /sys/class/power_supply/BAT0/status >&2
 elif test -e /sys/class/power_supply/BAT1/capacity; then

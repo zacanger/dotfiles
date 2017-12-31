@@ -1,4 +1,5 @@
-#!/bin/bash -i
+#!/usr/bin/env bash -i
+
 kill -WINCH $$
 set $(stty size)
 LINES=${2:=24}

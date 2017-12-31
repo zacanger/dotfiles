@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ ! "$1" ]; then
   echo "usage: $0 (command)"
@@ -9,4 +9,3 @@ until $1; do
   echo "trying again in a minute"
   sleep 60
 done
-

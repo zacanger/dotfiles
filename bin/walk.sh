@@ -1,8 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-#
 # emulates the 'tree' utility
-#
 
 shopt -s nullglob
 
@@ -60,4 +58,3 @@ shift $(( OPTIND - 1 ))
 for basedir in "${@:-.}"; do
   walk "$basedir"
 done
-

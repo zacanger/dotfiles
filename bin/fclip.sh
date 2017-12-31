@@ -1,9 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# author Tasos Latsas
-#
-# copy contents of a file in X cliboard
-# requires the xclip utility
+# copy contents of file to x cliboard
+# depends on xclip
 
 hash xclip &>/dev/null || { echo "xclip is not installed"; exit 1; }
 

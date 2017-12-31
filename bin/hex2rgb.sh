@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 [[ -z $1 ]] && {
   printf "Usage: %s <XResources color file>" "${0##*/}" >&2
@@ -19,4 +19,3 @@ while read line; do
   hexcode=${line/\*color* /}
   hex2dec ${hexcode:1:2} ${hexcode:3:2} ${hexcode:5:2}
 done < $1
-

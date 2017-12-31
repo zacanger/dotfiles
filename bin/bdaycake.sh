@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-c1(){
+c1() {
   echo "           iìíiìíiìíiì"
   echo "          |           |"
   echo "        __|___________|__"
@@ -10,7 +10,7 @@ c1(){
   sleep 0.1
 }
 
-c2(){
+c2() {
   echo "           ìíiìíiìíiìí"
   echo "          |           |"
   echo "        __|___________|__"

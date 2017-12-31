@@ -1,5 +1,5 @@
-#!/bin/bash
-# 
+#!/usr/bin/env bash
+
 # This script changes the brightness level of my screen.  For whatever
 # reason the keys have stopped working so I have to do it manually now.
 #
@@ -8,10 +8,10 @@
 # When run without arguments you can press the "u" or the "d" key to
 # make it go [u]p or [d]own in brightness.
 #
-# The projection of it is geometric so you get more granulity in the 
+# The projection of it is geometric so you get more granulity in the
 # dimmer settings then you get in other tools.
 #
-# Also, there's a bottom value that is not 0.  This means that you 
+# Also, there's a bottom value that is not 0.  This means that you
 # won't accidentally put yourself to a blank screen and then have
 # to blindly guess your way out of it.
 #

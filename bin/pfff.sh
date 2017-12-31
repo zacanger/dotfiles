@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #title :Screen recorder
 #description :Records Screen Cast with Sound
@@ -23,7 +23,7 @@ WIN_POS=$(echo "$INFO"|grep "upper-left"|head -n 2|cut -d\: -f2|tr "\n" " "|awk 
 #ffmpeg -f alsa -ac 2 -i pulse -f x11grab -s $WIN_GEO -r 15 -i :0.0+$WIN_POS -r 15 -acodec pcm_s16le -sameq "$SavePath.avi"
 avconv -f x11grab -s $WIN_GEO -r 15 -i :0.0+$WIN_POS -r 15 -qscale 3 "$SavePath.1.avi"&
 #arecord "$SavePath.wav" -f cd -r48000
-arecord -D "hw:3,0" -f cd -r48000 "$SavePath.wav" -c 1 
+arecord -D "hw:3,0" -f cd -r48000 "$SavePath.wav" -c 1
 
 killall avconv
 

@@ -1,11 +1,10 @@
 #!/bin/sh
-#
+
 # Author: Tasos Latsas
-#
+
 # Recursively set permissions for files and folders
 # in a given path or in the working directory
 # Especialy usefull when copying files from ntfs filesystems :P
-#
 
 show_help () {
 cat << EOF

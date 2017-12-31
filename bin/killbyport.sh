@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # kills whatever is listening on the port, passed as first parameter
 

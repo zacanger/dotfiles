@@ -1,5 +1,5 @@
-#!/bin/bash
-#
+#!/bin/sh
+
 # Start a hotspot in a non-bridged mode
 
 # This is where the internet is
@@ -30,4 +30,3 @@ iptables -F
 iptables --table nat -F
 iptables --table nat --append POSTROUTING --out-interface $DEV_INTERNET -j MASQUERADE
 iptables --append FORWARD --in-interface $DEV_AP -j ACCEPT
-

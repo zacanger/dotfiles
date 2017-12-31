@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # A script to only keep images of a certain size in a directory
 # by Philip Guo

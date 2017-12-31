@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 if [ -d "$1" ]; then
   if [ -n "$LS_COLORS" ]; then
