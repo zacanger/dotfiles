@@ -23,17 +23,13 @@ alias fn='cd ~/.bash_functions'
 alias fns='ls ~/.bash_functions/'
 
 # git &co. ; see gitconfig for more
-alias it='git'
 alias gd='git diff'
-alias dg='gd'
 alias gcl='git clone'
 alias grv='git remote -v'
 alias gst='git st'
 alias branches='git branches'
 alias publish='git publish'
-alias sprout='git sprout'
 alias switch='git switch'
-alias gimme='git pull origin master'
 alias hc='hub clone'
 alias hl='hub clone'
 alias hcl='hub clone'
@@ -444,7 +440,7 @@ alias xfl='xflux -z 84047'
 alias th='thunar .'
 alias st='stterm'
 
-# on mac:
-# alias bs='pmset -g batt | sed -n 2p' # or maybe
-# alias bs='system_profiler SPPowerDataType | ag cycle | cut -d : -f 2'
-# alias file='file -h'
+if [[ `uname` == 'Darwin' ]] ; then
+  alias bs='pmset -g batt | sed -n 2p'
+  alias file='file -h'
+fi
