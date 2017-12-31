@@ -1,10 +1,5 @@
 # vim: ft=sh
 
-#############################################################################
- ####  ~/.bashrc: run for non-login shells, sources most other configs  ####
- ####           check /usr/share/doc/bash & /etc for examples           ####
-#############################################################################
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -71,11 +66,11 @@ shopt -s dirspell
 
 # dynamic title
 case $TERM in
-xterm*)
-  PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
-  ;;
-*)
-  ;;
+  xterm*)
+    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+    ;;
+  *)
+    ;;
 esac
 
 # include
@@ -83,19 +78,14 @@ export CDPATH=.:$HOME/Dropbox:$HOME/Dropbox/work:$HOME/Dropbox/work/repos:$HOME/
 export PATH=$(npm bin):$HOME/.gem/global/bin:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.psvm/bin:$HOME/bin:$HOME/bin/x:$PATH
 export VISUAL='nvim'
 export EDITOR='nvim'
-export SLACK_USERNAME='zacanger'
-export LOLCOMMITS_ANIMATE='2'
 export MANPATH=$HOME/doc:$MANPATH
 export NODE_ENV=development
-export ATOM_DEV_RESOURCE_PATH='$HOME/.atom/dev'
 export GITHUB_USER='zacanger'
+
 export JOBS=max
-
-# send-tweet keys
-
 ulimit -n 10240
 
-XDG_CONFIG_HOME=/home/z/.config
+XDG_CONFIG_HOME=$HOME/.config
 if hash setxkbmap 2>/dev/null ; then
   /usr/bin/setxkbmap -option "caps:swapescape"
 fi
@@ -162,105 +152,17 @@ if [ -f $HOME/.hub-completion ]; then
   . $HOME/.hub-completion
 fi
 
-# put a clock in the top right corner of the terminal
-# while sleep 1;do tput sc;tput cup 0 $(($(tput cols)-11));echo -e "\e[31m`date +%T`\e[39m";tput rc;done &
+# brew's bash completion
+if [[ `uname` == 'Darwin' ]] ; then
+  if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+  fi
+fi
 
-# brew shit
-# if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  # . $(brew --prefix)/etc/bash_completion
-# fi
-
-# complete -C aws_completer aws
+# aws completion
+if hash aws_completer 2>/dev/null ; then
+  complete -C aws_completer aws
+fi
 
 # and, finally... liquidprompt; load from interactive shell, don't from scripts/scp
 echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
-
-############################################################
- ## FROM HERE DOWN, IT'S ALL JUST UNUSED BITS AND PIECES ##
- ##  alternate prompts, extras, other term titles, etc.  ##
-############################################################
-## the usual favourite prompt, when not using `liquidprompt`
-## set variable identifying the chroot you work in (used in the prompt below)
-# if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-#     debian_chroot=$(cat /etc/debian_chroot)
-# fi
-## (this is the prompt i was talking about.) fancy prompt (in color)
-# case "$TERM" in
-#     xterm-color) color_prompt=yes;;
-# esac
-# force_color_prompt=yes
-# if [ -n "$force_color_prompt" ]; then
-#     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-#   # if it's NOT ecma-48 (iso/iec-6429), which is very rare
-#   # we'd want to go with setf rather than setaf
-#   color_prompt=yes
-#     else
-#   color_prompt=
-#     fi
-# fi
-## very nice thing for git, if not using liquidprompt
-# export PS1="$PS1\$(git-check)" # gh:oss6/git-check
-
-## shline
-# function _update_ps1() {
-#      local PREV_ERROR=$?
-#      local JOBS=$(jobs -p | wc -l)
-#      export PS1="$(python2.7 ~/.shline/shline.py --prev-error $PREV_ERROR --jobs $JOBS 2> /dev/null)"
-#  }
-#
-#  export PROMPT_COMMAND="_update_ps1"
-
-# if [ -e /usr/share/terminfo/x/xterm-256color ] && [ "$COLORTERM" == "xfce4-terminal" ]; then
-#     export TERM=xterm-256color
-# fi
-
-# if [ "$color_prompt" = yes ]; then
-#     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-# else
-#     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-# fi
-# unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-# case "$TERM" in
-# xterm*|rxvt*)
-#     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-#     ;;
-# *)
-#     ;;
-# esac
-
-#  XTERM_TITLE='\[\033]0;\h\007\]'
-# [ "$IS_VIRTUAL_CONSOLE" ] && XTERM_TITLE=''
-# PS1=$XTERM_TITLE'\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-
-# vi mode
-# set -o vi
-# bind -m vi-insert \\C-l:clear-screen  # make Ctrl-L work the same as it does in emacs mode
-
-# programmable completion; enable if NOT enabled in /etc/bash.bashrc;
-# /etc/profile needs to source that
-# if ! shopt -oq posix; then
-#   if [ -f /usr/share/bash-completion/bash_completion ]; then
-#     . /usr/share/bash-completion/bash_completion
-#   elif [ -f /etc/bash_completion ]; then
-#     . /etc/bash_completion
-#   fi
-# fi
-
-# export PS1="[$(t | wc -l | sed -e's/ *//')] $PS1"
-
-# export PS="\[\e[1;33m\]\w\[\e[;0;1m\] ($( dirsize -Hb )) \$\[\e[;0m\]" # add this bit on to keep dirsize in prompt (see ~/bin/dirsize)
-
-# maybe puts a clock in the prompt?
-# PS1='\[\u@\h \T \w]\$'
-# or this way?
-# export PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:[\t]:\w\$ "
-
-# should give nice prompt with date and time
-# if [ "$color_prompt" = yes ]; then
-#     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\$'
-# else
-#    # PS1='${debian_chroot:+($debian_chroot)}[*\u@Ubuntu*]:\w\$ '
-#     PS1='${debian_chroot:+($debian_chroot)}[*\u@Ubuntu*]\t:\w\$ '
-# fi
