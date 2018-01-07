@@ -14,8 +14,8 @@ may be some references to that path scattered around.
 * This is shared between four Debian Sid laptops and one (work) Mac.
 * Bash 4, Python3 when possible, Node latest, Neovim.
 * I don't know Perl.
-* The files called `*.list` are to keep track of what I need on a fresh PC.
-  * `sources.more.list`
+* The files called `*.list` (under `/misc`) are to keep track of what I need on
+  a fresh PC.  `sources.more.list`
     * /etc/apt/sources.list.d/sources.more.list
   * `apt.list`
     * actually `apt-get install -fy` list, but that's not so succinct

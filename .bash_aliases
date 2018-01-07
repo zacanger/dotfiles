@@ -23,6 +23,7 @@ alias fn='cd ~/.bash_functions'
 alias fns='ls ~/.bash_functions/'
 
 # git &co. ; see gitconfig for more
+alias gfa='git fetch --all'
 alias gd='git diff'
 alias gcl='git clone'
 alias grv='git remote -v'
