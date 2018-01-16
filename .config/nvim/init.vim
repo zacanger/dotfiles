@@ -608,3 +608,6 @@ let g:tern_show_argument_hints='on_hold'
 
 let g:rooter_manual_only=1
 set mouse=a
+
+" pixie
+au BufNewFile,BufRead *.pxi set ft=clojure
