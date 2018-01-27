@@ -1,14 +1,10 @@
 alert-node
-alltheversions
 angrplayr
-auto-install
 babel-cli
 babel-core
 babel-eslint
-babel-it
 babel-plugin-transform-es2015-modules-commonjs
 babel-preset-latest
-babel-repl
 babili
 baudio
 bcat
@@ -16,6 +12,7 @@ bookmarkletify
 bower
 browserify
 calculate-tip
+calvin-cljs
 caniuse-cmd
 captureme
 cljs
