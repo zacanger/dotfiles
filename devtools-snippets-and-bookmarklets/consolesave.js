@@ -1,24 +1,17 @@
-;(function (console) {
-  console.save = function (data, filename) {
+;((console) => {
+  console.save = (data, filename = 'console.json') => {
     if (!data) {
       console.error('Console.save: No data')
       return
     }
 
-    if (!filename)
-      filename = 'console.json'
-
     if (typeof data === 'object') {
-      data = JSON.stringify(data, undefined, 4)
+      data = JSON.stringify(data, null, 2)
     }
 
-    var blob = new Blob([data], {
-        type: 'text/json'
-      }),
-
-      e = document.createEvent('MouseEvents'),
-
-      a = document.createElement('a')
+    const blob = new window.Blob([data], { type: 'text/json' })
+    const e = document.createEvent('MouseEvents')
+    const a = document.createElement('a')
 
     a.download = filename
     a.href = window.URL.createObjectURL(blob)

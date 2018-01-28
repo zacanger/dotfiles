@@ -15,4 +15,4 @@ const freezeGif = (i) => {
   }
 }
 
-[].slice.apply(document.images).filter(isGif).map(freezeGif)
+;[].slice.apply(document.images).filter(isGif).map(freezeGif)

@@ -1,27 +1,18 @@
-// showheaders.js
-// https://github.com/bgrins/devtools-snippets
-// Print out response headers for current URL.
+// print out response headers for current URL
 
-;(function () {
-  var request = new XMLHttpRequest()
+;(() => {
+  const request = new window.XMLHttpRequest()
   request.open('HEAD', window.location, false)
   request.send(null)
 
-  var headers = request.getAllResponseHeaders()
-  var tab = headers.split('\n').map(function (h) {
-    return {
-      'Key': h.split(': ')[0],
-      'Value': h.split(': ')[1]
-    }
-  }
-  ).filter(function (h) {
-    return h.Value !== undefined
-  }
-  )
+  const headers = request.getAllResponseHeaders()
+  const tab = headers.split('\n').map((h) => ({
+    Key: h.split(': ')[0],
+    Value: h.split(': ')[1]
+  })).filter((h) => h.Value !== undefined)
 
   console.group('Request Headers')
   console.log(headers)
   console.table(tab)
   console.groupEnd('Request Headers')
-
 })()
