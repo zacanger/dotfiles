@@ -1,4 +1,5 @@
-document.onkeydown = function (evt) {
+// chrome (intentionally) broke using backspace for history for some reason
+document.onkeydown = (evt) => {
   if (evt.key !== 'Backspace') return
   if (evt.target.nodeName === 'INPUT') return
   if (evt.target.nodeName === 'TEXTAREA') return
