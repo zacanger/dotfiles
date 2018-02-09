@@ -155,6 +155,7 @@ qt
 qt5
 qt55
 r
+racket # brew cask install racket
 ranger
 readline
 redis
