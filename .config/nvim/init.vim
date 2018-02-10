@@ -332,6 +332,7 @@ augroup vimrc-make-cmake
 augroup END
 
 au BufRead,BufNewFile *.md setlocal textwidth=80
+au FileType racket set et
 
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS noci
 
