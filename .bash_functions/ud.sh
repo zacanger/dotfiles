@@ -1,7 +1,6 @@
 # go up dir tree arbitrary amount
 ud() {
-
-    # check/save first arg (optional) (number of steps up); defaults to one
+  # check/save first arg (optional) (number of steps up); defaults to one
   local -i steps
   steps=${1:-1}
   if ! ((steps > 0)) ; then
@@ -37,4 +36,5 @@ _ud() {
     return 1
   fi
 }
+
 complete -F _ud ud

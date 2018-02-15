@@ -31,4 +31,5 @@ setupcolours() {
     export _COLOURSDEFINED=1
   fi
 }
+
 setupcolours

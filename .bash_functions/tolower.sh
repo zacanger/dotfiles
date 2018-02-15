@@ -8,4 +8,3 @@ tolower() {
 
   eval "$command tr '[:upper:]' '[:lower:]'"
 }
-

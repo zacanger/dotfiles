@@ -27,4 +27,5 @@ cf() {
   printf '%d\t%s\n' "${#files[@]}" "$dir"
   )
 }
+
 complete -A directory cf
