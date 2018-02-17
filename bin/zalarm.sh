@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
 
-# what you need: bash, mplayer, an audio file
 # change the next line to whatever you want
-ALARMPATH=$HOME/Dropbox/z/.alarm/mp3
+alarmpath=$HOME/Dropbox/z/.alarm/mp3
+
+if ! hash mplayer 2>/dev/null
+then
+  echo 'Please install mplayer!'
+  exit 1
+fi
 
 if [[ $# -eq 0 ]] ; then
   echo "it's now $(date)"
-  echo "alarm date and time? "
+  echo alarm date and time?
   read date
 else
   date="$1"
@@ -16,9 +21,9 @@ echo okay! alarm happening at $(date --date="$date")
 
 sleep $(( $(date --date="$date" +%s) - $(date +%s) ))
 
-echo wake up!
+echo "wake up!"
 
 while true; do
-  `which mplayer` $ALARMPATH
+  `which mplayer` $alarmpath
   sleep 1
 done

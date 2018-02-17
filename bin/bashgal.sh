@@ -91,7 +91,7 @@ do
   if [ $count -eq 5 ] ; then
     echo "    </td>" >> index.html
     echo "    </tr>" >> index.html
-echo >> index.html
+    echo >> index.html
     echo "    <tr>" >> index.html
     echo "    <td align='center'>" >> index.html
     count=1

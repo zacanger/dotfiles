@@ -7,7 +7,7 @@ command -v wget >/dev/null 2>&1 || { echo "wget not found. Please install it and
 
 if test -z $1; then { echo "Please provide URL to be mirrored"; exit 1; }; fi
 
-wget    --recursive \
+wget --recursive \
   --no-clobber \
   --random-wait \
   --page-requisites \

@@ -21,6 +21,4 @@ echo "<br>change the ls -something command into whatever to customize." >> ./ind
 
 echo "<p>" >> index.html
 echo "</body>" >> index.html
-
 echo "</html>" >> index.html
-
