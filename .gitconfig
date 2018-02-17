@@ -2,10 +2,6 @@
   editor = nvim
   excludesfile = /home/z/Dropbox/z/.gitignore_global
   ignorecase = false
-[gui]
-  fontui = -family \"Fantasque Sans Mono\" -size -10 -weight normal -slant roman -underline 0 -overstrike 0
-  fontdiff = -family \"Fantasque Sans Mono\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
-  editor = nvim
 [user]
   email = zac@zacanger.com
   name = zacanger
@@ -13,8 +9,6 @@
 [hub]
   username = zacanger
   oauthtoken =
-[cola]
-  fontdiff = Fantasque Sans Mono,10,-1,5,50,0,0,0,0,0
 [push]
   default = matching
 [color]
@@ -32,8 +26,6 @@
   b = log -p -M --follow --stat --
   chart = log --graph --oneline --all --decorate
   graph = log --all --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  ls = !/path/to/git-ls
-  cm = commit
   ac = !git add -A && git commit
   st = status -sb
   stash = stash -u
@@ -55,8 +47,6 @@
   local = true
   port = 7777
   browser = chromium
-[dude]
-  interval = 300
 [commit]
   template = ~/.gitmessage
   gpgsign = true
