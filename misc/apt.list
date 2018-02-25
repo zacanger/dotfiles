@@ -73,6 +73,7 @@ gstreamer1.0-plugins-ugly
 gtk-chtheme
 gzip
 haskell-stack
+hdevtools
 highlight
 hostname
 htop
