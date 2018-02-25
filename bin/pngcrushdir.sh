@@ -11,4 +11,4 @@ do
   echo "crushing $png"
   pngcrush -brute "$png" temp.png
   mv -f temp.png $png
-done;
+done

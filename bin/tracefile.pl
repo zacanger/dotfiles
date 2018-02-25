@@ -351,6 +351,3 @@ sub error {
     my $prog = $Global::progname || "tracefile";
     print $fh $prog, ": Error: ", @w;
 }
-
-
-

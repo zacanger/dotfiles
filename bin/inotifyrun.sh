@@ -19,4 +19,3 @@ while inotifywait -qre close_write --format "$FORMAT" .
 do
   "$@"
 done
-

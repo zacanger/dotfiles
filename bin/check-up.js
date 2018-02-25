@@ -7,7 +7,7 @@ const path = '/'
 
 if (!arg) {
   console.log('Usage: check-up.js example.com')
-  process.exit(0)
+  process.exit(1)
 }
 
 let port = 80

@@ -19,7 +19,7 @@ while (start <= end) {
       console.log(port, data)
       s.destroy()
     })
-    s.on('error', e => s.destroy())
+    s.on('error', () => s.destroy())
   })(port)
   start++
 }

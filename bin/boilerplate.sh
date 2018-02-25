@@ -122,3 +122,30 @@ read_params() {
 read_params $@
 main
 
+# check os
+platform='unknown'
+
+if [ "$(uname)" == "Darwin" ]; then
+  platform='mac'
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+  platform='linux'
+elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
+  platform='windows'
+fi
+
+# or
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  echo 'linux'
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  echo 'mac'
+elif [[ "$OSTYPE" == "cygwin" ]]; then
+  echo 'cygwin'
+elif [[ "$OSTYPE" == "msys" ]]; then
+  echo 'mingw'
+elif [[ "$OSTYPE" == "win32" ]]; then
+  echo 'win32'
+elif [[ "$OSTYPE" == "freebsd"* ]]; then
+  echo 'bsd'
+else
+  echo 'wtf'
+fi

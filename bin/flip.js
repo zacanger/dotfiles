@@ -15,7 +15,7 @@ str.split('').forEach((ch, i) => {
 process.argv.slice(2).forEach((file) => {
   const input = fs.readFileSync(file).toString()
   const output = input.split('\n').map((line) => (
-    line.split('').map(ch => (map[ch] || ch)).join('')
+    line.split('').map((ch) => (map[ch] || ch)).join('')
   )).join('\n')
   fs.writeFileSync(file, output)
 })

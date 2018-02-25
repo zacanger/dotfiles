@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
 set -e
 echo " "
 URL='http://dyn.value-domain.com/cgi-bin/dyn.fcg?ip'

@@ -121,4 +121,3 @@ git("push #{personal} #{master}", verbose: verbose)
 git("checkout #{alternate_branch}", verbose: verbose) unless alternate_branch.nil?
 
 git("rebase #{master}", verbose: verbose) if alternate_branch && options[:rebase]
-

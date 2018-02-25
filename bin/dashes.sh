@@ -81,4 +81,3 @@ done
 SEP="${SEP// /$C}"
 echo "${SEP::W}"
 [[ $F ]] || [[ $B ]] && echo -ne "\e[0m" || :
-

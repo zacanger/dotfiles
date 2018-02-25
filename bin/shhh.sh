@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-xterm -fullscreen & xtrlock
 
+xterm -fullscreen & xtrlock

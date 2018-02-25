@@ -7,4 +7,3 @@ date -d @`
     xclip -o |
     sed -r 's/[0-9]{3}$/.&/'
 `
-
