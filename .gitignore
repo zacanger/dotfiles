@@ -128,3 +128,4 @@ src/.webpack.js
 tags
 x/
 xfce4
+.nyc_output

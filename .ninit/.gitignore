@@ -106,3 +106,4 @@ pom.xml.asc
 public/lib
 src/.webpack.js
 x/
+.nyc_output
