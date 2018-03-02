@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# curl ifconfig.me
 set -e
 echo " "
 URL='http://dyn.value-domain.com/cgi-bin/dyn.fcg?ip'
