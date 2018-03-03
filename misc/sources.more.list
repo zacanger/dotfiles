@@ -8,7 +8,7 @@
 ## ftp://ftp.spline.de/pub/aptosid/debian/
 # deb http://httpredir.debian.org/debian sid main contrib non-free
 # deb-src http://httpredir.debian.org/debian sid main contrib non-free
-# deb http://httpredir.debian.org/debian expermiental contrib non-free
+# deb http://httpredir.debian.org/debian experimental contrib non-free
 # deb-src http://httpredir.debian.org/debian experimental main contrib non-free
 
 # bbqtools-basic & bbq-tools; also check github
@@ -52,28 +52,27 @@ deb http://dl.google.com/linux/talkplugin/deb/ stable main
 deb http://dl.google.com/linux/chrome/deb/ stable main
 
 # solydxk, mostly for their sweet xfce config tools
-deb http://community.solydxk.com/production solydxk main
 deb http://repository.solydxk.com solydxk main upstream import
 
 # sil tools and unicode typefaces
 deb http://packages.sil.org/ubuntu xenial main
 
 # spotify!
-deb http://repository.spotify.com testing non-free
+# deb http://repository.spotify.com testing non-free
 
 # rethinkdb
-deb http://download.rethinkdb.com/apt stretch main
+# deb http://download.rethinkdb.com/apt stretch main
 
 # mysql
-deb http://repo.mysql.com/apt/debian/ jessie mysql-apt-config
-deb http://repo.mysql.com/apt/debian/ jessie mysql-5.7
-deb-src http://repo.mysql.com/apt/debian/ jessie mysql-5.7
+# deb http://repo.mysql.com/apt/debian/ jessie mysql-apt-config
+# deb http://repo.mysql.com/apt/debian/ jessie mysql-5.7
+# deb-src http://repo.mysql.com/apt/debian/ jessie mysql-5.7
 
 # rabbitmq
-deb http://www.rabitmq.com/debian/ testing main
+# deb http://www.rabbitmq.com/debian/ testing main
 
 # erlang is needed for couchdb
-deb http://binaries.erlang-solutions.com/debian jessie contrib
+# deb http://binaries.erlang-solutions.com/debian jessie contrib
 
 # docker
 deb https://apt.dockerproject.org/repo debian-stretch main
@@ -82,11 +81,11 @@ deb https://apt.dockerproject.org/repo debian-stretch main
 deb http://download.fpcomplete.com/debian jessie main
 
 # golang
-deb http://ppa.launchpad.net/ubuntu-lxc/lxd-stable/ubuntu yakkety main
+# deb http://ppa.launchpad.net/ubuntu-lxc/lxd-stable/ubuntu yakkety main
 # deb-src http://ppa.launchpad.net/ubuntu-lxc/lxd-stable/ubuntu yakkety main
 
 # sqlitebrowser
-deb http://ppa.launchpad.net/linuxgndu/sqlitebrowser-testing/ubuntu yakkety main
+# deb http://ppa.launchpad.net/linuxgndu/sqlitebrowser-testing/ubuntu yakkety main
 # deb-src http://ppa.launchpad.net/linuxgndu/sqlitebrowser-testing/ubuntu yakkety main
 
 # Google Chrome
