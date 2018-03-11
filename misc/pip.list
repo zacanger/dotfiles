@@ -1,11 +1,15 @@
 # pip 3
+Cython
+Pillow
 legit
 lxml
 mps
 mps-youtube
 nltk
 nose
+numpy
 pipenv
+scipy
 virtualenv
 
 # pip 2
@@ -13,4 +17,6 @@ PyYAML
 bzr
 locustio
 mercurial
+numpy
 requests
+scipy
