@@ -1,4 +1,8 @@
 # go up dir tree arbitrary amount
+# pwd -> /home/z/.config/nvim
+# ud 3
+# pwd -> /home
+
 ud() {
   # check/save first arg (optional) (number of steps up); defaults to one
   local -i steps

@@ -1,7 +1,9 @@
 # back up in dir tree to first dir that matches arg
+# pwd -> /home/z/.config/nvim
+# bd home
+# pwd -> /home
 
 bd() {
-
   local arg     # passing opts to cd
   local -a opts
   for arg ; do
@@ -68,27 +70,27 @@ bd() {
       return 1
     fi
     ;;
-  esac
+esac
 
-  # try to cd to dir
-  builtin cd "${opts[@]}" -- "$dir"
+# try to cd to dir
+builtin cd "${opts[@]}" -- "$dir"
  }
 
-# completion
-_bd() {
-  local word
-  word=${COMP_WORDS[COMP_CWORD]}
+ # completion
+ _bd() {
+   local word
+   word=${COMP_WORDS[COMP_CWORD]}
 
-  # list of dirs at $PWD
-  local -a dirs
-  while read -d / -r dir ; do
-    if [[ -n $dir ]] ; then
-      dirs=("${dirs[@]}" "$dir")
-    fi
-  done < <(printf %s "$PWD")
+   # list of dirs at $PWD
+   local -a dirs
+   while read -d / -r dir ; do
+     if [[ -n $dir ]] ; then
+       dirs=("${dirs[@]}" "$dir")
+     fi
+   done < <(printf %s "$PWD")
 
-  # complete with matching dirs
-  COMPREPLY=( $(compgen -W "${dirs[*]}" -- "$word") )
-}
+   # complete with matching dirs
+   COMPREPLY=( $(compgen -W "${dirs[*]}" -- "$word") )
+ }
 
-complete -F _bd bd
+ complete -F _bd bd
