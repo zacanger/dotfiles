@@ -19,9 +19,9 @@ Plug 'Shougo/vimproc.vim', {
       \    },
       \ }
 Plug 'flowtype/vim-flow', {
-        \ 'autoload': {
-        \     'filetypes': 'javascript'
-        \ }}
+      \ 'autoload': {
+      \     'filetypes': 'javascript'
+      \ }}
 
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'FooSoft/vim-argwrap'
@@ -432,8 +432,8 @@ noremap ,o :!echo `git url`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<C-R>=lin
 augroup vimrc-python
   autocmd!
   autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 colorcolumn=79
-      \ formatoptions+=croq softtabstop=4 smartindent
-      \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+        \ formatoptions+=croq softtabstop=4 smartindent
+        \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
 
 " ale
@@ -450,10 +450,10 @@ let g:javascript_enable_domhtmlcss = 1
 inoremap <Esc> <Esc>`^
 
 autocmd User Node
-  \ if &filetype == "javascript" |
-  \   nmap <buffer> <C-w>f <Plug>NodeVSplitGotoFile |
-  \   nmap <buffer> <C-w><C-f> <Plug>NodeVSplitGotoFile |
-  \ endif
+      \ if &filetype == "javascript" |
+      \   nmap <buffer> <C-w>f <Plug>NodeVSplitGotoFile |
+      \   nmap <buffer> <C-w><C-f> <Plug>NodeVSplitGotoFile |
+      \ endif
 
 cnoremap sudow w !sudo tee & >/dev/null
 
@@ -624,11 +624,11 @@ nnoremap <silent> N   N:call HLNext(0.4)<cr>
 
 " blink the line containing the match
 function! HLNext (blinktime)
-    set invcursorline
-    redraw
-    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-    set invcursorline
-    redraw
+  set invcursorline
+  redraw
+  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+  set invcursorline
+  redraw
 endfunction
 
 " see dragvisuals.vim
