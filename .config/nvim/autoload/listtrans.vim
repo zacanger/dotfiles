@@ -1,6 +1,6 @@
 " Vim global plugin for list format translations
-" Maintainer:	Damian Conway
-" License:	This file is placed in the public domain.
+" Maintainer: Damian Conway
+" License:    This file is placed in the public domain.
 
 "######################################################################
 "##                                                                  ##
@@ -32,7 +32,7 @@ let g:LT_DEF_LIST_CONJ = 'and'
 let g:LT_CONJUNCTIONS  = [
 \   'and\s\+not', 'and', 'plus', 'with',
 \   'or\s\+else', 'or\s\+otherwise',
-\   'or', 'nor', 'but\s\+not', 'but', 
+\   'or', 'nor', 'but\s\+not', 'but',
 \   'else', 'otherwise'
 \]
 
