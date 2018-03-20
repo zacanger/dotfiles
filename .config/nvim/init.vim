@@ -615,7 +615,7 @@ au BufNewFile,BufRead *.pxi set ft=clojure
 
 " highlight the 81st column of wide lines
 highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
+call matchadd('ColorColumn', '\%121v', 100)
 
 " highlight matches when jumping to next
 " This rewires n and N to do the highlighing...
@@ -626,7 +626,7 @@ nnoremap <silent> N   N:call HLNext(0.4)<cr>
 function! HLNext (blinktime)
   set invcursorline
   redraw
-  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+  exec 'sleep ' . float2nr(a:blinktime * 500) . 'm'
   set invcursorline
   redraw
 endfunction
