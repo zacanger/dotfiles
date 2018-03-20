@@ -493,8 +493,9 @@ nnoremap :yal :%y+
 vnoremap :yal :%y+
 
 " fucking windows
-vnoremap <leader>nl :%s///g
-nnoremap <leader>nl :%s///g
+fu! FixEndings ()
+  :%s///g
+endfu
 
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
