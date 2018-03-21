@@ -627,7 +627,7 @@ nnoremap <silent> N   N:call HLNext(0.4)<cr>
 function! HLNext (blinktime)
   set invcursorline
   redraw
-  exec 'sleep ' . float2nr(a:blinktime * 500) . 'm'
+  exec 'sleep ' . float2nr(a:blinktime * 250) . 'm'
   set invcursorline
   redraw
 endfunction
