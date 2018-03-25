@@ -110,6 +110,10 @@ libjpeg-dev
 libpcre2-dev
 libreadline-dev
 libvte-dev
+libxkbcommon-dev
+libxkbcommon-x11-0
+libxkbcommon-x11-dev
+libxkbcommon0
 libxml2-utils
 liquidprompt
 lmms
