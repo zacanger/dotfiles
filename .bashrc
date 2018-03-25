@@ -137,19 +137,10 @@ if [ -d $HOME/.bash_functions ]; then
   done
 fi
 
-# npm completion
-if [ -f $HOME/.npm-completion ]; then
-  . $HOME/.npm-completion
-fi
-
-# git completion
-if [ -f $HOME/.git-completion ]; then
-  . $HOME/.git-completion
-fi
-
-# hub completion
-if [ -f $HOME/.hub-completion ]; then
-  . $HOME/.hub-completion
+if [ -d $HOME/.bash_completions ]; then
+  for file in $HOME/.bash_completions/*; do
+    . "$file"
+  done
 fi
 
 # brew's bash completion
