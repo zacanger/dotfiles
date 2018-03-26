@@ -518,8 +518,8 @@ let g:buftabs_marker_start = "["
 let g:buftabs_marker_end = "]"
 let g:buftabs_separator = "-"
 let g:buftabs_marker_modified = "!"
-nnoremap <C-left> :bprev<CR>
-nnoremap <C-right> :bnext<CR>
+nnoremap <C-j> :bprev<CR>
+nnoremap <C-k> :bnext<CR>
 
 " vim-markdown
 let g:vim_markdown_conceal = 0
