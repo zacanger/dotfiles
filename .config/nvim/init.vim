@@ -7,9 +7,6 @@ if has('vim_starting')
   set nocompatible " Be iMproved
 endif
 
-let g:vim_bootstrap_langs = "javascript,python,html"
-let g:vim_bootstrap_editor = "nvim" " nvim or vim
-
 Plug 'Shougo/vimproc.vim', {
       \ 'build' : {
       \     'windows' : 'tools\\update-dll-mingw',
@@ -613,7 +610,7 @@ set mouse=a
 " pixie
 au BufNewFile,BufRead *.pxi set ft=clojure
 
-" highlight the 81st column of wide lines
+" highlight the 121st column of wide lines
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%121v', 100)
 
