@@ -19,6 +19,7 @@ ca-certificates
 cabal-install
 chromium
 clang
+clipit
 cmake
 compton
 console-setup
@@ -155,6 +156,7 @@ perl-base
 pglcmd
 pgld
 pglgui
+pinentry-curses
 pmount
 pngcrush
 procps
