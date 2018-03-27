@@ -57,7 +57,7 @@ bindsym $mod+Ctrl+m exec x-terminal-emulator -e 'alsamixer'
 # Start Applications
 # bindsym $mod+Ctrl+b exec x-terminal-emulator -e 'bmenu'
 bindsym $mod+F2 exec qutebrowser
-bindsym $mod+F3 exec x-terminal-emulator -e 'mocp'
+bindsym $mod+F3 exec x-terminal-emulator -e 'ranger'
 bindsym $mod+F4 exec google-chrome-unstable
 bindsym $mod+F5 exec x-terminal-emulator -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill compton
