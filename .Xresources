@@ -18,7 +18,7 @@ XTerm*faceSize: 10
 *shading: 20
 !*geometry: 81x55
 
-*allow_bold:      	true
+*allow_bold:        true
 
 *copyCommand:      xsel -ib
 *pasteCommand:     xsel -ob
