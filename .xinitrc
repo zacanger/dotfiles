@@ -7,5 +7,6 @@ xflux -z 84047
 /usr/bin/setxkbmap -option "caps:swapescape"
 ~/.fehbg &
 xrandr --output HDMI-1 --auto --left-of LVDS-1
-# :exec -3
+dropbox start
+exec i3
 # exec ~/Dropbox/work/repos/wmjs/index.js
