@@ -28,7 +28,7 @@ stty stop ""
 
 # color ls
 if [ -x /usr/bin/dircolors ]; then
-  test -r $HOME/.dircolors && eval "$(dircolors -b $HOME/.dircolours)" || eval "$(dircolors -b)"
+  test -r $HOME/.dircolors && eval "$(dircolors -b $HOME/.dircolors)" || eval "$(dircolors -b)"
 fi
 
 # colored GCC warnings and errors
