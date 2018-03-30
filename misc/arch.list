@@ -1,0 +1,29 @@
+# yaourt
+ccat
+dropbox
+dropbox-cli
+hdevtools
+liquidprompt
+system76-dkms-git
+system76-driver
+
+# pacman
+atool
+chromium
+feh
+firefox-developer-edition
+highlight
+mplayer
+mpv
+node
+npm
+qutebrowser
+stack
+the_silver_searcher
+unclutter
+unrar
+unzip
+wicd
+wxcam
+xclip
+zathura
