@@ -27,7 +27,7 @@ font pango:Hasklig Regular 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec x-terminal-emulator
+bindsym $mod+Return exec kitty # x-terminal-emulator
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -66,7 +66,7 @@ bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
-focus_follows_mouse no
+# focus_follows_mouse no
 
 # change focus
 bindsym $mod+h focus left
@@ -94,9 +94,9 @@ bindsym $mod+q split toggle
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+# bindsym $mod+s layout stacking
+# bindsym $mod+w layout tabbed
+bindsym $mod+s layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
