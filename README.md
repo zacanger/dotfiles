@@ -17,6 +17,8 @@ may be some references to that path scattered around.
 * The files called `*.list` (under `/misc`) are to keep track of what I need on
   a fresh PC.  `sources.more.list`
     * /etc/apt/sources.list.d/sources.more.list
+  * `arch.list`
+    * Things to install on a brand-new Manjaro/i3 install.
   * `apt.list`
     * actually `apt-get install -fy` list, but that's not so succinct
     * This is generated with the following:
