@@ -27,7 +27,8 @@ font pango:Hasklig Regular 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty # x-terminal-emulator
+# bindsym $mod+Return exec kitty # x-terminal-emulator
+bindsym $mod+Return exec terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -250,8 +251,7 @@ mode "resize" {
 }
 
 # Lock screen
-# bindsym $mod+9 exec --no-startup-id blurlock
-bindsym $mod+9 exec --no-startup-id xtrlock
+bindsym $mod+9 exec --no-startup-id /home/z/bin/lock.sh
 
 # Autostart applications
 exec --no-startup-id compton -b
@@ -271,7 +271,6 @@ exec --no-startup-id unclutter
 # exec_always --no-startup-id sbxkb
 # exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
-# exec --no-startup-id xautolock -time 10 -locker blurlock
 # exec_always --no-startup-id ff-theme-util
 # exec_always --no-startup-id fix_xcursor
 

@@ -356,6 +356,7 @@ alias no='yes n'
 alias xfl='xflux -z 84047'
 alias th='thunar .'
 alias st='stterm'
+alias shhh='lock.sh'
 
 if [[ `uname` == 'Darwin' ]] ; then
   alias bs='pmset -g batt | sed -n 2p'
