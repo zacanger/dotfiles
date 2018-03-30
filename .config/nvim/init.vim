@@ -126,6 +126,8 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
+highlight clear Search
+highlight       Search    ctermfg=White
 
 " Encoding
 set bomb
@@ -471,6 +473,7 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " greplace
 let g:grep_cmd_opts = '--line-numbers --noheading'
 set grepprg=ag
+set grepformat=%f:%l:%c:%m
 
 let g:vimfiler_as_default_explorer = 1
 
