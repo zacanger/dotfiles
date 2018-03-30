@@ -1,4 +1,7 @@
-# liquidprompt debian default theme
+
+####################################
+# LIQUID PROMPT DEFAULT THEME FILE #
+####################################
 
 # Special characters
 # Be sure to use characters that exists in the font you use. You can use several
@@ -37,8 +40,8 @@ else
     LP_MARK_SHORTEN_PATH=" ... "
 fi
 
-LP_MARK_BRACKET_OPEN=""  # open bracket
-LP_MARK_BRACKET_CLOSE="" # close bracket
+LP_MARK_BRACKET_OPEN="["  # open bracket
+LP_MARK_BRACKET_CLOSE="]" # close bracket
 #LP_MARK_DEFAULT=""        # default prompt mark
 LP_MARK_PREFIX=" "        # prompt mark prefix
 LP_PS1_PREFIX=""
