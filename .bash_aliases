@@ -169,11 +169,11 @@ alias kff='pkill -15 firefox'
 alias kqu='pkill -15 qutebrowser'
 
 # dropbox
-alias dbup='dropbox start'
-alias dbdn='dropbox stop'
-alias dbst='dropbox status'
-alias dbls='dropbox filestatus ~/Dropbox/*'
-alias dbfs='dropbox filestatus'
+alias dbup='dropbox-cli start'
+alias dbdn='dropbox-cli stop'
+alias dbst='dropbox-cli status'
+alias dbls='dropbox-cli filestatus ~/Dropbox/*'
+alias dbfs='dropbox-cli filestatus'
 
 # this serves as a replacement for the script from http://motd.sh/
 # for your config, change the zip code, degrees (to c, if needed), stocks (to y, if needed),

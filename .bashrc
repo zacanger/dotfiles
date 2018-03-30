@@ -83,7 +83,7 @@ export NODE_ENV=development
 export GITHUB_USER='zacanger'
 
 export JOBS=max
-ulimit -n 10240
+# ulimit -n 10240
 
 XDG_CONFIG_HOME=$HOME/.config
 if hash setxkbmap 2>/dev/null ; then
@@ -121,7 +121,11 @@ reset='\033[0m'     # return the prompt to orig
 
 tabs -2
 
-eval $(opam config env)
+
+# better yaourt colors
+export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
+
+# eval $(opam config env)
 
 # eval "$(rbenv init -)"
 [ -f $HOME/.fzf.bash ] && source $HOME/.fzf.bash
@@ -156,4 +160,5 @@ if hash aws_completer 2>/dev/null ; then
 fi
 
 # and, finally... liquidprompt; load from interactive shell, don't from scripts/scp
-echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
+# echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
+echo $- | grep -q i 2>/dev/null && source /usr/bin/liquidprompt
