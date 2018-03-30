@@ -20,10 +20,6 @@ node-gyp-install
 node-wifi-scanner-cli
 npm-check-updates
 npm@next
-pscid
-pulp
-purescript
-purescript-psa
 simple-cam
 sloc
 standard-format
