@@ -248,9 +248,6 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-# Lock screen
-bindsym $mod+9 exec --no-startup-id /home/z/bin/lock.sh
-
 # Autostart applications
 exec --no-startup-id compton -b
 # exec --no-startup-id xrandr --output HDMI-1 --auto --left-of LVDS-1
@@ -261,16 +258,10 @@ exec --no-startup-id /usr/bin/setxkbmap -option "caps:swapescape"
 exec --no-startup-id nm-applet
 exec --no-startup-id clipit
 exec --no-startup-id unclutter
-# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-#exec --no-startup-id manjaro-hello
-# exec --no-startup-id xfce4-power-manager
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # exec --no-startup-id pamac-tray
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
-# exec --no-startup-id start_conky_maia
-# exec --no-startup-id start_conky_green
-# exec_always --no-startup-id ff-theme-util
-# exec_always --no-startup-id fix_xcursor
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
