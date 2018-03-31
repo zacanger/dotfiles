@@ -3,7 +3,6 @@ ccat
 dropbox
 dropbox-cli
 hdevtools
-keybase
 kitty
 liquidprompt
 system76-dkms-git
@@ -15,6 +14,7 @@ chromium
 feh
 firefox-developer-edition
 highlight
+keybase-bin
 mplayer
 mpv
 node
