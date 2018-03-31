@@ -4,6 +4,7 @@ dropbox
 dropbox-cli
 hdevtools
 keybase
+kitty
 liquidprompt
 system76-dkms-git
 system76-driver
@@ -11,6 +12,7 @@ system76-driver
 # pacman
 atool
 chromium
+edfview
 feh
 firefox-developer-edition
 highlight
@@ -27,4 +29,3 @@ unzip
 wicd
 wxcam
 xclip
-zathura
