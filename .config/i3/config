@@ -27,7 +27,6 @@ font pango:Hasklig Regular 10
 floating_modifier $mod
 
 # start a terminal
-# bindsym $mod+Return exec kitty # x-terminal-emulator
 bindsym $mod+Return exec terminal
 
 # kill focused window
@@ -42,7 +41,7 @@ bindsym $mod+space exec --no-startup-id dmenu_run
 ################################################################################################
 
 exec --no-startup-id volumeicon
-bindsym $mod+Ctrl+m exec x-terminal-emulator -e 'alsamixer'
+bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 #exec --no-startup-id pulseaudio
 #exec --no-startup-id pa-applet
 #bindsym $mod+Ctrl+m exec pavucontrol
@@ -54,11 +53,10 @@ bindsym $mod+Ctrl+m exec x-terminal-emulator -e 'alsamixer'
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 # Start Applications
-# bindsym $mod+Ctrl+b exec x-terminal-emulator -e 'bmenu'
 bindsym $mod+F2 exec qutebrowser
-bindsym $mod+F3 exec x-terminal-emulator -e 'ranger'
+bindsym $mod+F3 exec terminal -e 'ranger'
 bindsym $mod+F4 exec google-chrome-unstable
-bindsym $mod+F5 exec x-terminal-emulator -e 'mocp'
+bindsym $mod+F5 exec terminal -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
