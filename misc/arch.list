@@ -12,7 +12,6 @@ system76-driver
 # pacman
 atool
 chromium
-edfview
 feh
 firefox-developer-edition
 highlight
@@ -29,3 +28,5 @@ unzip
 wicd
 wxcam
 xclip
+zathura-pdf-poppler
+zathura-ps
