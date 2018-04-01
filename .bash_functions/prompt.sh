@@ -1,6 +1,5 @@
 # Frontend to controlling prompt
 prompt() {
-
     # If no arguments, print the prompt strings as they are
     if ! (($#)) ; then
         declare -p PS1 PS2 PS3 PS4
