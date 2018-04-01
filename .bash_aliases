@@ -6,13 +6,6 @@
 alias killx='sudo pkill -9 Xorg'
 alias ka='killall'
 
-# bye
-alias reboot='sudo /sbin/reboot'
-alias poweroff='sudo /sbin/poweroff'
-alias halt='sudo /sbin/halt'
-alias shutdown='sudo /sbin/shutdown'
-alias bye='sudo /sbin/poweroff'
-
 # managing .bashrc & .bash_aliases
 alias edrc='nvim ~/.bashrc'
 alias brc='nvim ~/.bashrc'
@@ -357,6 +350,7 @@ alias xfl='xflux -z 84047'
 alias th='thunar .'
 alias st='stterm'
 alias shhh='lock.sh'
+alias bye='poweroff'
 
 if [[ `uname` == 'Darwin' ]] ; then
   alias bs='pmset -g batt | sed -n 2p'
