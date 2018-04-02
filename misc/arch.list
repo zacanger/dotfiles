@@ -20,6 +20,8 @@ mpv
 node
 npm
 qutebrowser
+racket
+racket-docs
 stack
 the_silver_searcher
 unclutter
