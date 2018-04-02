@@ -20,39 +20,39 @@ XTerm*faceSize: 11
 *pointerColorBackground:          #2B2C2B
 *pointerColorForeground:          #16A085
 
-!! black dark/light
-*color0:                          #232423
-*color8:                          #282928
+!! black
+*color0:                          #3D3D3D
+*color8:                          #A2A597
 
-!! red dark/light
-*color1:                          #BA2922
-*color9:                          #CC372C
+!! red
+*color1:                          #E16C5B
+*color9:                          #F68080
 
-!! green dark/light
-*color2:                          #7E807E
-*color10:                         #8D8F8D
+!! green
+*color2:                          #B1EC73
+*color10:                         #CBE5AF
 
-!! yellow dark/light
-*color3:                          #4C4F4D
-*color11:                         #4E524F
+!! yellow
+*color3:                          #EACD84
+*color11:                         #F4A748
 
-!! blue dark/light
-*color4:                          #16A085
-*color12:                         #13BF9D
+!! blue
+*color4:                          #7FDEEC
+*color12:                         #75CEC8
 
-!! magenta dark/light
-*color5:                          #43746A
-*color13:                         #487D72
+!! magenta
+*color5:                          #C678DD
+*color13:                         #FCADEB
 
-!! cyan dark/light
-*color6:                          #00CCCC
-*color14:                         #00D1D1
+!! cyan
+*color6:                          #A8CFE3
+*color14:                         #CFF3D3
 
-!! white dark/light
-*color7:                          #E0E0E0
-*color15:                         #E8E8E8
+!! white
+*color7:                          #D2D8CF
+*color15:                         #FAFBF8
 
-Xcursor.theme: xcursor-breeze
+Xcursor.theme: Adwaita
 Xcursor.size:                     0
 
 XTerm*background:                 #272827
