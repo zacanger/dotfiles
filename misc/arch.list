@@ -9,6 +9,7 @@ system76-dkms-git
 system76-driver
 
 # pacman
+arandr
 atool
 chromium
 feh
