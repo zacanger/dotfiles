@@ -344,11 +344,7 @@ alias acd='a ; cd'
 alias tw='send-tweet'
 alias checkjane='curl -s https://jane.com/-/diag | jq .status'
 alias findlonglines="grep '.\{120\}' -r"
-alias xl='xtrlock'
 alias no='yes n'
-alias xfl='xflux -z 84047'
-alias th='thunar .'
-alias st='stterm'
 alias shhh='lock.sh'
 alias bye='poweroff'
 

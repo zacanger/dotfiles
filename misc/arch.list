@@ -16,6 +16,7 @@ chromium
 feh
 firefox-developer-edition
 highlight
+jq
 keybase-bin
 mplayer
 mpv
@@ -33,5 +34,6 @@ wicd
 wxcam
 xclip
 xfce4-power-manager-settings
+xorg-server-xephyr
 zathura-pdf-poppler
 zathura-ps
