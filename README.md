@@ -16,7 +16,7 @@ may be some references to that path scattered around.
 * I don't know Perl.
 * The files called `*.list` (under `/misc`) are to keep track of what I need on a fresh PC.
   * `sources.more.list`: /etc/apt/sources.list.d/sources.more.list
-  * `pacman.list` and `yaourt.list`: Things to install on a brand-new Manjaro/i3 install.
+  * `arch.list`: Things to install on a brand-new Manjaro/i3 install, generated with `pacman -Qqe`. Some of these might need `yaourt`.
   * `apt.list`: generated with `comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)`
   * `npm.list`: `npm i -g` all these things, generated with [global-packages-cli](https://npmjs.org/package/global-packages-cli)
   * `pip.list`: Python 3
