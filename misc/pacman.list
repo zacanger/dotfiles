@@ -1,16 +1,3 @@
-# yaourt
-ccat
-dropbox
-dropbox-cli
-hdevtools
-kitty
-liquidprompt
-slack-desktop
-system76-dkms-git
-system76-driver
-wicd-gtk
-
-# pacman
 arandr
 atool
 chromium
@@ -28,6 +15,7 @@ qutebrowser
 racket
 racket-docs
 ruby
+sox
 stack
 the_silver_searcher
 unclutter
