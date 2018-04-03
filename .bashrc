@@ -73,12 +73,10 @@ case $TERM in
     ;;
 esac
 
-# include
-export CDPATH=.:$HOME/Dropbox:$HOME/Dropbox/work:$HOME/Dropbox/work/repos:$HOME/Dropbox/z/bin:$HOME/Dropbox/z:/usr/local/lib:/usr/local/lib/node_modules
-export PATH=$(npm bin):$HOME/.gem/global/bin:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.psvm/bin:$HOME/bin:$HOME/bin/x:$PATH
+export CDPATH=.:$HOME/Dropbox:$HOME/Dropbox/work:$HOME/Dropbox/work/repos:$HOME/Dropbox/z:/usr/local/lib
+export PATH=$(npm bin):$HOME/.local/bin:$HOME/bin:$HOME/bin/x:$PATH
 export VISUAL='nvim'
 export EDITOR='nvim'
-export MANPATH=$HOME/doc:$MANPATH
 export NODE_ENV=development
 export GITHUB_USER='zacanger'
 
