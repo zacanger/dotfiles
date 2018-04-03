@@ -18,7 +18,7 @@ shopt -s globstar
 shopt -s dotglob
 
 # see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+[ -x /usr/bin/lesspipe.sh ] && eval "$(SHELL=/bin/sh lesspipe.sh)"
 
 export LESSOPEN="| $(which highlight) %s --out-format xterm256 --line-numbers --quiet --force --style solarized-light"
 export LESS=" -R"
@@ -27,7 +27,7 @@ export LESS=" -R"
 stty stop ""
 
 # color ls
-if [ -x /usr/bin/dircolors ]; then
+if [ -x /usr/bin/dircolors ] ; then
   test -r $HOME/.dircolors && eval "$(dircolors -b $HOME/.dircolors)" || eval "$(dircolors -b)"
 fi
 
@@ -88,47 +88,12 @@ if hash setxkbmap 2>/dev/null ; then
   /usr/bin/setxkbmap -option "caps:swapescape"
 fi
 
-# escape codes
-ESC_SEQ="\x1b["
-COL_RESET=$ESC_SEQ"39;49;00m"
-COL_RED=$ESC_SEQ"31;01m"
-COL_GREEN=$ESC_SEQ"32;01m"
-COL_YELLOW=$ESC_SEQ"33;01m"
-COL_BLUE=$ESC_SEQ"34;01m"
-COL_MAGENTA=$ESC_SEQ"35;01m"
-COL_CYAN=$ESC_SEQ"36;01m"
-
-# 0;30 Black
-# 0;33 Brown
-# 0;35 Purple
-# 0;37 Light Gray
-# 1;30 Dark Gray
-# 1;31 Light Red
-# 1;32 Light Green
-# 1;34 Light Blue
-# 1;35 Pink
-# 1;36 Light Cyan
-red='\033[1;31m'    # bold red
-green='\033[1;32m'  # bold green
-yell='\033[1;33m'   # bold yellow
-blue='\033[1;34m'   # bold blue
-purp='\033[1;35m'   # bold purple
-cyan='\033[1;36m'   # bold light blue
-white='\033[1;37m'  # bold white
-reset='\033[0m'     # return the prompt to orig
-
 tabs -2
-
 
 # better yaourt colors
 export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
 
-# eval $(opam config env)
-
-# eval "$(rbenv init -)"
-[ -f $HOME/.fzf.bash ] && source $HOME/.fzf.bash
-
-# keep aliases and functions on their own
+# aliases, functions, and completions in their own files
 if [ -f $HOME/.bash_aliases ]; then
   . $HOME/.bash_aliases
 fi
@@ -157,6 +122,5 @@ if hash aws_completer 2>/dev/null ; then
   complete -C aws_completer aws
 fi
 
-# and, finally... liquidprompt; load from interactive shell, don't from scripts/scp
-# echo $- | grep -q i 2>/dev/null && source /usr/share/liquidprompt/liquidprompt
+# load from interactive shell, don't from scripts/scp
 echo $- | grep -q i 2>/dev/null && source /usr/bin/liquidprompt

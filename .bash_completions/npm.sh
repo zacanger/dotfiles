@@ -1,4 +1,3 @@
-# vim: ft=sh
 ###-begin-npm-completion-###
 #
 # npm command completion script

@@ -17,6 +17,25 @@ COL_BLUE=$ESC_SEQ"34;01m"
 COL_MAGENTA=$ESC_SEQ"35;01m"
 COL_CYAN=$ESC_SEQ"36;01m"
 
+# 0;30 Black
+# 0;33 Brown
+# 0;35 Purple
+# 0;37 Light Gray
+# 1;30 Dark Gray
+# 1;31 Light Red
+# 1;32 Light Green
+# 1;34 Light Blue
+# 1;35 Pink
+# 1;36 Light Cyan
+red='\033[1;31m'    # bold red
+green='\033[1;32m'  # bold green
+yell='\033[1;33m'   # bold yellow
+blue='\033[1;34m'   # bold blue
+purp='\033[1;35m'   # bold purple
+cyan='\033[1;36m'   # bold light blue
+white='\033[1;37m'  # bold white
+reset='\033[0m'     # return the prompt to orig
+
 main() {
  # do stuff here
   echo hello
