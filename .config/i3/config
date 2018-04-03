@@ -34,7 +34,7 @@ bindsym $mod+Shift+q kill
 
 # start program launcher
 # bindsym $mod+space exec --no-startup-id dmenu_recency
-bindsym $mod+space exec --no-startup-id dmenu_run
+bindsym $mod+space exec --no-startup-id dmenu_run -i -fn 'Fira Code:pixelsize=12' -nb '#3d3d3d' -nf '#d2d8cf' -sf '#fafbf8' -sb '#a2a597'
 
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##

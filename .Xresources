@@ -106,7 +106,7 @@ URxvt*saveLines:                  5000
 ! URxvt*scrollWithBuffer:          boolean
 ! URxvt*tintColor:                 !7DA55
 ! URxvt*blurRadius:                HxV
-! URxvt*fading:                    number
+URxvt*fading:                    20
 ! URxvt*fadeColor:                 color
 ! URxvt*utmpInhibit:               boolean
 ! URxvt*urgentOnBell:              boolean

@@ -637,3 +637,20 @@ endfunction
 
 " see betterdigraphs.vim
 inoremap <expr>  <C-K>   BDG_GetDigraph()
+
+" this might be a horrible idea?
+nmap <leader>n :w!<cr>:call RunShellCommand("cat % \| node -p")<cr>
+function! RunShellCommand(cmdline)
+  let expanded_cmdline = a:cmdline
+  for part in split(a:cmdline, ' ')
+    if part[0] =~ '\v[%#<]'
+      let expanded_part = fnameescape(expand(part))
+      let expanded_cmdline = substitute(expanded_cmdline, part, expanded_part, '')
+    endif
+  endfor
+  botright new
+  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  execute '$read !'. expanded_cmdline
+  setlocal nomodifiable
+  1
+endfunction
