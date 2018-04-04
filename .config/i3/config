@@ -56,10 +56,11 @@ bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 
 # when using monitor
 bindsym $mod+F1 exec --no-startup-id xrandr --output HDMI2 --mode 1920x1080 --pos 1600x0 --rotate normal --output eDP1 --primary --mode 1600x900 --pos 0x180 --rotate normal
-bindsym $mod+F2 exec qutebrowser
-bindsym $mod+F3 exec terminal -e 'ranger'
-bindsym $mod+F4 exec google-chrome-unstable
-bindsym $mod+F5 exec terminal -e 'mocp'
+bindsym $mod+F2 exec --no-startup-id xrandr --output eDP1 --primary --mode 1600x900 --pos 0x0 --rotate normal
+bindsym $mod+F3 exec qutebrowser
+bindsym $mod+F4 exec terminal -e 'ranger'
+bindsym $mod+F5 exec google-chrome-unstable
+bindsym $mod+F6 exec terminal -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
