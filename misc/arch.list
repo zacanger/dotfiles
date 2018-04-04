@@ -5,6 +5,7 @@ alsa-firmware
 alsa-plugins
 alsa-utils
 arandr
+arc-gtk-theme
 atool
 autoconf
 automake
@@ -150,6 +151,7 @@ mplayer
 mpv
 nano
 ncdu
+neofetch
 neovim
 netctl
 network-manager-applet
@@ -226,7 +228,7 @@ ttf-droid
 ttf-inconsolata
 ttf-indic-otf
 ttf-liberation
-unclutter
+unclutter-xfixes-git
 unrar
 unzip
 upower
