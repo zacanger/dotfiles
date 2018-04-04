@@ -23,7 +23,7 @@ order += "wireless _first_"
 # order += "ethernet _first_"
 order += "battery all "
 # order += "load"
-order += " tztime local"
+order += "tztime local"
 # order += "ipv6"
 
 cpu_usage {
@@ -66,5 +66,5 @@ battery all {
 }
 
 tztime local {
-  format = "%Y-%m-%d %H:%M"
+  format = " %Y-%m-%d %H:%M |"
 }
