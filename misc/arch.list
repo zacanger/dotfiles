@@ -212,6 +212,7 @@ subversion
 sudo
 sysfsutils
 syslog-ng
+sysstat
 system76-dkms-git
 system76-driver
 systemd-sysvcompat

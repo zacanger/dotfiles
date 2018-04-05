@@ -1,4 +1,4 @@
-#!/usr/bin/env/bash
+#!/usr/bin/env bash
 
 if [ "$1" == "-l" ]; then
   echo "$(w && sensors && cat /proc/cpuinfo && iostat)"

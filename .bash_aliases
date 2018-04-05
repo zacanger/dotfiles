@@ -35,7 +35,6 @@ alias gitlog="git log --color --graph --pretty=format:'%Cgreen[%Creset%h%Cgreen]
 alias gittoday="git log --color --graph --pretty=format:'%Cgreen[%Creset%h%Cgreen]%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --since=yesterday"
 alias gco='git checkout'
 alias checkout='git checkout'
-alias gdm='git diff master'
 alias gw='ghwd.sh'
 alias gdd='git diff --dirstat'
 alias gl='glog'
