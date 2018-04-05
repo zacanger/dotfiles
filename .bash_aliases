@@ -69,19 +69,6 @@ alias brewupd='brew update && brew upgrade && brew cleanup && brew prune && brew
 alias vev='virtualenv -p /usr/bin/python3 venv'
 alias lfd='lein figwheel dev'
 
-# apt/dpkg stuff
-alias search='apt-cache search'
-alias policy='apt-cache policy'
-alias depends='apt-cache depends'
-alias ins='sudo apt-get install'
-alias insd='dpkg -l | ag ii | less'
-alias isit='dpkg -l | ag ii | ag '
-alias rdepends='apt-cache rdepends'
-alias show='apt-cache show'
-alias what-gives='apt-cache show "$1" | grep "^Filename:" | sed -e "s:\(.*\)/\(.*\)/\(.*\)/\(.*\)/.*:\4:"'
-alias what-repo='apt-cache show "$1" | grep ^Filename: | head -n1 | col2 /'
-alias what-source='apt-cache show "$1" | grep "^Filename:" | sed -e "s:\(.*\)/\(.*\)/\(.*\)/\(.*\)/.*:\4:"'
-
 # navigation
 alias d='cd'
 alias Cd='cd'
@@ -265,5 +252,6 @@ alias findlonglines="grep '.\{120\}' -r"
 alias no='yes n'
 alias shhh='lock.sh'
 alias bye='poweroff'
+alias zh='zathura'
 
 if [[ `uname` == 'Darwin' ]] ; then alias file='file -h' ; fi
