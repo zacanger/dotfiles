@@ -10,7 +10,7 @@ set $mod Mod4
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 new_window pixel 2
 new_float normal
-set $terminal kitty
+set $terminal terminal
 
 # Hide borders
 hide_edge_borders none
