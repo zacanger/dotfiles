@@ -2,8 +2,11 @@ module.exports = () => ({
   startupPrograms: [
     'zt',
     'compton -b',
-    'wallpaper.sh'
+    'wallpaper.sh',
+    'xflux -z 84047',
+    'setxkbmap -option "caps:swapescape"'
   ],
   borderWidth: 4,
-  borderColor: '00ff00'
+  borderColor: '00ff00',
+  launcher: 'dmenu_recency'
 })
