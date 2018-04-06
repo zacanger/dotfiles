@@ -1,6 +1,5 @@
 module.exports = () => ({
   startupPrograms: [
-    'zt',
     'compton -b',
     'wallpaper.sh',
     'xflux -z 84047',
@@ -8,5 +7,6 @@ module.exports = () => ({
   ],
   borderWidth: 4,
   borderColor: '00ff00',
-  launcher: 'dmenu_recency'
+  launcher: 'dmenu_recency',
+  terminal: 'zt'
 })
