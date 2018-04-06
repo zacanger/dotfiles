@@ -1,6 +1,8 @@
 module.exports = () => ({
   startupPrograms: [
-    'zt'
+    'zt',
+    'compton -b',
+    'wallpaper.sh'
   ],
   borderWidth: 4,
   borderColor: '00ff00'

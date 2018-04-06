@@ -59,6 +59,7 @@ bindsym $mod+F3 exec chromium
 bindsym $mod+F4 exec qutebrowser
 bindsym $mod+F5 exec $terminal -e 'ranger'
 bindsym $mod+F6 exec $terminal -e 'angrplayr'
+bindsym $mod+w exec --no-startup-id wallpaper.sh
 # bindsym $mod+t exec --no-startup-id pkill compton
 # bindsym $mod+Ctrl+t exec --no-startup-id compton -b
 # bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
