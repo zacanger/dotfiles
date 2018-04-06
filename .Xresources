@@ -6,58 +6,56 @@ Xft.autohint: false
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 
-XTerm*background: #2b2b2b
-XTerm*foreground: #e7e7e7
-XTerm*pointerColor: #16A085
-XTerm*faceName: Fixed
-XTerm*faceSize: 11
-
-*background:                      #272827
-*foreground:                      #657b83
 *fading:                          15
 *fadeColor:                       black
-*cursorColor:                     #16A085
 *pointerColorBackground:          #2B2C2B
 *pointerColorForeground:          #16A085
 
-!! black
-*color0:                          #3D3D3D
-*color8:                          #A2A597
+! special
+*.foreground:   #d9d7d2
+*.background:   #131111
+*.cursorColor:  #d9d7d2
 
-!! red
-*color1:                          #E16C5B
-*color9:                          #F68080
+! black
+*.color0:       #101010
+*.color8:       #3d3d3d
 
-!! green
-*color2:                          #B1EC73
-*color10:                         #CBE5AF
+! red
+*.color1:       #ae4435
+*.color9:       #df8568
 
-!! yellow
-*color3:                          #EACD84
-*color11:                         #F4A748
+! green
+*.color2:       #cedd66
+*.color10:      #c3e4a0
 
-!! blue
-*color4:                          #7FDEEC
-*color12:                         #75CEC8
+! yellow
+*.color3:       #e6bf5c
+*.color11:      #eabf8a
 
-!! magenta
-*color5:                          #C678DD
-*color13:                         #FCADEB
+! blue
+*.color4:       #60adcc
+*.color12:      #89c9e0
 
-!! cyan
-*color6:                          #A8CFE3
-*color14:                         #CFF3D3
+! magenta
+*.color5:       #a27fc5
+*.color13:      #dca1d0
 
-!! white
-*color7:                          #D2D8CF
-*color15:                         #FAFBF8
+! cyan
+*.color6:       #5bb4d2
+*.color14:      #85dfdb
+
+! white
+*.color7:       #bdc9b7
+*.color15:      #daded0
 
 Xcursor.theme: Adwaita
 Xcursor.size:                     0
 
-XTerm*background:                 #272827
-XTerm*foreground:                 #fdf6e3
+XTerm*.foreground:    #d9d7d2
+XTerm*.background:    #131111
+XTerm*.pointerColor:  #d9d7d2
 XTerm*reverseVideo:               on
+!! XTerm*faceSize: 11
 XTerm*faceName:                   Terminus:size=11:antialias=true
 XTerm*selectToClipboard:          true
 
