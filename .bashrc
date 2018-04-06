@@ -75,18 +75,20 @@ esac
 
 export CDPATH=.:$HOME/Dropbox:$HOME/Dropbox/work:$HOME/Dropbox/work/repos:$HOME/Dropbox/z:/usr/local/lib
 export PATH=$(npm bin):$HOME/.local/bin:$HOME/bin:$HOME/bin/x:$HOME/.gem/ruby/2.5.0/bin/:$PATH
-export VISUAL='nvim'
-export EDITOR='nvim'
+export VISUAL=nvim
+export EDITOR=nvim
+export TERMINAL=zt
 export NODE_ENV=development
-export GITHUB_USER='zacanger'
+export GITHUB_USER=zacanger
 
 export JOBS=max
 # ulimit -n 10240
 
 XDG_CONFIG_HOME=$HOME/.config
-if hash setxkbmap 2>/dev/null ; then
-  /usr/bin/setxkbmap -option "caps:swapescape"
-fi
+
+# if hash setxkbmap 2>/dev/null ; then
+  # /usr/bin/setxkbmap -option "caps:swapescape"
+# fi
 
 tabs -2
 
