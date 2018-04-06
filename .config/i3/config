@@ -51,6 +51,8 @@ bindsym $mod+Ctrl+m exec $terminal -e 'alsamixer'
 
 # Start Applications
 
+gaps inner 4px
+gaps outer 4px
 # when using monitor
 bindsym $mod+F1 exec --no-startup-id xrandr --output HDMI2 --mode 1920x1080 --pos 1600x0 --rotate normal --output eDP1 --primary --mode 1600x900 --pos 0x180 --rotate normal
 bindsym $mod+F2 exec --no-startup-id xrandr --output eDP1 --primary --mode 1600x900 --pos 0x0 --rotate normal
