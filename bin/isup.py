@@ -19,7 +19,6 @@ import sys
 import urllib
 
 class DownForEveryone(object):
-
     base_url = 'http://www.downforeveryoneorjustme.com/'
 
     def __init__(self):

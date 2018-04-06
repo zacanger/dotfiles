@@ -12,6 +12,7 @@ automake
 avahi
 b43-fwcutter
 bash
+bind-tools
 binutils
 bison
 blueman
