@@ -1,6 +1,6 @@
 # `$HOME`
 
-![screenshot](http://zacanger.com/assets/desktop-scrot.png)
+![screenshot](/screenshot.png?raw=true)
 
 These aren't really set up specifically with other people in mind, but
 please feel free to use anything you like. Just keep in mind that some
