@@ -23,7 +23,6 @@ may be some references to that path scattered around.
   * `chromium.list`: chrome extensions
   * `gem.list`: I guess I need Ruby
   * `brew.list`: I use a Mac at work.
-  * `type.list`: Fonts!
 * I have two directories hidden from git (`~/x/` and `~/bin/x/`);
   they're referenced in some other files, and hold executables that are either totally
   non-free, totally non-original, totally full of extra stuff i don't want in my path,
