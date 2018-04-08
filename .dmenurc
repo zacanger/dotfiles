@@ -3,7 +3,7 @@
 #
 
 ## define the font for dmenu to be used
-DMENU_FN="FiraCode-10"
+DMENU_FN="FiraCode-12"
 
 ## background colour for unselected menu-items
 DMENU_NB="#3d3d3d"

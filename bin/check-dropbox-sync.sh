@@ -4,5 +4,5 @@ while true
 do
   sleep 10
   clear
-  dropbox status
+  dropbox-cli status
 done
