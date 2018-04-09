@@ -12,7 +12,7 @@ application/x-extension-xhtml=chromium.desktop
 application/x-extension-xht=chromium.desktop
 image/jpeg=viewnior.desktop
 image/png=viewnior.desktop
-text/plain=mousepad.desktop
+text/plain=nvim.desktop
 x-scheme-handler/mailto=userapp-Thunderbird.desktop
 message/rfc822=userapp-Thunderbird.desktop
 application/pdf=zathura.desktop
@@ -21,7 +21,7 @@ application/x-bittorrent=transmission-gtk.desktop
 [Added Associations]
 image/jpeg=viewnior.desktop
 image/png=viewnior.desktop
-text/plain=mousepad.desktop;
+text/plain=nvim.desktop;
 x-scheme-handler/mailto=userapp-Thunderbird.desktop;
 message/rfc822=userapp-Thunderbird.desktop;
 application/pdf=zathura.desktop;
