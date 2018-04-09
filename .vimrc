@@ -1,9 +1,6 @@
-" This is a SUPER minimal vim config.
-" I use this when on a server, inside a container, breaking stuff, or whatever.
-" I'm okay just using `vi` but sometimes I really miss things like `v`
+" minimal vim config for working on remote machines, in containers, etc.
 " apk update && apk add vim
-" curl (this file's raw github url) to ~/.vimrc
-" I use nvim on my computers. See .config/nvim/init.vim for the real vimrc.
+" curl -sL https://raw.githubusercontent.com/zacanger/z/master/.vimrc ~/.vimrc
 
 set nu
 syntax enable
