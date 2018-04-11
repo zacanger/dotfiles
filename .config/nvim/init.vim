@@ -582,6 +582,7 @@ nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v
 
 " show tabs
 set list lcs=tab:\|\
+autocmd FileType go set nolist
 
 " break line on words
 set linebreak
