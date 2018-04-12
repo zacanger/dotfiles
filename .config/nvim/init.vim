@@ -20,7 +20,7 @@ Plug 'flowtype/vim-flow', {
       \     'filetypes': 'javascript'
       \ }}
 
-Plug 'chemzqm/vim-jsx-improve'
+" Plug 'chemzqm/vim-jsx-improve'
 " Plug 'pangloss/vim-javascript'
 " Plug 'mxw/vim-jsx'
 Plug 'sheerun/vim-polyglot'
@@ -388,6 +388,11 @@ let g:ctrlp_open_new_file = 'r'
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_regexp = 1
+" open in new tab
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<2-LeftMouse>'],
+    \ 'AcceptSelection("t")': ['<cr>'],
+    \ }
 
 " Disable visualbell
 set noeb vb t_vb=
@@ -568,7 +573,7 @@ endif
 let g:flow#enable = 0
 " let g:javascript_plugin_flow = 1
 
-let g:polyglot_disabled = ['css', 'js', 'jsx']
+" let g:polyglot_disabled = ['css', 'js', 'jsx']
 let g:csstoinline_wrap_pixels = 1
 
 if !exists('g:loaded_matchit')
