@@ -66,7 +66,6 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'reasonml/vim-reason-loader'
 Plug 'retorillo/istanbul.vim'
 Plug 'rhysd/vim-wasm'
-Plug 'romgrk/pp.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'sgur/vim-editorconfig'
@@ -645,19 +644,7 @@ endfunction
 " see betterdigraphs.vim
 inoremap <expr>  <C-K>   BDG_GetDigraph()
 
-" this might be a horrible idea?
-nmap <leader>n :w!<cr>:call RunShellCommand("cat % \| node -p")<cr>
-function! RunShellCommand(cmdline)
-  let expanded_cmdline = a:cmdline
-  for part in split(a:cmdline, ' ')
-    if part[0] =~ '\v[%#<]'
-      let expanded_part = fnameescape(expand(part))
-      let expanded_cmdline = substitute(expanded_cmdline, part, expanded_part, '')
-    endif
-  endfor
-  botright new
-  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-  execute '$read !'. expanded_cmdline
-  setlocal nomodifiable
-  1
-endfunction
+let g:vimpipe_silent = 1
+let g:vimpipe_close_map="<leader>m"
+let g:vimpipe_invoke_map="<leader>n"
+autocmd FileType javascript let b:vimpipe_command="node -p"
