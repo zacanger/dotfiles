@@ -1,11 +1,12 @@
 #!/bin/sh
 
-# simple script for running stable chrome with a temporary profile,
-# for testing and whatnot
+# simple script for running chromium with a temporary profile, for testing and whatnot
 
 profile_dir=`mktemp -d 'tmp_user.XXXX' -t`
 
-/usr/bin/google-chrome \
+ch=`/usr/bin/env chromium || /usr/bin/env chrome || /usr/bin/env google-chrome`
+
+$ch \
   --disable-java \
   --disable-sync \
   --disable-first-run-ui \
@@ -14,3 +15,4 @@ profile_dir=`mktemp -d 'tmp_user.XXXX' -t`
   --non-secure \
   --user-data-dir=$profile_dir \
   &
+
