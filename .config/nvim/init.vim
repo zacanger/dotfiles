@@ -387,6 +387,7 @@ let g:ctrlp_use_caching = 0
 let g:ctrlp_open_new_file = 'r'
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_regexp = 1
 
 " Disable visualbell
 set noeb vb t_vb=
