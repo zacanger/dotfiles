@@ -168,3 +168,49 @@ elif [[ "$OSTYPE" == "freebsd"* ]]; then
 else
   echo 'wtf'
 fi
+
+# Default to No if the user presses enter without giving an answer:
+# if ask "Do you want to do such-and-such?" N; then echo "Yes"; else echo "No"; fi
+# Only do something if you say Yes
+# if ask "Do you want to do such-and-such?"; then said_yes; fi
+# Only do something if you say No
+# if ! ask "Do you want to do such-and-such?"; then said_no; fi
+# Or if you prefer the shorter version:
+# ask "Do you want to do such-and-such?" && said_yes
+# ask "Do you want to do such-and-such?" || said_no
+ask() {
+  # https://djm.me/ask
+  local prompt default reply
+
+  while true; do
+
+    if [ "${2:-}" = "Y" ]; then
+      prompt="Y/n"
+      default=Y
+    elif [ "${2:-}" = "N" ]; then
+      prompt="y/N"
+      default=N
+    else
+      prompt="y/n"
+      default=
+    fi
+
+    # Ask the question (not using "read -p" as it uses stderr not stdout)
+    echo -n "$1 [$prompt] "
+
+    # Read the answer (use /dev/tty in case stdin is redirected from somewhere else)
+    read reply </dev/tty
+
+    # Default?
+    if [ -z "$reply" ]; then
+      reply=$default
+    fi
+
+    # Check if the reply is valid
+    case "$reply" in
+      Y*|y*) return 0 ;;
+      N*|n*) return 1 ;;
+    esac
+
+  done
+}
