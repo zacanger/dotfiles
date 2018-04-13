@@ -75,6 +75,7 @@ gst-plugins-base
 gst-plugins-good
 gst-plugins-ugly
 gstreamer
+gtk2fontsel
 gtk3-classic
 gtksourceview-pkgbuild
 gufw
