@@ -223,11 +223,12 @@ mode "resize" {
 
 # Autostart applications
 exec --no-startup-id compton -b
+exec --no-startup-id wicd-client --tray
 exec --no-startup-id xrandr --output eDP1 --primary --mode 1600x900 --pos 0x0 --rotate normal
 exec --no-startup-id dropbox-cli start
 exec --no-startup-id xflux -z 84047
 exec --no-startup-id /usr/bin/setxkbmap -option "caps:swapescape"
-exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
 exec --no-startup-id clipit
 exec --no-startup-id unclutter
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
