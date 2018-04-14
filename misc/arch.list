@@ -106,7 +106,6 @@ less
 lesspipe
 lib32-flex
 lib32-libva-vdpau-driver
-lib32-mesa-demos
 lib32-mesa-vdpau
 lib32-vulkan-intel
 lib32-vulkan-radeon
@@ -140,7 +139,6 @@ manjaro-settings-manager-notifier
 manjaro-system
 mdadm
 memtest86+
-mesa-demos
 mesa-vdpau
 mhwd
 mhwd-db

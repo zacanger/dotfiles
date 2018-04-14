@@ -1,5 +1,5 @@
 # Compare original and gzipped file size
-gz() {
+gzdiff() {
   local origsize
   origsize=$(wc -c < "$1")
   local gzipsize
