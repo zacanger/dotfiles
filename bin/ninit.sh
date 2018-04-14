@@ -100,4 +100,4 @@ fi
 fixpack # `npm i -g fixpack, and make a ~/.fixpackrc`
 git init
 git add -A
-git commit -m 'Boom!'
+git commit -m 'ninit'
