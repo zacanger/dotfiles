@@ -214,3 +214,27 @@ ask() {
 
   done
 }
+
+
+# 'types'
+
+isdir() {
+  [[ -d $1 ]]
+}
+
+isempty() {
+  [[ -z $1 ]]
+}
+
+isfile() {
+  [[ -f $1 ]]
+}
+
+isnotempty() {
+  [[ -n $1 ]]
+}
+
+# if itexists foo ; then (do things)
+itexists() {
+  command -v "$1" &> /dev/null ;
+}
