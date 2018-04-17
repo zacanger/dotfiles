@@ -91,11 +91,6 @@ body a:active *:not(img) body {
   color: #a7d7e5!important;
 }
 
-body a:visited,
-body a:visited *:not(img) {
-  color: #df8585!important;
-}
-
 code,
 pre,
 input,
