@@ -274,6 +274,7 @@ xfsprogs
 xorg-server
 xorg-server-xephyr
 xorg-twm
+xorg-xbacklight
 xorg-xev
 xorg-xhost
 xorg-xinit

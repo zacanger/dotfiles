@@ -12,7 +12,6 @@ set $terminal zt
 new_window pixel 2
 new_float normal
 
-
 # Hide borders
 hide_edge_borders none
 
@@ -33,21 +32,9 @@ bindsym $mod+Shift+q kill
 bindsym $mod+space exec --no-startup-id dmenu_recency -b
 # bindsym $mod+space exec --no-startup-id dmenu_run -i -fn 'Fira Code:pixelsize=12' -nb '#3d3d3d' -nf '#d2d8cf' -sf '#fafbf8' -sb '#a2a597'
 
-################################################################################################
-## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
-################################################################################################
-
-exec --no-startup-id volumeicon
-bindsym $mod+Ctrl+m exec $terminal -e 'alsamixer'
-#exec --no-startup-id pulseaudio
-#exec --no-startup-id pa-applet
-#bindsym $mod+Ctrl+m exec pavucontrol
-
-################################################################################################
-
 # Screen brightness controls
-# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 # Start Applications
 
@@ -223,15 +210,18 @@ mode "resize" {
 
 # Autostart applications
 exec --no-startup-id compton -b
-exec --no-startup-id wicd-client --tray
+exec --no-startup-id nm-applet
 exec --no-startup-id xrandr --output eDP1 --primary --mode 1600x900 --pos 0x0 --rotate normal
 exec --no-startup-id dropbox-cli start
 exec --no-startup-id xflux -z 84047
 exec --no-startup-id /usr/bin/setxkbmap -option "caps:swapescape"
-# exec --no-startup-id nm-applet
 exec --no-startup-id clipit
 exec --no-startup-id unclutter
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id volumeicon
+#exec --no-startup-id pulseaudio
+#exec --no-startup-id pa-applet
+
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 
