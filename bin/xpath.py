@@ -10,6 +10,7 @@ def getxpath(fd, xpath, attribute=None, encoding=None):
     parser = etree.HTMLParser(encoding=encoding)
     xml = etree.parse(fd, parser)
     sels = xml.xpath(xpath)
+
   except AssertionError:
     return None
 
@@ -33,22 +34,18 @@ def main(args):
 
   encoding = None
   attribute = None
-  for o, a in opts:
-    if o == "-h":
-      usage(args[0])
-    elif o == "-e":
-      encoding = a
-    elif o == "-a":
-      attribute = a
-    else:
-      assert False, "unhandled option"
 
-  if len(largs) < 1:
-    usage(args[0])
+  for o, a in opts:
+    if o == "-h": usage(args[0])
+    elif o == "-e": encoding = a
+    elif o == "-a": attribute = a
+    else: assert False, "unhandled option"
+
+  if len(largs) < 1: usage(args[0])
 
   rpath = getxpath(sys.stdin, largs[0], attribute, encoding)
-  if rpath == None:
-    return 1
+
+  if rpath == None: return 1
 
   sys.stdout.write(rpath)
 
