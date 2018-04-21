@@ -69,7 +69,7 @@ bindsym $mod+Shift+l move right
 
 # workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
-bindsym $mod+b workspace back_and_forth
+# bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
 # split orientation
@@ -303,7 +303,7 @@ bar {
   }
 }
 
-bindsym $mod+m bar mode toggle
+bindsym $mod+b bar mode toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
