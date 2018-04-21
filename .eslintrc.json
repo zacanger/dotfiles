@@ -1,5 +1,5 @@
 {
   "extends": [
-    "eslint-config-jane"
+    "eslint-config-zacanger"
   ]
 }
