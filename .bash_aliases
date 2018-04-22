@@ -14,7 +14,7 @@ alias reload='source ~/.bashrc'
 # git &co. ; see gitconfig for more
 alias gfa='git fetch --all'
 alias gd='git diff'
-alias gcl='git clone'
+alias gc='git clone'
 alias grv='git remote -v'
 alias gst='git st'
 alias branches='git branches'
@@ -202,7 +202,6 @@ alias findallcolours="egrep -oi '#[a-f0-9]{6}' *.css | sort | uniq"
 alias ghstatus='curl -s https://status.github.com/api/status.json | jq .status'
 alias githubstatus='curl -s https://status.github.com/api/messages.json | jq .'
 alias rkt='racket'
-alias gc='g c'
 alias ytdl='youtube-dl'
 alias alltlds="curl -s http://data.iana.org/TLD/tlds-alpha-by-domain.txt | grep -v XN | sed -e 1d -e 's/\(.*\)/\L\1/'"
 alias ur='unrar x -kb'
