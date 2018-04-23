@@ -23,6 +23,7 @@ Plug 'flowtype/vim-flow', {
 " Plug 'chemzqm/vim-jsx-improve'
 " Plug 'pangloss/vim-javascript'
 " Plug 'mxw/vim-jsx'
+Plug 'othree/yajs.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'FooSoft/vim-argwrap'
@@ -572,7 +573,7 @@ endif
 let g:flow#enable = 0
 " let g:javascript_plugin_flow = 1
 
-" let g:polyglot_disabled = ['css', 'js', 'jsx']
+let g:polyglot_disabled = ['css', 'js', 'jsx', 'javascript', 'javascript.jsx']
 let g:csstoinline_wrap_pixels = 1
 
 if !exists('g:loaded_matchit')
