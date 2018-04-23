@@ -24,6 +24,7 @@ Plug 'flowtype/vim-flow', {
 " Plug 'pangloss/vim-javascript'
 " Plug 'mxw/vim-jsx'
 Plug 'othree/yajs.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'FooSoft/vim-argwrap'
@@ -576,6 +577,9 @@ let g:flow#enable = 0
 let g:polyglot_disabled = ['css', 'js', 'jsx', 'javascript', 'javascript.jsx']
 let g:csstoinline_wrap_pixels = 1
 
+" javascript-libraries-syntax config
+let g:used_javascript_libs = 'jquery,underscore,react,jasmine,ramda,tape'
+
 if !exists('g:loaded_matchit')
   runtime macros/matchit.vim
 endif
@@ -654,3 +658,11 @@ autocmd FileType python let b:vimpipe_command="python -c"
 
 " post to ix.io -- needs ix.sh
 nnoremap <leader>i :w !ix.sh<CR>
+
+" syntaxcomplete
+if has("autocmd") && exists("+omnifunc")
+  autocmd Filetype *
+        \ if &omnifunc == "" |
+        \   setlocal omnifunc=syntaxcomplete#Complete |
+        \ endif
+endif
