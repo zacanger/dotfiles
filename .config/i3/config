@@ -47,9 +47,6 @@ bindsym $mod+F4 exec qutebrowser
 bindsym $mod+F5 exec $terminal -e 'ranger'
 bindsym $mod+F6 exec $terminal -e 'angrplayr'
 bindsym $mod+w exec --no-startup-id wallpaper.sh
-# bindsym $mod+t exec --no-startup-id pkill compton
-# bindsym $mod+Ctrl+t exec --no-startup-id compton -b
-# bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 bindsym Print exec --no-startup-id scrot
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
@@ -72,10 +69,10 @@ bindsym $mod+Shift+l move right
 # bindsym $mod+b workspace back_and_forth
 # bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
-# split orientation
-# bindsym $mod+h split h;exec notify-send 'tile horizontally'
-# bindsym $mod+v split v;exec notify-send 'tile vertically'
-bindsym $mod+q split toggle
+# toggle horizontal/vertical split
+# bindsym $mod+h split h
+# bindsym $mod+v split v
+bindsym $mod+t split toggle
 
 # toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
