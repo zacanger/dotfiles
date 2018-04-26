@@ -666,3 +666,5 @@ if has("autocmd") && exists("+omnifunc")
         \   setlocal omnifunc=syntaxcomplete#Complete |
         \ endif
 endif
+
+nnoremap <leader>w :w<CR>
