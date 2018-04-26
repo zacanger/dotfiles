@@ -24,6 +24,7 @@ Plug 'flowtype/vim-flow', {
 " Plug 'pangloss/vim-javascript'
 " Plug 'mxw/vim-jsx'
 Plug 'othree/yajs.vim'
+Plug 'luochen1990/rainbow'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'FelikZ/ctrlp-py-matcher'
@@ -53,7 +54,6 @@ Plug 'jparise/vim-graphql'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-emoji'
 Plug 'junegunn/vim-peekaboo'
-Plug 'kien/rainbow_parentheses.vim'
 Plug 'kien/tabman.vim'
 Plug 'krisajenkins/vim-pipe'
 Plug 'mattn/emoji-vim'
@@ -467,11 +467,7 @@ cnoremap sudow w !sudo tee & >/dev/null
 
 colo angr
 
-" keeping rainbow parens on
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+let g:rainbow_active = 1
 
 let g:netrw_gx="<cWORD>"
 
