@@ -24,7 +24,7 @@ Plug 'flowtype/vim-flow', {
 " Plug 'pangloss/vim-javascript'
 " Plug 'mxw/vim-jsx'
 Plug 'othree/yajs.vim'
-Plug 'luochen1990/rainbow'
+" Plug 'luochen1990/rainbow'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'FelikZ/ctrlp-py-matcher'
@@ -436,7 +436,7 @@ cnoremap sudow w !sudo tee & >/dev/null
 
 colo angr
 
-let g:rainbow_active = 1
+" let g:rainbow_active = 1
 
 let g:netrw_gx="<cWORD>"
 
