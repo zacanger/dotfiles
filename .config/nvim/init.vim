@@ -123,12 +123,27 @@ let mapleader="\<Space>"
 set hidden
 
 " Searching
+
 set hlsearch
 set incsearch
 set ignorecase
 set smartcase
 highlight clear Search
 highlight       Search    ctermfg=White
+" Clean search (highlight)
+nnoremap <silent> <leader>/ :noh<cr>
+" blink the line containing the match
+function! HLNext (blinktime)
+  set invcursorline
+  redraw
+  exec 'sleep ' . float2nr(a:blinktime * 250) . 'm'
+  set invcursorline
+  redraw
+endfunction
+" highlight matches when jumping to next
+" This rewires n and N to do the highlighing...
+nnoremap <silent> n   n:call HLNext(0.4)<cr>
+nnoremap <silent> N   N:call HLNext(0.4)<cr>
 
 " Encoding
 set bomb
@@ -412,9 +427,6 @@ noremap <leader>x :bn<CR>
 " Close buffer
 noremap <leader>c :bd<CR>
 
-" Clean search (highlight)
-nnoremap <silent> <leader><space> :noh<cr>
-
 " Switching windows
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
@@ -628,23 +640,10 @@ au BufNewFile,BufRead *.pxi set ft=clojure
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%121v', 100)
 
-" highlight matches when jumping to next
-" This rewires n and N to do the highlighing...
-nnoremap <silent> n   n:call HLNext(0.4)<cr>
-nnoremap <silent> N   N:call HLNext(0.4)<cr>
-
-" blink the line containing the match
-function! HLNext (blinktime)
-  set invcursorline
-  redraw
-  exec 'sleep ' . float2nr(a:blinktime * 250) . 'm'
-  set invcursorline
-  redraw
-endfunction
-
 " see betterdigraphs.vim
 inoremap <expr>  <C-K>   BDG_GetDigraph()
 
+" vimpipe stuff
 let g:vimpipe_silent = 1
 let g:vimpipe_close_map="<leader>m"
 let g:vimpipe_invoke_map="<leader>n"
