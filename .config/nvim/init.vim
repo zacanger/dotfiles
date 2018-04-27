@@ -65,7 +65,6 @@ Plug 'neovim/node-host'
 Plug 'othree/csscomplete.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'rbgrouleff/bclose.vim'
-Plug 'reasonml/vim-reason-loader'
 Plug 'retorillo/istanbul.vim'
 Plug 'rhysd/vim-wasm'
 Plug 'scrooloose/nerdcommenter'
@@ -77,7 +76,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-jp/vital.vim'
-Plug 'vim-scripts/CSApprox'
 Plug 'vim-scripts/SyntaxRange'
 Plug 'vim-scripts/grep.vim'
 Plug 'vim-scripts/ingo-library'
@@ -176,8 +174,6 @@ set t_Co=256
 set cursorline
 set guioptions=egmrti
 set gfn=Monospace\ 10
-
-let g:CSApprox_loaded = 1
 
 if &term =~ '256color'
   set t_ut=256
@@ -648,3 +644,7 @@ if has("autocmd") && exists("+omnifunc")
 endif
 
 nnoremap <leader>w :w<CR>
+
+" nerdcommenter
+let g:NERDSpaceDelims=1
+let g:NERDCommentEmptyLines=1
