@@ -64,7 +64,6 @@ Plug 'moll/vim-node'
 Plug 'neovim/node-host'
 Plug 'othree/csscomplete.vim'
 Plug 'plasticboy/vim-markdown'
-Plug 'rbgrouleff/bclose.vim'
 Plug 'retorillo/istanbul.vim'
 Plug 'rhysd/vim-wasm'
 Plug 'scrooloose/nerdcommenter'
@@ -72,7 +71,6 @@ Plug 'sgur/vim-editorconfig'
 Plug 'snoe/nvim-parinfer.js'
 Plug 'ternjs/tern_for_vim'
 Plug 'tpope/vim-fireplace'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-jp/vital.vim'
@@ -159,7 +157,6 @@ let g:session_directory = "~/.config/nvim/session"
 let g:session_autoload = "no"
 let g:session_autosave = "yes"
 let g:session_command_aliases = 1
-
 
 "" Visual Settings
 
@@ -339,22 +336,11 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS noci
 
 set autoread
 
-
 "" Mappings
 
 " Split
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
-
-" Git
-noremap <Leader>ga :Gwrite<CR>
-noremap <Leader>gc :Gcommit<CR>
-noremap <Leader>gsh :Gpush<CR>
-noremap <Leader>gll :Gpull<CR>
-noremap <Leader>gs :Gstatus<CR>
-noremap <Leader>gb :Gblame<CR>
-noremap <Leader>gd :Gvdiff<CR>
-noremap <Leader>gr :Gremove<CR>
 
 " session management
 nnoremap <leader>so :OpenSession
@@ -377,7 +363,7 @@ noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 " shows current hi group
-map ,hi :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
+map <leader>hi :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 
 " ctrlp.vim
 set wildmode=list:longest,list:full
@@ -404,13 +390,6 @@ noremap YY "+y<CR>
 noremap P "+gP<CR>
 noremap XX "+x<CR>
 
-" Buffer nav
-noremap <leader>z :bp<CR>
-noremap <leader>x :bn<CR>
-
-" Close buffer
-noremap <leader>c :bd<CR>
-
 " Switching windows
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
@@ -424,12 +403,6 @@ vmap > >gv
 " Move visual block
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
-
-" Open current line on GitHub
-noremap ,o :!echo `git url`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<C-R>=line('.')<CR> \| xargs open<CR><CR>
-
-
-"" Misc config
 
 " vim-python
 augroup vimrc-python
@@ -483,15 +456,8 @@ autocmd Filetype gitcommit setlocal spell textwidth=80
 nnoremap :! :!clear;
 vnoremap :! :!clear;
 
-" man = doc = help
-nnoremap :man :help
-vnoremap :man :help
-nnoremap :doc :help
-vnoremap :doc :help
-
 " yank whole file
 nnoremap :yal :%y+
-vnoremap :yal :%y+
 
 " fucking windows
 fu! FixEndings ()
@@ -611,7 +577,6 @@ map <silent> <F8> /^\(<\{7\}\\|>\{7\}\\|=\{7\}\\|\|\{7\}\)\( \\|$\)<cr>
 let g:tern_map_keys=1
 let g:tern_show_argument_hints='on_hold'
 
-let g:rooter_manual_only=1
 set mouse=a
 
 " pixie
