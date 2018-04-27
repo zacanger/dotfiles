@@ -69,7 +69,6 @@ Plug 'reasonml/vim-reason-loader'
 Plug 'retorillo/istanbul.vim'
 Plug 'rhysd/vim-wasm'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
 Plug 'sgur/vim-editorconfig'
 Plug 'snoe/nvim-parinfer.js'
 Plug 'ternjs/tern_for_vim'
@@ -270,23 +269,12 @@ abbr lmbd λ
 abbr frll ∀
 abbr midfing 🖕
 
-" NERDTree
-let g:NERDTreeChDirMode=2
-let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
-let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
-let g:NERDTreeShowBookmarks=1
-let g:nerdtree_tabs_focus_on_files=1
-let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-let g:NERDTreeWinSize = 50
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 set wildignore+=*.o,*.obj,.git,*.rbc,__pycache__,node_modules/**,bower_components/**
 set wildignore+=solr/**,log/**,*.psd,*.PSD,.git/**,.gitkeep,.gems/**
 set wildignore+=*.ico,*.ICO,backup/**,*.sql,*.dump,*.tmp,*.min.js,Gemfile.lock
 set wildignore+=*.png,*.PNG,*.JPG,*.jpg,*.JPEG,*.jpeg,*.GIF,*.gif,*.pdf,*.PDF
 set wildignore+=vendor/**,coverage/**,tmp/**,rdoc/**,*.BACKUP.*,*.BASE.*,*.LOCAL.*,*.REMOTE.*,.sass-cache/**
-
-" nnoremap <silent> <F2> :NERDTreeFind<CR>
-noremap <F3> :NERDTreeToggle<CR>
 
 " grep.vim
 nnoremap <silent> <leader>f :Rgrep<CR>
@@ -623,9 +611,6 @@ let g:parinfer_mode="off"
 
 " use <F8> to go to next conflict marker
 map <silent> <F8> /^\(<\{7\}\\|>\{7\}\\|=\{7\}\\|\|\{7\}\)\( \\|$\)<cr>
-
-" close nerdtree on file open
-let NERDTreeQuitOnOpen=1
 
 let g:tern_map_keys=1
 let g:tern_show_argument_hints='on_hold'
