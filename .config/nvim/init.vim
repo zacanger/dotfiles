@@ -591,7 +591,7 @@ inoremap <expr>  <C-K>   BDG_GetDigraph()
 
 " vimpipe stuff
 let g:vimpipe_silent = 1
-let g:vimpipe_close_map="<leader>m"
+let g:vimpipe_close_map="<leader>,"
 let g:vimpipe_invoke_map="<leader>n"
 autocmd FileType javascript let b:vimpipe_command="node -p"
 autocmd FileType clojure,clojurescript let b:vimpipe_command="lumo -e"

@@ -1,6 +1,6 @@
 " minimal vim config for working on remote machines, in containers, etc.
 " apk update && apk add vim
-" curl -sL https://raw.githubusercontent.com/zacanger/z/master/.vimrc ~/.vimrc
+" curl -sL https://raw.githubusercontent.com/zacanger/z/master/.vimrc > ~/.vimrc
 
 set nu
 syntax enable
