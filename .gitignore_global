@@ -75,7 +75,6 @@ _build/
 _references.js
 bin/x
 bower_components
-build.js
 build/Release
 bundle
 bundle.js
