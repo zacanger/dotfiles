@@ -176,6 +176,7 @@ openresolv
 openssh
 os-prober
 p7zip
+pacgraph
 pacman
 patch
 patchutils
