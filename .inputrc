@@ -11,6 +11,11 @@ set completion-ignore-case on
 set completion-prefix-display-length 2
 set completion-map-case on
 
+set editing-mode vi
+set keymap vi-command
+set keymap vi-insert
+"p": self-insert
+
 # set enable-keypad on
 
 # do not bell on tab-completion
