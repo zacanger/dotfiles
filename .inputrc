@@ -12,9 +12,13 @@ set completion-prefix-display-length 2
 set completion-map-case on
 
 set editing-mode vi
+$if mode=vi
 set keymap vi-command
+Control-l: clear-screen
 set keymap vi-insert
+Control-l: clear-screen
 "p": self-insert
+$endif
 
 # set enable-keypad on
 
