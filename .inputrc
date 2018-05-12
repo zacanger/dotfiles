@@ -17,6 +17,8 @@ set keymap vi-command
 Control-l: clear-screen
 set keymap vi-insert
 Control-l: clear-screen
+"\e.": insert-last-argument
+Control-w: backward-kill-word
 "p": self-insert
 $endif
 
