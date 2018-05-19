@@ -613,3 +613,7 @@ nnoremap <leader>w :w<CR>
 " nerdcommenter
 let g:NERDSpaceDelims=1
 let g:NERDCommentEmptyLines=1
+
+" argwrap
+let g:argwrap_padded_braces = '[{'
+let g:argwrap_tail_comma_braces = '[{'
