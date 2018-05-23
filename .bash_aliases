@@ -155,7 +155,6 @@ alias :q='exit'
 alias ag='ag --path-to-ignore ~/.agignore'
 alias catlines="highlight $1 --out-format xterm256 --line-numbers --quiet --force --style solarized-light"
 alias cat='ccat'
-alias aag='a | ag'
 alias all='compgen -c | sort -u'
 alias bs='bs.sh'
 alias c='clear'
