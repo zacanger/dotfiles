@@ -12,6 +12,7 @@ autoconf
 automake
 avahi
 b43-fwcutter
+banner
 bash
 bind-tools
 binutils
