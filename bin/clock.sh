@@ -17,7 +17,7 @@ banner_size() {
   while read; do
     [[ ${#REPLY} -gt $banner_cols ]] && banner_cols=${#REPLY}
     ((++banner_rows))
-  done < <(banner "12:34 PM")
+  done < <(banner "00:00")
 }
 
 display_clock() {
@@ -27,7 +27,7 @@ display_clock() {
     tput cup $row $clock_col
     echo -n "$REPLY"
     ((++row))
-  done < <(banner "$(date +'%I:%M %p')")
+  done < <(banner "$(date +'%H:%M ')")
 }
 
 # Set a trap to restore terminal on Ctrl-c (exit).
