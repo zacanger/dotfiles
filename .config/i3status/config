@@ -1,11 +1,7 @@
 # vim: ft=i3
-# i3status configuration file.
-# see "man i3status" for documentation.
 
-# It is important that this file is edited as UTF-8.
-# The following line should contain a sharp s:
-# ß
-# If the above line is not correctly displayed, fix your editor first!
+# man i3status
+# this file must be edited as utf-8
 
 general {
   colors = true
@@ -36,8 +32,7 @@ load {
 }
 
 disk "/" {
-  # format = " hdd %avail "
-  format = " ⛁ %avail "
+  format = " disk: %avail "
 }
 
 ethernet _first_ {
