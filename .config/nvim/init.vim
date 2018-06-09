@@ -128,13 +128,13 @@ highlight       Search    ctermfg=White
 " Clean search (highlight)
 nnoremap <silent> <leader>/ :noh<cr>
 " blink the line containing the match
-function! HLNext (blinktime)
+fu! HLNext (blinktime)
   set invcursorline
   redraw
   exec 'sleep ' . float2nr(a:blinktime * 250) . 'm'
   set invcursorline
   redraw
-endfunction
+endfu
 " highlight matches when jumping to next
 " This rewires n and N to do the highlighing...
 nnoremap <silent> n   n:call HLNext(0.4)<cr>
@@ -292,13 +292,12 @@ if has("nvim")
   autocmd BufEnter term://* startinsert
 endif
 
-"" Functions
 if !exists('*s:setupWrapping')
-  function s:setupWrapping()
+  fu s:setupWrapping()
     set wrap
     set wm=2
     set textwidth=79
-  endfunction
+  endfu
 endif
 
 
@@ -513,11 +512,11 @@ let g:gitgutter_max_signs = 700
 
 " let g:jsx_ext_required = 0
 
-function! SortLines() range
+fu! SortLines() range
   execute a:firstline . "," . a:lastline . 's/^\(.*\)$/\=strdisplaywidth( submatch(0) ) . " " . submatch(0)/'
   execute a:firstline . "," . a:lastline . 'sort n'
   execute a:firstline . "," . a:lastline . 's/^\d\+\s//'
-endfunction
+endfu
 
 " because of docker + mac + webpack (or whatever)...
 let g:backupcopy = 'yes'
@@ -621,3 +620,16 @@ let g:argwrap_tail_comma_braces = '[{'
 
 " jest snapshot files
 au BufRead,BufNewFile *.js.snap set ft=javascript
+
+" echo GetFileSize()
+fu! GetFileSize()
+    let bytes = getfsize(expand("%:p"))
+    if bytes <= 0
+        return "0"
+    endif
+    if bytes < 1024
+        return bytes
+    else
+        return (bytes / 1024) . "K"
+    endif
+endfu
