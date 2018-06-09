@@ -36,8 +36,10 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 
 # history stuff
 shopt -s histappend # append
-HISTCONTROL='erasedups:ignoreboth' # ignore lines with spaces & dups
-HISTIGNORE="ls:l:la:lo:lS:lv:lT:ll:a:k:ld:lr:cd:lc:h:history:ranger:mocp:mu:q:exit:c:ds:ds.:clear:erm:w:gg:ZZ:q!:\:wq:\:Wq:..:.:cs:dt:co:ni:ns:vi:reload:gst:edrc:edal:fs:xtrlock:dbst:dbup:dbdn:\:q:ls*;k *;a *;* --help;* -h:nss:ncu:fetch:gf:pull:gd:g:v:nu:cerm:clc"
+HISTCONTROL='erasedups:ignoreboth' # ignore lines with spaces, and duplicates
+HISTIGNORE="ls:l:la:lo:lS:lv:lT:ll:a:k:ld:lr:cd:lc:h:history:q:exit:c:ds:ds.:clear:erm:clc:cerm"
+HISTIGNORE="$HISTIGNORE:..:.:cs:co:ni:ns:vi:reload:gst:edrc:edal:fs:xtrlock:dbst:dbup:dbdn"
+HISTIGNORE="$HISTIGNORE:\:q:ls*:k *:a *:* --help:* -h:nss:ncu:fetch:gf:gd:g:v:nu"
 HISTSIZE= # length
 HISTFILESIZE= # size
 HISTTIMEFORMAT='%F %T  ' # timestamp
@@ -78,17 +80,13 @@ export PATH=$(npm bin):$HOME/.local/bin:$HOME/bin:$HOME/bin/x:$HOME/.gem/ruby/2.
 export VISUAL=nvim
 export EDITOR=nvim
 export TERMINAL=zt
-export NODE_ENV=development
-export GITHUB_USER=zacanger
 
 export JOBS=max
-# ulimit -n 10240
+if [[ `uname` == 'Darwin' ]] ; then
+  ulimit -n 10240
+fi
 
 XDG_CONFIG_HOME=$HOME/.config
-
-# if hash setxkbmap 2>/dev/null ; then
-  # /usr/bin/setxkbmap -option "caps:swapescape"
-# fi
 
 tabs -2
 
@@ -124,9 +122,7 @@ if hash aws_completer 2>/dev/null ; then
   complete -C aws_completer aws
 fi
 
-# load from interactive shell, don't from scripts/scp
-echo $- | grep -q i 2>/dev/null && source /usr/bin/liquidprompt
-
-# if [ -f $HOME/.bash_prompt ]; then
-  # . $HOME/.bash_prompt
-# fi
+# finally, load the fancy prompt
+if [ -f $HOME/.bash_prompt ]; then
+  . $HOME/.bash_prompt
+fi

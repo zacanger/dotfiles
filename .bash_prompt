@@ -1,22 +1,6 @@
+# vim: ft=sh
+
 [ -z "$PS1" ] && return
 
-_PROMPT() {
-  _EXIT_STATUS=$?
-  [ $_EXIT_STATUS != 0 ] && _EXIT_STATUS_STR=" \[\033[38;5;7m\][\[$(tput sgr0)\]\[\033[38;5;9m\]$_EXIT_STATUS\[$(tput sgr0)\]\[\033[38;5;7m\]]\[$(tput sgr0)\]"
-
-  _BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-  if [ ! $_BRANCH == "" ]
-  then
-    _BRANCH_STR="[\[$(tput sgr0)\]\[\033[38;5;11m\]$_BRANCH\[$(tput sgr0)\]\[\033[38;5;7m\]]"
-  else
-    _BRANCH_STR=""
-  fi
-
-  PS1="\[$(tput sgr0)\]\[\033[38;5;15m\]\[$(tput sgr0)\]\[\033[38;5;7m\][\[$(tput sgr0)\]\[\033[38;5;14m\]\W\[$(tput sgr0)\]\[\033[38;5;7m\]]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;7m\]$_BRANCH_STR\[$(tput sgr0)\]\[\033[38;5;15m\]\[$(tput sgr0)\]\[\033[38;5;15m\]$_EXIT_STATUS_STR\[$(tput sgr0)\]\[\033[38;5;7m\]>>\[$(tput sgr0)\] "
-  unset _EXIT_STATUS_STR
-  unset _EXIT_STATUS
-  unset _BRANCH_STR
-  unset _BRANCH
-}
-
-PROMPT_COMMAND=_PROMPT
+# load from interactive shell, don't from scripts/scp
+echo $- | grep -q i 2>/dev/null && source /usr/bin/liquidprompt
