@@ -6,6 +6,7 @@
 
 set input-meta on
 set output-meta on
+set colored-stats
 
 set completion-ignore-case on
 set completion-prefix-display-length 2
