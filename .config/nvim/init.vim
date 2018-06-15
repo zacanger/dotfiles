@@ -633,3 +633,6 @@ fu! GetFileSize()
         return (bytes / 1024) . "K"
     endif
 endfu
+
+" match angle brackest
+set matchpairs+=<:>
