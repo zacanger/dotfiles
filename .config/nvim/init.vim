@@ -538,6 +538,7 @@ let g:csstoinline_wrap_pixels = 1
 " javascript-libraries-syntax config
 let g:used_javascript_libs = 'jquery,underscore,react,jasmine,ramda,tape'
 
+" match % on more stuff
 if !exists('g:loaded_matchit')
   runtime macros/matchit.vim
 endif
@@ -636,3 +637,7 @@ endfu
 
 " match angle brackest
 set matchpairs+=<:>
+
+" preserve flags for pattern when repeating substitution with &
+nnoremap <silent> & :<C-U>&&<CR>
+vnoremap <silent> & :<C-U>&&<CR>
