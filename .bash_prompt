@@ -5,23 +5,170 @@
 # load from interactive shell, don't from scripts/scp
 # echo $- | grep -q i 2>/dev/null && source /usr/bin/liquidprompt
 
-_PROMPT() {
-  _EXIT_STATUS=$?
-  [ $_EXIT_STATUS != 0 ] && _EXIT_STATUS_STR=" \[\033[38;5;7m\][\[$(tput sgr0)\]\[\033[38;5;9m\]$_EXIT_STATUS\[$(tput sgr0)\]\[\033[38;5;7m\]]\[$(tput sgr0)\]"
+prompt() {
+    # If no arguments, print the prompt strings as they are
+    if ! (($#)) ; then
+        declare -p PS1 PS2 PS3 PS4
+        return
+    fi
 
-  _BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-  if [ ! $_BRANCH == "" ]
-  then
-    _BRANCH_STR="[\[$(tput sgr0)\]\[\033[38;5;11m\]$_BRANCH\[$(tput sgr0)\]\[\033[38;5;7m\]]"
-  else
-    _BRANCH_STR=""
-  fi
+    # What's done next depends on the first argument to the function
+    case $1 in
 
-  PS1="\[$(tput sgr0)\]\[\033[38;5;15m\]\[$(tput sgr0)\]\[\033[38;5;7m\][\[$(tput sgr0)\]\[\033[38;5;14m\]\W\[$(tput sgr0)\]\[\033[38;5;7m\]]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;7m\]$_BRANCH_STR\[$(tput sgr0)\]\[\033[38;5;15m\]\[$(tput sgr0)\]\[\033[38;5;15m\]$_EXIT_STATUS_STR\[$(tput sgr0)\]\[\033[38;5;7m\]$\[$(tput sgr0)\] "
-  unset _EXIT_STATUS_STR
-  unset _EXIT_STATUS
-  unset _BRANCH_STR
-  unset _BRANCH
+        # Turn complex, colored PS1 and debugging PS4 prompts on
+        on)
+            # Set up pre-prompt command
+            PROMPT_COMMAND='declare -i PROMPT_RETURN=$? ; history -a'
+
+            # Set up prompt, including optional PROMPT_PREFIX and PROMPT_SUFFIX
+            # variables
+            PS1='[\w]'
+            PS1=$PS1'$(prompt job)'
+            PS1=$PS1'$(prompt vcs)'
+            PS1='$PROMPT_PREFIX'$PS1
+            PS1=$PS1'$PROMPT_SUFFIX'
+            PS1=$PS1' \$'
+
+            # If Bash 4.0 is available, trim very long paths in prompt
+            if ((BASH_VERSINFO[0] >= 4)) ; then
+                PROMPT_DIRTRIM=4
+            fi
+
+            # Count available colors
+            local -i colors
+            colors=$( {
+                tput Co || tput colors
+            } 2>/dev/null )
+
+            # Prepare reset code
+            local reset
+            reset=$( {
+                tput me || tput sgr0
+            } 2>/dev/null )
+
+            # Decide prompt color formatting based on color availability
+            local format
+            case $colors in
+
+                # Check if we have non-bold bright green available
+                256)
+                    format=$( {
+                        tput AF 10 || tput setaf 10 \
+                            || tput AF 10 0 0 || tput setaf 10 0 0
+                    } 2>/dev/null )
+                    ;;
+
+                # If we have only eight colors, use bold green
+                8)
+                    format=$( {
+                        tput AF 2 || tput setaf 2
+                        tput md || tput bold
+                    } 2>/dev/null )
+                    ;;
+
+                # For all other terminals, we assume non-color (!), and we just
+                # use bold
+                *)
+                    format=$( {
+                        tput md || tput bold
+                    } 2>/dev/null )
+                    ;;
+            esac
+
+            # String it all together
+            PS1='\['"$format"'\]'"$PS1"'\['"$reset"'\] '
+            PS2='> '
+            PS3='? '
+            PS4='+<$?> ${BASH_SOURCE:-$BASH}:$FUNCNAME:$LINENO:'
+            ;;
+
+        # Revert to simple inexpensive prompts
+        off)
+            unset -v PROMPT_COMMAND PROMPT_DIRTRIM PROMPT_RETURN
+            PS1='\$ '
+            PS2='> '
+            PS3='? '
+            PS4='+ '
+            ;;
+
+        git)
+            # Bail if we have no git(1)
+            if ! hash git 2>/dev/null ; then
+                return 1
+            fi
+
+            # Attempt to determine git branch, bail if we can't
+            local branch
+            branch=$( {
+                git symbolic-ref --quiet HEAD \
+                || git rev-parse --short HEAD
+            } 2>/dev/null )
+            if [[ ! -n $branch ]] ; then
+                return 1
+            fi
+            branch=${branch##*/}
+
+            # Safely read status with -z --porcelain
+            local line
+            local -i ready modified untracked
+            while IFS= read -d '' -r line ; do
+                if [[ $line == [MADRCT]* ]] ; then
+                    ready=1
+                fi
+                if [[ $line == ?[MADRCT]* ]] ; then
+                    modified=1
+                fi
+                if [[ $line == '??'* ]] ; then
+                    untracked=1
+                fi
+            done < <(git status -z --porcelain 2>/dev/null)
+
+            # Build state array from status output flags
+            local -a state
+            if ((ready)) ; then
+                state=("${state[@]}" '+')
+            fi
+            if ((modified)) ; then
+                state=("${state[@]}" '!')
+            fi
+            if ((untracked)) ; then
+                state=("${state[@]}" '?')
+            fi
+
+            # Add another indicator if we have stashed changes
+            if git rev-parse --verify refs/stash >/dev/null 2>&1 ; then
+                state=("${state[@]}" '^')
+            fi
+
+            # Print the status in brackets with a git: prefix
+            (IFS= ; printf '(git:%s%s)' "${branch:-unknown}" "${state[*]}")
+            ;;
+
+        # VCS wrapper prompt function; print the first relevant prompt, if any
+        vcs)
+            prompt git
+            ;;
+
+        # Show the count of background jobs in curly brackets, if not zero
+        job)
+            local -i jobc
+            while read -r _ ; do
+                ((jobc++))
+            done < <(jobs -p)
+            if ((jobc > 0)) ; then
+                printf '{%u}' "$jobc"
+            fi
+            ;;
+
+        # Print error
+        *)
+            printf '%s: Unknown command %s\n' "$FUNCNAME" "$1" >&2
+            return 2
+    esac
 }
 
-PROMPT_COMMAND=_PROMPT
+# Complete words
+complete -W 'on off git vcs job' prompt
+
+# Start with full-fledged prompt
+prompt on
