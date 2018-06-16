@@ -5,19 +5,4 @@
 # load from interactive shell, don't from scripts/scp
 # echo $- | grep -q i 2>/dev/null && source /usr/bin/liquidprompt
 
-__git_branch_name() {
-  git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3-
-}
-
-__git_branch_prompt() {
-  local branch=`__git_branch_name`
-  if [ $branch ]; then printf " [%s]" $branch; fi
-}
-
-__re_prompt() {
-  PS1="\[\033[0;35m\]\[\033[0;36m\]\W\[\033[0m\]\[\033[0;32m\]\$(__git_branch_prompt)\[\033[0m\] \$ "
-}
-
-PROMPT_COMMAND=__re_prompt
-
-trap '__re_prompt' DEBUG
+export PS1="[:\W]\$? \\$\[$(tput sgr0)\] "
