@@ -141,7 +141,7 @@ prompt() {
             fi
 
             # Print the status in brackets with a git: prefix
-            (IFS= ; printf '(git:%s%s)' "${branch:-unknown}" "${state[*]}")
+            (IFS= ; printf '(%s%s)' "${branch:-unknown}" "${state[*]}")
             ;;
 
         # VCS wrapper prompt function; print the first relevant prompt, if any
