@@ -104,7 +104,7 @@ set backspace=indent,eol,start
 
 " Tabs. May be overriten by autocmd rules
 set tabstop=2
-set softtabstop=0
+set softtabstop=2
 set shiftwidth=2
 set expandtab
 set smartindent
@@ -641,3 +641,13 @@ set matchpairs+=<:>
 " preserve flags for pattern when repeating substitution with &
 nnoremap <silent> & :<C-U>&&<CR>
 vnoremap <silent> & :<C-U>&&<CR>
+
+" don't redraw the screen when executing macros, etc
+set lazyredraw
+
+if has('virtualedit')
+  set virtualedit+=block
+endif
+
+set nojoinspaces
+set display=lastline
