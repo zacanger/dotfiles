@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ND=$HOME/.ninit # ninit dir -- set this to whereever you keep these files
+ND=$HOME/.config/ninit # ninit dir -- set this to whereever you keep these files
 DN="${PWD##*/}" # current directory (like basename `pwd`)
 
 # make these files in wherever you specified $ND
@@ -100,4 +100,4 @@ fi
 fixpack # `npm i -g fixpack, and make a ~/.fixpackrc`
 git init
 git add -A
-git commit -m 'ninit'
+git commit -m 'Init'
