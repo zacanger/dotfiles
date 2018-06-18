@@ -93,23 +93,6 @@ tabs -2
 # better yaourt colors
 export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
 
-# aliases, functions, and completions in their own files
-if [ -f $HOME/.bash_aliases ]; then
-  . $HOME/.bash_aliases
-fi
-
-if [ -d $HOME/.bash_functions ]; then
-  for file in $HOME/.bash_functions/*; do
-    . "$file"
-  done
-fi
-
-if [ -d $HOME/.bash_completions ]; then
-  for file in $HOME/.bash_completions/*; do
-    . "$file"
-  done
-fi
-
 # brew's bash completion
 if [[ `uname` == 'Darwin' ]] ; then
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
@@ -122,7 +105,27 @@ if hash aws_completer 2>/dev/null ; then
   complete -C aws_completer aws
 fi
 
-# finally, load the fancy prompt
-if [ -f $HOME/.bash_prompt ]; then
-  . $HOME/.bash_prompt
+# aliases, functions, prompt, and completions in their own files
+if [ -d $HOME/.bash ]
+then
+  if [ -f $HOME/.bash/aliases ]
+  then
+    . $HOME/.bash/aliases
+  fi
+  if [ -d $HOME/.bash/functions ]
+  then
+    for file in $HOME/.bash/functions/*; do
+      . "$file"
+    done
+  fi
+  if [ -d $HOME/.bash/completions ]
+  then
+    for file in $HOME/.bash/completions/*; do
+      . "$file"
+    done
+  fi
+  # finally, load the fancy prompt
+  if [ -f $HOME/.bash/prompt ]; then
+    . $HOME/.bash/prompt
+  fi
 fi
