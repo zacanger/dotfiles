@@ -181,6 +181,7 @@ os-prober
 p7zip
 pacgraph
 pacman
+pandoc
 patch
 patchutils
 pciutils
@@ -199,7 +200,6 @@ python-neovim
 python2-neovim
 qt5-styleplugins
 qt5ct
-qtractor
 qutebrowser
 racket
 racket-docs
