@@ -1,5 +1,3 @@
-# vim: ft=sh
-
 [ -z "$PS1" ] && return
 
 # load from interactive shell, don't from scripts/scp

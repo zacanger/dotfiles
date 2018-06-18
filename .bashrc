@@ -108,9 +108,9 @@ fi
 # aliases, functions, prompt, and completions in their own files
 if [ -d $HOME/.bash ]
 then
-  if [ -f $HOME/.bash/aliases ]
+  if [ -f $HOME/.bash/aliases.sh ]
   then
-    . $HOME/.bash/aliases
+    . $HOME/.bash/aliases.sh
   fi
   if [ -d $HOME/.bash/functions ]
   then
@@ -125,7 +125,7 @@ then
     done
   fi
   # finally, load the fancy prompt
-  if [ -f $HOME/.bash/prompt ]; then
-    . $HOME/.bash/prompt
+  if [ -f $HOME/.bash/prompt.sh ]; then
+    . $HOME/.bash/prompt.sh
   fi
 fi
