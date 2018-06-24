@@ -66,6 +66,7 @@ gcc
 gcc-libs
 gcolor2
 gconf
+gdb
 gettext
 gimp
 git
@@ -130,6 +131,7 @@ linux-firmware
 linux414
 linux414-r8168
 liquidprompt
+lldb
 logrotate
 lsb-release
 lvm2
