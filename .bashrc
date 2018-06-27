@@ -75,7 +75,7 @@ case $TERM in
     ;;
 esac
 
-export CDPATH=.:$HOME/Dropbox:$HOME/Dropbox/work:$HOME/Dropbox/work/repos:$HOME/Dropbox/z:/usr/local/lib
+export CDPATH=.:$HOME:$HOME/Dropbox
 export PATH=$(npm bin):$HOME/.local/bin:$HOME/bin:$HOME/bin/x:$HOME/.gem/ruby/2.5.0/bin/:$PATH
 export VISUAL=nvim
 export EDITOR=nvim
