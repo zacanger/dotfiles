@@ -93,9 +93,6 @@ tabs -2
 # better yaourt colors
 export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
 
-# pacman -S bash-completion
-[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
-
 # brew's bash completion
 if [[ `uname` == 'Darwin' ]] ; then
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
@@ -108,7 +105,7 @@ if hash aws_completer 2>/dev/null ; then
   complete -C aws_completer aws
 fi
 
-# aliases, functions, prompt, in their own files
+# aliases, functions, completions, prompt, in their own files
 if [ -d $HOME/.bash ]
 then
   if [ -f $HOME/.bash/aliases.sh ]
@@ -121,6 +118,13 @@ then
       . "$file"
     done
   fi
+  if [ -d $HOME/.bash/completions ]
+  then
+    for file in $HOME/.bash/completions/*; do
+      . "$file"
+    done
+  fi
+
   # finally, load the fancy prompt
   if [ -f $HOME/.bash/prompt.sh ]; then
     . $HOME/.bash/prompt.sh
