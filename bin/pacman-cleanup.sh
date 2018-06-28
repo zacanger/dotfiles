@@ -1,7 +1,6 @@
 #!/bin/sh
+set -e
 
-# set fastest mirror
 pacman-mirrors -g
-
-# upgrade and optimize db
-pacman-db-upgrade && pacman-optimize && sync
+pacman-db-upgrade
+sync
