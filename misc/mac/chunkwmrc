@@ -15,21 +15,21 @@ chunkc core::plugin_dir /usr/local/opt/chunkwm/share/chunkwm/plugins
 chunkc core::hotload 1
 chunkc core::unload tiling.so
 chunkc core::unload ffm.so
-chunkc core::unload border.so
+# chunkc core::unload border.so
 
 #
 # NOTE: the following are config variables for the chunkwm-tiling plugin.
 #
 
 chunkc set global_desktop_mode           bsp
-chunkc set 2_desktop_mode                monocle
-chunkc set 5_desktop_mode                float
+# chunkc set 2_desktop_mode                monocle
+# chunkc set 5_desktop_mode                float
 
-chunkc set global_desktop_offset_top     4
-chunkc set global_desktop_offset_bottom  4
-chunkc set global_desktop_offset_left    4
-chunkc set global_desktop_offset_right   4
-chunkc set global_desktop_offset_gap     1
+chunkc set global_desktop_offset_top     0
+chunkc set global_desktop_offset_bottom  0
+chunkc set global_desktop_offset_left    0
+chunkc set global_desktop_offset_right   0
+chunkc set global_desktop_offset_gap     4
 
 chunkc set desktop_padding_step_size     10.0
 chunkc set desktop_gap_step_size         5.0
@@ -49,20 +49,20 @@ chunkc set window_region_locked          1
 
 chunkc set mouse_modifier                fn
 
-chunkc set preselect_border_color        0xffd75f5f
-chunkc set preselect_border_width        5
-chunkc set preselect_border_radius       0
+# chunkc set preselect_border_color        0xffd75f5f
+# chunkc set preselect_border_width        5
+# chunkc set preselect_border_radius       0
 
-chunkc set focused_border_color          0xff0f6288
-chunkc set focused_border_width          5
-chunkc set focused_border_radius         5
-chunkc set focused_border_skip_floating  0
+# chunkc set focused_border_color          0xff0f6288
+# chunkc set focused_border_width          5
+# chunkc set focused_border_radius         5
+# chunkc set focused_border_skip_floating  0
 
 #
 # NOTE: specify plugins to load when chunkwm starts.
 #       if chunkc plugin_dir is not set, the absolutepath is necessary.
 #
 
-chunkc core::load border.so
+# chunkc core::load border.so
 chunkc core::load tiling.so
 chunkc core::load ffm.so

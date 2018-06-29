@@ -12,13 +12,13 @@ alt - s : chunkc tiling::desktop --layout monocle
 shift + alt - q : chunkc tiling::window --close
 
 # change focus
-alt - h : chunkc tiling::window --focus west
-alt - j : chunkc tiling::window --focus south
-alt - k : chunkc tiling::window --focus north
-alt - l : chunkc tiling::window --focus east
+cmd - h : chunkc tiling::window --focus west
+cmd - j : chunkc tiling::window --focus south
+cmd - k : chunkc tiling::window --focus north
+cmd - l : chunkc tiling::window --focus east
 
-alt - p : chunkc tiling::window --focus prev
-alt - n : chunkc tiling::window --focus next
+cmd - p : chunkc tiling::window --focus prev
+cmd - n : chunkc tiling::window --focus next
 
 # move focused window
 shift + alt - h : chunkc tiling::window --warp west
@@ -38,3 +38,13 @@ shift + alt - 3 : chunkc tiling::window --send-to-desktop 3
 shift + alt - 4 : chunkc tiling::window --send-to-desktop 4
 shift + alt - 5 : chunkc tiling::window --send-to-desktop 5
 shift + alt - 6 : chunkc tiling::window --send-to-desktop 6
+
+# monitor focus
+alt - u : chunkc tiling::monitor -f prev
+alt - i : chunkc tiling::monitor -f next
+shift + alt - u : chunkc tiling::window --send-to-monitor prev
+shift + alt - i : chunkc tiling::window --send-to-monitor next
+
+# open terminal
+# cmd - return : open -a /Applications/Utilities/Terminal.app
+cmd - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
