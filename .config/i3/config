@@ -9,7 +9,7 @@ set $terminal zt
 # workspace_layout tabbed <stacking|tabbed>
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-new_window pixel 2
+new_window pixel 1
 new_float normal
 
 # Hide borders
@@ -38,7 +38,7 @@ bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness 
 
 # Start Applications
 
-gaps inner 8
+gaps inner 4
 # when using monitor
 bindsym $mod+F1 exec --no-startup-id "xrandr --output eDP1 --primary --mode 1600x900 --pos 0x0 --rotate normal ; wallpaper.sh"
 bindsym $mod+F2 exec --no-startup-id "xrandr --output HDMI2 --mode 1920x1080 --pos 1600x0 --rotate normal --output eDP1 --primary --mode 1600x900 --pos 0x180 --rotate normal ; wallpaper.sh"
