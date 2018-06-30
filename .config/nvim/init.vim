@@ -652,3 +652,6 @@ endif
 
 set nojoinspaces
 set display=lastline
+
+" node native addons
+au BufNewFile,BufRead *.gyp set ft=json
