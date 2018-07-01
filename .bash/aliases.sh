@@ -91,7 +91,7 @@ alias rml='unlink'
 
 # ls things
 alias ls='ls -F --color=auto --group-directories-first'
-alias lS='ls -lS'
+alias lS='ls -lSh'
 alias k='ls'
 alias l='ls -oshS'
 alias la='ls -A'
