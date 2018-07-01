@@ -79,6 +79,7 @@ export PATH=$(npm bin):$HOME/.local/bin:$HOME/bin:$HOME/bin/x:$HOME/.gem/ruby/2.
 export VISUAL=nvim
 export EDITOR=nvim
 export TERMINAL=zt
+export PYTHONSTARTUP=$HOME/.config/startup.py
 
 export JOBS=max
 if [[ `uname` == 'Darwin' ]] ; then
