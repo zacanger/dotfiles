@@ -4,7 +4,7 @@ alias ka='killall'
 
 # managing .bashrc & .bash_aliases
 alias edrc='nvim ~/.bashrc'
-alias edal='nvim ~/.bash_aliases'
+alias edal='nvim ~/.bash/aliases.sh'
 alias reload='source ~/.bashrc'
 
 # git &co. ; see gitconfig for more
@@ -17,7 +17,6 @@ alias branches='git branches'
 alias gpf='git pf'
 alias githist='git log -S'
 alias gf='git fetch'
-alias fetch='git fetch'
 alias rpo='git rpo'
 alias gg="git log --color --graph --pretty=format:'%Cgreen[%Creset%h%Cgreen]%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gittoday="git log --color --graph --pretty=format:'%Cgreen[%Creset%h%Cgreen]%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --since=yesterday"

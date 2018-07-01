@@ -37,9 +37,9 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 # history stuff
 shopt -s histappend # append
 HISTCONTROL='erasedups:ignoreboth' # ignore lines with spaces, and duplicates
-HISTIGNORE="ls:l:la:lo:lS:lv:a:k:cd:h:history:q:exit:c:ds:ds.:clear:erm:clc:cerm"
-HISTIGNORE="$HISTIGNORE:..:.:cs:co:ni:ns:vi:reload:gst:edrc:edal:fs:xtrlock:dbst:dbup:dbdn"
-HISTIGNORE="$HISTIGNORE:\:q::k *:a *:* --help:* -h:nss:ncu:fetch:gf:gd:g:v:nu"
+HISTIGNORE="ls:l:la:lo:lS:lv:a:k:cd:h:history:q:\:q:exit:c:ds:ds.:clear:erm:clc:cerm"
+HISTIGNORE="$HISTIGNORE:..:...:.:cs:co:ni:ns:vi:reload:gst:edrc:edal:fs:xtrlock:dbst:dbup:dbdn"
+HISTIGNORE="$HISTIGNORE:ncu:gf:gd:g:v:nu"
 HISTSIZE= # length
 HISTFILESIZE= # size
 HISTTIMEFORMAT='%F %T  ' # timestamp
