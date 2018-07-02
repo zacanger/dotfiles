@@ -37,10 +37,10 @@ shift + alt - 5 : chunkc tiling::window --send-to-desktop 5
 shift + alt - 6 : chunkc tiling::window --send-to-desktop 6
 
 # monitor focus
-alt - u : chunkc tiling::monitor -f prev
-alt - i : chunkc tiling::monitor -f next
-shift + cmd - j : chunkc tiling::window --send-to-monitor prev
-shift + cmd - k : chunkc tiling::window --send-to-monitor next
+shift + cmd - j : chunkc tiling::monitor -f prev
+shift + cmd - k : chunkc tiling::monitor -f next
+shift + cmd - h : chunkc tiling::window --send-to-monitor prev
+shift + cmd - l : chunkc tiling::window --send-to-monitor next
 
 # open terminal
 cmd - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
