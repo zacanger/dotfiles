@@ -16,10 +16,10 @@ cmd - j : chunkc tiling::window --focus next
 cmd - k : chunkc tiling::window --focus prev
 
 # move focused window
-shift + alt - h : chunkc tiling::window --warp west
-shift + alt - j : chunkc tiling::window --warp south
-shift + alt - k : chunkc tiling::window --warp north
-shift + alt - l : chunkc tiling::window --warp east
+cmd + alt - left : chunkc tiling::window --warp west
+cmd + alt - down : chunkc tiling::window --warp south
+cmd + alt - up : chunkc tiling::window --warp north
+cmd + alt - right : chunkc tiling::window --warp east
 
 alt - r : chunkc tiling::desktop --rotate 90
 
