@@ -199,5 +199,10 @@ alias no='yes n'
 alias shhh='lock.sh'
 alias bye='poweroff'
 alias zh='zathura'
+alias cla='clc ; cerm'
 
-if [[ `uname` == 'Darwin' ]] ; then alias file='file -h' ; fi
+if [[ `uname` == 'Darwin' ]]
+then
+  alias file='file -h'
+  alias shhh='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
+fi
