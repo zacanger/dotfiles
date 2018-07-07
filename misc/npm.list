@@ -4,6 +4,7 @@ calculate-tip
 cloc
 editorconfig
 empty-trash-cli
+exp
 fixpack
 global-packages-cli
 html2txt
@@ -21,6 +22,7 @@ node-gyp-install
 node-wifi-scanner-cli
 npm-check-updates
 npm@next
+react-native-cli
 simple-cam
 sloc
 standard
