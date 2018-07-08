@@ -78,7 +78,7 @@ esac
 export PATH=$(npm bin):$HOME/.local/bin:$HOME/bin:$HOME/bin/x:$HOME/.gem/ruby/2.5.0/bin/:$PATH
 export VISUAL=nvim
 export EDITOR=nvim
-export TERMINAL=zt
+export TERMINAL=qterminal
 export PYTHONSTARTUP=$HOME/.config/startup.py
 
 export JOBS=max
