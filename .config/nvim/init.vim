@@ -86,6 +86,7 @@ Plug 'w0rp/ale'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 Plug 'zacanger/angr.vim'
+Plug 'junegunn/seoul256.vim'
 
 call plug#end()
 
@@ -200,7 +201,7 @@ set titlestring=%F
 set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
 
 " vim-airline
-let g:airline_theme = 'angr'
+let g:airline_theme = 'seoul256'
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -434,7 +435,8 @@ autocmd User Node
 
 cnoremap sudow w !sudo tee & >/dev/null
 
-colo angr
+let g:seoul256_background = 233
+colo seoul256
 
 " let g:rainbow_active = 1
 
