@@ -74,6 +74,7 @@ git
 gksu
 glibc
 gnome-keyring
+gnu-netcat
 gparted
 grep
 grub
