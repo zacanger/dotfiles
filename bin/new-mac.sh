@@ -3,6 +3,11 @@
 # First, disable SIP. Turn off and boot up while holding CMD+R,
 # then open Utilities > Terminal and run `csrutil disable`
 
+# Take ownership of /usr/local. By default, all gems,
+# python packages, and npm packages go in here.
+# I know this is controversial. It _really_ doesn't matter.
+sudo chown -R $USER /usr/local
+
 # CLI tools
 xcode-select --install
 
@@ -138,7 +143,6 @@ defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 # Disable “natural” (Lion-style) scrolling
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
-
 
 # Kill some stuff
 pkill -9 Finder
