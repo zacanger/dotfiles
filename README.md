@@ -12,10 +12,10 @@ may be some references to that path scattered around.
 ## Things To Know
 
 * This is shared between a work Mac, Arch laptop, and sometimes a Debian laptop.
-* Bash 4, Python3 when possible, Node latest, Neovim.
+* Bash 4, Python3, Node latest, Neovim.
 * I don't know Perl.
 * The files called `*.list` (under `/misc`) are to keep track of what I need on a fresh PC.
-  * `arch.list`: Things to install on a brand-new Manjaro/i3 install, generated with `pacman -Qqe`. Some of these might need `yaourt`.
+  * `arch.list`: Things to install on a brand-new Manjaro/i3 install, generated with `pacman -Qqe`. Some of these might need `yaourt` or whatever's cool this week.
   * `npm.list`: `npm i -g` all these things, generated with [global-packages-cli](https://npmjs.org/package/global-packages-cli)
   * `pip.list`: Python 3
   * `gem.list`: I guess I need Ruby

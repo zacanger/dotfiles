@@ -1,4 +1,3 @@
-alert-node
 angrplayr
 calculate-tip
 cloc
@@ -6,8 +5,6 @@ editorconfig
 empty-trash-cli
 exp
 fixpack
-global-packages-cli
-html2txt
 http-codes-cli
 jscodeshift
 kill-tabs
@@ -18,8 +15,6 @@ mime-types-cli
 n
 neovim
 node-gyp
-node-gyp-install
-node-wifi-scanner-cli
 npm-check-updates
 npm@next
 react-native-cli
@@ -29,5 +24,3 @@ standard
 teenypng
 trash-cli
 ttystudio
-vmd
-vtop
