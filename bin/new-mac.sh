@@ -36,8 +36,14 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 # Always show scrollbars
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
+# Disable slow keys
+defaults write com.apple.universalaccess slowKey -int 0
+
+# Short key repeat delay
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
+
 # Set a fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 10
+defaults write NSGlobalDomain KeyRepeat -int 3
 
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
