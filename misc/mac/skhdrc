@@ -24,21 +24,14 @@ cmd + alt - right : chunkc tiling::window --warp east
 alt - r : chunkc tiling::desktop --rotate 90
 
 # move focused container to workspace
-shift + alt - m : chunkc tiling::window --send-to-desktop $(chunkc get _last_active_desktop)
-shift + alt - p : chunkc tiling::window --send-to-desktop prev
-shift + alt - n : chunkc tiling::window --send-to-desktop next
-shift + alt - 1 : chunkc tiling::window --send-to-desktop 1
-shift + alt - 2 : chunkc tiling::window --send-to-desktop 2
-shift + alt - 3 : chunkc tiling::window --send-to-desktop 3
-shift + alt - 4 : chunkc tiling::window --send-to-desktop 4
-shift + alt - 5 : chunkc tiling::window --send-to-desktop 5
-shift + alt - 6 : chunkc tiling::window --send-to-desktop 6
+# shift + alt - p : chunkc tiling::window --send-to-desktop prev
+# shift + alt - n : chunkc tiling::window --send-to-desktop next
 
 # monitor focus
 shift + cmd - j : chunkc tiling::monitor -f prev
 shift + cmd - k : chunkc tiling::monitor -f next
-shift + cmd - h : chunkc tiling::window --send-to-monitor prev
-shift + cmd - l : chunkc tiling::window --send-to-monitor next
+shift + alt - j : chunkc tiling::window --send-to-monitor prev
+shift + alt - k : chunkc tiling::window --send-to-monitor next
 
 # open terminal
 cmd - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
