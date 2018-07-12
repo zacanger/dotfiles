@@ -27,7 +27,7 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
 # Show remaining battery time and percentage
-defaults write com.apple.menuextra.battery ShowPercent -string "NO"
+defaults write com.apple.menuextra.battery ShowPercent -string "YES"
 defaults write com.apple.menuextra.battery ShowTime -string "YES"
 
 # Disable the “Are you sure you want to open this application?” dialog
@@ -36,8 +36,8 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 # Always show scrollbars
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
-# Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 0
+# Set a fast keyboard repeat rate
+defaults write NSGlobalDomain KeyRepeat -int 10
 
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
@@ -91,7 +91,8 @@ defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 chflags nohidden ~/Library
 
 # Disable local Time Machine backups
-hash tmutil &> /dev/null && sudo tmutil disablelocal
+# Doesn't work on High Sierra??
+# hash tmutil &> /dev/null && sudo tmutil disablelocal
 
 # Finder
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
@@ -265,6 +266,7 @@ brew_packages=(
   nettle
   nginx
   ninja
+  node
   ocaml
   ocamlbuild
   oniguruma
@@ -317,7 +319,7 @@ brew_packages=(
   xz
 )
 for brew_p in "${brew_packages[@]}"; do
-  brew install $p
+  brew install $brew_p
 done
 
 # Install chunkwm and skhd
@@ -325,10 +327,10 @@ brew tap crisidev/homebrew-chunkwm
 brew install --HEAD --with-tmp-logging chunkwm
 brew install --HEAD --with-logging  koekeishiya/formulae/skhd
 brew services start chunkwm
-brew services start skbd
+brew services start skhd
 
 # Global gems
-gem install compass bootstrap-sass neovim rake
+sudo gem install compass bootstrap-sass neovim rake
 
 # Install youtube-dl
 curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
@@ -341,6 +343,10 @@ if [ -f $HOME/Dropbox/z/misc/npm.list ]; then
   done
 fi
 
+# Update Node and npm the way I prefer
+n lts && n prune
+npm i -g npm && npm i -g npx
+
 # Install python packages
 if [ -f $HOME/Dropbox/z/misc/pip.list ]; then
   for p in `cat $HOME/Dropbox/z/misc/pip.list`; do
@@ -349,8 +355,10 @@ if [ -f $HOME/Dropbox/z/misc/pip.list ]; then
 fi
 
 # Haskell editor helpers
-stack install hdevtools
+# stack install hdevtools
+
+# Finish installing tern for vim
+cd $HOME.local/share/nvim/plugged/tern_for_vim/ && npm i
 
 # Update the Mac
-# sudo softwareupdate -i -a
-
+sudo softwareupdate -i -a

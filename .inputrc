@@ -34,6 +34,7 @@ $if mode=vi
 set keymap vi-command
 Control-l: clear-screen
 set keymap vi-insert
+"\e.": insert-last-argument
 Control-l: clear-screen
 "\e.": insert-last-argument
 Control-w: backward-kill-word

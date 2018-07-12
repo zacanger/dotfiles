@@ -41,7 +41,7 @@ Plug 'bling/vim-airline'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
-Plug 'styled-components/vim-styled-components'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'frigoeu/psc-ide-vim'
 Plug 'goldfeld/vim-seek'
 Plug 'gorodinskiy/vim-coloresque'
