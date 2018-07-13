@@ -369,7 +369,7 @@ fi
 # stack install hdevtools
 
 # Finish installing tern for vim
-cd $HOME.local/share/nvim/plugged/tern_for_vim/ && npm i
+cd $HOME/.local/share/nvim/plugged/tern_for_vim/ && npm i
 
 # Update the Mac
 sudo softwareupdate -i -a
