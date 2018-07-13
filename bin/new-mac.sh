@@ -14,7 +14,7 @@ xcode-select --install
 # Install Homebrew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-### MAC SHIT
+### Make the Mac a little less bad
 
 # Turn on key repeats, since by default Macs show some weird little character-picker
 # dialog when you hold a key
@@ -119,7 +119,8 @@ defaults write com.apple.Safari WebKitDeveloperExtras -bool true
 defaults write com.apple.iTunes allow-half-stars -bool true
 defaults write com.apple.iTunes invertStoreLinks -bool true
 
-# Dock
+## Dock
+
 defaults write com.apple.Dock autohide -bool true
 defaults write com.apple.dock largesize -int 65
 defaults write com.apple.dock tilesize -int 10
@@ -154,6 +155,8 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 # Kill some stuff
 pkill -9 Finder
 pkill -9 Dock
+
+### Brew
 
 # Install brew packages
 # Special cases
@@ -334,6 +337,8 @@ brew install --HEAD --with-tmp-logging chunkwm
 brew install --HEAD --with-logging  koekeishiya/formulae/skhd
 brew services start chunkwm
 brew services start skhd
+
+### Other Stuff
 
 # Global gems
 sudo gem install compass bootstrap-sass neovim rake
