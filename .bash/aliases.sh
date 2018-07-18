@@ -192,6 +192,7 @@ alias alltlds="curl -s http://data.iana.org/TLD/tlds-alpha-by-domain.txt | grep 
 alias ur='unrar x -kb'
 alias cerm='c ; erm'
 alias fx='find . -maxdepth 2 -type d -name x'
+alias fnm='find . -type d -name node_modules'
 alias acd='a ; cd'
 alias checkjane='curl -s https://jane.com/-/diag | jq .status'
 alias findlonglines="grep '.\{120\}' -r"
