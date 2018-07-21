@@ -153,6 +153,7 @@ manjaro-system
 mdadm
 memtest86+
 mesa-vdpau
+meson
 mhwd
 mhwd-db
 mkinitcpio-openswap
