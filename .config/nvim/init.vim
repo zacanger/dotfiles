@@ -85,7 +85,6 @@ Plug 'vim-utils/vim-troll-stopper'
 Plug 'w0rp/ale'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
-Plug 'zacanger/angr.vim'
 Plug 'junegunn/seoul256.vim'
 
 call plug#end()
@@ -338,6 +337,12 @@ set autoread
 
 "" Mappings
 
+nnoremap > >>
+nnoremap < <<
+
+" select most recently edited text
+nnoremap vp `[v`]
+
 " Split
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
@@ -364,6 +369,15 @@ noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 " shows current hi group
 map <leader>hi :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
+
+" Show syntax highlighting groups for word under cursor
+nmap <F7> :call <SID>SynStack()<CR>
+fu! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfu
 
 " ctrlp.vim
 set wildmode=list:longest,list:full
