@@ -23,3 +23,5 @@ may be some references to that path scattered around.
 * I have a directory `~/bin/x` hidden from version control. It may be referenced
   in a few other files. This directory contains nonfree and/or non-original
   executables.
+
+Unless otherwise noted, everything here is under the MIT license.
