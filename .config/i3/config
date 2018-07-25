@@ -4,6 +4,7 @@
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
 set $terminal mt
+set $alt Mod1
 
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
@@ -24,6 +25,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec --no-startup-id $terminal
+bindsym $alt+Return exec --no-startup-id $terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
