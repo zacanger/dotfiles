@@ -35,6 +35,7 @@
   web = instaweb
   add = add -A
   p = push
+  clear = checkout .
   rpo = remote prune origin
   alias = config --get-regexp 'alias.*'
   search = "grep _Iin"
