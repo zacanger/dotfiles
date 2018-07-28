@@ -1,5 +1,4 @@
-#!/bin/bash
-# /usr/bin/blurlock
+#!/bin/sh
 
 # take screenshot
 import -window root /tmp/screenshot.png
