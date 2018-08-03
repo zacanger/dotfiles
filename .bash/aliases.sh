@@ -26,6 +26,7 @@ alias gitodo='git grep -EiI "FIXME|TODO"'
 alias gds='git diff --stat'
 alias rbl='git rebase -i HEAD~2'
 alias aca='ac a'
+alias gpt='git push --follow-tags'
 
 # development package managers
 alias np='npm publish'
