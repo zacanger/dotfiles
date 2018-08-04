@@ -27,6 +27,7 @@ alias gds='git diff --stat'
 alias rbl='git rebase -i HEAD~2'
 alias aca='ac a'
 alias gpt='git push --follow-tags'
+alias gp='git push'
 
 # development package managers
 alias np='npm publish'
