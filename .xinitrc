@@ -10,4 +10,5 @@ xmodmap -e "clear lock" # disable caps lock switch
 xmodmap -e "keysym Caps_Lock = Escape" # set caps_lock as escape
 xinput set-int-prop "$PAD" "Device Enabled" 8 0 # turn off touchpad
 exec i3
+clcl-daemon &
 # exec ~/Dropbox/work/repos/wmjs/index.js
