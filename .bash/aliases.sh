@@ -199,6 +199,7 @@ alias shhh='lock.sh'
 alias bye='poweroff'
 alias zh='zathura'
 alias cla='clc ; cerm'
+alias lv='luvi'
 
 if [[ `uname` == 'Darwin' ]]
 then
