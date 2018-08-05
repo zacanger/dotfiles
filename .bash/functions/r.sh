@@ -1,5 +1,6 @@
-# repeat n times command
-# `r 20 kk ; r 10 r 10 cn ; r 50 echo 'lol' > lol.lol `
+# repeat command n times
+# example: r 20 echo y # same as yes | head -n 20
+
 r() {
   local i max
   max=$1; shift;
