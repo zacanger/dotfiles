@@ -113,3 +113,6 @@ nvim +PlugInstall +qa
 
 # finish installing tern for vim
 cd $HOME/.local/share/nvim/plugged/tern_for_vim/ && npm i
+
+# link fonts
+ln -s $z_path/x/fonts/ $HOME/.local/share/
