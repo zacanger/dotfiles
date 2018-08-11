@@ -116,3 +116,4 @@ cd $HOME/.local/share/nvim/plugged/tern_for_vim/ && npm i
 
 # link fonts
 ln -s $z_path/x/fonts/ $HOME/.local/share/
+fc-cache
