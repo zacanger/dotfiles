@@ -86,6 +86,7 @@ Plug 'w0rp/ale'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 Plug 'junegunn/seoul256.vim'
+Plug 'OrangeT/vim-csharp'
 
 call plug#end()
 
