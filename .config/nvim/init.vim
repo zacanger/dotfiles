@@ -78,9 +78,9 @@ Plug 'vim-utils/vim-husk'
 Plug 'vim-utils/vim-man'
 Plug 'vim-utils/vim-troll-stopper'
 Plug 'w0rp/ale'
-Plug 'xolox/vim-misc'
 Plug 'junegunn/seoul256.vim'
 Plug 'OrangeT/vim-csharp'
+Plug 'junegunn/vim-slash'
 
 call plug#end()
 
