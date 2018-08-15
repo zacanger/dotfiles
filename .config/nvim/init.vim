@@ -20,11 +20,7 @@ Plug 'flowtype/vim-flow', {
       \     'filetypes': 'javascript'
       \ }}
 
-" Plug 'chemzqm/vim-jsx-improve'
-" Plug 'pangloss/vim-javascript'
-" Plug 'mxw/vim-jsx'
 Plug 'othree/yajs.vim'
-" Plug 'luochen1990/rainbow'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'FelikZ/ctrlp-py-matcher'
@@ -57,7 +53,6 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'kien/tabman.vim'
 Plug 'krisajenkins/vim-pipe'
 Plug 'mattn/emoji-vim'
-Plug 'mhinz/vim-grepper'
 Plug 'mhinz/vim-signify'
 Plug 'mhinz/vim-startify'
 Plug 'moll/vim-node'
@@ -84,7 +79,6 @@ Plug 'vim-utils/vim-man'
 Plug 'vim-utils/vim-troll-stopper'
 Plug 'w0rp/ale'
 Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
 Plug 'junegunn/seoul256.vim'
 Plug 'OrangeT/vim-csharp'
 
@@ -119,7 +113,6 @@ let mapleader="\<Space>"
 set hidden
 
 " Searching
-
 set hlsearch
 set incsearch
 set ignorecase
@@ -153,14 +146,7 @@ set fileformats=unix,dos,mac
 set showcmd
 set shell=/bin/bash
 
-" session management
-let g:session_directory = "~/.config/nvim/session"
-let g:session_autoload = "no"
-let g:session_autosave = "yes"
-let g:session_command_aliases = 1
-
 "" Visual Settings
-
 syntax on
 set ruler
 set number
@@ -348,12 +334,6 @@ nnoremap vp `[v`]
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
 
-" session management
-nnoremap <leader>so :OpenSession
-nnoremap <leader>ss :SaveSession
-nnoremap <leader>sd :DeleteSession<CR>
-nnoremap <leader>sc :CloseSession<CR>
-
 " Tabs
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
@@ -453,8 +433,6 @@ cnoremap sudow w !sudo tee & >/dev/null
 let g:seoul256_background = 233
 colo seoul256
 
-" let g:rainbow_active = 1
-
 let g:netrw_gx="<cWORD>"
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -477,7 +455,7 @@ vnoremap :! :!clear;
 nnoremap :yal :%y+
 
 " fucking windows
-fu! FixEndings ()
+fu! FixEndings()
   :%s///g
 endfu
 
