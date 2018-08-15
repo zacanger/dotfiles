@@ -3,14 +3,14 @@
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
-set $terminal mt
+set $terminal xterm
 set $alt Mod1
 
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-new_window pixel 1
+new_window pixel 2
 new_float normal
 
 # Hide borders
@@ -151,11 +151,6 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open applications on specific workspaces
-
-# Open specific applications in floating mode
-for_window [title="alsamixer"] floating enable border pixel 2
-for_window [class="GParted"] floating enable border normal
-for_window [class="qt5ct"] floating enable sticky enable border normal
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -306,7 +301,7 @@ bindsym $mod+b bar mode toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
-client.focused          #556064 #556064 #80FFF9 #FDF6E3
+client.focused          #ADBFC5 #556064 #80FFF9 #FDF6E3
 client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
 client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
 client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
