@@ -4,8 +4,11 @@
 "\ex": 'cd !$\015ls\015'
 "\ez": 'cd -\015ls\015'
 
+# allow unicode input/output
 set input-meta on
 set output-meta on
+set convert-meta off
+
 set colored-stats
 
 # tab completion
