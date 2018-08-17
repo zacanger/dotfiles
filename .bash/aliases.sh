@@ -106,12 +106,6 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-# browsers
-alias ch='chromium'
-alias ff='firefox'
-alias qu='qutebrowser --enable-webengine-inspector'
-alias kk='kill-tabs'
-
 # dropbox
 alias dbup='dropbox-cli start'
 alias dbdn='dropbox-cli stop'

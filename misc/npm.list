@@ -3,13 +3,9 @@ cloc
 editorconfig
 empty-trash-cli
 envinfo
-exp
 fixpack
 http-codes-cli
-jscodeshift
-kill-tabs
 lnx
-lumo-cljs
 luvi
 mime-types-cli
 n
@@ -17,8 +13,6 @@ neovim
 node-gyp
 npm-check-updates
 npm@next
-react-native-cli
-simple-cam
 sloc
 standard
 teenypng
