@@ -53,23 +53,12 @@ alias cd..='cd ..'
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-alias .....="cd ../../../../"
-alias ......="cd ../../../../.."
-alias .......="cd ../../../../../.."
-alias ........="cd ../../../../../../.."
 alias ,,='..'
 alias ,,,='...'
 alias ,,,,='....'
-alias ,,,,,='.....'
-alias ,,,,,,='......'
-alias ,,,,,,,='.......'
-alias ,,,,,,,,='........'
-alias ,,,,,,,,,='.........'
-alias fonts="cd /usr/share/fonts"
 alias cs='cd $OLDPWD'
 alias ..a='.. && a'
 alias ...a='... && a'
-alias ....a='.... && a'
 
 # safety, etc.
 # gh:sindresorhus/trash,empty-trash
@@ -81,8 +70,6 @@ alias ln='ln -i'
 alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
-alias unl='unlink'
-alias rml='unlink'
 
 # ls things
 alias ls='ls -F --color=auto --group-directories-first'
@@ -113,7 +100,7 @@ alias dbfs='dropbox-cli filestatus'
 alias tuner='for n in D2 A2 D3 G3 A3 D4;do play -n synth 4 pluck $n repeat 3;done'
 
 # nvim
-alias v='v.sh'
+alias v='nvim'
 alias ex='nvim'
 alias vi='nvim'
 alias iv='nvim'
@@ -124,7 +111,6 @@ alias virb='nvim -R -b'
 alias view='vim -R'
 alias vl='v -l'
 alias vv='nvim ~/.config/nvim/init.vim'
-alias v='nvim'
 
 # all the rest
 alias q='exit'
