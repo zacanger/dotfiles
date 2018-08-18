@@ -14,8 +14,7 @@ alias gc='git clone'
 alias grv='git remote -v'
 alias branches='git branches'
 alias rpo='git rpo'
-alias gg="git log --color --graph --pretty=format:'%Cgreen[%Creset%h%Cgreen]%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias gittoday="git log --color --graph --pretty=format:'%Cgreen[%Creset%h%Cgreen]%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --since=yesterday"
+alias gg='git g'
 alias gco='git checkout'
 alias gw='ghwd.sh'
 alias gdd='git diff --dirstat'

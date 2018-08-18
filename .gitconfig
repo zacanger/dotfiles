@@ -24,9 +24,8 @@
   switch = !legit switch
   resync = !legit resync
   b = log -p -M --follow --stat --
-  chart = log --graph --oneline --all --decorate
-  graph = log --all --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   ac = !git add -A && git commit
+  g = log --color --graph --pretty=format:'%Cgreen[%Creset%h%Cgreen]%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   st = status -sb
   stash = stash -u
   remote = remote -v
@@ -39,8 +38,7 @@
   rpo = remote prune origin
   alias = config --get-regexp 'alias.*'
   search = "grep _Iin"
-  # still working on this
-  foo = log --color --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%n%Creset %s%n%Cgreen(%cr)%Creset by %C(bold blue)<%an>%Creset%Cred %GK%n'
+  graph = log --color --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%n%Cgreen(%cr)%Creset by %C(bold blue)<%an>%Creset%Cred %GK%n'
 [help]
   autocorrect = 10
 [instaweb]
