@@ -2,13 +2,10 @@
 
 const { execFileSync } = require('child_process')
 
-const isRunning = process.argv.includes(__filename)
-
 const DEFAULT_BRANCH = 'master'
 const checkAgainst = process.argv[2] || DEFAULT_BRANCH
 
 const exec = (command, args) => {
-  if (!isRunning) console.log('> ' + [ command ].concat(args).join(' '))
   const options = {
     cwd: process.cwd(),
     env: process.env,
@@ -32,6 +29,4 @@ const listChangedFiles = () => {
   ])
 }
 
-if (isRunning) console.log([ ...listChangedFiles() ].join('\n'))
-
-module.exports = listChangedFiles
+console.log([ ...listChangedFiles() ].join('\n'))

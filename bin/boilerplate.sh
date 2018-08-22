@@ -2,6 +2,7 @@
 
 set -e
 
+# ${0##*/} -- this script's name
 # this sets up the script's full path
 pushd `dirname $0` > /dev/null
 SCRIPTPATH=`pwd`
