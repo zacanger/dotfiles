@@ -27,7 +27,7 @@ if [[ $PS1 && -f /usr/share/git/git-prompt.sh ]]; then
   export GIT_PS1_SHOWUNTRACKEDFILES=1
 
   export PROMPT_DIRTRIM=3
-  export PS1="$GY[$B\w\$(__git_ps1 \"$GY|$LB%s\")$GY]$W \$(get_prompt_symbol) "
+  export PS1="$GY[$B\w\$(__git_ps1 \"$GY|$LB%s\")$GY]$W\$(get_prompt_symbol) "
 else
-  export PS1="$GY[$B\w$GY]$W \$(get_prompt_symbol) "
+  export PS1="$GY[$B\w$GY]$W\$(get_prompt_symbol) "
 fi

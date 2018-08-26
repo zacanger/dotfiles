@@ -11,6 +11,7 @@ done
 names.sh .
 
 find . -type f -name 'k2nblog*.url' -exec rm {} +
+find . -type f -name 'thumbs.db' -exec rm {} +
 
 # TODO: rename files from foobar-_-www.k2nblog.com, where any part after foobar may not be there
 
