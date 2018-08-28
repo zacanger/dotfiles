@@ -88,6 +88,7 @@ export VISUAL=nvim
 export EDITOR=nvim
 export TERMINAL=mt
 export PYTHONSTARTUP=$HOME/.config/startup.py
+export GPG_TTY=$(tty)
 
 if [[ `uname` == 'Darwin' ]]; then
   # i'm at work
