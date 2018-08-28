@@ -32,3 +32,12 @@ if [[ $PS1 && -f /usr/share/git/git-prompt.sh ]]; then
 else
   export PS1="$B\w$GY $W\$(get_prompt_symbol) "
 fi
+unset B
+unset LB
+unset GY
+unset G
+unset P
+unset PP
+unset R
+unset Y
+unset W
