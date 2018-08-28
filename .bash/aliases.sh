@@ -109,6 +109,17 @@ alias view='vim -R'
 alias vl='v -l'
 alias vv='nvim ~/.config/nvim/init.vim'
 
+# clipboard
+if [[ `uname` == 'Darwin' ]]; then
+  alias co='pbcopy'
+  alias pa='pbpaste'
+  alias clc='echo -n | co'
+else
+  alias co='xclip -selection clipboard'
+  alias pa='xclip -selection clipboard -o'
+  alias clc='echo -n | co && echo -n | xclip -selection primary'
+fi
+
 # all the rest
 alias q='exit'
 alias :q='exit'
@@ -118,7 +129,6 @@ alias cat='ccat'
 alias all='compgen -c | sort -u'
 alias bs='bs.sh'
 alias c='clear'
-alias co='xclip -selection clipboard'
 alias cx='chmod +x'
 alias dayofyear='date +%j'
 alias ds='dirsize.sh'
@@ -130,8 +140,6 @@ alias locate='locate -ie'
 alias makelist="make -rpn | sed -n -e '/^$/ { n ; /^[^ .#][^ ]*:/p ; }' | egrep --color '^[^ ]*:'"
 alias md='mkdir -p -v'
 alias names='names.sh'
-alias pa='xclip -selection clipboard -o'
-alias clc='echo -n | co && echo -n | xclip -selection primary'
 alias randomchars='dd if=/dev/urandom count=1 2> /dev/null | uuencode -m - | sed -ne 2p | cut -c-16'
 alias screencast='ffmpeg -f x11grab -s wxga -r 25 -i :0.0 -sameq ~/.tmp/screencast.mpg'
 alias sf='standard --fix'
