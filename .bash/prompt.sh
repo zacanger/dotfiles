@@ -1,8 +1,11 @@
 [ -z "$PS1" ] && return
 
-# load from interactive shell, don't from scripts/scp
-# echo $- | grep -q i 2>/dev/null && source /usr/bin/liquidprompt
-# echo $- | grep -q i 2>/dev/null && source /usr/local/Cellar/liquidprompt/1.11/share/liquidprompt
+# liquidprompt: load from interactive shell, don't from scripts/scp
+# if [[ `uname` == 'Darwin' ]]; then
+  # echo $- | grep -q i 2>/dev/null && source /usr/local/Cellar/liquidprompt/1.11/share/liquidprompt
+# else
+  # echo $- | grep -q i 2>/dev/null && source /usr/bin/liquidprompt
+# fi
 
 B='\[\e[1;38;5;33m\]'
 LB='\[\e[1;38;5;81m\]'
@@ -20,6 +23,7 @@ __get_prompt_symbol() {
 
 USE_GIT_PROMPT=no
 
+# figure out if we can use git prompt
 if [[ $PS1 && -f /usr/share/git/git-prompt.sh ]]; then
   source /usr/share/git/git-prompt.sh
   USE_GIT_PROMPT=yes
@@ -28,6 +32,7 @@ elif [[ $PS1 && -f /usr/local/etc/bash_completion.d/git-prompt.sh ]]; then
   source /usr/local/etc/bash_completion.d/git-prompt.sh
   USE_GIT_PROMPT=yes
 fi
+
 if [[ $USE_GIT_PROMPT == 'yes' ]]; then
   export GIT_PS1_SHOWDIRTYSTATE=1
   export GIT_PS1_SHOWSTASHSTATE=1
