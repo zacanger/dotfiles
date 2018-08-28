@@ -2,6 +2,7 @@
 
 # load from interactive shell, don't from scripts/scp
 # echo $- | grep -q i 2>/dev/null && source /usr/bin/liquidprompt
+# echo $- | grep -q i 2>/dev/null && source /usr/local/Cellar/liquidprompt/1.11/share/liquidprompt
 
 B='\[\e[1;38;5;33m\]'
 LB='\[\e[1;38;5;81m\]'

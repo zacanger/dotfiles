@@ -14,8 +14,10 @@ shopt -s cmdhist
 shopt -s checkwinsize
 
 # "**" in pathname matches all files & 0 or more dirs/subdirs; also, ".foo"
-shopt -s globstar
-shopt -s dotglob
+if [[ `uname` == 'Linux' ]]; then
+  shopt -s globstar
+  shopt -s dotglob
+fi
 
 # see lesspipe(1)
 [ -x /usr/bin/lesspipe.sh ] && eval "$(SHELL=/bin/sh lesspipe.sh)"
@@ -27,7 +29,7 @@ export LESS=" -R"
 stty stop ""
 
 # color ls
-if [ -x /usr/bin/dircolors ] ; then
+if hash dircolors 2>/dev/null; then
   test -r $HOME/.dircolors && eval "$(dircolors -b $HOME/.dircolors)" || eval "$(dircolors -b)"
 fi
 
@@ -64,7 +66,9 @@ complete -A function -A variable unset                      # more vars
 
 # autocorrect spelling on some things
 shopt -s cdspell
-shopt -s dirspell
+if [[ `uname` == 'Linux' ]]; then
+  shopt -s dirspell
+fi
 
 # dynamic title
 case $TERM in
@@ -75,16 +79,24 @@ case $TERM in
     ;;
 esac
 
-export PATH=$(npm bin):$HOME/.local/bin:$HOME/bin:$HOME/bin/x:$HOME/.gem/ruby/2.5.0/bin/:$PATH
+if [[ `uname` == 'Darwin' ]]; then
+  export PATH="$HOME/bin:$HOME/.gem/global/bin:$HOME/.cabal/bin:$HOME/Library/Haskell/bin:/usr/local/opt/coreutils/libexec/gnubin:/opt/local/bin:/opt/local/sbin:$GOPATH/bin:/usr/local/sbin:$HOME/.local/bin:/usr/local/opt/gettext/bin:$PATH"
+else
+  export PATH="$(npm bin):$HOME/.local/bin:$HOME/bin:$HOME/bin/x:$HOME/.gem/ruby/2.5.0/bin/:$PATH"
+fi
 export VISUAL=nvim
 export EDITOR=nvim
 export TERMINAL=mt
 export PYTHONSTARTUP=$HOME/.config/startup.py
 
-export JOBS=max
-if [[ `uname` == 'Darwin' ]] ; then
+if [[ `uname` == 'Darwin' ]]; then
+  # i'm at work
+  export CDPATH="$CDPATH:$HOME/jane"
+  export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
   ulimit -n 10240
 fi
+
+export JOBS=max
 
 XDG_CONFIG_HOME=$HOME/.config
 
