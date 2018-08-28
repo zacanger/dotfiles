@@ -20,18 +20,27 @@ get_prompt_symbol() {
 
 if [[ $PS1 && -f /usr/share/git/git-prompt.sh ]]; then
   source /usr/share/git/git-prompt.sh
-
   export GIT_PS1_SHOWDIRTYSTATE=1
   export GIT_PS1_SHOWSTASHSTATE=1
   export GIT_PS1_SHOWCOLORHINGS=1
   export GIT_PS1_SHOWUPSTREAM='auto'
   export GIT_PS1_SHOWUNTRACKEDFILES=1
-
+  export PROMPT_DIRTRIM=3
+  export PS1="$B\w\$(__git_ps1 \"$GY|$LB%s\")$GY $W\$(get_prompt_symbol) "
+elif [[ $PS1 && -f /usr/local/etc/bash_completion.d/git-prompt.sh ]]; then
+  # fuckin macs man
+  source /usr/local/etc/bash_completion.d/git-prompt.sh
+  export GIT_PS1_SHOWDIRTYSTATE=1
+  export GIT_PS1_SHOWSTASHSTATE=1
+  export GIT_PS1_SHOWCOLORHINGS=1
+  export GIT_PS1_SHOWUPSTREAM='auto'
+  export GIT_PS1_SHOWUNTRACKEDFILES=1
   export PROMPT_DIRTRIM=3
   export PS1="$B\w\$(__git_ps1 \"$GY|$LB%s\")$GY $W\$(get_prompt_symbol) "
 else
   export PS1="$B\w$GY $W\$(get_prompt_symbol) "
 fi
+
 unset B
 unset LB
 unset GY
