@@ -414,6 +414,7 @@ let g:ale_linters = {
       \ 'javascript': ['eslint'],
       \ 'jsx': ['eslint']
       \}
+let b:ale_javascript_eslint_options = "--rule 'prettier/prettier: 0'"
 
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
