@@ -18,7 +18,7 @@ Y='\[\e[1;38;5;214m\]'
 W='\[\e[0m\]'
 
 __get_prompt_symbol() {
-  [[ $UID == 0 ]] && echo "#" || echo "\$"
+  [[ $UID == 0 ]] && echo "# "
 }
 
 USE_GIT_PROMPT=no
@@ -40,9 +40,9 @@ if [[ $USE_GIT_PROMPT == 'yes' ]]; then
   export GIT_PS1_SHOWUPSTREAM='auto'
   export GIT_PS1_SHOWUNTRACKEDFILES=1
   export PROMPT_DIRTRIM=3
-  export PS1="$B\w\$(__git_ps1 \"$GY|$LB%s\")$GY $W\$(__get_prompt_symbol) "
+  export PS1="$B\w\$(__git_ps1 \"$GY|$LB%s\")$GY $W\$(__get_prompt_symbol)"
 else
-  export PS1="$B\w$GY $W\$(__get_prompt_symbol) "
+  export PS1="$B\w$GY $W\$(__get_prompt_symbol)"
 fi
 
 unset B
