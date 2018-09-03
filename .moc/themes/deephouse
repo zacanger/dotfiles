@@ -1,9 +1,3 @@
-##############################################################################
-#
-# Deephouse theme for dark console By Leodelacruz
-#
-##############################################################################
-
 background           = yellow  default
 frame                = white   default
 window_title         = white   default underline,dim
