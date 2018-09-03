@@ -172,7 +172,7 @@ alias zh='zathura'
 alias cla='clc ; cerm'
 alias lv='luvi'
 # requires moc and theme file
-alias mu='mocp -T ~/.moc/themes/z'
+alias mu='mocp -T ~/.moc/themes/z .'
 
 if [[ `uname` == 'Darwin' ]]
 then
