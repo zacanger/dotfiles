@@ -76,6 +76,10 @@ ln -s $z_path/.gnupg/gpg-agent.conf $HOME/.gnupg/
 mkdir -p $HOME/.ghc
 ln -s $z_path/.ghc/ghci.conf $HOME/.ghc/
 
+# moc, music on console player
+mkdir -p $HOME/.moc
+ln -s $zconf_path/.moc/themes/ $HOME/.moc/
+
 # .config
 $conf_path=$HOME/.config
 $zconf_path=$z_path/.config
