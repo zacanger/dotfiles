@@ -20,6 +20,7 @@ Plug 'flowtype/vim-flow', {
       \     'filetypes': 'javascript'
       \ }}
 
+Plug 'fatih/vim-go'
 Plug 'othree/yajs.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'sheerun/vim-polyglot'
