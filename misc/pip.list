@@ -11,3 +11,4 @@ numpy
 requests
 scipy
 virtualenv
+xlsx2csv
