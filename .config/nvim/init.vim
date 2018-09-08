@@ -24,7 +24,6 @@ Plug 'fatih/vim-go'
 Plug 'othree/yajs.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'FooSoft/vim-argwrap'
 Plug 'KabbAmine/lazyList.vim'
 Plug 'KabbAmine/vCoolor.vim'
@@ -36,7 +35,6 @@ Plug 'airblade/vim-rooter'
 Plug 'bitc/vim-hdevtools'
 Plug 'bling/vim-airline'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'frigoeu/psc-ide-vim'
@@ -228,8 +226,7 @@ else
   let g:airline_symbols.linenr = ''
 endif
 
-
-" Abbreviations
+" abbrs
 cnoreabbrev W! w!
 cnoreabbrev Q! q!
 cnoreabbrev Qall! qall!
@@ -246,10 +243,14 @@ cnoreabbrev stu sort u
 cnoreabbrev Stu sort u
 cnoreabbrev Set set
 cnoreabbrev Bd bd
-abbr lmbd λ
-abbr frll ∀
-abbr midfing 🖕
+inoreabbr lmbd λ
+inoreabbr frll ∀
+inoreabbr midfing 🖕
 
+" wild
+set wildmenu
+set path+=**
+set wildmode=list:longest,list:full
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 set wildignore+=*.o,*.obj,.git,*.rbc,__pycache__,node_modules/**,bower_components/**
 set wildignore+=solr/**,log/**,*.psd,*.PSD,.git/**,.gitkeep,.gems/**
@@ -288,10 +289,8 @@ if !exists('*s:setupWrapping')
   endfu
 endif
 
-
-"" Autocmd Rules
-
-" The PC is fast enough, do syntax highlight syncing from start
+"" aus
+" syntax highlight syncing from start
 augroup vimrc-sync-fromstart
   autocmd!
   autocmd BufEnter * :syntax sync fromstart
@@ -323,24 +322,23 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS noci
 
 set autoread
 
-"" Mappings
-
+"" mappings
 nnoremap > >>
 nnoremap < <<
 
 " select most recently edited text
 nnoremap vp `[v`]
 
-" Split
+" split
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
 
-" Tabs
+" tabs
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
 nnoremap <silent> <S-t> :tabnew<CR>
 
-" Set working directory
+" set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
 
 " Opens an edit command with the path of the currently edited file filled in
@@ -360,21 +358,6 @@ fu! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfu
-
-" ctrlp.vim
-set wildmode=list:longest,list:full
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
-let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
-let g:ctrlp_use_caching = 0
-let g:ctrlp_open_new_file = 'r'
-let g:ctrlp_map = '<leader>p'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_regexp = 1
-" open in new tab
-let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<2-LeftMouse>'],
-    \ 'AcceptSelection("t")': ['<cr>'],
-    \ }
 
 " Disable visualbell
 set noeb vb t_vb=
@@ -435,6 +418,11 @@ cnoremap sudow w !sudo tee & >/dev/null
 let g:seoul256_background = 233
 colo seoul256
 
+let g:netrw_banner=0
+let g:netrw_browser_split=4
+let g:netrw_altv=1
+let g:netrw_liststyle=3
+let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_gx="<cWORD>"
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -443,8 +431,6 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:grep_cmd_opts = '--line-numbers --noheading'
 set grepprg=ag
 set grepformat=%f:%l:%c:%m
-
-let g:vimfiler_as_default_explorer = 1
 
 " commit message thing
 autocmd Filetype gitcommit setlocal spell textwidth=80
