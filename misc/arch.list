@@ -203,6 +203,7 @@ poppler-data
 powertop
 procps-ng
 psmisc
+python
 python-neovim
 python2-neovim
 qt5-styleplugins
