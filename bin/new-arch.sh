@@ -44,6 +44,7 @@ home_links=(
   .bash_profile
   .bashrc
   bin
+  .ctags
   .dircolors
   .dmenurc
   .docker
