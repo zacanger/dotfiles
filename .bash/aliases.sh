@@ -7,7 +7,7 @@ alias edrc='nvim ~/.bashrc'
 alias edal='nvim ~/.bash/aliases.sh'
 alias reload='source ~/.bashrc'
 
-# git &co. ; see gitconfig for more
+# git; see gitconfig for more
 alias gfa='git fetch --all'
 alias gd='git diff'
 alias gc='git clone'
@@ -101,12 +101,7 @@ alias v='nvim'
 alias ex='nvim'
 alias vi='nvim'
 alias iv='nvim'
-alias vib='nvim -b'
 alias vim='nvim'
-alias vir='nvim -R'
-alias virb='nvim -R -b'
-alias view='vim -R'
-alias vl='v -l'
 alias vv='nvim ~/.config/nvim/init.vim'
 
 # clipboard
@@ -157,7 +152,6 @@ alias checkip='curl http://checkip.amazonaws.com/'
 alias findallcolours="egrep -oi '#[a-f0-9]{6}' *.css | sort | uniq"
 alias ghstatus='curl -s https://status.github.com/api/status.json | jq .status'
 alias githubstatus='curl -s https://status.github.com/api/messages.json | jq .'
-alias ytdl='youtube-dl'
 alias alltlds="curl -s http://data.iana.org/TLD/tlds-alpha-by-domain.txt | grep -v XN | sed -e 1d -e 's/\(.*\)/\L\1/'"
 alias ur='unrar x -kb'
 alias cerm='c ; erm'
@@ -173,9 +167,3 @@ alias cla='clc ; cerm'
 alias lv='luvi'
 # requires moc and theme file
 alias mu='mocp -T ~/.moc/themes/z .'
-
-if [[ `uname` == 'Darwin' ]]
-then
-  alias file='file -h'
-  alias shhh='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
-fi
