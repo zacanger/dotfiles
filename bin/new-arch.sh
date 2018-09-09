@@ -38,6 +38,12 @@ for p in `cat $list_path/npm.list`; do
   npm i -g $p
 done
 
+# go
+mkdir -p $HOME/.go
+for p in `cat $list_path/go.list`; do
+  go get -u $p
+done
+
 # $HOME symlinks
 home_links=(
   .agignore

@@ -1,0 +1,5 @@
+github.com/davecgh/go-spew/spew
+github.com/k0kubun/pp
+github.com/motemen/gore
+github.com/nsf/gocode
+golang.org/x/tools/cmd/godoc
