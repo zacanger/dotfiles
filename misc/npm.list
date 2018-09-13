@@ -13,6 +13,7 @@ neovim
 node-gyp
 npm-check-updates
 npm@next
+simple-cam
 sloc
 standard
 teenypng
