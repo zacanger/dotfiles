@@ -7,7 +7,9 @@ const normal = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,';01234567
 const flipped = `∀qƆpƎℲ⅁HIſʞ⅂WNOԀΌᴚS⊥∩ɅMX⅄Zɐqɔpǝɟ6ɥıſʞlɯuodbɹsʇnʌʍxʎz˙',؛0Ɩ2Ɛᔭ59Ɫ86¿¡„⅋)(][/\‾_=-><`
 
 const flip = (s) =>
-  s.split('').map((c) => normal.includes(c) ? flipped[normal.indexOf(c)] : c).reverse().join('')
+  s.split('').map((c) =>
+    normal.includes(c) ? flipped[normal.indexOf(c)] : c
+  ).reverse().join('')
 
 let text = ''
 process.stdin.resume()
