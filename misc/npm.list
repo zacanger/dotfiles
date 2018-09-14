@@ -2,7 +2,6 @@ calculate-tip
 cloc
 editorconfig
 empty-trash-cli
-envinfo
 fixpack
 http-codes-cli
 lnx
