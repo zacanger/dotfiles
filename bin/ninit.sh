@@ -28,7 +28,7 @@ WITHOUTG="{
     \"test\": \"\"
   },
   \"engines\": {
-    \"node\": \">=8.0.0\"
+    \"node\": \">=10.0.0\"
   },
   \"homepage\": \"https://github.com/zacanger/$DN#readme\",
   \"repository\": {
@@ -60,7 +60,7 @@ WITHG="{
     \"test\": \"\"
   },
   \"engines\": {
-    \"node\": \">=8.0.0\"
+    \"node\": \">=10.0.0\"
   },
   \"bin\": \"./index.js\",
   \"homepage\": \"https://github.com/zacanger/$DN#readme\",
