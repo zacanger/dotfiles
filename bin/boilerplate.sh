@@ -239,3 +239,14 @@ isnotempty() {
 itexists() {
   command -v "$1" &> /dev/null ;
 }
+
+die() {
+  echo -e $1; exit 1
+}
+
+# depends foo bar
+depends() {
+  for cmd in $@; do
+    which $cmd &> /dev/null || die "Error: Required command '$cmd' is missing."
+  done
+}
