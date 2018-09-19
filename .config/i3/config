@@ -44,12 +44,7 @@ gaps inner 4
 # when using monitor
 bindsym $mod+F1 exec --no-startup-id screenlayout-without-monitor.sh
 bindsym $mod+F2 exec --no-startup-id screenlayout-with-monitor.sh
-bindsym $mod+F3 exec chromium
-bindsym $mod+F4 exec qutebrowser
-bindsym $mod+F5 exec $terminal -e 'ranger'
-bindsym $mod+F6 exec $terminal -e 'angrplayr'
 bindsym $mod+w exec --no-startup-id wallpaper.sh
-bindsym Print exec --no-startup-id scrot
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 # focus_follows_mouse no
