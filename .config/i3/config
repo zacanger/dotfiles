@@ -32,7 +32,7 @@ bindsym $mod+Shift+q kill
 
 # start program launcher
 bindsym $mod+space exec --no-startup-id dmenu_recency -b
-# bindsym $mod+space exec --no-startup-id dmenu_run -i -fn 'Fira Code:pixelsize=12' -nb '#3d3d3d' -nf '#d2d8cf' -sf '#fafbf8' -sb '#a2a597'
+bindsym $alt+space exec --no-startup-id dmenu_recency -b
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
