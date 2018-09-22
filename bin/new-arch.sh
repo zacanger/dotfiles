@@ -115,6 +115,7 @@ ln -s $zconf_path/ninit $conf_path/
 ln -s $zconf_path/nvim $conf_path/
 ln -s $zconf_path/startup.py $conf_path/
 ln -s $zconf_path/wmjs.js $conf_path/
+ln -s $zconf_path/qutebrowser $conf_path/
 
 # install youtube-dl
 curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
