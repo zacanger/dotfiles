@@ -7,80 +7,54 @@ if has('vim_starting')
   set nocompatible " Be iMproved
 endif
 
-Plug 'Shougo/vimproc.vim', {
-      \ 'build' : {
-      \     'windows' : 'tools\\update-dll-mingw',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
 Plug 'flowtype/vim-flow', {
       \ 'autoload': {
       \     'filetypes': 'javascript'
       \ }}
 
-Plug 'fatih/vim-go'
-Plug 'othree/yajs.vim'
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'sheerun/vim-polyglot'
-Plug 'FooSoft/vim-argwrap'
-Plug 'KabbAmine/lazyList.vim'
-Plug 'KabbAmine/vCoolor.vim'
-Plug 'Shougo/unite-outline'
-Plug 'Shougo/unite.vim'
-Plug 'airblade/vim-accent'
-Plug 'airblade/vim-gitgutter'
-Plug 'airblade/vim-rooter'
-Plug 'bitc/vim-hdevtools'
-Plug 'bling/vim-airline'
-Plug 'bronson/vim-trailing-whitespace'
-Plug 'ajh17/VimCompletesMe'
-" Plug 'ervandew/supertab'
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'frigoeu/psc-ide-vim'
-Plug 'goldfeld/vim-seek'
-Plug 'gorodinskiy/vim-coloresque'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'honza/vim-snippets'
-Plug 'isomoar/vim-css-to-inline'
-Plug 'jeetsukumaran/vim-buffergator'
-Plug 'jiangmiao/auto-pairs'
-Plug 'jparise/vim-graphql'
-Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/vim-emoji'
-Plug 'junegunn/vim-peekaboo'
-Plug 'kien/tabman.vim'
-Plug 'krisajenkins/vim-pipe'
-Plug 'mattn/emoji-vim'
-Plug 'mhinz/vim-signify'
-Plug 'mhinz/vim-startify'
-Plug 'moll/vim-node'
-Plug 'neovim/node-host'
-Plug 'othree/csscomplete.vim'
-Plug 'plasticboy/vim-markdown'
-Plug 'retorillo/istanbul.vim'
-Plug 'rhysd/vim-wasm'
-Plug 'scrooloose/nerdcommenter'
-Plug 'sgur/vim-editorconfig'
-Plug 'snoe/nvim-parinfer.js'
-Plug 'ternjs/tern_for_vim'
-Plug 'tpope/vim-fireplace'
-Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-jp/vital.vim'
-Plug 'vim-scripts/SyntaxRange'
-Plug 'vim-scripts/grep.vim'
-Plug 'vim-scripts/ingo-library'
-Plug 'vim-scripts/paredit.vim'
-Plug 'vim-scripts/syntaxcomplete'
-Plug 'vim-utils/vim-husk'
-Plug 'vim-utils/vim-man'
-Plug 'vim-utils/vim-troll-stopper'
-Plug 'w0rp/ale'
-Plug 'junegunn/seoul256.vim'
-Plug 'OrangeT/vim-csharp'
-Plug 'junegunn/vim-slash'
+Plug 'fatih/vim-go'                                                  " golang
+Plug 'othree/yajs.vim'                                               " some js syntax
+Plug 'othree/javascript-libraries-syntax.vim'                        " more js syn
+Plug 'sheerun/vim-polyglot'                                          " misc langs
+Plug 'FooSoft/vim-argwrap'                                           " wrap items in blocks/lists
+Plug 'airblade/vim-rooter'                                           " set path to project root
+Plug 'bitc/vim-hdevtools'                                            " haskell
+Plug 'bling/vim-airline'                                             " better statusline
+Plug 'bronson/vim-trailing-whitespace'                               " highlight trailing whitespace
+Plug 'ajh17/VimCompletesMe'                                          " tab completion for all sorts of vim completions, also see 'ervandew/supertab'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' } " make styled-components less bad in vim
+Plug 'gorodinskiy/vim-coloresque'                                    " highlight colors
+Plug 'hail2u/vim-css3-syntax'                                        " since css syn in vim is bad
+Plug 'isomoar/vim-css-to-inline'                                     " convert between css and dom-type styles
+Plug 'jiangmiao/auto-pairs'                                          " auto-complete pairs of things
+Plug 'jparise/vim-graphql'                                           " make sense of graphql files
+Plug 'junegunn/vim-easy-align'                                       " align stuff on a symbol (like the comments in this block)
+Plug 'junegunn/vim-peekaboo'                                         " see registers easily
+Plug 'krisajenkins/vim-pipe'                                         " pipe to external command
+Plug 'mhinz/vim-signify'                                             " vcs markers in gutter, also see 'airblade/vim-gitgutter'
+Plug 'dbmrq/vim-howdy'                                               " mru start list, also see 'mhinz/vim-startify'
+Plug 'moll/vim-node'                                                 " enchance vim for node (for example, better gf)
+Plug 'othree/csscomplete.vim'                                        " better css completion
+Plug 'plasticboy/vim-markdown'                                       " better markdown features
+Plug 'retorillo/istanbul.vim'                                        " wallaby-like features
+Plug 'rhysd/vim-wasm'                                                " webassembly support
+Plug 'scrooloose/nerdcommenter'                                      " there are so many commenter plugins, but this one just works
+Plug 'sgur/vim-editorconfig'                                         " support editorconfig
+Plug 'ternjs/tern_for_vim'                                           " better js support
+Plug 'tpope/vim-surround'                                            " surround things with other things
+Plug 'vim-airline/vim-airline-themes'                                " statusline themes
+Plug 'vim-jp/vital.vim'                                              " a bunch of utils, might be unused now
+Plug 'vim-scripts/SyntaxRange'                                       " maybe unused
+Plug 'vim-scripts/grep.vim'                                          " grep for vim
+Plug 'vim-scripts/ingo-library'                                      " common funcs, might be unused
+Plug 'vim-scripts/paredit.vim'                                       " balance parens
+Plug 'vim-scripts/syntaxcomplete'                                    " super simple syn completion
+Plug 'vim-utils/vim-husk'                                            " bash emacs-mode mappings in command mode
+Plug 'vim-utils/vim-troll-stopper'                                   " highlight unicode chars that look like ascii chars
+Plug 'w0rp/ale'                                                      " linting
+Plug 'junegunn/seoul256.vim'                                         " colo
+Plug 'OrangeT/vim-csharp'                                            " nice features, including higlighting of razor templates
+Plug 'junegunn/vim-slash'                                            " better buffer search
 
 call plug#end()
 
@@ -641,3 +615,9 @@ set display=lastline
 
 " node native addons
 au BufNewFile,BufRead *.gyp set ft=json
+
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
