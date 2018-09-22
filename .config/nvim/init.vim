@@ -616,8 +616,8 @@ set display=lastline
 " node native addons
 au BufNewFile,BufRead *.gyp set ft=json
 
-
-" Start interactive EasyAlign in visual mode (e.g. vipga)
+" easyalign
+" start in visual mode (vipga)
 xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+" start for object/motion (gaip)
 nmap ga <Plug>(EasyAlign)
