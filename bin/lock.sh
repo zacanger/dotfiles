@@ -11,7 +11,7 @@ else
   rm /tmp/screenshot.png
 
   # lock the screen
-  i3lock -i /tmp/screenshotblur.png
+  i3lock -u -i /tmp/screenshotblur.png
 
   exit 0
 fi
