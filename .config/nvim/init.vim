@@ -32,7 +32,6 @@ Plug 'junegunn/vim-easy-align'                                       " align stu
 Plug 'junegunn/vim-peekaboo'                                         " see registers easily
 Plug 'krisajenkins/vim-pipe'                                         " pipe to external command
 Plug 'mhinz/vim-signify'                                             " vcs markers in gutter, also see 'airblade/vim-gitgutter'
-Plug 'dbmrq/vim-howdy'                                               " mru start list, also see 'mhinz/vim-startify'
 Plug 'moll/vim-node'                                                 " enchance vim for node (for example, better gf)
 Plug 'othree/csscomplete.vim'                                        " better css completion
 Plug 'plasticboy/vim-markdown'                                       " better markdown features
