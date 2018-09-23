@@ -75,6 +75,7 @@ alias l='ls -oshS'
 alias la='ls -A'
 alias a='ls -A'
 alias f='k -1'
+alias lt='ls -lt'
 
 # grep things
 alias dir='dir --color=auto'
@@ -162,5 +163,6 @@ alias bye='poweroff'
 alias zh='zathura'
 alias cla='clc ; cerm'
 alias lv='luvi'
+alias fiag='find . | ag'
 # requires moc and theme file
 alias mu='mocp -T ~/.moc/themes/deephouse .'
