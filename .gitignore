@@ -131,6 +131,5 @@ xfce4
 .nyc_output
 plug.vim.old
 .config/qutebrowser/quickmarks
-.config/qutebrowser/quickmarks
 .config/qutebrowser/qsettings
 .config/qutebrowser/bookmarks
