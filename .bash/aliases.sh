@@ -164,5 +164,6 @@ alias zh='zathura'
 alias cla='clc ; cerm'
 alias lv='luvi'
 alias fiag='find . | ag'
+alias w3h='w3m -T text/html'
 # requires moc and theme file
 alias mu='mocp -T ~/.moc/themes/deephouse .'
