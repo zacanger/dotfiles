@@ -19,7 +19,7 @@ WITHOUTG="{
   \"author\": {
     \"name\": \"Zac Anger\",
     \"email\": \"zac@zacanger.com\",
-    \"url\": \"http://zacanger.com\"
+    \"url\": \"https://zacanger.com\"
   },
   \"license\": \"MIT\",
   \"main\": \"index.js\",
@@ -51,7 +51,7 @@ WITHG="{
   \"author\": {
     \"name\": \"Zac Anger\",
     \"email\": \"zac@zacanger.com\",
-    \"url\": \"http://zacanger.com\"
+    \"url\": \"https://zacanger.com\"
   },
   \"license\": \"MIT\",
   \"main\": \"index.js\",
