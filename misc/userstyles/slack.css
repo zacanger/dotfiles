@@ -1,7 +1,7 @@
 /*
 document.addEventListener('DOMContentLoaded', () => {
  $.ajax({
-   url: 'https://raw.githubusercontent.com/zacanger/z/master/misc/userstyles/slack.css',
+   url: 'https://raw.githubusercontent.com/zacanger/z/7a635f7212cdbf6bf1e8a41d899b3bc65807205d/misc/userstyles/slack.css',
    success: (css) => {
      $('<style></style>').appendTo('head').html(css);
    }
