@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ `uname` == 'Darwin' ]] ; then
-  pmset -g batt | sed -n 2p
+  pmset -g batt | sed -n 2p | cut -d' ' -f3-4
 else
   if test -e /sys/class/power_supply/BAT0/capacity; then
     cat /sys/class/power_supply/BAT0/capacity /sys/class/power_supply/BAT0/status >&2
