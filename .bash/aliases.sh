@@ -167,3 +167,7 @@ alias fiag='find . | ag'
 alias w3h='w3m -T text/html'
 # requires moc and theme file
 alias mu='mocp -T ~/.moc/themes/deephouse .'
+
+if [[ `uname` == 'Darwin' ]]; then
+  alias file='file -h'
+fi
