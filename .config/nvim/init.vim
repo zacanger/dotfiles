@@ -620,3 +620,6 @@ au BufNewFile,BufRead *.gyp set ft=json
 xmap ga <Plug>(EasyAlign)
 " start for object/motion (gaip)
 nmap ga <Plug>(EasyAlign)
+
+" vim-trailing-whitespace
+let g:extra_whitespace_ignored_filetypes = ['go', 'md']
