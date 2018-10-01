@@ -19,6 +19,6 @@ max_line_length = 80
 indent_size = 4
 max_line_length = 80
 
-[*.md]
+[*.{md,go}]
 trim_trailing_whitespace = false
 max_line_length = 80
