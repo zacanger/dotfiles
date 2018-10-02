@@ -35,6 +35,7 @@ Plug 'mhinz/vim-signify'                                             " vcs marke
 Plug 'moll/vim-node'                                                 " enchance vim for node (for example, better gf)
 Plug 'othree/csscomplete.vim'                                        " better css completion
 Plug 'plasticboy/vim-markdown'                                       " better markdown features
+Plug 'bounceme/poppy.vim'                                            " simple highlight/rainbow parens plugin
 Plug 'retorillo/istanbul.vim'                                        " wallaby-like features
 Plug 'rhysd/vim-wasm'                                                " webassembly support
 Plug 'scrooloose/nerdcommenter'                                      " there are so many commenter plugins, but this one just works
@@ -623,3 +624,6 @@ nmap ga <Plug>(EasyAlign)
 
 " vim-trailing-whitespace
 let g:extra_whitespace_ignored_filetypes = ['go', 'md']
+
+" poppy
+au! cursormoved * call PoppyInit()
