@@ -2,7 +2,7 @@
 cd() {
   local arg
   local -a opts
-  for arg ; do
+  for arg; do
     case $arg in
       --)
         shift
@@ -17,8 +17,8 @@ cd() {
         ;;
     esac
   done
-  if (($# == 2)) ; then
-    if [[ $PWD == *"$1"* ]] ; then
+  if (($# == 2)); then
+    if [[ $PWD == *"$1"* ]]; then
       builtin cd "${opts[@]}" -- "${PWD/$1/$2}"
     else
       printf 'bash: %s: could not replace substring\n' \

@@ -6,7 +6,7 @@
 bd() {
   local arg     # passing opts to cd
   local -a opts
-  for arg ; do
+  for arg; do
     case $arg in
       --)
         shift
@@ -23,7 +23,7 @@ bd() {
   done
 
   # zero or one args; any more: bail
-  if (($# > 1)) ; then
+  if (($# > 1)); then
     printf 'bash: %s: usage: %s [PATH]\n' \
       "$FUNCNAME" "$FUNCNAME" >&2
     return 2
@@ -61,10 +61,10 @@ bd() {
     # if nothing matches, we get an empty string
     *)
     dir=${PWD%/*}
-    while [[ -n $dir && $dir != */"$req" ]] ; do
+    while [[ -n $dir && $dir != */"$req" ]]; do
       dir=${dir%/*}
     done
-    if [[ -z $dir ]] ; then
+    if [[ -z $dir ]]; then
       printf 'bash: %s: Directory name not in path\n' \
         "$FUNCNAME" >&2
       return 1
@@ -74,23 +74,23 @@ esac
 
 # try to cd to dir
 builtin cd "${opts[@]}" -- "$dir"
- }
+}
 
  # completion
- _bd() {
-   local word
-   word=${COMP_WORDS[COMP_CWORD]}
+_bd() {
+  local word
+  word=${COMP_WORDS[COMP_CWORD]}
 
-   # list of dirs at $PWD
-   local -a dirs
-   while read -d / -r dir ; do
-     if [[ -n $dir ]] ; then
-       dirs=("${dirs[@]}" "$dir")
-     fi
-   done < <(printf %s "$PWD")
+  # list of dirs at $PWD
+  local -a dirs
+  while read -d / -r dir; do
+    if [[ -n $dir ]]; then
+      dirs=("${dirs[@]}" "$dir")
+    fi
+  done < <(printf %s "$PWD")
 
-   # complete with matching dirs
-   COMPREPLY=( $(compgen -W "${dirs[*]}" -- "$word") )
- }
+  # complete with matching dirs
+  COMPREPLY=( $(compgen -W "${dirs[*]}" -- "$word") )
+}
 
- complete -F _bd bd
+complete -F _bd bd

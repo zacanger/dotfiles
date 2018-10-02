@@ -4,7 +4,7 @@
 pd() {
   local arg target
   local -a opts
-  for arg ; do
+  for arg; do
     case $arg in
       --)
         shift
@@ -34,7 +34,7 @@ pd() {
       return 2
       ;;
   esac
-  if [[ -n $target ]] ; then
+  if [[ -n $target ]]; then
     builtin cd "${opts[@]}" -- "$target"
   else
     printf 'bash: %s: error calculating parent directory\n' \

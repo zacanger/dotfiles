@@ -1,14 +1,13 @@
 COLS="$(tput cols)"
-if (( COLS <= 0 )) ; then
+if (( COLS <= 0 )); then
   COLS="${COLUMNS:-80}"
 fi
 
 hr() {
   local WORD="$1"
-  if [[ -n "$WORD" ]] ; then
+  if [[ -n "$WORD" ]]; then
     local LINE=''
-    while (( ${#LINE} < COLS ))
-    do
+    while (( ${#LINE} < COLS )); do
       LINE="$LINE$WORD"
     done
 
@@ -19,8 +18,7 @@ hr() {
 hrs() {
   local WORD
 
-  for WORD in "${@:-#}"
-  do
+  for WORD in "${@:-#}"; do
     hr "$WORD"
   done
 }
