@@ -373,3 +373,6 @@ cd $HOME/.local/share/nvim/plugged/tern_for_vim/ && npm i
 
 # Update the Mac
 sudo softwareupdate -i -a
+
+# Get and install http://tracesof.net/uebersicht/, then
+git clone https://github.com/herrbischoff/nerdbar.widget $HOME/Library/Application\ Support/Übersicht/widgets/nerdbar.widget

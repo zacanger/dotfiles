@@ -66,3 +66,8 @@ chunkc set mouse_modifier                fn
 # chunkc core::load border.so
 chunkc core::load tiling.so
 chunkc core::load ffm.so
+
+# hold alt key and drag to move windows
+chunkc set mouse_move_window   alt
+# hold alt and shift and drag window edges to resize
+chunkc set mouse_resize_window alt shift
