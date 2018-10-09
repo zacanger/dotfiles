@@ -1,5 +1,5 @@
-body, html, td {
-  background-color: #222;
+body, html, td, tbody, table, tr {
+  background-color: #222 !important;
 }
 
 a, a:hover {
