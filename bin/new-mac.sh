@@ -271,6 +271,7 @@ brew_packages=(
   mpv
   ncdu
   ncurses
+  neofetch
   neovim
   nettle
   nginx
@@ -376,3 +377,5 @@ sudo softwareupdate -i -a
 
 # Get and install http://tracesof.net/uebersicht/, then
 ln -s $HOME/Dropbox/z/misc/mac/bar.widget $HOME/Library/Application\ Support/Übersicht/widgets/bar.widget
+
+# TODO: linking all config files
