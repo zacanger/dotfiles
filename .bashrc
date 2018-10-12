@@ -82,7 +82,7 @@ else
 fi
 export VISUAL=nvim
 export EDITOR=nvim
-export TERMINAL=mt
+export TERMINAL=xterm
 export PYTHONSTARTUP=$HOME/.config/startup.py
 
 if [[ `uname` == 'Darwin' ]]; then
