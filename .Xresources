@@ -56,5 +56,5 @@ XTerm*.background:    #131111
 XTerm*.pointerColor:  #d9d7d2
 !! XTerm*faceSize: 11
 
-XTerm*faceName:                   Bront:size=12:antialias=true
+XTerm*faceName:                   Bront:size=14:antialias=true
 XTerm*selectToClipboard:          true
