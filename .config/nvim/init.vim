@@ -22,9 +22,7 @@ Plug 'bitc/vim-hdevtools'                                            " haskell
 Plug 'bling/vim-airline'                                             " better statusline
 Plug 'bronson/vim-trailing-whitespace'                               " highlight trailing whitespace
 Plug 'ajh17/VimCompletesMe'                                          " tab completion for all sorts of vim completions, also see 'ervandew/supertab'
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' } " make styled-components less bad in vim
 Plug 'gorodinskiy/vim-coloresque'                                    " highlight colors
-Plug 'hail2u/vim-css3-syntax'                                        " since css syn in vim is bad
 Plug 'isomoar/vim-css-to-inline'                                     " convert between css and dom-type styles
 Plug 'jiangmiao/auto-pairs'                                          " auto-complete pairs of things
 Plug 'jparise/vim-graphql'                                           " make sense of graphql files
