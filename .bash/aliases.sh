@@ -77,13 +77,6 @@ alias a='ls -A'
 alias f='k -1'
 alias lt='ls -lt'
 
-# grep things
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-
 # dropbox
 alias dbup='dropbox-cli start'
 alias dbdn='dropbox-cli stop'
@@ -114,6 +107,7 @@ else
 fi
 
 # all the rest
+alias grep='grep --color=auto'
 alias q='exit'
 alias :q='exit'
 alias ag='ag --path-to-ignore ~/.agignore'
