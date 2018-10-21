@@ -1,12 +1,5 @@
 [ -z "$PS1" ] && return
 
-# liquidprompt: load from interactive shell, don't from scripts/scp
-# if [[ `uname` == 'Darwin' ]]; then
-  # echo $- | grep -q i 2>/dev/null && source /usr/local/Cellar/liquidprompt/1.11/share/liquidprompt
-# else
-  # echo $- | grep -q i 2>/dev/null && source /usr/bin/liquidprompt
-# fi
-
 B='\[\e[1;38;5;33m\]'
 LB='\[\e[1;38;5;81m\]'
 GY='\[\e[1;38;5;242m\]'
