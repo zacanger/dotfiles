@@ -1,6 +1,7 @@
 Cython
 Pillow
 PyYAML
+awscli
 legit
 lxml
 mps
