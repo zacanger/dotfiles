@@ -20,8 +20,5 @@ may be some references to that path scattered around.
   * `pip.list`: Python 3
   * `gem.list`: I guess I need Ruby
 * On a fresh Mac (we have to use those where I work), first sync Dropbox, then run `new-mac.sh` and symlink all the shit.
-* I have a directory `~/bin/x` hidden from version control. It may be referenced
-  in a few other files. This directory contains nonfree and/or non-original
-  executables.
 
 Unless otherwise noted, everything here is under the MIT license.
