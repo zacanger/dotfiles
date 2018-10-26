@@ -12,3 +12,4 @@ set nowritebackup
 set noswapfile
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
+set clipboard^=unnamed,unnamedplus
