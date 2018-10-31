@@ -6,11 +6,6 @@ case $- in
       *) return;;
 esac
 
-# automatically start x after login on first vt
-if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-  exec startx
-fi
-
 # don't kill bg jobs on exit
 shopt -u huponexit
 
