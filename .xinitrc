@@ -8,6 +8,6 @@ xset s off
 xset s noblank
 xmodmap -e "clear lock" # disable caps lock switch
 xmodmap -e "keysym Caps_Lock = Escape" # set caps_lock as escape
-clcl-daemon &
+# clcl-daemon &
 exec i3
 # exec ~/Dropbox/work/repos/wmjs/index.js
