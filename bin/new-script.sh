@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-for i; do
-  printf "#!/usr/bin/env bash\n\n\n" > "$i"
-  chmod a+x "$i"
-done
+script=$1
+lang=${2:-bash}
 
-${EDITOR:-vim} -c ':3' "$@"
+printf "#!/usr/bin/env $lang\n\n\n" > "$script"
+chmod a+x "$script"
+
+${EDITOR:-vim} -c ':3' "$script"
