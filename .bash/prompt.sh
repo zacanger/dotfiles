@@ -7,6 +7,7 @@ prompt() {
             PS1=
             PS1=$PS1'\w'
             PS1=$PS1'$(prompt vcs)'
+            PS1=$PS1'→'
 
             # Add a helpful prefix if this shell appears to be exotic
             case ${SHELL##*/} in
