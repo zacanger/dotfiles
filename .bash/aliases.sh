@@ -131,6 +131,7 @@ alias randomchars='dd if=/dev/urandom count=1 2> /dev/null | uuencode -m - | sed
 alias screencast='ffmpeg -f x11grab -s wxga -r 25 -i :0.0 -sameq ~/.tmp/screencast.mpg'
 alias sw='time cat'
 alias vn='viewnior'
+alias bye='poweroff'
 alias yt2mp3='youtube-dl --extract-audio --audio-format mp3'
 alias shrug='echo "¯\_(ツ)_/¯"'
 alias shco='shrug | co'
