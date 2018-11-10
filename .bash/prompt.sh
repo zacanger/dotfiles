@@ -1,18 +1,9 @@
-# Frontend to controlling prompt
 prompt() {
-
-    # What's done next depends on the first argument to the function
     case $1 in
-
-        # Turn complex, colored PS1 and debugging PS4 prompts on
         on)
-            # Set up pre-prompt command
             PROMPT_COMMAND='history -a'
-
-            # trim very long paths in prompt
             PROMPT_DIRTRIM=2
 
-            # Basic prompt shape depends on whether we're in SSH or not
             PS1=
             PS1=$PS1'\w'
             PS1=$PS1'$(prompt vcs)'
@@ -26,44 +17,19 @@ prompt() {
             # Add prefix and suffix
             PS1='${PROMPT_PREFIX}'$PS1'${PROMPT_SUFFIX}'
 
-            # Add terminating "$" or "#" sign
-            PS1=$PS1'\$'
-
             # Declare variables to contain terminal control strings
             local format reset
 
             # Disregard output and error from these tput(1) calls
             {
-                # Count available colors
-                local -i colors
-                colors=$(tput colors || tput Co)
-
-                # Prepare reset code
                 reset=$(tput sgr0 || tput me)
-
-                # Check if we have non-bold bright green available
-                if ((colors >= 16)) ; then
-                    format=$(
-                        pc=${PROMPT_COLOR:-10}
-                        tput setaf "$pc" ||
-                        tput setaf "$pc" 0 0 ||
-                        tput AF "$pc" ||
-                        tput AF "$pc" 0 0
-                    )
-
-                # If we have only eight colors, use bold green
-                elif ((colors >= 8)) ; then
-                    format=$(
-                        pc=${PROMPT_COLOR:-2}
-                        tput setaf "$pc" || tput AF "$pc"
-                        tput bold || tput md
-                    )
-
-                # Otherwise, we just try bold
-                else
-                    format=$(tput bold || tput md)
-                fi
-
+                format=$(
+                    pc=${PROMPT_COLOR:-10}
+                    tput setaf "$pc" ||
+                    tput setaf "$pc" 0 0 ||
+                    tput AF "$pc" ||
+                    tput AF "$pc" 0 0
+                )
             } >/dev/null 2>&1
 
             # String it all together
@@ -73,7 +39,6 @@ prompt() {
             PS4='+<$?> ${BASH_SOURCE:-$BASH}:${FUNCNAME[0]}:$LINENO:'
             ;;
 
-        # Revert to simple inexpensive prompts
         off)
             unset -v PROMPT_COMMAND PROMPT_DIRTRIM
             PS1='$ '
@@ -82,9 +47,7 @@ prompt() {
             PS4='+ '
             ;;
 
-        # Git prompt function
         git)
-
             # Wrap as compound command; we don't want to see output from any of
             # these git(1) calls
             {
@@ -165,7 +128,6 @@ prompt() {
                 "${state//\\/\\\\}"
             ;;
 
-        # VCS wrapper prompt function; print the first relevant prompt, if any
         vcs)
             local vcs
             for vcs in "${PROMPT_VCS[@]:-git}" ; do
@@ -173,12 +135,10 @@ prompt() {
             done
             ;;
 
-        # No argument given, print prompt strings and vars
         '')
             declare -p PS1 PS2 PS3 PS4
             ;;
 
-        # Print error
         *)
             printf '%s: Unknown command %s\n' "${FUNCNAME[0]}" "$1" >&2
             return 2
