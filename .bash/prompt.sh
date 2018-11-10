@@ -9,18 +9,13 @@ prompt() {
             # Set up pre-prompt command
             PROMPT_COMMAND='history -a'
 
-            # If Bash 4.0 is available, trim very long paths in prompt
-            ((BASH_VERSINFO[0] >= 4)) && PROMPT_DIRTRIM=4
+            # trim very long paths in prompt
+            PROMPT_DIRTRIM=2
 
             # Basic prompt shape depends on whether we're in SSH or not
             PS1=
-            if [[ -n $SSH_CLIENT || -n $SSH_CONNECTION ]] ; then
-                PS1=$PS1'\h:'
-            fi
             PS1=$PS1'\w'
-
-            # Add sub-commands; VCS, job, and return status checks
-            PS1=$PS1'$(ret=$?;prompt vcs;prompt job;prompt ret)'
+            PS1=$PS1'$(prompt vcs)'
 
             # Add a helpful prefix if this shell appears to be exotic
             case ${SHELL##*/} in
@@ -85,9 +80,6 @@ prompt() {
             PS2='> '
             PS3='? '
             PS4='+ '
-            if [[ -n $SSH_CLIENT || -n $SSH_CONNECTION ]] ; then
-                PS1=$(hostname -s)'$ '
-            fi
             ;;
 
         # Git prompt function
@@ -179,21 +171,6 @@ prompt() {
             for vcs in "${PROMPT_VCS[@]:-git}" ; do
                 prompt "$vcs" && return
             done
-            ;;
-
-        # Show return status of previous command in angle brackets, if not zero
-        ret)
-            # shellcheck disable=SC2154
-            ((ret)) && printf '<%u>' "${ret//\\/\\\\}"
-            ;;
-
-        # Show the count of background jobs in curly brackets, if not zero
-        job)
-            local -i jobc
-            while read -r ; do
-                ((jobc++))
-            done < <(jobs -p)
-            ((jobc)) && printf '{%u}' "${jobc//\\/\\\\}"
             ;;
 
         # No argument given, print prompt strings and vars
