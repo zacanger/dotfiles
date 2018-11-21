@@ -37,7 +37,6 @@ Plug 'retorillo/istanbul.vim'                      " wallaby-like features
 Plug 'rhysd/vim-wasm'                              " webassembly support
 Plug 'scrooloose/nerdcommenter'                    " there are so many commenter plugins, but this one just works
 Plug 'sgur/vim-editorconfig'                       " support editorconfig
-Plug 'ternjs/tern_for_vim'                         " better js support
 Plug 'tpope/vim-surround'                          " surround things with other things
 Plug 'vim-airline/vim-airline-themes'              " statusline themes
 Plug 'vim-jp/vital.vim'                            " a bunch of utils, might be unused now
@@ -531,9 +530,6 @@ let g:parinfer_mode="off"
 
 " use <F8> to go to next conflict marker
 map <silent> <F8> /^\(<\{7\}\\|>\{7\}\\|=\{7\}\\|\|\{7\}\)\( \\|$\)<cr>
-
-let g:tern_map_keys=1
-let g:tern_show_argument_hints='on_hold'
 
 set mouse=a
 
