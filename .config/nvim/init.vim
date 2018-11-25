@@ -552,9 +552,6 @@ autocmd FileType javascript let b:vimpipe_command="node -p"
 autocmd FileType clojure,clojurescript let b:vimpipe_command="lumo -e"
 autocmd FileType python let b:vimpipe_command="python -c"
 
-" post to ix.io -- needs ix.sh
-nnoremap <leader>i :w !ix.sh<CR>
-
 " syntaxcomplete
 if has("autocmd") && exists("+omnifunc")
   autocmd Filetype *
