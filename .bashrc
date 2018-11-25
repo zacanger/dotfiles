@@ -84,6 +84,7 @@ export VISUAL=nvim
 export EDITOR=nvim
 export TERMINAL=mt
 export PYTHONSTARTUP=$HOME/.config/startup.py
+export BROWSER=w3m
 
 if [[ `uname` == 'Darwin' ]]; then
   # i'm at work
