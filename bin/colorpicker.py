@@ -1,9 +1,5 @@
-#!/usr/bin/env python2
+#!/usr/bin/python2
 
-from gtk import Window, ColorSelection, main
+import gtk
 
-window = Window()
-window.add(ColorSelection())
-window.show_all()
-
-main()
+gtk.ColorSelectionDialog('Color').run()
