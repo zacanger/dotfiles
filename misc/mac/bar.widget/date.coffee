@@ -9,6 +9,6 @@ style: """
   -webkit-font-smoothing: antialiased
   color: #eeeeee
   font: 12px Hasklig
-  right: 70px
+  right: 65px
   top: 3px
 """
