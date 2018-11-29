@@ -3,12 +3,12 @@ command: "ESC=`printf \"\e\"`; ps -A -o %mem | awk '{s+=$1} END {print \"\" s}'"
 refreshFrequency: 30000 # ms
 
 render: (output) ->
-  "mem #{output}"
+  " | mem #{output}"
 
 style: """
   -webkit-font-smoothing: antialiased
-  color: #D5C4A1
+  color: #eeeeee
   font: 12px Hasklig
-  right: 220px
+  right: 253px
   top: 3px
 """

@@ -3,12 +3,12 @@ command: "date +\"%a %d %b\""
 refreshFrequency: 10000
 
 render: (output) ->
-  "#{output}"
+  " | #{output}"
 
 style: """
   -webkit-font-smoothing: antialiased
-  color: #B16286
+  color: #eeeeee
   font: 12px Hasklig
-  right: 60px
+  right: 70px
   top: 3px
 """
