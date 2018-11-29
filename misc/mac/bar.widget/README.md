@@ -1,1 +1,1 @@
-Fork of https://github.com/herrbischoff/nerdbar.widget
+For use with https://github.com/felixhageloh/uebersicht
