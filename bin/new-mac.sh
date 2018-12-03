@@ -172,6 +172,7 @@ brew install gnu-tar --with-default-names
 brew install gnu-which --with-default-names
 brew install grep --with-default-names
 brew cask install racket
+brew cask install minikube
 # The rest
 brew_packages=(
   aspcud
@@ -237,6 +238,7 @@ brew_packages=(
   jack
   jpeg
   jq
+  kubernetes-cli
   lame
   leiningen
   less
