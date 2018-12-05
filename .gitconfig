@@ -5,7 +5,7 @@
 [user]
   email = zac@zacanger.com
   name = zacanger
-  signingkey = 0E301CABD9D72DB5
+  signingkey = F758A5EBFC761412
 [push]
   default = matching
 [color]
