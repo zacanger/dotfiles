@@ -315,6 +315,7 @@ brew_packages=(
   sip
   source-highlight
   sqlite
+  telnet
   the_silver_searcher
   tree
   unrar
