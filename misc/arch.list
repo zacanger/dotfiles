@@ -227,6 +227,7 @@ sox
 spectre-meltdown-checker
 speedtest-cli
 stack
+strace
 subversion
 sudo
 sysfsutils
