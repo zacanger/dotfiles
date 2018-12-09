@@ -71,7 +71,3 @@ chunkc core::load ffm.so
 chunkc set mouse_move_window alt
 # hold alt and shift and drag window edges to resize
 chunkc set mouse_resize_window alt shift
-# offset bar
-chunkc set custom_bar_enabled 1
-chunkc set custom_bar_all_monitors 1
-chunkc set custom_bar_offset_top 20
