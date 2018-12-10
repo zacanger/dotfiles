@@ -3,15 +3,6 @@
 if [[ `uname` == 'Darwin' ]]; then
   /System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend
 else
-  # take screenshot
-  import -window root /tmp/screenshot.png
-
-  # blur it
-  convert /tmp/screenshot.png -blur 0x9 /tmp/screenshotblur.png
-  rm /tmp/screenshot.png
-
-  # lock the screen
-  i3lock -u -i /tmp/screenshotblur.png
-
+  i3lock --color=212121
   exit 0
 fi
