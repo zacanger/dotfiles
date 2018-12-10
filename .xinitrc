@@ -1,6 +1,8 @@
 #!/bin/sh
 
-[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+if [ -f ~/.Xresources ]; then
+  xrdb -merge ~/.Xresources
+fi
 xsetroot -cursor_name left_ptr &
 ~/bin/wallpaper.sh
 xset -dpms
