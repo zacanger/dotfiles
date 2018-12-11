@@ -41,5 +41,4 @@ done
 CHARSET="A-Za-z0-9${SYM}"
 
 tr -cd "$CHARSET" < /dev/urandom | fold -w $BYTES | sed ${NUM}q
-#	| dd count=$NUM bs=$BYTES iflag=fullblock 2> /dev/null | fold -w $BYTES
-echo
+# dd count=$NUM bs=$BYTES iflag=fullblock 2> /dev/null | fold -w $BYTES
