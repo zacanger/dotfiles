@@ -512,6 +512,9 @@ autocmd FileType go set nolist
 
 " break line on words
 set linebreak
+" keep indentation
+set breakindent
+set showbreak=\\\\\
 
 " fix where new splits show up
 set splitbelow
