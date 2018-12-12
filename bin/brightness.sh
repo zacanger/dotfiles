@@ -5,7 +5,9 @@
 backlight_path=/sys/class/backlight/intel_backlight/brightness
 arg="$1"
 
-if [ "$arg" = 'low' ]; then
+if [ "$arg" = 'dark' ]; then
+  echo 50 > $backlight_path
+elif [ "$arg" = 'low' ]; then
   echo 500 > $backlight_path
 elif [ "$arg" = 'mid' ]; then
   echo 2500 > $backlight_path

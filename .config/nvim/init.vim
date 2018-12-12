@@ -532,7 +532,9 @@ let g:parinfer_mode="off"
 " use <F8> to go to next conflict marker
 map <silent> <F8> /^\(<\{7\}\\|>\{7\}\\|=\{7\}\\|\|\{7\}\)\( \\|$\)<cr>
 
-set mouse=a
+if has('mouse')
+  set mouse=a
+endif
 
 " pixie
 au BufNewFile,BufRead *.pxi set ft=clojure
