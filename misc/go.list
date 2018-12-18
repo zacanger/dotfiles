@@ -1,4 +1,5 @@
 github.com/davecgh/go-spew/spew
+github.com/jingweno/ccat
 github.com/k0kubun/pp
 github.com/motemen/gore
 github.com/nsf/gocode

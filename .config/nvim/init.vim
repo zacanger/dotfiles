@@ -17,7 +17,7 @@ Plug 'flowtype/vim-flow', {
       \ 'autoload': {
       \     'filetypes': 'javascript'
       \ }}
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 Plug 'FooSoft/vim-argwrap'                    " wrap items in blocks/lists
 Plug 'OrangeT/vim-csharp'                     " nice features, including higlighting of razor templates
@@ -622,4 +622,4 @@ nmap ga <Plug>(EasyAlign)
 let g:extra_whitespace_ignored_filetypes = ['go', 'md']
 
 " poppy
-au! cursormoved * call PoppyInit()
+" au! cursormoved * call PoppyInit()
