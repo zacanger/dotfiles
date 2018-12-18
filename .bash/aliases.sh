@@ -78,11 +78,17 @@ alias f='k -1'
 alias lt='ls -lt'
 
 # dropbox
-alias dbup='dropbox-cli start'
-alias dbdn='dropbox-cli stop'
-alias dbst='dropbox-cli status'
-alias dbls='dropbox-cli filestatus ~/Dropbox/*'
-alias dbfs='dropbox-cli filestatus'
+if [[ `uname -a` == *"Arch"* ]]; then
+  dropbox_cmd=dropbox-cli
+else
+  dropbox_cmd=dropbox
+fi
+alias dbup="$dropbox_cmd start"
+alias dbdn="$dropbox_cmd stop"
+alias dbst="$dropbox_cmd status"
+alias dbls="$dropbox_cmd filestatus ~/Dropbox/*"
+alias dbfs="$dropbox_cmd filestatus"
+unset dropbox_cmd
 
 # this requires sox, and is for DADGAD. change to E2-E4 (etc) for standard.
 alias tuner='for n in D2 A2 D3 G3 A3 D4;do play -n synth 4 pluck $n repeat 3;done'
