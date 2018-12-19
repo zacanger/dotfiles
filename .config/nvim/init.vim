@@ -542,6 +542,9 @@ endif
 " pixie
 au BufNewFile,BufRead *.pxi set ft=clojure
 
+" github actions
+au BufNewFile,BufRead *.workflow set ft=terraform
+
 " highlight the 121st column of wide lines
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%121v', 100)
