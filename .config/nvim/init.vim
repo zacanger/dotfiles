@@ -626,3 +626,6 @@ let g:extra_whitespace_ignored_filetypes = ['go', 'md']
 
 " poppy
 au! cursormoved * call PoppyInit()
+
+" ignore vim-go warning on old nvim
+let g:go_version_warning = 0
