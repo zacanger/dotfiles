@@ -3,7 +3,7 @@
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
-set $terminal mt
+set $terminal st
 set $alt Mod1
 
 # set default desktop layout (default is tiling)
@@ -31,8 +31,8 @@ bindsym $alt+Return exec --no-startup-id $terminal
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+space exec --no-startup-id dmenu_recency -b
-bindsym $alt+space exec --no-startup-id dmenu_recency -b
+bindsym $mod+space exec --no-startup-id dmenu-recent.sh -b
+bindsym $alt+space exec --no-startup-id dmenu-recent.sh -b
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
@@ -40,10 +40,9 @@ bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness 
 
 # Start Applications
 
-gaps inner 4
 # when using monitor
-bindsym $mod+F1 exec --no-startup-id screenlayout-without-monitor.sh
-bindsym $mod+F2 exec --no-startup-id screenlayout-with-monitor.sh
+# bindsym $mod+F1 exec --no-startup-id screenlayout-without-monitor.sh
+# bindsym $mod+F2 exec --no-startup-id screenlayout-with-monitor.sh
 bindsym $mod+w exec --no-startup-id wallpaper.sh
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
