@@ -41,8 +41,7 @@ bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness 
 # Start Applications
 
 # when using monitor
-# bindsym $mod+F1 exec --no-startup-id screenlayout-without-monitor.sh
-# bindsym $mod+F2 exec --no-startup-id screenlayout-with-monitor.sh
+bindsym $mod+F1 exec --no-startup-id screenlayout-thinkpad.sh
 bindsym $mod+w exec --no-startup-id wallpaper.sh
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
