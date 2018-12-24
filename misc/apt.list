@@ -1132,11 +1132,13 @@ pulseaudio-equalizer
 pulseaudio-utils
 pxlib1
 python
+python-apt
 python-apt-common
 python-crypto
 python-dbus
 python-ldb
 python-minimal
+python-parted
 python-samba
 python-sexy
 python-talloc
@@ -1205,6 +1207,7 @@ snapd
 software-properties-common
 software-properties-gtk
 sound-theme-freedesktop
+sox
 squashfs-tools
 ssl-cert
 stiler
@@ -1287,6 +1290,7 @@ xul-ext-ubufox
 xviewer
 xxd
 xz-utils
+yad
 yudit-common
 zathura
 zathura-pdf-poppler
