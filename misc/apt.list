@@ -18,6 +18,7 @@ arandr
 aspell
 aspell-en
 atool
+audacity
 avahi-daemon
 base-files
 base-passwd
@@ -342,6 +343,7 @@ keyutils
 klibc-utils
 kmod
 krb5-locales
+lame
 language-pack-de
 language-pack-de-base
 language-pack-en
