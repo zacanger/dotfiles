@@ -91,11 +91,13 @@ evince-common
 evolution-data-server-common
 exfat-fuse
 exfat-utils
+fbi
 fdisk
 feh
 ffmpegthumbnailer
 file
 file-roller
+fim
 findutils
 firefox
 firefox-locale-de
@@ -1261,6 +1263,7 @@ wamerican
 wbritish
 wget
 whiptail
+whois
 wireless-tools
 wpasupplicant
 wvdial
