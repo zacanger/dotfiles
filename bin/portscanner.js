@@ -16,7 +16,7 @@ while (start <= end) {
     s.setTimeout(timeout, () => s.destroy())
     s.connect(port, host, () => console.log(`${port} is open!`))
     s.on('data', (data) => {
-      console.log(port, data)
+      console.log(port, data.toString())
       s.destroy()
     })
     s.on('error', () => s.destroy())
