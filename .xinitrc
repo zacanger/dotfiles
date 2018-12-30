@@ -10,6 +10,7 @@ xset s off
 xset s noblank
 xmodmap -e "clear lock" # disable caps lock switch
 xmodmap -e "keysym Caps_Lock = Escape" # set caps_lock as escape
+redshift -l 40.760780:-111.891045 &
 # clcl-daemon &
 exec i3
 # exec ~/Dropbox/work/repos/wmjs/index.js

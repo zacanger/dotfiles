@@ -1187,6 +1187,7 @@ python3.6-minimal
 qt5-style-plugins
 ranger
 readline-common
+redshift
 reiserfsprogs
 rfkill
 rpcbind
