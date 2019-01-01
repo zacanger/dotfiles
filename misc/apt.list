@@ -1107,6 +1107,7 @@ pkg-config
 plymouth
 plymouth-label
 plymouth-theme-ubuntu-text
+pngcrush
 policykit-1
 policykit-1-gnome
 policykit-desktop-privileges
@@ -1259,7 +1260,6 @@ usbutils
 util-linux
 uuid-runtime
 viewnior
-vlc
 wamerican
 wbritish
 wget
