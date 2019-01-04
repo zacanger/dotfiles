@@ -124,17 +124,18 @@ if hash aws_completer 2>/dev/null ; then
 fi
 
 # aliases, functions, prompt, in their own files
-if [ -d $HOME/.bash ]
-then
-  if [ -f $HOME/.bash/aliases.sh ]
-  then
+if [ -d $HOME/.bash ]; then
+  if [ -f $HOME/.bash/aliases.sh ]; then
     . $HOME/.bash/aliases.sh
   fi
-  if [ -d $HOME/.bash/functions ]
-  then
+  if [ -d $HOME/.bash/functions ]; then
     for file in $HOME/.bash/functions/*; do
       . "$file"
     done
+  fi
+  # git and alias completion helpers
+  if [ -f $HOME/.bash/completion.sh ]; then
+    . $HOME/.bash/completion.sh
   fi
   # finally, load the fancy prompt
   if [ -f $HOME/.bash/prompt.sh ]; then
