@@ -95,6 +95,7 @@ fbi
 fdisk
 feh
 ffmpegthumbnailer
+figlet
 file
 file-roller
 fim
@@ -1226,12 +1227,14 @@ system-config-samba
 system-tools-backends
 systemd
 systemd-sysv
+sysvbanner
 sysvinit-utils
 tar
 tcpdump
 telnet
 time
 tmux
+toilet
 transmission-common
 transmission-gtk
 ttf-ubuntu-font-family
