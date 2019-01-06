@@ -10,8 +10,13 @@ sudo chown -R $USER /usr/local
 # install global packages
 list_path=$z_path/misc
 
-# arch
-yaourt -S - < $list_path/arch.list
+if [[ `uname -a` == *"Arch"* ]]; then
+  yaourt -Syu
+  yaourt -S - < $list_path/arch.list
+elif [[ `uname -a` == *"Debian"* ]] || [[ `uname -a` == *"Ubuntu"* ]]; then
+  apt-get update && apt-get dist-upgrade -f y
+  apt-get install $list_path/apt.list
+fi
 
 # gem
 for p in `cat $list_path/gem.list`; do

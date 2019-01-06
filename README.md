@@ -22,6 +22,6 @@ may be some references to that path scattered around.
   * `go.list`: `go get -u` this stuff
   * `gem.list`: I guess I need Ruby
 * On a fresh Mac (we have to use those where I work), first sync Dropbox, then run `new-mac.sh` and symlink all the shit.
-* On fresh Arch, sync Dropbox and run `new-arch.sh`.
+* On fresh Arch or Debian, sync Dropbox and run `new-linux.sh`.
 
 Unless otherwise noted, everything here is under the MIT license.
