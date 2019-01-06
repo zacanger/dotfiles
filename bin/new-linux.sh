@@ -51,11 +51,11 @@ done
 
 # $HOME symlinks
 home_links=(
+  .Xresources
   .agignore
   .bash
   .bash_profile
   .bashrc
-  bin
   .ctags
   .dircolors
   .dmenurc
@@ -70,9 +70,10 @@ home_links=(
   .inputrc
   .profile
   .racketrc
+  .tmux.conf
   .vimrc
   .xinitrc
-  .Xresources
+  bin
 )
 
 for l in "${home_links[@]}"; do

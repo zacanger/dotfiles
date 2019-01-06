@@ -378,7 +378,4 @@ cd $HOME/.local/share/nvim/plugged/tern_for_vim/ && npm i
 # Update the Mac
 sudo softwareupdate -i -a
 
-# Get and install http://tracesof.net/uebersicht/, then
-ln -s $HOME/Dropbox/z/misc/mac/bar.widget $HOME/Library/Application\ Support/Übersicht/widgets/bar.widget
-
-# TODO: linking all config files
+# TODO: symlinks
