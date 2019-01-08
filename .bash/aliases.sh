@@ -167,4 +167,5 @@ alias bye='poweroff'
 
 if [[ `uname` == 'Darwin' ]]; then
   alias file='file -h'
+  alias alacritty='open -a /Applications/Alacritty.app'
 fi

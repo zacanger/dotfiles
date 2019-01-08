@@ -34,4 +34,4 @@ shift + alt - j : chunkc tiling::window --send-to-monitor prev
 shift + alt - k : chunkc tiling::window --send-to-monitor next
 
 # open terminal
-cmd - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
+cmd - return : open -a /Applications/Alacritty.app # /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
