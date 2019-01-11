@@ -39,7 +39,6 @@ busybox-static
 bzip2
 ca-certificates
 cifs-utils
-cinnamon-l10n
 command-not-found
 command-not-found-data
 console-setup
@@ -91,6 +90,7 @@ evince-common
 evolution-data-server-common
 exfat-fuse
 exfat-utils
+exuberant-ctags
 fbi
 fdisk
 feh
@@ -209,8 +209,7 @@ fwupdate-signed
 gcc-7-base
 gcc-8-base
 gcr
-gdebi
-gdebi-core
+gdb
 gdisk
 geoip-database
 gettext-base
@@ -253,10 +252,6 @@ gnome-desktop3-data
 gnome-disk-utility
 gnome-keyring
 gnome-search-tool
-gnome-software
-gnome-software-common
-gnome-software-plugin-flatpak
-gnome-software-plugin-snap
 gnome-system-tools
 gnome-themes-standard
 gnupg
@@ -1221,7 +1216,6 @@ strace
 stterm
 suckless-tools
 sudo
-synaptic
 system-config-printer
 system-config-printer-common
 system-config-samba
