@@ -29,7 +29,7 @@ for p in `cat $list_path/stack.list`; do
 done
 
 # python
-curl -s https://bootstrap.pypa.io/get-pip.py | sudod python3
+curl -s https://bootstrap.pypa.io/get-pip.py | sudo python3
 for p in `cat $list_path/pip.list`; do
   sudo pip3 install $p
 done

@@ -1170,6 +1170,7 @@ python3-minimal
 python3-neovim
 python3-pexpect
 python3-pil
+python3-pip
 python3-pkg-resources
 python3-ptyprocess
 python3-reportlab
