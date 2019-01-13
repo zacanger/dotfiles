@@ -144,8 +144,6 @@ alias todo='nvim ~/Dropbox/work/wip/.todo.json'
 alias am='alsamixer'
 alias checkip='curl http://checkip.amazonaws.com/'
 alias findallcolours="egrep -oi '#[a-f0-9]{6}' *.css | sort | uniq"
-alias ghstatus='curl -s https://status.github.com/api/status.json | jq .status'
-alias githubstatus='curl -s https://status.github.com/api/messages.json | jq .'
 alias alltlds="curl -s http://data.iana.org/TLD/tlds-alpha-by-domain.txt | grep -v XN | sed -e 1d -e 's/\(.*\)/\L\1/'"
 alias ur='unrar x -kb'
 alias cerm='c ; erm'
@@ -163,7 +161,6 @@ alias w3h='w3m -T text/html'
 alias mu='mocp -T ~/.moc/themes/deephouse .'
 alias y2j="python3 -c 'import sys, yaml, json; y=yaml.safe_load(sys.stdin.read ()); print(json.dumps(y, default=lambda obj: obj.isoformat() if hasattr(obj, \"isoformat\") else obj))' | jq ."
 alias cpr='cp -R'
-alias bye='poweroff'
 
 if [[ `uname` == 'Darwin' ]]; then
   alias file='file -h'
