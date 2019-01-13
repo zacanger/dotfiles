@@ -3,7 +3,6 @@ acl
 acpi-support
 acpid
 adduser
-advert-block
 alsa-utils
 anacron
 apparmor
@@ -251,7 +250,6 @@ glib-networking-services
 gnome-desktop3-data
 gnome-disk-utility
 gnome-keyring
-gnome-search-tool
 gnome-system-tools
 gnome-themes-standard
 gnupg
@@ -1035,7 +1033,6 @@ lxsession
 lxsession-default-apps
 lxsession-logout
 man-db
-mate-calc
 mawk
 memtest86+
 menulibre
@@ -1068,14 +1065,9 @@ network-manager
 network-manager-gnome
 networkd-dispatcher
 nfs-common
-nitrogen
 notification-daemon
 nplan
 ntfs-3g
-numix-folders
-numix-icon-theme
-numix-icon-theme-circle
-numix-icon-theme-square
 openjdk-8-jre
 openprinting-ppds
 openshot-qt
@@ -1277,7 +1269,6 @@ xdg-desktop-portal-gtk
 xdg-user-dirs
 xdg-user-dirs-gtk
 xdg-utils
-xed
 xfsprogs
 xinit
 xinput
@@ -1290,7 +1281,6 @@ xserver-xorg-video-intel
 xserver-xorg-video-qxl
 xterm
 xul-ext-ubufox
-xviewer
 xxd
 xz-utils
 yad
