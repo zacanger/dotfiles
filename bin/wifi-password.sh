@@ -1,16 +1,8 @@
 #!/usr/bin/env bash
 
-version="0.1.0"
+verbose=
 
-platform='unknown'
-
-if [ "$(uname)" == "Darwin" ]; then
-  echo ''
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-  exit 0
-elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
-  exit 0
-fi
+[[ `uname` == 'Darwin' ]] || exit 0
 
 # locate airport(1)
 airport="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport"
@@ -19,11 +11,10 @@ if [ ! -f $airport ]; then
   exit 1
 fi
 
+
 # by default we are verbose (unless non-tty)
 if [ -t 1 ]; then
   verbose=1
-else
-  verbose=
 fi
 
 # usage info
@@ -34,9 +25,7 @@ usage() {
 
   Options:
     -q, --quiet      Only output the password.
-    -V, --version    Output version
     -h, --help       This message.
-    --               End of options
 
 EOF
 }
@@ -44,10 +33,6 @@ EOF
 # parse options
 while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
   case $1 in
-    -V | --version )
-      echo $version
-      exit
-      ;;
     -q | --quiet )
       verbose=
       ;;
