@@ -52,6 +52,7 @@ Plug 'vim-scripts/syntaxcomplete'             " super simple syn completion
 Plug 'vim-utils/vim-husk'                     " bash emacs-mode mappings in command mode
 Plug 'vim-utils/vim-troll-stopper'            " highlight unicode chars that look like ascii chars
 Plug 'w0rp/ale'                               " linting
+Plug 'dyng/ctrlsf.vim'                        " fancy search -- not sure about this yet
 
 call plug#end()
 
