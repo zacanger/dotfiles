@@ -52,7 +52,10 @@ Plug 'vim-scripts/syntaxcomplete'             " super simple syn completion
 Plug 'vim-utils/vim-husk'                     " bash emacs-mode mappings in command mode
 Plug 'vim-utils/vim-troll-stopper'            " highlight unicode chars that look like ascii chars
 Plug 'w0rp/ale'                               " linting
+
+" testing
 Plug 'dyng/ctrlsf.vim'                        " fancy search -- not sure about this yet
+
 
 call plug#end()
 
@@ -545,6 +548,9 @@ au BufNewFile,BufRead *.pxi set ft=clojure
 
 " github actions
 au BufNewFile,BufRead *.workflow set ft=terraform
+
+" jenkins
+au BufNewFile,BufRead Jenkinsfile set ft=groovy
 
 " highlight the 121st column of wide lines
 highlight ColorColumn ctermbg=magenta
