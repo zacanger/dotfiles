@@ -161,6 +161,7 @@ alias mu='mocp -T ~/.moc/themes/deephouse .'
 alias y2j="python3 -c 'import sys, yaml, json; y=yaml.safe_load(sys.stdin.read ()); print(json.dumps(y, default=lambda obj: obj.isoformat() if hasattr(obj, \"isoformat\") else obj))' | jq ."
 alias cpr='cp -R'
 alias tn='tmux new'
+alias bye='poweroff'
 
 if [[ `uname` == 'Darwin' ]]; then
   alias file='file -h'
