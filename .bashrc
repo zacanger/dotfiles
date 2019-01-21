@@ -94,6 +94,9 @@ if [[ `uname` == 'Darwin' ]]; then
   ulimit -n 10240
 fi
 
+# get core dumps
+ulimit -c unlimited
+
 export JOBS=max
 
 XDG_CONFIG_HOME=$HOME/.config
