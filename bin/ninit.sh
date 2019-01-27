@@ -10,6 +10,7 @@ cp $ND/.gitattributes .gitattributes
 cp $ND/.eslintrc.json .eslintrc.json
 cp $ND/LICENSE.md LICENSE.md
 cp $ND/.npmrc .npmrc
+cp -R $ND/.github .github
 
 WITHOUTG="{
   \"name\": \"$DN\",
@@ -100,7 +101,7 @@ else
 fi
 
 git init
-npm i -D eslint babel-eslint eslint-plugin-{babel,promise,import,unicorn,node} eslint-config-zacanger tape fixpac
+npm i -D eslint babel-eslint eslint-plugin-{babel,promise,import,unicorn,node} eslint-config-zacanger tape fixpack
 fixpack # `npm i -g fixpack, and make a ~/.fixpackrc`
 git add -A
 git commit -m 'Init'
