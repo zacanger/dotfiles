@@ -11,7 +11,7 @@ may be some references to that path scattered around.
 
 ## Things To Know
 
-* This is shared between Ubuntu, Debian, Arch, and macOS.
+* This is shared between Ubuntu, Debian, Arch, work macOS, and Windows for music + WSL.
 * Bash 4, Python3, Node latest, Neovim.
 * I don't know Perl.
 * The files called `*.list` (under `/misc`) are to keep track of what I need on a fresh PC.
@@ -21,7 +21,7 @@ may be some references to that path scattered around.
   * `pip.list`: Python 3
   * `go.list`: `go get -u` this stuff
   * `gem.list`: I guess I need Ruby
-* On a fresh Mac (we have to use those where I work), first sync Dropbox, then run `new-mac.sh` and symlink all the shit.
+* On a fresh Mac, first sync Dropbox, then run `new-mac.sh` and symlink all the shit.
 * On fresh Arch or Debian, sync Dropbox and run `new-linux.sh`.
 
 Unless otherwise noted, everything here is under the MIT license.
