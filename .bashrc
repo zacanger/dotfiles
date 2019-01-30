@@ -145,3 +145,6 @@ if [ -d $HOME/.bash ]; then
     . $HOME/.bash/prompt.sh
   fi
 fi
+
+# start tmux on new shell
+[ -z "$TMUX" ] && { tmux attach || exec tmux new-session; }
