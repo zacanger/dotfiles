@@ -147,4 +147,4 @@ if [ -d $HOME/.bash ]; then
 fi
 
 # start tmux on new shell
-[ -z "$TMUX" ] && { tmux attach || exec tmux new-session; }
+# [ -z "$TMUX" ] && { tmux attach || exec tmux new-session; }
