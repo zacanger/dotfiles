@@ -102,7 +102,7 @@ else
 fi
 
 git init
-npm i -D eslint babel-eslint eslint-plugin-{babel,promise,import,unicorn,node} eslint-config-zacanger tape
-fixpack # `npm i -g fixpack, and make a ~/.fixpackrc`
+npm i -D eslint babel-eslint eslint-plugin-{babel,promise,import,unicorn,node} eslint-config-zacanger tape sortpack
+npx sortpack
 git add -A
 git commit -m 'Init'

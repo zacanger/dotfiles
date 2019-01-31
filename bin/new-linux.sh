@@ -62,7 +62,6 @@ home_links=(
   .docker
   .editorconfig
   .eslintrc.json
-  .fixpackrc
   .g
   .gitconfig
   .gitignore_global
