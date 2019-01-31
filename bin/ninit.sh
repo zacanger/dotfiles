@@ -24,7 +24,6 @@ WITHOUTG="{
   \"license\": \"MIT\",
   \"main\": \"index.js\",
   \"scripts\": {
-    \"start\": \"node index\",
     \"test\": \"npm run test:lint && npm run test:tape\",
     \"test:tape\": \"tape test.js\",
     \"test:lint\": \"eslint *.js\",
@@ -59,8 +58,10 @@ WITHG="{
   \"license\": \"MIT\",
   \"main\": \"index.js\",
   \"scripts\": {
-    \"start\": \"node index\",
-    \"test\": \"\"
+    \"test\": \"npm run test:lint && npm run test:tape\",
+    \"test:tape\": \"tape test.js\",
+    \"test:lint\": \"eslint *.js\",
+    \"preversion\": \"npm t\"
   },
   \"engines\": {
     \"node\": \">=10.0.0\"
