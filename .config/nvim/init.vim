@@ -53,10 +53,6 @@ Plug 'vim-utils/vim-husk'                     " bash emacs-mode mappings in comm
 Plug 'vim-utils/vim-troll-stopper'            " highlight unicode chars that look like ascii chars
 Plug 'w0rp/ale'                               " linting
 
-" testing
-Plug 'dyng/ctrlsf.vim'                        " fancy search -- not sure about this yet
-
-
 call plug#end()
 
 " Required:
