@@ -3,6 +3,7 @@ cloc
 count-bmp
 editorconfig
 empty-trash-cli
+fetchenv
 http-codes-cli
 lnx
 luvi

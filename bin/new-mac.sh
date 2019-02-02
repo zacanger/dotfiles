@@ -275,7 +275,6 @@ brew_packages=(
   mpv
   ncdu
   ncurses
-  neofetch
   neovim
   nettle
   nginx
