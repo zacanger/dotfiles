@@ -267,6 +267,7 @@ brew_packages=(
   m4
   mad
   make
+  meson
   mongodb
   most
   mpfr
