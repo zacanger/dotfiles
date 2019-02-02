@@ -1,15 +1,15 @@
-workflow "Build and Test" {
+workflow "Install and Test" {
   on = "push"
   resolves = ["Test"]
 }
 
-action "Build" {
+action "Install" {
   uses = "actions/npm@master"
   args = "ci"
 }
 
 action "Test" {
-  needs = "Build"
+  needs = "Install"
   uses = "actions/npm@master"
   args = "t"
 }
