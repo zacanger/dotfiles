@@ -111,7 +111,7 @@ if hash dircolors 2>/dev/null; then
   test -r $HOME/.dircolors && eval "$(dircolors -b $HOME/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-# pacman -S bash-completion
+# pacman -S bash-completion or apt-get install bash-completion
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
 
 # brew's bash completion
@@ -146,5 +146,8 @@ if [ -d $HOME/.bash ]; then
   fi
 fi
 
-# start tmux on new shell
-# [ -z "$TMUX" ] && { tmux attach || exec tmux new-session; }
+if [[ `uname` == 'Darwin' ]]; then
+  # On Linux, I manage multiple terminal sessions with the window manager
+  # On Mac, that's painful, so start tmux on a new shell.
+  [ -z "$TMUX" ] && { tmux attach || exec tmux new-session; }
+fi
