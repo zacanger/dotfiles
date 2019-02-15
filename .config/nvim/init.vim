@@ -8,50 +8,48 @@ if has('vim_starting')
 endif
 
 
-" maybe unused
-Plug 'vim-jp/vital.vim'         " a bunch of utils, might be unused now
-Plug 'vim-scripts/SyntaxRange'  " maybe unused
-Plug 'vim-scripts/ingo-library' " common funcs, might be unused
 
 Plug 'flowtype/vim-flow', {
       \ 'autoload': {
       \     'filetypes': 'javascript'
       \ }}
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-Plug 'FooSoft/vim-argwrap'                    " wrap items in blocks/lists
-Plug 'OrangeT/vim-csharp'                     " nice features, including higlighting of razor templates
-Plug 'airblade/vim-rooter'                    " set path to project root
-Plug 'ajh17/VimCompletesMe'                   " tab completion for all sorts of vim completions, also see 'ervandew/supertab'
-Plug 'bitc/vim-hdevtools'                     " haskell
-Plug 'bling/vim-airline'                      " better statusline
-Plug 'bounceme/poppy.vim'                     " simple highlight/rainbow parens plugin
-Plug 'bronson/vim-trailing-whitespace'        " highlight trailing whitespace
-Plug 'gorodinskiy/vim-coloresque'             " highlight colors
-Plug 'isomoar/vim-css-to-inline'              " convert between css and dom-type styles
-Plug 'jiangmiao/auto-pairs'                   " auto-complete pairs of things
-Plug 'junegunn/seoul256.vim'                  " colo
-Plug 'junegunn/vim-easy-align'                " align stuff on a symbol (like the comments in this block)
-Plug 'junegunn/vim-peekaboo'                  " see registers easily
-Plug 'junegunn/vim-slash'                     " better buffer search
-Plug 'krisajenkins/vim-pipe'                  " pipe to external command
-Plug 'mhinz/vim-signify'                      " vcs markers in gutter, also see 'airblade/vim-gitgutter'
-Plug 'moll/vim-node'                          " enchance vim for node (for example, better gf)
-Plug 'othree/csscomplete.vim'                 " better css completion
-Plug 'othree/javascript-libraries-syntax.vim' " more js syn
-Plug 'othree/yajs.vim'                        " some js syntax
-Plug 'plasticboy/vim-markdown'                " better markdown features
-Plug 'rhysd/vim-wasm'                         " webassembly support
-Plug 'scrooloose/nerdcommenter'               " there are so many commenter plugins, but this one just works
-Plug 'sgur/vim-editorconfig'                  " support editorconfig
-Plug 'sheerun/vim-polyglot'                   " misc langs
-Plug 'tpope/vim-surround'                     " surround things with other things
-Plug 'vim-airline/vim-airline-themes'         " statusline themes
-Plug 'vim-scripts/paredit.vim'                " balance parens
-Plug 'vim-scripts/syntaxcomplete'             " super simple syn completion
-Plug 'vim-utils/vim-husk'                     " bash emacs-mode mappings in command mode
-Plug 'vim-utils/vim-troll-stopper'            " highlight unicode chars that look like ascii chars
-Plug 'w0rp/ale'                               " linting
+Plug 'fatih/vim-go'
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " this takes forever
+
+Plug 'vim-jp/vital.vim'                " deps
+Plug 'vim-scripts/SyntaxRange'         " deps
+Plug 'vim-scripts/ingo-library'        " deps
+Plug 'FooSoft/vim-argwrap'             " wrap items in blocks/lists
+Plug 'OrangeT/vim-csharp'              " nice features, including higlighting of razor templates
+Plug 'airblade/vim-rooter'             " set path to project root
+Plug 'ajh17/VimCompletesMe'            " tab completion for all sorts of vim completions, also see 'ervandew/supertab'
+Plug 'bitc/vim-hdevtools'              " haskell
+Plug 'bling/vim-airline'               " better statusline
+Plug 'bounceme/poppy.vim'              " simple highlight/rainbow parens plugin
+Plug 'bronson/vim-trailing-whitespace' " highlight trailing whitespace
+Plug 'gorodinskiy/vim-coloresque'      " highlight colors
+Plug 'isomoar/vim-css-to-inline'       " convert between css and dom-type styles
+Plug 'jiangmiao/auto-pairs'            " auto-complete pairs of things
+Plug 'junegunn/seoul256.vim'           " colo
+Plug 'junegunn/vim-easy-align'         " align stuff on a symbol (like the comments in this block)
+Plug 'junegunn/vim-peekaboo'           " see registers easily
+Plug 'junegunn/vim-slash'              " better buffer search
+Plug 'mhinz/vim-signify'               " vcs markers in gutter, also see 'airblade/vim-gitgutter'
+Plug 'moll/vim-node'                   " enchance vim for node (for example, better gf)
+Plug 'othree/csscomplete.vim'          " better css completion
+Plug 'othree/yajs.vim'                 " some js syntax
+Plug 'plasticboy/vim-markdown'         " better markdown features
+Plug 'scrooloose/nerdcommenter'        " there are so many commenter plugins, but this one just works
+Plug 'sgur/vim-editorconfig'           " support editorconfig
+Plug 'sheerun/vim-polyglot'            " misc langs
+Plug 'tpope/vim-surround'              " surround things with other things
+Plug 'vim-airline/vim-airline-themes'  " statusline themes
+Plug 'vim-scripts/paredit.vim'         " balance parens
+Plug 'vim-scripts/syntaxcomplete'      " super simple syn completion
+Plug 'vim-utils/vim-husk'              " bash emacs-mode mappings in command mode
+Plug 'vim-utils/vim-troll-stopper'     " highlight unicode chars that look like ascii chars
+Plug 'w0rp/ale'                        " linting
 
 call plug#end()
 
@@ -491,9 +489,6 @@ let g:flow#enable = 0
 let g:polyglot_disabled = ['css', 'js', 'jsx', 'javascript', 'javascript.jsx']
 let g:csstoinline_wrap_pixels = 1
 
-" javascript-libraries-syntax config
-let g:used_javascript_libs = 'jquery,underscore,react,jasmine,ramda,tape'
-
 " match % on more stuff
 if !exists('g:loaded_matchit')
   runtime macros/matchit.vim
@@ -554,14 +549,6 @@ call matchadd('ColorColumn', '\%121v', 100)
 
 " see betterdigraphs.vim
 inoremap <expr>  <C-K>   BDG_GetDigraph()
-
-" vimpipe stuff
-let g:vimpipe_silent = 1
-let g:vimpipe_close_map="<leader>,"
-let g:vimpipe_invoke_map="<leader>n"
-autocmd FileType javascript let b:vimpipe_command="node -p"
-autocmd FileType clojure,clojurescript let b:vimpipe_command="lumo -e"
-autocmd FileType python let b:vimpipe_command="python -c"
 
 " syntaxcomplete
 if has("autocmd") && exists("+omnifunc")
