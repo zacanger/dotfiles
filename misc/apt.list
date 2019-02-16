@@ -9,6 +9,7 @@ apparmor
 appstream
 apt
 apt-config-icons
+apt-transport-https
 apt-utils
 apt-xapian-index
 aptdaemon
@@ -253,6 +254,7 @@ gnome-keyring
 gnome-system-tools
 gnome-themes-standard
 gnupg
+gnupg-agent
 gnupg-l10n
 gnupg-utils
 gparted
