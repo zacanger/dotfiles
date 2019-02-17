@@ -7,8 +7,6 @@ if has('vim_starting')
   set nocompatible " Be iMproved
 endif
 
-
-
 Plug 'flowtype/vim-flow', {
       \ 'autoload': {
       \     'filetypes': 'javascript'
@@ -574,15 +572,15 @@ au BufRead,BufNewFile *.js.snap set ft=javascript
 
 " echo GetFileSize()
 fu! GetFileSize()
-    let bytes = getfsize(expand("%:p"))
-    if bytes <= 0
-        return "0"
-    endif
-    if bytes < 1024
-        return bytes
-    else
-        return (bytes / 1024) . "K"
-    endif
+  let bytes = getfsize(expand("%:p"))
+  if bytes <= 0
+    return "0"
+  endif
+  if bytes < 1024
+    return bytes
+  else
+    return (bytes / 1024) . "K"
+  endif
 endfu
 
 " match angle brackest
