@@ -1,7 +1,7 @@
 module.exports = () => ({
   startupPrograms: [
     'wallpaper.sh',
-    'xflux -z 84047',
+    'redshift -l 40.760780:-111.891045',
     'setxkbmap -option "caps:swapescape"'
   ],
   borderWidth: 2,
