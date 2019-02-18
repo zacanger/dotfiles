@@ -98,21 +98,16 @@ $conf_path=$HOME/.config
 $zconf_path=$z_path/.config
 mkdir -p $conf_path/i3
 mkdir -p $conf_path/i3status
-mkdir -p $conf_path/liquidprompt
 mkdir -p $conf_path/ranger
 mkdir -p $conf_path/zathura
 ln -s $zconf_path/i3/config $conf_path/i3/
 ln -s $zconf_path/i3status/config $conf_path/i3status/
-ln -s $zconf_path/liquidprompt/z.theme $conf_path/liquidprompt/
 ln -s $zconf_path/ranger/devicons.py $conf_path/ranger/
 ln -s $zconf_path/ranger/plugins $conf_path/ranger/
 ln -s $zconf_path/ranger/rc.conf $conf_path/ranger/
 ln -s $zconf_path/ranger/rifle.conf $conf_path/ranger/
 ln -s $zconf_path/ranger/scope.sh $conf_path/ranger/
 ln -s $zconf_path/zathura/zathurarc $conf_path/zathura/
-ln -s $zconf_path/angrplayr.json $conf_path/
-ln -s $zconf_path/compton.conf $conf_path/
-ln -s $zconf_path/liquidpromptrc $conf_path/
 ln -s $zconf_path/mimeapps.list $conf_path/
 ln -s $zconf_path/ninit $conf_path/
 ln -s $zconf_path/nvim $conf_path/

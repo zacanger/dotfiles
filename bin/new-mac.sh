@@ -261,7 +261,6 @@ brew_packages=(
   libtool
   libvorbis
   libyaml
-  liquidprompt
   lua
   lzip
   m4
