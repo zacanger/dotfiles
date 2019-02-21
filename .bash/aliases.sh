@@ -113,12 +113,15 @@ else
 fi
 
 # all the rest
+
+if hash ccat 2/>/dev/null; then
+  alias cat='ccat'
+fi
 alias grep='grep --color=auto'
 alias q='exit'
 alias :q='exit'
 alias ag='ag --path-to-ignore ~/.agignore'
 alias catlines="highlight $1 --out-format xterm256 --line-numbers --quiet --force --style solarized-light"
-alias cat='ccat'
 alias all='compgen -c | sort -u'
 alias bs='bs.sh'
 alias c='clear'
