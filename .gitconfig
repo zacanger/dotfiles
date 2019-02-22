@@ -33,8 +33,6 @@
   p = push
   clear = checkout .
   rpo = remote prune origin
-  alias = config --get-regexp 'alias.*'
-  search = "grep _Iin"
   graph = log --color --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%n%Cgreen(%cr)%Creset by %C(bold blue)<%an>%Creset%Cred %GK%n'
 [help]
   autocorrect = 10
