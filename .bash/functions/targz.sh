@@ -1,7 +1,7 @@
 # Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression
 targz() {
   local tmpFile="${@%/}.tar"
-  tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1
+  tar -cvf "${tmpFile}" "${@}" || return 1
   size=$(
   stat -f"%z" "${tmpFile}" 2> /dev/null; # OS X `stat`
   stat -c"%s" "${tmpFile}" 2> /dev/null # GNU `stat`
