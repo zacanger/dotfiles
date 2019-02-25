@@ -112,11 +112,27 @@ else
   alias clc='echo -n | co && echo -n | xclip -selection primary'
 fi
 
-# all the rest
+# special cases
 
-if hash ccat 2/>/dev/null; then
+# don't break cat if no ccat
+if hash ccat 2>/dev/null; then
   alias cat='ccat'
 fi
+
+# requires moc and theme file
+if hash mocp 2>/dev/null; then
+  # debian, ubuntu
+  alias mu='mocp -T ~/.moc/themes/deephouse .'
+else
+  alias mu='moc -T ~/.moc/themes/deephouse .'
+fi
+
+if [[ `uname` == 'Darwin' ]]; then
+  alias file='file -h'
+  alias alacritty='open -a /Applications/Alacritty.app'
+fi
+
+# all the rest
 alias grep='grep --color=auto'
 alias q='exit'
 alias :q='exit'
@@ -159,14 +175,7 @@ alias zh='zathura'
 alias cla='clc ; cerm'
 alias lv='luvi'
 alias w3h='w3m -T text/html'
-# requires moc and theme file
-alias mu='mocp -T ~/.moc/themes/deephouse .'
 alias y2j="python3 -c 'import sys, yaml, json; y=yaml.safe_load(sys.stdin.read ()); print(json.dumps(y, default=lambda obj: obj.isoformat() if hasattr(obj, \"isoformat\") else obj))' | jq ."
 alias c2j='csv2json.py'
 alias cpr='cp -R'
 alias tn='tmux new'
-
-if [[ `uname` == 'Darwin' ]]; then
-  alias file='file -h'
-  alias alacritty='open -a /Applications/Alacritty.app'
-fi
