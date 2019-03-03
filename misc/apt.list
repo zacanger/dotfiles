@@ -1179,6 +1179,7 @@ python3-yaml
 python3.6
 python3.6-minimal
 qt5-style-plugins
+qutebrowser
 ranger
 rar
 readline-common
