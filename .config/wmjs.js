@@ -4,8 +4,9 @@ module.exports = () => ({
     'redshift -l 40.760780:-111.891045',
     'setxkbmap -option "caps:swapescape"'
   ],
-  borderWidth: 2,
-  borderColor: '00ff00',
+  borderWidth: 1,
+  borderColor: '9CD7A1',
   launcher: 'dmenu_run',
-  terminal: 'st'
+  terminal: 'st',
+  log: true
 })
