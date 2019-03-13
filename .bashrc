@@ -88,7 +88,6 @@ export BROWSER=firefox
 
 if [[ `uname` == 'Darwin' ]]; then
   # i'm at work
-  export CDPATH="$CDPATH:$HOME/jane"
   export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
   export GPG_TTY=$(tty)
   ulimit -n 10240
