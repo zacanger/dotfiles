@@ -171,7 +171,6 @@ brew install gnu-sed --with-default-names
 brew install gnu-tar --with-default-names
 brew install gnu-which --with-default-names
 brew install grep --with-default-names
-brew cask install racket
 brew cask install minikube
 brew cask install alacritty
 # The rest

@@ -1,3 +1,0 @@
-(require xrepl)
-(define (q) (exit))
-(define (h) (help))

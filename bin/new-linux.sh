@@ -68,7 +68,6 @@ home_links=(
   .gitmessage
   .inputrc
   .profile
-  .racketrc
   .tmux.conf
   .vimrc
   .xinitrc
