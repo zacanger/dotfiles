@@ -1,3 +1,3 @@
 pp() {
-  git push --follow-tags && npm publish --otp=$1
+  npm publish --otp=$1 && git push --follow-tags
 }
