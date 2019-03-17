@@ -156,6 +156,7 @@ alias screencast='ffmpeg -f x11grab -s wxga -r 25 -i :0.0 -sameq ~/.tmp/screenca
 alias sw='time cat'
 alias vn='viewnior'
 alias yt2mp3='youtube-dl --extract-audio --audio-format mp3'
+alias ytpls='youtube-dl --extract-audio --audio-format mp3 -o "%(playlist_index)s-%(title)s.%(ext)s"'
 alias shrug='echo "¯\_(ツ)_/¯"'
 alias shco='shrug | co'
 alias todo='nvim ~/Dropbox/work/wip/.todo.json'
