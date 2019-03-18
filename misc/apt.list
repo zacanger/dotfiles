@@ -79,6 +79,7 @@ dmidecode
 dmsetup
 dmz-cursor-theme
 dnsutils
+docker-compose
 dosfstools
 dpkg
 e2fsprogs
