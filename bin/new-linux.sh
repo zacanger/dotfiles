@@ -49,6 +49,9 @@ for p in `cat $list_path/go.list`; do
   go get -u $p
 done
 
+# install the rust toolchain - interactive
+curl https://sh.rustup.rs -sSf | sh
+
 # $HOME symlinks
 home_links=(
   .Xresources
@@ -91,6 +94,10 @@ ln -s $z_path/.ghc/ghci.conf $HOME/.ghc/
 # moc, music on console player
 mkdir -p $HOME/.moc
 ln -s $zconf_path/.moc/themes/ $HOME/.moc/
+
+# cargo, rust
+mkdir -p $HOME/.cargo
+ln -s $z_path/.cargo/config $HOME/.cargo/
 
 # .config
 $conf_path=$HOME/.config
@@ -136,6 +143,3 @@ if [[ `uname -a` == *"Debian"* ]] || [[ `uname -a` == *"Ubuntu"* ]]; then
   sudo apt-get install -y docker-ce docker-ce-cli containerd.io
   sudo usermod -aG docker $USER
 fi
-
-# install the rust toolchain - interactive
-curl https://sh.rustup.rs -sSf | sh
