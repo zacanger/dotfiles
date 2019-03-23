@@ -136,3 +136,6 @@ if [[ `uname -a` == *"Debian"* ]] || [[ `uname -a` == *"Ubuntu"* ]]; then
   sudo apt-get install -y docker-ce docker-ce-cli containerd.io
   sudo usermod -aG docker $USER
 fi
+
+# install the rust toolchain - interactive
+curl https://sh.rustup.rs -sSf | sh
