@@ -375,3 +375,8 @@ fi
 sudo softwareupdate -i -a
 
 # TODO: symlinks
+
+# install the rust toolchain - interactive
+curl https://sh.rustup.rs -sSf | sh
+rustup toolchain install nightly
+cargo +nightly install racer

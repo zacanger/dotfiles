@@ -76,7 +76,7 @@ esac
 
 export GOPATH=$HOME/.go
 if [[ `uname` == 'Darwin' ]]; then
-  export PATH="$HOME/bin:$HOME/.gem/global/bin:$HOME/.cabal/bin:$HOME/Library/Haskell/bin:/usr/local/opt/coreutils/libexec/gnubin:/opt/local/bin:/opt/local/sbin:$GOPATH/bin:/usr/local/sbin:$HOME/.local/bin:/usr/local/opt/gettext/bin:$PATH"
+  export PATH="$HOME/bin:$HOME/.gem/global/bin:$HOME/.cabal/bin:$HOME/Library/Haskell/bin:/usr/local/opt/coreutils/libexec/gnubin:/opt/local/bin:/opt/local/sbin:$GOPATH/bin:/usr/local/sbin:$HOME/.local/bin:/usr/local/opt/gettext/bin::$HOME/.cargo/bin:$PATH"
 else
   export PATH="$HOME/.local/bin:$HOME/bin:$HOME/bin/x:$HOME/.cargo/bin:$HOME/.gem/ruby/2.5.0/bin/:$GOPATH/bin:$PATH"
 fi
