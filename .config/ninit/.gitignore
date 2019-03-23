@@ -74,7 +74,6 @@
 /.build/
 /checkouts/
 /classes/
-/target/
 Icon
 Network Trash Folder
 Temporary Items
@@ -107,3 +106,5 @@ src/.webpack.js
 x/
 .nyc_output
 /tags
+Cargo.lock
+target/
