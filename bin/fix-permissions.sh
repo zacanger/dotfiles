@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Author: Tasos Latsas
 
@@ -6,7 +6,7 @@
 # in a given path or in the working directory
 # Especialy usefull when copying files from ntfs filesystems :P
 
-show_help () {
+show_help() {
 cat << EOF
 usage: $(basename "$0") OPTIONS
 
@@ -36,10 +36,9 @@ check_permissions() {
     return 1
   fi
 
-  for i in 0 1 2
-  do
+  for i in 0 1 2; do
     if [ ${mode:${i}:1} -lt 0 ] || [ ${mode:${i}:1} -gt 7 ]; then
-        return 1
+      return 1
     fi
   done
 }
