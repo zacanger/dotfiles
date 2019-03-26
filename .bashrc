@@ -37,8 +37,8 @@ HISTCONTROL='erasedups:ignoreboth' # ignore lines with spaces, and duplicates
 HISTIGNORE="ls:l:la:lo:lS:lv:a:k:cd:h:history:q:\:q:exit:c:ds:ds.:clear:erm:clc:cerm"
 HISTIGNORE="$HISTIGNORE:..:...:.:cs:co:ni:ns:vi:reload:gst:edrc:edal:fs:dbst:dbup:dbdn"
 HISTIGNORE="$HISTIGNORE:ncu:gf:gd:g:v:nu:cla:shhh:todo:poweroff:tn:ncdu"
-HISTSIZE= # length
-HISTFILESIZE= # size
+HISTSIZE=1000 # length
+HISTFILESIZE=1000 # size
 HISTTIMEFORMAT='%F %T  ' # timestamp
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ;} history -a"
 

@@ -543,6 +543,9 @@ au BufNewFile,BufRead *.workflow set ft=terraform
 " jenkins
 au BufNewFile,BufRead Jenkinsfile set ft=groovy
 
+" babelrc
+au BufNewFile,BufRead .babelrc set ft=json
+
 " highlight the 121st column of wide lines
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%121v', 100)
