@@ -238,6 +238,7 @@ brew_packages=(
   jack
   jpeg
   jq
+  kompose
   kubernetes-cli
   lame
   leiningen
