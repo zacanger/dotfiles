@@ -177,6 +177,5 @@ alias cla='clc ; cerm'
 alias lv='luvi'
 alias w3h='w3m -T text/html'
 alias y2j="python3 -c 'import sys, yaml, json; y=yaml.safe_load(sys.stdin.read ()); print(json.dumps(y, default=lambda obj: obj.isoformat() if hasattr(obj, \"isoformat\") else obj))' | jq ."
-alias c2j='csv2json.py'
 alias cpr='cp -R'
 alias tn='tmux new'
