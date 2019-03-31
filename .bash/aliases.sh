@@ -119,14 +119,6 @@ if hash ccat 2>/dev/null; then
   alias cat='ccat'
 fi
 
-# requires moc and theme file
-if hash mocp 2>/dev/null; then
-  # debian, ubuntu
-  alias mu='mocp -T ~/.moc/themes/deephouse .'
-else
-  alias mu='moc -T ~/.moc/themes/deephouse .'
-fi
-
 if [[ `uname` == 'Darwin' ]]; then
   alias file='file -h'
   alias alacritty='open -a /Applications/Alacritty.app'
