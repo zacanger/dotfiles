@@ -15,7 +15,6 @@ so there may be a few references to those paths scattered around.
   setup is oriented around quick editing of text and quick navigation.
 * This is shared between Ubuntu, Debian, Arch, macOS.
 * Bash 5, Python 3 mostly, Node latest, Neovim.
-* I don't know Perl. I don't really want to know Perl.
 * The files called `*.list` (under `/misc`) are to keep track of what I need on a fresh computer.
   * `apt.list`: generated with `apt-mark showmanual`
   * `arch.list`: Things to install on a brand-new Manjaro/i3 install, generated with `pacman -Qqe`. Some of these might need `yaourt` or whatever's cool this week.
