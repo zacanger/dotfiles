@@ -384,7 +384,6 @@ autocmd User Node
       \ endif
 
 cnoremap sudow w !sudo tee & >/dev/null
-cnoremap reload so $HOME/.config/nvim/init.vim
 
 let g:seoul256_background = 233
 colo seoul256
