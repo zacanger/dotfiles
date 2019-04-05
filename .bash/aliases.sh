@@ -37,7 +37,6 @@ alias niy='npm init -y'
 alias lint='npm run -s test:lint'
 alias jv='jq .version < package.json'
 alias pipupd='pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
-alias brewupd='brew update && brew upgrade && brew cleanup && brew prune && brew doctor'
 alias venv='virtualenv -p /usr/bin/python3'
 alias lfd='lein figwheel dev'
 
