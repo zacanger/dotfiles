@@ -106,6 +106,6 @@ src/.webpack.js
 x/
 .nyc_output
 /tags
-Cargo.lock
 target/
 **/*.rs.bak
+!Cargo.lock
