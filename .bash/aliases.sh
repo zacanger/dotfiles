@@ -20,7 +20,6 @@ alias gw='ghwd.sh'
 alias gtd='gittoday'
 alias gst='git st'
 alias gitodo='git grep -EiI "FIXME|TODO"'
-alias rbl='git rebase -i HEAD~2'
 alias aca='ac a'
 alias gp='git push'
 
