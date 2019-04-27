@@ -19,10 +19,8 @@ Plug 'vim-jp/vital.vim'                " deps
 Plug 'vim-scripts/SyntaxRange'         " deps
 Plug 'vim-scripts/ingo-library'        " deps
 Plug 'FooSoft/vim-argwrap'             " wrap items in blocks/lists
-Plug 'OrangeT/vim-csharp'              " nice features, including higlighting of razor templates
 Plug 'airblade/vim-rooter'             " set path to project root
-Plug 'ajh17/VimCompletesMe'            " tab completion for all sorts of vim completions, also see 'ervandew/supertab'
-Plug 'bitc/vim-hdevtools'              " haskell
+Plug 'ajh17/VimCompletesMe'            " tab completion helpers, also see 'ervandew/supertab'
 Plug 'bling/vim-airline'               " better statusline
 Plug 'bounceme/poppy.vim'              " simple highlight/rainbow parens plugin
 Plug 'bronson/vim-trailing-whitespace' " highlight trailing whitespace
