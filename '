@@ -68,7 +68,7 @@ search () {
   local url result
 
   url=`get_url`
-  result=`curl -s "$url"`
+  result=`curl "$url"`
 
   debug "URL: $url"
 
