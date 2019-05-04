@@ -3,6 +3,7 @@ alsa-utils
 anacron
 apt
 apt-config-icons
+apt-file
 apt-transport-https
 apt-utils
 apt-xapian-index
@@ -36,8 +37,8 @@ dwm
 exuberant-ctags
 fdisk
 feh
-ffmpegthumbnailer
 ffmpeg
+ffmpegthumbnailer
 figlet
 file
 findutils
@@ -50,7 +51,6 @@ gettext-base
 ghostscript
 ghostscript-x
 gimp
-inkscape
 git-all
 gnupg
 gnupg-agent
@@ -64,6 +64,7 @@ hunspell-en-us
 im-config
 imagemagick
 info
+inkscape
 iproute2
 iptables
 iputils-ping
@@ -72,6 +73,8 @@ jq
 lame
 laptop-detect
 less
+libx11-dev
+libxft-dev
 lshw
 lsof
 ltrace
