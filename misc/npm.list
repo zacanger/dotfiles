@@ -1,6 +1,6 @@
 calculate-tip
 cloc
-count-bmp
+count-bpm
 editorconfig
 empty-trash-cli
 fetchenv
@@ -13,11 +13,10 @@ ndic
 neovim
 node-gyp
 npm-check-updates
-npm@next
+npm
+npx
 shipe
 simple-cam
 sloc
-standard
 teenypng
 trash-cli
-ttystudio

@@ -20,18 +20,14 @@ for p in `cat $list_path/pip.list`; do
 done
 
 # node
+apt-get install -f -y nodejs npm
+npm i -g n
 n lts
 n prune
-npm i -g npm
-npm i -g npx
+npm i -g npm npx
+apt-get remove nodejs npm
 for p in `cat $list_path/npm.list`; do
   npm i -g $p
-done
-
-# go
-mkdir -p $HOME/.go
-for p in `cat $list_path/go.list`; do
-  go get -u $p
 done
 
 # install the rust toolchain - interactive
@@ -104,10 +100,6 @@ ln -s $zconf_path/startup.py $conf_path/
 ln -s $zconf_path/wmjs.js $conf_path/
 ln -s $zconf_path/qutebrowser $conf_path/
 
-# install youtube-dl
-curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
-chmod a+rx /usr/local/bin/youtube-dl
-
 # install vim shit
 nvim +PlugInstall +qa
 
@@ -115,17 +107,15 @@ nvim +PlugInstall +qa
 ln -s $z_path/x/fonts/ $HOME/.local/share/
 fc-cache
 
-# install docker if deb/ubuntu
-if [[ `uname -a` == *"Debian"* ]] || [[ `uname -a` == *"Ubuntu"* ]]; then
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  sudo add-apt-repository \
-    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-    $(lsb_release -cs) \
-    stable"
-  sudo apt-get update
-  sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-  sudo usermod -aG docker $USER
-fi
+# install docker
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+  "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) \
+  stable"
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose
+sudo usermod -aG docker $USER
 
 # slack
 snap install slack --classic

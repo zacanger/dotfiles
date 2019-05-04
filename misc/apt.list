@@ -32,7 +32,6 @@ dash
 dc
 diffutils
 dnsutils
-docker-compose
 dwm
 exuberant-ctags
 fdisk
