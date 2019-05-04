@@ -137,6 +137,9 @@ if [[ `uname -a` == *"Debian"* ]] || [[ `uname -a` == *"Ubuntu"* ]]; then
   sudo usermod -aG docker $USER
 fi
 
+# slack
+snap install slack --classic
+
 # install keybase
 curl --remote-name https://prerelease.keybase.io/keybase_amd64.deb
 sudo dpkg -i keybase_amd64.deb
