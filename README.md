@@ -21,6 +21,5 @@ so there may be a few references to those paths scattered around.
   * `npm.list`: `npm i -g` all these things, generated with [global-packages-cli](https://npmjs.org/package/global-packages-cli)
   * `pip.list`: Python 3
   * `go.list`: `go get -u` this stuff
-  * `gem.list`: I guess I need Ruby
 * On fresh computers, I sync Dropbox first, then run either `new-mac.sh` (and
   symlink all the things) or `new-linux.sh`.

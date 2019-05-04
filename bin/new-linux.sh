@@ -13,16 +13,6 @@ list_path=$z_path/misc
 apt-get update && apt-get dist-upgrade -f y
 apt-get install $list_path/apt.list
 
-# gem
-for p in `cat $list_path/gem.list`; do
-  sudo gem install $g
-done
-
-# haskell
-for p in `cat $list_path/stack.list`; do
-  stack install $p
-done
-
 # python
 curl -s https://bootstrap.pypa.io/get-pip.py | sudo python3
 for p in `cat $list_path/pip.list`; do
