@@ -136,3 +136,9 @@ if [[ `uname -a` == *"Debian"* ]] || [[ `uname -a` == *"Ubuntu"* ]]; then
   sudo apt-get install -y docker-ce docker-ce-cli containerd.io
   sudo usermod -aG docker $USER
 fi
+
+# install keybase
+curl --remote-name https://prerelease.keybase.io/keybase_amd64.deb
+sudo dpkg -i keybase_amd64.deb
+sudo apt-get install -f
+run_keybase
