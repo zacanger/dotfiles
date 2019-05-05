@@ -102,6 +102,7 @@ parted
 patch
 pavucontrol
 pciutils
+pcmanfm
 pinentry-curses
 pkg-config
 procps
@@ -124,6 +125,7 @@ strace
 stterm
 suckless-tools
 sudo
+sysstat
 sysvbanner
 sysvinit-utils
 tar
@@ -131,12 +133,14 @@ tcpdump
 telnet
 time
 tmux
+trayer
 tzdata
 unclutter
 unrar
 unzip
 usbutils
 util-linux
+viewnior
 wget
 whois
 wireless-tools

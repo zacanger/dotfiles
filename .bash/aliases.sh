@@ -125,7 +125,6 @@ fi
 # all the rest
 alias grep='grep --color=auto'
 alias q='exit'
-alias :q='exit'
 alias ag='ag --path-to-ignore ~/.agignore'
 alias catlines="highlight $1 --out-format xterm256 --line-numbers --quiet --force --style solarized-light"
 alias all='compgen -c | sort -u'
