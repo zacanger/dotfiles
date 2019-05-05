@@ -31,8 +31,7 @@ bindsym $alt+Return exec --no-startup-id $terminal
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+space exec --no-startup-id dmenu-recent.sh -b
-bindsym $alt+space exec --no-startup-id dmenu-recent.sh -b
+bindsym $alt+space exec --no-startup-id dmenu_run
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
