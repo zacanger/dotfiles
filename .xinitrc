@@ -25,6 +25,7 @@ trayer \
   &
 nm-applet &
 dropbox start -i &
+KEYBASE_AUTOSTART=1 run_keybase &
 ~/bin/dwm-xsetroot.sh &
 exec dwm
 # exec ~/Dropbox/work/repos/wmjs/index.js
