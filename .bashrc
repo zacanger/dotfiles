@@ -89,9 +89,10 @@ export BROWSER=firefox
 if [[ `uname` == 'Darwin' ]]; then
   # i'm at work
   export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
-  export GPG_TTY=$(tty)
   ulimit -n 10240
 fi
+
+export GPG_TTY=$(tty)
 
 # get core dumps
 ulimit -c unlimited
