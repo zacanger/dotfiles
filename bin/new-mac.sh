@@ -135,6 +135,246 @@ defaults write com.apple.dock show-process-indicators -bool true
 # Don’t animate opening applications from the Dock
 defaults write com.apple.dock launchanim -bool false
 
+# Disable 'Dashboard' whatever that is
+defaults write com.apple.dashboard mcx-disabled -boolean TRUE
+
+# Trackpad: enable tap to click for this user and for the login screen
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+# Disable “natural” (Lion-style) scrolling
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+
+# Kill some stuff
+pkill -9 Finder
+pkill -9 Dock
+
+### Brew
+
+# Install brew packages
+# Special cases
+brew install python3
+brew postinstall python3 # get pip
+brew install wdiff --with-gettext
+brew install coreutils --with-default-names
+brew install ed --with-default-names
+brew install findutils --with-default-names
+brew install gnu-indent --with-default-names
+brew install gnu-sed --with-default-names
+brew install gnu-tar --with-default-names
+brew install gnu-which --with-default-names
+brew install grep --with-default-names
+brew cask install minikube
+brew cask install alacritty
+# The rest
+brew_packages=(
+  aspcud
+  aspell
+  atk
+  atool
+  autoconf
+  automake
+  awscli
+  bash
+  bash-completion
+  bdw-gc
+  berkeley-db
+  binutils
+  boost
+  cairo
+  camlp4
+  ccat
+  clasp
+  cmake
+  cowsay
+  ctags
+  curl
+  dbus
+  diffutils
+  dos2unix
+  doxygen
+  enchant
+  faac
+  ffmpeg
+  figlet
+  file-formula
+  flac
+  fontconfig
+  freetype
+  fribidi
+  gawk
+  gcc
+  gdb
+  gdbm
+  gdk-pixbuf
+  gettext
+  ghc
+  giflib
+  gifsicle
+  git
+  gmp
+  gnutls
+  go
+  gpatch
+  gpg
+  graphicsmagick
+  gringo
+  gzip
+  harfbuzz
+  haskell-stack
+  highlight
+  htop
+  icu4c
+  imagemagick
+  imlib2
+  isl
+  jack
+  jpeg
+  jq
+  kompose
+  kubernetes-cli
+  lame
+  leiningen
+  less
+  libass
+  libav
+  libepoxy
+  libevent
+  libffi
+  libid3tag
+  libmagic
+  libmpc
+  libogg
+  libpng
+  libsamplerate
+  libsndfile
+  libsoup
+  libtasn1
+  libtiff
+  libtool
+  libvorbis
+  libyaml
+  lua
+  lzip
+  m4
+  mad
+  make
+  meson
+  mongodb
+  most
+  mpfr
+  mplayer
+  mpv
+  ncdu
+  ncurses
+  neovim
+  nettle
+  nginx
+  ninja
+  node
+  ocaml
+  ocamlbuild
+  oniguruma
+  opam
+  openjpeg
+  openssh
+  openssl
+  p7zip
+  pandoc
+  pango
+  pcre
+  perl518
+  pixman
+  pkg-config
+  pngcrush
+  poppler
+  pv
+  py2cairo
+  pygobject
+  pyqt5
+  qt
+  qt5
+  qt55
+  r
+  ranger
+  readline
+  redis
+  rlwrap
+  rsync
+  ruby
+  s-lang
+  screen
+  siege
+  sip
+  source-highlight
+  sqlite
+  telnet
+  the_silver_searcher
+  tree
+  unrar
+  unzip
+  vala
+  w3m
+  watch
+  watchman
+  webp
+  wget
+  wrk
+  x264
+  xvid
+  xz
+)
+for brew_p in "${brew_packages[@]}"; do
+  brew install $brew_p
+done
+
+# Install chunkwm and skhd
+brew tap crisidev/homebrew-chunkwm
+brew install --HEAD --with-tmp-logging chunkwm
+brew install --HEAD --with-logging  koekeishiya/formulae/skhd
+brew services start chunkwm
+brew services start skhd
+
+### Other Stuff
+
+# Global gems
+sudo gem install compass bootstrap-sass neovim rake
+
+# Install youtube-dl
+curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+chmod a+rx /usr/local/bin/youtube-dl
+
+# Install npm packages
+if [ -f $HOME/Dropbox/z/misc/npm.list ]; then
+  for p in `cat $HOME/Dropbox/z/misc/npm.list`; do
+    npm i -g $p
+  done
+fi
+
+# Update Node and npm the way I prefer
+n lts && n prune
+npm i -g npm && npm i -g npx
+
+# Install python packages
+if [ -f $HOME/Dropbox/z/misc/pip.list ]; then
+  for p in `cat $HOME/Dropbox/z/misc/pip.list`; do
+    pip3 install $p
+  done
+fi
+
+# Haskell editor helpers
+# stack install hdevtools
+
+# Update the Mac
+sudo softwareupdate -i -a
+
+# TODO: symlinks
+
+# install the rust toolchain - interactive
+curl https://sh.rustup.rs -sSf | sh
+rustup toolchain install nightly
+cargo +nightly install racer
 # Disable Notification Center and remove the menu bar icon
 sudo launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
 
