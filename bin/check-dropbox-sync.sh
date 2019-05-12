@@ -6,7 +6,7 @@ else
   dropbox_cmd=dropbox
 fi
 while true; do
-  sleep 10
+  sleep 30
   clear
   $dropbox_cmd status
 done
