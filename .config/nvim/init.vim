@@ -196,7 +196,7 @@ endif
 " abbrs
 cnoreabbrev W! w!
 cnoreabbrev Q! q!
-cnoreabbrev Qa! qa
+cnoreabbrev Qa! qa!
 cnoreabbrev Wq wq
 cnoreabbrev Wa wa
 cnoreabbrev WQ wq
