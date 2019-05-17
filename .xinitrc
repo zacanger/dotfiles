@@ -12,8 +12,6 @@ xmodmap -e "clear lock" # disable caps lock switch
 xmodmap -e "keysym Caps_Lock = Escape" # set caps_lock as escape
 unclutter -root &
 redshift -l 40.760780:-111.891045 &
-nm-applet &
-dropbox start -i &
-KEYBASE_AUTOSTART=1 run_keybase &
+# KEYBASE_AUTOSTART=1 run_keybase &
 exec i3
 # exec ~/Dropbox/work/repos/wmjs/index.js
