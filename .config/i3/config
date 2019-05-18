@@ -42,7 +42,6 @@ bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness 
 
 # when using monitor
 bindsym $mod+F1 exec --no-startup-id screenlayout-thinkpad.sh
-bindsym $mod+w exec --no-startup-id wallpaper.sh
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 # focus_follows_mouse no
@@ -282,7 +281,7 @@ bar {
 bindsym $mod+b bar mode toggle
 
 # Theme colors
-# class                   border  backgr. text    indic.   child_border
+# class                 border  backgr. text    indic.   child_border
 client.focused          #ADBFC5 #556064 #80FFF9 #FDF6E3
 client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
 client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
