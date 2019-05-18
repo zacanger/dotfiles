@@ -8,10 +8,10 @@ feh --bg-fill ~/Dropbox/z/misc/wall.jpg
 xset -dpms
 xset s off
 xset s noblank
-xmodmap -e "clear lock" # disable caps lock switch
-xmodmap -e "keysym Caps_Lock = Escape" # set caps_lock as escape
+xmodmap -e "clear lock"
+xmodmap -e "keysym Caps_Lock = Escape"
 unclutter -root &
 redshift -l 40.760780:-111.891045 &
-# KEYBASE_AUTOSTART=1 run_keybase &
+KEYBASE_AUTOSTART=1 run_keybase &
 exec i3
 # exec ~/Dropbox/work/repos/wmjs/index.js
