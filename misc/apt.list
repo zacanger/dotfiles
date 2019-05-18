@@ -57,6 +57,7 @@ gnupg-utils
 grep
 groff-base
 hdparm
+highlight
 hostname
 htop
 hunspell-en-us
@@ -133,7 +134,6 @@ tcpdump
 telnet
 time
 tmux
-trayer
 tzdata
 unclutter
 unrar
