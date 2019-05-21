@@ -158,12 +158,14 @@ chmod 755 thumbnails/
 # opening up in default browser; should be cross-platform
 echo "Opening in your default browser."
 sleep 2
-for opener in xdg-open open cygstart "start"; {
+
+for opener in xdg-open open cygstart "start"; do
   if command -v $opener; then
     open=$opener;
     break;
   fi
-}
+done
+
 $open index.html
 
 exit 0
