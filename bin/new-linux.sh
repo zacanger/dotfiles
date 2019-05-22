@@ -44,7 +44,6 @@ home_links=(
   .bashrc
   .ctags
   .dircolors
-  .dmenurc
   .docker
   .editorconfig
   .eslintrc.json

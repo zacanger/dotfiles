@@ -114,6 +114,7 @@ ranger
 rar
 readline-common
 redshift
+rofi
 rsync
 scrot
 sed
@@ -123,7 +124,6 @@ smartmontools
 software-properties-common
 sox
 strace
-suckless-tools
 sudo
 sysstat
 sysvbanner
