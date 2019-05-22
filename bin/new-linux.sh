@@ -77,10 +77,12 @@ ln -s $z_path/.cargo/config $HOME/.cargo/
 # .config
 $conf_path=$HOME/.config
 $zconf_path=$z_path/.config
+mkdir -p $conf_path/alacritty
 mkdir -p $conf_path/i3
 mkdir -p $conf_path/i3status
 mkdir -p $conf_path/ranger
 mkdir -p $conf_path/zathura
+ln -s $zconf_path/alacritty/alacritty.yml $conf_path/alacritty/
 ln -s $zconf_path/ranger/rc.conf $conf_path/ranger/
 ln -s $zconf_path/ranger/rifle.conf $conf_path/ranger/
 ln -s $zconf_path/ranger/scope.sh $conf_path/ranger/

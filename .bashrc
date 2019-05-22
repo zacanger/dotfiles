@@ -82,7 +82,7 @@ else
 fi
 export VISUAL=nvim
 export EDITOR=nvim
-export TERMINAL=st
+export TERMINAL=alacritty
 export PYTHONSTARTUP=$HOME/.config/startup.py
 export BROWSER=firefox
 
