@@ -10,6 +10,7 @@ sudo chown -R $USER /usr/local
 # install global packages
 list_path=$z_path/misc
 
+add-apt-repository ppa:mmstick76/alacritty
 apt-get update && apt-get dist-upgrade -f y
 apt-get install $list_path/apt.list
 
