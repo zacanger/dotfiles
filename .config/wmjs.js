@@ -5,7 +5,7 @@ module.exports = () => ({
   ],
   borderWidth: 1,
   borderColor: '9CD7A1',
-  launcher: 'rofi',
-  terminal: 'xterm',
+  launcher: 'rofi-run.sh',
+  terminal: 'alacritty',
   log: true
 })
