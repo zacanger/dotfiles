@@ -26,7 +26,7 @@ WITHOUTG="{
   \"scripts\": {
     \"test\": \"npm run test:lint && npm run test:tape\",
     \"test:tape\": \"tape test.js\",
-    \"test:lint\": \"eslint *.js\",
+    \"test:lint\": \"standard\",
     \"preversion\": \"npm t && sortpack\"
   },
   \"engines\": {
@@ -60,7 +60,7 @@ WITHG="{
   \"scripts\": {
     \"test\": \"npm run test:lint && npm run test:tape\",
     \"test:tape\": \"tape test.js\",
-    \"test:lint\": \"eslint *.js\",
+    \"test:lint\": \"standard\",
     \"preversion\": \"npm t && sortpack\"
   },
   \"engines\": {
@@ -102,7 +102,7 @@ else
 fi
 
 git init
-npm i -D eslint babel-eslint eslint-plugin-{babel,promise,import,unicorn,node} eslint-config-zacanger tape sortpack
+npm i -D standard sortpack
 npx sortpack
 git add -A
 git commit -m 'Init'
