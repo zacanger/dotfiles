@@ -36,6 +36,8 @@ curl https://sh.rustup.rs -sSf | sh
 rustup toolchain install nightly
 cargo +nightly install racer
 
+cp $z_path/.gitconfig $HOME/
+
 # $HOME symlinks
 home_links=(
   .Xresources
@@ -47,9 +49,7 @@ home_links=(
   .dircolors
   .docker
   .editorconfig
-  .eslintrc.json
   .g
-  .gitconfig
   .gitignore_global
   .gitmessage
   .inputrc
@@ -69,6 +69,10 @@ done
 # gpg
 mkdir -p $HOME/.gnupg
 ln -s $z_path/.gnupg/gpg-agent.conf $HOME/.gnupg/
+
+# ghci
+mkdir -p $HOME/.ghc
+ln -s $z_path/.ghc/.ghci.conf $HOME/.ghc/
 
 # cargo, rust
 mkdir -p $HOME/.cargo
