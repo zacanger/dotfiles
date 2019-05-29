@@ -20,6 +20,6 @@ while true; do
   echo "temp: $temperature"
   echo "batt: $batt"
   echo "disk: $disk"
-  sleep 30
+  sleep 60
   clear
 done

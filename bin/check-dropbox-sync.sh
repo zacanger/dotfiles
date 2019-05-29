@@ -7,6 +7,6 @@ else
 fi
 while true; do
   $dropbox_cmd status
-  sleep 30
+  sleep 60
   clear
 done
