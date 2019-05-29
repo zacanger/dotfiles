@@ -8,7 +8,7 @@ wut() {
     curl -Gs "https://www.mankier.com/api/explain/?cols="$(tput cols) --data-urlencode "q=$1"
   else
     echo "Usage"
-    echo "explain                  interactive mode."
-    echo "explain 'cmd -o | ...'   one quoted command to explain it."
+    echo "wut                  interactive mode."
+    echo "wut 'cmd -o | ...'   one quoted command to explain it."
   fi
 }
