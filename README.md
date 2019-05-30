@@ -1,5 +1,7 @@
 # `$HOME`
 
+![screenshot](/screenshot.png?raw=true)
+
 Please feel free to use anything you like! 
 Unless otherwise noted, everything here is under the MIT license.
 
