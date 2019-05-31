@@ -26,7 +26,7 @@ WITHOUTG="{
     \"test\": \"npm run test:lint && npm run test:tape\",
     \"test:tape\": \"tape test.js\",
     \"test:lint\": \"standard\",
-    \"preversion\": \"npm t && sortpack\"
+    \"preversion\": \"sortpack && npm t\"
   },
   \"engines\": {
     \"node\": \">=10.0.0\"
@@ -60,7 +60,7 @@ WITHG="{
     \"test\": \"npm run test:lint && npm run test:tape\",
     \"test:tape\": \"tape test.js\",
     \"test:lint\": \"standard\",
-    \"preversion\": \"npm t && sortpack\"
+    \"preversion\": \"sortpack && npm t\"
   },
   \"engines\": {
     \"node\": \">=10.0.0\"
@@ -101,7 +101,7 @@ else
 fi
 
 git init
-npm i -D standard sortpack
+npm i -D standard sortpack tape
 npx sortpack
 git add -A
 git commit -m 'Init'
