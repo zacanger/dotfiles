@@ -12,7 +12,7 @@ list_path=$z_path/misc
 
 add-apt-repository ppa:mmstick76/alacritty
 apt-get update && apt-get dist-upgrade -f y
-apt-get install $list_path/apt.list
+cat $list_path/apt.list | xargs apt-get install -y
 
 # python
 curl -s https://bootstrap.pypa.io/get-pip.py | sudo python3
@@ -27,9 +27,7 @@ n lts
 n prune
 npm i -g npm npx
 apt-get remove nodejs npm
-for p in `cat $list_path/npm.list`; do
-  npm i -g $p
-done
+cat $list_path/npm.list | xargs npm i -g
 
 # install the rust toolchain - interactive
 curl https://sh.rustup.rs -sSf | sh
