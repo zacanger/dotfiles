@@ -32,7 +32,6 @@ cat $list_path/npm.list | xargs npm i -g
 # install the rust toolchain - interactive
 curl https://sh.rustup.rs -sSf | sh
 rustup toolchain install nightly
-cargo +nightly install racer
 
 cp $z_path/.gitconfig $HOME/
 
