@@ -32,6 +32,7 @@ curl https://sh.rustup.rs -sSf | sh
 rustup toolchain install nightly
 
 cp $z_path/.gitconfig $HOME/
+cp $z_path/.npmrc $HOME/
 
 # $HOME symlinks
 home_links=(
