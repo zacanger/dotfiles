@@ -16,9 +16,7 @@ cat $list_path/apt.list | xargs apt-get install -y
 
 # python
 curl -s https://bootstrap.pypa.io/get-pip.py | sudo python3
-for p in `cat $list_path/pip.list`; do
-  sudo pip3 install $p
-done
+cat $list_path/pip.list | sudo pip3 install
 
 # node
 apt-get install -f -y nodejs npm
