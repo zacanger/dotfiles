@@ -34,6 +34,10 @@ rustup toolchain install nightly
 cp $z_path/.gitconfig $HOME/
 cp $z_path/.npmrc $HOME/
 
+rm -f $HOME/.profile
+rm -f $HOME/.bash_profile
+rm -f $HOME/.bashrc
+
 # $HOME symlinks
 home_links=(
   .Xresources
