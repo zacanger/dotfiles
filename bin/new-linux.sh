@@ -10,21 +10,21 @@ sudo chown -R $USER /usr/local
 # install global packages
 list_path=$z_path/misc
 
-add-apt-repository ppa:mmstick76/alacritty
-apt-get update && apt-get dist-upgrade -f -y
-cat $list_path/apt.list | xargs apt-get install -y
+sudo add-apt-repository ppa:mmstick76/alacritty
+sudo apt-get update && apt-get dist-upgrade -f -y
+cat $list_path/apt.list | xargs sudo apt-get install -y
 
 # python
 curl -s https://bootstrap.pypa.io/get-pip.py | sudo python3
 cat $list_path/pip.list | sudo pip3 install
 
 # node
-apt-get install -f -y nodejs npm
+sudo apt-get install -f -y nodejs npm
 npm i -g n
 n lts
 n prune
 npm i -g npm npx
-apt-get remove nodejs npm
+sudo apt-get remove nodejs npm
 cat $list_path/npm.list | xargs npm i -g
 
 # install the rust toolchain - interactive
@@ -116,7 +116,7 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose
 sudo usermod -aG docker $USER
 
 # slack
-snap install slack --classic
+sudo snap install slack --classic
 
 # install keybase
 curl --remote-name https://prerelease.keybase.io/keybase_amd64.deb
