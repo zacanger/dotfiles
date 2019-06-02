@@ -11,7 +11,7 @@ sudo chown -R $USER /usr/local
 list_path=$z_path/misc
 
 add-apt-repository ppa:mmstick76/alacritty
-apt-get update && apt-get dist-upgrade -f y
+apt-get update && apt-get dist-upgrade -f -y
 cat $list_path/apt.list | xargs apt-get install -y
 
 # python
