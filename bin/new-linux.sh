@@ -117,6 +117,7 @@ sudo usermod -aG docker $USER
 
 # slack
 sudo snap install slack --classic
+sudo snap install microk8s --classic
 
 # install keybase
 curl --remote-name https://prerelease.keybase.io/keybase_amd64.deb
