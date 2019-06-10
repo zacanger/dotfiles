@@ -628,3 +628,5 @@ let g:rustfmt_emit_files = 1
 let g:rustfmt_command = 'rustfmt'
 let g:rustfmt_options = ''
 let g:ale_rust_cargo_use_check = 1
+
+let g:AutoPairsShortcutToggle = ''
