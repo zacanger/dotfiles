@@ -630,3 +630,7 @@ let g:rustfmt_options = ''
 let g:ale_rust_cargo_use_check = 1
 
 let g:AutoPairsShortcutToggle = ''
+
+" temporary, see https://github.com/numirias/security/blob/master/doc/2019-06-04_ace-vim-neovim.md
+set modelines=0
+set nomodeline
