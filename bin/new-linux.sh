@@ -47,7 +47,6 @@ home_links=(
   .bashrc
   .ctags
   .dircolors
-  .docker
   .editorconfig
   .g
   .gitignore_global
@@ -65,6 +64,10 @@ for l in "${home_links[@]}"; do
 done
 
 # other symlinks
+
+# docker: don't link, because auth
+mkdir -p $HOME/.docker
+cp $z_path/.docker/config.json $HOME/docker/
 
 # gpg
 mkdir -p $HOME/.gnupg
