@@ -118,9 +118,10 @@ sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose
 sudo usermod -aG docker $USER
 
-# slack
+# misc
 sudo snap install slack --classic
 sudo snap install microk8s --classic
+sudo snap install go --classic
 
 # install keybase
 curl --remote-name https://prerelease.keybase.io/keybase_amd64.deb
