@@ -38,6 +38,7 @@ alias jv='jq .version < package.json'
 alias pipupd='pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
 alias venv='virtualenv -p /usr/bin/python3'
 alias lfd='lein figwheel dev'
+alias nu='npm i -g n && n latest && n prune && npm i -g npm npx npm-check-updates'
 
 # navigation
 alias d='cd'
