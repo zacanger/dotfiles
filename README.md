@@ -14,7 +14,7 @@ so there may be a few references to those paths scattered around.
   setup is oriented around quick editing of text and quick navigation.
 * This is shared between some Thinkpads Ubuntu and one (work) macbook.
 * I use nvim, but init.vim config probably works fine with Vim 8 (if renamed to .vimrc)
-* i3 on Linux, chunkwm on Mac.
+* i3 on Linux, Spectacle on Mac.
 * Bash 4 and 5, Python 3 mostly, Node latest, Neovim.
 * The files called `*.list` (under `/misc`) are to keep track of what I need on a fresh computer.
   * `apt.list`: generated with `apt-mark showmanual`

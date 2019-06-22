@@ -3,6 +3,8 @@
 # First, disable SIP. Turn off and boot up while holding CMD+R,
 # then open Utilities > Terminal and run `csrutil disable`
 
+# Install Spectacle from the website
+
 # Take ownership of /usr/local. By default, all gems,
 # python packages, and npm packages go in here.
 # I know this is controversial. It _really_ doesn't matter.
@@ -337,13 +339,6 @@ brew_packages=(
 for brew_p in "${brew_packages[@]}"; do
   brew install $brew_p
 done
-
-# Install chunkwm and skhd
-brew tap crisidev/homebrew-chunkwm
-brew install --HEAD --with-tmp-logging chunkwm
-brew install --HEAD --with-logging  koekeishiya/formulae/skhd
-brew services start chunkwm
-brew services start skhd
 
 ### Other Stuff
 
