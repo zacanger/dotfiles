@@ -31,7 +31,7 @@
 [instaweb]
   local = true
   port = 7777
-  browser = chromium
+  browser = firefox
 [commit]
   template = ~/.gitmessage
   gpgsign = true
