@@ -123,6 +123,7 @@ sed
 sensible-utils
 silversearcher-ag
 smartmontools
+snapcraft
 software-properties-common
 sox
 strace
