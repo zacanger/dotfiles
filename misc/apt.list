@@ -74,6 +74,8 @@ jq
 lame
 laptop-detect
 less
+libncurses5-dev
+libncursesw5-dev
 libx11-dev
 libxft-dev
 lm-sensors
