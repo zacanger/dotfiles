@@ -10,6 +10,7 @@ neovim
 nltk
 numpy
 requests
+scan-build
 scipy
 virtualenv
 xlsx2csv
