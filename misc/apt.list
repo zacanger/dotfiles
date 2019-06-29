@@ -20,9 +20,12 @@ bc
 bind9-host
 bsdmainutils
 bsdutils
+build-essential
 busybox-static
 bzip2
 ca-certificates
+clang-6.0
+cmake
 coreutils
 cpio
 cpp
@@ -74,10 +77,13 @@ jq
 lame
 laptop-detect
 less
+libclang-6.0-dev
 libncurses5-dev
 libncursesw5-dev
+libssl-dev
 libx11-dev
 libxft-dev
+llvm-6.0
 lm-sensors
 lshw
 lsof
