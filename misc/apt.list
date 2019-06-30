@@ -79,6 +79,7 @@ laptop-detect
 less
 libclang-6.0-dev
 libncurses5-dev
+qtcreator
 libncursesw5-dev
 libssl-dev
 libx11-dev
