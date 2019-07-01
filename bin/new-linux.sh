@@ -32,7 +32,6 @@ curl https://sh.rustup.rs -sSf | sh
 rustup toolchain install nightly
 cargo +nightly install racer
 cargo install cargo-check
-cargo install cargo-bump
 
 cp $z_path/.gitconfig $HOME/
 cp $z_path/.npmrc $HOME/

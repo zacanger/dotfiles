@@ -380,4 +380,3 @@ curl https://sh.rustup.rs -sSf | sh
 rustup toolchain install nightly
 cargo +nightly install racer
 cargo install cargo-check
-cargo install cargo-bump
