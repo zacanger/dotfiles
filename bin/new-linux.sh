@@ -31,7 +31,6 @@ cat $list_path/npm.list | xargs npm i -g
 curl https://sh.rustup.rs -sSf | sh
 rustup toolchain install nightly
 cargo +nightly install racer
-cargo install cargo-check
 
 cp $z_path/.gitconfig $HOME/
 cp $z_path/.npmrc $HOME/
