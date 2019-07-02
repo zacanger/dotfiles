@@ -119,10 +119,6 @@ procps
 psmisc
 python3-all
 python3-neovim
-qt5-default
-qt5-doc
-qtbase5-examples
-qtcreator
 ranger
 rar
 readline-common
