@@ -24,7 +24,7 @@ build-essential
 busybox-static
 bzip2
 ca-certificates
-clang-6.0
+clang
 cmake
 coreutils
 cpio
