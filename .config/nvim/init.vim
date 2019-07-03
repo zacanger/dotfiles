@@ -364,7 +364,8 @@ let g:ale_linters = {
       \ 'rust': ['cargo'],
       \ 'javascript': ['eslint'],
       \ 'typescript': ['eslint'],
-      \ 'jsx': ['eslint']
+      \ 'jsx': ['eslint'],
+      \ 'python': ['pycodestyle']
       \}
 let b:ale_javascript_eslint_options = "--rule 'prettier/prettier: 0'"
 
