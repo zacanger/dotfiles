@@ -1,7 +1,6 @@
 teams:
 * jane
 * utahjavascript
-* lgbt
 * gophers
 * rancher-users
 * techworkersco
