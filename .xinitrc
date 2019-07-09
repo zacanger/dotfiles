@@ -12,6 +12,7 @@ xmodmap -e "clear lock"
 xmodmap -e "keysym Caps_Lock = Escape"
 unclutter -root &
 redshift -l 40.760780:-111.891045 &
+toggletouch.sh
 # KEYBASE_AUTOSTART=1 run_keybase &
 exec i3
 # exec ~/Dropbox/work/repos/wmjs/index.js
