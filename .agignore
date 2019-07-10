@@ -97,3 +97,5 @@ public/lib
 src/.webpack.js
 tags
 package-lock.json
+junit.xml
+*.js.snap
