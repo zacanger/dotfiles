@@ -178,6 +178,7 @@ brew install gnu-which --with-default-names
 brew install grep --with-default-names
 brew cask install minikube
 brew cask install alacritty
+brew cask install google-cloud-sdk
 # The rest
 brew_packages=(
   aspcud
