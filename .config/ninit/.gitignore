@@ -110,3 +110,6 @@ target/
 **/*.rs.bak
 !Cargo.lock
 core
+.terraform/
+*.tfstate*
+*.tfvars
