@@ -44,7 +44,7 @@ alias_completion() {
     (( ${#completions[@]} == 0 )) && return 0
 
     # create temporary file for wrapper functions and completions
-    rm -f "/tmp/${namespace}-*.tmp" # preliminary cleanup
+    $(which rm) -f "/tmp/${namespace}-*.tmp" # preliminary cleanup
     local tmp_file; tmp_file="$(mktemp "/tmp/${namespace}-${RANDOM}.XXXXXX")" || return 1
 
     local completion_loader; completion_loader="$(complete -p -D 2>/dev/null | sed -Ene 's/.* -F ([^ ]*).*/\1/p')"
@@ -96,7 +96,7 @@ alias_completion() {
         new_completion="${new_completion% *} $alias_name"
         echo "$new_completion" >> "$tmp_file"
     done < <(alias -p | sed -Ene "s/$alias_regex/\1 '\2' '\3'/p")
-    source "$tmp_file" && rm -f "$tmp_file"
+    source "$tmp_file" && $(which rm) -f "$tmp_file"
 }
 alias_completion
 unset -f alias_completion
