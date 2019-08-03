@@ -1,6 +1,8 @@
 1. reboot while holding escape and the 'refresh' looking button
-1. set up developer mode (ctrl+d skips pauses)
-1. after reboot, switch to vt2 (the forward key is f2) and set up a password
+1. set up developer mode (ctrl+d skips pauses/screens)
+  * the funky 'your shit is fucked' screen is not real, just ctrl+d
+1. after reboot, enable debugging features i guess
+1. after reboot again, switch to vt2 (the forward key is f2) and set up a password
 1. go back and ctrl+alt+t, enter 'shell'
 1. follow the crouton install instructions
 1. `crouton -r xenial -t x11,cli-extra`
