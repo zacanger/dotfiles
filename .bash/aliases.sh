@@ -113,9 +113,9 @@ fi
 
 # special cases
 
-# don't break cat if no ccat
-if hash ccat 2>/dev/null; then
-  alias cat='ccat'
+# don't break cat if no bat
+if hash bat 2>/dev/null; then
+  alias cat='bat'
 fi
 
 if [[ `uname` == 'Darwin' ]]; then
