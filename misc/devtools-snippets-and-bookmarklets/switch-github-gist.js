@@ -1,15 +1,15 @@
-;(function() {
-  var u
-  , loc = document.location
-  , p   = loc.pathname
-  , l   = 'gist.github.com'
-  , r   = 'github.com'
+;(function () {
+  let u
+  let loc = document.location
+  let p = loc.pathname
+  let l = 'gist.github.com'
+  let r = 'github.com'
 
-  function l2r(p) {
+  function l2r (p) {
     return p
   }
 
-  function r2l(p) {
+  function r2l (p) {
     return p
   }
 

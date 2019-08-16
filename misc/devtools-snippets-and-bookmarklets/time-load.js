@@ -11,7 +11,7 @@ XMLHttpRequest.prototype.send = (function (orig) {
   var pushState = history.pushState
   history.pushState = function (state) {
     console.time()
-    if (typeof history.onpushstate == 'function') {
+    if (typeof history.onpushstate === 'function') {
       history.onpushstate({ state: state })
     }
     return pushState.apply(history, arguments)
