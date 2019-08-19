@@ -1,6 +1,7 @@
 Cython
 Pillow
 PyYAML
+autopep8
 awscli
 legit
 lxml
