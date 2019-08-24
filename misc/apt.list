@@ -69,6 +69,7 @@ im-config
 imagemagick
 info
 inkscape
+inotify-tools
 iproute2
 iptables
 iputils-ping
