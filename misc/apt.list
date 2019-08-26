@@ -78,9 +78,14 @@ jq
 lame
 laptop-detect
 less
+libcairo2-dev
 libclang-6.0-dev
+libgif-dev
+libjpeg-dev
 libncurses5-dev
 libncursesw5-dev
+libpango1.0-dev
+librsvg2-dev
 libssl-dev
 libx11-dev
 libxft-dev
