@@ -538,9 +538,6 @@ au BufNewFile,BufRead *.pxi set ft=clojure
 " github actions
 au BufNewFile,BufRead *.workflow set ft=terraform
 
-" jenkins
-au BufNewFile,BufRead Jenkinsfile set ft=groovy
-
 " babelrc
 au BufNewFile,BufRead .babelrc set ft=json
 
