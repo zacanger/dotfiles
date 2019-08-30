@@ -88,9 +88,7 @@ echo "# $DN
 
 ## Usage
 
-## License
-
-[LGPL-3.0](./LICENSE.md)" > README.md
+[LICENSE](./LICENSE.md)" > README.md
 
 if [ "$1" == "-g" ] ; then
   echo $WITHG > package.json
