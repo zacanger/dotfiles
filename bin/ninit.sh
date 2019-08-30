@@ -20,7 +20,7 @@ WITHOUTG="{
     \"email\": \"zac@zacanger.com\",
     \"url\": \"https://zacanger.com\"
   },
-  \"license\": \"MIT\",
+  \"license\": \"LGPL-3.0\",
   \"main\": \"index.js\",
   \"scripts\": {
     \"test\": \"npm run test:lint && npm run test:tape\",
@@ -54,7 +54,7 @@ WITHG="{
     \"email\": \"zac@zacanger.com\",
     \"url\": \"https://zacanger.com\"
   },
-  \"license\": \"MIT\",
+  \"license\": \"LGPL-3.0\",
   \"main\": \"index.js\",
   \"scripts\": {
     \"test\": \"npm run test:lint && npm run test:tape\",
@@ -90,7 +90,7 @@ echo "# $DN
 
 ## License
 
-[MIT](./LICENSE.md)" > README.md
+[LGPL-3.0](./LICENSE.md)" > README.md
 
 if [ "$1" == "-g" ] ; then
   echo $WITHG > package.json

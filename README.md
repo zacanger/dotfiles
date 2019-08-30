@@ -3,7 +3,7 @@
 ![screenshot](/screenshot.png?raw=true)
 
 Please feel free to use anything you like! 
-Unless otherwise noted, everything here is under the MIT license.
+Unless otherwise noted, everything here is under the LGPL-3.0 license.
 
 I keep this repo at `/home/z/Dropbox/z` and symlink a lot of stuff to `/home/z`,
 so there may be a few references to those paths scattered around.
