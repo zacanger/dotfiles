@@ -85,6 +85,7 @@ libjpeg-dev
 libncurses5-dev
 libncursesw5-dev
 libpango1.0-dev
+libreadline-dev
 librsvg2-dev
 libssl-dev
 libx11-dev
