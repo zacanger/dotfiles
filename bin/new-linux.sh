@@ -12,11 +12,12 @@ list_path=$z_path/misc
 
 sudo add-apt-repository ppa:mmstick76/alacritty
 sudo apt-get update && apt-get dist-upgrade -f -y
+sudo apt-get install -y alacritty
 cat $list_path/apt.list | xargs sudo apt-get install -y
 
 # python
 curl -s https://bootstrap.pypa.io/get-pip.py | sudo python3
-cat $list_path/pip.list | sudo pip3 install
+cat $list_path/pip.list | xargs sudo pip3 install
 
 # node
 sudo apt-get install -f -y nodejs npm
@@ -133,5 +134,5 @@ run_keybase
 # set up gcloud cli
 echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-sudo apt-get update && sudo apt-get install google-cloud-sdk
+sudo apt-get update && sudo apt-get install google-cloud-sdk -y
 gcloud init
