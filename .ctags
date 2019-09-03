@@ -86,6 +86,15 @@
 --regex-javascript=/^[ \t]*let[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*new/\1/V,Variable,Variables/b
 --regex-javascript=/^[ \t]*const[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*new/\1/V,Variable,Variables/b
 
+--langdef=Rust
+--langmap=Rust:.rs
+--regex-Rust=/fn +([a-zA-Z0-9_]+) *[(<{]/\1/f,functions,function definitions/
+--regex-Rust=/(type|enum|struct|trait)[ \t]+([a-zA-Z0-9_]+) *[<{(;]/\2/T,types,type definitions/
+--regex-Rust=/mod[ \t]+([a-zA-Z0-9_]+) *[<{(;]/\1/M,modules,module definitions/
+--regex-Rust=/(static|const) +([a-zA-Z0-9_]+) *[:=]/\2/c,consts,static constants/
+--regex-Rust=/macro_rules! +([a-zA-Z0-9_]+) *[{]/\1/d,macros,macro definitions/
+--regex-Rust=/impl([ \t\n]*<[^>]*>)?[ \t]+(([a-zA-Z0-9_:]+)[ \t]*(<[^>]*>)?[ \t]+(for)[ \t]+)?([a-zA-Z0-9_]+)/\6/i,impls,trait implementations/
+
 --exclude=*.bak
 --exclude=*.pyc
 --exclude=*.swp
