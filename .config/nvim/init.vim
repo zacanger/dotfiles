@@ -45,7 +45,7 @@ Plug 'vim-scripts/paredit.vim'         " balance parens
 Plug 'vim-scripts/syntaxcomplete'      " super simple syn completion
 Plug 'vim-utils/vim-husk'              " bash emacs-mode mappings in command mode
 Plug 'vim-utils/vim-troll-stopper'     " highlight unicode chars that look like ascii chars
-Plug 'w0rp/ale'                        " linting
+Plug 'dense-analysis/ale'              " linting
 Plug 'rust-lang/rust.vim'              " rust support
 Plug 'racer-rust/vim-racer'            " better rust
 
