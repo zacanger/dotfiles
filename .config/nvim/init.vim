@@ -535,8 +535,8 @@ endif
 " pixie
 au BufNewFile,BufRead *.pxi set ft=clojure
 
-" github actions
-au BufNewFile,BufRead *.workflow set ft=terraform
+" alternate jenkinsfiles
+au BufNewFile,BufRead Promotionfile set ft=jenkinsfile
 
 " babelrc
 au BufNewFile,BufRead .babelrc set ft=json
