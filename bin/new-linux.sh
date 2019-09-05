@@ -75,10 +75,6 @@ cp $z_path/.docker/config.json $HOME/docker/
 mkdir -p $HOME/.gnupg
 ln -s $z_path/.gnupg/gpg-agent.conf $HOME/.gnupg/
 
-# ghci
-mkdir -p $HOME/.ghc
-ln -s $z_path/.ghc/.ghci.conf $HOME/.ghc/
-
 # cargo, rust
 mkdir -p $HOME/.cargo
 ln -s $z_path/.cargo/config $HOME/.cargo/
@@ -90,12 +86,10 @@ mkdir -p $conf_path/alacritty
 mkdir -p $conf_path/i3
 mkdir -p $conf_path/i3status
 mkdir -p $conf_path/ranger
-mkdir -p $conf_path/zathura
 ln -s $zconf_path/alacritty/alacritty.yml $conf_path/alacritty/
 ln -s $zconf_path/ranger/rc.conf $conf_path/ranger/
 ln -s $zconf_path/ranger/rifle.conf $conf_path/ranger/
 ln -s $zconf_path/ranger/scope.sh $conf_path/ranger/
-ln -s $zconf_path/zathura/zathurarc $conf_path/zathura/
 ln -s $zconf_path/i3/config $conf_path/i3/
 ln -s $zconf_path/i3status/config $conf_path/i3status/
 ln -s $zconf_path/ninit $conf_path/
