@@ -77,17 +77,11 @@ alias f='k -1'
 alias lt='ls -lt'
 
 # dropbox
-if [[ `uname -a` == *"Arch"* ]]; then
-  dropbox_cmd=dropbox-cli
-else
-  dropbox_cmd=dropbox
-fi
-alias dbup="$dropbox_cmd start"
-alias dbdn="$dropbox_cmd stop"
-alias dbst="$dropbox_cmd status"
-alias dbls="$dropbox_cmd filestatus ~/Dropbox/*"
-alias dbfs="$dropbox_cmd filestatus"
-unset dropbox_cmd
+alias dbup="dropbox start"
+alias dbdn="dropbox stop"
+alias dbst="dropbox status"
+alias dbls="dropbox filestatus ~/Dropbox/*"
+alias dbfs="dropbox filestatus"
 
 # this requires sox, and is for DADGAD. change to E2-E4 (etc) for standard.
 alias tuner='for n in D2 A2 D3 G3 A3 D4;do play -n synth 4 pluck $n repeat 3;done'
@@ -111,13 +105,12 @@ else
   alias clc='echo -n | co && echo -n | xclip -selection primary'
 fi
 
-# special cases
-
 # don't break cat if no bat
 if hash bat 2>/dev/null; then
   alias cat='bat'
 fi
 
+# more mac stuff
 if [[ `uname` == 'Darwin' ]]; then
   alias file='file -h'
   alias alacritty='open -a /Applications/Alacritty.app'
@@ -127,9 +120,6 @@ fi
 alias grep='grep --color=auto'
 alias q='exit'
 alias ag='ag --path-to-ignore ~/.agignore'
-alias catlines="highlight $1 --out-format xterm256 --line-numbers --quiet --force --style solarized-light"
-alias all='compgen -c | sort -u'
-alias bs='bs.sh'
 alias c='clear'
 alias cx='chmod +x'
 alias ds='dirsize.sh'
@@ -137,7 +127,6 @@ alias fontlist='fc-list | cut -d : -f 2 | sort -u | uniq'
 alias fs='ranger'
 alias h='history'
 alias less='less -m -N -g -i -J --line-numbers --underline-special'
-alias locate='locate -ie'
 alias makelist="make -rpn | sed -n -e '/^$/ { n ; /^[^ .#][^ ]*:/p ; }' | egrep --color '^[^ ]*:'"
 alias md='mkdir -p -v'
 alias names='names.sh'
@@ -147,12 +136,10 @@ alias sw='time cat'
 alias vn='viewnior'
 alias yt2mp3='youtube-dl --extract-audio --audio-format mp3'
 alias ytpls='youtube-dl --extract-audio --audio-format mp3 -o "%(playlist_index)s-%(title)s.%(ext)s"'
-alias shrug='echo "¯\_(ツ)_/¯"'
-alias shco='shrug | co'
+alias shrug='echo "¯\_(ツ)_/¯" | co'
 alias todo='nvim ~/Dropbox/work/wip/.todo.json'
 alias am='alsamixer'
 alias checkip='curl http://checkip.amazonaws.com/'
-alias findallcolours="egrep -oi '#[a-f0-9]{6}' *.css | sort | uniq"
 alias alltlds="curl -s http://data.iana.org/TLD/tlds-alpha-by-domain.txt | grep -v XN | sed -e 1d -e 's/\(.*\)/\L\1/'"
 alias ur='unrar x -kb'
 alias cerm='c ; erm'
@@ -162,10 +149,7 @@ alias acd='a ; cd'
 alias findlonglines="grep '.\{120\}' -r"
 alias no='yes n'
 alias shhh='lock.sh'
-alias zh='zathura'
 alias cla='clc ; cerm'
 alias lv='luvi'
-alias w3h='w3m -T text/html'
-alias y2j="python3 -c 'import sys, yaml, json; y=yaml.safe_load(sys.stdin.read ()); print(json.dumps(y, default=lambda obj: obj.isoformat() if hasattr(obj, \"isoformat\") else obj))' | jq ."
 alias cpr='cp -R'
 alias tn='tmux new'

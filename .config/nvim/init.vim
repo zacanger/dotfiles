@@ -7,11 +7,6 @@ if has('vim_starting')
   set nocompatible " Be iMproved
 endif
 
-Plug 'flowtype/vim-flow', {
-      \ 'autoload': {
-      \     'filetypes': 'javascript'
-      \ }}
-
 Plug 'fatih/vim-go'
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " this takes forever
 
@@ -224,29 +219,6 @@ set wildignore+=*.ico,*.ICO,backup/**,*.sql,*.dump,*.tmp,*.min.js,Gemfile.lock
 set wildignore+=*.png,*.PNG,*.JPG,*.jpg,*.JPEG,*.jpeg,*.GIF,*.gif,*.pdf,*.PDF
 set wildignore+=vendor/**,coverage/**,tmp/**,rdoc/**,*.BACKUP.*,*.BASE.*,*.LOCAL.*,*.REMOTE.*,.sass-cache/**
 
-" grep.vim
-nnoremap <silent> <leader>f :Rgrep<CR>
-let Grep_Default_Options = '-IR'
-let Grep_Skip_Files = '*.log *.db'
-let Grep_Skip_Dirs = '.git node_modules'
-
-if has("nvim")
-  " Make escape work in the Neovim terminal.
-  tnoremap <Esc> <C-\><C-n>
-
-  " Make navigation into and out of Neovim terminal splits nicer.
-  tnoremap <C-h> <C-\><C-N><C-w>h
-  tnoremap <C-j> <C-\><C-N><C-w>j
-  tnoremap <C-k> <C-\><C-N><C-w>k
-  tnoremap <C-l> <C-\><C-N><C-w>l
-
-  " I like relative numbering when in normal mode.
-  autocmd TermOpen * setlocal conceallevel=0 colorcolumn=0 relativenumber
-
-  " Prefer Neovim terminal insert mode to normal mode.
-  autocmd BufEnter term://* startinsert
-endif
-
 if !exists('*s:setupWrapping')
   fu s:setupWrapping()
     set wrap
@@ -282,7 +254,6 @@ augroup vimrc-make-cmake
 augroup END
 
 au BufRead,BufNewFile *.md setlocal textwidth=80
-au FileType racket set et
 
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS noci
 
@@ -298,32 +269,6 @@ nnoremap vp `[v`]
 " split
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
-
-" tabs
-nnoremap <Tab> gt
-nnoremap <S-Tab> gT
-nnoremap <silent> <S-t> :tabnew<CR>
-
-" set working directory
-nnoremap <leader>. :lcd %:p:h<CR>
-
-" Opens an edit command with the path of the currently edited file filled in
-noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
-
-" Opens a tab edit command with the path of the currently edited file filled
-noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
-
-" shows current hi group
-map <leader>hi :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
-
-" Show syntax highlighting groups for word under cursor
-nmap <F7> :call <SID>SynStack()<CR>
-fu! <SID>SynStack()
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfu
 
 " Disable visualbell
 set noeb vb t_vb=
@@ -376,12 +321,6 @@ let g:javascript_enable_domhtmlcss = 1
 
 inoremap <Esc> <Esc>`^
 
-autocmd User Node
-      \ if &filetype == "javascript" |
-      \   nmap <buffer> <C-w>f <Plug>NodeVSplitGotoFile |
-      \   nmap <buffer> <C-w><C-f> <Plug>NodeVSplitGotoFile |
-      \ endif
-
 cnoremap sudow w !sudo tee & >/dev/null
 
 let g:seoul256_background = 233
@@ -394,13 +333,6 @@ let g:netrw_liststyle=3
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_gx="<cWORD>"
 
-let g:SuperTabDefaultCompletionType = "<c-n>"
-
-" greplace
-let g:grep_cmd_opts = '--line-numbers --noheading'
-set grepprg=ag
-set grepformat=%f:%l:%c:%m
-
 " commit message thing
 autocmd Filetype gitcommit setlocal spell textwidth=80
 
@@ -408,38 +340,11 @@ autocmd Filetype gitcommit setlocal spell textwidth=80
 nnoremap :! :!clear;
 vnoremap :! :!clear;
 
-" yank whole file
-nnoremap :yal :%y+
-
-" fucking windows
-fu! FixEndings()
-  :%s///g
-endfu
-
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
-" insert current line number in normal mode with f1
-nnoremap <F1> :execute "normal! i" . ( line(".") )<cr>
-nnoremap <F2> :execute "normal! i console.log(" . ( line(".") ) . ")"<cr>
-
 " keep Y consistent
 nnoremap Y y$
-
-" buftabs
-let g:buftabs_enabled = 1
-let g:buftabs_in_statusline = 1
-let g:buftabs_in_cmdline = 0
-let g:buftabs_only_basename = 1
-let g:buftabs_active_highlight_group = "Visual"
-let g:buftabs_inactive_highlight_group = ""
-let g:buftabs_statusline_highlight_group = ""
-let g:buftabs_marker_start = "["
-let g:buftabs_marker_end = "]"
-let g:buftabs_separator = "-"
-let g:buftabs_marker_modified = "!"
-nnoremap <C-j> :bprev<CR>
-nnoremap <C-k> :bnext<CR>
 
 " vim-markdown
 let g:vim_markdown_conceal = 0
@@ -459,30 +364,8 @@ let g:vim_markdown_fenced_languages = [
 let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_folding_disabled = 1
 
-" vim-gitgutter
-let g:gitgutter_max_signs = 700
-
-" let g:jsx_ext_required = 0
-
-fu! SortLines() range
-  execute a:firstline . "," . a:lastline . 's/^\(.*\)$/\=strdisplaywidth( submatch(0) ) . " " . submatch(0)/'
-  execute a:firstline . "," . a:lastline . 'sort n'
-  execute a:firstline . "," . a:lastline . 's/^\d\+\s//'
-endfu
-
 " because of docker + mac + webpack (or whatever)...
 let g:backupcopy = 'yes'
-
-" flow
-let local_flow = finddir('node_modules', '.;') . '/.bin/flow'
-if matchstr(local_flow, "^\/\\w") == ''
-  let local_flow= getcwd() . "/" . local_flow
-endif
-if executable(local_flow)
-  let g:flow#flowpath = local_flow
-endif
-let g:flow#enable = 0
-" let g:javascript_plugin_flow = 1
 
 let g:polyglot_disabled = ['css', 'js', 'jsx', 'javascript', 'javascript.jsx']
 let g:csstoinline_wrap_pixels = 1
@@ -570,19 +453,6 @@ nnoremap <silent> <leader>a :ArgWrap<CR>
 " jest snapshot files
 au BufRead,BufNewFile *.js.snap set ft=javascript
 
-" echo GetFileSize()
-fu! GetFileSize()
-  let bytes = getfsize(expand("%:p"))
-  if bytes <= 0
-    return "0"
-  endif
-  if bytes < 1024
-    return bytes
-  else
-    return (bytes / 1024) . "K"
-  endif
-endfu
-
 " match angle brackest
 set matchpairs+=<:>
 
@@ -630,10 +500,6 @@ let g:rustfmt_options = ''
 let g:ale_rust_cargo_use_check = 1
 
 let g:AutoPairsShortcutToggle = ''
-
-" temporary, see https://github.com/numirias/security/blob/master/doc/2019-06-04_ace-vim-neovim.md
-set modelines=0
-set nomodeline
 
 " URL encode/decode visual selection
 vnoremap <leader>en :!python -c 'import sys,urllib;print urllib.quote(sys.stdin.read().strip())'<cr>
