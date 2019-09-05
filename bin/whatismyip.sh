@@ -7,5 +7,5 @@
 command -v curl >/dev/null 2>&1 || { echo "Curl program not found. Please install it and try again"; exit 1; }
 command -v host >/dev/null 2>&1 || { echo "Host program not found. Please install it and try again"; exit 1; }
 host ipinfo.io >/dev/null 2>&1 \
-&& curl -f ipinfo.io/ip \
-|| exit 1
+  && curl -f ipinfo.io/ip \
+  || exit 1
