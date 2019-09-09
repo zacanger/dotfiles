@@ -115,6 +115,7 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose
 sudo usermod -aG docker $USER
 
 # misc
+sudo snap set system refresh.retain=2
 sudo snap install slack --classic
 sudo snap install microk8s --classic
 sudo snap install go --classic
