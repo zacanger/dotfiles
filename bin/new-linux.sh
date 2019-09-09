@@ -10,9 +10,7 @@ sudo chown -R $USER /usr/local
 # install global packages
 list_path=$z_path/misc
 
-sudo add-apt-repository ppa:mmstick76/alacritty
 sudo apt-get update && apt-get dist-upgrade -f -y
-sudo apt-get install -y alacritty
 cat $list_path/apt.list | xargs sudo apt-get install -y
 
 # python
@@ -82,11 +80,9 @@ ln -s $z_path/.cargo/config $HOME/.cargo/
 # .config
 $conf_path=$HOME/.config
 $zconf_path=$z_path/.config
-mkdir -p $conf_path/alacritty
 mkdir -p $conf_path/i3
 mkdir -p $conf_path/i3status
 mkdir -p $conf_path/ranger
-ln -s $zconf_path/alacritty/alacritty.yml $conf_path/alacritty/
 ln -s $zconf_path/ranger/rc.conf $conf_path/ranger/
 ln -s $zconf_path/ranger/rifle.conf $conf_path/ranger/
 ln -s $zconf_path/ranger/scope.sh $conf_path/ranger/
