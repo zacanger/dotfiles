@@ -42,7 +42,6 @@ Plug 'vim-utils/vim-husk'              " bash emacs-mode mappings in command mod
 Plug 'vim-utils/vim-troll-stopper'     " highlight unicode chars that look like ascii chars
 Plug 'dense-analysis/ale'              " linting
 Plug 'rust-lang/rust.vim'              " rust support
-Plug 'racer-rust/vim-racer'            " better rust
 
 call plug#end()
 
