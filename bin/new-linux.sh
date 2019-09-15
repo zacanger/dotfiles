@@ -90,7 +90,6 @@ ln -s $zconf_path/i3status/config $conf_path/i3status/
 ln -s $zconf_path/ninit $conf_path/
 ln -s $zconf_path/nvim $conf_path/
 ln -s $zconf_path/startup.py $conf_path/
-ln -s $zconf_path/wmjs.js $conf_path/
 
 # install vim shit
 nvim +PlugInstall +qa
