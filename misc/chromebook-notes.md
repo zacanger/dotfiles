@@ -10,3 +10,5 @@
 * `sudo enter-chroot -n xenial` and do all the setup there (install i3, set up xinitrc, etc)
 * put some kinda start alias in the chronos .bashrc, like `alias start='sudo enter-chroot -n xenial xinit'`
 * get back in and finish setup from bits of bin/new-linux.sh
+
+https://www.codedonut.com/chromebook/install-full-native-standalone-linux-on-any-chromebook-elementaryos/#6_Modify_the_Chromebooks_BIOS

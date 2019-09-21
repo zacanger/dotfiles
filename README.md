@@ -15,8 +15,8 @@ those paths scattered around.
 * Professionaly, I write Node, shell, and lots and lots of
   config. A lot of my setup is oriented around quick editing
   of text and quick navigation.
-* This is shared between some Thinkpads (Ubuntu) and one
-  (work) macbook.
+* This is shared between some Thinkpads (Ubuntu), one (work) macbook,
+  and a Chromebook running Gallium.
 * I use nvim, but init.vim config probably works fine with
   Vim 8 (if renamed to .vimrc)
 * i3 on Linux, Spectacle on Mac.
