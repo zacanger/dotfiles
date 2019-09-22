@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-echo UNTESTED
+echo 'Make sure ~/Dropbox/z is synced before running!'
+echo 'It may be safter to run this block-by-block.'
 
 z_path=$HOME/Dropbox/z
 
