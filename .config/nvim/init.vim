@@ -19,8 +19,6 @@ Plug 'ajh17/VimCompletesMe'            " tab completion helpers, also see 'ervan
 Plug 'bling/vim-airline'               " better statusline
 Plug 'bounceme/poppy.vim'              " simple highlight/rainbow parens plugin
 Plug 'bronson/vim-trailing-whitespace' " highlight trailing whitespace
-Plug 'gorodinskiy/vim-coloresque'      " highlight colors
-Plug 'isomoar/vim-css-to-inline'       " convert between css and dom-type styles
 Plug 'jiangmiao/auto-pairs'            " auto-complete pairs of things
 Plug 'junegunn/seoul256.vim'           " colo
 Plug 'junegunn/vim-easy-align'         " align stuff on a symbol (like the comments in this block)
