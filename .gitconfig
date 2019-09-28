@@ -37,7 +37,3 @@
   gpgsign = true
 [http]
   postBuffer = 524288000
-[transfer]
-  fsckobjects = true
-[fetch]
-  fsckobjects = true
