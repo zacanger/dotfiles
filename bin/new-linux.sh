@@ -128,6 +128,7 @@ sudo snap set system refresh.retain=2
 sudo snap install slack --classic
 sudo snap install microk8s --classic
 sudo snap install go --classic
+sudo usermod -aG microk8s $USER
 
 # Install Keybase
 curl --remote-name https://prerelease.keybase.io/keybase_amd64.deb
