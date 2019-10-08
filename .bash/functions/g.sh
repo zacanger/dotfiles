@@ -3,10 +3,10 @@
 _g_init() {
   # init directory if it does not exist
   if [ ! -d "$HOME/.g" ]; then
-        mkdir "$HOME/.g"
+    mkdir "$HOME/.g"
   fi
   # set completion function
-  command -v complete &>/dev/null && complete -F _g_completions g gd 
+  command -v complete &>/dev/null && complete -F _g_completions g gd
 }
 
 _g_completions() {
@@ -39,7 +39,7 @@ gd() {
     rm "$HOME/.g/${1-_back}"
     echo "Deleted bookmark $1"
   else
-   echo "Bookmark $1 not found!"
+    echo "Bookmark $1 not found!"
   fi
 }
 

@@ -9,7 +9,7 @@ alias reload='source ~/.bashrc'
 
 # git; see gitconfig for more
 alias gfa='git fetch --all'
-alias gd='git diff'
+# alias gd='git diff'
 alias gc='git clone'
 alias grv='git remote -v'
 alias branches='git branches'
