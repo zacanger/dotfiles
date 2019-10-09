@@ -10,10 +10,10 @@ _g_init() {
 }
 
 _g_completions() {
-  for file in "$HOME/.g/$2"*; do
+  for file in "$HOME/.g/${2//\\ / }"*; do
     if [ -f "$file" ]; then
       FILE_BASENAME=$(basename "${file}")
-      COMPREPLY+=( "${FILE_BASENAME/ /\\ }" )
+      COMPREPLY+=( "${FILE_BASENAME// /\\ }" )
     fi
   done
 }
