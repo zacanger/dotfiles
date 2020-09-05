@@ -1,0 +1,15 @@
+{
+  "root": true,
+  "extends": [
+    "plugin:zacanger/recommended",
+    "plugin:zacanger/react",
+    "plugin:zacanger/node",
+    "plugin:zacanger/typescript",
+    "plugin:zacanger/prettier-ts",
+    "plugin:zacanger/prettier",
+    "plugin:zacanger/jest"
+  ],
+  "plugins": [
+    "zacanger"
+  ]
+}

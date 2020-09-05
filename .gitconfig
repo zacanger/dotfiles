@@ -1,0 +1,37 @@
+[core]
+  editor = nvim
+  excludesfile = /home/z/Dropbox/z/.gitignore_global
+  ignorecase = false
+[user]
+  email = zac@zacanger.com
+  name = zacanger
+  signingkey = F758A5EBFC761412
+[push]
+  default = matching
+[color]
+  ui = 1
+[alias]
+  b = log -p -M --follow --stat --
+  ac = !git add -A && git commit
+  g = log --color --graph --pretty=format:'%Cgreen[%Creset%h%Cgreen]%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  st = status -sb
+  stash = stash -u
+  remote = remote -v
+  branch = branch -rv
+  rebase = rebase -i
+  add = add -A
+  p = push
+  clear = checkout .
+  rpo = remote prune origin
+  alias = config --get-regexp 'alias.*'
+  graph = log --color --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%n%Cgreen(%cr)%Creset by %C(bold blue)<%an>%Creset%Cred %GK%n'
+  all = "!find . -type d -name .git -prune -execdir pwd ';' -execdir git $@ ';' #"
+  gcpa = gc --prune --aggressive
+[help]
+  autocorrect = 10
+[commit]
+  gpgsign = true
+[http]
+  postBuffer = 524288000
+[pull]
+  ff = only

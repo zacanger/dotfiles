@@ -1,0 +1,86 @@
+"\ej": menu-complete
+"\ek": menu-complete-backward
+
+"\ex": 'cd !$\015ls\015'
+"\ez": 'cd -\015ls\015'
+
+# allow unicode input/output
+set input-meta on
+set output-meta on
+set convert-meta off
+
+set colored-stats
+
+# tab completion
+set completion-ignore-case on
+
+set completion-prefix-display-length 2
+
+# treat underscore and hyphen as the same
+set completion-map-case on
+
+# show me lots of stuff
+set completion-query-items 1000
+
+# don't display ^C etc
+set echo-control-characters off
+
+# show trailing slash
+set mark-directories on
+set mark-symlinked-directories on
+
+# don't complete already completed text
+set skip-completed-text on
+
+set editing-mode vi
+$if mode=vi
+set keymap vi-command
+Control-l: clear-screen
+set keymap vi-insert
+"\e.": insert-last-argument
+Control-l: clear-screen
+"\e.": insert-last-argument
+Control-w: backward-kill-word
+"p": self-insert
+$endif
+
+# set enable-keypad on
+
+# do not bell on tab-completion
+set bell-style none
+
+# some defaults / modifications for the emacs mode
+$if mode=emacs
+
+# allow the use of the Home/End keys
+"\e[1~": beginning-of-line
+"\e[4~": end-of-line
+
+# allow the use of the Delete/Insert keys
+"\e[3~": delete-char
+"\e[2~": quoted-insert
+
+# mappings for Ctrl-left-arrow and Ctrl-right-arrow for word moving
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
+"\e[5C": forward-word
+"\e[5D": backward-word
+"\e\e[C": forward-word
+"\e\e[D": backward-word
+
+$if term=rxvt
+"\e[7~": beginning-of-line
+"\e[8~": end-of-line
+"\eOc": forward-word
+"\eOd": backward-word
+$endif
+
+# for non RH/Debian xterm, can't hurt for RH/Debian xterm
+# "\eOH": beginning-of-line
+# "\eOF": end-of-line
+
+# for freebsd console
+# "\e[H": beginning-of-line
+# "\e[F": end-of-line
+
+$endif

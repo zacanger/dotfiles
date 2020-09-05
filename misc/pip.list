@@ -1,0 +1,13 @@
+Cython
+PyYAML
+autopep8
+awscli
+black
+bpython
+neovim
+nltk
+numpy
+pip
+requests
+scipy
+virtualenv

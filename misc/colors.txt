@@ -1,0 +1,29 @@
+// terminal colors
+static const char *colorname[] = {
+  /* 8 normal colors */
+  [0] = "#101010", /* black   */
+  [1] = "#ae4435", /* red     */
+  [2] = "#cedd66", /* green   */
+  [3] = "#e6bf5c", /* yellow  */
+  [4] = "#60adcc", /* blue    */
+  [5] = "#a27fc5", /* magenta */
+  [6] = "#5bb4d2", /* cyan    */
+  [7] = "#bdc9b7", /* white   */
+
+  /* 8 bright colors */
+  [8]  = "#3d3d3d", /* black   */
+  [9]  = "#df8568", /* red     */
+  [10] = "#c3e4a0", /* green   */
+  [11] = "#eabf8a", /* yellow  */
+  [12] = "#89c9e0", /* blue    */
+  [13] = "#dca1d0", /* magenta */
+  [14] = "#85dfdb", /* cyan    */
+  [15] = "#daded0", /* white   */
+
+  /* special colors */
+  [256] = "#131111", /* background */
+  [257] = "#d9d7d2", /* foreground */
+};
+
+// slack colors
+#030303,#1f1f1f,#303030,#d9d9d9,#2b2b2b,#d6d6d6,#6da675,#c090d6

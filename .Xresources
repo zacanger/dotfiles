@@ -1,0 +1,60 @@
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+
+*fading:                          15
+*fadeColor:                       black
+*pointerColorBackground:          #2B2C2B
+*pointerColorForeground:          #16A085
+
+! special
+*.foreground:   #d9d7d2
+*.background:   #131111
+*.cursorColor:  #d9d7d2
+
+! black
+*.color0:       #101010
+*.color8:       #3d3d3d
+
+! red
+*.color1:       #ae4435
+*.color9:       #df8568
+
+! green
+*.color2:       #cedd66
+*.color10:      #c3e4a0
+
+! yellow
+*.color3:       #e6bf5c
+*.color11:      #eabf8a
+
+! blue
+*.color4:       #60adcc
+*.color12:      #89c9e0
+
+! magenta
+*.color5:       #a27fc5
+*.color13:      #dca1d0
+
+! cyan
+*.color6:       #5bb4d2
+*.color14:      #85dfdb
+
+! white
+*.color7:       #bdc9b7
+*.color15:      #daded0
+
+Xcursor.theme: Adwaita
+Xcursor.size:  0
+
+XTerm*.foreground:    #d9d7d2
+XTerm*.background:    #131111
+XTerm*.pointerColor:  #d9d7d2
+!! XTerm*faceSize: 11
+
+XTerm*faceName:                   Bront:size=12:antialias=true
+XTerm*selectToClipboard:          true
