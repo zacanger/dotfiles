@@ -11,6 +11,7 @@ alias reload='source ~/.bashrc'
 
 # git; see gitconfig for more
 alias gfa='git fetch --all'
+alias gcpa='git gcpa'
 alias gdi='git diff'
 alias gcl='git clone'
 alias grv='git remote -v'
