@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-main_menu() {
+main() {
   echo '1) Celsius to Fahrenheit'
   echo '2) Fahrenheit to Celsius'
   echo ""
@@ -34,4 +34,4 @@ c_to_f() {
   exit 0
 }
 
-main_menu
+main
