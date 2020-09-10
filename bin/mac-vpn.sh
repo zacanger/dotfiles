@@ -21,4 +21,4 @@ main() {
   esac
 }
 
-main $@
+main "$@"
