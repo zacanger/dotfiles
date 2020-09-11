@@ -46,8 +46,9 @@ gd() {
 }
 
 # show all
+_grep=$(which grep)
 ga() {
-  ( cd "$HOME/.g" ; grep '' * ) | awk 'BEGIN { FS=":" } { printf("%-10s %s\n",$1,$2) }' | grep -i -E "${1-.*}"
+  ( cd "$HOME/.g" ; $_grep '' * ) | awk 'BEGIN { FS=":" } { printf("%-10s %s\n",$1,$2) }' | $_grep -i -E "${1-.*}"
 }
 
 _g_init
