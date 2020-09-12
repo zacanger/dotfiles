@@ -127,6 +127,9 @@ fi
 # more mac stuff
 if [[ $(uname) == 'Darwin' ]]; then
   alias file='file -h'
+  if hash gfind 2>/dev/null; then
+    alias find='gfind'
+  fi
 fi
 
 # all the rest
