@@ -374,7 +374,8 @@ let g:vim_markdown_folding_disabled = 1
 " because of docker + mac + webpack (or whatever)...
 let g:backupcopy = 'yes'
 
-let g:polyglot_disabled = ['css', 'js', 'jsx', 'javascript', 'javascript.jsx']
+" TODO: delete this if it doesn't seem to make any difference
+" let g:polyglot_disabled = ['css', 'js', 'jsx', 'javascript', 'javascript.jsx']
 let g:csstoinline_wrap_pixels = 1
 
 " match % on more stuff

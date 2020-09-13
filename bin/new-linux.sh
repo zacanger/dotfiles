@@ -112,7 +112,8 @@ cp "$z_path/.ghc/ghci.conf" "$HOME/.ghc/"
 chmod go-w "$HOME/.ghc"
 stack ghci
 stack install ShellCheck
-stack install pandoc
+# Disabling for now, this takes an absurdly long time
+# stack install pandoc
 
 # Ruby
 cat "$list_path/gem.list" | xargs sudo gem install
