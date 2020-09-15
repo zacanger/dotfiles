@@ -16,7 +16,7 @@ main() {
       ;;
     start) start
       ;;
-    *) echo 'usage: stop or start'
+    *) echo "$(basename "$0") usage: stop or start"
       ;;
   esac
 }
