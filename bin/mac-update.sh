@@ -2,8 +2,7 @@
 set -e
 
 brew update
-brew cask upgrade
 brew upgrade
+brew upgrade --cask
 brew cleanup
-brew doctor
-brew cask doctor
+brew doctor --verbose
