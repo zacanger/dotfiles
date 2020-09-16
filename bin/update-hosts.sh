@@ -14,6 +14,7 @@ curl \
   > hosts2
 
 # ??????????
+# maybe moved to https://gitlab.com/CHEF-KOCH/cks-filterlist??
 # https://github.com/CHEF-KOCH/NSABlocklist
 # curl \
   # -sSL \
