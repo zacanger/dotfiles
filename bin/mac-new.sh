@@ -127,7 +127,7 @@ defaults write com.apple.iTunes invertStoreLinks -bool true
 defaults write com.apple.dock no-bouncing -bool true
 # defaults write com.apple.Dock autohide -bool true
 defaults write com.apple.dock largesize -int 65
-defaults write com.apple.dock tilesize -int 10
+defaults write com.apple.dock tilesize -int 14
 # Minimize windows into their application’s icon
 defaults write com.apple.dock minimize-to-application -bool true
 # Remove the auto-hiding Dock delay
