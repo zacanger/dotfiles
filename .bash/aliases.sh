@@ -74,11 +74,11 @@ alias chgrp='chgrp --preserve-root'
 
 # ls things
 alias ls='ls -F --color=auto --group-directories-first'
-alias lS='ls -lSh'
-alias k='ls'
-alias l='ls -oshS'
+alias lS='ls -loSh'
+alias l='ls'
+alias k='ls -1'
 alias a='ls -A'
-alias f='k -1'
+alias f='ls -1'
 alias lt='ls -ltrh'
 
 # dropbox
