@@ -1,7 +1,8 @@
 # `$HOME`
 
-See <ttps://github.com/zacanger/dotfiles-archived> for old Git history, I
-archived the repo and started fresh due to huge Git directory size.
+See <https://github.com/zacanger/junk/tree/master/dotfiles-archive> for old
+Git history, I archived the repo and started fresh due to huge Git directory
+size.
 
 Unless otherwise noted in the file, everything here is under the LGPL-3.0
 license, so feel free to to fork or copy out anything useful to you.
