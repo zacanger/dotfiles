@@ -306,6 +306,7 @@ brew_packages=(
   rsync
   ruby
   s-lang
+  shellcheck
   siege
   sip
   source-highlight
