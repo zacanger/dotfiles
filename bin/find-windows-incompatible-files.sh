@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 # files with reserve names and characters
 LC_ALL=C find . -name '*[[:cntrl:]<>:"\\|?*]*' \

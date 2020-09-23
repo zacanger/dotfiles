@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env bash
+set -e
 
 dotnet clean
 find . -name bin -type d -exec rm -r {} \;

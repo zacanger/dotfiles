@@ -1,6 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env bash
+set -e
 
-# little backlight-adjusting script for my netbook
+# little backlight-adjusting script
 
 backlight_path=/sys/class/backlight/intel_backlight/brightness
 arg="$1"
