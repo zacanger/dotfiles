@@ -181,8 +181,6 @@ brew install gnu-which --with-default-names
 brew install grep --with-default-names
 brew cask install minikube
 brew cask install mpv
-brew install ubuntu/microk8s/microk8s
-microk8s install
 # The rest
 brew_packages=(
   aspcud
