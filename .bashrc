@@ -15,7 +15,13 @@ _sourceif "$HOME/.bash/config.sh"
 _sourceif "$HOME/.bash/history.sh"
 _sourceif "$HOME/.bash/path.sh"
 _sourceif "$HOME/.bash/vars.sh"
-_sourceif "$HOME/.bash/aliases.sh"
+
+if [ -d "$HOME/.bash/aliases" ]; then
+  for file in "$HOME"/.bash/aliases/*; do
+    _sourceif "$file"
+  done
+fi
+
 _sourceif "$HOME/.bash/prompt.sh"
 
 # completions

@@ -1,0 +1,17 @@
+# shellcheck shell=bash
+
+alias gfa='git fetch --all'
+alias gcpa='git gcpa'
+alias gdi='git diff'
+alias gcl='git clone'
+alias grv='git remote -v'
+alias branches='git all-branches'
+alias rpo='git rpo'
+alias gg='git g'
+alias gco='git checkout'
+alias gw='ghwd.sh'
+alias gst='git st'
+alias gitodo='git grep -EiI "FIXME|TODO"'
+alias aca='ac a'
+alias gp='git push'
+alias gpft='git push origin master --follow-tags'
