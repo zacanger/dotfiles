@@ -159,6 +159,9 @@ defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 # Disable “natural” (Lion-style) scrolling
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
+# Use f-keys without holding fn key:
+echo '2' | sudo tee /sys/module/hid_apple/parameters/fnmode
+
 # Kill some stuff
 pkill -9 Finder
 pkill -9 Dock
