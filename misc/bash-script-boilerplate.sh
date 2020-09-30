@@ -249,6 +249,10 @@ is_not_empty() {
   [[ -n $1 ]]
 }
 
+is_link() {
+  [[ -L $1 ]]
+}
+
 # if it_exists foo ; then (do things)
 it_exists() {
   command -v "$1" &> /dev/null ;
