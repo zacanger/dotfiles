@@ -6,7 +6,7 @@ alias ka='killall'
 
 # managing .bashrc & .bash_aliases
 alias edrc='nvim ~/.bashrc'
-alias edal='nvim ~/.bash/aliases.sh'
+alias edal='nvim ~/.bash/aliases'
 alias reload='source ~/.bashrc'
 
 # clipboard
