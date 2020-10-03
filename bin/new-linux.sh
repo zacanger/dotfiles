@@ -167,6 +167,7 @@ sudo usermod -aG docker "$USER"
 sudo apt-get remove -y '*whoopsie*'
 sudo apt-get remove -y 'gnome-*'
 sudo apt-get remove -y pinentry-gnome3
+sudo apt-get remove -y cups
 sudo snap remove --purge gtk-common-themes
 sudo snap remove --purge gnome-3-34-1804
 sudo apt autoremove -y
