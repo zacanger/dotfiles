@@ -444,6 +444,7 @@ if has("autocmd") && exists("+omnifunc")
 endif
 
 nnoremap <leader>w :w<CR>
+nnoremap <leader>m :make<CR>
 
 " nerdcommenter
 let g:NERDSpaceDelims=1
