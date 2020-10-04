@@ -53,8 +53,6 @@ rustup default nightly
 # Golang REPL
 go get -u github.com/motemen/gore/cmd/gore
 go get -u github.com/mdempsky/gocode
-# Another one, haven't decided yet
-go get -u github.com/containous/yaegi/cmd/yaegi
 
 # Copy rather than link because of auth
 cp "$z_path/.npmrc" "$HOME/"
