@@ -1,5 +1,5 @@
 [core]
-  editor = nvim
+  editor = vim
   excludesfile = /home/z/Dropbox/z/.gitignore_global
   ignorecase = false
 [user]

@@ -1,7 +1,6 @@
-" zacanger's init.vim
-" for nvim | neovim.io
+" zacanger's .vimrc
 
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin('~/.local/share/vim/plugged')
 
 if has('vim_starting')
   set nocompatible " Be iMproved
@@ -490,7 +489,7 @@ let g:extra_whitespace_ignored_filetypes = ['go', 'md']
 " poppy
 au! cursormoved * call PoppyInit()
 
-" ignore vim-go warning on old nvim
+" ignore vim-go warning on old versions
 let g:go_version_warning = 0
 
 " fix imports + format on save

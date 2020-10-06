@@ -1,7 +1,7 @@
 # shellcheck shell=bash
 
-export VISUAL=nvim
-export EDITOR=nvim
+export VISUAL=vim
+export EDITOR=vim
 export TERMINAL=st
 export PYTHONSTARTUP=$HOME/.config/startup.py
 export BROWSER=firefox

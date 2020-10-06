@@ -25,7 +25,6 @@ cat "$list_path/apt.list" | xargs sudo apt-get install -y
 # Snaps
 sudo snap set system refresh.retain=2
 sudo snap refresh
-sudo snap install --beta nvim --classic
 sudo snap install slack --classic
 sudo snap install microk8s --classic
 sudo snap install go --classic
@@ -80,6 +79,8 @@ home_links=(
   .inputrc
   .profile
   .tmux.conf
+  .vim
+  .vimrc
   .xinitrc
   bin
 )
@@ -139,7 +140,6 @@ ln -s "$zconf_path/ranger/scope.sh" "$conf_path/ranger/"
 ln -s "$zconf_path/i3/config" "$conf_path/i3/"
 ln -s "$zconf_path/i3status/config" "$conf_path/i3status/"
 ln -s "$zconf_path/ninit" "$conf_path/"
-ln -s "$zconf_path/nvim" "$conf_path/"
 ln -s "$zconf_path/startup.py" "$conf_path/"
 ln -s "$zconf_path/neofetch/config.conf" "$conf_path/neofetch/"
 
@@ -147,10 +147,10 @@ ln -s "$zconf_path/neofetch/config.conf" "$conf_path/neofetch/"
 cp "$zconf_path/pcmanfm/default/pcmanfm.conf" "$conf_path/pcmanfm/default/"
 
 # Vim
-curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-nvim +PlugInstall +qa
-nvim +GoInstallBinaries +qa
+vim +PlugInstall +qa
+vim +GoInstallBinaries +qa
 
 # Link fonts
 ln -s "$z_path/x/fonts/" "$HOME/.local/share/"

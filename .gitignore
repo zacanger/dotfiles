@@ -52,7 +52,6 @@
 .bower-tmp
 .cabal-sandbox/
 .completer.hist
-.config/nvim/session/*
 .config/ranger/bookmarks
 .config/ranger/history
 .config/ranger/tagged
@@ -131,5 +130,7 @@ xfce4
 .config/qutebrowser/quickmarks
 .config/qutebrowser/qsettings
 .config/qutebrowser/bookmarks
-.config/nvim/autoload/plug.vim
-.config/nvim/autoload/plug.vim.old
+.vim/autoload/plug.vim
+.vim/autoload/plug.vim.old
+.vim/.netrwhist
+.vim/session

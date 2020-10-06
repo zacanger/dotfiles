@@ -49,8 +49,6 @@
 .bower-tmp
 .cabal-sandbox/
 .completer.hist
-.config/nvim/bundle/*
-.config/nvim/session/*
 .config/ranger/bookmarks
 .config/ranger/history
 .fseventsd

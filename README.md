@@ -20,7 +20,7 @@ which don't get symlinked or copied over.
 * Window manager: plain i3, very light config, i3status
 * Terminal: [st fork](https://github.com/zacanger/st)
 * File manager: Ranger
-* Editor: Neovim, but my configs probably work fine for Vim too
+* Editor: Vim
 * Browser: Firefox
 * Shell: Bash, with lots of aliases and handy functions. `~/.bashrc`
   mostly just sources a bunch of stuff in `~/.bash/`

@@ -282,7 +282,6 @@ brew_packages=(
   mplayer
   ncdu
   ncurses
-  neovim
   nettle
   nginx
   ninja
@@ -321,6 +320,7 @@ brew_packages=(
   unrar
   unzip
   vala
+  vim
   w3m
   watch
   watchman
@@ -338,7 +338,7 @@ done
 ### Other Stuff
 
 # Global gems
-sudo gem install compass bootstrap-sass neovim rake
+sudo gem install compass bootstrap-sass rake
 
 # Install youtube-dl
 curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
@@ -359,10 +359,10 @@ if [[ -f $HOME/Dropbox/z/misc/pip.list ]]; then
 fi
 
 # Vim
-curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-nvim +PlugInstall +qa
-nvim +GoInstallBinaries +qa
+vim +PlugInstall +qa
+vim +GoInstallBinaries +qa
 
 # Update the Mac
 sudo softwareupdate -i -a
