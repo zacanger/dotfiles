@@ -5,8 +5,8 @@ alias killx='sudo pkill -9 Xorg'
 alias ka='killall'
 
 # managing .bashrc & .bash_aliases
-alias edrc='vim ~/.bashrc'
-alias edal='vim ~/.bash/aliases'
+alias edrc="$EDITOR ~/.bashrc"
+alias edal="$EDITOR ~/.bash/aliases"
 alias reload='source ~/.bashrc'
 
 # clipboard
