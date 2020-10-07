@@ -14,7 +14,6 @@ alias fontlist='fc-list | cut -d : -f 2 | sort -u | uniq'
 alias fs='ranger'
 alias h='history'
 alias less='less -m -N -g -i -J --line-numbers --underline-special'
-alias makelist="make -rpn | sed -n -e '/^$/ { n ; /^[^ .#][^ ]*:/p ; }' | egrep --color '^[^ ]*:'"
 alias md='mkdir -p -v'
 alias names='names.sh'
 alias randomchars='dd if=/dev/urandom count=1 2> /dev/null | uuencode -m - | sed -ne 2p | cut -c-16'
