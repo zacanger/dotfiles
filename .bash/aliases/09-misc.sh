@@ -2,8 +2,6 @@
 
 # this requires sox, and is for DADGAD. change to E2-E4 (etc) for standard.
 alias tuner='for n in D2 A2 D3 G3 A3 D4;do play -n synth 4 pluck $n repeat 3;done'
-# npm i -g somafm
-alias radio='somafm -n'
 alias py='bpython'
 alias q='exit'
 alias ag='ag --path-to-ignore ~/.agignore'
