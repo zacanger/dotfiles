@@ -14,7 +14,7 @@ def openColorDialog(_):
 class App(QWidget):
     def __init__(self):
         super().__init__()
-        self.title = 'colorpicker'
+        self.title = "colorpicker"
         self.left = 10
         self.top = 10
         self.width = 320
@@ -25,11 +25,11 @@ class App(QWidget):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
 
-        button = QPushButton('open color picker', self)
+        button = QPushButton("open color picker", self)
         button.move(10, 10)
         button.clicked.connect(self.on_click)
 
-        quit_button = QPushButton('Quit', self)
+        quit_button = QPushButton("Quit", self)
         quit_button.move(10, 40)
         quit_button.clicked.connect(self.close)
 
@@ -40,7 +40,7 @@ class App(QWidget):
         openColorDialog(self)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = QApplication(sys.argv)
     ex = App()
     sys.exit(app.exec_())
