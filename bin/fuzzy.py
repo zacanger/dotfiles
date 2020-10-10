@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 # Based on https://github.com/sgtpep/pmenu (GPL 3.0, see license
-# in that repo). Modified to be a general fuzzy finder for whatever
-# purpose, and to remove the caching-related stuff.
+# in that repo). Modified to remove the cache, remove some options,
+# remove some keybinds, and generally just do less.
 
 import argparse
 import curses
@@ -17,41 +17,14 @@ import signal
 import subprocess
 import sys
 
-__version__ = "0.3.3"
-
-required_version = (3, 3)
-if sys.version_info < required_version:
-    sys.exit("Python {}.{} or newer is required.".format(*required_version))
-
 
 def get_args():
     parser = argparse.ArgumentParser(
-        usage="pipe newline-separated menu items to stdin and/or pass them as positional arguments"
+        usage="Pipe newline-separated items or pass as args"
     )
     parser.add_argument("item", nargs="*", help="the menu item text")
-    parser.add_argument(
-        "-c",
-        "--command",
-        help="the shell command which output will populate the menu items on every keystroke ({} will be replaced by the current input text)",
-    )
-    parser.add_argument(
-        "-n",
-        "--name",
-        help="the cache file name with the most recently used items",
-    )
-    parser.add_argument("-p", "--prompt", help="the prompt text")
-    parser.add_argument(
-        "-v", "--version", action="version", version="%(prog)s " + __version__
-    )
-
     args = parser.parse_args()
-    if args.prompt is None:
-        args.prompt = "> "
-        if args.name:
-            args.prompt = args.name + args.prompt
-
     return args
-
 
 
 def get_input_items():
@@ -61,25 +34,7 @@ def get_input_items():
         input_items += stdin.read().splitlines()
     input_items += args.item
     input_items = filter(None, input_items)
-
     return list(input_items)
-
-
-def get_command_items():
-    if not args.command:
-        return []
-
-    command_argument = shlex.quote(query_text)
-    command = args.command.replace("{}", command_argument)
-    command_output = subprocess.check_output(
-        command, shell=True, stderr=subprocess.DEVNULL
-    )
-    command_output = command_output.decode("utf8", "replace")
-    command_items = command_output.splitlines()
-    command_items = filter(None, command_items)
-
-    return list(command_items)
-
 
 
 def redirect_stdio(func):
@@ -90,7 +45,6 @@ def redirect_stdio(func):
         stdout = open("/dev/tty", "w")
         os.dup2(stdin.fileno(), 0)
         os.dup2(stdout.fileno(), 1)
-
         return func()
     finally:
         os.dup2(prev_stdin, 0)
@@ -159,8 +113,6 @@ def get_filtered_items():
                     substring_items.append(item)
             filtered_items += exact_items + prefix_items + substring_items
 
-    filtered_items += get_command_items()
-
     return filtered_items
 
 
@@ -175,7 +127,8 @@ def redraw(screen):
             )
             screen.insstr(i + 1, 0, item[: curses.COLS - 1], item_attr)
 
-        top_line_text = args.prompt + query_text
+        prompt = "-> "
+        top_line_text = prompt + query_text
         top_line_offset = len(top_line_text) - (curses.COLS - 1)
         if top_line_offset < 0:
             top_line_offset = 0
