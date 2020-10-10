@@ -1,10 +1,19 @@
 #!/usr/bin/env bash
 
-echo 'This script depends on this repo existing at'
-echo '~/Dropbox/z. Make sure that directory exists'
-echo 'before running!'
-echo
-echo 'It may be safter to run this block-by-block.'
+cat << EOF
+This script assumes it's being run from the git
+repo at github.com/zacanger/dotfiles and has been
+cloned to \$HOME/Dropbox/z. Make sure that
+directory exists.
+
+This script also assume's it's being run on Ubuntu
+LTS; it may work fine on Debian or other derivatives,
+or it might not.
+
+This script will exit, because it's safer to run
+the steps block-by-block in case of failures.
+EOF
+
 exit 1
 
 # disable auto upgrades, period, unattended upgrades in apt.conf.d
