@@ -132,6 +132,7 @@ git clone https://github.com/zacanger/st && \
   make install && \
   cd .. && \
   rm -rf st
+ln -s /usr/local/bin/st /usr/local/bin/x-terminal-emulator
 
 # .config
 conf_path=$HOME/.config
