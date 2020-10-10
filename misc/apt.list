@@ -26,6 +26,7 @@ busybox-static
 bzip2
 ca-certificates
 clang
+clang-format
 cmake
 coreutils
 cpio
