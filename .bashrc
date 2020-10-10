@@ -42,11 +42,19 @@ if [ -d "$HOME/.bash/functions" ]; then
 fi
 
 if [[ $(uname) == 'Darwin' ]] || [[ $(uname -a) == *'microsoft'* ]]; then
-  # Macs yell at you if you don't use bash, because Macs are bad
+  # Macs yell at you if you use Bash
   export BASH_SILENCE_DEPRECATION_WARNING=1
-  # On Linux, I manage multiple terminal sessions with the window manager
-  # On Mac and WSL, that's painful, so start tmux on a new shell.
+  # On Mac and WSL, I only use one terminal,
+  # so I just always attach to the same session
   [ -z "$TMUX" ] && { tmux attach || exec tmux new-session; }
+else
+  # On Linux, I use a tiling window manager, so I'll
+  # usually want a separate session for each new terminal window.
+  if [[ ! "$TERM" =~ screen ]] && \
+    [[ ! "$TERM" =~ tmux ]] && \
+    [ -z "$TMUX" ]; then
+    exec tmux
+  fi
 fi
 
 # n-install: http://git.io/n-install-repo
