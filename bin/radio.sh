@@ -2,13 +2,13 @@
 set -e
 
 # Source: https://github.com/whiteinge/dotfiles
-# Modified to not use a fuzzy finder, since
-# I don't really like those
+# Slightly modified to use a different fuzzy finder
 
 curl -sS https://api.somafm.com/channels.json | \
   jq -r '.channels[] |
-    "\(.title)\n\(.description)\n\(.playlists[] |
+    "\(.title)\t\(.description)\t\(.playlists[] |
     limit(1;select(.quality == "low")) |
     .url)\n"' | \
-  vipe.sh | \
+  fuzzy.py | \
+  cut -f3 | \
   xargs mpv
