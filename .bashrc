@@ -50,11 +50,12 @@ if [[ $(uname) == 'Darwin' ]] || [[ $(uname -a) == *'microsoft'* ]]; then
 else
   # On Linux, I use a tiling window manager, so I'll
   # usually want a separate session for each new terminal window.
-  # if [[ ! "$TERM" =~ screen ]] && \
-    # [[ ! "$TERM" =~ tmux ]] && \
-    # [ -z "$TMUX" ]; then
-    # exec tmux
-  # fi
+  if [[ ! "$TERM" =~ screen ]] && \
+    [[ ! "$TERM" =~ tmux ]] && \
+    [[ ! "$TERM" =~ linux ]] && \
+    [ -z "$TMUX" ]; then
+    exec tmux
+  fi
   :
 fi
 
