@@ -137,8 +137,6 @@ ln -s /usr/local/bin/st /usr/local/bin/x-terminal-emulator
 # .config
 conf_path=$HOME/.config
 zconf_path=$z_path/.config
-mkdir -p "$conf_path/i3"
-mkdir -p "$conf_path/i3status"
 mkdir -p "$conf_path/ranger"
 mkdir -p "$conf_path/pcmanfm/default"
 mkdir -p "$conf_path/neofetch"
@@ -147,8 +145,6 @@ ln -s "$zconf_path/libfm/libfm.conf" "$conf_path/libfm/"
 ln -s "$zconf_path/ranger/rc.conf" "$conf_path/ranger/"
 ln -s "$zconf_path/ranger/rifle.conf" "$conf_path/ranger/"
 ln -s "$zconf_path/ranger/scope.sh" "$conf_path/ranger/"
-ln -s "$zconf_path/i3/config" "$conf_path/i3/"
-ln -s "$zconf_path/i3status/config" "$conf_path/i3status/"
 ln -s "$zconf_path/ninit" "$conf_path/"
 ln -s "$zconf_path/startup.py" "$conf_path/"
 ln -s "$zconf_path/neofetch/config.conf" "$conf_path/neofetch/"

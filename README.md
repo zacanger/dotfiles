@@ -17,7 +17,7 @@ which don't get symlinked or copied over.
 
 * Hardware: Thinkpads
 * OS: Ubuntu 20.04 (I've tried every distro out there, this is fine for me)
-* Window manager: plain i3, very light config, i3status
+* Window manager: [lesswm](https://github.com/zacanger/lesswm)
 * Terminal: [st fork](https://github.com/zacanger/st)
 * File manager: Ranger
 * Editor: Vim

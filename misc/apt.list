@@ -71,7 +71,6 @@ highlight
 hostname
 htop
 hunspell-en-us
-i3
 im-config
 imagemagick
 inetutils-traceroute
@@ -156,6 +155,7 @@ snapcraft
 software-properties-common
 sox
 strace
+suckless-tools
 sudo
 sysstat
 sysvbanner
