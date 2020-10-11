@@ -81,15 +81,21 @@ def get_filtered_items():
     else:
         filtered_items = []
         word_regexes = [
-            re.escape(i) for i in re.split(r"\s+", query_text.strip()) if i
-        ]
+            re.escape(i) for i in re.split(
+                r"\s+", query_text.strip()
+            ) if i]
+
         exact_regexes = [
-            re.compile(r"\b{}\b".format(i), re.I) for i in word_regexes
-        ]
+            re.compile(
+                r"\b{}\b".format(i), re.I) for i in word_regexes]
+
         prefix_regexes = [
-            re.compile(r"\b{}".format(i), re.I) for i in word_regexes
-        ]
-        substring_regexes = [re.compile(i, re.I) for i in word_regexes]
+            re.compile(
+                r"\b{}".format(i), re.I) for i in word_regexes]
+
+        substring_regexes = [
+            re.compile(i, re.I) for i in word_regexes]
+
         for items in (input_items,):
             exact_items = []
             prefix_items = []
@@ -103,7 +109,11 @@ def get_filtered_items():
                     prefix_items.append(item)
                 else:
                     substring_items.append(item)
-            filtered_items += exact_items + prefix_items + substring_items
+
+            filtered_items += \
+                exact_items + \
+                prefix_items + \
+                substring_items
 
     return filtered_items
 
@@ -115,9 +125,12 @@ def redraw(screen):
         items = filtered_items[: curses.LINES - 1]
         for i, item in enumerate(items):
             item_attr = (
-                curses.A_REVERSE if i == selection_index else curses.A_NORMAL
-            )
-            screen.insstr(i + 1, 0, item[: curses.COLS - 1], item_attr)
+                curses.A_REVERSE
+                if i == selection_index
+                else curses.A_NORMAL)
+
+            screen.insstr(
+                i + 1, 0, item[: curses.COLS - 1], item_attr)
 
         prompt = "-> "
         top_line_text = prompt + query_text
@@ -187,9 +200,8 @@ def main(screen):
         # ^N, Down
         elif char_code == curses.ascii.SO or char == curses.KEY_DOWN:
             if (
-                selection_index
-                < min(len(filtered_items), curses.LINES - 1) - 1
-            ):
+                selection_index < min(
+                    len(filtered_items), curses.LINES - 1) - 1):
                 selection_index += 1
             redraw(screen)
 
