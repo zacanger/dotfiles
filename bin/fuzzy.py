@@ -4,7 +4,6 @@
 # in that repo). Modified to remove the cache, remove some options,
 # remove some keybinds, and generally just do less.
 
-import argparse
 import curses
 import curses.ascii
 import fileinput
@@ -17,14 +16,7 @@ import signal
 import subprocess
 import sys
 
-
-def get_args():
-    parser = argparse.ArgumentParser(
-        usage="Pipe newline-separated items or pass as args"
-    )
-    parser.add_argument("item", nargs="*", help="the menu item text")
-    args = parser.parse_args()
-    return args
+args = sys.argv[1:]
 
 
 def get_input_items():
@@ -32,7 +24,7 @@ def get_input_items():
     if not sys.stdin.isatty():
         stdin = io.TextIOWrapper(sys.stdin.buffer, "utf8", "replace")
         input_items += stdin.read().splitlines()
-    input_items += args.item
+    input_items += args
     input_items = filter(None, input_items)
     return list(input_items)
 
@@ -226,7 +218,6 @@ def main(screen):
 
 
 if __name__ == "__main__":
-    args = get_args()
     query_text = ""
     input_items = get_input_items()
 
