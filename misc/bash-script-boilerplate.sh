@@ -7,6 +7,7 @@ set -e
 pushd $(dirname $0) > /dev/null
 SCRIPTPATH=$(pwd)
 popd > /dev/null
+SCRIPTNAME=$(basename "$0")
 
 # colors
 ESC_SEQ="\x1b["
