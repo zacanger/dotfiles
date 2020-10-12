@@ -12,8 +12,16 @@ fi
 
 prev_ifs=$IFS
 IFS=$'\n'
-desktop_dirs=(${XDG_DATA_HOME-~/.local/share}/applications /usr/share/applications)
-desktop_paths=($(find "${desktop_dirs[@]}" -type f -name "*.desktop" ! -name "chrome-*-*.desktop" 2>/dev/null || :))
+desktop_dirs=(
+  ${XDG_DATA_HOME-~/.local/share}/applications
+  /usr/share/applications)
+desktop_paths=(
+  $(find "${desktop_dirs[@]}" \
+    -type f \
+    -name "*.desktop" \
+    ! -name "chrome-*-*.desktop" \
+    2>/dev/null || \
+    :))
 desktop_names=("${desktop_paths[@]##*/}")
 desktop_names=("${desktop_names[@]%.desktop}")
 IFS=$prev_ifs
@@ -31,7 +39,9 @@ else
   cmd=$(grep -oP -m 1 "(?<=^Exec=).+" "$desktop_path")
   cmd=${cmd// -[[:alnum:]]* %[[:alpha:]]/}
   cmd=${cmd// %[[:alpha:]]/}
-  grep -q ^Terminal=true "$desktop_path" || exec nohup setsid "$cmd" > /dev/null
+  grep -q \
+    ^Terminal=true "$desktop_path" || \
+    exec nohup setsid "$cmd" > /dev/null
 fi
 
 printf "\e]0;${cmd%% *}\a"
