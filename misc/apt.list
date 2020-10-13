@@ -27,11 +27,13 @@ bzip2
 ca-certificates
 clang
 clang-format
+clang-tools
 cmake
 coreutils
 cpio
 cpp
 cpp-7
+cppcheck
 cron
 cryptsetup
 curl
