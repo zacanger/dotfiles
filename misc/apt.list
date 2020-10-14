@@ -102,6 +102,7 @@ libreadline-dev
 librsvg2-dev
 libssl-dev
 libx11-dev
+libxcursor-dev
 libxft-dev
 llvm-6.0
 lm-sensors
