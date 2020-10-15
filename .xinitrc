@@ -3,7 +3,7 @@
 if [ -f ~/.Xresources ]; then
   xrdb -merge ~/.Xresources
 fi
-xsetroot -cursor_name left_ptr &
+xsetroot -cursor_name left_ptr
 xsetroot -solid "#222"
 xset -dpms
 xset s off
