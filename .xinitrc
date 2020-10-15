@@ -14,4 +14,4 @@ unclutter -root &
 redshift -l 40.760780:-111.891045 -b 0.7 &
 toggletouch.sh
 dropbox start -i
-exec /home/z/Dropbox/work/repos/lesswm/lesswm
+exec lesswm
