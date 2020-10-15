@@ -29,7 +29,7 @@ sudo chown -R "$USER" /usr/local
 
 # Install global packages
 sudo apt-get update && sudo apt-get dist-upgrade -f -y
-cat "$list_path/apt.list" | xargs sudo apt-get install -y
+xargs sudo apt-get install -y < "$list_path/apt.list"
 
 # Snaps
 sudo snap set system refresh.retain=2
@@ -40,7 +40,7 @@ sudo snap install go --classic
 
 # Python packages
 curl -s https://bootstrap.pypa.io/get-pip.py | sudo python3
-cat "$list_path/pip.list" | xargs sudo pip3 install -U
+xargs sudo pip3 install -U < "$list_path/pip.list"
 # there's no /usr/bin/python in ubuntu 20....
 sudo ln -s /usr/bin/python3 /usr/bin/python
 
@@ -51,7 +51,7 @@ n prune
 npm i -g npm
 
 # Install Node packages.
-cat "$list_path/npm.list" | xargs npm i -g
+xargs npm i -g < "$list_path/npm.list"
 
 # Install the rust toolchain - interactive.
 curl https://sh.rustup.rs -sSf | sh
@@ -124,7 +124,7 @@ stack install ShellCheck
 # stack install pandoc
 
 # Ruby
-cat "$list_path/gem.list" | xargs sudo gem install
+xargs sudo gem install < "$list_path/gem.list"
 
 # My st fork
 git clone https://github.com/zacanger/st && \

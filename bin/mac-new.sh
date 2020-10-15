@@ -346,7 +346,7 @@ chmod a+rx /usr/local/bin/youtube-dl
 
 # Install npm packages
 if [[ -f $HOME/Dropbox/z/misc/npm.list ]]; then
-  cat "$HOME/Dropbox/z/misc/npm.list" | xargs npm i -g
+  xargs npm i -g < "$HOME/Dropbox/z/misc/npm.list"
 fi
 
 # Update Node and npm the way I prefer
@@ -355,7 +355,7 @@ npm i -g npm && npm i -g npx
 
 # Install python packages
 if [[ -f $HOME/Dropbox/z/misc/pip.list ]]; then
-  cat "$HOME/Dropbox/z/misc/npm.list" | xargs sudo pip3 install -U
+  xargs sudo pip3 install -U < "$HOME/Dropbox/z/misc/npm.list"
 fi
 
 # Vim
