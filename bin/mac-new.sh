@@ -373,3 +373,6 @@ sudo softwareupdate -i -a
 curl https://sh.rustup.rs -sSf | sh
 rustup toolchain install nightly
 rustup default nightly
+
+echo '/usr/local/bin/bash' >> /etc/shells
+chsh -s /usr/local/bin/bash
