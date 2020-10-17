@@ -39,6 +39,7 @@ cryptsetup
 curl
 dash
 dc
+debootstrap
 dialog
 diffutils
 dnsutils
@@ -148,6 +149,7 @@ readline-common
 redshift
 rsync
 ruby-full
+schroot
 scrot
 sed
 sensible-utils
