@@ -511,3 +511,6 @@ let g:AutoPairsShortcutToggle = ''
 " URL encode/decode visual selection
 vnoremap <leader>en :!python -c 'import sys,urllib;print urllib.quote(sys.stdin.read().strip())'<cr>
 vnoremap <leader>de :!python -c 'import sys,urllib;print urllib.unquote(sys.stdin.read().strip())'<cr>
+
+" Silence the cd echo
+let g:rooter_silent_chdir = 1
