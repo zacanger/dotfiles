@@ -10,13 +10,11 @@ shopt -s checkwinsize
 shopt -s cdspell
 
 # "**" in pathname matches all files & 0 or more dirs/subdirs; also, ".foo"
-if [[ $(uname) == 'Linux' ]]; then
-  shopt -s globstar
-  shopt -s dotglob
-  shopt -s dirspell
-  shopt -s direxpand
-  shopt -s checkjobs
-fi
+shopt -s globstar
+shopt -s dotglob
+shopt -s dirspell
+shopt -s direxpand
+shopt -s checkjobs
 
 # check that hashed commands still exist before running them
 shopt -s checkhash
