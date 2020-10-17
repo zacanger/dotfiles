@@ -13,15 +13,6 @@ curl \
   https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling/hosts \
   > hosts2
 
-# ??????????
-# maybe moved to https://gitlab.com/CHEF-KOCH/cks-filterlist??
-# https://github.com/CHEF-KOCH/NSABlocklist
-# curl \
-  # -sSL \
-  # https://raw.githubusercontent.com/CHEF-KOCH/NSABlocklist/master/HOSTS/HOSTS \
-  # > hosts3
-
-# hosts3
 cat hosts1 hosts2 /etc/hosts \
   | sed -e '/^[ \t]*#/d' \
   | sed -e '/mediafire/d' \
@@ -30,7 +21,7 @@ cat hosts1 hosts2 /etc/hosts \
 
 echo "127.0.0.1 $(hostname)" >> hosts
 
-rm hosts1 hosts2 # hosts3
+rm hosts1 hosts2
 sudo mv /etc/hosts /etc/hosts.bak
 sudo mv hosts /etc/hosts
 clear-dns-cache.sh
