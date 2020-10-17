@@ -34,7 +34,7 @@ xargs sudo apt-get install -y < "$list_path/apt.list"
 # Snaps
 sudo snap set system refresh.retain=2
 sudo snap refresh
-sudo snap install slack --classic
+# sudo snap install slack --classic
 sudo snap install microk8s --classic
 sudo snap install go --classic
 
