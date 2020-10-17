@@ -25,7 +25,6 @@ curl \
 cat hosts1 hosts2 /etc/hosts \
   | sed -e '/^[ \t]*#/d' \
   | sed -e '/mediafire/d' \
-  | sed -e '/datadog/d' \
   | sed -e '/twitter/d' \
   | sort -u > hosts
 
