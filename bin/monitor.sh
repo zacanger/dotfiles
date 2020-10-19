@@ -14,12 +14,14 @@ while true; do
     sed 's/[^0-9.]*//g' |
     awk '{ total += $1; count++ } END { print total/count }'
   )
+  dropbox=$(dropbox status | head -1)
 
   echo "$datestring"
   echo "cpu: $cpuusage"
   echo "temp: $temperature"
   echo "batt: $batt"
   echo "disk: $disk"
+  echo "db: $dropbox"
   sleep 60
   clear
 done
