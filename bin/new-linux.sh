@@ -205,3 +205,4 @@ for d in Desktop Documents Music Pictures Public Templates Videos; do
 done
 
 update-hosts.sh
+update-dircolors.sh
