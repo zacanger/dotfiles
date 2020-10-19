@@ -1,6 +1,6 @@
 #                                    LS_COLORS
 # Maintainers: Magnus Woldrich <m@japh.se>,
-#              Ryan Delaney <ryan.delaney@gmail.com> OpenGPG: 0D98863B4E1D07B6
+#              Ryan Delaney <ryan.patrick.delaney@protonmail.com>
 #         URL: https://github.com/trapd00r/LS_COLORS
 #
 #   This is a collection of extension:color mappings, suitable to use as your
@@ -88,6 +88,8 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .bib                  38;5;178
 .json                 38;5;178
 .jsonl                38;5;178
+.jsonnet              38;5;178
+.libsonnet            38;5;142
 .ndjson               38;5;178
 .msg                  38;5;178
 .pgn                  38;5;178
@@ -319,6 +321,8 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .agdai                38;5;110
 #   Zig
 .zig                  38;5;81
+# V
+.v                    38;5;81
 
 # binaries {{{2
 # compiled apps for interpreted languages
@@ -467,7 +471,6 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .dts                  38;5;137;1
 .fcm                  38;5;137;1
 .m4a                  38;5;137;1
-.mid                  38;5;137;1
 .mod                  38;5;137;1
 .mp3                  38;5;137;1
 .mp4a                 38;5;137;1
@@ -483,6 +486,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .cda                  38;5;136;1
 .flac                 38;5;136;1
 .alac                 38;5;136;1
+.mid                  38;5;136;1
 .midi                 38;5;136;1
 .pcm                  38;5;136;1
 .wav                  38;5;136;1
@@ -521,6 +525,8 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .sz                   38;5;40
 .tar                  38;5;40
 .tgz                  38;5;40
+.warc                 38;5;40
+.WARC                 38;5;40
 .xz                   38;5;40
 .z                    38;5;40
 .zip                  38;5;40
