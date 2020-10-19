@@ -16,7 +16,9 @@ EOF
 
 exit 1
 
-# disable auto upgrades, period, unattended upgrades in apt.conf.d
+# disable auto upgrades, periodic, unattended upgrades in apt.conf.d
+# Copy user.js to firefox profile before setting up firefox
+# remove splash from /etc/default/grub and sudo update-grub
 
 z_path=$HOME/Dropbox/z
 list_path=$z_path/misc
@@ -29,7 +31,7 @@ sudo chown -R "$USER" /usr/local
 
 # Install global packages
 sudo apt-get update && sudo apt-get dist-upgrade -f -y
-xargs sudo apt-get install -y < "$list_path/apt.list"
+cat "$list_path/apt.list" | xargs sudo apt-get install -y
 
 # Snaps
 sudo snap set system refresh.retain=2
@@ -40,7 +42,7 @@ sudo snap install go --classic
 
 # Python packages
 curl -s https://bootstrap.pypa.io/get-pip.py | sudo python3
-xargs sudo pip3 install -U < "$list_path/pip.list"
+cat "$list_path/pip.list" | xargs sudo pip3 install -U
 # there's no /usr/bin/python in ubuntu 20....
 sudo ln -s /usr/bin/python3 /usr/bin/python
 
@@ -51,7 +53,7 @@ n prune
 npm i -g npm
 
 # Install Node packages.
-xargs npm i -g < "$list_path/npm.list"
+cat "$list_path/npm.list" | xargs npm i -g
 
 # Install the rust toolchain - interactive.
 curl https://sh.rustup.rs -sSf | sh
@@ -124,7 +126,7 @@ stack install ShellCheck
 # stack install pandoc
 
 # Ruby
-xargs sudo gem install < "$list_path/gem.list"
+cat "$list_path/gem.list" | xargs sudo gem install
 
 # My st fork
 git clone https://github.com/zacanger/st && \
@@ -198,10 +200,8 @@ sudo microk8s enable metrics-server
 sudo microk8s enable prometheus
 sudo microk8s enable storage
 sudo microk8s stop
+for d in Desktop Documents Music Pictures Public Templates Videos; do
+  rm -d "$HOME/$d"
+done
 
 update-hosts.sh
-# Copy user.js to firefox profile before setting up firefox
-
-# remove splash from /etc/default/grub and sudo update-grub
-
-reboot
