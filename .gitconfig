@@ -34,4 +34,4 @@
 [http]
   postBuffer = 524288000
 [pull]
-  ff = only
+  rebase = false
