@@ -159,6 +159,7 @@ snapcraft
 software-properties-common
 sox
 strace
+suckless-tools
 sudo
 sysstat
 sysvbanner
