@@ -4,7 +4,6 @@
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
 set $terminal st
-set $alt Mod1
 
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
@@ -25,14 +24,12 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec --no-startup-id $terminal
-bindsym $alt+Return exec --no-startup-id $terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start program launcher
 bindsym $mod+space exec --no-startup-id rofi-run.sh -b
-bindsym $alt+space exec --no-startup-id rofi-run.sh -b
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
@@ -68,7 +65,7 @@ bindsym $mod+Shift+l exec "~/bin/i3-move-cursor-window-center.sh move right"
 bindsym $mod+m split toggle
 
 # toggle fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+ctrl+space fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 # bindsym $mod+s layout stacking
