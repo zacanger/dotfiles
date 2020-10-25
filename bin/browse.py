@@ -22,7 +22,12 @@ once in a while, no storage on filesystem (runs in memory).
 
 TODO (Search for TODO to find more):
 * ctrl+l to select addr bar
+* use html.head.title for window title once available
+* favicons?
 * middle click to open/close tabs
+* open in new tab doesn't work
+* windows?
+* new tab should be about:blank
 * ctrl+tab/ctrl+shift+tab + ctrl+{1..0} to move between tab
 * make it look better (move buttons around, styles, etc.)
 * clean up the code, especially around adding widgets and shortcuts
