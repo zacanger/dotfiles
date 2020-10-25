@@ -96,6 +96,7 @@ class BrowserTab(QWidget):
         self.setLayout(vbox)
 
         # Set up profile with no storage and faked user agent
+        # You can verify this with print(profile.isOffTheRecord())
         profile = QWebEngineProfile("", self.browser)
         profile.setHttpUserAgent(USER_AGENT)
         webenginePage = QWebEnginePage(profile, self.browser)
