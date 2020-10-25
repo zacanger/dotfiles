@@ -20,13 +20,14 @@ python3-pyqt5 python3-pyqt5.qtwebengine libqt5webenginewidgets5
 Goals: single file, zero config except updating the user agent
 once in a while, no storage on filesystem (runs in memory).
 
-TODO:
-* reload
-* move status bar to bottom
-* address bar should be both search and url
+TODO (Search for TODO to find more):
+* middle click to open/close tabs
+* ctrl+tab/ctrl+shift+tab + ctrl+{1..0} to move between tab
+* make it look better (move buttons around, styles, etc.)
+* clean up the code, especially around adding widgets and shortcuts
 """
 
-
+SEARCH_URL = "https://duckduckgo.com/?q="
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 \
 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36"
 
@@ -38,12 +39,8 @@ class BrowserTab(QWidget):
         # Widgets
         self.browser = QWebEngineView()
         self.addr_bar = QLineEdit(page)
-        self.search = QLineEdit()
         self.find = QLineEdit()
         self.progress = QProgressBar()
-        sbox = QHBoxLayout()
-        sbox.addWidget(QLabel("DDG"))
-        sbox.addWidget(self.search)
         hbox = QHBoxLayout()
         self.lbl_find = QLabel("Find")
         self.hide_find()
@@ -63,15 +60,22 @@ class BrowserTab(QWidget):
         quit_short = QShortcut(QKeySequence("Ctrl+Q"), self)
         quit_short.activated.connect(QApplication.instance().quit)
         quit.clicked.connect(QApplication.instance().quit)
+
+        reload = QPushButton("R")
+        reload.setMaximumSize(20, 20)
+        reload_short = QShortcut(QKeySequence("Ctrl+R"), self)
+        reload_short.activated.connect(self.browser.reload)
+        reload.clicked.connect(self.browser.reload)
+
         addrbox.addWidget(quit)
+        addrbox.addWidget(reload)
         addrbox.addWidget(self.addr_bar)
 
         vbox = QVBoxLayout()
         vbox.addLayout(addrbox)
-        vbox.addLayout(sbox)
         vbox.addLayout(hbox)
-        vbox.addWidget(self.progress)
         vbox.addWidget(self.browser)
+        vbox.addWidget(self.progress)
 
         # find
         find_short = QShortcut(QKeySequence("Ctrl+F"), self)
@@ -80,14 +84,7 @@ class BrowserTab(QWidget):
         find_hide.activated.connect(self.hide_find)
 
         # Signals and Slots
-        self.addr_bar.returnPressed.connect(
-            lambda: self.browser.load(QUrl(self.addr_bar.text()))
-        )
-        self.search.returnPressed.connect(
-            lambda: self.browser.load(
-                QUrl(f"https://www.duckduckgo.com/?q={qp(self.search.text())}")
-            )
-        )
+        self.addr_bar.returnPressed.connect(self.browse_or_search)
         self.find.returnPressed.connect(
             lambda: self.browser.page().findText(self.find.text())
         )
@@ -104,6 +101,18 @@ class BrowserTab(QWidget):
         webenginePage = QWebEnginePage(profile, self.browser)
         self.browser.setPage(webenginePage)
         self.browser.load(QUrl(page))
+
+    def browse_or_search(self):
+        text = self.addr_bar.text()
+        # TODO: make this a regex to see if it looks like a url
+        if "http" not in text:
+            if "." not in text:
+                url = SEARCH_URL + qp(text)
+            else:
+                url = "https://" + text
+        else:
+            url = text
+        self.browser.load(QUrl(url))
 
     def show_find(self):
         self.lbl_find.show()
@@ -136,13 +145,16 @@ class Browser(QTabWidget):
         self.setTabsClosable(True)
         self.setMovable(True)
         self.setUsesScrollButtons(True)
-        # self.setTabShape(self.Triangular)
         self.currentChanged.connect(self.tab_changed)
         self.tabCloseRequested.connect(self.close_tab)
         self.insertTab(-1, QWidget(), "+")
 
         new_tab = QShortcut(QKeySequence("Ctrl+T"), self)
         new_tab.activated.connect(self.add_tab)
+
+        # TODO: get index to get this to work
+        # close_tab_short = QShortcut(QKeySequence("Ctrl+W"), self)
+        # close_tab_short.activated.connect(self.close_tab)
 
     def close_tab(self, index):
         if index != self.count() - 1:
