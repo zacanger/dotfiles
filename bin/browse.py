@@ -13,8 +13,17 @@ from PyQt5.Qt import pyqtSlot, pyqtSignal, Qt
 
 """
 Originally based on https://github.com/Pebaz/LeafBrowser
+
 Requires these packages on Ubuntu:
 python3-pyqt5 python3-pyqt5.qtwebengine libqt5webenginewidgets5
+
+Goals: single file, zero config except updating the user agent
+once in a while, no storage on filesystem (runs in memory).
+
+TODO:
+* reload
+* move status bar to bottom
+* address bar should be both search and url
 """
 
 
