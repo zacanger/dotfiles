@@ -1,6 +1,4 @@
 Cython
-PyQt5-sip
-PyQtWebEngine
 PyYAML
 autopep8
 awscli
@@ -9,8 +7,6 @@ bpython
 nltk
 numpy
 pip
-pyqt5
 requests
 scipy
-sip
 virtualenv
