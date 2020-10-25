@@ -21,6 +21,7 @@ Goals: single file, zero config except updating the user agent
 once in a while, no storage on filesystem (runs in memory).
 
 TODO (Search for TODO to find more):
+* ctrl+l to select addr bar
 * middle click to open/close tabs
 * ctrl+tab/ctrl+shift+tab + ctrl+{1..0} to move between tab
 * make it look better (move buttons around, styles, etc.)
