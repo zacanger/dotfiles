@@ -184,6 +184,8 @@ sudo usermod -aG docker "$USER"
 # There may be some extra packages to manually remove after this
 sudo apt-get remove -y '*whoopsie*'
 sudo apt-get remove -y 'gnome-*'
+sudo apt-get remove -y 'geoclue-*'
+sudo apt-get remove -y yelp
 sudo apt-get remove -y pinentry-gnome3
 sudo apt-get remove -y cups
 sudo snap remove --purge gtk-common-themes

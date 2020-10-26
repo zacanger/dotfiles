@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e -o pipefail
 
+## TODO: do I need this anymore?
+
 # Usage example: run.sh firefox, or run.sh then enter firefox
 # Bind some keys to something like $TERMINAL -e run.sh to
 # replace dmenu/rofi-like launching.
