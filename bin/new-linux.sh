@@ -193,12 +193,14 @@ sudo apt-get remove -y \
   cups-common \
   cups-pk-helper \
   cups-ppdc \
+  file-roller \
   gstreamer1.0-pulseaudio \
   libavahi-core7 \
   libavahi-glib1 \
   libcanberra-pulse \
   libpulse-mainloop-glib0 \
   libpulsedsp \
+  mousetweaks \
   orca \
   pavucontrol \
   pinentry-gnome3 \
