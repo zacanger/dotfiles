@@ -186,24 +186,32 @@ sudo apt-get remove -y '*whoopsie*'
 sudo apt-get remove -y 'gnome-*'
 sudo apt-get remove -y 'avahi-*'
 sudo apt-get remove -y 'geoclue-*'
-sudo apt-get remove -y yelp
-sudo apt-get remove -y orca
-sudo apt-get remove -y libavahi-core7
-sudo apt-get remove -y libavahi-glib1
-sudo apt-get remove -y pinentry-gnome3
-sudo apt-get remove -y cups
-sudo apt-get remove -y cups-bsd
-sudo apt-get remove -y cups-pk-helper
-sudo apt-get remove -y cups-ppdc
-sudo apt-get remove -y cups-client
-sudo apt-get remove -y cups-common
-sudo apt-get remove -y python3-cups
-sudo apt-get remove -y python3-cupshelpers
-sudo snap remove --purge gtk-common-themes
-sudo snap remove --purge gnome-3-34-1804
+sudo apt-get remove -y \
+  cups \
+  cups-bsd \
+  cups-client \
+  cups-common \
+  cups-pk-helper \
+  cups-ppdc \
+  gstreamer1.0-pulseaudio \
+  libavahi-core7 \
+  libavahi-glib1 \
+  libcanberra-pulse \
+  libpulse-mainloop-glib0 \
+  libpulsedsp \
+  orca \
+  pavucontrol \
+  pinentry-gnome3 \
+  pulseaudio-module-bluetooth \
+  pulseaudio-utils \
+  python3-cups \
+  python3-cupshelpers \
+  yelp
 sudo apt autoremove -y
 sudo apt purge
 sudo apt clean
+sudo snap remove --purge gtk-common-themes
+sudo snap remove --purge gnome-3-34-1804
 sudo update-alternatives --all
 sudo systemctl stop apache2
 sudo systemctl disable apache2
