@@ -126,7 +126,7 @@ stack install ShellCheck
 # stack install pandoc
 
 # Ruby
-cat "$list_path/gem.list" | xargs sudo gem install
+# cat "$list_path/gem.list" | xargs sudo gem install
 
 # My st fork
 git clone https://github.com/zacanger/st && \
