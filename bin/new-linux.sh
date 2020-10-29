@@ -46,24 +46,6 @@ cat "$list_path/pip.list" | xargs sudo pip3 install -U
 # there's no /usr/bin/python in ubuntu 20....
 sudo ln -s /usr/bin/python3 /usr/bin/python
 
-# Node - interactive
-curl -sL https://git.io/n-install | bash -s -- -n
-n latest
-n prune
-npm i -g npm
-
-# Install Node packages.
-cat "$list_path/npm.list" | xargs npm i -g
-
-# Install the rust toolchain - interactive.
-curl https://sh.rustup.rs -sSf | sh
-rustup toolchain install nightly
-rustup default nightly
-
-# Golang REPL
-go get -u github.com/motemen/gore/cmd/gore
-go get -u github.com/mdempsky/gocode
-
 # Copy rather than link because of auth
 cp "$z_path/.npmrc" "$HOME/"
 
@@ -158,6 +140,24 @@ ln -s "$zconf_path/neofetch/config.conf" "$conf_path/neofetch/"
 
 # Copy rather than link because config contains window height
 cp "$zconf_path/pcmanfm/default/pcmanfm.conf" "$conf_path/pcmanfm/default/"
+
+# Node - interactive
+curl -sL https://git.io/n-install | bash -s -- -n
+n latest
+n prune
+npm i -g npm
+
+# Install Node packages.
+cat "$list_path/npm.list" | xargs npm i -g
+
+# Install the rust toolchain - interactive.
+curl https://sh.rustup.rs -sSf | sh
+rustup toolchain install nightly
+rustup default nightly
+
+# Golang REPL
+go get -u github.com/motemen/gore/cmd/gore
+go get -u github.com/mdempsky/gocode
 
 # Vim
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
