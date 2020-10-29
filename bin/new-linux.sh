@@ -187,6 +187,7 @@ sudo apt-get remove -y 'gnome-*'
 sudo apt-get remove -y 'avahi-*'
 sudo apt-get remove -y 'geoclue-*'
 sudo apt-get remove -y \
+  bluez \
   cups \
   cups-bsd \
   cups-client \
