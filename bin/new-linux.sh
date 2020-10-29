@@ -137,13 +137,6 @@ git clone https://github.com/zacanger/st && \
 ln -s /usr/local/bin/st /usr/local/bin/x-terminal-emulator
 sudo cp -R /home/z/.terminfo /root
 
-# My window manager
-git clone https://github.com/zacanger/lesswm && \
-  cd lesswm && \
-  make install &&
-  cd .. && \
-  rm -rf lesswm
-
 # .config
 conf_path=$HOME/.config
 zconf_path=$z_path/.config
