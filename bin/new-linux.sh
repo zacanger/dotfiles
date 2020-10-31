@@ -188,6 +188,7 @@ sudo apt-get remove -y \
   cups-pk-helper \
   cups-ppdc \
   file-roller \
+  gedit \
   gstreamer1.0-pulseaudio \
   libavahi-core7 \
   libavahi-glib1 \
