@@ -181,6 +181,7 @@ sudo apt-get remove -y 'avahi-*'
 sudo apt-get remove -y 'geoclue-*'
 sudo apt-get remove -y \
   bluez \
+  brltty \
   cups \
   cups-bsd \
   cups-client \
@@ -189,18 +190,13 @@ sudo apt-get remove -y \
   cups-ppdc \
   file-roller \
   gedit \
-  gstreamer1.0-pulseaudio \
   libavahi-core7 \
   libavahi-glib1 \
-  libcanberra-pulse \
-  libpulse-mainloop-glib0 \
-  libpulsedsp \
   mousetweaks \
   orca \
   pavucontrol \
   pinentry-gnome3 \
   pulseaudio-module-bluetooth \
-  pulseaudio-utils \
   python3-cups \
   python3-cupshelpers \
   yelp
