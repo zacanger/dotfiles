@@ -5,7 +5,7 @@ HISTIGNORE="ls:l:la:lo:lS:lv:a:k:cd:h:history:q:exit:c:clear:erm:clc:cerm"
 HISTIGNORE="$HISTIGNORE:..:...:.:cs:co:ni:ns:vi:reload:gst:edrc:edal:fs:ncu"
 HISTIGNORE="$HISTIGNORE:gd:g:v:nu:cla:todo:poweroff:tn:ncdu:startx"
 HISTIGNORE="$HISTIGNORE:rbl:aca:dbup:dbdn:dbst:vv:sync:gdi:cf:f:gfa"
-HISTIGNORE="$HISTIGNORE:rbl *:g *"
+HISTIGNORE="$HISTIGNORE:rbl *:g *:radio.sh"
 
 if [[ $(uname) == 'Darwin' ]]; then
   HISTSIZE=10000 # length
