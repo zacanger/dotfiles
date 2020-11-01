@@ -19,6 +19,7 @@ bash-completion
 bat
 bc
 bind9-host
+bison
 bsdmainutils
 bsdutils
 build-essential
@@ -54,6 +55,7 @@ file
 findutils
 firefox
 firefox-locale-en
+flex
 fontconfig
 fontconfig-config
 gdb
@@ -98,7 +100,6 @@ libncursesw5-dev
 libpango1.0-dev
 libpq-dev
 libpq5
-libqt5webenginewidgets5
 libreadline-dev
 librsvg2-dev
 libssl-dev
@@ -143,7 +144,6 @@ psmisc
 python3-all
 python3-dev
 python3-pyqt5
-python3-pyqt5.qtwebengine
 ranger
 rar
 readline-common
