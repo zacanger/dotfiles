@@ -199,11 +199,12 @@ cnoreabbrev Set set
 cnoreabbrev Bd bd
 inoreabbr lmbd λ
 inoreabbr frll ∀
-inoreabbr midfing 🖕
 inoreabbr (tm) ™
 inoreabbr (c) ©
 inoreabbr (r) ®
-inoremap hamsic ☭
+inoreabbr hamsic ☭
+inoreabbr neccessary necessary
+inoreabbr neccesary necessary
 
 " wild
 set wildmenu
