@@ -7,8 +7,9 @@
 # https://github.com/rxhanson/Rectangle
 
 # Take ownership of /usr/local. By default, all gems,
-# python packages, and npm packages go in here.
-# I know this is controversial. It _really_ doesn't matter.
+# python packages, brew packages, etc in here.
+# Some people, especially in the mac-user and frontend dev world,
+# would say this is controversial or risky. They're incorrect.
 sudo chown -R "$USER" /usr/local
 
 # CLI tools
@@ -367,7 +368,7 @@ vim +GoInstallBinaries +qa
 # Update the Mac
 sudo softwareupdate -i -a
 
-# TODO: symlinks
+# TODO: symlinks. See new-linux.sh
 
 # install the rust toolchain - interactive
 curl https://sh.rustup.rs -sSf | sh
