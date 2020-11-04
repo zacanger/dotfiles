@@ -58,6 +58,11 @@ firefox-locale-en
 flex
 fontconfig
 fontconfig-config
+fonts-cardo
+fonts-fantasque-sans
+fonts-firacode
+fonts-hack
+fonts-lato
 gdb
 gettext-base
 ghostscript
@@ -175,6 +180,7 @@ transmission-gtk
 tree
 tzdata
 unclutter
+unifont
 unrar
 unzip
 usbutils

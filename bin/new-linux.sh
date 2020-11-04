@@ -165,10 +165,6 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 vim +PlugInstall +qa
 vim +GoInstallBinaries +qa
 
-# Link fonts
-ln -s "$z_path/x/fonts/" "$HOME/.local/share/"
-fc-cache
-
 # Add self to some groups
 sudo usermod -aG microk8s "$USER"
 sudo usermod -aG docker "$USER"
