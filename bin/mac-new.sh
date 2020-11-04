@@ -6,19 +6,7 @@
 # Install Rectangle and configure to start on login:
 # https://github.com/rxhanson/Rectangle
 
-# Take ownership of /usr/local. By default, all gems,
-# python packages, brew packages, etc in here.
-# Some people, especially in the mac-user and frontend dev world,
-# would say this is controversial or risky. They're incorrect.
-sudo chown -R "$USER" /usr/local
-
-# CLI tools
-xcode-select --install
-
-# Install Homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-### Make the Mac a little less bad
+### Change macos settings
 
 # Turn on key repeats, since by default Macs show some weird little character-picker
 # dialog when you hold a key
@@ -167,8 +155,28 @@ echo '2' | sudo tee /sys/module/hid_apple/parameters/fnmode
 pkill -9 Finder
 pkill -9 Dock
 
-### Brew
+# Update the Mac
+sudo softwareupdate -i -a
 
+## Now that that's done we can install and configure what we need
+
+# Some mac users will tell you it's risky to use this directory.
+# I'm telling you it's fine, they're probably the sort of people
+# who prefer the Apple App Store over Makefiles.
+sudo chown -R "$USER" /usr/local
+
+# Install Docker from website.
+
+# Install Dropbox and sync; dotfiles are at $HOME/Dropbox/z
+z_path=$HOME/Dropbox/z
+list_path=$z_path/misc
+"$z_path/bin/dropbox-fix.sh"
+
+# CLI tools
+xcode-select --install
+
+# Install Homebrew
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 # Install brew packages
 # Special cases
 brew install https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
@@ -336,7 +344,78 @@ for brew_p in "${brew_packages[@]}"; do
   brew install "$brew_p"
 done
 
-### Other Stuff
+# Copy rather than link because of auth. npm login later.
+cp "$z_path/.npmrc" "$HOME/"
+
+# We don't want the defaults.
+rm -f "$HOME/.profile"
+rm -f "$HOME/.bash_profile"
+rm -f "$HOME/.bashrc"
+rm -f "$HOME/.bash_logout"
+
+# $HOME symlinks
+home_links=(
+  .agignore
+  .bash
+  .bash_logout
+  .bash_profile
+  .bashrc
+  .ctags
+  .dircolors
+  .editorconfig
+  .g
+  .gitconfig
+  .gitignore_global
+  .inputrc
+  .profile
+  .tmux.conf
+  .vim
+  .vimrc
+  bin
+)
+
+for l in "${home_links[@]}"; do
+  ln -s "$z_path/$l" "$HOME/"
+done
+
+# Docker: don't link, because auth. docker login later.
+mkdir -p "$HOME/.docker"
+cp "$z_path/.docker/config.json" "$HOME/.docker/"
+
+# GPG, don't link because keys.
+mkdir -p "$HOME/.gnupg"
+ln -s "$z_path/.gnupg/gpg-agent.conf" "$HOME/.gnupg/"
+
+# Rust
+mkdir -p "$HOME/.cargo"
+ln -s "$z_path/.cargo/config" "$HOME/.cargo/"
+
+# .config
+conf_path=$HOME/.config
+zconf_path=$z_path/.config
+mkdir -p "$conf_path/ranger"
+mkdir -p "$conf_path/neofetch"
+ln -s "$zconf_path/ranger/rc.conf" "$conf_path/ranger/"
+ln -s "$zconf_path/ranger/rifle.conf" "$conf_path/ranger/"
+ln -s "$zconf_path/ranger/scope.sh" "$conf_path/ranger/"
+ln -s "$zconf_path/ninit" "$conf_path/"
+ln -s "$zconf_path/startup.py" "$conf_path/"
+ln -s "$zconf_path/neofetch/config.conf" "$conf_path/neofetch/"
+
+# Node and packages
+curl -sL https://git.io/n-install | bash -s -- -n
+n latest
+n prune
+npm i -g npm
+cat "$list_path/npm.list" | xargs npm i -g
+
+# Golang REPL
+go get -u github.com/motemen/gore/cmd/gore
+go get -u github.com/mdempsky/gocode
+
+sudo usermod -aG docker "$USER"
+# Python packages
+cat "$list_path/pip3.list" | xargs sudo pip3 install -U
 
 # Global gems
 sudo gem install compass bootstrap-sass rake
@@ -345,30 +424,11 @@ sudo gem install compass bootstrap-sass rake
 curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
 chmod a+rx /usr/local/bin/youtube-dl
 
-# Install npm packages
-if [[ -f $HOME/Dropbox/z/misc/npm.list ]]; then
-  xargs npm i -g < "$HOME/Dropbox/z/misc/npm.list"
-fi
-
-# Update Node and npm the way I prefer
-n lts && n prune
-npm i -g npm && npm i -g npx
-
-# Install python packages
-if [[ -f $HOME/Dropbox/z/misc/pip.list ]]; then
-  xargs sudo pip3 install -U < "$HOME/Dropbox/z/misc/npm.list"
-fi
-
 # Vim
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +PlugInstall +qa
 vim +GoInstallBinaries +qa
-
-# Update the Mac
-sudo softwareupdate -i -a
-
-# TODO: symlinks. See new-linux.sh
 
 # install the rust toolchain - interactive
 curl https://sh.rustup.rs -sSf | sh
