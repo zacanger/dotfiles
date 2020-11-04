@@ -5,20 +5,19 @@
 
 general {
   colors = true
-  interval = 5
+  interval = 15
   color_good = "#2AA198"
-  color_bad = "#586E75"
-  color_degraded = "#DC322F"
+  color_bad = "#EAFF89"
+  color_degraded = "#FF8B07"
 }
 
 order += "cpu_usage"
-# order += "load"
+order += "load"
+order += "memory"
 order += "disk /"
-# order += "disk /home"
-order += "wireless _first_"
+# order += "wireless _first_"
 # order += "ethernet _first_"
-order += "battery all "
-# order += "load"
+order += "battery 1"
 order += "tztime local"
 # order += "ipv6"
 
@@ -27,8 +26,8 @@ cpu_usage {
 }
 
 load {
-  format = " load %1min "
-  # max_threshold = 0.3
+  format = " load: %1min "
+  max_threshold = 0.8
 }
 
 disk "/" {
@@ -41,21 +40,17 @@ ethernet _first_ {
   # format_down = " no lan "
 }
 
-battery all {
-  # format = "%status %percentage %remaining %emptytime"
-  format = " %status %percentage"
+memory {
+  format = " free: %available "
+  threshold_degraded = "1024M"
+}
+
+battery 1 {
+  path = "/sys/class/power_supply/BAT0/uevent"
+  format = " batt: %status %percentage %remaining %emptytime "
   format_down = "No battery"
   last_full_capacity = true
   integer_battery_capacity = true
-  # status_chr = ""
-  status_chr = "⚡"
-  # status_bat = "bat"
-  # status_bat = "☉"
-  status_bat = ""
-  # status_unk = "?"
-  status_unk = ""
-  # status_full = ""
-  status_full = "☻"
   low_threshold = 15
   threshold_type = time
 }
