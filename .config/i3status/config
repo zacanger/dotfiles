@@ -27,7 +27,7 @@ cpu_usage {
 
 load {
   format = " load: %1min "
-  max_threshold = 0.8
+  max_threshold = 2
 }
 
 disk "/" {
