@@ -12,7 +12,7 @@ general {
 }
 
 order += "cpu_usage"
-order += "load"
+# order += "load"
 order += "memory"
 order += "disk /"
 # order += "wireless _first_"
