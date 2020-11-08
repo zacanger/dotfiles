@@ -418,6 +418,9 @@ endif
 " pixie
 au BufNewFile,BufRead *.pxi set ft=clojure
 
+" I don't ever write Verilog, but might try out V
+au BufNewFile,BufRead *.v set ft=vlang
+
 " cshtml
 au BufNewFile,BufRead *.cshtml set ft=html
 
