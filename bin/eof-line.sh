@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 # add newlines to files with noeol
 find . \

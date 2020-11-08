@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 ND=$HOME/.config/ninit # ninit dir -- set this to whereever you keep these files
 DN="${PWD##*/}" # current directory (like basename $(pwd))

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 if [[ $(uname) == 'Darwin' ]] ; then
   pmset -g batt | sed -n 2p | cut -d' ' -f3-4

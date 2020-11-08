@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 OFFS=""
 SIZE=$(xdpyinfo | grep dimensions | awk '{print $2;}')

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 echo 'start (hh:mm:ss.0)'
 read -r start

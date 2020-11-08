@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 # usage: weather.sh zip
 
@@ -11,5 +12,10 @@ if [ -z "$1" ] ; then
   exit 0
 fi
 
-curl -s https://rss.accuweather.com/rss/liveweather_rss.asp\?metric\=${METRIC}\&locCode\=$1 | perl -ne 'if (/Currently/) {chomp;/\<title\>Currently: (.*)?\<\/title\>/; print "$1"; }'
+curl \
+  -s \
+  https://rss.accuweather.com/rss/liveweather_rss.asp\?metric\=${METRIC}\&locCode\=$1 \
+  | perl \
+  -ne \
+  'if (/Currently/) {chomp;/\<title\>Currently: (.*)?\<\/title\>/; print "$1"; }'
 echo

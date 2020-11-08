@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 if [[ $(uname -a) == *"Arch"* ]]; then
   dropbox_cmd=dropbox-cli

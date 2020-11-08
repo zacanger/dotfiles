@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 if [ "$1" != "-y" ]; then
   echo "Make sure you replace the values in this script first"

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 # Mirrors a site locally; pretends to be Google to make sure it works
 # Warning: very impolite script - don't use on servers that aren't your own

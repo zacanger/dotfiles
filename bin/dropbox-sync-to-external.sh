@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 set -e
 
 for dir in /media/z/*; do

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 if [[ $(uname) == 'Darwin' ]]; then
   ps -A -m -S -O comm,pmem,rss | awk '

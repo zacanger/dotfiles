@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 # Examples:
 #     ix hello.txt              # paste file (name/ext will be set).

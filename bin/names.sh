@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 if [ -z "$1" ]; then
   echo 'names: convert filenames to lowercase and replace characters, recursively'

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 minutes="$1"
 bell_path="$HOME/Dropbox/z/x/bell.mp3"

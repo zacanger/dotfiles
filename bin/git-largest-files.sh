@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 git verify-pack -v .git/objects/pack/pack-*.idx |
 grep blob | sort -k3nr | head |

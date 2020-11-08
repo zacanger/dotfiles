@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 while true; do
   batt=$(cat /sys/class/power_supply/BAT0/capacity)

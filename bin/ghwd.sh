@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 # Figure out github repo base URL
 base_url=$(git config --get remote.origin.url)

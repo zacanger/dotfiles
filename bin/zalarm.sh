@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 alarmpath=$HOME/Dropbox/z/x/alarm.mp3
 

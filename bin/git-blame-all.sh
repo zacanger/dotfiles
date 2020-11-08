@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 set -e
 
 git ls-tree --name-only -r HEAD \
@@ -8,4 +7,3 @@ git ls-tree --name-only -r HEAD \
   | sort \
   | uniq -c \
   | sort -nr
-
