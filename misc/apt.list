@@ -103,7 +103,6 @@ libpq-dev
 libpq5
 libreadline-dev
 librsvg2-dev
-libsqlite3-dev
 libssl-dev
 libx11-dev
 libxcursor-dev
