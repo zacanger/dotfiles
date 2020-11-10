@@ -175,6 +175,8 @@ sudo apt-get remove -y '*whoopsie*'
 sudo apt-get remove -y 'gnome-*'
 sudo apt-get remove -y 'avahi-*'
 sudo apt-get remove -y 'geoclue-*'
+sudo apt-get remove -y 'emacs*'
+sudo apt-get remove -y '*elpa*'
 sudo apt-get remove -y \
   bluez \
   brltty \

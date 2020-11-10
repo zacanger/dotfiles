@@ -10,8 +10,6 @@ apt-xapian-index
 aptdaemon
 aptdaemon-data
 arandr
-aspell
-aspell-en
 atool
 audacity
 bash
@@ -74,13 +72,11 @@ hdparm
 highlight
 hostname
 htop
-hunspell-en-us
 i3
 im-config
 imagemagick
 inetutils-traceroute
 info
-inkscape
 inotify-tools
 iproute2
 iptables
