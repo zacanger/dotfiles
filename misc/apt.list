@@ -57,6 +57,7 @@ flex
 fontconfig
 fontconfig-config
 fonts-hack
+fonts-noto
 gdb
 gettext-base
 ghostscript
@@ -172,7 +173,6 @@ transmission-gtk
 tree
 tzdata
 unclutter
-unifont
 unrar
 unzip
 usbutils
