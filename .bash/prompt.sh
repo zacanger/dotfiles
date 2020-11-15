@@ -26,7 +26,7 @@ prompt() {
       {
         reset=$(tput sgr0 || tput me)
         format=$(
-          pc=${PROMPT_COLOR:-2}
+          pc=${PROMPT_COLOR:-10}
           tput setaf "$pc" ||
           tput setaf "$pc" 0 0 ||
           tput AF "$pc" ||
