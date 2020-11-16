@@ -67,6 +67,7 @@ git-all
 gnupg
 gnupg-agent
 gnupg-utils
+golang
 grep
 groff-base
 hdparm

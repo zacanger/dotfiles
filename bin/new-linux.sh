@@ -33,13 +33,6 @@ sudo chown -R "$USER" /usr/local
 sudo apt-get update && sudo apt-get dist-upgrade -f -y
 cat "$list_path/apt.list" | xargs sudo apt-get install -y
 
-# Snaps
-sudo snap set system refresh.retain=2
-sudo snap refresh
-# sudo snap install slack --classic
-sudo snap install microk8s --classic
-sudo snap install go --classic
-
 # Python packages
 curl -s https://bootstrap.pypa.io/get-pip.py | sudo python3
 cat "$list_path/pip.list" | xargs sudo pip3 install -U
@@ -165,8 +158,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 vim +PlugInstall +qa
 vim +GoInstallBinaries +qa
 
-# Add self to some groups
-sudo usermod -aG microk8s "$USER"
+# Add self to Docker group
 sudo usermod -aG docker "$USER"
 
 # Cleanup
@@ -188,6 +180,7 @@ sudo apt-get remove -y \
   cups-ppdc \
   file-roller \
   gedit \
+  gnome-software-plugin-snap \
   libavahi-core7 \
   libavahi-glib1 \
   mousetweaks \
@@ -197,26 +190,20 @@ sudo apt-get remove -y \
   pulseaudio-module-bluetooth \
   python3-cups \
   python3-cupshelpers \
+  snapcraft \
+  snapd \
   yelp
+
 sudo apt autoremove -y
 sudo apt purge
 sudo apt clean
-sudo snap remove --purge gtk-common-themes
-sudo snap remove --purge gnome-3-34-1804
+sudo rm -rf /var/cache/snapd/
 sudo update-alternatives --all
 sudo systemctl stop apache2
 sudo systemctl disable apache2
 sudo systemctl stop apache-htcacheclean
 sudo systemctl disable apache-htcacheclean
-sudo microk8s enable dashboard
-sudo microk8s enable dns
-sudo microk8s enable helm3
-sudo microk8s enable ingress
-sudo microk8s enable metrics-server
-sudo microk8s enable prometheus
-sudo microk8s enable storage
-sudo microk8s stop
-for d in Desktop Documents Music Pictures Public Templates Videos; do
+for d in Desktop Documents Music Pictures Public Templates Videos snap; do
   rm -d "$HOME/$d"
 done
 
