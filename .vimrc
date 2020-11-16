@@ -349,21 +349,8 @@ noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 " keep Y consistent
 nnoremap Y y$
 
-" vim-markdown
+" vim-markdown (from polyglot)
 let g:vim_markdown_conceal = 0
-let g:vim_markdown_fenced_languages = [
-      \'bash=Shell',
-      \'console=Shell',
-      \'css=CSS',
-      \'html=HTML',
-      \'javascript=JavaScript',
-      \'js=JavaScript',
-      \'jsx=JSX',
-      \'less=CSS',
-      \'sass=CSS',
-      \'scss=CSS',
-      \'sh=Shell'
-      \]
 let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_folding_disabled = 1
 
