@@ -25,7 +25,6 @@ Plug 'junegunn/vim-peekaboo'           " see registers easily
 Plug 'junegunn/vim-slash'              " better buffer search
 Plug 'mhinz/vim-signify'               " vcs markers in gutter, also see 'airblade/vim-gitgutter'
 Plug 'moll/vim-node'                   " enchance vim for node (for example, better gf)
-Plug 'plasticboy/vim-markdown'         " better markdown features
 Plug 'scrooloose/nerdcommenter'        " there are so many commenter plugins, but this one just works
 Plug 'sgur/vim-editorconfig'           " support editorconfig
 Plug 'sheerun/vim-polyglot'            " language support
