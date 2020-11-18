@@ -192,6 +192,7 @@ sudo apt-get remove -y \
   python3-cupshelpers \
   snapcraft \
   snapd \
+  unattended-upgrades \
   yelp
 
 sudo apt autoremove -y
