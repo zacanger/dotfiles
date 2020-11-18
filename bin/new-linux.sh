@@ -163,6 +163,8 @@ sudo usermod -aG docker "$USER"
 
 # Cleanup
 # There may be some extra packages to manually remove after this
+sudo rm /etc/update-motd.d/90-updates-available
+sudo rm /etc/update-motd.d/92-unattended-upgrades
 sudo apt-get remove -y '*whoopsie*'
 sudo apt-get remove -y 'gnome-*'
 sudo apt-get remove -y 'avahi-*'
