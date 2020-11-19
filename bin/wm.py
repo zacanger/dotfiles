@@ -5,16 +5,22 @@ from Xlib import X, XK
 
 dpy = Display()
 
+# Super key
+mod_key = X.Mod4Mask
+
+# mod_key + F1: raise window
 dpy.screen().root.grab_key(
     dpy.keysym_to_keycode(XK.string_to_keysym("F1")),
-    X.Mod1Mask,
+    mod_key,
     1,
     X.GrabModeAsync,
     X.GrabModeAsync,
 )
+
+# mod_key + left mouse: move window
 dpy.screen().root.grab_button(
     1,
-    X.Mod1Mask,
+    mod_key,
     1,
     X.ButtonPressMask | X.ButtonReleaseMask | X.PointerMotionMask,
     X.GrabModeAsync,
@@ -22,9 +28,11 @@ dpy.screen().root.grab_button(
     X.NONE,
     X.NONE,
 )
+
+# mod_key + left mouse: resize window
 dpy.screen().root.grab_button(
     3,
-    X.Mod1Mask,
+    mod_key,
     1,
     X.ButtonPressMask | X.ButtonReleaseMask | X.PointerMotionMask,
     X.GrabModeAsync,
