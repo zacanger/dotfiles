@@ -16,3 +16,7 @@ pp = pprint.pprint
 
 def paste():
     exec(sys.stdin.read(), globals())
+
+
+def doc(x):
+    print(x.__doc__)
