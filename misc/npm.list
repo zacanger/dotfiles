@@ -13,6 +13,7 @@ mime-types-cli
 ndic
 node-gyp
 npm-check-updates
+shellcheck
 shipe
 sloc
 sortpack

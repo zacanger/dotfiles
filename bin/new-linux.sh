@@ -89,20 +89,6 @@ ln -s "$z_path/.gnupg/gpg-agent.conf" "$HOME/.gnupg/"
 mkdir -p "$HOME/.cargo"
 ln -s "$z_path/.cargo/config" "$HOME/.cargo/"
 
-# Haskell
-curl -sSL https://get.haskellstack.org/ | sh
-mkdir -p "$HOME/.ghc"
-# Copy rather than link because of permissions
-cp "$z_path/.ghc/ghci.conf" "$HOME/.ghc/"
-chmod go-w "$HOME/.ghc"
-stack ghci
-stack install ShellCheck
-# Disabling for now, this takes an absurdly long time
-# stack install pandoc
-
-# Ruby
-# cat "$list_path/gem.list" | xargs sudo gem install
-
 # My st fork
 git clone https://github.com/zacanger/st && \
   cd st && \
