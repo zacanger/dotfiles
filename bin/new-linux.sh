@@ -35,7 +35,7 @@ cat "$list_path/apt.list" | xargs sudo apt-get install -y
 
 # Python packages
 curl -s https://bootstrap.pypa.io/get-pip.py | sudo python3
-cat "$list_path/pip.list" | xargs sudo pip3 install -U
+cat "$list_path/pip.list" | xargs pip3 install -U
 # there's no /usr/bin/python in ubuntu 20....
 sudo ln -s /usr/bin/python3 /usr/bin/python
 
