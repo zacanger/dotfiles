@@ -320,6 +320,7 @@ brew_packages=(
   siege
   sip
   source-highlight
+  sox
   sqlite
   telnet
   terraform

@@ -2,7 +2,6 @@
 set -e
 
 minutes="$1"
-bell_path="$HOME/Dropbox/z/x/bell.mp3"
 cols=$(tput cols)
 rows=$(tput lines)
 middle_row=$((rows / 2))
@@ -11,7 +10,7 @@ sec=00
 min="$minutes"
 
 play_bell() {
-  mplayer "$bell_path" > /dev/null 2>&1 &
+  play -q -n synth 3 sin 400 fade l 0 3 2.8 &
 }
 
 end() {
