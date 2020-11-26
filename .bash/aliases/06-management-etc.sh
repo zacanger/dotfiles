@@ -7,7 +7,7 @@ alias ka='killall'
 # managing .bashrc & .bash_aliases
 alias edrc="$EDITOR ~/.bashrc"
 alias edal="$EDITOR ~/.bash/aliases"
-alias reload='source ~/.bashrc'
+alias reload='_sourceif ~/.bashrc'
 
 # clipboard
 if [[ $(uname) == 'Darwin' ]]; then

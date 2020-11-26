@@ -67,7 +67,7 @@ alias_completion() {
   new_completion="${new_completion% *} $alias_name"
   echo "$new_completion" >> "$tmp_file"
   done < <(alias -p | sed -Ene "s/$alias_regex/\1 '\2' '\3'/p")
-  source "$tmp_file" && $(which rm) -f "$tmp_file"
+  _sourceif "$tmp_file" && $(which rm) -f "$tmp_file"
 }
 
 alias_completion
