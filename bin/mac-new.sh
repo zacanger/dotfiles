@@ -359,6 +359,7 @@ home_links=(
   .bash
   .bash_logout
   .bash_profile
+  .bash_sessions_disable
   .bashrc
   .ctags
   .dircolors
@@ -366,6 +367,7 @@ home_links=(
   .g
   .gitconfig
   .gitignore_global
+  .hushlogin
   .inputrc
   .profile
   .tmux.conf
