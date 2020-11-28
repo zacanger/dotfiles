@@ -1,9 +1,5 @@
 # shellcheck shell=bash
 
-# misc
-alias ghc='stack ghc'
-alias ghci='stack ghci'
-
 # python
 alias pipupd='cat ~/Dropbox/z/misc/pip.list | xargs pip3 install -U'
 alias venv='virtualenv venv'
