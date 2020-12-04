@@ -39,6 +39,12 @@ cat "$list_path/pip.list" | xargs sudo pip3 install -U
 # there's no /usr/bin/python in ubuntu 20....
 sudo ln -s /usr/bin/python3 /usr/bin/python
 
+# Install youtube-dl
+curl -L \
+  https://yt-dl.org/downloads/latest/youtube-dl \
+  -o /usr/local/bin/youtube-dl
+chmod a+rx /usr/local/bin/youtube-dl
+
 # Copy rather than link because of auth
 cp "$z_path/.npmrc" "$HOME/"
 
