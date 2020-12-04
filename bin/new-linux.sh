@@ -187,7 +187,8 @@ sudo apt-get remove -y \
   snapcraft \
   snapd \
   unattended-upgrades \
-  yelp
+  yelp \
+  youtube-dl
 
 sudo apt autoremove -y
 sudo apt purge
