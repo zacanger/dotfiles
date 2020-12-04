@@ -1,7 +1,7 @@
 # shellcheck shell=bash
 
 # python
-alias pipupd='cat ~/Dropbox/z/misc/pip.list | xargs pip3 install -U'
+alias pipupd='cat ~/Dropbox/z/misc/pip.list | xargs sudo pip3 install -U'
 alias venv='virtualenv venv'
 
 # node
