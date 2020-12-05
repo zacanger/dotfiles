@@ -6,9 +6,6 @@ if has('vim_starting')
   set nocompatible " Be iMproved
 endif
 
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " Go support
-Plug 'fatih/vim-go'
-
 Plug 'vim-jp/vital.vim'                " deps
 Plug 'vim-scripts/SyntaxRange'         " deps
 Plug 'vim-scripts/ingo-library'        " deps
@@ -34,6 +31,7 @@ Plug 'vim-scripts/syntaxcomplete'      " super simple syn completion
 Plug 'vim-utils/vim-husk'              " bash emacs-mode mappings in command mode
 Plug 'vim-utils/vim-troll-stopper'     " highlight unicode chars that look like ascii chars
 Plug 'dense-analysis/ale'              " linting
+Plug 'fatih/vim-go'                    " go support
 Plug 'rust-lang/rust.vim'              " rust support
 
 call plug#end()
