@@ -4,8 +4,6 @@ See <https://github.com/zacanger/junk/tree/master/dotfiles-archive> for old
 Git history. I archived the repo and started fresh due to huge Git directory
 size.
 
-Unless otherwise noted, everything here is under the LGPL-3.0 license.
-
 I keep this repo at `/home/z/Dropbox/z`, and my setup scripts (see below for
 details) link everything to `$HOME/`. This repo is laid out exactly the same way
 as it is in my home directory on Linux machines, with the exception of this
@@ -38,3 +36,4 @@ which don't get symlinked or copied over.
   a fresh computer. They're installed from by the setup scripts.
 * On fresh Linux machines, I first sync `~/Dropbox/z`, then run each block in
   `~/bin/new-linux.sh` separately.
+* Unless otherwise noted, everything here is under the LGPL-3.0 license.
