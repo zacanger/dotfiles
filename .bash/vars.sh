@@ -2,7 +2,7 @@
 
 export VISUAL=vim
 export EDITOR=vim
-export TERMINAL=st
+export TERMINAL=xterm
 export PYTHONSTARTUP=$HOME/.config/startup.py
 export BROWSER=firefox
 export XDG_CONFIG_HOME=$HOME/.config
