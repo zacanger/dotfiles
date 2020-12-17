@@ -15,7 +15,7 @@ which don't get symlinked or copied over.
 * Hardware: Thinkpads
 * OS: Ubuntu 20.04 (I've tried every distro out there, this is fine for me)
 * Window manager: plain i3, very light config, i3status
-* Terminal: [st fork](https://github.com/zacanger/st)
+* Terminal: xterm
 * File manager: Ranger
 * Editor: Vim
 * Browser: Firefox

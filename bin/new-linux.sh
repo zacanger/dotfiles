@@ -95,15 +95,6 @@ ln -s "$z_path/.gnupg/gpg-agent.conf" "$HOME/.gnupg/"
 mkdir -p "$HOME/.cargo"
 ln -s "$z_path/.cargo/config" "$HOME/.cargo/"
 
-# My st fork
-git clone https://github.com/zacanger/st && \
-  cd st && \
-  make install && \
-  cd .. && \
-  rm -rf st
-ln -s /usr/local/bin/st /usr/local/bin/x-terminal-emulator
-sudo cp -R /home/z/.terminfo /root
-
 # .config
 conf_path=$HOME/.config
 zconf_path=$z_path/.config
