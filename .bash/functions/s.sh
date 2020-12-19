@@ -15,7 +15,7 @@ s() {
     '
   else
     while [ "$1" ]; do
-      cd="$(echo "$cd" | sed "s/$1/$2/")"
+      cd="$(echo "$cd" | sed "s#$1#$2#")"
       shift; shift
     done
     cd "$cd" || return
