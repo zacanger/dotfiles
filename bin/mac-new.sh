@@ -191,110 +191,62 @@ brew install gnu-sed --with-default-names
 brew install gnu-tar --with-default-names
 brew install gnu-which --with-default-names
 brew install grep --with-default-names
-brew cask install minikube
 brew cask install mpv
 # The rest
 brew_packages=(
-  aspcud
   aspell
-  atk
   atool
   autoconf
   automake
-  aws-iam-authenticator
   awscli
   bash
   bash-completion
-  bdw-gc
-  berkeley-db
   binutils
-  boost
   cairo
-  camlp4
   clasp
   cmake
-  cowsay
   ctags
   curl
-  dbus
   diffutils
   dos2unix
-  doxygen
-  enchant
   faac
   ffmpeg
-  figlet
   file-formula
   flac
   fontconfig
   freetype
-  fribidi
   gawk
   gcc
   gdb
-  gdbm
-  gdk-pixbuf
   gettext
-  ghc
-  giflib
   gifsicle
   git
-  gmp
   gnutls
   go
   gpatch
   gpg
   graphicsmagick
-  gringo
   gzip
   harfbuzz
   haskell-stack
   highlight
   htop
-  icu4c
   imagemagick
-  imlib2
-  isl
-  jack
   jpeg
   jq
   kompose
   kubernetes-cli
   lame
   less
-  libass
-  libav
-  libepoxy
-  libevent
-  libffi
-  libid3tag
-  libmagic
-  libmpc
-  libogg
-  libpng
-  libsamplerate
-  libsndfile
-  libsoup
-  libtasn1
-  libtiff
-  libtool
-  libvorbis
-  libyaml
-  lua
   lzip
   m4
-  mad
   make
   meson
-  mongodb
-  mpfr
   mplayer
   ncdu
   ncurses
-  nettle
   nginx
   ninja
-  oniguruma
   openjpeg
   openssh
   openssl
@@ -302,14 +254,11 @@ brew_packages=(
   pandoc
   pango
   pcre
-  perl518
-  pixman
+  perl
   pkg-config
   pngcrush
   poppler
   pv
-  py2cairo
-  pygobject
   ranger
   readline
   redis
