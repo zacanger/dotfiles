@@ -258,9 +258,6 @@ for brew_p in "${brew_packages[@]}"; do
   brew install "$brew_p"
 done
 
-# Copy rather than link because of auth. npm login later.
-cp "$z_path/.npmrc" "$HOME/"
-
 # We don't want the defaults.
 rm -f "$HOME/.profile"
 rm -f "$HOME/.bash_profile"
@@ -321,17 +318,21 @@ ln -s "$zconf_path/startup.py" "$conf_path/"
 ln -s "$zconf_path/neofetch/config.conf" "$conf_path/neofetch/"
 
 # Node and packages
+# Copy rather than link because of auth. npm login later.
+cp "$z_path/.npmrc" "$HOME/"
 curl -sL https://git.io/n-install | bash -s -- -n
 n latest
 n prune
 cat "$list_path/npm.list" | xargs npm i -g
+# Fix path since Macs don't use /home
+gsed -i 's#/home#/Users#' "$HOME/.npmrc"
 
 # Golang REPL
 go get -u github.com/motemen/gore/cmd/gore
 go get -u github.com/mdempsky/gocode
 
 # Python packages
-cat "$list_path/pip3.list" | xargs sudo pip3 install -U
+cat "$list_path/pip3.list" | xargs pip3 install -U
 
 # Install youtube-dl
 curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
