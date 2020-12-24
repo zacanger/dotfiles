@@ -121,7 +121,6 @@ cp "$zconf_path/pcmanfm/default/pcmanfm.conf" "$conf_path/pcmanfm/default/"
 curl -sL https://git.io/n-install | bash -s -- -n
 n latest
 n prune
-npm i -g npm
 
 # Install Node packages.
 cat "$list_path/npm.list" | xargs npm i -g

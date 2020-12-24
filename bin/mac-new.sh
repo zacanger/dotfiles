@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# First, disable SIP. Turn off and boot up while holding CMD+R,
-# then open Utilities > Terminal and run csrutil disable
-
 # Install Rectangle and configure to start on login:
 # https://github.com/rxhanson/Rectangle
 
@@ -89,8 +86,7 @@ defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 chflags nohidden ~/Library
 
 # Disable local Time Machine backups
-# Doesn't work on High Sierra??
-# hash tmutil &> /dev/null && sudo tmutil disablelocal
+sudo tmutil disable
 
 # Finder
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
@@ -160,58 +156,33 @@ sudo softwareupdate -i -a
 
 ## Now that that's done we can install and configure what we need
 
-# Some mac users will tell you it's risky to use this directory.
-# I'm telling you it's fine, they're probably the sort of people
-# who prefer the Apple App Store over Makefiles.
-sudo chown -R "$USER" /usr/local
-
 # Install Docker from website.
 
 # Install Dropbox and sync; dotfiles are at $HOME/Dropbox/z
 z_path=$HOME/Dropbox/z
 list_path=$z_path/misc
-"$z_path/bin/dropbox-fix.sh"
 
-# CLI tools
-xcode-select --install
+# Install Homebrew (also installs command-line tools from Xcode)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# Install Homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 # Install brew packages
-# Special cases
-brew install https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
-brew install python3
-brew postinstall python3 # get pip
-brew install wdiff --with-gettext
-brew install coreutils --with-default-names
-brew install ed --with-default-names
-brew install findutils --with-default-names
-brew install gnu-indent --with-default-names
-brew install gnu-sed --with-default-names
-brew install gnu-tar --with-default-names
-brew install gnu-which --with-default-names
-brew install grep --with-default-names
-brew cask install mpv
-# The rest
 brew_packages=(
   aspell
   atool
   autoconf
   automake
-  awscli
   bash
   bash-completion
   binutils
-  cairo
-  clasp
   cmake
+  coreutils
   ctags
   curl
   diffutils
   dos2unix
-  faac
   ffmpeg
   file-formula
+  findutils
   flac
   fontconfig
   freetype
@@ -221,18 +192,21 @@ brew_packages=(
   gettext
   gifsicle
   git
+  gnu-indent
+  gnu-sed
+  gnu-tar
+  gnu-which
   gnutls
   go
   gpatch
   gpg
-  graphicsmagick
+  grep
   gzip
   harfbuzz
   haskell-stack
   highlight
   htop
   imagemagick
-  jpeg
   jq
   kompose
   kubernetes-cli
@@ -243,11 +217,10 @@ brew_packages=(
   make
   meson
   mplayer
+  mpv
   ncdu
   ncurses
-  nginx
   ninja
-  openjpeg
   openssh
   openssl
   p7zip
@@ -259,14 +232,13 @@ brew_packages=(
   pngcrush
   poppler
   pv
+  python3
   ranger
   readline
-  redis
   rlwrap
   rsync
   ruby
-  s-lang
-  siege
+  rust
   sip
   source-highlight
   sox
@@ -275,19 +247,12 @@ brew_packages=(
   terraform
   the_silver_searcher
   tree
-  unrar
   unzip
-  vala
   vim
   w3m
   watch
-  watchman
-  webp
+  wdiff
   wget
-  wrk
-  x264
-  xvid
-  xz
 )
 for brew_p in "${brew_packages[@]}"; do
   brew install "$brew_p"
@@ -357,19 +322,14 @@ ln -s "$zconf_path/neofetch/config.conf" "$conf_path/neofetch/"
 curl -sL https://git.io/n-install | bash -s -- -n
 n latest
 n prune
-npm i -g npm
 cat "$list_path/npm.list" | xargs npm i -g
 
 # Golang REPL
 go get -u github.com/motemen/gore/cmd/gore
 go get -u github.com/mdempsky/gocode
 
-sudo usermod -aG docker "$USER"
 # Python packages
 cat "$list_path/pip3.list" | xargs sudo pip3 install -U
-
-# Global gems
-sudo gem install compass bootstrap-sass rake
 
 # Install youtube-dl
 curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
@@ -380,11 +340,6 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +PlugInstall +qa
 vim +GoInstallBinaries +qa
-
-# install the rust toolchain - interactive
-curl https://sh.rustup.rs -sSf | sh
-rustup toolchain install nightly
-rustup default nightly
 
 echo '/usr/local/bin/bash' >> /etc/shells
 chsh -s /usr/local/bin/bash
