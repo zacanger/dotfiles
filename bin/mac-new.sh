@@ -300,7 +300,9 @@ cp "$z_path/.docker/config.json" "$HOME/.docker/"
 
 # GPG, don't link because keys.
 mkdir -p "$HOME/.gnupg"
-ln -s "$z_path/.gnupg/gpg-agent.conf" "$HOME/.gnupg/"
+cp "$z_path/.gnupg/gpg-agent.conf" "$HOME/.gnupg/"
+# Different path on Macs
+gsed -i 's#usr/bin#usr/local/bin#' "$HOME/.gnupg/gpg-agent.conf"
 
 # Rust
 mkdir -p "$HOME/.cargo"
