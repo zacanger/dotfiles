@@ -1,6 +1,7 @@
 // also see:
 // https://github.com/pyllyukko/user.js/blob/master/user.js
 
+user_pref('accessibility.typeaheadfind.enablesound', false);
 user_pref('app.normandy.api_url', '');
 user_pref('app.normandy.enabled', false);
 user_pref('app.shield.optoutstudies.enabled', false);
