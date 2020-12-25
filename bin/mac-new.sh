@@ -216,7 +216,6 @@ brew_packages=(
   m4
   make
   meson
-  mplayer
   mpv
   ncdu
   ncurses
