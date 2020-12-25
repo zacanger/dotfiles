@@ -333,6 +333,8 @@ go get -u github.com/mdempsky/gocode
 
 # Python packages
 cat "$list_path/pip3.list" | xargs pip3 install -U
+# Because Macs still have Python 2 as the default
+ln -s /usr/local/bin/python3 /usr/local/bin/python
 
 # Install youtube-dl
 curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
