@@ -256,6 +256,7 @@ brew_packages=(
 for brew_p in "${brew_packages[@]}"; do
   brew install "$brew_p"
 done
+brew install blurred --cask
 
 # We don't want the defaults.
 rm -f "$HOME/.profile"
