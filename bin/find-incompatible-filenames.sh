@@ -20,9 +20,11 @@ find . \
   grep -v '^      1 ' | \
   cut -c '9-'
 
-# > 260 chars
-find "$PWD" | while IFS= read -r path; do
-  if [ "${#path}" -gt 260 ]; then
-    printf '%s\n' "$path"
-  fi
-done
+if [ "$1" == "-w" ]; then
+  # > 260 chars
+  find "$PWD" | while IFS= read -r path; do
+    if [ "${#path}" -gt 260 ]; then
+      printf '%s\n' "$path"
+    fi
+  done
+fi
