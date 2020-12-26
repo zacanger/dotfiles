@@ -173,6 +173,7 @@ brew_packages=(
   automake
   bash
   bash-completion
+  bat
   binutils
   cmake
   coreutils
