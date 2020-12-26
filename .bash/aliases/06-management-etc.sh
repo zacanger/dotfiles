@@ -34,14 +34,15 @@ else
   alias grep='grep --color=auto'
 fi
 
-# More Mac things
 if [[ $(uname) == 'Darwin' ]]; then
   alias file='file -h'
   if hash gfind 2>/dev/null; then
     alias find='gfind'
   fi
   if hash gsed 2>/dev/null; then
-    alias sed='sed'
+    alias sed='gsed'
   fi
   alias poweroff='sudo shutdown -h now'
+elif [[ $(uname -a) == *'microsoft'* ]]; then
+  alias poweroff='powershell.exe "stop-computer"'
 fi
