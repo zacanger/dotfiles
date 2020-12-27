@@ -177,7 +177,6 @@ brew_packages=(
   bash-completion
   bat
   binutils
-  calibre
   cmake
   coreutils
   ctags
