@@ -3,6 +3,8 @@
 # Install Rectangle and configure to start on login:
 # https://github.com/rxhanson/Rectangle
 
+# Import misc/profile.terminal to Terminal.app
+
 ### Change macos settings
 
 # Turn on key repeats, since by default Macs show some weird little character-picker
