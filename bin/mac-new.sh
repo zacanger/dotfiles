@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 
-# Install Rectangle and configure to start on login:
-# https://github.com/rxhanson/Rectangle
-
-# Import misc/profile.terminal to Terminal.app
-
-### Change macos settings
+## Change macos settings
 
 # Turn on key repeats, since by default Macs show some weird little character-picker
 # dialog when you hold a key
@@ -158,108 +153,20 @@ sudo softwareupdate -i -a
 
 ## Now that that's done we can install and configure what we need
 
-# Install Docker from website.
+# Install Docker from website
+# Install FL Studio
+# Import misc/profile.terminal to Terminal.app
+# Install Rectangle and configure to start on login:
+# https://github.com/rxhanson/Rectangle
 
 # Install Dropbox and sync; dotfiles are at $HOME/Dropbox/z
 z_path=$HOME/Dropbox/z
 list_path=$z_path/misc
 
-# Install Homebrew (also installs command-line tools from Xcode)
+# Install Homebrew (also installs command-line tools from Xcode),
+# then brew packages.
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# Install brew packages
-brew_packages=(
-  aspell
-  atool
-  autoconf
-  automake
-  bash
-  bash-completion
-  bat
-  binutils
-  cmake
-  coreutils
-  ctags
-  curl
-  diffutils
-  dos2unix
-  ffmpeg
-  file-formula
-  findutils
-  flac
-  fontconfig
-  freetype
-  gawk
-  gcc
-  gdb
-  gettext
-  gifsicle
-  git
-  gnu-indent
-  gnu-sed
-  gnu-tar
-  gnu-which
-  gnutls
-  go
-  gpatch
-  gpg
-  grep
-  gzip
-  harfbuzz
-  haskell-stack
-  highlight
-  htop
-  imagemagick
-  jq
-  kompose
-  kubernetes-cli
-  lame
-  less
-  lzip
-  m4
-  make
-  meson
-  mpv
-  ncdu
-  ncurses
-  ninja
-  openssh
-  openssl
-  p7zip
-  pandoc
-  pango
-  pcre
-  perl
-  pkg-config
-  pngcrush
-  poppler
-  pv
-  python3
-  ranger
-  readline
-  rlwrap
-  rsync
-  ruby
-  rust
-  sip
-  source-highlight
-  sox
-  sqlite
-  telnet
-  terraform
-  the_silver_searcher
-  tree
-  unzip
-  vim
-  w3m
-  watch
-  wdiff
-  wget
-)
-for brew_p in "${brew_packages[@]}"; do
-  brew install "$brew_p"
-done
-brew install blurred --cask
+cat "$list_path/brew.list" | xargs brew install
 
 # We don't want the defaults.
 rm -f "$HOME/.profile"
