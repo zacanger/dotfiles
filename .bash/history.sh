@@ -6,14 +6,7 @@ HISTIGNORE="$HISTIGNORE:..:...:.:cs:co:ni:ns:vi:reload:gst:edrc:edal:fs:ncu"
 HISTIGNORE="$HISTIGNORE:gd:g:v:nu:cla:todo:poweroff:tn:ncdu:startx"
 HISTIGNORE="$HISTIGNORE:rbl:aca:dbup:dbdn:dbst:vv:sync:gdi:cf:f:gfa"
 HISTIGNORE="$HISTIGNORE:rbl *:g *:radio.sh"
-
-if [[ $(uname) == 'Darwin' ]]; then
-  HISTSIZE=10000 # length
-  HISTFILESIZE=10000 # size
-else
-  HISTSIZE=500 # length
-  HISTFILESIZE=500 # size
-fi
-
+HISTSIZE=1000 # length
+HISTFILESIZE=1000 # size
 HISTTIMEFORMAT='%F %T  ' # timestamp
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ;} history -a"
