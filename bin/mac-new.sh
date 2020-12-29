@@ -155,6 +155,8 @@ sudo softwareupdate -i -a
 
 # Install Docker from website
 # Install FL Studio
+# Install Hack font (for Terminal)
+# Install all of Google's Noto fonts (for more language support)
 # Import misc/profile.terminal to Terminal.app
 # Install Rectangle and configure to start on login:
 # https://github.com/rxhanson/Rectangle
