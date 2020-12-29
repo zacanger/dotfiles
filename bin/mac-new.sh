@@ -167,6 +167,7 @@ list_path=$z_path/misc
 # then brew packages.
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 cat "$list_path/brew.list" | xargs brew install
+brew install --cask transmission
 
 # We don't want the defaults.
 rm -f "$HOME/.profile"
