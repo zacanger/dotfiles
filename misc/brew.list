@@ -13,6 +13,7 @@ ctags
 curl
 diffutils
 dos2unix
+fdupes
 ffmpeg
 file-formula
 findutils
