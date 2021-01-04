@@ -42,7 +42,7 @@ while (( $# > 0 )); do
     "${sizeargs[@]}" \
     "$1" "ppm:-" |
     grep -v '^$' | grep -v '^#' |
-    gawk '
+    awk '
 {
   if (NR <= 3)
   {
