@@ -168,8 +168,7 @@ list_path=$z_path/misc
 # Install Homebrew (also installs command-line tools from Xcode),
 # then brew packages.
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-cat "$list_path/brew.list" | xargs brew install
-brew install --cask transmission
+brew bundle --file "$list_path/"
 
 # We don't want the defaults.
 rm -f "$HOME/.profile"
