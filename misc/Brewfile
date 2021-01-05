@@ -18,7 +18,7 @@ brew "pcre"
 brew "readline"
 brew "sqlite"
 brew "xz"
-brew "python@3.9", link: false
+brew "python@3.9"
 brew "cmake"
 brew "coreutils"
 brew "ctags"
