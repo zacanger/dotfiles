@@ -36,12 +36,9 @@ Plug 'rust-lang/rust.vim'              " rust support
 
 call plug#end()
 
-" Required:
-filetype plugin indent on
-
 "" Basic Setup
 
-" Encoding
+filetype plugin indent on
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
@@ -90,7 +87,7 @@ nnoremap <silent> N   N:call HLNext(0.4)<cr>
 set bomb
 set binary
 
-" Directories for swp files
+" Don't write these, it's not like Vim crashes all that often
 set nobackup
 set noswapfile
 
@@ -351,9 +348,6 @@ nnoremap Y y$
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_folding_disabled = 1
-
-" because of docker + mac + webpack (or whatever)...
-let g:backupcopy = 'yes'
 
 let g:csstoinline_wrap_pixels = 1
 
