@@ -187,6 +187,21 @@ get_platform() {
   echo $platform
 }
 
+# retry n cmd
+# retry 4 ls -ll
+# retry 4 some_function
+retry() {
+  local -r -i max_attempts="$1"; shift
+  local -i attempt_num=1
+  until "$@"; do
+    if ((attempt_num==max_attempts)); then
+      return 1
+    else
+      sleep $((attempt_num++))
+    fi
+  done
+}
+
 # Default to No if the user presses enter without giving an answer:
 # if ask "Do you want to do such-and-such?" N; then echo "Yes"; else echo "No"; fi
 # Only do something if you say Yes
