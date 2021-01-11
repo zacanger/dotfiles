@@ -158,6 +158,7 @@ sudo softwareupdate -i -a
 # Install Hack font (for Terminal)
 # Install all of Google's Noto fonts (for more language support)
 # Import misc/profile.terminal to Terminal.app
+# Install mupdf from https://mupdf.com/downloads/ (the brew version is broken)
 # Install Rectangle and configure to start on login:
 # https://github.com/rxhanson/Rectangle
 
