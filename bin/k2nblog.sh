@@ -22,3 +22,6 @@ for f in *; do
     mv "$f" "$new_name"
   fi
 done
+
+echo 'Potential files for removal:'
+find . | grep 'inst'
