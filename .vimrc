@@ -497,3 +497,28 @@ vnoremap <leader>de :!python -c 'import sys,urllib;print urllib.unquote(sys.stdi
 
 " Silence the cd echo
 let g:rooter_silent_chdir = 1
+
+function! IsWSL()
+  if has("linux")
+    let lines = readfile("/proc/version")
+    if lines[0] =~ "microsoft"
+      return 1
+    endif
+  endif
+  return 0
+endfunction
+
+if IsWSL()
+  map <silent> "=p :r !powershell.exe -Command Get-Clipboard<CR>
+  map! <silent> <C-r>= :r !powershell.exe -Command Get-Clipboard<CR>
+
+  " I thought this will be better :)
+  noremap "+p :exe 'norm a'.system('/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard')<CR>
+  let s:clip = '/mnt/c/Windows/System32/clip.exe'
+  if executable(s:clip)
+    augroup WSLYank
+      autocmd!
+      autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
+    augroup END
+  end
+end
