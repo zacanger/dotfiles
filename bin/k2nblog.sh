@@ -23,5 +23,9 @@ for f in *; do
   fi
 done
 
-echo 'Potential files for removal:'
+echo
+echo 'Potential files for removal'
+echo
 find . | grep 'inst'
+echo
+echo 'Potential files for removal'
