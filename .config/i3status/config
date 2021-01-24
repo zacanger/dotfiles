@@ -4,11 +4,11 @@
 # this file must be edited as utf-8
 
 general {
-  colors = true
-  interval = 15
-  color_good = "#2AA198"
-  color_bad = "#EAFF89"
-  color_degraded = "#FF8B07"
+    colors = true
+    interval = 15
+    color_good = "#2AA198"
+    color_bad = "#EAFF89"
+    color_degraded = "#FF8B07"
 }
 
 order += "cpu_usage"
@@ -22,39 +22,39 @@ order += "tztime local"
 # order += "ipv6"
 
 cpu_usage {
-  format = " cpu: %usage "
+    format = " cpu: %usage "
 }
 
 load {
-  format = " load: %1min "
-  max_threshold = 2
+    format = " load: %1min "
+    max_threshold = 2
 }
 
 disk "/" {
-  format = " disk: %avail "
+    format = " disk: %avail "
 }
 
 ethernet _first_ {
 # if you use %speed, i3status requires root privileges
-  format_up = " lan: %ip %speed "
-  # format_down = " no lan "
+    format_up = " lan: %ip %speed "
+    # format_down = " no lan "
 }
 
 memory {
-  format = " free: %available "
-  threshold_degraded = "1024M"
+    format = " free: %available "
+    threshold_degraded = "1024M"
 }
 
 battery 1 {
-  path = "/sys/class/power_supply/BAT0/uevent"
-  format = " batt: %status %percentage %remaining %emptytime "
-  format_down = "No battery"
-  last_full_capacity = true
-  integer_battery_capacity = true
-  low_threshold = 15
-  threshold_type = time
+    path = "/sys/class/power_supply/BAT0/uevent"
+    format = " batt: %status %percentage %remaining %emptytime "
+    format_down = "No battery"
+    last_full_capacity = true
+    integer_battery_capacity = true
+    low_threshold = 15
+    threshold_type = time
 }
 
 tztime local {
-  format = " %a %Y-%m-%d %H:%M |"
+    format = " %a %Y-%m-%d %H:%M |"
 }

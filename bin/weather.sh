@@ -6,16 +6,16 @@ set -e
 METRIC=0 # 0 for F, 1 for C
 
 if [ -z "$1" ] ; then
-  echo
-  echo "usage: weather.sh zip"
-  echo
-  exit 0
+    echo
+    echo "usage: weather.sh zip"
+    echo
+    exit 0
 fi
 
 curl \
-  -s \
-  https://rss.accuweather.com/rss/liveweather_rss.asp\?metric\=${METRIC}\&locCode\=$1 \
-  | perl \
-  -ne \
-  'if (/Currently/) {chomp;/\<title\>Currently: (.*)?\<\/title\>/; print "$1"; }'
+    -s \
+    https://rss.accuweather.com/rss/liveweather_rss.asp\?metric\=${METRIC}\&locCode\=$1 \
+    | perl \
+    -ne \
+    'if (/Currently/) {chomp;/\<title\>Currently: (.*)?\<\/title\>/; print "$1"; }'
 echo

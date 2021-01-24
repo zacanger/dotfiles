@@ -1,6 +1,6 @@
 makelist() {
-  make -rpn | \
-    sed -n -e '/^$/ { n ; /^[^ .#][^ ]*:/p ; }' | \
-    sort | \
-    egrep --color '^[^ ]*:'
+    make -rpn | \
+        sed -n -e '/^$/ { n ; /^[^ .#][^ ]*:/p ; }' | \
+        sort | \
+        egrep --color '^[^ ]*:'
 }

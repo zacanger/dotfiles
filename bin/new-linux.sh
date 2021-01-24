@@ -41,8 +41,8 @@ sudo ln -s /usr/bin/python3 /usr/bin/python
 
 # Install youtube-dl
 curl -L \
-  https://yt-dl.org/downloads/latest/youtube-dl \
-  -o /usr/local/bin/youtube-dl
+    https://yt-dl.org/downloads/latest/youtube-dl \
+    -o /usr/local/bin/youtube-dl
 chmod a+rx /usr/local/bin/youtube-dl
 
 # Copy rather than link because of auth
@@ -56,29 +56,29 @@ rm -f "$HOME/.bash_logout"
 
 # $HOME symlinks
 home_links=(
-  .Xresources
-  .agignore
-  .bash
-  .bash_logout
-  .bash_profile
-  .bashrc
-  .ctags
-  .dircolors
-  .editorconfig
-  .g
-  .gitconfig
-  .gitignore_global
-  .inputrc
-  .profile
-  .tmux.conf
-  .vim
-  .vimrc
-  .xinitrc
-  bin
+    .Xresources
+    .agignore
+    .bash
+    .bash_logout
+    .bash_profile
+    .bashrc
+    .ctags
+    .dircolors
+    .editorconfig
+    .g
+    .gitconfig
+    .gitignore_global
+    .inputrc
+    .profile
+    .tmux.conf
+    .vim
+    .vimrc
+    .xinitrc
+    bin
 )
 
 for l in "${home_links[@]}"; do
-  ln -s "$z_path/$l" "$HOME/"
+    ln -s "$z_path/$l" "$HOME/"
 done
 
 # Docker: don't link, because auth.
@@ -102,7 +102,6 @@ mkdir -p "$conf_path/i3"
 mkdir -p "$conf_path/i3status"
 mkdir -p "$conf_path/ranger"
 mkdir -p "$conf_path/pcmanfm/default"
-mkdir -p "$conf_path/neofetch"
 mkdir -p "$conf_path/libfm"
 ln -s "$zconf_path/libfm/libfm.conf" "$conf_path/libfm/"
 ln -s "$zconf_path/ranger/rc.conf" "$conf_path/ranger/"
@@ -112,7 +111,6 @@ ln -s "$zconf_path/i3/config" "$conf_path/i3/"
 ln -s "$zconf_path/i3status/config" "$conf_path/i3status/"
 ln -s "$zconf_path/ninit" "$conf_path/"
 ln -s "$zconf_path/startup.py" "$conf_path/"
-ln -s "$zconf_path/neofetch/config.conf" "$conf_path/neofetch/"
 
 # Copy rather than link because config contains window height
 cp "$zconf_path/pcmanfm/default/pcmanfm.conf" "$conf_path/pcmanfm/default/"
@@ -130,15 +128,10 @@ curl https://sh.rustup.rs -sSf | sh
 rustup toolchain install nightly
 rustup default nightly
 
-# Golang REPL
-go get -u github.com/motemen/gore/cmd/gore
-go get -u github.com/mdempsky/gocode
-
 # Vim
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +PlugInstall +qa
-vim +GoInstallBinaries +qa
 
 # Add self to Docker group
 sudo usermod -aG docker "$USER"
@@ -154,31 +147,31 @@ sudo apt-get remove -y 'geoclue-*'
 sudo apt-get remove -y 'emacs*'
 sudo apt-get remove -y '*elpa*'
 sudo apt-get remove -y \
-  bluez \
-  brltty \
-  cups \
-  cups-bsd \
-  cups-client \
-  cups-common \
-  cups-pk-helper \
-  cups-ppdc \
-  file-roller \
-  gedit \
-  gnome-software-plugin-snap \
-  libavahi-core7 \
-  libavahi-glib1 \
-  mousetweaks \
-  orca \
-  pavucontrol \
-  pinentry-gnome3 \
-  pulseaudio-module-bluetooth \
-  python3-cups \
-  python3-cupshelpers \
-  snapcraft \
-  snapd \
-  unattended-upgrades \
-  yelp \
-  youtube-dl
+    bluez \
+    brltty \
+    cups \
+    cups-bsd \
+    cups-client \
+    cups-common \
+    cups-pk-helper \
+    cups-ppdc \
+    file-roller \
+    gedit \
+    gnome-software-plugin-snap \
+    libavahi-core7 \
+    libavahi-glib1 \
+    mousetweaks \
+    orca \
+    pavucontrol \
+    pinentry-gnome3 \
+    pulseaudio-module-bluetooth \
+    python3-cups \
+    python3-cupshelpers \
+    snapcraft \
+    snapd \
+    unattended-upgrades \
+    yelp \
+    youtube-dl
 
 sudo apt autoremove -y
 sudo apt purge
@@ -190,7 +183,7 @@ sudo systemctl disable apache2
 sudo systemctl stop apache-htcacheclean
 sudo systemctl disable apache-htcacheclean
 for d in Desktop Documents Music Pictures Public Templates Videos snap; do
-  rm -d "$HOME/$d"
+    rm -d "$HOME/$d"
 done
 
 update-hosts.sh

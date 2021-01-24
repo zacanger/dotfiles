@@ -5,10 +5,10 @@ set -e
 # Slightly modified to use a different fuzzy finder
 
 curl -sS https://api.somafm.com/channels.json | \
-  jq -r '.channels[] |
-    "\(.title)\t\(.description)\t\(.playlists[] |
-    limit(1;select(.quality == "low")) |
-    .url)\n"' | \
-  fuzzy.py | \
-  cut -f3 | \
-  xargs mpv
+    jq -r '.channels[] |
+        "\(.title)\t\(.description)\t\(.playlists[] |
+        limit(1;select(.quality == "low")) |
+        .url)\n"' | \
+    fuzzy.py | \
+    cut -f3 | \
+    xargs mpv

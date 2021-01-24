@@ -10,17 +10,17 @@ const timeout = 2000
 let start = 1
 
 while (start <= end) {
-  let port = start
-  ;((port) => {
-    let s = new net.Socket()
+    let port = start
+    ;((port) => {
+        let s = new net.Socket()
 
-    s.setTimeout(timeout, () => s.destroy())
-    s.connect(port, host, () => console.log(`${port} is open!`))
-    s.on('data', (data) => {
-      console.log(port, data.toString())
-      s.destroy()
-    })
-    s.on('error', () => s.destroy())
-  })(port)
-  start++
+        s.setTimeout(timeout, () => s.destroy())
+        s.connect(port, host, () => console.log(`${port} is open!`))
+        s.on('data', (data) => {
+            console.log(port, data.toString())
+            s.destroy()
+        })
+        s.on('error', () => s.destroy())
+    })(port)
+    start++
 }

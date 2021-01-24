@@ -14,7 +14,6 @@ export LESS=" -R"
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 if [[ $(uname) == 'Darwin' ]]; then
-  # i'm at work
-  export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
-  ulimit -n 10240
+    export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
+    ulimit -n 10240
 fi

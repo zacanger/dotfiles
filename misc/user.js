@@ -1,6 +1,12 @@
 // also see:
 // https://github.com/pyllyukko/user.js/blob/master/user.js
+// https://github.com/arkenfox/user.js
 
+user_pref("dom.maxHardwareConcurrency", 2);
+user_pref("extensions.webcompat-reporter.enabled", false);
+user_pref("network.http.referer.XOriginPolicy", 2);
+user_pref("pdfjs.enableScripting", false);
+user_pref("privacy.trackingprotection.socialtracking.enabled", true);
 user_pref('accessibility.typeaheadfind.enablesound', false);
 user_pref('app.normandy.api_url', '');
 user_pref('app.normandy.enabled', false);
@@ -8,6 +14,7 @@ user_pref('app.shield.optoutstudies.enabled', false);
 user_pref('beacon.enabled', false);
 user_pref('browser.aboutConfig.showWarning', false);
 user_pref('browser.cache.offline.enable', false);
+user_pref('browser.chrome.site_icons', false);
 user_pref('browser.discovery.enabled', false);
 user_pref('browser.fixup.alternate.enabled', false);
 user_pref('browser.formfill.enable', false);
@@ -54,6 +61,8 @@ user_pref('devtools.editor.keymap', 'vim');
 user_pref('devtools.theme', 'dark');
 user_pref('dom.battery.enabled', false);
 user_pref('dom.event.contextmenu.enabled', false);
+user_pref('dom.security.https_only_mode', true);
+user_pref('dom.security.https_only_mode_ever_enabled', true);
 user_pref('extensions.getAddons.cache.enabled', false);
 user_pref('extensions.pocket.api', '');
 user_pref('extensions.pocket.enabled', false);
@@ -77,7 +86,6 @@ user_pref('permissions.default.camera', 2);
 user_pref('permissions.default.desktop-notification', 2);
 user_pref('permissions.default.geo', 2);
 user_pref('permissions.default.microphone', 2);
-user_pref('plugin.state.flash', 0);
 user_pref('privacy.donottrackheader.enabled', true);
 user_pref('privacy.firstparty.isolate', true);
 user_pref('privacy.resistFingerprinting', true);

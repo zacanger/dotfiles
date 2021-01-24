@@ -37,9 +37,9 @@ shopt -u sourcepath
 
 # see lesspipe(1)
 if [ -x /usr/bin/lesspipe.sh ]; then
-  eval "$(SHELL=/bin/sh lesspipe.sh)"
+    eval "$(SHELL=/bin/sh lesspipe.sh)"
 elif hash lesspipe 2>/dev/null; then
-  eval "$(lesspipe)"
+    eval "$(lesspipe)"
 fi
 
 # forward history search with ctrl-s
@@ -53,14 +53,14 @@ tabs -2
 
 # color ls
 if hash dircolors 2>/dev/null; then
-  test -r "$HOME/.dircolors" && eval "$(dircolors -b "$HOME/.dircolors")" || eval "$(dircolors -b)"
+    test -r "$HOME/.dircolors" && eval "$(dircolors -b "$HOME/.dircolors")" || eval "$(dircolors -b)"
 fi
 
 # dynamic title
 case $TERM in
-  xterm*)
-    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
-    ;;
-  *)
-    ;;
+    xterm*)
+        PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+        ;;
+    *)
+        ;;
 esac

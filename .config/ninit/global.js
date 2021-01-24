@@ -5,5 +5,5 @@ const main = () => {
 }
 
 if (!module.parent) {
-  main()
+    main()
 }

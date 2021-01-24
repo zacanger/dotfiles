@@ -6,8 +6,10 @@
 
 import curses
 import curses.ascii
+import difflib
 import fileinput
 import io
+import math
 import os
 import re
 import shlex
@@ -17,6 +19,10 @@ import subprocess
 import sys
 
 args = sys.argv[1:]
+
+
+def similar(inp, line):
+    return difflib.SequenceMatcher(a=inp.lower(), b=line.lower()).ratio() > 0.6
 
 
 def get_input_items():
@@ -81,39 +87,40 @@ def get_filtered_items():
     else:
         filtered_items = []
         word_regexes = [
-            re.escape(i) for i in re.split(
-                r"\s+", query_text.strip()
-            ) if i]
+            re.escape(i) for i in re.split(r"\s+", query_text.strip()) if i
+        ]
 
         exact_regexes = [
-            re.compile(
-                r"\b{}\b".format(i), re.I) for i in word_regexes]
+            re.compile(r"\b{}\b".format(i), re.I) for i in word_regexes
+        ]
 
         prefix_regexes = [
-            re.compile(
-                r"\b{}".format(i), re.I) for i in word_regexes]
+            re.compile(r"\b{}".format(i), re.I) for i in word_regexes
+        ]
 
-        substring_regexes = [
-            re.compile(i, re.I) for i in word_regexes]
+        substring_regexes = [re.compile(i, re.I) for i in word_regexes]
 
-        for items in (input_items,):
+        for item in input_items:
             exact_items = []
             prefix_items = []
             substring_items = []
-            for item in items:
-                if not all(re.search(i, item) for i in substring_regexes):
-                    continue
-                elif all(re.search(i, item) for i in exact_regexes):
-                    exact_items.append(item)
-                elif all(re.search(i, item) for i in prefix_regexes):
-                    prefix_items.append(item)
-                else:
-                    substring_items.append(item)
+            similar_items = []
 
-            filtered_items += \
-                exact_items + \
-                prefix_items + \
-                substring_items
+            if not all(re.search(i, item) for i in substring_regexes):
+                if similar(query_text, item):
+                    similar_items.append(item)
+                else:
+                    continue
+            elif all(re.search(i, item) for i in exact_regexes):
+                exact_items.append(item)
+            elif all(re.search(i, item) for i in prefix_regexes):
+                prefix_items.append(item)
+            else:
+                substring_items.append(item)
+
+            filtered_items += (
+                exact_items + prefix_items + substring_items + similar_items
+            )
 
     return filtered_items
 
@@ -125,12 +132,10 @@ def redraw(screen):
         items = filtered_items[: curses.LINES - 1]
         for i, item in enumerate(items):
             item_attr = (
-                curses.A_REVERSE
-                if i == selection_index
-                else curses.A_NORMAL)
+                curses.A_REVERSE if i == selection_index else curses.A_NORMAL
+            )
 
-            screen.insstr(
-                i + 1, 0, item[: curses.COLS - 1], item_attr)
+            screen.insstr(i + 1, 0, item[: curses.COLS - 1], item_attr)
 
         prompt = "-> "
         top_line_text = prompt + query_text
@@ -200,8 +205,9 @@ def main(screen):
         # ^N, Down
         elif char_code == curses.ascii.SO or char == curses.KEY_DOWN:
             if (
-                selection_index < min(
-                    len(filtered_items), curses.LINES - 1) - 1):
+                selection_index
+                < min(len(filtered_items), curses.LINES - 1) - 1
+            ):
                 selection_index += 1
             redraw(screen)
 

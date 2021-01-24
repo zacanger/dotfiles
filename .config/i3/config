@@ -93,7 +93,7 @@ bindsym $mod+Ctrl+Left workspace prev
 # Workspace names
 # to display names or symbols instead of plain workspace numbers you can use
 # something like: set $ws1 1:mail
-#                 set $ws2 2:
+#  set $ws2 2:
 set $ws1 1
 set $ws2 2
 set $ws3 3
@@ -164,25 +164,25 @@ bindsym $mod+Ctrl+l resize grow width 5 px or 5 ppt
 # Same logic applied to everything else.
 set_from_resource $term_background background
 set_from_resource $term_foreground foreground
-set_from_resource $term_color0     color0
-set_from_resource $term_color1     color1
-set_from_resource $term_color2     color2
-set_from_resource $term_color3     color3
-set_from_resource $term_color4     color4
-set_from_resource $term_color5     color5
-set_from_resource $term_color6     color6
-set_from_resource $term_color7     color7
-set_from_resource $term_color8     color8
-set_from_resource $term_color9     color9
-set_from_resource $term_color10    color10
-set_from_resource $term_color11    color11
-set_from_resource $term_color12    color12
-set_from_resource $term_color13    color13
-set_from_resource $term_color14    color14
-set_from_resource $term_color15    color15
+set_from_resource $term_color0    color0
+set_from_resource $term_color1    color1
+set_from_resource $term_color2    color2
+set_from_resource $term_color3    color3
+set_from_resource $term_color4    color4
+set_from_resource $term_color5    color5
+set_from_resource $term_color6    color6
+set_from_resource $term_color7    color7
+set_from_resource $term_color8    color8
+set_from_resource $term_color9    color9
+set_from_resource $term_color10   color10
+set_from_resource $term_color11   color11
+set_from_resource $term_color12   color12
+set_from_resource $term_color13   color13
+set_from_resource $term_color14   color14
+set_from_resource $term_color15   color15
 
-set_from_resource $background      background
-set_from_resource $foreground      foreground
+set_from_resource $background  background
+set_from_resource $foreground  foreground
 set_from_resource $color0          color0
 set_from_resource $color1          color1
 set_from_resource $color2          color2
@@ -193,45 +193,41 @@ set_from_resource $color6          color6
 set_from_resource $color7          color7
 set_from_resource $color8          color8
 set_from_resource $color9          color9
-set_from_resource $color10         color10
-set_from_resource $color11         color11
-set_from_resource $color12         color12
-set_from_resource $color13         color13
-set_from_resource $color14         color14
-set_from_resource $color15         color15
+set_from_resource $color10       color10
+set_from_resource $color11       color11
+set_from_resource $color12       color12
+set_from_resource $color13       color13
+set_from_resource $color14       color14
+set_from_resource $color15       color15
 
 bar {
-  i3bar_command i3bar
-  status_command i3status
-  position bottom
-  font pango:Hack 10
+    i3bar_command i3bar
+    status_command i3status
+    position bottom
+    font pango:Hack 10
 
-  # 'xrandr --output eDP1 --primary'
-  # tray_output primary
-  # tray_output eDP1
+    bindsym button4 nop
+    bindsym button5 nop
+    strip_workspace_numbers yes
 
-  bindsym button4 nop
-  bindsym button5 nop
-  strip_workspace_numbers yes
+    colors {
+        background #3d3d3d
+        statusline #d2d8cf
+        separator  #a2a597
 
-  colors {
-    background #3d3d3d
-    statusline #d2d8cf
-    separator  #a2a597
-
-    #                  border  backgr. text
-    focused_workspace  #a2a597 #3d3d3d #76cec8
-    active_workspace   #d2d8cf #3d3d3d #fafbf8
-    inactive_workspace #3d3d3d #3d3d3d #fafbf8
-    binding_mode       #16a085 #2C2C2C #F9FAF9
-    urgent_workspace   #f68080 #e165cb #eacd84
-  }
+        #  border  backgr. text
+        focused_workspace  #a2a597 #3d3d3d #76cec8
+        active_workspace   #d2d8cf #3d3d3d #fafbf8
+        inactive_workspace #3d3d3d #3d3d3d #fafbf8
+        binding_mode       #16a085 #2C2C2C #F9FAF9
+        urgent_workspace   #f68080 #e165cb #eacd84
+    }
 }
 
 bindsym $mod+b bar mode toggle
 
 # Theme colors
-# class                 border  backgr. text    indic.   child_border
+# class border    backgr. text indic.     child_border
 client.focused          #ADBFC5 #556064 #80FFF9 #FDF6E3
 client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
 client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948

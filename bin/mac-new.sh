@@ -109,7 +109,7 @@ defaults write com.apple.iTunes invertStoreLinks -bool true
 defaults write com.apple.dock no-bouncing -bool true
 # defaults write com.apple.Dock autohide -bool true
 defaults write com.apple.dock largesize -int 65
-defaults write com.apple.dock tilesize -int 14
+defaults write com.apple.dock tilesize -int 25
 # Minimize windows into their application’s icon
 defaults write com.apple.dock minimize-to-application -bool true
 # Remove the auto-hiding Dock delay
@@ -155,14 +155,13 @@ sudo softwareupdate -i -a
 
 # Install Docker from website
 # Install FL Studio
+# Install Izotope product portal
 # Install Hack font (for Terminal)
 # Install all of Google's Noto fonts (for more language support)
 # Import misc/profile.terminal to Terminal.app
 # Install mupdf from https://mupdf.com/downloads/ (the brew version is broken)
-# Install Rectangle and configure to start on login:
-# https://github.com/rxhanson/Rectangle
 
-# Install Dropbox and sync; dotfiles are at $HOME/Dropbox/z
+# First get the repo
 z_path=$HOME/Dropbox/z
 list_path=$z_path/misc
 
@@ -179,29 +178,29 @@ rm -f "$HOME/.bash_logout"
 
 # $HOME symlinks
 home_links=(
-  .agignore
-  .bash
-  .bash_logout
-  .bash_profile
-  .bash_sessions_disable
-  .bashrc
-  .ctags
-  .dircolors
-  .editorconfig
-  .g
-  .gitconfig
-  .gitignore_global
-  .hushlogin
-  .inputrc
-  .profile
-  .tmux.conf
-  .vim
-  .vimrc
-  bin
+    .agignore
+    .bash
+    .bash_logout
+    .bash_profile
+    .bash_sessions_disable
+    .bashrc
+    .ctags
+    .dircolors
+    .editorconfig
+    .g
+    .gitconfig
+    .gitignore_global
+    .hushlogin
+    .inputrc
+    .profile
+    .tmux.conf
+    .vim
+    .vimrc
+    bin
 )
 
 for l in "${home_links[@]}"; do
-  ln -s "$z_path/$l" "$HOME/"
+    ln -s "$z_path/$l" "$HOME/"
 done
 
 # Docker: don't link, because auth. docker login later.
@@ -222,13 +221,11 @@ ln -s "$z_path/.cargo/config" "$HOME/.cargo/"
 conf_path=$HOME/.config
 zconf_path=$z_path/.config
 mkdir -p "$conf_path/ranger"
-mkdir -p "$conf_path/neofetch"
 ln -s "$zconf_path/ranger/rc.conf" "$conf_path/ranger/"
 ln -s "$zconf_path/ranger/rifle.conf" "$conf_path/ranger/"
 ln -s "$zconf_path/ranger/scope.sh" "$conf_path/ranger/"
 ln -s "$zconf_path/ninit" "$conf_path/"
 ln -s "$zconf_path/startup.py" "$conf_path/"
-ln -s "$zconf_path/neofetch/config.conf" "$conf_path/neofetch/"
 
 # Node and packages
 # Copy rather than link because of auth. npm login later.
@@ -239,10 +236,6 @@ n prune
 cat "$list_path/npm.list" | xargs npm i -g
 # Fix path since Macs don't use /home
 gsed -i 's#/home#/Users#' "$HOME/.npmrc"
-
-# Golang REPL
-go get -u github.com/motemen/gore/cmd/gore
-go get -u github.com/mdempsky/gocode
 
 # Python packages
 cat "$list_path/pip3.list" | xargs pip3 install -U
@@ -257,7 +250,26 @@ chmod a+rx /usr/local/bin/youtube-dl
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +PlugInstall +qa
-vim +GoInstallBinaries +qa
 
 echo '/usr/local/bin/bash' >> /etc/shells
 chsh -s /usr/local/bin/bash
+
+# Sets an init script to give me another control key
+mkdir -p ~/Library/LaunchAgents
+cat<<EOF >~/Library/LaunchAgents/userkeymapping.plist
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>userkeymapping</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>$HOME/bin/mac-right-opt-to-ctrl.sh</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+</dict>
+</plist>
+EOF
+launchctl load ~/Library/LaunchAgents/userkeymapping.plist

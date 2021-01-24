@@ -1,7 +1,6 @@
 Jinja2
 PyYAML
 autopep8
-awscli
 black
 bpython
 feedgen

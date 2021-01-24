@@ -2,9 +2,9 @@
 set -e
 
 gs \
-  -q \
-  -dNOPAUSE \
-  -dBATCH \
-  -sDEVICE=pdfwrite \
-  -sOutputFile=merged.pdf \
-  "$@"
+    -q \
+    -dNOPAUSE \
+    -dBATCH \
+    -sDEVICE=pdfwrite \
+    -sOutputFile=merged.pdf \
+    "$@"

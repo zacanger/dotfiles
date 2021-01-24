@@ -4,5 +4,5 @@
 # usage: permnums file-to-check
 
 permnums() {
-  stat -c %a "$1"
+    stat -c %a "$1"
 }

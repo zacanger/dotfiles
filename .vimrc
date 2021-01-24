@@ -3,36 +3,37 @@
 call plug#begin('~/.local/share/vim/plugged')
 
 if has('vim_starting')
-  set nocompatible " Be iMproved
+    set nocompatible " Be iMproved
 endif
 
-Plug 'vim-jp/vital.vim'                " deps
-Plug 'vim-scripts/SyntaxRange'         " deps
-Plug 'vim-scripts/ingo-library'        " deps
-Plug 'FooSoft/vim-argwrap'             " wrap items in blocks/lists
-Plug 'airblade/vim-rooter'             " set path to project root
-Plug 'ajh17/VimCompletesMe'            " tab completion helpers, also see 'ervandew/supertab'
-Plug 'bling/vim-airline'               " better statusline
-Plug 'bounceme/poppy.vim'              " simple highlight/rainbow parens plugin
-Plug 'bronson/vim-trailing-whitespace' " highlight trailing whitespace
-Plug 'jiangmiao/auto-pairs'            " auto-complete pairs of things
-Plug 'junegunn/seoul256.vim'           " colo
-Plug 'junegunn/vim-easy-align'         " align stuff on a symbol (like the comments in this block)
-Plug 'junegunn/vim-peekaboo'           " see registers easily
-Plug 'junegunn/vim-slash'              " better buffer search
-Plug 'mhinz/vim-signify'               " vcs markers in gutter, also see 'airblade/vim-gitgutter'
-Plug 'moll/vim-node'                   " enchance vim for node (for example, better gf)
-Plug 'scrooloose/nerdcommenter'        " there are so many commenter plugins, but this one just works
-Plug 'sgur/vim-editorconfig'           " support editorconfig
-Plug 'sheerun/vim-polyglot'            " language support
-Plug 'tpope/vim-surround'              " surround things with other things
-Plug 'vim-scripts/paredit.vim'         " balance parens
-Plug 'vim-scripts/syntaxcomplete'      " super simple syn completion
-Plug 'vim-utils/vim-husk'              " bash emacs-mode mappings in command mode
-Plug 'vim-utils/vim-troll-stopper'     " highlight unicode chars that look like ascii chars
-Plug 'dense-analysis/ale'              " linting
-Plug 'fatih/vim-go'                    " go support
-Plug 'rust-lang/rust.vim'              " rust support
+Plug 'vim-jp/vital.vim'                   " deps
+Plug 'vim-scripts/SyntaxRange'            " deps
+Plug 'vim-scripts/ingo-library'           " deps
+Plug 'FooSoft/vim-argwrap'                " wrap items in blocks/lists
+Plug 'airblade/vim-rooter'                " set path to project root
+Plug 'ajh17/VimCompletesMe'               " tab completion helpers, also see 'ervandew/supertab'
+Plug 'bling/vim-airline'                  " better statusline
+Plug 'bounceme/poppy.vim'                 " simple highlight/rainbow parens plugin
+Plug 'bronson/vim-trailing-whitespace'    " highlight trailing whitespace
+Plug 'jiangmiao/auto-pairs'               " auto-complete pairs of things
+Plug 'junegunn/seoul256.vim'              " colo
+Plug 'junegunn/vim-easy-align'            " align stuff on a symbol (like the comments in this block)
+Plug 'junegunn/vim-peekaboo'              " see registers easily
+Plug 'junegunn/vim-slash'                 " better buffer search
+Plug 'mhinz/vim-signify'                  " vcs markers in gutter, also see 'airblade/vim-gitgutter'
+Plug 'moll/vim-node'                      " enchance vim for node (for example, better gf)
+Plug 'scrooloose/nerdcommenter'           " there are so many commenter plugins, but this one just works
+Plug 'sgur/vim-editorconfig'              " support editorconfig
+Plug 'sheerun/vim-polyglot'               " language support
+Plug 'tpope/vim-surround'                 " surround things with other things
+Plug 'vim-scripts/paredit.vim'            " balance parens
+Plug 'vim-scripts/syntaxcomplete'         " super simple syn completion
+Plug 'vim-utils/vim-husk'                 " bash emacs-mode mappings in command mode
+Plug 'vim-utils/vim-troll-stopper'        " highlight unicode chars that look like ascii chars
+Plug 'dense-analysis/ale'                 " linting
+Plug 'rust-lang/rust.vim'                 " rust support
+Plug 'tmux-plugins/vim-tmux-focus-events' " fix focus events from tmux
+Plug 'blueyed/vim-diminactive'            " dim inactive windows, works with the tmux fix
 
 call plug#end()
 
@@ -67,21 +68,21 @@ set incsearch
 set ignorecase
 set smartcase
 highlight clear Search
-highlight       Search    ctermfg=White
+highlight Search ctermfg=White
 " Clean search (highlight)
 nnoremap <silent> <leader>/ :noh<cr>
 " blink the line containing the match
 fu! HLNext (blinktime)
-  set invcursorline
-  redraw
-  exec 'sleep ' . float2nr(a:blinktime * 250) . 'm'
-  set invcursorline
-  redraw
+    set invcursorline
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 250) . 'm'
+    set invcursorline
+    redraw
 endfu
 " highlight matches when jumping to next
 " This rewires n and N to do the highlighing...
-nnoremap <silent> n   n:call HLNext(0.4)<cr>
-nnoremap <silent> N   N:call HLNext(0.4)<cr>
+nnoremap <silent> n n:call HLNext(0.4)<cr>
+nnoremap <silent> N N:call HLNext(0.4)<cr>
 
 " Encoding
 set bomb
@@ -109,7 +110,7 @@ set guioptions=egmrti
 set gfn=Monospace\ 10
 
 if &term =~ '256color'
-  set t_ut=256
+    set t_ut=256
 endif
 
 " Disable the blinking cursor.
@@ -118,8 +119,8 @@ set scrolloff=3
 
 " Map cursor for insert mode
 if &term =~ "xterm\\|rxvt"
-  let &t_SI .= "\<Esc>[5 q"
-  let &t_EI .= "\<Esc>[0 q"
+    let &t_SI .= "\<Esc>[5 q"
+    let &t_EI .= "\<Esc>[0 q"
 endif
 
 " Status bar
@@ -142,38 +143,38 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 
 if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
+    let g:airline_symbols = {}
 endif
 
 if !exists('g:airline_powerline_fonts')
-  let g:airline#extensions#tabline#left_sep = ' '
-  let g:airline#extensions#tabline#left_alt_sep = '|'
-  let g:airline_left_sep          = '▶'
-  let g:airline_left_alt_sep      = '»'
-  let g:airline_right_sep         = '◀'
-  let g:airline_right_alt_sep     = '«'
-  let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
-  let g:airline#extensions#readonly#symbol   = '⊘'
-  let g:airline#extensions#linecolumn#prefix = '¶'
-  let g:airline#extensions#paste#symbol      = 'ρ'
-  let g:airline_symbols.linenr    = '␊'
-  let g:airline_symbols.branch    = '⎇'
-  let g:airline_symbols.paste     = 'ρ'
-  let g:airline_symbols.paste     = 'Þ'
-  let g:airline_symbols.paste     = '∥'
-  let g:airline_symbols.whitespace = 'Ξ'
+    let g:airline#extensions#tabline#left_sep     = ' '
+    let g:airline#extensions#tabline#left_alt_sep = '|'
+    let g:airline_left_sep                        = '▶'
+    let g:airline_left_alt_sep                    = '»'
+    let g:airline_right_sep                       = '◀'
+    let g:airline_right_alt_sep                   = '«'
+    let g:airline#extensions#branch#prefix        = '⤴' "➔, ➥, ⎇
+    let g:airline#extensions#readonly#symbol      = '⊘'
+    let g:airline#extensions#linecolumn#prefix    = '¶'
+    let g:airline#extensions#paste#symbol         = 'ρ'
+    let g:airline_symbols.linenr                  = '␊'
+    let g:airline_symbols.branch                  = '⎇'
+    let g:airline_symbols.paste                   = 'ρ'
+    let g:airline_symbols.paste                   = 'Þ'
+    let g:airline_symbols.paste                   = '∥'
+    let g:airline_symbols.whitespace              = 'Ξ'
 else
-  let g:airline#extensions#tabline#left_sep = ''
-  let g:airline#extensions#tabline#left_alt_sep = ''
+    let g:airline#extensions#tabline#left_sep     = ''
+    let g:airline#extensions#tabline#left_alt_sep = ''
 
-  " powerline symbols
-  let g:airline_left_sep = ''
-  let g:airline_left_alt_sep = ''
-  let g:airline_right_sep = ''
-  let g:airline_right_alt_sep = ''
-  let g:airline_symbols.branch = ''
-  let g:airline_symbols.readonly = ''
-  let g:airline_symbols.linenr = ''
+    " powerline symbols
+    let g:airline_left_sep         = ''
+    let g:airline_left_alt_sep     = ''
+    let g:airline_right_sep        = ''
+    let g:airline_right_alt_sep    = ''
+    let g:airline_symbols.branch   = ''
+    let g:airline_symbols.readonly = ''
+    let g:airline_symbols.linenr   = ''
 endif
 
 " abbrs
@@ -212,37 +213,37 @@ set wildignore+=*.png,*.PNG,*.JPG,*.jpg,*.JPEG,*.jpeg,*.GIF,*.gif,*.pdf,*.PDF
 set wildignore+=vendor/**,coverage/**,tmp/**,rdoc/**,*.BACKUP.*,*.BASE.*,*.LOCAL.*,*.REMOTE.*,.sass-cache/**
 
 if !exists('*s:setupWrapping')
-  fu s:setupWrapping()
-    set wrap
-    set wm=2
-    set textwidth=79
-  endfu
+    fu s:setupWrapping()
+        set wrap
+        set wm=2
+        set textwidth=79
+    endfu
 endif
 
 "" aus
 " syntax highlight syncing from start
 augroup vimrc-sync-fromstart
-  autocmd!
-  autocmd BufEnter * :syntax sync fromstart
+    autocmd!
+    autocmd BufEnter * :syntax sync fromstart
 augroup END
 
 " Remember cursor position
 augroup vimrc-remember-cursor-position
-  autocmd!
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+    autocmd!
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
 " txt
 augroup vimrc-wrapping
-  autocmd!
-  autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
+    autocmd!
+    autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
 augroup END
 
 " make/cmake
 augroup vimrc-make-cmake
-  autocmd!
-  autocmd FileType make setlocal noexpandtab
-  autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
+    autocmd!
+    autocmd FileType make setlocal noexpandtab
+    autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
 augroup END
 
 au BufRead,BufNewFile *.md setlocal textwidth=80
@@ -257,6 +258,9 @@ nnoremap < <<
 
 " select most recently edited text
 nnoremap vp `[v`]
+
+" gq: format, ip: in paragraph. i do this a lot, so leader-q is nice.
+noremap <Leader>q gqip
 
 " split
 noremap <Leader>h :<C-u>split<CR>
@@ -288,8 +292,8 @@ vnoremap K :m '<-2<CR>gv=gv
 
 " vim-python
 augroup vimrc-python
-  autocmd!
-  autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8
+    autocmd!
+    autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4
         \ formatoptions+=croq softtabstop=4 smartindent
         \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
@@ -298,15 +302,15 @@ augroup END
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_linters = {
-      \ 'rust': ['cargo'],
-      \ 'javascript': ['eslint'],
-      \ 'typescript': ['eslint'],
-      \ 'jsx': ['eslint'],
-      \ 'python': ['pycodestyle']
-      \}
+        \ 'rust': ['cargo'],
+        \ 'javascript': ['eslint'],
+        \ 'typescript': ['eslint'],
+        \ 'jsx': ['eslint'],
+        \ 'python': ['pycodestyle']
+        \}
 let b:ale_javascript_eslint_options = "--rule 'prettier/prettier: 0'"
 let g:ale_fixers = {
-\   'python': ['black'],
+\     'python': ['black'],
 \}
 
 " vim-airline
@@ -353,7 +357,7 @@ let g:csstoinline_wrap_pixels = 1
 
 " match % on more stuff
 if !exists('g:loaded_matchit')
-  runtime macros/matchit.vim
+    runtime macros/matchit.vim
 endif
 
 " better ctrl-l
@@ -390,7 +394,7 @@ let g:parinfer_mode="off"
 map <silent> <F8> /^\(<\{7\}\\|>\{7\}\\|=\{7\}\\|\|\{7\}\)\( \\|$\)<cr>
 
 if has('mouse')
-  set mouse=a
+    set mouse=a
 endif
 
 " pixie
@@ -410,17 +414,14 @@ au BufNewFile,BufRead *.jenkinsfile set ft=jenkinsfile
 au BufNewFile,BufRead .babelrc set ft=json
 
 " highlight the 121st column of wide lines
-highlight ColorColumn ctermbg=magenta
+hi ColorColumn ctermbg=235
 call matchadd('ColorColumn', '\%121v', 100)
-
-" see betterdigraphs.vim
-inoremap <expr>  <C-K>   BDG_GetDigraph()
 
 " syntaxcomplete
 if has("autocmd") && exists("+omnifunc")
-  autocmd Filetype *
+    autocmd Filetype *
         \ if &omnifunc == "" |
-        \   setlocal omnifunc=syntaxcomplete#Complete |
+        \     setlocal omnifunc=syntaxcomplete#Complete |
         \ endif
 endif
 
@@ -437,9 +438,6 @@ let g:argwrap_padded_braces = '[{'
 let g:argwrap_tail_comma_braces = '[{'
 nnoremap <silent> <leader>a :ArgWrap<CR>
 
-" jest snapshot files
-au BufRead,BufNewFile *.js.snap set ft=javascript
-
 " match angle brackest
 set matchpairs+=<:>
 
@@ -451,7 +449,7 @@ vnoremap <silent> & :<C-U>&&<CR>
 set lazyredraw
 
 if has('virtualedit')
-  set virtualedit+=block
+    set virtualedit+=block
 endif
 
 set nojoinspaces
@@ -472,12 +470,6 @@ let g:extra_whitespace_ignored_filetypes = ['go', 'md']
 " poppy
 au! cursormoved * call PoppyInit()
 
-" ignore vim-go warning on old versions
-let g:go_version_warning = 0
-
-" fix imports + format on save
-let g:go_fmt_command = "goimports"
-
 " use {{{ }}}
 set foldmethod=marker
 
@@ -491,34 +483,10 @@ let g:ale_rust_cargo_use_check = 1
 
 let g:AutoPairsShortcutToggle = ''
 
-" URL encode/decode visual selection
-vnoremap <leader>en :!python -c 'import sys,urllib;print urllib.quote(sys.stdin.read().strip())'<cr>
-vnoremap <leader>de :!python -c 'import sys,urllib;print urllib.unquote(sys.stdin.read().strip())'<cr>
-
 " Silence the cd echo
 let g:rooter_silent_chdir = 1
 
-function! IsWSL()
-  if has("linux")
-    let lines = readfile("/proc/version")
-    if lines[0] =~ "microsoft"
-      return 1
-    endif
-  endif
-  return 0
-endfunction
-
-if IsWSL()
-  map <silent> "=p :r !powershell.exe -Command Get-Clipboard<CR>
-  map! <silent> <C-r>= :r !powershell.exe -Command Get-Clipboard<CR>
-
-  " I thought this will be better :)
-  noremap "+p :exe 'norm a'.system('/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard')<CR>
-  let s:clip = '/mnt/c/Windows/System32/clip.exe'
-  if executable(s:clip)
-    augroup WSLYank
-      autocmd!
-      autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
-    augroup END
-  end
-end
+" dimming settings
+let g:diminactive_enable_focus = 1
+let g:diminactive_use_colorcolumn = 1
+let g:diminactive_use_syntax = 1
