@@ -25,7 +25,6 @@ fi
 _sourceif "$HOME/.bash/prompt.sh"
 
 # completions
-# pacman -S bash-completion or apt-get install bash-completion
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
 
 if [ -d "$HOME/.bash/completion" ]; then

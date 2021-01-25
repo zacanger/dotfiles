@@ -187,7 +187,6 @@ home_links=(
     .ctags
     .dircolors
     .editorconfig
-    .g
     .gitconfig
     .gitignore_global
     .hushlogin
@@ -203,15 +202,15 @@ for l in "${home_links[@]}"; do
     ln -s "$z_path/$l" "$HOME/"
 done
 
+mkdir "$HOME/.g"
+
 # Docker: don't link, because auth. docker login later.
 mkdir -p "$HOME/.docker"
 cp "$z_path/.docker/config.json" "$HOME/.docker/"
 
-# GPG, don't link because keys.
+# GPG, don't link whole dir because of keys
 mkdir -p "$HOME/.gnupg"
-cp "$z_path/.gnupg/gpg-agent.conf" "$HOME/.gnupg/"
-# Different path on Macs
-gsed -i 's#usr/bin#usr/local/bin#' "$HOME/.gnupg/gpg-agent.conf"
+ln -s "$z_path/.gnupg/gpg-agent.conf" "$HOME/.gnupg/"
 
 # Rust
 mkdir -p "$HOME/.cargo"
