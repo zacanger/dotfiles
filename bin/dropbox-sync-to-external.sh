@@ -14,4 +14,6 @@ fi
 vol=$vol_root/$(ls "$vol_root" | fuzzy.py)
 
 rsync -a -L --inplace "$HOME/Dropbox/" "$vol/backup/" --delete --info=progress2
+
+date > "$vol/backup/sync-timestamp.txt"
 sync

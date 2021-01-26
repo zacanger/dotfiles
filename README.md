@@ -27,3 +27,5 @@ symlinked or copied over.
 * I mostly work with configs, shell scripts, and some Python and Node, so my
     setup is oriented towards quick navigation and editing.
 * Unless otherwise noted, everything here is under the LGPL-3.0 license.
+* I previously mostly used Ubuntu; the commit removing Linux configs is
+    [here](1fd1d6ad117db2a77025c56675149db6d47c8428).

@@ -1,9 +1,8 @@
 # shellcheck shell=bash
 
-# safety, etc.
-# gh:sindresorhus/trash,empty-trash
-alias rm='trash'
-alias erm='empty-trash'
+# safety
+alias rm='trash.sh'
+alias erm='trash.sh -e'
 alias mv='mv -iv'
 alias cp='cp -iv'
 alias ln='ln -i'

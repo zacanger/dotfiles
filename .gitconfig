@@ -12,6 +12,7 @@
     ui = 1
 [alias]
     b = log -p -M --follow --stat --
+    fixup = "!f() { TARGET=$(git rev-parse "$1"); git commit --fixup=$TARGET ${@:2} && EDITOR=true git rebase -i --autostash --autosquash $TARGET^; }; f"
     ac = !git add -A && git commit
     g = log --color --graph --pretty=format:'%Cgreen[%Creset%h%Cgreen]%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     st = status -sb
@@ -27,6 +28,7 @@
     graph = log --color --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%n%Cgreen(%cr)%Creset by %C(bold blue)<%an>%Creset%Cred %GK%n'
     all = "!find . -type d -name .git -prune -execdir pwd ';' -execdir git $@ ';' #"
     gcpa = gc --prune --aggressive
+    authors = "!git ls-files | xargs -n1 git blame --line-porcelain | sed -n 's/^author //p' | sort -f | uniq -ic | sort -nr"
 [help]
     autocorrect = 10
 [commit]

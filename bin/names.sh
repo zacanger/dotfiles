@@ -16,6 +16,7 @@ find "$1" -depth -name '*' | while read file; do
         | tr ',' '_' \
         | tr '[' '-' \
         | tr ']' '-' \
+        | tr '\`' '-' \
         | tr "'" '-' \
         | tr '"' '-' \
         | tr ' ' '_' \

@@ -1,36 +1,43 @@
 #!/usr/bin/env bash
 
+# Your terminal program will need full disk access
+# for this to really work.
+
 sudo -v
 
-brew cleanup --prune=all
+del_paths=(
+    "$HOME/.Trash/*"
+    "$HOME/.cache/youtube-dl/*"
+    "$HOME/.local/share/ranger/*"
+    "$HOME/.viminfo"
+    "$HOME/.z-trash/*"
+    "$HOME/Library/Caches/*"
+    /Library/Caches/*
+    /Library/Logs/DiagnosticReports/*
+    /System/Library/Caches/*
+    /cores/core.*
+    /private/var/log/asl/*.asl
+    /var/spool/cups/c0*
+    /var/spool/cups/cache/job.cache*
+    /var/spool/cups/tmp/*
+)
+for p in "${del_paths[@]}"; do
+    sudo rm -rfv "$p"
+done
+
+gfind "$HOME" -name '.DS_Store' -type f -delete
+gfind "$HOME" -maxdepth 1 -name '*hist*' -delete
+gfind "$HOME" -maxdepth 1 -name '*hst' -delete
 
 sqlite3 \
     ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* \
     'delete from LSQuarantineEvent'
 
+brew cleanup --prune=all
 gem cleanup
-
-docker system prune -af
-docker-clean.sh
-
+docker-clear.sh
 npm cache clear -f
-
 clear-dns-cache.sh
 
-sudo rm -rfv /private/var/log/asl/*.asl
-sudo rm -rfv /Library/Logs/DiagnosticReports/*
-sudo rm -rfv ~/.Trash/*
-sudo rm -rfv /Library/Caches/*
-sudo rm -rfv /System/Library/Caches/*
-sudo rm -rfv ~/Library/Caches/*
-sudo rm -rfv /cores/core.*
-
-gfind "$HOME" -name '.DS_Store' -type f -delete
-
-gfind "$HOME" -maxdepth 1 -name '*hist*' -delete
-gfind "$HOME" -maxdepth 1 -name '*hst' -delete
-rm "$HOME/.viminfo"
-
 sudo purge
-
 sync

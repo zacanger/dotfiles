@@ -13,6 +13,9 @@ names.sh .
 find . -type f -name 'k2nblog*.url' -exec rm {} +
 find . -type f -name 'kpopstan*.url' -exec rm {} +
 find . -type f -name 'thumbs.db' -exec rm {} +
+find . -type f -name '*.jpg' -exec rm {} +
+find . -type f -name '*.png' -exec rm {} +
+find . -type f -name '*.gif' -exec rm {} +
 
 for f in *; do
     new_name=$(echo "$f" \

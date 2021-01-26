@@ -1,13 +1,9 @@
 cloc
 editorconfig
-empty-trash-cli
 ghwd
 git-all-branches
-http-codes-cli
-luvi
 node-gyp
 npm-check-updates
 shellcheck
 sortpack
-teenypng
-trash-cli
+svgo
