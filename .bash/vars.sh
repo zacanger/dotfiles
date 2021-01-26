@@ -15,5 +15,10 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 
 if [[ $(uname) == 'Darwin' ]]; then
     export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
+    export MANPATH=/opt/homebrew/share/man:$MANPATH
+    export MANPATH=/opt/homebrew/opt/coreutils/libexec/gnuman:$MANPATH
     ulimit -n 10240
+    export HOMEBREW_NO_ANALYTICS=1
+    export HOMEBREW_NO_INSECURE_REDIRECT=1
+    export HOMEBREW_CASK_OPTS='--require-sha'
 fi

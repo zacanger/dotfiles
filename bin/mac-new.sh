@@ -2,6 +2,38 @@
 
 ## Change macos settings
 
+# Disable remote management service
+sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -deactivate -stop
+
+# Remove remote desktop settings
+sudo rm -rf /var/db/RemoteManagement
+sudo defaults delete /Library/Preferences/com.apple.RemoteDesktop.plist
+defaults delete ~/Library/Preferences/com.apple.RemoteDesktop.plist
+sudo rm -r /Library/Application\ Support/Apple/Remote\ Desktop/
+rm -r ~/Library/Application\ Support/Remote\ Desktop/
+rm -r ~/Library/Containers/com.apple.RemoteDesktop
+
+# Disable spell correction
+defaults write NSGlobalDomain WebAutomaticSpellingCorrectionEnabled -bool false
+
+# Disable remote Apple events
+sudo systemsetup -setremoteappleevents off
+
+# Don't put documents in iCloud
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+# Hide stuff on desktop
+defaults write com.apple.finder CreateDesktop -bool False
+
+# Disable captive portals
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.control.plist Active -bool false
+
+# Hide recent dock items
+defaults write com.apple.dock show-recents -bool false
+
+# Turn off airdrop
+defaults write com.apple.NetworkBrowser DisableAirDrop -bool true
+
 # Turn on key repeats, since by default Macs show some weird little character-picker
 # dialog when you hold a key
 defaults write -g ApplePressAndHoldEnabled -bool false
@@ -151,6 +183,29 @@ pkill -9 Dock
 # Update the Mac
 sudo softwareupdate -i -a
 
+# Install Rosetta
+softwareupdate --install-rosetta
+
+# Turn on Filevault
+sudo fdsetup enable
+
+# Disable language data collection (spelling)
+sudo rm -rfv "$HOME/Library/LanguageModeling/*" "$HOME/Library/Spelling/*" "$HOME/Library/Suggestions/*"
+sudo chmod -R 000 ~/Library/LanguageModeling ~/Library/Spelling ~/Library/Suggestions
+sudo chflags -R uchg ~/Library/LanguageModeling ~/Library/Spelling ~/Library/Suggestions
+
+# Same for Siri analytics
+sudo rm -rfv ~/Library/Assistant/SiriAnalytics.db
+touch ~/Library/Assistant/SiriAnalytics.db
+sudo chmod -R 000 ~/Library/Assistant/SiriAnalytics.db
+sudo chflags -R uchg ~/Library/Assistant/SiriAnalytics.db
+
+# Disable crash reporter: apple doesn't need to know when my programs crash
+defaults write com.apple.CrashReporter DialogType none
+
+# Disable Bonjour
+sudo defaults write /Library/Preferences/com.apple.mDNSResponder.plist NoMulticastAdvertisements -bool YES
+
 ## Now that that's done we can install and configure what we need
 
 # Install Docker from website
@@ -158,8 +213,8 @@ sudo softwareupdate -i -a
 # Install Izotope product portal
 # Install Hack font (for Terminal)
 # Install all of Google's Noto fonts (for more language support)
+# Install mupdf from https://www.mupdf.com/downloads/index.html (brew version is broken)
 # Import misc/profile.terminal to Terminal.app
-# Install mupdf from https://mupdf.com/downloads/ (the brew version is broken)
 
 # First get the repo
 z_path=$HOME/Dropbox/z
@@ -168,7 +223,7 @@ list_path=$z_path/misc
 # Install Homebrew (also installs command-line tools from Xcode),
 # then brew packages.
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew bundle --file="$list_path/"
+brew bundle --file="$list_path/Brewfile"
 
 # We don't want the defaults.
 rm -f "$HOME/.profile"
@@ -202,7 +257,15 @@ for l in "${home_links[@]}"; do
     ln -s "$z_path/$l" "$HOME/"
 done
 
+# Used by the bash functions in g.sh, a directory bookmarking system
 mkdir "$HOME/.g"
+
+# Link currently-active repos for easy access
+ln -s "$HOME/Dropbox/work/repos/3-active" "$HOME/repos"
+
+# mpv, don't link whole dir because of watch_later
+mkdir -p "$HOME/.mpv"
+ln -s "$z_path/.mpv/input.conf" "$HOME/.mpv/"
 
 # Docker: don't link, because auth. docker login later.
 mkdir -p "$HOME/.docker"
@@ -226,32 +289,30 @@ ln -s "$zconf_path/ranger/scope.sh" "$conf_path/ranger/"
 ln -s "$zconf_path/ninit" "$conf_path/"
 ln -s "$zconf_path/startup.py" "$conf_path/"
 
-# Node and packages
-# Copy rather than link because of auth. npm login later.
+# npm stuff; copy rather than link because of auth. npm login later.
 cp "$z_path/.npmrc" "$HOME/"
-curl -sL https://git.io/n-install | bash -s -- -n
-n latest
-n prune
-cat "$list_path/npm.list" | xargs npm i -g
 # Fix path since Macs don't use /home
 gsed -i 's#/home#/Users#' "$HOME/.npmrc"
+cat "$list_path/npm.list" | xargs npm i -g
 
 # Python packages
 cat "$list_path/pip3.list" | xargs pip3 install -U
 # Because Macs still have Python 2 as the default
-ln -s /usr/local/bin/python3 /usr/local/bin/python
-
-# Install youtube-dl
-curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
-chmod a+rx /usr/local/bin/youtube-dl
+# On Intel Macs this is at /usr/local/bin
+ln -s /opt/homebrew/bin/python3 /opt/homebrew/bin/python
 
 # Vim
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +PlugInstall +qa
+vim +GoInstallBinaries +qa
 
-echo '/usr/local/bin/bash' >> /etc/shells
-chsh -s /usr/local/bin/bash
+# Useful for offline doc browsing
+go get golang.org/x/tools/cmd/godoc
+
+# On Intel Macs, this should be /usr/local/bin
+echo '/opt/homebrew/bin/bash' >> /etc/shells
+chsh -s /opt/homebrew/bin/bash
 
 # Sets an init script to give me another control key
 mkdir -p ~/Library/LaunchAgents

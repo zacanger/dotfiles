@@ -2,7 +2,6 @@
 
 # this requires sox, and is for DADGAD. change to E2-E4 (etc) for standard.
 alias tuner='for n in D2 A2 D3 G3 A3 D4;do play -n synth 4 pluck $n repeat 3;done'
-alias py='bpython'
 alias q='exit'
 alias ag='ag --path-to-ignore ~/.agignore'
 alias c='clear'
@@ -14,21 +13,13 @@ alias less='less -m -N -g -i -J --line-numbers --underline-special'
 alias md='mkdir -p -v'
 alias names='names.sh'
 alias sw='time cat'
-alias vn='viewnior'
 alias yt2mp3='youtube-dl --extract-audio --audio-format mp3'
 alias ytpls='youtube-dl --extract-audio --audio-format mp3 -o "%(playlist_index)s-%(title)s.%(ext)s"'
-alias shrug='echo "¯\_(ツ)_/¯" | co'
-alias am='alsamixer'
-alias alltlds="curl -s http://data.iana.org/TLD/tlds-alpha-by-domain.txt | sed -e 1d -e 's/\(.*\)/\L\1/'"
 alias ur='unrar x -kb'
 alias cerm='c ; erm'
-alias fx='find . -maxdepth 2 -type d -name x'
 alias fnm='find . -type d -name node_modules'
-alias acd='a ; cd'
-alias findlonglines="grep '.\{120\}' -r"
+alias findlonglines="grep '.\{80\}' -r"
 alias no='yes n'
-alias cla='clc ; cerm'
+alias cla='clc; cerm; tmux clearhist'
 alias cpr='cp -R'
 alias tn='tmux new'
-alias lv='luvi -m -n'
-alias curlretry='curl -g -L -C - --retry 20 --retry-connrefused'

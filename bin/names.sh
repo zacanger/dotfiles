@@ -2,29 +2,58 @@
 set -e
 
 if [ -z "$1" ]; then
-    echo 'names: convert filenames to lowercase and replace characters, recursively'
-    echo 'usage: names path/to/directory'
+    echo 'names: make file and directory names command-friendly, recursively'
+    echo 'usage: names.sh path/to/directory'
     exit 0
 fi
 
-find "$1" -depth -name '*' | while read file; do
+if hash gfind 2>/dev/null; then
+    _find=$(which gfind)
+else
+    _find=$(which find)
+fi
+
+if hash gsed 2>/dev/null; then
+    _sed=$(which gsed)
+else
+    _sed=$(which sed)
+fi
+
+if hash gtr 2>/dev/null; then
+    _tr=$(which gtr)
+else
+    _tr=$(which tr)
+fi
+
+"$_find" "$1" -depth -name '*' | while read -r file; do
     directory=$(dirname "$file")
     oldfilename=$(basename "$file")
-    # tr -d '[{}(),\!]' | tr -d "\'"
-    newfilename=$(echo "$oldfilename" \
-        | tr 'A-Z' 'a-z' \
-        | tr ',' '_' \
-        | tr '[' '-' \
-        | tr ']' '-' \
-        | tr "'" '-' \
-        | tr '"' '-' \
-        | tr ' ' '_' \
-        | tr '(' '-' \
-        | tr ')' '-' \
-        | sed 's/_-_/-/g')
+    # shellcheck disable=1112
+    newfilename_mostly=$(echo "$oldfilename" \
+        | "$_tr" 'A-Z' 'a-z' \
+        | "$_tr" ',' '_' \
+        | "$_tr" '[' '-' \
+        | "$_tr" ']' '-' \
+        | "$_tr" '\`' '-' \
+        | "$_tr" "'" '-' \
+        | "$_tr" '"' '-' \
+        | "$_tr" ' ' '_' \
+        | "$_tr" '(' '-' \
+        | "$_tr" ')' '-' \
+        | "$_tr" '!' '-' \
+        | "$_tr" ':' '-' \
+        | "$_sed" 's/&/and/g' \
+        | "$_sed" 's/[‘’｜﹂﹁「」“„『』【】]/__/g' \
+        | "$_sed" 's/_-_/-/g')
+
+    # TODO: this isn't working
+    # trying to remove any leading _ or - chars
+    # newfilename="${newfilename_mostly//^[-_]/}"
+    newfilename="$newfilename_mostly"
 
     if [ "$oldfilename" != "$newfilename" ]; then
         mv -i "$directory/$oldfilename" "$directory/$newfilename"
+        # shellcheck disable=SC2086
         echo ""$directory/$oldfilename" -> "$directory/$newfilename""
     fi
 done

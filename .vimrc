@@ -18,6 +18,7 @@ Plug 'bronson/vim-trailing-whitespace'    " highlight trailing whitespace
 Plug 'jiangmiao/auto-pairs'               " auto-complete pairs of things
 Plug 'junegunn/seoul256.vim'              " colo
 Plug 'junegunn/vim-easy-align'            " align stuff on a symbol (like the comments in this block)
+Plug 'fatih/vim-go'                       " go support
 Plug 'junegunn/vim-peekaboo'              " see registers easily
 Plug 'junegunn/vim-slash'                 " better buffer search
 Plug 'mhinz/vim-signify'                  " vcs markers in gutter, also see 'airblade/vim-gitgutter'
@@ -35,6 +36,9 @@ Plug 'rust-lang/rust.vim'                 " rust support
 Plug 'tmux-plugins/vim-tmux-focus-events' " fix focus events from tmux
 Plug 'blueyed/vim-diminactive'            " dim inactive windows, works with the tmux fix
 
+Plug '$HOME/repos/cozy/editor/vim' " temporary while this project is a WIP
+
+
 call plug#end()
 
 "" Basic Setup
@@ -48,9 +52,9 @@ set fileencodings=utf-8
 set backspace=indent,eol,start
 
 " Tabs. May be overriten by autocmd rules
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 set expandtab
 set smartindent
 set smarttab
@@ -181,6 +185,7 @@ endif
 cnoreabbrev W! w!
 cnoreabbrev Q! q!
 cnoreabbrev Qa! qa!
+cnoreabbrev qa1 qa!
 cnoreabbrev Wq wq
 cnoreabbrev Wa wa
 cnoreabbrev WQ wq
@@ -215,7 +220,7 @@ set wildignore+=vendor/**,coverage/**,tmp/**,rdoc/**,*.BACKUP.*,*.BASE.*,*.LOCAL
 if !exists('*s:setupWrapping')
     fu s:setupWrapping()
         set wrap
-        set wm=2
+        set wm=4
         set textwidth=79
     endfu
 endif
@@ -350,7 +355,7 @@ nnoremap Y y$
 
 " vim-markdown (from polyglot)
 let g:vim_markdown_conceal = 0
-let g:vim_markdown_new_list_item_indent = 2
+let g:vim_markdown_new_list_item_indent = 4
 let g:vim_markdown_folding_disabled = 1
 
 let g:csstoinline_wrap_pixels = 1
@@ -490,3 +495,6 @@ let g:rooter_silent_chdir = 1
 let g:diminactive_enable_focus = 1
 let g:diminactive_use_colorcolumn = 1
 let g:diminactive_use_syntax = 1
+
+" fix imports + format on save
+let g:go_fmt_command = "goimports"

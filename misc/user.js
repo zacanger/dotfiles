@@ -1,12 +1,31 @@
 // also see:
 // https://github.com/pyllyukko/user.js/blob/master/user.js
-// https://github.com/arkenfox/user.js
+// https://github.com/arkenfox/user.js/blob/master/user.js
 
+user_pref("browser.link.open_newwindow", 3);
+user_pref("browser.link.open_newwindow.restriction", 0);
+user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
+user_pref("browser.sessionstore.interval", 30000);
+user_pref("browser.startup.homepage_override.mstone", "ignore");
+user_pref("dom.disable_open_during_load", true);
+user_pref("dom.disable_window_move_resize", true);
 user_pref("dom.maxHardwareConcurrency", 2);
+user_pref("dom.popup_allowed_events", "click dblclick mousedown pointerdown");
 user_pref("extensions.webcompat-reporter.enabled", false);
+user_pref("general.warnOnAboutConfig", false);
+user_pref("media.eme.enabled", false);
 user_pref("network.http.referer.XOriginPolicy", 2);
 user_pref("pdfjs.enableScripting", false);
+user_pref("privacy.clearOnShutdown.cache", true);
+user_pref("privacy.clearOnShutdown.downloads", true);
+user_pref("privacy.clearOnShutdown.formdata", true);
+user_pref("privacy.clearOnShutdown.history", true);
+user_pref("privacy.clearOnShutdown.offlineApps", true);
+user_pref("privacy.clearOnShutdown.sessions", true);
+user_pref("privacy.clearOnShutdown.siteSettings", false);
+user_pref("privacy.sanitize.timeSpan", 0);
 user_pref("privacy.trackingprotection.socialtracking.enabled", true);
+user_pref("security.tls.version.enable-deprecated", false);
 user_pref('accessibility.typeaheadfind.enablesound', false);
 user_pref('app.normandy.api_url', '');
 user_pref('app.normandy.enabled', false);
@@ -53,6 +72,7 @@ user_pref('browser.sessionstore.max_tabs_undo', 10);
 user_pref('browser.sessionstore.warnOnQuit', true);
 user_pref('browser.startup.blankWindow', false);
 user_pref('browser.startup.homepage', 'about:blank');
+user_pref('browser.urlbar.filter.javascript', false);
 user_pref('browser.urlbar.searchSuggestionsChoice', false);
 user_pref('browser.urlbar.speculativeConnect.enabled', false);
 user_pref('browser.urlbar.suggest.searches', false);
@@ -71,16 +91,22 @@ user_pref('extensions.pocket.site', '');
 user_pref('extensions.shield-recipe-client.enabled', false);
 user_pref('extensions.systemAddon.update.enabled', false);
 user_pref('extensions.webextensions.restrictedDomains', '');
+user_pref('gecko.handlerService.schemes.mailto.0.name', '');
+user_pref('gecko.handlerService.schemes.mailto.0.uriTemplate', '');
+user_pref('gecko.handlerService.schemes.mailto.1.name', '');
+user_pref('gecko.handlerService.schemes.mailto.1.uriTemplate', '');
 user_pref('geo.enabled', false);
 user_pref('geo.wifi.uri', '');
 user_pref('javascript.options.wasm', false);
 user_pref('media.navigator.enabled', false);
 user_pref('media.peerconnection.enabled', false);
+user_pref('media.videocontrols.picture-in-picture.video-toggle.has-used', true);
 user_pref('network.IDN_show_punycode', true);
 user_pref('network.dns.disablePrefetch', true);
 user_pref('network.http.speculative-parallel-limit', 0);
 user_pref('network.predictor.enabled', false);
 user_pref('network.prefetch-next', false);
+user_pref('network.protocol-handler.external.mailto', false);
 user_pref('network.security.esni.enabled', true);
 user_pref('permissions.default.camera', 2);
 user_pref('permissions.default.desktop-notification', 2);

@@ -10,14 +10,14 @@ curl \
 # https://github.com/StevenBlack/hosts
 curl \
     -sSL \
-    https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling/hosts \
+    https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling-porn-social/hosts \
     > hosts2
 
 cat hosts1 hosts2 /etc/hosts \
     | sed -e '/^[ \t]*#/d' \
     | sort -u > hosts
 
-echo "127.0.0.1 $(hostname)" >> hosts
+echo "0.0.0.0 $(hostname)" >> hosts
 
 rm hosts1 hosts2
 sudo mv /etc/hosts /etc/hosts.bak
