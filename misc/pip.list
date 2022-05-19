@@ -6,5 +6,6 @@ bpython
 feedgen
 pip
 py-gfm
+pylint
 requests
 virtualenv
