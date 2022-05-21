@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
 
-# Based on https://github.com/sgtpep/pmenu (GPL 3.0, see license
-# in that repo). Modified to remove the cache, remove some options,
-# remove some keybinds, and generally just do less.
+"""
+Fuzzy finder.
+Based on https://github.com/sgtpep/pmenu (GPL 3.0, see license
+in that repo). Modified to remove the cache, remove some options,
+remove some keybinds, and generally just do less.
+"""
 
 import curses
 import curses.ascii
 import difflib
-import fileinput
 import io
-import math
 import os
 import re
-import shlex
 import shutil
 import signal
-import subprocess
 import sys
 
 args = sys.argv[1:]

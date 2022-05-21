@@ -7,14 +7,14 @@ from nested_lookup import nested_lookup  # pip install nested-lookup
 # helm template jenkins/jenkins | ./this-script.py
 # cat foo.yml | ./this-script.py
 
-template = ""
+TEMPLATE = ""
 
 for line in sys.stdin:
-    template += line
+    TEMPLATE += line
 
-parts = template.split('---')
+parts = TEMPLATE.split('---')
 for p in parts:
     y = yaml.safe_load(p)
     matches = nested_lookup("image", y)
-    if (len(matches)):
+    if len(matches):
         print("\n".join(matches))
