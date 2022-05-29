@@ -6,4 +6,5 @@ node-gyp
 npm-check-updates
 shellcheck
 sortpack
+standard
 svgo
