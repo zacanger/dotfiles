@@ -11,8 +11,6 @@ cp "$ND/.gitignore" .gitignore
 cp "$ND/.gitattributes" .gitattributes
 cp "$ND/LICENSE.md" LICENSE.md
 cp "$ND/.npmrc" .npmrc
-cp "$ND/.eslintrc.json" .eslintrc.json
-cp "$ND/.prettierrc.js" .prettierrc.js
 cp -R "$ND/.github" .github
 
 WITHOUTG="{
@@ -24,16 +22,16 @@ WITHOUTG="{
         \"email\": \"zac@zacanger.com\",
         \"url\": \"https://zacanger.com\"
     },
-    \"license\": \"LGPL-3.0\",
+    \"license\": \"MIT\",
     \"main\": \"index.js\",
     \"scripts\": {
         \"test\": \"npm run test:lint && npm run test:tape\",
         \"test:tape\": \"tape test.js\",
-        \"test:lint\": \"eslint\",
-        \"preversion\": \"npm t\"
+        \"test:lint\": \"standard\",
+        \"preversion\": \"npm t && sortpack\"
     },
     \"engines\": {
-        \"node\": \">=10.0.0\"
+        \"node\": \">=16.0.0\"
     },
     \"homepage\": \"https://github.com/zacanger/$DN#readme\",
     \"repository\": {
@@ -50,19 +48,6 @@ WITHOUTG="{
     \"funding\": {
         \"type\": \"ko-fi\",
         \"url\": \"https://ko-fi.com/zacanger\"
-    },
-    \"lint-staged\": {
-        \"*.js\": [
-            \"prettier --write\"
-        ],
-        \"package.json\": [
-            \"sortpack\"
-        ]
-    },
-    \"husky\": {
-        \"hooks\": {
-            \"pre-commit\": \"lint-staged\"
-        }
     }
 }"
 
@@ -75,16 +60,16 @@ WITHG="{
         \"email\": \"zac@zacanger.com\",
         \"url\": \"https://zacanger.com\"
     },
-    \"license\": \"LGPL-3.0\",
+    \"license\": \"MIT\",
     \"main\": \"index.js\",
     \"scripts\": {
         \"test\": \"npm run test:lint && npm run test:tape\",
         \"test:tape\": \"tape test.js\",
-        \"test:lint\": \"eslint\",
-        \"preversion\": \"npm t\"
+        \"test:lint\": \"standard\",
+        \"preversion\": \"npm t && sortpack\"
     },
     \"engines\": {
-        \"node\": \">=10.0.0\"
+        \"node\": \">=16.0.0\"
     },
     \"bin\": \"./index.js\",
     \"homepage\": \"https://github.com/zacanger/$DN#readme\",
@@ -102,19 +87,6 @@ WITHG="{
     \"funding\": {
         \"type\": \"ko-fi\",
         \"url\": \"https://ko-fi.com/zacanger\"
-    },
-    \"lint-staged\": {
-        \"*.js\": [
-            \"prettier --write\"
-        ],
-        \"package.json\": [
-            \"sortpack\"
-        ]
-    },
-    \"husky\": {
-        \"hooks\": {
-            \"pre-commit\": \"lint-staged\"
-        }
     }
 }"
 
@@ -139,7 +111,7 @@ else
 fi
 
 git init
-npm i -D eslint eslint-plugin-zacanger prettier sortpack tape husky lint-staged
+npm i -D standard sortpack tape
 npx sortpack
 git add -A
 git commit -m 'Init'
