@@ -20,6 +20,13 @@ del_paths=(
     /var/spool/cups/c0*
     /var/spool/cups/cache/job.cache*
     /var/spool/cups/tmp/*
+    "$HOME/Library/Containers/com.apple.Safari/Data/Library/Caches/*"
+    /private/var/folders/ry/*/*/com.apple.Safari/com.apple.Safari/com.apple.metal/*/libraries.data
+    /private/var/folders/ry/*/*/com.apple.Safari/com.apple.Safari/com.apple.metal/*/libraries.maps
+    "$HOME/Library/Containers/io.te0.WebView/Data/Library/Caches/WebKit"
+    "$HOME/Library/Safari/History.db*"
+    "$HOME/Library/Safari/RecentlyClosedTabs.plist"
+    "$HOME/Library/Safari/CloudHistoryRemoteConfiguration.plist"
 )
 for p in "${del_paths[@]}"; do
     sudo rm -rfv "$p"
