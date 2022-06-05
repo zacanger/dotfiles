@@ -35,6 +35,7 @@ Plug 'dense-analysis/ale'                 " linting
 Plug 'rust-lang/rust.vim'                 " rust support
 Plug 'tmux-plugins/vim-tmux-focus-events' " fix focus events from tmux
 Plug 'blueyed/vim-diminactive'            " dim inactive windows, works with the tmux fix
+Plug 'dhruvasagar/vim-table-mode'         " instant tables
 
 Plug '$HOME/repos/cozy/editor/vim' " temporary while this project is a WIP
 
