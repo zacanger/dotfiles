@@ -2,6 +2,7 @@ cloc
 editorconfig
 ghwd
 git-all-branches
+luvi
 node-gyp
 npm-check-updates
 shellcheck
