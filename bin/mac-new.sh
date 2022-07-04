@@ -215,7 +215,7 @@ sudo defaults write /Library/Preferences/com.apple.mDNSResponder.plist NoMultica
 # Install mupdf from https://www.mupdf.com/downloads/index.html (brew version is broken)
 # Import misc/profile.terminal to Terminal.app
 # Install Spotify desktop
-# Install Zoom desktop
+# Install Spitfire Audio
 
 # First get the repo
 z_path=$HOME/Dropbox/z
