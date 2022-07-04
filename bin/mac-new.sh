@@ -310,7 +310,7 @@ vim +PlugInstall +qa
 vim +GoInstallBinaries +qa
 
 # Useful for offline doc browsing
-go get golang.org/x/tools/cmd/godoc
+go install golang.org/x/tools/cmd/godoc@latest
 
 echo '/opt/homebrew/bin/bash' >> /etc/shells
 chsh -s /opt/homebrew/bin/bash
