@@ -12,7 +12,7 @@ trash_files() {
     for f in "$@"; do
         b=$(basename "$f")
         dest="$b"
-        if [ -f "$trash_dir/$b" ]; then
+        if [ -e "$trash_dir/$b" ]; then
             dest="$b-$RANDOM"
         fi
         mv -i "$f" "$trash_dir/$dest"

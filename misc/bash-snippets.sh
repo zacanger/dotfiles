@@ -254,6 +254,11 @@ is_dir() {
     [[ -d $1 ]]
 }
 
+is_thing() {
+    # file or dir or socket
+    [[ -e $1 ]]
+}
+
 is_empty() {
     [[ -z $1 ]]
 }
