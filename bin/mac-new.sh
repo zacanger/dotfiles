@@ -213,6 +213,7 @@ sudo defaults write /Library/Preferences/com.apple.mDNSResponder.plist NoMultica
 # Install Izotope product portal
 # Install Hack font (for Terminal)
 # Install all of Google's Noto fonts (for more language support)
+#     (https://github.com/notofonts/noto-fonts)
 # Install mupdf from https://www.mupdf.com/downloads/index.html (brew version is broken)
 # Import misc/profile.terminal to Terminal.app
 # Install Spotify desktop
@@ -281,6 +282,8 @@ ln -s "$z_path/.gnupg/gpg-agent.conf" "$HOME/.gnupg/"
 mkdir -p "$HOME/.cargo"
 ln -s "$z_path/.cargo/config" "$HOME/.cargo/"
 
+# copy user.js to Library/Application\ Support/Firefox/Profiles/[profile]/
+
 # .config
 conf_path=$HOME/.config
 zconf_path=$z_path/.config
@@ -293,14 +296,11 @@ ln -s "$zconf_path/startup.py" "$conf_path/"
 
 # npm stuff; copy rather than link because of auth. npm login later.
 cp "$z_path/.npmrc" "$HOME/"
-# Fix path since Macs don't use /home
-gsed -i 's#/home#/Users#' "$HOME/.npmrc"
 cat "$list_path/npm.list" | xargs npm i -g
 
 # Python packages
 cat "$list_path/pip3.list" | xargs pip3 install -U
 # Because Macs still have Python 2 as the default
-# On Intel Macs this is at /usr/local/bin
 ln -s /opt/homebrew/bin/python3 /opt/homebrew/bin/python
 
 # Vim
@@ -312,7 +312,6 @@ vim +GoInstallBinaries +qa
 # Useful for offline doc browsing
 go get golang.org/x/tools/cmd/godoc
 
-# On Intel Macs, this should be /usr/local/bin
 echo '/opt/homebrew/bin/bash' >> /etc/shells
 chsh -s /opt/homebrew/bin/bash
 
@@ -335,3 +334,5 @@ cat<<EOF >~/Library/LaunchAgents/userkeymapping.plist
 </plist>
 EOF
 launchctl load ~/Library/LaunchAgents/userkeymapping.plist
+
+rm "$HOME/.zsh*"
