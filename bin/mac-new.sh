@@ -212,8 +212,6 @@ sudo defaults write /Library/Preferences/com.apple.mDNSResponder.plist NoMultica
 # Install FL Studio
 # Install Izotope product portal
 # Install Hack font (for Terminal)
-# Install all of Google's Noto fonts (for more language support)
-#     (https://github.com/notofonts/noto-fonts)
 # Install mupdf from https://www.mupdf.com/downloads/index.html (brew version is broken)
 # Import misc/profile.terminal to Terminal.app
 # Install Spotify desktop
