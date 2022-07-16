@@ -1,5 +1,6 @@
 Jinja2
 Pillow
+PyFLP
 PyYAML
 autopep8
 black
