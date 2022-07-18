@@ -11,3 +11,4 @@ shellcheck
 sortpack
 standard
 svgo
+ts-standard

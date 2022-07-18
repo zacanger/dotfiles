@@ -309,14 +309,16 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_linters = {
         \ 'rust': ['cargo'],
-        \ 'javascript': ['eslint'],
-        \ 'typescript': ['eslint'],
-        \ 'jsx': ['eslint'],
+        \ 'javascript': ['standard'],
+        \ 'typescript': ['ts-standard'],
+        \ 'jsx': ['standard'],
         \ 'python': ['pycodestyle']
         \}
-let b:ale_javascript_eslint_options = "--rule 'prettier/prettier: 0'"
 let g:ale_fixers = {
 \     'python': ['black'],
+\     'jsx': ['standard'],
+\     'javascript': ['standard'],
+\     'typescript': ['ts-standard'],
 \}
 
 " vim-airline
