@@ -291,6 +291,7 @@ ln -s "$zconf_path/ranger/rifle.conf" "$conf_path/ranger/"
 ln -s "$zconf_path/ranger/scope.sh" "$conf_path/ranger/"
 ln -s "$zconf_path/ninit" "$conf_path/"
 ln -s "$zconf_path/startup.py" "$conf_path/"
+ln -s "$zconf_path/mpv" "$conf_path/"
 
 # npm stuff; copy rather than link because of auth. npm login later.
 cp "$z_path/.npmrc" "$HOME/"
