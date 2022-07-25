@@ -264,10 +264,6 @@ mkdir "$HOME/.g"
 # Link currently-active repos for easy access
 ln -s "$HOME/Dropbox/work/repos/3-active" "$HOME/repos"
 
-# mpv, don't link whole dir because of watch_later
-mkdir -p "$HOME/.mpv"
-ln -s "$z_path/.mpv/input.conf" "$HOME/.mpv/"
-
 # Docker: don't link, because auth. docker login later.
 mkdir -p "$HOME/.docker"
 cp "$z_path/.docker/config.json" "$HOME/.docker/"
