@@ -256,12 +256,6 @@ au BufRead,BufNewFile *.md setlocal textwidth=80
 
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS noci
 
-" custom au for faust
-augroup filetypedetect
-    au! BufRead,BufNewFile *.fst      setfiletype faust
-    au! BufRead,BufNewFile *.dsp      setfiletype faust
-augroup END
-
 set autoread
 
 "" mappings
