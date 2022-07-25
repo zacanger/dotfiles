@@ -134,3 +134,4 @@ xfce4
 .vim/autoload/plug.vim.old
 .vim/.netrwhist
 .vim/session
+.config/mpv/watch_later/
