@@ -200,11 +200,68 @@ touch ~/Library/Assistant/SiriAnalytics.db
 sudo chmod -R 000 ~/Library/Assistant/SiriAnalytics.db
 sudo chflags -R uchg ~/Library/Assistant/SiriAnalytics.db
 
+# Limit ad tracking
+defaults write com.apple.AdLib forceLimitAdTracking -bool true
+defaults write com.apple.AdLib personalizedAdsMigrated -bool false
+defaults write com.apple.AdLib allowIdentifierForAdvertising -bool false
+defaults write com.apple.AdLib allowApplePersonalizedAdvertising -bool false
+
+# Disable geocode suggestions
+defaults write com.apple.suggestions SuggestionsAllowGeocode -bool false
+
+# Disable Siri suggestions
+defaults write com.apple.suggestions AppCanShowSiriSuggestionsBlacklist -array \
+  "com.apple.AppStore" \
+  "com.apple.iCal" \
+  "com.apple.AddressBook" \
+  "com.apple.FaceTime" \
+  "com.apple.mail" \
+  "com.apple.Maps" \
+  "com.apple.iChat" \
+  "com.apple.MobileSMS" \
+  "com.apple.news" \
+  "com.apple.Notes" \
+  "com.apple.Photos" \
+  "com.apple.podcasts" \
+  "com.apple.reminders" \
+  "com.apple.Safari"
+
+# Disable Siri analytics
+defaults write com.apple.suggestions SiriCanLearnFromAppBlacklist -array \
+  "com.apple.AppStore" \
+  "com.apple.iCal" \
+  "com.apple.AddressBook" \
+  "com.apple.FaceTime" \
+  "com.apple.mail" \
+  "com.apple.Maps" \
+  "com.apple.iChat" \
+  "com.apple.MobileSMS" \
+  "com.apple.news" \
+  "com.apple.Notes" \
+  "com.apple.Photos" \
+  "com.apple.podcasts" \
+  "com.apple.reminders" \
+  "com.apple.Safari"
+
+# Disable Ask Siri (System Preferences > Siri > Uncheck "Enable Ask Siri")
+defaults write com.apple.assistant.support "Assistant Enabled" -bool false
+
+# Hide Siri in menu bar
+defaults write com.apple.siri StatusMenuVisible -bool false
+
 # Disable crash reporter: apple doesn't need to know when my programs crash
 defaults write com.apple.CrashReporter DialogType none
 
+# Save to disk (not to iCloud) by default
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
 # Disable Bonjour
 sudo defaults write /Library/Preferences/com.apple.mDNSResponder.plist NoMulticastAdvertisements -bool YES
+
+# Disable handoff between Mac and nearby iCloud devices
+defaults write \
+  ~/Library/Preferences/ByHost/com.apple.coreservices.useractivityd.plist \
+  ActivityAdvertisingAllowed -bool false
 
 ## Now that that's done we can install and configure what we need
 
