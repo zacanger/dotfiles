@@ -122,3 +122,4 @@ user_pref('browser.urlbar.suggest.quicksuggest.nonsponsored', false);
 user_pref('browser.urlbar.suggest.quicksuggest.sponsored', false);
 user_pref('browser.download.alwaysOpenPanel', false);
 user_pref('browser.download.manager.addToRecentDocs', false);
+user_pref('media.videocontrols.picture-in-picture.enabled', false);
