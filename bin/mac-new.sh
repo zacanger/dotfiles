@@ -367,6 +367,9 @@ go install golang.org/x/tools/cmd/godoc@latest
 echo '/opt/homebrew/bin/bash' >> /etc/shells
 chsh -s /opt/homebrew/bin/bash
 
+# install git-lfs hooks
+git lfs install
+
 # Sets an init script to give me another control key
 mkdir -p ~/Library/LaunchAgents
 cat<<EOF >~/Library/LaunchAgents/userkeymapping.plist
