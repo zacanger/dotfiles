@@ -42,7 +42,7 @@ sqlite3 \
 
 brew cleanup --prune=all
 gem cleanup
-docker-clear.sh
+if [[ "$1" == "-d" ]]; then docker-clear.sh; fi
 npm cache clear -f
 clear-dns-cache.sh
 
