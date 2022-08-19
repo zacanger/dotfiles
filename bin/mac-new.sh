@@ -119,6 +119,7 @@ sudo tmutil disable
 
 # Finder
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
 defaults write com.apple.finder QuitMenuItem -bool true
 defaults write com.apple.finder DesktopViewOptions -dict IconSize -integer 72
 defaults write com.apple.finder AppleShowAllFiles true # should this be YES?
