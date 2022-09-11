@@ -75,7 +75,6 @@ user_pref('browser.urlbar.searchSuggestionsChoice', false);
 user_pref('browser.urlbar.speculativeConnect.enabled', false);
 user_pref('browser.urlbar.suggest.searches', false);
 user_pref('datareporting.healthreport.uploadEnabled', false);
-user_pref('devtools.editor.keymap', 'vim');
 user_pref('devtools.theme', 'dark');
 user_pref('dom.battery.enabled', false);
 user_pref('dom.event.contextmenu.enabled', false);
