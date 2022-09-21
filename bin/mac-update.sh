@@ -11,3 +11,5 @@ cat ~/Dropbox/z/misc/pip.list | sed '/pip/d' | xargs pip3 install -U
 
 vim +PlugUpgrade +qa
 vim +PlugUpdate +qa
+
+~/bin/update-dircolors.sh
