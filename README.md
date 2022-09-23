@@ -21,11 +21,11 @@ symlinked or copied over.
 
 ## Notes
 
-* `~/bin/mac-*` is all Mac-specific scripts. Several aliases and functions are
+* `~/bin/mac-*` is all Mac-specific scripts. Most aliases and functions are
     written to be compatible with both Mac and Linux.
 * The files at `misc/*.list` are for installing packages.
 * I mostly work with configs, shell scripts, and some Python and Node, so my
     setup is oriented towards quick navigation and editing.
 * Unless otherwise noted, everything here is under the MIT license.
-* I previously mostly used Ubuntu; the commit removing Linux configs is
-    [here](1fd1d6ad117db2a77025c56675149db6d47c8428).
+* I previously mostly used Ubuntu, and before that Arch, and before that Debian,
+    so some lingering bits for those distros may still be lingering around.
