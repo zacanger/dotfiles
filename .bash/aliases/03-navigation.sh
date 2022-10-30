@@ -8,4 +8,4 @@ alias ....="cd ../../.."
 alias ,,='..'
 alias ,,,='...'
 alias ,,,,='....'
-alias cs='cd $OLDPWD'
+alias cs='cd "$OLDPWD"'
