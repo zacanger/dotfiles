@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 
-alias gfa='git fetch --all'
+alias gfa='git fetch --all --prune'
 alias gcpa='git gcpa'
 alias gdi='git diff'
 alias gcl='git clone'
