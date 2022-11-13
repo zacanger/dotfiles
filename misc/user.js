@@ -126,3 +126,6 @@ user_pref("privacy.partition.always_partition_third_party_non_cookie_storage", t
 user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.telemetry", false);
 user_pref("privacy.partition.always_partition_third_party_non_cookie_storage.exempt_sessionstorage", false);
+user_pref("browser.messaging-system.whatsNewPanel.enabled", false);
+user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
+user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
