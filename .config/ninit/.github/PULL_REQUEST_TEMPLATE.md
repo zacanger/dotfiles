@@ -15,4 +15,4 @@
 # Checklist
 
 * [ ] Added tests / did not decrease code coverage
-* [ ] Tested in supported environments (common browsers or current and LTS Node)
+* [ ] Tested in supported environments
