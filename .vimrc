@@ -501,3 +501,6 @@ let g:diminactive_use_syntax = 1
 
 " fix imports + format on save
 let g:go_fmt_command = "goimports"
+
+" convert camelCase to snake_case
+nnoremap <leader>crs :g;<c-r><c-w>; s;[a-z]\@<=[A-Z];_\l&;g<cr>
