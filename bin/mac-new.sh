@@ -327,6 +327,10 @@ cp "$z_path/.docker/config.json" "$HOME/.docker/"
 mkdir -p "$HOME/.gnupg"
 ln -s "$z_path/.gnupg/gpg-agent.conf" "$HOME/.gnupg/"
 
+# Rust
+mkdir -p "$HOME/.cargo"
+ln -s "$z_path/.cargo/config" "$HOME/.cargo/"
+
 # copy user.js to Library/Application\ Support/Firefox/Profiles/[profile]/
 
 # .config
@@ -353,6 +357,10 @@ ln -s /opt/homebrew/bin/python3 /opt/homebrew/bin/python
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +PlugInstall +qa
+vim +GoInstallBinaries +qa
+
+# Useful for offline doc browsing
+go install golang.org/x/tools/cmd/godoc@latest
 
 echo '/opt/homebrew/bin/bash' >> /etc/shells
 chsh -s /opt/homebrew/bin/bash

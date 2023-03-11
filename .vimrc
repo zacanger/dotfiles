@@ -18,6 +18,7 @@ Plug 'bronson/vim-trailing-whitespace'    " highlight trailing whitespace
 Plug 'jiangmiao/auto-pairs'               " auto-complete pairs of things
 Plug 'junegunn/seoul256.vim'              " colo
 Plug 'junegunn/vim-easy-align'            " align stuff on a symbol (like the comments in this block)
+Plug 'fatih/vim-go'                       " go support
 Plug 'junegunn/vim-peekaboo'              " see registers easily
 Plug 'junegunn/vim-slash'                 " better buffer search
 Plug 'mhinz/vim-signify'                  " vcs markers in gutter, also see 'airblade/vim-gitgutter'
@@ -31,6 +32,7 @@ Plug 'vim-scripts/syntaxcomplete'         " super simple syn completion
 Plug 'vim-utils/vim-husk'                 " bash emacs-mode mappings in command mode
 Plug 'vim-utils/vim-troll-stopper'        " highlight unicode chars that look like ascii chars
 Plug 'dense-analysis/ale'                 " linting
+Plug 'rust-lang/rust.vim'                 " rust support
 Plug 'tmux-plugins/vim-tmux-focus-events' " fix focus events from tmux
 Plug 'blueyed/vim-diminactive'            " dim inactive windows, works with the tmux fix
 Plug 'dhruvasagar/vim-table-mode'         " instant tables
@@ -307,6 +309,7 @@ let g:ale_virtualtext_cursor = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_linters = {
+        \ 'rust': ['cargo'],
         \ 'javascript': ['standard'],
         \ 'typescript': ['ts-standard'],
         \ 'jsx': ['standard'],
@@ -371,6 +374,8 @@ nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
 " show tabs
 set list lcs=tab:\|\
+" except in go, because gofmt says so
+autocmd FileType go set nolist
 
 " break line on words
 set linebreak
@@ -469,13 +474,21 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " vim-trailing-whitespace
-let g:extra_whitespace_ignored_filetypes = ['md']
+let g:extra_whitespace_ignored_filetypes = ['go', 'md']
 
 " poppy
 au! cursormoved * call PoppyInit()
 
 " use {{{ }}}
 set foldmethod=marker
+
+" rust stuff
+let g:rustfmt_autosave = 1
+let g:rustfmt_command = "cargo fmt --"
+let g:rustfmt_emit_files = 1
+let g:rustfmt_command = 'rustfmt'
+let g:rustfmt_options = ''
+let g:ale_rust_cargo_use_check = 1
 
 let g:AutoPairsShortcutToggle = ''
 
@@ -486,6 +499,9 @@ let g:rooter_silent_chdir = 1
 let g:diminactive_enable_focus = 1
 let g:diminactive_use_colorcolumn = 1
 let g:diminactive_use_syntax = 1
+
+" fix imports + format on save
+let g:go_fmt_command = "goimports"
 
 " convert camelCase to snake_case
 nnoremap <leader>crs :g;<c-r><c-w>; s;[a-z]\@<=[A-Z];_\l&;g<cr>
