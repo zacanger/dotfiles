@@ -32,7 +32,6 @@ Plug 'vim-scripts/syntaxcomplete'         " super simple syn completion
 Plug 'vim-utils/vim-husk'                 " bash emacs-mode mappings in command mode
 Plug 'vim-utils/vim-troll-stopper'        " highlight unicode chars that look like ascii chars
 Plug 'dense-analysis/ale'                 " linting
-Plug 'rust-lang/rust.vim'                 " rust support
 Plug 'tmux-plugins/vim-tmux-focus-events' " fix focus events from tmux
 Plug 'blueyed/vim-diminactive'            " dim inactive windows, works with the tmux fix
 Plug 'dhruvasagar/vim-table-mode'         " instant tables
@@ -309,7 +308,6 @@ let g:ale_virtualtext_cursor = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_linters = {
-        \ 'rust': ['cargo'],
         \ 'javascript': ['standard'],
         \ 'typescript': ['ts-standard'],
         \ 'jsx': ['standard'],
@@ -481,14 +479,6 @@ au! cursormoved * call PoppyInit()
 
 " use {{{ }}}
 set foldmethod=marker
-
-" rust stuff
-let g:rustfmt_autosave = 1
-let g:rustfmt_command = "cargo fmt --"
-let g:rustfmt_emit_files = 1
-let g:rustfmt_command = 'rustfmt'
-let g:rustfmt_options = ''
-let g:ale_rust_cargo_use_check = 1
 
 let g:AutoPairsShortcutToggle = ''
 

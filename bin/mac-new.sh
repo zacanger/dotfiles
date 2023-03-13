@@ -327,10 +327,6 @@ cp "$z_path/.docker/config.json" "$HOME/.docker/"
 mkdir -p "$HOME/.gnupg"
 ln -s "$z_path/.gnupg/gpg-agent.conf" "$HOME/.gnupg/"
 
-# Rust
-mkdir -p "$HOME/.cargo"
-ln -s "$z_path/.cargo/config" "$HOME/.cargo/"
-
 # copy user.js to Library/Application\ Support/Firefox/Profiles/[profile]/
 
 # .config
