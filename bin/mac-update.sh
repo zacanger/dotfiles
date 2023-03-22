@@ -13,3 +13,4 @@ vim +PlugUpgrade +qa
 vim +PlugUpdate +qa
 
 ~/bin/update-dircolors.sh
+~/bin/update-hosts.sh
