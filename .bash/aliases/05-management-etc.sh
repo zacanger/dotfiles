@@ -19,13 +19,12 @@ if hash bat 2>/dev/null; then
     alias cat='bat'
 fi
 
-# TODO: fix this, it's conflicting with bash_completion all of a sudden
 # use ag if installed
-# if hash ag 2>/dev/null; then
-    # alias grep='ag'
-# else
+if hash ag 2>/dev/null; then
+    alias grep='ag'
+else
     alias grep='grep --color=auto'
-# fi
+fi
 
 if [[ $(uname) == 'Darwin' ]]; then
     alias file='file -h'

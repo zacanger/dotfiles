@@ -16,6 +16,12 @@ _sourceif "$HOME/.bash/history.sh"
 _sourceif "$HOME/.bash/path.sh"
 _sourceif "$HOME/.bash/vars.sh"
 
+if [ -d "$HOME/.bash/completion" ]; then
+    for file in "$HOME"/.bash/completion/*; do
+        _sourceif "$file"
+    done
+fi
+
 if [ -d "$HOME/.bash/aliases" ]; then
     for file in "$HOME"/.bash/aliases/*; do
         _sourceif "$file"
@@ -23,15 +29,6 @@ if [ -d "$HOME/.bash/aliases" ]; then
 fi
 
 _sourceif "$HOME/.bash/prompt.sh"
-
-# completions
-[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
-
-if [ -d "$HOME/.bash/completion" ]; then
-    for file in "$HOME"/.bash/completion/*; do
-        _sourceif "$file"
-    done
-fi
 
 # all the functions
 if [ -d "$HOME/.bash/functions" ]; then

@@ -3,6 +3,8 @@
 # brew's bash completion
 if [[ $(uname) == 'Darwin' ]]; then
     _sourceif "$(brew --prefix)/etc/bash_completion"
+else
+    _sourceif /usr/share/bash-completion/bash_completion
 fi
 
 # aws completion
