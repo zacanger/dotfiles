@@ -1,5 +1,7 @@
 # `$HOME`
 
+[Donate](https://ko-fi.com/zacanger)
+
 See <https://github.com/zacanger/junk/tree/master/dotfiles-archive> for old
 Git history. I archived the repo and started fresh due to huge Git directory
 size.
