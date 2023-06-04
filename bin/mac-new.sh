@@ -137,8 +137,10 @@ defaults write com.apple.Safari WebKitDeveloperExtras -bool true
 defaults write com.apple.iTunes allow-half-stars -bool true
 defaults write com.apple.iTunes invertStoreLinks -bool true
 
-## Dock
+# Terminal, don't allow other apps to read keys
+defaults write -app Terminal SecureKeyboardEntry -bool true
 
+## Dock
 defaults write com.apple.dock no-bouncing -bool true
 # defaults write com.apple.Dock autohide -bool true
 defaults write com.apple.dock largesize -int 65
