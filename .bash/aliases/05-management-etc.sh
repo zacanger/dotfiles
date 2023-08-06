@@ -12,11 +12,17 @@ if [[ $(uname) == 'Darwin' ]]; then
     alias co='pbcopy'
     alias pa='pbpaste'
     alias clc='echo -n | co'
+else
+    alias co='xclip -selection clipboard'
+    alias pa='xclip -selection clipboard -o'
+    alias clc='echo -n | co && echo -n | xclip -selection primary'
 fi
 
 # don't break cat if no bat
 if hash bat 2>/dev/null; then
     alias cat='bat'
+elif hash batcat 2>/dev/null; then
+    alias cat='batcat'
 fi
 
 # use ag if installed
