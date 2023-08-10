@@ -114,9 +114,9 @@ pkg-config
 procps
 psmisc
 python3-all
-python3-pip
 python3-dev
 python3-gpg
+python3-pip
 ranger
 rar
 readline-common
@@ -157,6 +157,7 @@ xinit
 xinput
 xkb-data
 xserver-xorg-input-synaptics
+xterm
 xxd
 xz-utils
 zip
