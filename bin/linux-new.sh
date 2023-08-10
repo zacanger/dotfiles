@@ -91,19 +91,12 @@ ln -s "$z_path/.gnupg/gpg-agent.conf" "$HOME/.gnupg/"
 
 # Other symlinks
 
-# Rust
-mkdir -p "$HOME/.cargo"
-ln -s "$z_path/.cargo/config" "$HOME/.cargo/"
-
 # .config
 conf_path=$HOME/.config
 zconf_path=$z_path/.config
 mkdir -p "$conf_path/i3"
 mkdir -p "$conf_path/i3status"
 mkdir -p "$conf_path/ranger"
-mkdir -p "$conf_path/pcmanfm/default"
-mkdir -p "$conf_path/libfm"
-ln -s "$zconf_path/libfm/libfm.conf" "$conf_path/libfm/"
 ln -s "$zconf_path/ranger/rc.conf" "$conf_path/ranger/"
 ln -s "$zconf_path/ranger/rifle.conf" "$conf_path/ranger/"
 ln -s "$zconf_path/ranger/scope.sh" "$conf_path/ranger/"
@@ -112,9 +105,6 @@ ln -s "$zconf_path/i3status/config" "$conf_path/i3status/"
 ln -s "$zconf_path/ninit" "$conf_path/"
 ln -s "$zconf_path/startup.py" "$conf_path/"
 
-# Copy rather than link because config contains window height
-cp "$zconf_path/pcmanfm/default/pcmanfm.conf" "$conf_path/pcmanfm/default/"
-
 # Node - interactive
 curl -sL https://git.io/n-install | bash -s -- -n
 n latest
@@ -122,11 +112,6 @@ n prune
 
 # Install Node packages.
 cat "$list_path/npm.list" | xargs npm i -g
-
-# Install the rust toolchain - interactive.
-curl https://sh.rustup.rs -sSf | sh
-rustup toolchain install nightly
-rustup default nightly
 
 # Vim
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
