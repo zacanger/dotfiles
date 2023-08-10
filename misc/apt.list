@@ -156,7 +156,6 @@ xinit
 xinput
 xkb-data
 xserver-xorg-input-synaptics
-xterm
 xxd
 xz-utils
 zip
