@@ -136,53 +136,15 @@ vim +PlugInstall +qa
 # Add self to Docker group
 sudo usermod -aG docker "$USER"
 
-# Cleanup
-# There may be some extra packages to manually remove after this
-sudo rm /etc/update-motd.d/90-updates-available
-sudo rm /etc/update-motd.d/92-unattended-upgrades
-sudo apt-get remove -y '*whoopsie*'
-sudo apt-get remove -y 'gnome-*'
-sudo apt-get remove -y 'avahi-*'
-sudo apt-get remove -y 'geoclue-*'
-sudo apt-get remove -y 'emacs*'
-sudo apt-get remove -y '*elpa*'
-sudo apt-get remove -y \
-    bluez \
-    brltty \
-    cups \
-    cups-bsd \
-    cups-client \
-    cups-common \
-    cups-pk-helper \
-    cups-ppdc \
-    file-roller \
-    gedit \
-    gnome-software-plugin-snap \
-    libavahi-core7 \
-    libavahi-glib1 \
-    mousetweaks \
-    orca \
-    pavucontrol \
-    pinentry-gnome3 \
-    pulseaudio-module-bluetooth \
-    python3-cups \
-    python3-cupshelpers \
-    snapcraft \
-    snapd \
-    unattended-upgrades \
-    yelp \
-    youtube-dl
-
 sudo apt autoremove -y
 sudo apt purge
 sudo apt clean
-sudo rm -rf /var/cache/snapd/
 sudo update-alternatives --all
 sudo systemctl stop apache2
 sudo systemctl disable apache2
 sudo systemctl stop apache-htcacheclean
 sudo systemctl disable apache-htcacheclean
-for d in Desktop Documents Music Pictures Public Templates Videos snap; do
+for d in Desktop Documents Music Pictures Public Templates Videos; do
     rm -d "$HOME/$d"
 done
 
