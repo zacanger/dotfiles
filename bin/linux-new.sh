@@ -94,14 +94,10 @@ ln -s "$z_path/.gnupg/gpg-agent.conf" "$HOME/.gnupg/"
 # .config
 conf_path=$HOME/.config
 zconf_path=$z_path/.config
-mkdir -p "$conf_path/i3"
-mkdir -p "$conf_path/i3status"
 mkdir -p "$conf_path/ranger"
 ln -s "$zconf_path/ranger/rc.conf" "$conf_path/ranger/"
 ln -s "$zconf_path/ranger/rifle.conf" "$conf_path/ranger/"
 ln -s "$zconf_path/ranger/scope.sh" "$conf_path/ranger/"
-ln -s "$zconf_path/i3/config" "$conf_path/i3/"
-ln -s "$zconf_path/i3status/config" "$conf_path/i3status/"
 ln -s "$zconf_path/ninit" "$conf_path/"
 ln -s "$zconf_path/startup.py" "$conf_path/"
 
