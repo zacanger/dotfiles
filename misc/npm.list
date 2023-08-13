@@ -7,6 +7,7 @@ luvi
 mime-types-cli
 node-gyp
 npm-check-updates
+read-qr-code-cli
 shellcheck
 sortpack
 standard
