@@ -1,43 +1,52 @@
 " zacanger's .vimrc
 
-call plug#begin('~/.local/share/vim/plugged')
-
 if has('vim_starting')
     set nocompatible " Be iMproved
 endif
 
-Plug 'vim-jp/vital.vim'                   " deps
-Plug 'vim-scripts/SyntaxRange'            " deps
-Plug 'vim-scripts/ingo-library'           " deps
-Plug 'FooSoft/vim-argwrap'                " wrap items in blocks/lists
-Plug 'airblade/vim-rooter'                " set path to project root
-Plug 'ervandew/supertab'
-Plug 'bling/vim-airline'                  " better statusline
-Plug 'bounceme/poppy.vim'                 " simple highlight/rainbow parens plugin
-Plug 'bronson/vim-trailing-whitespace'    " highlight trailing whitespace
-Plug 'jiangmiao/auto-pairs'               " auto-complete pairs of things
-Plug 'junegunn/seoul256.vim'              " colo
-Plug 'junegunn/vim-easy-align'            " align stuff on a symbol (like the comments in this block)
-Plug 'fatih/vim-go'                       " go support
-Plug 'junegunn/vim-peekaboo'              " see registers easily
-Plug 'junegunn/vim-slash'                 " better buffer search
-Plug 'mhinz/vim-signify'                  " vcs markers in gutter, also see 'airblade/vim-gitgutter'
-Plug 'moll/vim-node'                      " enchance vim for node (for example, better gf)
-Plug 'scrooloose/nerdcommenter'           " there are so many commenter plugins, but this one just works
-Plug 'sgur/vim-editorconfig'              " support editorconfig
-Plug 'sheerun/vim-polyglot'               " language support
-Plug 'tpope/vim-surround'                 " surround things with other things
-Plug 'vim-scripts/paredit.vim'            " balance parens
-Plug 'vim-scripts/syntaxcomplete'         " super simple syn completion
-Plug 'vim-utils/vim-husk'                 " bash emacs-mode mappings in command mode
-Plug 'vim-utils/vim-troll-stopper'        " highlight unicode chars that look like ascii chars
-Plug 'dense-analysis/ale'                 " linting
-Plug 'tmux-plugins/vim-tmux-focus-events' " fix focus events from tmux
-Plug 'blueyed/vim-diminactive'            " dim inactive windows, works with the tmux fix
-Plug 'dhruvasagar/vim-table-mode'         " instant tables
+let g:coc_global_extensions = [
+\ 'coc-json',
+\ 'coc-tsserver',
+\ 'coc-html',
+\ 'coc-css',
+\ 'coc-yaml',
+\ 'coc-sh',
+\ 'coc-go',
+\ '@yaegassy/coc-pylsp'
+\ ]
 
-Plug '$HOME/repos/cozy/editor/vim' " temporary while this project is a WIP
+call plug#begin('~/.local/share/vim/plugged')
 
+Plug 'vim-jp/vital.vim'                           " deps
+Plug 'vim-scripts/SyntaxRange'                    " deps
+Plug 'vim-scripts/ingo-library'                   " deps
+Plug 'FooSoft/vim-argwrap'                        " wrap items in blocks/lists
+Plug 'airblade/vim-rooter'                        " set path to project root
+Plug 'ervandew/supertab'                          " tab insert-mode completions
+Plug 'bling/vim-airline'                          " better statusline
+Plug 'bounceme/poppy.vim'                         " simple highlight/rainbow parens plugin
+Plug 'bronson/vim-trailing-whitespace'            " highlight trailing whitespace
+Plug 'jiangmiao/auto-pairs'                       " auto-complete pairs of things
+Plug 'junegunn/seoul256.vim'                      " colo
+Plug 'junegunn/vim-easy-align'                    " align stuff on a symbol (like the comments in this block)
+Plug 'fatih/vim-go'                               " go support
+Plug 'junegunn/vim-peekaboo'                      " see registers easily
+Plug 'junegunn/vim-slash'                         " better buffer search
+Plug 'mhinz/vim-signify'                          " vcs markers in gutter, also see 'airblade/vim-gitgutter'
+Plug 'moll/vim-node'                              " enchance vim for node (for example, better gf)
+Plug 'scrooloose/nerdcommenter'                   " there are so many commenter plugins, but this one just works
+Plug 'sgur/vim-editorconfig'                      " support editorconfig
+Plug 'sheerun/vim-polyglot'                       " language support
+Plug 'tpope/vim-surround'                         " surround things with other things
+Plug 'vim-scripts/paredit.vim'                    " balance parens
+Plug 'vim-scripts/syntaxcomplete'                 " super simple syn completion
+Plug 'vim-utils/vim-husk'                         " bash emacs-mode mappings in command mode
+Plug 'vim-utils/vim-troll-stopper'                " highlight unicode chars that look like ascii chars
+Plug 'dense-analysis/ale'                         " linting
+Plug 'tmux-plugins/vim-tmux-focus-events'         " fix focus events from tmux
+Plug 'blueyed/vim-diminactive'                    " dim inactive windows, works with the tmux fix
+Plug 'dhruvasagar/vim-table-mode'                 " instant tables
+Plug 'neoclide/coc.nvim', { 'branch': 'release' } " LSP support
 
 call plug#end()
 
