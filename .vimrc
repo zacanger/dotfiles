@@ -42,7 +42,6 @@ Plug 'vim-scripts/paredit.vim'                    " balance parens
 Plug 'vim-scripts/syntaxcomplete'                 " super simple syn completion
 Plug 'vim-utils/vim-husk'                         " bash emacs-mode mappings in command mode
 Plug 'vim-utils/vim-troll-stopper'                " highlight unicode chars that look like ascii chars
-Plug 'dense-analysis/ale'                         " linting
 Plug 'tmux-plugins/vim-tmux-focus-events'         " fix focus events from tmux
 Plug 'blueyed/vim-diminactive'                    " dim inactive windows, works with the tmux fix
 Plug 'dhruvasagar/vim-table-mode'                 " instant tables
@@ -151,7 +150,6 @@ set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
 
 " vim-airline
 let g:airline_theme = 'seoul256'
-let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 
@@ -311,23 +309,6 @@ augroup vimrc-python
         \ formatoptions+=croq softtabstop=4 smartindent
         \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
-
-" ale
-let g:ale_virtualtext_cursor = 1
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:ale_linters = {
-        \ 'javascript': ['standard'],
-        \ 'typescript': ['ts-standard'],
-        \ 'jsx': ['standard'],
-        \ 'python': ['pycodestyle']
-        \}
-let g:ale_fixers = {
-\     'python': ['black'],
-\     'jsx': ['standard'],
-\     'javascript': ['standard'],
-\     'typescript': ['ts-standard'],
-\}
 
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
