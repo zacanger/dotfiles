@@ -12,7 +12,7 @@ let g:coc_global_extensions = [
 \ 'coc-yaml',
 \ 'coc-sh',
 \ 'coc-go',
-\ '@yaegassy/coc-pylsp'
+\ 'coc-pyright',
 \ ]
 
 call plug#begin('~/.local/share/vim/plugged')
@@ -485,3 +485,17 @@ let g:go_fmt_command = "goimports"
 
 " convert camelCase to snake_case
 nnoremap <leader>crs :g;<c-r><c-w>; s;[a-z]\@<=[A-Z];_\l&;g<cr>
+
+" coc settings
+" use <tab> to trigger completion and navigate to the next complete item
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
