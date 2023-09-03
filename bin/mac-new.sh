@@ -190,7 +190,7 @@ sudo softwareupdate -i -a
 softwareupdate --install-rosetta
 
 # Turn on Filevault
-sudo fdsetup enable
+sudo fdesetup enable
 
 # Disable language data collection (spelling)
 sudo rm -rfv "$HOME/Library/LanguageModeling/*" "$HOME/Library/Spelling/*" "$HOME/Library/Suggestions/*"
@@ -271,8 +271,6 @@ defaults write \
 # Install Docker from website
 # Install FL Studio
 # Install Izotope product portal
-# Install Hack font (for Terminal)
-# Install mupdf from https://www.mupdf.com/downloads/index.html (brew version is broken)
 # Import misc/profile.terminal to Terminal.app
 # Install Spotify desktop
 # Install Spitfire Audio
@@ -347,7 +345,7 @@ cp "$z_path/.npmrc" "$HOME/"
 cat "$list_path/npm.list" | xargs npm i -g
 
 # Python packages
-cat "$list_path/pip3.list" | xargs pip3 install -U
+cat "$list_path/pip.list" | xargs pip3 install -U
 # Because Macs still have Python 2 as the default
 ln -s /opt/homebrew/bin/python3 /opt/homebrew/bin/python
 
@@ -360,7 +358,7 @@ vim +GoInstallBinaries +qa
 # Useful for offline doc browsing
 go install golang.org/x/tools/cmd/godoc@latest
 
-echo '/opt/homebrew/bin/bash' >> /etc/shells
+echo '/opt/homebrew/bin/bash' | sudo tee -a /etc/shells
 chsh -s /opt/homebrew/bin/bash
 
 # install git-lfs hooks
