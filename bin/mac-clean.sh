@@ -30,8 +30,6 @@ del_paths=(
     /private/var/folders/ry/*/*/com.apple.Safari/com.apple.Safari/com.apple.metal/*/libraries.data
     /private/var/folders/ry/*/*/com.apple.Safari/com.apple.Safari/com.apple.metal/*/libraries.maps
     "$HOME/Library/Containers/io.te0.WebView/Data/Library/Caches/WebKit"
-    "$HOME/Library/Safari/History.db*"
-    "$HOME/Library/Safari/RecentlyClosedTabs.plist"
     "$HOME/Library/Safari/CloudHistoryRemoteConfiguration.plist"
 )
 for p in "${del_paths[@]}"; do

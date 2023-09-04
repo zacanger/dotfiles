@@ -3,6 +3,7 @@
 # also includes some changes from pierre dangauthier and
 # roy-orbinson (on github; i assume not the real roy orbinson)
 
+TRASH_DIR="$HOME/.z-trash"
 # TODO:
 # honestly, a lot. this is very large and includes a lot
 # that i don't really care about.
@@ -62,20 +63,12 @@ X: toggle executable
 
 y: mark copy
 m: mark move
-d: mark trash (~/.local/share/fff/trash/)
-s: mark symbolic link
+d: mark trash (TRASH_DIR)
 b: mark bulk rename
-
-Y: mark all for copy
-M: mark all for move
-D: mark all for trash (~/.local/share/fff/trash/)
-S: mark all for symbolic link
-B: mark all for bulk rename
 
 p: paste/move/delete/bulk_rename
 c: clear file selections
 
-[1-4]: favourites/bookmarks (see customization)
 5: page up
 6: page down
 
@@ -126,29 +119,6 @@ export FFF_CD_ON_EXIT=1
 # Default: "${XDG_CACHE_HOME}/fff/fff.d"
 #          If not using XDG, "${HOME}/.cache/fff/fff.d" is used.
 export FFF_CD_FILE=~/.fff_d
-
-# Trash Directory
-# Default: "${XDG_DATA_HOME}/fff/trash"
-#          If not using XDG, "${XDG_DATA_HOME}/fff/trash" is used.
-export FFF_TRASH=~/.local/share/fff/trash
-
-# Trash Command
-# Default: "mv"
-#          Define a custom program to use to trash files.
-#          The program will be passed the list of selected files
-#          and directories.
-export FFF_TRASH_CMD="mv"
-
-# Favourites (Bookmarks) (keys 1-9) (dir or file)
-export FFF_FAV1=~/projects
-export FFF_FAV2=~/.bashrc
-export FFF_FAV3=~/Pictures/Wallpapers/
-export FFF_FAV4=/usr/share
-export FFF_FAV5=/
-export FFF_FAV6=
-export FFF_FAV7=
-export FFF_FAV8=
-export FFF_FAV9=
 
 # File format.
 # Customize the item string.
@@ -203,21 +173,13 @@ export FFF_KEY_TO_BOTTOM="G"
 # Go to dirs.
 export FFF_KEY_GO_DIR=":"
 export FFF_KEY_GO_HOME="~"
-export FFF_KEY_GO_TRASH="t"
 
 ### File operations.
 
 export FFF_KEY_YANK="y"
 export FFF_KEY_MOVE="m"
 export FFF_KEY_TRASH="d"
-export FFF_KEY_LINK="s"
 export FFF_KEY_BULK_RENAME="b"
-
-export FFF_KEY_YANK_ALL="Y"
-export FFF_KEY_MOVE_ALL="M"
-export FFF_KEY_TRASH_ALL="D"
-export FFF_KEY_LINK_ALL="S"
-export FFF_KEY_BULK_RENAME_ALL="B"
 
 export FFF_KEY_PASTE="p"
 export FFF_KEY_CLEAR="c"
@@ -246,18 +208,6 @@ get_os() {
         darwin*)
             opener=open
             file_flags=bIL
-        ;;
-
-        haiku)
-            opener=open
-
-            [[ -z $FFF_TRASH_CMD ]] &&
-                FFF_TRASH_CMD=trash
-
-            [[ $FFF_TRASH_CMD == trash ]] && {
-                FFF_TRASH=$(finddir -v "$PWD" B_TRASH_DIRECTORY)
-                mkdir -p "$FFF_TRASH"
-            }
         ;;
     esac
 }
@@ -658,7 +608,6 @@ list_help() {
         ''
         "${FFF_KEY_HIDDEN:-.}: toggle hidden files"
         "${FFF_KEY_SEARCH:-/}: search"
-        "${FFF_KEY_GO_TRASH:-t}: go to trash"
         "${FFF_KEY_GO_HOME:-~}: go to home"
         "${FFF_KEY_REFRESH:-e}: refresh current dir"
         "${FFF_KEY_SHELL:-!}: open shell in current dir"
@@ -677,20 +626,11 @@ list_help() {
         ''
         "${FFF_KEY_YANK:-y}: mark copy"
         "${FFF_KEY_MOVE:-m}: mark move"
-        "${FFF_KEY_TRASH:-d}: mark trash (~/.local/share/fff/trash/)"
-        "${FFF_KEY_LINK:-s}: mark symbolic link"
+        "${FFF_KEY_TRASH:-d}: mark trash (TRASH_DIR)"
         "${FFF_KEY_BULK_RENAME:-b}: mark bulk rename"
-        ''
-        "${FFF_KEY_YANK_ALL:-Y}: mark all for copy"
-        "${FFF_KEY_MOVE_ALL:-M}: mark all for move"
-        "${FFF_KEY_TRASH_ALL:-D}: mark all for trash (~/.local/share/fff/trash/)"
-        "${FFF_KEY_LINK_ALL:-S}: mark all for symbolic link"
-        "${FFF_KEY_BULK_RENAME_ALL:-B}: mark all for bulk rename"
         ''
         "${FFF_KEY_PASTE:-p}: paste/move/delete/bulk_rename"
         "${FFF_KEY_CLEAR:-c}: clear file selections"
-        ''
-        '[1-9]: favourites/bookmarks (see customization in man page)'
         ''
         "q: exit with 'cd' (if enabled) or exit this help"
         "Ctrl+C: exit without 'cd'"
@@ -715,43 +655,26 @@ mark() {
     [[ ${list[0]} == empty && -z ${list[1]} ]] &&
         return
 
-    if [[ $1 == all ]]; then
-        if ((${#marked_files[@]} != ${#list[@]})); then
-            marked_files=("${list[@]}")
-            mark_dir=$PWD
-        else
-            marked_files=()
-        fi
+    if [[ ${marked_files[$1]} == "${list[$1]}" ]]; then
+        unset 'marked_files[scroll]'
 
-        redraw
     else
-        if [[ ${marked_files[$1]} == "${list[$1]}" ]]; then
-            unset 'marked_files[scroll]'
-
-        else
-            marked_files[$1]="${list[$1]}"
-            mark_dir=$PWD
-        fi
-
-        # Clear line before changing it.
-        printf '\e[K'
-        print_line "$1"
+        marked_files[$1]="${list[$1]}"
+        mark_dir=$PWD
     fi
+
+    # Clear line before changing it.
+    printf '\e[K'
+    print_line "$1"
 
     # Find the program to use.
     case "$2" in
-        ${FFF_KEY_YANK:=y}|${FFF_KEY_YANK_ALL:=Y}) file_program=(cp -iR) ;;
-        ${FFF_KEY_MOVE:=m}|${FFF_KEY_MOVE_ALL:=M}) file_program=(mv -i)  ;;
-        ${FFF_KEY_LINK:=s}|${FFF_KEY_LINK_ALL:=S}) file_program=(ln -s)  ;;
+        ${FFF_KEY_YANK:=y}) file_program=(cp -iR) ;;
+        ${FFF_KEY_MOVE:=m}) file_program=(mv -i)  ;;
 
         # These are 'fff' functions.
-        ${FFF_KEY_TRASH:=d}|${FFF_KEY_TRASH_ALL:=D})
-            file_program=(trash)
-        ;;
-
-        ${FFF_KEY_BULK_RENAME:=b}|${FFF_KEY_BULK_RENAME_ALL:=B})
-            file_program=(bulk_rename)
-        ;;
+        ${FFF_KEY_TRASH:=d}) file_program=(trash) ;;
+        ${FFF_KEY_BULK_RENAME:=b}) file_program=(bulk_rename) ;;
     esac
 
     status_line
@@ -764,29 +687,26 @@ trash() {
     [[ $cmd_reply != y ]] &&
         return
 
-    if [[ $FFF_TRASH_CMD ]]; then
-        # Pass all but the last argument to the user's
-        # custom script. command is used to prevent this function
-        # from conflicting with commands named "trash".
-        command "$FFF_TRASH_CMD" "${@:1:$#-1}"
+    cd "$TRASH_DIR" || cmd_line "error: Can't cd to trash directory."
 
+    if cp -alf "$@" &>/dev/null; then
+        rm -r "${@:1:$#-1}"
     else
-        cd "$FFF_TRASH" || cmd_line "error: Can't cd to trash directory."
-
-        if cp -alf "$@" &>/dev/null; then
-            rm -r "${@:1:$#-1}"
-        else
-            mv -f "$@"
-        fi
-
-        # Go back to where we were.
-        cd "$OLDPWD" ||:
+        mv -f "$@"
     fi
+
+    # Go back to where we were.
+    cd "$OLDPWD" ||:
 }
 
 bulk_rename() {
+    rename_file=''
+    if hash mktemp 2>/dev/null; then
+        rename_file=$(mktemp)
+    else
+        rename_file="$HOME/.fs_tmp_bulk_rename"
+    fi
     # Bulk rename files using '$EDITOR'.
-    rename_file=${XDG_CACHE_HOME:=${HOME}/.cache}/fff/bulk_rename
     marked_files=("${@:1:$#-1}")
 
     # Save marked files to a file and open them for editing.
@@ -844,14 +764,6 @@ open() {
         # Everything else goes through 'xdg-open'/'open'.
         case "$mime_type" in
             text/*|*x-empty*|*json*)
-                # If 'fff' was opened as a file picker, save the opened
-                # file in a file called 'opened_file'.
-                ((file_picker == 1)) && {
-                    printf '%s\n' "$1" > \
-                        "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/opened_file"
-                    exit
-                }
-
                 clear_screen
                 reset_terminal
                 "${VISUAL:-${EDITOR:-vi}}" "$1"
@@ -1200,22 +1112,10 @@ key() {
         ${FFF_KEY_YANK:=y}|\
         ${FFF_KEY_MOVE:=m}|\
         ${FFF_KEY_TRASH:=d}|\
-        ${FFF_KEY_LINK:=s}|\
         ${FFF_KEY_BULK_RENAME:=b})
             ((helping)) && return
 
             mark "$scroll" "$1"
-        ;;
-
-        # Mark all files for operation.
-        ${FFF_KEY_YANK_ALL:=Y}|\
-        ${FFF_KEY_MOVE_ALL:=M}|\
-        ${FFF_KEY_TRASH_ALL:=D}|\
-        ${FFF_KEY_LINK_ALL:=S}|\
-        ${FFF_KEY_BULK_RENAME_ALL:=B})
-            ((helping)) && return
-
-            mark all "$1"
         ;;
 
         # Do the file operation.
@@ -1383,14 +1283,6 @@ key() {
             open ~
         ;;
 
-        # Go to trash.
-        ${FFF_KEY_GO_TRASH:=t})
-            ((helping)) && return
-
-            get_os
-            open "$FFF_TRASH"
-        ;;
-
         # Go to previous dir.
         ${FFF_KEY_PREVIOUS:=-})
             ((helping)) && return
@@ -1407,17 +1299,6 @@ key() {
             }
 
             open "$PWD"
-        ;;
-
-        # Directory favourites.
-        [1-9])
-            ((helping)) && return
-
-            favourite="FFF_FAV${1}"
-            favourite="${!favourite}"
-
-            [[ $favourite ]] &&
-                open "$favourite"
         ;;
 
         # Quit and store current directory in a file for CD on exit.
@@ -1451,20 +1332,10 @@ main() {
     # '||:': Do nothing if 'cd' fails. We don't care.
     cd "${2:-$1}" &>/dev/null ||:
 
-    [[ $1 == -v ]] && {
-        printf '%s\n' "fff 2.2"
-        exit
-    }
-
     [[ $1 == -h ]] && {
         man fff
         exit
     }
-
-    # Store file name in a file on open instead of using 'FFF_OPENER'.
-    # Used in 'fff.vim'.
-    [[ $1 == -p ]] &&
-        file_picker=1
 
     # bash 5 and some versions of bash 4 don't allow SIGWINCH to interrupt
     # a 'read' command and instead wait for it to complete. In this case it
@@ -1485,7 +1356,7 @@ main() {
 
     # Create the trash and cache directory if they don't exist.
     mkdir -p "${XDG_CACHE_HOME:=${HOME}/.cache}/fff" \
-             "${FFF_TRASH:=${XDG_DATA_HOME:=${HOME}/.local/share}/fff/trash}"
+             "${TRASH_DIR}"
 
     # 'nocaseglob': Glob case insensitively (Used for case insensitive search).
     # 'nullglob':   Don't expand non-matching globs to themselves.
