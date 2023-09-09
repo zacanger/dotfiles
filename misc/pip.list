@@ -9,5 +9,6 @@ feedgen
 pip
 py-gfm
 pylint
+ranger-fm
 requests
 virtualenv

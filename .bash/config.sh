@@ -46,7 +46,7 @@ fi
 stty stop ""
 
 # get core dumps
-ulimit -c unlimited
+ulimit -c unlimited 2>/dev/null
 
 # set tab width in terminal output
 tabs -2

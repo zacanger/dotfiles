@@ -3,6 +3,7 @@ set -e
 
 default_trash_dir="$HOME/.z-trash"
 trash_dir=${TRASH_DIR:-$default_trash_dir}
+ignored_rm_flags='-R -r -f -rf -fr --force --recursive'
 
 restore_trash_dir() {
     mkdir -p "$trash_dir"
@@ -10,12 +11,14 @@ restore_trash_dir() {
 
 trash_files() {
     for f in "$@"; do
-        b=$(basename "$f")
-        dest="$b"
-        if [ -e "$trash_dir/$b" ]; then
-            dest="$b-$RANDOM"
+        if ! [[ " $ignored_rm_flags " = *" $f "* ]]; then
+            b=$(basename "$f")
+            dest="$b"
+            if [ -e "$trash_dir/$b" ]; then
+                dest="$b-$RANDOM"
+            fi
+            mv -i "$f" "$trash_dir/$dest"
         fi
-        mv -i "$f" "$trash_dir/$dest"
     done
 }
 

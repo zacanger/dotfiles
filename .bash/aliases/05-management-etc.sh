@@ -43,5 +43,8 @@ if [[ $(uname) == 'Darwin' ]]; then
     if hash gmake 2>/dev/null; then
         alias make='gmake'
     fi
+    if hash gtar 2>/dev/null; then
+        alias make='gmake'
+    fi
     alias poweroff='sudo shutdown -h now'
 fi

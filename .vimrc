@@ -320,7 +320,11 @@ inoremap <Esc> <Esc>`^
 cnoremap sudow w !sudo tee & >/dev/null
 
 let g:seoul256_background = 233
-colo seoul256
+try
+    colorscheme seoul256
+catch /^Vim\%((\a\+)\)\=:E185/
+    colorscheme elflord
+endtry
 
 let g:netrw_banner=0
 let g:netrw_browser_split=4
@@ -464,11 +468,22 @@ nmap ga <Plug>(EasyAlign)
 " vim-trailing-whitespace
 let g:extra_whitespace_ignored_filetypes = ['go', 'md']
 
-" poppy
-au! cursormoved * call PoppyInit()
+" if Poppy isn't loaded (like when first installing plugins),
+" calling it will error, so we just set some defaults instead
+if exists('poppyhigh')
+    au! cursormoved * call PoppyInit()
+else
+    " match pairs
+    inoremap { {}<Esc>ha
+    inoremap ( ()<Esc>ha
+    inoremap [ []<Esc>ha
+    inoremap " ""<Esc>ha
+    inoremap ' ''<Esc>ha
+    inoremap ` ``<Esc>ha
+endif
 
-" use {{{ }}}
-set foldmethod=marker
+" don't use {{{  }}}, also syntax never really works the way i want
+set foldmethod=manual
 
 let g:AutoPairsShortcutToggle = ''
 
@@ -499,3 +514,77 @@ inoremap <silent><expr> <Tab>
       \ coc#refresh()
 inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
 inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+
+"   TODO: maybe use these instead of some plugins
+"   function! StripTrailingWhitespaces() abort
+"       let l:save = winsaveview()
+"       keeppatterns %s/\v\s+$//e
+"       call winrestview(l:save)
+"   endfunction
+"   autocmd BufWritePost * StripTrailingWhitespaces
+"
+"   " dylan araps wrote this. i don't think he'll mind.
+"   let g:root#patterns = get(g:, 'root#patterns', ['.git', '_darcs', '.hg', '.bzr', '.svn'])
+"   let g:root#auto = get(g:, 'root#auto', 0)
+"   let g:root#autocmd_patterns = get(g:, 'root#autocmd_patterns', '*')
+"   let g:root#echo = get(g:, 'root#echo', 1)
+"
+"   function! s:findRoot()
+"       if &buftype ==? ''
+"           " The plugin doesn't work with autochdir
+"           set noautochdir
+"
+"           " The plugin only works with local directories
+"           if expand('%:p') =~? '://'
+"               return
+"           endif
+"
+"           " Start in open file's directory
+"           silent! lcd %:p:h
+"           let l:liststart = 0
+"
+"           for l:pattern in g:root#patterns[l:liststart : len(g:root#patterns)]
+"               " If l:pattern is a file use findfile() else use finddir()
+"               if matchstr(l:pattern, '\m\C\w\+\.\w*$') == l:pattern
+"                   let l:fullpath = findfile(l:pattern, ';')
+"               else
+"                   let l:fullpath = finddir(l:pattern, ';')
+"               endif
+"
+"               " Split the directory into path/match
+"               let l:match = matchstr(l:fullpath, '\m\C[^\/]*$')
+"               let l:path = matchstr(l:fullpath, '\m\C.*\/')
+"
+"               " $HOME + match
+"               let l:home = $HOME . '/' . l:pattern
+"               if l:fullpath == '' || l:fullpath == l:home
+"                   let l:liststart = l:liststart + 1
+"                   lcd %:p:h
+"               elseif empty(l:match) == 0
+"                   break
+"               endif
+"
+"               " If the search hits the end of the list start over
+"               if l:liststart == len(g:root#patterns)
+"                   let l:liststart = 0
+"               endif
+"           endfor
+"
+"           " If path is anything but blank
+"           if l:path !=? ''
+"               exe 'lcd' . ' ' l:path
+"           endif
+"
+"           if g:root#echo == 1 && l:match !=? ''
+"               echom 'Found' l:match 'in' getcwd()
+"           elseif g:root#echo == 1
+"               echom 'Root dir not found'
+"           endif
+"       endif
+"   endfunction
+"
+"   command! Root call s:findRoot()
+"   augroup root
+"       au!
+"       exe 'autocmd BufEnter ' . g:root#autocmd_patterns . ' :Root'
+"   augroup END

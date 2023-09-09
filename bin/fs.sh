@@ -1,215 +1,116 @@
 #!/usr/bin/env bash
-# based on fff by dylanaraps, MIT licensed
-# also includes some changes from pierre dangauthier and
-# roy-orbinson (on github; i assume not the real roy orbinson)
+# set -ex
 
-TRASH_DIR="$HOME/.z-trash"
-# TODO:
-# honestly, a lot. this is very large and includes a lot
-# that i don't really care about.
-# some things i already know i need to do:
-# * slim it all down
-# * build a convenient mime-type/opener map
-# * fix all shellcheck issues
+# Based on fff by dylanaraps, MIT licensed.
+# Also includes some changes from Pierre Dangauthier and
+# Roy-Orbison (GH username, not the famous one).
+# Depends on coreutils and some kind of opener (xdg-open, etc.).
+
+# TODO: A lot. See the comments. Some general ideas:
+# * get keybinds working the same as in ranger
+# * build a good mime-type to handler map and fn
+# * fix anything shellcheck complains about
 # * get rid of the custom trash implementation
-# * consolidate help/usage
-# * when it's ready, alias to fs, and get rid of ranger
-# * copy into dotfiles-minimal when i'm happy with it
+# * redo help
+# * consider adding support for multiple keys (vim-style phrases)
+# * swap : out to work for complex things like in ranger
+# * n and N handling in search
+# * add an open_with
+# * renaming: I, A, and r
 
-# Dependencies:
-#- `coreutils`
-#   - File operations.
-#  `xdg-utils` (*optional*)
-#   - Program handling (*non-text*).
-#   - *Customizable (if not using `xdg-open`): `$FFF_OPENER`.*
+# TODO: my ranger keybinds. sort through, find what matters,
+# make everything match.
+#   <escape>   change_mode normal
+#   S          shell $SHELL
+#   :          console
+#   ;          console
+#   !          console shell
+#   cd         console cd%space
+#   cw         console rename%space
+#   <c-p>      chain console; eval fm.ui.console.history_move(-1)
+#   <space>    mark_files toggle=True
+#   v          mark_files all=True toggle=True
+#   V          toggle_visual_mode
+#   dd         cut
+#   yy         copy
+#   ya         copy mode=add
+#   yr         copy mode=remove
+#   yt         copy mode=toggle
+#   pp         paste
+#   po         paste overwrite=True
+#   pP         paste append=True
+#   pO         paste overwrite=True append=True
+#   n          search_next
+#   N          search_next forward=False
+#   PP         paste overwrite=True
+#   xx         console delete
+#   XX         shell trash %s
 
-manpage='
-j: scroll down
-k: scroll up
-h: go to parent dir
-l: go to child dir
+# TODO: old manpage, reconcile as we go
+# then update list_help with the new stuff
+#
+#  :: go to a directory by typing     # :cd in ranger
+#  !: open shell in current dir       # FFF_KEY_SHELL
+#
+#  operations:
+#  y: mark copy           # FFF_KEY_YANK
+#  m: mark move           # FFF_KEY_MOVE
+#  d: mark trash          # FFF_KEY_TRASH
+#  b: mark bulk rename    # FFF_KEY_BULK_RENAME
+#  p: paste/move/delete/bulk_rename
+#  c: clear file selections
+#
+#  q/ctrl+c: exit
 
-enter: go to child dir
-backspace: go to parent dir
+init_options() {
+    # All config.
+    # In a function for easy folding.
 
--: go to previous dir
+    # keys
+    FSSH_KEY_ATTRIBUTES='i'         # show info with stat
+    FSSH_KEY_GO_HOME='~'            # cd ~/
+    FSSH_KEY_GO_DIR=':'             # go to directory
+    FSSH_KEY_HELP='?'               # display keybinds
+    FSSH_KEY_QUIT='q'               # exit
+    FSSH_KEY_RENAME='A'             # rename files (A to match vim A)
+    FSSH_KEY_SEARCH='/'             # search through files in dir
+    FSSH_KEY_PASTE='p'              # multi file ops
+    FSSH_KEY_CLEAR='c'              # clear files selected for op
+    FSSH_KEY_MKFILE='f'             # touch
+    FSSH_KEY_MKDIR='n'              # mkdir
+    FSSH_KEY_UP='k'                 # vim-alike
+    FSSH_KEY_DOWN='j'               # vim-alike
+    FSSH_KEY_RIGHT='l'              # vim-alike
+    FSSH_KEY_LEFT='h'               # vim-alike
+    FSSH_KEY_TOGGLE_HIDDEN='.'      # toggle hidden file display
+    FSSH_KEY_TOP='g'                # vim-alike - this is gg in ranger
+    FSSH_KEY_BOTTOM='G'             # vim-alike
+    FSSH_KEY_REFRESH='R'            # refresh dir and redraw
+    FSSH_KEY_PAGE_UP='K'            # page up
+    FSSH_KEY_PAGE_DOWN='J'          # page down
 
-g: go to top
-G: go to bottom
+    # options
+    FSSH_TRASH_DIR="$HOME/.z-trash" # move to trash instead of rm
+    FSSH_EDITOR='vim'               # maybe VISUAL | EDITOR | vim | vi
+    FSSH_STAT_CMD='stat'            # show attrs
+    FSSH_HIDDEN=1                   # show hidden files by default
+    FSSH_MARK_FORMAT=" %f*"
+    FSSH_FILE_FORMAT="%f"
 
-:: go to a directory by typing
-
-/: search
-t: go to trash
-~: go to home
-e: refresh current dir
-!: open shell in current dir
-
-x: view file/dir attributes
-
-down:  scroll down
-up:    scroll up
-left:  go to parent dir
-right: go to child dir
-
-PgUp: page up
-PgDown: page down
-u: ncdu
-
-f: new file
-n: new dir
-r: rename
-X: toggle executable
-
-y: mark copy
-m: mark move
-d: mark trash (TRASH_DIR)
-b: mark bulk rename
-
-p: paste/move/delete/bulk_rename
-c: clear file selections
-
-5: page up
-6: page down
-
-q: exit with "cd" (if enabled) or exit help
-Ctrl+C: exit without "cd"
-
-?: show help
-
-### Customization
-# Use LS_COLORS to color fff.
-# (On by default if available)
-# (Ignores FFF_COL1)
-export FFF_LS_COLORS=1
-
-# Show/Hide hidden files on open.
-# (On by default)
-export FFF_HIDDEN=0
-
-# Directory color [0-9]
-export FFF_COL1=2
-
-# Status background color [0-9]
-export FFF_COL2=7
-
-# Selection color [0-9] (copied/moved files)
-export FFF_COL3=6
-
-# Cursor color [0-9]
-export FFF_COL4=1
-
-# Status foreground color [0-9]
-export FFF_COL5=0
-
-# Text Editor
-export EDITOR="vim"
-
-# File Opener
-export FFF_OPENER="xdg-open"
-
-# File Attributes Command
-export FFF_STAT_CMD="stat"
-
-# Enable or disable CD on exit.
-# Default: "1"
-export FFF_CD_ON_EXIT=1
-
-# CD on exit helper file
-# Default: "${XDG_CACHE_HOME}/fff/fff.d"
-#          If not using XDG, "${HOME}/.cache/fff/fff.d" is used.
-export FFF_CD_FILE=~/.fff_d
-
-# File format.
-# Customize the item string.
-# Format ("%f" is the current file): "str%fstr"
-# Example (Add a tab before files): FFF_FILE_FORMAT="%f"
-export FFF_FILE_FORMAT="%f"
-
-# Mark format.
-# Customize the marked item string.
-# Format ("%f" is the current file): "str%fstr"
-# Example (Add a " >" before files): FFF_MARK_FORMAT="> %f"
-export FFF_MARK_FORMAT=" %f*"
-
-KKeeyybbiinnddiinnggss
-For more information see:
-   https://github.com/dylanaraps/fff#customizing-the-keybindings
-
-### Moving around.
-
-# Go to child directory.
-export FFF_KEY_CHILD1="l"
-export FFF_KEY_CHILD2=$"\[C" # Right Arrow
-export FFF_KEY_CHILD3=""      # Enter / Return
-
-# Go to parent directory.
-export FFF_KEY_PARENT1="h"
-export FFF_KEY_PARENT2=$"\[D" # Left Arrow
-export FFF_KEY_PARENT3=$"177" # Backspace
-export FFF_KEY_PARENT4=$"\b"   # Backspace (Older terminals)
-
-# Go to previous directory.
-export FFF_KEY_PREVIOUS="-"
-
-# Search.
-export FFF_KEY_SEARCH="/"
-
-# Spawn a shell.
-export FFF_KEY_SHELL="!"
-
-# Scroll down.
-export FFF_KEY_SCROLL_DOWN1="j"
-export FFF_KEY_SCROLL_DOWN2=$"\[B" # Down Arrow
-
-# Scroll up.
-export FFF_KEY_SCROLL_UP1="k"
-export FFF_KEY_SCROLL_UP2=$"\[A"   # Up Arrow
-
-# Go to top and bottom.
-export FFF_KEY_TO_TOP="g"
-export FFF_KEY_TO_BOTTOM="G"
-
-# Go to dirs.
-export FFF_KEY_GO_DIR=":"
-export FFF_KEY_GO_HOME="~"
-
-### File operations.
-
-export FFF_KEY_YANK="y"
-export FFF_KEY_MOVE="m"
-export FFF_KEY_TRASH="d"
-export FFF_KEY_BULK_RENAME="b"
-
-export FFF_KEY_PASTE="p"
-export FFF_KEY_CLEAR="c"
-
-export FFF_KEY_RENAME="r"
-export FFF_KEY_MKDIR="n"
-export FFF_KEY_MKFILE="f"
-
-### Miscellaneous
-
-# Show file attributes.
-export FFF_KEY_ATTRIBUTES="x"
-
-# Toggle executable flag.
-export FFF_KEY_EXECUTABLE="X"
-
-# Toggle hidden files.
-export FFF_KEY_HIDDEN="."
-'
-
-get_os() {
-    # Figure out the current operating system to set some specific variables.
-    # '$OSTYPE' typically stores the name of the OS kernel.
-    case $OSTYPE in
-        # Mac OS X / macOS.
-        darwin*)
-            opener=open
-            file_flags=bIL
-        ;;
-    esac
+    # Use LS_COLORS (will cancel if not available)
+    # LS_COLORS takes priority over the other color settings
+    FSSH_LS_COLORS=1                # use LS_COLORS
+    FSSH_COL1=5                     # directory color, magenta
+    FSSH_COL2=4                     # status background color, cyan
+    FSSH_COL3=1                     # selection color, red
+    FSSH_COL4=2                     # cursor color, green
+    FSSH_COL5=0                     # status foreground color, black
+    if [[ $(uname) == 'Darwin' ]]; then
+        FSSH_DEFAULT_OPENER=open
+        file_flags=bIL
+    else
+        FSSH_DEFAULT_OPENER=xdg-open
+    fi
 }
 
 setup_terminal() {
@@ -259,16 +160,16 @@ setup_options() {
     # multiple times in the code.
 
     # Format for normal files.
-    [[ $FFF_FILE_FORMAT == *%f* ]] && {
-        file_pre=${FFF_FILE_FORMAT/'%f'*}
-        file_post=${FFF_FILE_FORMAT/*'%f'}
+    [[ $FSSH_FILE_FORMAT == *%f* ]] && {
+        file_pre=${FSSH_FILE_FORMAT/'%f'*}
+        file_post=${FSSH_FILE_FORMAT/*'%f'}
     }
 
     # Format for marked files.
     # Use affixes provided by the user or use defaults, if necessary.
-    if [[ $FFF_MARK_FORMAT == *%f* ]]; then
-        mark_pre=${FFF_MARK_FORMAT/'%f'*}
-        mark_post=${FFF_MARK_FORMAT/*'%f'}
+    if [[ $FSSH_MARK_FORMAT == *%f* ]]; then
+        mark_pre=${FSSH_MARK_FORMAT/'%f'*}
+        mark_post=${FSSH_MARK_FORMAT/*'%f'}
     else
         mark_pre=" "
         mark_post="*"
@@ -295,7 +196,7 @@ get_ls_colors() {
     # as a separate variable.
     # Format: ':.ext=0;0:*.jpg=0;0;0:*png=0;0;0;0:'
     [[ -z $LS_COLORS ]] && {
-        FFF_LS_COLORS=0
+        FSSH_LS_COLORS=0
         return
     }
 
@@ -365,8 +266,8 @@ status_line() {
     #              This is more widely supported than '\e[u'.
     printf '\e7\e[%sH\e[3%s;4%sm%*s\r%s %s%s\e[m\e[%sH\e[K\e8' \
            "$((LINES-1))" \
-           "${FFF_COL5:-0}" \
-           "${FFF_COL2:-1}" \
+           "${FSSH_COL5:-0}" \
+           "${FSSH_COL2:-1}" \
            "$COLUMNS" "" \
            "($((scroll+1))/$((list_total+1)))" \
            "$mark_ui" \
@@ -424,7 +325,7 @@ print_line() {
         file_name=${list[$1]}
         if [[ "$file_name" ]]; then
             # Highlight the key(s), escaping any specials in overrides to a human-readable form
-            format+=\\e[${di:-1;3${FFF_COL1:-2}}m
+            format+=\\e[${di:-1;3${FSSH_COL1:-2}}m
             local action="${file_name%: *}"
             format+="$(cat -A <<<"$action" | head -c -2)\\e[${fi:-37}m: "
             file_name="${file_name##*: }"
@@ -437,7 +338,7 @@ print_line() {
 
     # Directory.
     elif [[ -d ${list[$1]} ]]; then
-        format+=\\e[${di:-1;3${FFF_COL1:-2}}m
+        format+=\\e[${di:-1;3${FSSH_COL1:-2}}m
         suffix+=/
 
     # Block special file.
@@ -470,7 +371,7 @@ print_line() {
 
     # Color files that end in a pattern as defined in LS_COLORS.
     # 'BASH_REMATCH' is an array that stores each REGEX match.
-    elif [[ $FFF_LS_COLORS == 1 &&
+    elif [[ $FSSH_LS_COLORS == 1 &&
             $ls_patterns &&
             $file_name =~ ($ls_patterns)$ ]]; then
         match=${BASH_REMATCH[0]}
@@ -480,7 +381,7 @@ print_line() {
     # Color files based on file extension and LS_COLORS.
     # Check if file extension adheres to POSIX naming
     # standard before checking if it's a variable.
-    elif [[ $FFF_LS_COLORS == 1 &&
+    elif [[ $FSSH_LS_COLORS == 1 &&
             $file_ext != "$file_name" &&
             $file_ext =~ ^[a-zA-Z0-9_]*$ ]]; then
         file_ext=ls_${file_ext}
@@ -492,11 +393,11 @@ print_line() {
 
     # If the list item is under the cursor.
     (($1 == scroll)) &&
-        format+="\\e[1;3${FFF_COL4:-6};7m"
+        format+="\\e[1;3${FSSH_COL4:-6};7m"
 
     # If the list item is marked for operation.
-    !((helping)) && [[ ${marked_files[$1]} == "${list[$1]:-null}" ]] && {
-        format+=\\e[3${FFF_COL3:-1}m${mark_pre}
+    ! ((helping)) && [[ ${marked_files[$1]} == "${list[$1]:-null}" ]] && {
+        format+=\\e[3${FSSH_COL3:-1}m${mark_pre}
         suffix+=${mark_post}
     }
 
@@ -591,51 +492,8 @@ list_help() {
     printf '\e]2;fff: help\e'\\
 
     list=(
-        "${FFF_KEY_SCROLL_DOWN1:-j}: scroll down"
-        "${FFF_KEY_SCROLL_UP1:-k}: scroll up"
-        "${FFF_KEY_PARENT1:-h}: go to parent dir"
-        "${FFF_KEY_CHILD1:-l}: go to child dir"
-        ''
-        'enter: go to child dir'
-        'backspace: go to parent dir'
-        ''
-        "${FFF_KEY_PREVIOUS:--}: go to previous dir"
-        ''
-        "${FFF_KEY_TO_TOP:-g}: go to top"
-        "${FFF_KEY_TO_BOTTOM:-G}: go to bottom"
-        ''
-        "${FFF_KEY_GO_DIR:-:}: go to a directory by typing"
-        ''
-        "${FFF_KEY_HIDDEN:-.}: toggle hidden files"
-        "${FFF_KEY_SEARCH:-/}: search"
-        "${FFF_KEY_GO_HOME:-~}: go to home"
-        "${FFF_KEY_REFRESH:-e}: refresh current dir"
-        "${FFF_KEY_SHELL:-!}: open shell in current dir"
-        ''
-        "${FFF_KEY_ATTRIBUTES:-x}: view file/dir attributes"
-        ''
-        'down:  scroll down'
-        'up:    scroll up'
-        'left:  go to parent dir'
-        'right: go to child dir'
-        ''
-        "${FFF_KEY_MKFILE:-f}: new file"
-        "${FFF_KEY_MKDIR:-n}: new dir"
-        "${FFF_KEY_RENAME:-r}: rename"
-        "${FFF_KEY_EXECUTABLE:-X}: toggle executable"
-        ''
-        "${FFF_KEY_YANK:-y}: mark copy"
-        "${FFF_KEY_MOVE:-m}: mark move"
-        "${FFF_KEY_TRASH:-d}: mark trash (TRASH_DIR)"
-        "${FFF_KEY_BULK_RENAME:-b}: mark bulk rename"
-        ''
-        "${FFF_KEY_PASTE:-p}: paste/move/delete/bulk_rename"
-        "${FFF_KEY_CLEAR:-c}: clear file selections"
-        ''
-        "q: exit with 'cd' (if enabled) or exit this help"
-        "Ctrl+C: exit without 'cd'"
-        ''
-        "${FFF_KEY_HELP:-?}: show this help"
+        'TODO: more here'
+        "$FSSH_KEY_HELP: show this help"
     )
 
     ((list_total=${#list[@]}-1))
@@ -687,7 +545,7 @@ trash() {
     [[ $cmd_reply != y ]] &&
         return
 
-    cd "$TRASH_DIR" || cmd_line "error: Can't cd to trash directory."
+    cd "$FSSH_TRASH_DIR" || cmd_line "error: Can't cd to trash directory."
 
     if cp -alf "$@" &>/dev/null; then
         rm -r "${@:1:$#-1}"
@@ -706,12 +564,12 @@ bulk_rename() {
     else
         rename_file="$HOME/.fs_tmp_bulk_rename"
     fi
-    # Bulk rename files using '$EDITOR'.
+    # Bulk rename files using '$FSSH_EDITOR'.
     marked_files=("${@:1:$#-1}")
 
     # Save marked files to a file and open them for editing.
     printf '%s\n' "${marked_files[@]##*/}" > "$rename_file"
-    "${EDITOR:-vi}" "$rename_file"
+    "$FSSH_EDITOR" "$rename_file"
 
     # Read the renamed files to an array.
     IFS=$'\n' read -d "" -ra changed_files < "$rename_file"
@@ -738,17 +596,18 @@ bulk_rename() {
 
     # Let the user double-check the commands and execute them.
     ((renamed == 1)) && {
-        "${EDITOR:-vi}" "$rename_file"
+        "$FSSH_EDITOR" "$rename_file"
 
         source "$rename_file"
         rm "$rename_file"
     }
 
-    # Fix terminal settings after '$EDITOR'.
+    # Fix terminal settings after '$FSSH_EDITOR'.
     setup_terminal
 }
 
 open() {
+    # TODO: this needs major improvements to handle various file types
     # Open directories and files.
     if [[ -d $1/ ]]; then
         search=
@@ -760,13 +619,13 @@ open() {
         # Figure out what kind of file we're working with.
         get_mime_type "$1"
 
-        # Open all text-based files in '$EDITOR'.
+        # Open all text-based files in '$FSSH_EDITOR'.
         # Everything else goes through 'xdg-open'/'open'.
         case "$mime_type" in
             text/*|*x-empty*|*json*)
                 clear_screen
                 reset_terminal
-                "${VISUAL:-${EDITOR:-vi}}" "$1"
+                "${VISUAL:-${FSSH_EDITOR}}" "$1"
                 setup_terminal
                 redraw
             ;;
@@ -783,7 +642,7 @@ open() {
                 # 'nohup':  Make the process immune to hangups.
                 # '&':      Send it to the background.
                 # 'disown': Detach it from the shell.
-                nohup "${FFF_OPENER:-${opener:-xdg-open}}" "$1" &>/dev/null &
+                nohup "$FSSH_DEFAULT_OPENER" "$1" &>/dev/null &
                 disown
             ;;
         esac
@@ -843,7 +702,7 @@ cmd_line() {
             "")
                 # If there's only one search result and its a directory,
                 # enter it on one enter keypress.
-                !((helping)) && [[ $2 == search && -d ${list[0]} ]] && ((list_total == 0)) && {
+                ! ((helping)) && [[ $2 == search && -d ${list[0]} ]] && ((list_total == 0)) && {
                     # '\e[?25l': Hide the cursor.
                     printf '\e[?25l'
 
@@ -927,33 +786,19 @@ key() {
     }
 
     case ${special_key:-$1} in
-        "${FFF_KEY_HELP:=?}")
+        "$FSSH_KEY_HELP")
             redraw help
         ;;
 
         # Open list item.
-        # 'C' is what bash sees when the right arrow is pressed
-        # ('\e[C' or '\eOC').
-        # '' is what bash sees when the enter/return key is pressed.
-        ${FFF_KEY_CHILD1:=l}|\
-        ${FFF_KEY_CHILD2:=$'\e[C'}|\
-        ${FFF_KEY_CHILD3:=""}|\
-        ${FFF_KEY_CHILD4:=$'\eOC'})
+        "$FSSH_KEY_RIGHT")
             ((helping)) && return
 
             open "${list[scroll]}"
         ;;
 
         # Go to the parent directory.
-        # 'D' is what bash sees when the left arrow is pressed
-        # ('\e[D' or '\eOD').
-        # '\177' and '\b' are what bash sometimes sees when the backspace
-        # key is pressed.
-        ${FFF_KEY_PARENT1:=h}|\
-        ${FFF_KEY_PARENT2:=$'\e[D'}|\
-        ${FFF_KEY_PARENT3:=$'\177'}|\
-        ${FFF_KEY_PARENT4:=$'\b'}|\
-        ${FFF_KEY_PARENT5:=$'\eOD'})
+        "$FSSH_KEY_LEFT")
             ((helping)) && return
 
             # If a search was done, clear the results and open the current dir.
@@ -967,10 +812,8 @@ key() {
             fi
         ;;
 
-        # Page up
-        # "${FFF_KEY_PAGE_DOWN1:=6}")
-        ${FFF_KEY_PAGE_DOWN1:=6}|\
-        ${FFF_KEY_PAGE_DOWN2:=$'\e[6'})
+        # Page down
+        "$FSSH_KEY_PAGE_DOWN")
             for ((ii=0; ii<scroll_page; ii++)) do
                 ((scroll >= list_total)) && break
                 ((scroll++))
@@ -983,9 +826,8 @@ key() {
             done
         ;;
 
-        # Page down
-        ${FFF_KEY_PAGE_UP1:=5}|\
-        ${FFF_KEY_PAGE_UP2:=$'\e[5'})
+        # Page up
+        "$FSSH_KEY_PAGE_UP")
             for ((ii=0; ii<scroll_page; ii++)) do
                 ((scroll <= 0)) && break
                 ((scroll--))
@@ -1005,11 +847,7 @@ key() {
         ;;
 
         # Scroll down.
-        # 'B' is what bash sees when the down arrow is pressed
-        # ('\e[B' or '\eOB').
-        ${FFF_KEY_SCROLL_DOWN1:=j}|\
-        ${FFF_KEY_SCROLL_DOWN2:=$'\e[B'}|\
-        ${FFF_KEY_SCROLL_DOWN3:=$'\eOB'})
+        "$FSSH_KEY_DOWN")
             while ((scroll < list_total)); do
                 ((scroll++))
                 ((y < max_items)) && ((y++))
@@ -1024,11 +862,7 @@ key() {
         ;;
 
         # Scroll up.
-        # 'A' is what bash sees when the up arrow is pressed
-        # ('\e[A' or '\eOA').
-        ${FFF_KEY_SCROLL_UP1:=k}|\
-        ${FFF_KEY_SCROLL_UP2:=$'\e[A'}|\
-        ${FFF_KEY_SCROLL_UP3:=$'\eOA'})
+        "$FSSH_KEY_UP")
             # '\e[1L': Insert a line above the cursor.
             # '\e[A':  Move cursor up a line.
             while ((scroll > 0)); do
@@ -1051,7 +885,7 @@ key() {
         ;;
 
         # Go to top.
-        ${FFF_KEY_TO_TOP:=g})
+        "$FSSH_KEY_TOP")
             ((scroll != 0)) && {
                 scroll=0
                 redraw
@@ -1059,7 +893,7 @@ key() {
         ;;
 
         # Go to bottom.
-        ${FFF_KEY_TO_BOTTOM:=G})
+        "$FSSH_KEY_BOTTOM")
             ((scroll != list_total)) && {
                 ((scroll=list_total))
                 redraw
@@ -1067,19 +901,19 @@ key() {
         ;;
 
         # Show hidden files.
-        ${FFF_KEY_HIDDEN:=.})
+        "$FSSH_KEY_TOGGLE_HIDDEN")
             ((helping)) && return
 
             # 'a=a>0?0:++a': Toggle between both values of 'shopt_flags'.
             #                This also works for '3' or more values with
             #                some modification.
             shopt_flags=(u s)
-            shopt -"${shopt_flags[((a=${a:=$FFF_HIDDEN}>0?0:++a))]}" dotglob
+            shopt -"${shopt_flags[((a=${a:=$FSSH_HIDDEN}>0?0:++a))]}" dotglob
             redraw full
         ;;
 
         # Search.
-        ${FFF_KEY_SEARCH:=/})
+        "$FSSH_KEY_SEARCH")
             cmd_line "/" "search"
 
             # If the search came up empty, redraw the current dir.
@@ -1119,7 +953,7 @@ key() {
         ;;
 
         # Do the file operation.
-        ${FFF_KEY_PASTE:=p})
+        "$FSSH_KEY_PASTE")
             ((helping)) && return
 
             [[ ${marked_files[*]} ]] && {
@@ -1144,7 +978,7 @@ key() {
         ;;
 
         # Clear all marked files.
-        ${FFF_KEY_CLEAR:=c})
+        "$FSSH_KEY_CLEAR")
             ((helping)) && return
 
             [[ ${marked_files[*]} ]] && {
@@ -1154,7 +988,7 @@ key() {
         ;;
 
         # Rename list item.
-        ${FFF_KEY_RENAME:=r})
+        "$FSSH_KEY_RENAME")
             ((helping)) && return
 
             [[ ! -e ${list[scroll]} ]] &&
@@ -1176,7 +1010,7 @@ key() {
         ;;
 
         # Create a directory.
-        ${FFF_KEY_MKDIR:=n})
+        "$FSSH_KEY_MKDIR")
             ((helping)) && return
 
             cmd_line "mkdir: " "dirs"
@@ -1195,7 +1029,7 @@ key() {
         ;;
 
         # Create a file.
-        ${FFF_KEY_MKFILE:=f})
+        "$FSSH_KEY_MKFILE")
             ((helping)) && return
 
             cmd_line "mkfile: "
@@ -1214,56 +1048,30 @@ key() {
         ;;
 
         # Show file attributes.
-        ${FFF_KEY_ATTRIBUTES:=x})
+        "$FSSH_KEY_ATTRIBUTES")
             ((helping)) && return
 
             [[ -e "${list[scroll]}" ]] && {
                 clear_screen
                 status_line "${list[scroll]}"
-                "${FFF_STAT_CMD:-stat}" "${list[scroll]}"
+                "$FSSH_STAT_CMD" "${list[scroll]}"
                 read -ern 1
                 redraw
             }
         ;;
 
-        # Toggle executable flag.
-        ${FFF_KEY_EXECUTABLE:=X})
-            ((helping)) && return
-
-            [[ -f ${list[scroll]} && -w ${list[scroll]} ]] && {
-                if [[ -x ${list[scroll]} ]]; then
-                    chmod -x "${list[scroll]}"
-                    status_line "Unset executable."
-                else
-                    chmod +x "${list[scroll]}"
-                    status_line "Set executable."
-                fi
-            }
-        ;;
-
-         ## run du/ncdu to get sizes
-        u)
-            [[ -e "${list[scroll]}" ]] && {
-                clear_screen
-                reset_terminal
-                status_line "${list[scroll]}"
-                type ncdu &> /dev/null && ncdu "${list[scroll]}" || du "${list[scroll]}"
-                setup_terminal
-                redraw
-            }
-        ;;
-
         ## add ? to display keyboard shortcuts
-        "?")
+        "$FSSH_KEY_HELP")
             clear_screen
-            cat ~/bin/fff/fff.1 | grep -A 62 "Usage"| grep -v "^\." | less
+            # TODO:
+            echo "Coming soon: help"
             setup_terminal
             redraw
         ;;
 
 
         # Go to dir.
-        ${FFF_KEY_GO_DIR:=:})
+        "$FSSH_KEY_GO_DIR")
             ((helping)) && return
 
             cmd_line "go to dir: " "dirs"
@@ -1277,21 +1085,14 @@ key() {
         ;;
 
         # Go to '$HOME'.
-        ${FFF_KEY_GO_HOME:='~'})
+        "$FSSH_KEY_GO_HOME")
             ((helping)) && return
 
             open ~
         ;;
 
-        # Go to previous dir.
-        ${FFF_KEY_PREVIOUS:=-})
-            ((helping)) && return
-
-            open "$OLDPWD"
-        ;;
-
         # Refresh current dir.
-        ${FFF_KEY_REFRESH:=e})
+        "$FSSH_KEY_REFRESH")
             ((helping)) && {
                 list=("${cur_list[@]}")
                 redraw
@@ -1301,22 +1102,12 @@ key() {
             open "$PWD"
         ;;
 
-        # Quit and store current directory in a file for CD on exit.
-        # Don't allow user to redefine 'q' so a bad keybinding doesn't
-        # remove the option to quit.
-        q)
+        # Goodbye
+        "$FSSH_KEY_QUIT")
             ((helping)) && {
                 redraw full
                 return
             }
-
-            : "${FFF_CD_FILE:=${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d}"
-
-            [[ -w $FFF_CD_FILE ]] &&
-                rm "$FFF_CD_FILE"
-
-            [[ ${FFF_CD_ON_EXIT:=1} == 1 ]] &&
-                printf '%s\n' "$PWD" > "$FFF_CD_FILE"
 
             exit
         ;;
@@ -1324,6 +1115,7 @@ key() {
 }
 
 main() {
+    init_options
     # Handle a directory as the first argument.
     # 'cd' is a cheap way of finding the full path to a directory.
     # It updates the '$PWD' variable on successful execution.
@@ -1331,11 +1123,6 @@ main() {
     #
     # '||:': Do nothing if 'cd' fails. We don't care.
     cd "${2:-$1}" &>/dev/null ||:
-
-    [[ $1 == -h ]] && {
-        man fff
-        exit
-    }
 
     # bash 5 and some versions of bash 4 don't allow SIGWINCH to interrupt
     # a 'read' command and instead wait for it to complete. In this case it
@@ -1348,15 +1135,14 @@ main() {
     ((BASH_VERSINFO[0] > 3)) &&
         read_flags=(-t 0.05)
 
-    ((${FFF_LS_COLORS:=1} == 1)) &&
+    (("$FSSH_LS_COLORS" == 1)) &&
         get_ls_colors
 
-    ((${FFF_HIDDEN:=0} == 1)) &&
+    (("$FSSH_HIDDEN" == 1)) &&
         shopt -s dotglob
 
-    # Create the trash and cache directory if they don't exist.
-    mkdir -p "${XDG_CACHE_HOME:=${HOME}/.cache}/fff" \
-             "${TRASH_DIR}"
+    # Create the trash directory if it doesn't exist
+    mkdir -p "$FSSH_TRASH_DIR"
 
     # 'nocaseglob': Glob case insensitively (Used for case insensitive search).
     # 'nullglob':   Don't expand non-matching globs to themselves.
@@ -1368,7 +1154,6 @@ main() {
     # Trap the window resize signal (handle window resize events).
     trap 'get_term_size; redraw' WINCH
 
-    get_os
     get_term_size
     setup_options
     setup_terminal
