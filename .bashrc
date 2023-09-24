@@ -11,8 +11,4 @@ _sourceif() {
     [ -f "$1" ] && . "$1"
 }
 
-if [[ -n "$_Z_DOT_LOADED" ]]; then
-    return
-fi
-
 _sourceif "$HOME/.bash/bashrc.sh"

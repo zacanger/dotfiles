@@ -6,7 +6,9 @@ case $- in
     *) return;;
 esac
 
-_Z_DOT_LOADED=1
+# TODO: I don't remember why I added this,
+# but it's not working in some environments.
+# if [[ -n "$_Z_DOT_LOADED" ]]; then return; fi
 
 # little helper
 _sourceif() {
@@ -72,3 +74,5 @@ if [[ $(uname) == 'Linux' ]]; then
     export N_PREFIX="$HOME/n"
     [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
 fi
+
+# _Z_DOT_LOADED=1

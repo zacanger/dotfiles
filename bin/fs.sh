@@ -8,7 +8,7 @@
 
 # TODO: A lot. See the comments. Some general ideas:
 # * get keybinds working the same as in ranger
-# * build a good mime-type to handler map and fn
+# * build a good mime-type to handler map and fn (check rifle conf)
 # * fix anything shellcheck complains about
 # * get rid of the custom trash implementation
 # * redo help
@@ -62,6 +62,7 @@
 #
 #  q/ctrl+c: exit
 
+# TODO: order properly for usage in help
 init_options() {
     # All config.
     # In a function for easy folding.
@@ -491,10 +492,9 @@ list_help() {
     # Set window name.
     printf '\e]2;fff: help\e'\\
 
-    list=(
-        'TODO: more here'
-        "$FSSH_KEY_HELP: show this help"
-    )
+    options=$(type init_options | sed '1,3d;$d' | sed 's/^[[:space:]]\{1,\}//')
+    # TODO: Janky output. But it works, for now
+    readarray -t list <<< $options
 
     ((list_total=${#list[@]}-1))
 

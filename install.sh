@@ -5,21 +5,30 @@ here="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 PATH="$here/bin:$PATH"
 
+log_info() {
+    cyan='\033[1;36m'
+    reset='\033[0m'
+    echo -e "$cyan->  $1$reset"
+}
+
 ##
 ## mac-specific
 ##
 
 setup_mac_misc() {
+    log_info "${FUNCNAME[0]}"
     ln -s /opt/homebrew/bin/python3 /opt/homebrew/bin/python
     go install golang.org/x/tools/cmd/godoc@latest
 }
 
 setup_brew() {
+    log_info "${FUNCNAME[0]}"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     brew bundle --file="$here/misc//Brewfile"
 }
 
 mac_cleanup() {
+    log_info "${FUNCNAME[0]}"
     echo '/opt/homebrew/bin/bash' | sudo tee -a /etc/shells
     chsh -s /opt/homebrew/bin/bash
 
@@ -63,6 +72,7 @@ EOM
 }
 
 change_default_mac_settings() {
+    log_info "${FUNCNAME[0]}"
     # disable all remote management type stuff
     sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -deactivate -stop
     sudo rm -rf /var/db/RemoteManagement
@@ -231,11 +241,13 @@ change_default_mac_settings() {
 ##
 
 setup_apt() {
+    log_info "${FUNCNAME[0]}"
     sudo apt-get update && sudo apt-get dist-upgrade -f -y
     cat "$here/misc/apt.list" | xargs sudo apt-get install -y
 }
 
 linux_cleanup() {
+    log_info "${FUNCNAME[0]}"
     sudo usermod -aG docker "$USER"
     sudo apt autoremove -y
     sudo apt purge
@@ -251,12 +263,14 @@ linux_cleanup() {
 }
 
 install_node() {
+    log_info "${FUNCNAME[0]}"
     curl -sL https://git.io/n-install | bash -s -- -n
     n latest
     n prune
 }
 
 setup_linux_misc() {
+    log_info "${FUNCNAME[0]}"
     dropbox-fix.sh
     sudo chown -R "$USER" /usr/local
     curl -s https://bootstrap.pypa.io/get-pip.py | sudo python3
@@ -281,6 +295,7 @@ EOM
 ##
 
 config_links() {
+    log_info "${FUNCNAME[0]}"
     zconf_path="$here/.config"
     conf_path="$HOME/.config"
     mkdir -p "$conf_path/ranger"
@@ -293,10 +308,12 @@ config_links() {
 }
 
 has_program() {
+    log_info "${FUNCNAME[0]} $1"
     command -v "$1" &> /dev/null
 }
 
 remove_defaults() {
+    log_info "${FUNCNAME[0]}"
     rm -f "$HOME/.profile"
     rm -f "$HOME/.bash_profile"
     rm -f "$HOME/.bashrc"
@@ -304,6 +321,7 @@ remove_defaults() {
 }
 
 home_links() {
+    log_info "${FUNCNAME[0]}"
     to_link=(
         .Xresources
         .agignore
@@ -343,6 +361,7 @@ home_links() {
 }
 
 handle_config_special_cases() {
+    log_info "${FUNCNAME[0]}"
     # special cases: avoid overwriting auth,
     # make sure config options are loaded in the right order,
     # don't fail on deeply nested dirs but also
@@ -376,35 +395,55 @@ handle_config_special_cases() {
 
 }
 
-try_install_vitals() {
+try_install_vital() {
+    log_info "${FUNCNAME[0]} $1"
+
     # can't live without these
-    apt update && apt install -y vim curl 2>/dev/null
-    # alpine
-    apk add --no-cache vim curl 2>/dev/null
+    if has_program apt; then
+        sudo apt update && sudo apt install -y "$1" 2>/dev/null
+    fi
+    if has_program apk; then
+        apk add --no-cache "$1" 2>/dev/null # alpine
+    fi
+
     # red hat-like
-    yum -y install vim curl 2>/dev/null
-    dnf -y install vim curl 2>/dev/null
-    # arch
-    pacman -S curl vim 2>/dev/null
-    # mac
-    yes | brew install curl vim 2>/dev/null
+    if has_program yum; then
+        sudo yum -y install "$1" 2>/dev/null
+    fi
+    if has_program dnf; then
+        sudo dnf -y install "$1" 2>/dev/null
+    fi
+    if has_program pacman; then
+        sudo pacman -S "$1" 2>/dev/null # arch
+    fi
+    if has_program brew; then
+        yes | brew install "$1" 2>/dev/null # mac
+    fi
 }
 
 setup_vim() {
+    log_info "${FUNCNAME[0]}"
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-    # note: these _require_ interactive, so
-    # will fail in linux_slim, but that's okay, on the next open
-    # just :PlugInstall
-    vim +PlugInstall +qa
-    vim +CocUpdate +qa
+    if has_program tmux; then
+        log_info "${FUNCNAME[0]} in tmux"
+        tmux new-session -d 'vim +PlugInstall +qa && vim +CocUpdate +qa || bash'
+    else
+        log_info "${FUNCNAME[0]} assuming interactive"
+        # may fail
+        vim +PlugInstall +qa
+        vim +CocUpdate +q
+    fi
 }
 
 install_packages() {
-    if ! has_program vim; then
-        try_install_vitals 2>/dev/null
-    fi
+    log_info "${FUNCNAME[0]}"
+    for p in vim tmux curl; do
+        if ! has_program "$p"; then
+            try_install_vital "$p" 2>/dev/null
+        fi
+    done
 
     if has_program npm; then
         cat "$here/misc/npm.list" | xargs npm i -g
@@ -424,6 +463,7 @@ install_packages() {
 }
 
 config_files_with_auth() {
+    log_info "${FUNCNAME[0]}"
     mkdir -p "$HOME/.docker"
     cp "$here/.docker/config.json" "$HOME/.docker/"
     mkdir -p "$HOME/.gnupg"
@@ -431,6 +471,7 @@ config_files_with_auth() {
 }
 
 update_others() {
+    log_info "${FUNCNAME[0]}"
     update-hosts.sh
     update-dircolors.sh
 }
@@ -440,6 +481,7 @@ update_others() {
 ##
 
 linux_all() {
+    log_info "${FUNCNAME[0]}"
     setup_apt
     setup_linux_misc
     remove_defaults
@@ -454,6 +496,7 @@ linux_all() {
 }
 
 linux_slim() {
+    log_info "${FUNCNAME[0]}"
     SLIM=1
     home_links
     config_links
@@ -462,6 +505,7 @@ linux_slim() {
 }
 
 mac_all() {
+    log_info "${FUNCNAME[0]}"
     change_default_mac_settings
     setup_brew
     remove_defaults
