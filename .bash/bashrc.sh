@@ -56,16 +56,16 @@ if hash tmux 2>/dev/null; then
         # On Mac, I only use one terminal,
         # so I just always attach to the same session
         [ -z "$TMUX" ] && { tmux attach || exec tmux new-session; }
-    else
-        # On Linux, I use a tiling window manager, so I'll
-        # usually want a separate session for each new terminal window.
-        if [[ ! "$TERM" =~ screen ]] && \
-            [[ ! "$TERM" =~ tmux ]] && \
-            [[ ! "$TERM" =~ linux ]] && \
-            [ -z "$TMUX" ]; then
-                    exec tmux
-        fi
-        :
+#     else
+#         # On Linux, I use a tiling window manager, so I'll
+#         # usually want a separate session for each new terminal window.
+#         if [[ ! "$TERM" =~ screen ]] && \
+#             [[ ! "$TERM" =~ tmux ]] && \
+#             [[ ! "$TERM" =~ linux ]] && \
+#             [ -z "$TMUX" ]; then
+#                     exec tmux
+#         fi
+#         :
     fi
 fi
 
