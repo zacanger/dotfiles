@@ -11,7 +11,7 @@ set -e
 # https://github.com/StevenBlack/hosts
 curl \
     -sSL \
-    https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling-porn/hosts \
+    https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/porn/hosts \
     > hosts2
 
 # cat hosts1 hosts2 /etc/hosts \
