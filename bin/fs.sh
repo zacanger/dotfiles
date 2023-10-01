@@ -6,98 +6,31 @@
 # Roy-Orbison (GH username, not the famous one).
 # Depends on coreutils and some kind of opener (xdg-open, etc.).
 
+# TODO:
+# Finish keybind fixes (see below)
+# Fix anything Shellcheck complains about
+# Get rid of custom trash implementation
+# Swap : to work for complex commands (functions in here, I guess)
+# n and N handling in search
+# Add an open_with
+# Fix renaming (I, A, r?)
 
-
-# TODO: rifle.conf mime/opener map
-# ext flp, has open,     X, flag f = open -a "FL Studio 21.app" -- "$@"
-# ext mlt, has open,     X, flag f = open -a "Shotcut.app" -- "$@"
-#
-# mime ^text,  label editor = "vim" -- "$@"
-# mime ^text,  label pager  = "less" -- "$@"
-# !mime ^text, label editor, ext html|xml|csv|tex|py|pl|rb|sh|php|js|json|ts = "vim" -- "$@"
-# !mime ^text, label pager,  ext html|xml|csv|tex|py|pl|rb|sh|php|js|json|ts = "less" -- "$@"
-#
-# ext 1                         = man "$1"
-# ext s[wmf]c, has zsnes, X     = zsnes "$1"
-# ext nes, has fceux, X         = fceux "$1"
-# ext exe                       = wine "$1"
-# name ^[mM]akefile$            = make
-#
-# ext py  = python -- "$1"
-# ext pl  = perl -- "$1"
-# ext rb  = ruby -- "$1"
-# ext sh  = sh -- "$1"
-# ext php = php -- "$1"
-#
-# ext mp3|ogg|flac|wav|8gp, has mpv = mpv --vid=no -- "$@"
-# ext mid = timidity -- "$1"
-# mime ^audio|mp3$, terminal, has mpv = mpv --vid=no -- "$@"
-# mime ^audio|ogg$, terminal, has mpv = mpv --vid=no -- "$@"
-# mime ^audio|ogg$, terminal, has mpv  = mpv --vid=no -- "$@"
-# mime ^audio|ogg$, terminal, has mpv = mpv --vid=no -- "$@"
-# mime ^audio|ogg$, terminal, has mpv = mpv --vid=no -- "@"
-# mime ^audio|midi$, terminal, has timidity = timidity -- "$1"
-# mime ^video, has mpv, X, flag f = mpv -- "$@"
-# mime ^video, terminal, !X, has mpv = mpv -- "$@"
-# mime ^video, terminal, !X, has mpv = mpv -- "$@"
-#
-# mime ^image, has viewnior, X, flag f = viewnior -- "$@"
-# mime ^image, has feh,      X, flag f = feh -- "$@"
-# ext xcf,                   X, flag f = gimp -- "$@"
-# mime ^image, has open,     X, flag f = open -a Preview.app -- "$@"
-#
-# ext pdf, has mupdf-gl, X, flag f = mupdf-gl -- "$@"
-# ext pdf, has mupdf,    X, flag f = mupdf -- "$@"
-# ext pdf, has open,     X, flag f = open -a Preview.app -- "$@"
-# ext epub, has mupdf-gl, X, flag f = mupdf-gl -- "$@"
-# ext epub, has mupdf,    X, flag f = mupdf -- "$@"
-# ext docx?, has catdoc,       terminal = catdoc -- "$@" | "$PAGER"
-# ext docx?, has cat-docx,     terminal = catidocx -- "$@" | "$PAGER"
-#
-# ext 7z|ace|ar|arc|bz2?|cab|cpio|cpt|deb|dgc|dmg|gz,  has als     = als -- "$@" | "$PAGER"
-# ext iso|jar|msi|pkg|rar|shar|tar|tgz|xar|xpi|xz|zip, has als     = als -- "$@" | "$PAGER"
-# ext 7z|ace|ar|arc|bz2?|cab|cpio|cpt|deb|dgc|dmg|gz,  has aunpack = aunpack -- "$@"
-# ext iso|jar|msi|pkg|rar|shar|tar|tgz|xar|xpi|xz|zip, has aunpack = aunpack -- "$@"
-# Fallback:
-# ext tar|gz, has tar = tar vvtf "$@" | "$PAGER"
-# ext tar|gz, has tar = tar vvxf "$@"
-#
-# label editor, !mime ^text, !ext html|xml|csv|tex|py|pl|rb|sh|php|js|jsx|css|json|styl|less|scss|sass|md|markdown|ts  = "vim" -- "$@"
-# label pager,  !mime ^text, !ext html|xml|csv|tex|py|pl|rb|sh|php|js|jsx|css|json|styl|less|scss|sass|md|markdown|ts  = "less" -- "$@"
-
-# TODO: A lot. See the comments. Some general ideas:
-# * get keybinds working the same as in ranger
-# * build a good mime-type to handler map and fn (check rifle conf)
-# * fix anything shellcheck complains about
-# * get rid of the custom trash implementation
-# * consider adding support for multiple keys (vim-style phrases)
-# * swap : out to work for complex things like in ranger
-# * n and N handling in search
-# * add an open_with
-# * renaming: I, A, and r
-
-# TODO: my ranger keybinds. sort through, find what matters,
+# Ranger keybinds I care about that aren't working here yet:
 # make everything match.
-#   <escape>   change_mode normal
-#   S          shell $SHELL
 #   :          console
-#   ;          console
 #   !          console shell
 #   <space>    mark_files toggle=True
 #   v          mark_files all=True toggle=True
 #   V          toggle_visual_mode
 #   dd         cut
 #   yy         copy
-#   ya         copy mode=add
-#   yr         copy mode=remove
-#   yt         copy mode=toggle
 #   pp         paste
 #   n          search_next
 #   N          search_next forward=False
 #   xx         console delete
 #   XX         shell trash %s
 
-# TODO: old manpage, reconcile as we go
+# Keybinds I don't really like, want to fix:
 #
 #  :: go to a directory by typing     # :cd in ranger
 #  !: open shell in current dir       # FFF_KEY_SHELL
@@ -162,6 +95,10 @@ init_options() {
     else
         FSSH_DEFAULT_OPENER=xdg-open
     fi
+}
+
+has_program() {
+    hash "$1" &> /dev/null
 }
 
 setup_terminal() {
@@ -609,7 +546,7 @@ trash() {
 
 bulk_rename() {
     rename_file=''
-    if hash mktemp 2>/dev/null; then
+    if has_program mktemp; then
         rename_file=$(mktemp)
     else
         rename_file="$HOME/.fs_tmp_bulk_rename"
@@ -657,7 +594,6 @@ bulk_rename() {
 }
 
 open() {
-    # TODO: this needs major improvements to handle various file types
     # Open directories and files.
     if [[ -d $1/ ]]; then
         search=
@@ -671,6 +607,9 @@ open() {
 
         # Open all text-based files in '$FSSH_EDITOR'.
         # Everything else goes through 'xdg-open'/'open'.
+        # TODO: use all these?
+        # html|xml|csv|tex|py|pl|rb|sh|php|js|jsx|css|
+        # json|styl|less|scss|sass|md|markdown|ts
         case "$mime_type" in
             text/*|*x-empty*|*json*)
                 clear_screen
@@ -680,10 +619,28 @@ open() {
                 redraw
             ;;
 
-            application/x-gzip*)
+            *pdf*|*epub*)
                 clear_screen
                 reset_terminal
-                "zcat" "$1" | less -S
+                if has_program mupdf; then mupdf "$1";
+                elif has_proram mupdf-gl; then mupdf-gl "$1;"
+                fi
+                setup_terminal
+                redraw
+            ;;
+
+            audio/*)
+                clear_screen
+                reset_terminal
+                mpv --vid=no "$1"
+                setup_terminal
+                redraw
+            ;;
+
+            video/*)
+                clear_screen
+                reset_terminal
+                mpv "$1"
                 setup_terminal
                 redraw
             ;;
