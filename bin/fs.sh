@@ -6,6 +6,8 @@
 # Roy-Orbison (GH username, not the famous one).
 # Depends on coreutils and some kind of opener (xdg-open, etc.).
 
+# See also, for ideas: https://github.com/wick3dr0se/fml
+
 # TODO:
 # Finish keybind fixes (see below)
 # Fix anything Shellcheck complains about

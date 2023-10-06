@@ -11,9 +11,9 @@ let g:coc_global_extensions = [
 \ 'coc-css',
 \ 'coc-yaml',
 \ 'coc-sh',
-\ 'coc-go',
 \ 'coc-pyright',
 \ ]
+" \ 'coc-go',
 
 call plug#begin('~/.local/share/vim/plugged')
 
@@ -29,7 +29,7 @@ Plug 'bronson/vim-trailing-whitespace'            " highlight trailing whitespac
 Plug 'jiangmiao/auto-pairs'                       " auto-complete pairs of things
 Plug 'junegunn/seoul256.vim'                      " colo
 Plug 'junegunn/vim-easy-align'                    " align stuff on a symbol (like the comments in this block)
-Plug 'fatih/vim-go'                               " go support
+" Plug 'fatih/vim-go'                               " go support
 Plug 'junegunn/vim-peekaboo'                      " see registers easily
 Plug 'junegunn/vim-slash'                         " better buffer search
 Plug 'mhinz/vim-signify'                          " vcs markers in gutter, also see 'airblade/vim-gitgutter'
@@ -496,7 +496,7 @@ let g:diminactive_use_colorcolumn = 1
 let g:diminactive_use_syntax = 1
 
 " fix imports + format on save
-let g:go_fmt_command = "goimports"
+" let g:go_fmt_command = "goimports"
 
 " convert camelCase to snake_case
 nnoremap <leader>crs :g;<c-r><c-w>; s;[a-z]\@<=[A-Z];_\l&;g<cr>

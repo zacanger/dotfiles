@@ -428,7 +428,7 @@ setup_vim() {
 
     if has_program tmux; then
         log_info "${FUNCNAME[0]} in tmux"
-        tmux new-session -d 'vim +PlugInstall +qa && vim +CocUpdate +qa || bash'
+        tmux new-session -d 'vim +PlugInstall +CocInstall +qa || bash'
     else
         log_info "${FUNCNAME[0]} assuming interactive"
         # may fail
