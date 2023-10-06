@@ -34,14 +34,22 @@ curl \
     # https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/tif.txt \
     # > hosts5
 
+echo "127.0.0.1 $(hostname)" >> hosts
+
 # cat hosts1 hosts2 hosts3 hosts4 hosts5 /etc/hosts \
 cat hosts2 hosts4 /etc/hosts \
     | sed -e '/^[ \t]*#/d' \
-    | sort -u > hosts
+    | sort -u > hosts-almost
 
-echo "0.0.0.0 $(hostname)" >> hosts
+echo '# /etc/hosts' >> hosts-header
+echo '# move to /etc/hosts and then run update-hosts.sh' >> hosts-header
+echo '# TODO: consider moving to dnsmasq because this gets large' >> hosts-header
+echo '' >> hosts-header
 
-rm hosts2 hosts4
+cat hosts-header hosts-almost > hosts
+rm hosts2 hosts4 hosts-almost hosts-header
+
 sudo mv /etc/hosts /etc/hosts.bak
+cat hosts > "$HOME/Dropbox/notes/etc-hosts"
 sudo mv hosts /etc/hosts
 clear-dns-cache.sh

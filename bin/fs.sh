@@ -480,7 +480,15 @@ list_help() {
     # Set window name.
     printf '\e]2;fs: help\e'\\
 
-    options=$(type init_options | sed '1,3d;$d' | sed 's/^[[:space:]]\{1,\}//')
+    # get the function containing all options
+    # trim the `type` output so we're just left with the body
+    # de-indent
+    options=$(type init_options \
+        | sed '1,3d;$d' \
+        | sed 's/^[[:space:]]\{1,\}//')
+        # TODO: replace '=' with ':  '.
+        # Works in shell, not here, probably due to drawing implementation
+        # | sed 's/\=/ ')
     readarray -t list <<< $options
 
     ((list_total=${#list[@]}-1))
