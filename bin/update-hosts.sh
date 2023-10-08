@@ -49,9 +49,10 @@ echo '' >> hosts-header
 cat hosts-header hosts-almost > hosts
 rm hosts2 hosts4 hosts-almost hosts-header
 
+cat hosts > "$HOME/Dropbox/z/misc/x/hosts"
 sudo mv /etc/hosts /etc/hosts.bak
-cat hosts > "$HOME/Dropbox/notes/etc-hosts"
 sudo mv hosts /etc/hosts
+
 clear-dns-cache.sh
 
 # see check-hosts after this;
