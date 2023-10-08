@@ -53,3 +53,7 @@ sudo mv /etc/hosts /etc/hosts.bak
 cat hosts > "$HOME/Dropbox/notes/etc-hosts"
 sudo mv hosts /etc/hosts
 clear-dns-cache.sh
+
+# see check-hosts after this;
+# need to get that working,
+# because hosts is way too large
