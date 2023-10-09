@@ -12,4 +12,4 @@ for line in $split_hosts; do
     fi
 done
 
-grep -v -f "$input_file" "$bad_hosts_file" > "$filtered_hosts_file"
+grep -v -f "$bad_hosts_file" "$input_file" > "$filtered_hosts_file"
