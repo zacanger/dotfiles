@@ -428,12 +428,11 @@ setup_vim() {
 
     if has_program tmux; then
         log_info "${FUNCNAME[0]} in tmux"
-        tmux new-session -d 'vim +PlugInstall +CocInstall +qa || bash'
+        tmux new-session -d "vim +PlugInstall +qa; vim +'CocInstall -sync coc-json coc-tsserver coc-html coc-css coc-yaml coc-sh coc-pyright' +qa || bash"
     else
         log_info "${FUNCNAME[0]} assuming interactive"
-        # may fail
         vim +PlugInstall +qa
-        vim +CocUpdate +q
+        vim +'CocInstall -sync coc-json coc-tsserver coc-html coc-css coc-yaml coc-sh coc-pyright' +qa
     fi
 }
 
