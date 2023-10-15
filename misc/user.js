@@ -1,6 +1,7 @@
 // also see:
 // https://github.com/pyllyukko/user.js/blob/master/user.js
 // https://github.com/arkenfox/user.js/blob/master/user.js
+// https://github.com/yokoffing/Betterfox
 
 user_pref("accessibility.typeaheadfind.enablesound", false);
 user_pref("app.normandy.api_url", "");
