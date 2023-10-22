@@ -131,6 +131,22 @@ user_pref("privacy.sanitize.timeSpan", 0);
 user_pref("privacy.trackingprotection.enabled", true);
 user_pref("privacy.trackingprotection.socialtracking.enabled", true);
 user_pref("startup.homepage_welcome_url", "");
+user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 user_pref("toolkit.telemetry.archive.enabled", false);
 user_pref("toolkit.telemetry.cachedClientID", "");
 user_pref("webgl.disabled", true);
+user_pref("nglayout.initialpaint.delay", 100);
+user_pref("nglayout.initialpaint.delay_in_oopif", 100);
+
+/*
+ * Put in both chrome/userChrome.css and chrome/userContent.css
+body,
+html,
+.browserContainer,
+#mainPopupSet,
+#main-window,
+#tabbrowser-tabbox,
+#tabbrowser-tabpanels {
+  background-color: #212121 !important;
+}
+*/
