@@ -147,6 +147,7 @@ html,
 #main-window,
 #tabbrowser-tabbox,
 #tabbrowser-tabpanels {
-  background-color: #212121 !important;
+  background-color: #101010;
+  color: #dedede;
 }
 */
