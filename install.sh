@@ -34,25 +34,9 @@ mac_cleanup() {
 
     git lfs install
 
-    # Sets an init script to give me another control key
-    mkdir -p ~/Library/LaunchAgents
-    cat<<EOF >~/Library/LaunchAgents/userkeymapping.plist
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>Label</key>
-    <string>userkeymapping</string>
-    <key>ProgramArguments</key>
-    <array>
-        <string>$HOME/bin/mac-right-opt-to-ctrl.sh</string>
-    </array>
-    <key>RunAtLoad</key>
-    <true/>
-</dict>
-</plist>
-EOF
-    launchctl load ~/Library/LaunchAgents/userkeymapping.plist
+    keymap_file='com.local.KeyRemapping.plist'
+    cp "$here/misc/$keymap_file" "$HOME/Library/LaunchAgents/"
+    launchctl load "$HOME/Library/LaunchAgents/$keymap_file"
 
     rm -rf "$HOME/.zsh*"
 }
