@@ -255,7 +255,7 @@ install_node() {
 
 setup_linux_misc() {
     log_info "${FUNCNAME[0]}"
-    dropbox-fix.sh
+    fix-dropbox-sync.sh
     sudo chown -R "$USER" /usr/local
     curl -s https://bootstrap.pypa.io/get-pip.py | sudo python3
     sudo ln -s /usr/bin/python3 /usr/bin/python
