@@ -5,6 +5,5 @@ if [[ $(uname) == 'Darwin' ]]; then
     sudo dscacheutil -flushcache
     sudo killall -HUP mDNSResponder
 else
-    sudo systemd-resolve --flush-caches
-    sudo service network-manager restart
+    resolvectl flush-caches
 fi

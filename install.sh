@@ -232,6 +232,8 @@ setup_apt() {
 
 linux_cleanup() {
     log_info "${FUNCNAME[0]}"
+    n latest
+    n prune
     sudo usermod -aG docker "$USER"
     sudo apt autoremove -y
     sudo apt purge
@@ -249,20 +251,14 @@ linux_cleanup() {
 install_node() {
     log_info "${FUNCNAME[0]}"
     curl -sL https://git.io/n-install | bash -s -- -n
-    n latest
-    n prune
 }
 
 setup_linux_misc() {
     log_info "${FUNCNAME[0]}"
     fix-dropbox-sync.sh
     sudo chown -R "$USER" /usr/local
-    curl -s https://bootstrap.pypa.io/get-pip.py | sudo python3
     sudo ln -s /usr/bin/python3 /usr/bin/python
-    curl -L \
-        https://yt-dl.org/downloads/latest/youtube-dl \
-        -o /usr/local/bin/youtube-dl
-    chmod a+rx /usr/local/bin/youtube-dl
+    pip3 install yt-dlp
 }
 
 linux_finish() {
@@ -422,6 +418,8 @@ setup_vim() {
 
 install_packages() {
     log_info "${FUNCNAME[0]}"
+    source "$HOME/.bashrc"
+
     for p in vim tmux curl; do
         if ! has_program "$p"; then
             try_install_vital "$p" 2>/dev/null
