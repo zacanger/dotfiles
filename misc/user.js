@@ -1,7 +1,6 @@
 // also see:
 // https://github.com/pyllyukko/user.js/blob/master/user.js
 // https://github.com/arkenfox/user.js/blob/master/user.js
-// https://github.com/yokoffing/Betterfox
 
 user_pref("accessibility.typeaheadfind.enablesound", false);
 user_pref("app.normandy.api_url", "");
@@ -14,6 +13,7 @@ user_pref("browser.chrome.site_icons", false);
 user_pref("browser.discovery.enabled", false);
 user_pref("browser.download.alwaysOpenPanel", false);
 user_pref("browser.download.manager.addToRecentDocs", false);
+user_pref("browser.download.start_downloads_in_tmp_dir", true);
 user_pref("browser.fixup.alternate.enabled", false);
 user_pref("browser.formfill.enable", false);
 user_pref("browser.link.open_newwindow", 3);
@@ -65,12 +65,19 @@ user_pref("browser.tabs.insertAfterCurrent", true);
 user_pref("browser.translations.autoTranslate", false);
 user_pref("browser.translations.automaticallyPopup", false);
 user_pref("browser.translations.enable", false);
+user_pref("browser.urlbar.addons.featureGate", false);
 user_pref("browser.urlbar.filter.javascript", false);
+user_pref("browser.urlbar.mdn.featureGate", false);
+user_pref("browser.urlbar.pocket.featureGate", false);
 user_pref("browser.urlbar.searchSuggestionsChoice", false);
+user_pref("browser.urlbar.showSearchTerms.enabled", false);
 user_pref("browser.urlbar.speculativeConnect.enabled", false);
 user_pref("browser.urlbar.suggest.quicksuggest.nonsponsored", false);
 user_pref("browser.urlbar.suggest.quicksuggest.sponsored", false);
 user_pref("browser.urlbar.suggest.searches", false);
+user_pref("browser.urlbar.trending.featureGate", false);
+user_pref("browser.urlbar.weather.featureGate", false);
+user_pref("browser.vpn_promo.enabled", false);
 user_pref("datareporting.healthreport.uploadEnabled", false);
 user_pref("devtools.theme", "dark");
 user_pref("dom.battery.enabled", false);
@@ -103,12 +110,15 @@ user_pref("media.videocontrols.picture-in-picture.enabled", false);
 user_pref("media.videocontrols.picture-in-picture.video-toggle.has-used", true);
 user_pref("network.IDN_show_punycode", true);
 user_pref("network.dns.disablePrefetch", true);
+user_pref("network.dns.skipTRR-when-parental-control-enabled", false);
 user_pref("network.http.referer.XOriginPolicy", 2);
 user_pref("network.http.speculative-parallel-limit", 0);
 user_pref("network.predictor.enabled", false);
 user_pref("network.prefetch-next", false);
 user_pref("network.protocol-handler.external.mailto", false);
 user_pref("network.security.esni.enabled", true);
+user_pref("nglayout.initialpaint.delay", 100);
+user_pref("nglayout.initialpaint.delay_in_oopif", 100);
 user_pref("pdfjs.enableScripting", false);
 user_pref("permissions.default.camera", 2);
 user_pref("permissions.default.desktop-notification", 2);
@@ -135,8 +145,6 @@ user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 user_pref("toolkit.telemetry.archive.enabled", false);
 user_pref("toolkit.telemetry.cachedClientID", "");
 user_pref("webgl.disabled", true);
-user_pref("nglayout.initialpaint.delay", 100);
-user_pref("nglayout.initialpaint.delay_in_oopif", 100);
 
 /*
  * Put in both chrome/userChrome.css and chrome/userContent.css
