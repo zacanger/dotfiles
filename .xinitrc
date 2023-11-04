@@ -8,8 +8,7 @@ xsetroot -solid "#222"
 xset -dpms
 xset s off
 xset s noblank
-xmodmap -e "clear lock"
-xmodmap -e "keysym Caps_Lock = Escape"
+setxkbmap -option caps:escape
 unclutter -root &
 redshift -l 40.760780:-111.891045 -b 0.7 &
 # dropbox start -i &
