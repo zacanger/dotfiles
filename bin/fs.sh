@@ -9,35 +9,22 @@
 # See also, for ideas: https://github.com/wick3dr0se/fml
 
 # TODO:
-# Finish keybind fixes (see below)
+# Refactor operation keybinds:
+# yy should yank
+# dd should cut
+# pp should paste
+# xx should shell trash
+# v should select and move to the next line
+# <space> should select all
+#
+# n and N handling in search
+# o for open_with (takes an argument)
+# Fix renaming (I, A, r?)
+#
 # Fix anything Shellcheck complains about
 # Get rid of custom trash implementation
-# Swap : to work for complex commands (functions in here, I guess)
-# n and N handling in search
-# Add an open_with
-# Fix renaming (I, A, r?)
 
-# Ranger keybinds I care about that aren't working here yet:
-# make everything match.
-#   :          console
-#   !          console shell
-#   <space>    mark_files toggle=True
-#   v          mark_files all=True toggle=True
-#   V          toggle_visual_mode
-#   dd         cut
-#   yy         copy
-#   pp         paste
-#   n          search_next
-#   N          search_next forward=False
-#   xx         console delete
-#   XX         shell trash %s
-
-# Keybinds I don't really like, want to fix:
-#
-#  :: go to a directory by typing     # :cd in ranger
-#  !: open shell in current dir       # FFF_KEY_SHELL
-#
-#  operations:
+# Current keybinds for those operations:
 #  y: mark copy           # FFF_KEY_YANK
 #  m: mark move           # FFF_KEY_MOVE
 #  d: mark trash          # FFF_KEY_TRASH
@@ -82,6 +69,7 @@ init_options() {
     FSSH_HIDDEN=1                   # show hidden files by default
     FSSH_MARK_FORMAT=" %f*"
     FSSH_FILE_FORMAT="%f"
+    FSSH_KEY_SHELL='!'
 
     # Use LS_COLORS (will cancel if not available)
     # LS_COLORS takes priority over the other color settings
@@ -315,7 +303,6 @@ print_line() {
         file_name=${list[$1]}
         if [[ "$file_name" ]]; then
             # Highlight the key(s), escaping any specials in overrides to a human-readable form
-            # TODO: Janky output. But it works, for now
             format+=\\e[${di:-1;3${FSSH_COL1:-2}}m
             # local action="${file_name%: *}"
             # format+="$(cat -A <<<"$action" | head -c -2)\\e[${fi:-37}m: "
@@ -485,12 +472,13 @@ list_help() {
     # get the function containing all options
     # trim the `type` output so we're just left with the body
     # de-indent
+    # TODO: this is janky, not quite the format i really want
     options=$(type init_options \
         | sed '1,3d;$d' \
-        | sed 's/^[[:space:]]\{1,\}//')
-        # TODO: replace '=' with ':  '.
+        | sed 's/^[[:space:]]\{1,\}//' \
+        | sed 's/\=/ / ' \
+        | xargs printf "%10s\n")
         # Works in shell, not here, probably due to drawing implementation
-        # | sed 's/\=/ ')
     readarray -t list <<< $options
 
     ((list_total=${#list[@]}-1))
@@ -617,9 +605,6 @@ open() {
 
         # Open all text-based files in '$FSSH_EDITOR'.
         # Everything else goes through 'xdg-open'/'open'.
-        # TODO: use all these?
-        # html|xml|csv|tex|py|pl|rb|sh|php|js|jsx|css|
-        # json|styl|less|scss|sass|md|markdown|ts
         case "$mime_type" in
             text/*|*x-empty*|*json*)
                 clear_screen
@@ -945,7 +930,7 @@ key() {
         ;;
 
         # Spawn a shell.
-        ${FFF_KEY_SHELL:=!})
+        "$FSSH_KEY_SHELL")
             ((helping)) && return
 
             reset_terminal
@@ -1076,16 +1061,6 @@ key() {
                 redraw
             }
         ;;
-
-        ## add ? to display keyboard shortcuts
-        "$FSSH_KEY_HELP")
-            clear_screen
-            # TODO:
-            echo "Coming soon: help"
-            setup_terminal
-            redraw
-        ;;
-
 
         # Go to dir.
         "$FSSH_KEY_GO_DIR")
