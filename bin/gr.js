@@ -1,51 +1,66 @@
 #!/usr/bin/env node
 
-// like gron, but it's a little node script
-// gron appears to be abanonded, and besides,
-// it's 2k LOC, including many features i'll never care about
-// i always have node installed, so. this.
+// like gron, but not abandoned, like 3%
+// of gron's sloc, and in node
 //
 // usage:
 // cat package.json | gr.js
 // cat package.json | gr.js | grep repository | gr.js -u
 
-const isObject = val => val && typeof val === 'object' && !Array.isArray(val)
-const addDelimiter = (a, b) => a ? `${a}.${b}` : b
-const addKv = (k, v) => `${k} = ${JSON.stringify(v)}`
+const isObject = (val) =>
+  val && typeof val === 'object' && !Array.isArray(val) && val != null
+const addDelimiter = (a, b) =>
+  a ? `${a}.${b}` : b
+const addKv = (k, v) =>
+  `${k} = ${JSON.stringify(v)}`
 
-const toGreppable = (obj) => {
+const _toGreppable = (obj) => {
   const paths = (obj = {}, head = '') =>
     Object.entries(obj)
       .reduce((product, [key, value]) => {
         const fullPath = addDelimiter(head, key)
-        return isObject(value)
-          ? product.concat(paths(value, fullPath))
-          // TODO: little bug here, should be key.index = value
-          : Array.isArray(value)
-            ? product.concat(addDelimiter(key, toGreppable(value)))
-            : product.concat(addKv(fullPath, value))
+        if (isObject(value)) {
+          return product.concat(paths(value, fullPath))
+        }
+        if (Array.isArray(value)) {
+          return product.concat(
+            value.map((v, i) =>
+              addKv(addDelimiter(fullPath, i), v)))
+        }
+
+        return product.concat(addKv(fullPath, value))
       }, [])
 
   return paths(obj)
-    .map((x) => addDelimiter('json', x))
-    .join('\n')
 }
+
+const toGreppable = (obj) =>
+  _toGreppable(obj)
+    .map((a) =>
+      addDelimiter('json', a))
+    .join('\n')
 
 const set = (obj, rawPath, value) => {
   if (Object(obj) !== obj) { return obj }
 
   const path = rawPath.toString().match(/[^.[\]]+/g) || []
 
-  // eslint-disable-next-line no-return-assign
-  path.slice(0, -1).reduce((a, c, i) =>
-    Object(a[c]) === a[c]
-    // if exists and obj, follow
-      ? a[c]
-    // else, create key. is the next key a potential array-index?
-      : a[c] = Math.abs(path[i + 1]) >> 0 === +path[i + 1]
-        ? [] // yes: assign a new array object
-        : {} // no: assign a new plain object
-  , obj)[path[path.length - 1]] = value // assign the value to the last key
+  path.slice(0, -1).reduce((a, c, i) => {
+    if (Object(a[c]) === a[c]) {
+      // if exists and obj
+      return a[c]
+    }
+
+    // else, create key
+    return a[c] = Math.abs(path[i + 1]) >> 0 === +path[i + 1]
+      // is the next key a potential array-index?
+      // if so, assign to array
+      // else, assign to obj
+      ? []
+      : {}
+  }, obj)[
+    // assign the value to the last key
+    path[path.length - 1]] = value
 
   return obj
 }
