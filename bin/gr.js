@@ -1,5 +1,11 @@
 #!/usr/bin/env node
 
+// like gron, but it's a little node script
+// gron appears to be abanonded, and besides,
+// it's 2k LOC, including many features i'll never care about
+// i always have node installed, so. this.
+//
+// usage:
 // cat package.json | gr.js
 // cat package.json | gr.js | grep repository | gr.js -u
 
@@ -20,7 +26,9 @@ const toGreppable = (obj) => {
             : product.concat(addKv(fullPath, value))
       }, [])
 
-  return paths(obj).join('\n')
+  return paths(obj)
+    .map((x) => addDelimiter('json', x))
+    .join('\n')
 }
 
 const set = (obj, rawPath, value) => {
@@ -48,7 +56,7 @@ const toJson = (str) =>
     const rawKey = splitLine[0]
     const rawValue = splitLine[1]
     return set(obj, rawKey.trim(), JSON.parse(rawValue))
-  }, {})
+  }, {}).json
 
 const s = process.openStdin()
 let d = ''
