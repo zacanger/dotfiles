@@ -31,6 +31,6 @@ if ! hash tmux 2>/dev/null; then
     alias cla='clc; cerm'
 fi
 
-if [ -f "$HOME/Dropbox/todo/todo.txt" ]; then
-    alias todo="vim $HOME/Dropbox/todo/todo.txt"
+if [ -f "$HOME/Dropbox/todo/todo.md" ]; then
+    alias todo="vim $HOME/Dropbox/todo/todo.md"
 fi
