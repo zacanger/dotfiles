@@ -125,7 +125,7 @@ user_pref("permissions.default.desktop-notification", 2);
 user_pref("permissions.default.geo", 2);
 user_pref("permissions.default.microphone", 2);
 user_pref("privacy.clearOnShutdown.cache", true);
-user_pref('network.trr.exclude-etc-hosts', false);
+user_pref('network.trr.exclude-etc-hosts', true);
 user_pref("privacy.clearOnShutdown.downloads", true);
 user_pref("privacy.clearOnShutdown.formdata", true);
 user_pref("privacy.clearOnShutdown.history", true);
