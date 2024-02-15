@@ -47,7 +47,6 @@ Finished! TODO manually:
 
 Install Docker from website
 Install FL Studio
-Install Izotope product portal
 Import misc/profile.terminal to Terminal.app
 Install Spitfire Audio
 Install Authy from App Store
