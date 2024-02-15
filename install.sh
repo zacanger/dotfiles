@@ -50,6 +50,7 @@ Install FL Studio
 Install Izotope product portal
 Import misc/profile.terminal to Terminal.app
 Install Spitfire Audio
+Install Authy from App Store
 See mac-plugins directory for more VST/Component setup
 copy user.js to Library/Application\ Support/Firefox/Profiles/[profile]/
 EOM
