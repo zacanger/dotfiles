@@ -9,22 +9,13 @@
 # See also, for ideas: https://github.com/wick3dr0se/fml
 
 # TODO:
-# Refactor operation keybinds:
-# yy should yank
-# dd should cut
-# pp should paste
-# xx should shell trash
 # v should select and move to the next line
 # <space> should select all
-#
-# n and N handling in search
-# o for open_with (takes an argument)
-# Fix renaming (I, A, r?)
-#
+# Better system for bulk rename
 # Fix anything Shellcheck complains about
 # Get rid of custom trash implementation
 
-# Current keybinds for those operations:
+# Remove these old keybinds
 #  y: mark copy           # FFF_KEY_YANK
 #  m: mark move           # FFF_KEY_MOVE
 #  d: mark trash          # FFF_KEY_TRASH
@@ -49,6 +40,9 @@ init_options() {
     FSSH_KEY_GO_HOME='~'            # cd ~/
     FSSH_KEY_GO_DIR=':'             # go to directory
 
+    FSSH_KEY_YANK='y'               # start yank (yy)
+    FSSH_KEY_CUT='d'                # start cut (yy)
+    FSSH_KEY_PUT='p'                # start put (pp)
     FSSH_KEY_TOGGLE_HIDDEN='.'      # toggle hidden file display
     FSSH_KEY_RENAME='A'             # rename files (A to match vim A)
     FSSH_KEY_PASTE='p'              # multi file ops
@@ -58,6 +52,7 @@ init_options() {
     FSSH_KEY_REFRESH='R'            # refresh dir and redraw
 
     FSSH_KEY_SEARCH='/'             # search through files in dir
+    FSSH_KEY_OPEN_WITH='/'          # open with custom program
     FSSH_KEY_ATTRIBUTES='i'         # show info with stat
     FSSH_KEY_HELP='?'               # display keybinds
     FSSH_KEY_QUIT='q'               # exit
@@ -1092,6 +1087,47 @@ key() {
             }
 
             open "$PWD"
+        ;;
+
+        # TODO:
+        # open_with
+        "$FSSH_KEY_OPEN_WITH")
+            ((helping)) && return
+
+            echo 'todo'
+        ;;
+
+        # TODO:
+        # Start yank
+        "$FSSH_KEY_YANK")
+            ((helping)) && return
+
+            read -srn 1 -t 0.2 next_key
+            if [[ $next_key == "$FSSH_KEY_YANK" ]]; then
+                echo 'todo'
+            fi
+        ;;
+
+        # TODO:
+        # Start cut
+        "$FSSH_KEY_CUT")
+            ((helping)) && return
+
+            read -srn 1 -t 0.2 next_key
+            if [[ $next_key == "$FSSH_KEY_CUT" ]]; then
+                echo 'todo'
+            fi
+        ;;
+
+        # TODO:
+        # Start put
+        "$FSSH_KEY_PUT")
+            ((helping)) && return
+
+            read -srn 1 -t 0.2 next_key
+            if [[ $next_key == "$FSSH_KEY_PUT" ]]; then
+                echo 'todo'
+            fi
         ;;
 
         # Goodbye
