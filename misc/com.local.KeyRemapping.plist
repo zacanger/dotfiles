@@ -10,7 +10,6 @@
         <string>property</string>
         <string>--set</string>
         <string>{"UserKeyMapping":[
-
             {
               "HIDKeyboardModifierMappingSrc": 0x700000039,
               "HIDKeyboardModifierMappingDst": 0x700000029
@@ -21,6 +20,10 @@
               "HIDKeyboardModifierMappingDst": 0x700000035
             }
 
+            {
+              "HIDKeyboardModifierMappingSrc": 0x700000065,
+              "HIDKeyboardModifierMappingDst": 0x7000000E7
+            }
         ]}</string>
     </array>
     <key>RunAtLoad</key>
