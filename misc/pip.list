@@ -6,7 +6,6 @@ autopep8
 black
 bpython
 feedgen
-pip
 poetry
 py-gfm
 pylint
