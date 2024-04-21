@@ -29,7 +29,7 @@ fi
     directory=$(dirname "$file")
     oldfilename=$(basename "$file")
     # shellcheck disable=1112
-    newfilename_mostly=$(echo "$oldfilename" \
+    newfilename=$(echo "$oldfilename" \
         | "$_tr" 'A-Z' 'a-z' \
         | "$_tr" ',' '_' \
         | "$_tr" '[' '-' \
@@ -45,11 +45,6 @@ fi
         | "$_sed" 's/&/and/g' \
         | "$_sed" 's/[‘’｜﹂﹁「」“„『』【】]/__/g' \
         | "$_sed" 's/_-_/-/g')
-
-    # TODO: this isn't working
-    # trying to remove any leading _ or - chars
-    # newfilename="${newfilename_mostly//^[-_]/}"
-    newfilename="$newfilename_mostly"
 
     if [ "$oldfilename" != "$newfilename" ]; then
         mv -i "$directory/$oldfilename" "$directory/$newfilename"

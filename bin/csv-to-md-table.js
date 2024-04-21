@@ -80,7 +80,6 @@ const main = () => {
     console.error('Pass an input file.')
     process.exit(1)
   }
-  // TODO: handle options here
 
   console.log(csvToMarkdown(fs.readFileSync(fileToProcess, 'utf-8').trim()))
 }

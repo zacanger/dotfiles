@@ -13,7 +13,6 @@ while true; do
     datestring=$(date +"%a %Y-%m-%d %H:%M")
     if [[ $(uname) == 'Darwin' ]]; then
         cpuusage=$(ps -A -o %cpu | awk '{ cpu += $1;  } END { print cpu  }')
-        # TODO:
         temperature="" # no easy equivalent of `sensors`
         dropbox="" # no cli on mac
 
