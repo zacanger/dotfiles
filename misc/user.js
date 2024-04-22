@@ -146,6 +146,8 @@ user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 user_pref("toolkit.telemetry.archive.enabled", false);
 user_pref("toolkit.telemetry.cachedClientID", "");
 user_pref("webgl.disabled", true);
+user_pref("webgl.enable-webgl", false);
+user_pref("webgl.enable-webgl2", false);
 
 /*
  * Put in both chrome/userChrome.css and chrome/userContent.css
