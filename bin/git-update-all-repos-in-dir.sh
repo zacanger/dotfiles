@@ -10,6 +10,7 @@ for r in *; do
         cd "$r"
         git fetch --all
         git pull
+        git remote prune origin
         cd ..
     fi
 done
