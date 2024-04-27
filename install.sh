@@ -31,13 +31,7 @@ mac_cleanup() {
     log_info "${FUNCNAME[0]}"
     echo '/opt/homebrew/bin/bash' | sudo tee -a /etc/shells
     chsh -s /opt/homebrew/bin/bash
-
     git lfs install
-
-    keymap_file='com.local.KeyRemapping.plist'
-    cp "$here/misc/$keymap_file" "$HOME/Library/LaunchAgents/"
-    launchctl load "$HOME/Library/LaunchAgents/$keymap_file"
-
     rm -rf "$HOME/.zsh*"
 }
 
