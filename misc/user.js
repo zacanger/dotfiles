@@ -103,6 +103,7 @@ user_pref("general.warnOnAboutConfig", false);
 user_pref("geo.enabled", false);
 user_pref("geo.wifi.uri", "");
 user_pref("javascript.options.wasm", false);
+user_pref("javascript.options.shared_memory", false);
 user_pref("media.eme.enabled", false);
 user_pref("media.navigator.enabled", false);
 user_pref("media.peerconnection.enabled", false);
