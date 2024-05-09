@@ -10,7 +10,5 @@ npm-check-updates
 read-qr-code-cli
 shellcheck
 sortpack
-standard
 svgo
-ts-standard
 typescript
