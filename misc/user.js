@@ -80,6 +80,7 @@ user_pref("browser.urlbar.weather.featureGate", false);
 user_pref("browser.vpn_promo.enabled", false);
 user_pref("datareporting.healthreport.uploadEnabled", false);
 user_pref("devtools.theme", "dark");
+user_pref("dom.private-attribution.submission.enabled", false);
 user_pref("dom.battery.enabled", false);
 user_pref("dom.disable_open_during_load", true);
 user_pref("dom.disable_window_move_resize", true);
