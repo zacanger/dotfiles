@@ -61,6 +61,8 @@ user_pref("browser.sessionstore.warnOnQuit", true);
 user_pref("browser.startup.blankWindow", false);
 user_pref("browser.startup.homepage", "about:blank");
 user_pref("browser.startup.homepage_override.mstone", "ignore");
+user_pref("browser.tabs.hoverPreview.enabled", false);
+user_pref("browser.tabs.hoverPreview.showThumbnails", false);
 user_pref("browser.tabs.insertAfterCurrent", true);
 user_pref("browser.translations.autoTranslate", false);
 user_pref("browser.translations.automaticallyPopup", false);
