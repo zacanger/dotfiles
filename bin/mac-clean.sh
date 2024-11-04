@@ -12,7 +12,6 @@ del_paths=(
     "$HOME/.Trash/*"
     "$HOME/.cache/youtube-dl/*"
     "$HOME/.cache/yt-dlp/*"
-    "$HOME/.local/share/ranger/*"
     "$HOME/.viminfo"
     "$HOME/.z-trash/*"
     "$HOME/Library/Caches/*"

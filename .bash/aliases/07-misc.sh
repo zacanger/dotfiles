@@ -2,6 +2,8 @@
 
 if hash ranger 2>/dev/null; then
     alias fs='ranger'
+elif hash joshuto 2>/dev/null; then
+    alias fs='joshuto'
 else
     alias fs='fs.sh'
 fi

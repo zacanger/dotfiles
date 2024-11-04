@@ -9,6 +9,5 @@ feedgen
 poetry
 py-gfm
 pylint
-ranger-fm
 requests
 virtualenv

@@ -19,7 +19,7 @@ generic slim Linux installations (for use in remote environments).
 ## What I Use
 
 * macOS, Rectangle, stock Terminal.app
-* File manager: Ranger
+* File manager: Joshuto
 * Editor: Vim
 * Browser: Firefox
 * Shell: Bash, with lots of aliases and handy functions. `~/.bashrc`
